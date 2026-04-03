@@ -1,0 +1,1170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catalyst Works | Find Your Business Constraint</title>
+  <meta name="description" content="Identify your hidden business constraint in 60 minutes. $350 Executive Signal Session for CEOs, COOs &amp; CIOs. Name your bottleneck. Remove it.">
+  <link rel="icon" type="image/jpeg" href="CatalystWorks_logo.jpg">
+  <link rel="canonical" href="https://catalystworks.consulting">
+  <!-- Open Graph -->
+  <meta property="og:title" content="Catalyst Works | Find Your Business Constraint">
+  <meta property="og:description" content="Identify your hidden business constraint in 60 minutes. $350 Executive Signal Session for CEOs &amp; COOs. Name it. Remove it.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://catalystworks.consulting/">
+  <meta property="og:image" content="https://catalystworks.consulting/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Catalyst Works | Find Your Business Constraint">
+  <meta name="twitter:description" content="60 minutes. One constraint named in writing. $350 Executive Signal Session for CEOs and COOs.">
+  <meta name="twitter:image" content="https://catalystworks.consulting/og-image.jpg">
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Catalyst Works",
+    "url": "https://catalystworks.consulting",
+    "email": "catalystworks.ai@gmail.com",
+    "founder": {
+      "@type": "Person",
+      "name": "Boubacar Barry"
+    },
+    "description": "Catalyst Works helps CEOs, COOs, and CIOs identify and remove the single constraint blocking organizational throughput using Theory of Constraints diagnostics."
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Executive Signal Session",
+    "description": "A 60-minute structured constraint diagnostic for CEOs, COOs, and CIOs. One named constraint delivered in writing within 24 hours.",
+    "provider": {
+      "@type": "Organization",
+      "name": "Catalyst Works",
+      "url": "https://catalystworks.consulting"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "350",
+      "priceCurrency": "USD"
+    },
+    "duration": "PT60M"
+  }
+  </script>
+
+  <style>
+    /* ─── TOKENS ───────────────────────────────────── */
+    :root {
+      --navy:        #071A2E;
+      --carbon:      #1E222A;
+      --cyan:        #00B7C2;
+      --cyan-hover:  #008F99;
+      --orange:      #FF7A00;
+      --orange-hover:#E06900;
+      --clay:        #B47C57;
+      --mist:        #F3F6F9;
+      --white:       #FFFFFF;
+      --text-muted:  rgba(255,255,255,0.55);
+      --text-mid:    rgba(255,255,255,0.75);
+      --text-dim:    rgba(255,255,255,0.35);
+      --cyan-dim:    rgba(0,183,194,0.10);
+      --cyan-border: rgba(0,183,194,0.18);
+      --clay-dim:    rgba(180,124,87,0.10);
+      --clay-border: rgba(180,124,87,0.28);
+    }
+
+    /* ─── RESET & BASE ─────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--navy); color: var(--white);
+      line-height: 1.6; overflow-x: hidden; -webkit-font-smoothing: antialiased;
+    }
+    ::selection { background: rgba(0,183,194,0.22); color: #fff; }
+    a { text-decoration: none; color: inherit; }
+    button { font-family: inherit; cursor: pointer; border: none; background: none; }
+
+    /* ─── LAYOUT ───────────────────────────────────── */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+    .section    { padding: 96px 0; }
+
+    /* ─── EYEBROW LABEL ────────────────────────────── */
+    .label {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--cyan); margin-bottom: 18px;
+    }
+    .label::before { content: ''; width: 22px; height: 1px; background: currentColor; display: inline-block; flex-shrink: 0; }
+    .label-clay { color: var(--clay); }
+    .label-orange { color: var(--orange); }
+
+    /* ─── TYPOGRAPHY ───────────────────────────────── */
+    h1 { font-size: clamp(36px, 6vw, 64px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.08; color: #fff; }
+    h2 { font-size: clamp(26px, 4vw, 38px); font-weight: 700; letter-spacing: -0.02em; line-height: 1.18; }
+    h3 { font-size: 16px; font-weight: 700; line-height: 1.35; }
+
+    /* ─── BUTTONS ──────────────────────────────────── */
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--orange); color: #fff;
+      font-size: 14px; font-weight: 700; letter-spacing: 0.01em;
+      padding: 15px 28px; border-radius: 4px;
+      transition: background 200ms, transform 150ms, box-shadow 200ms;
+      box-shadow: 0 4px 24px rgba(255,122,0,0.22);
+    }
+    .btn-primary:hover { background: var(--orange-hover); transform: translateY(-1px); box-shadow: 0 8px 32px rgba(255,122,0,0.32); }
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: transparent; color: var(--cyan);
+      font-size: 14px; font-weight: 700;
+      padding: 14px 27px; border-radius: 4px; border: 1.5px solid var(--cyan);
+      transition: background 200ms, transform 150ms;
+    }
+    .btn-secondary:hover { background: var(--cyan-dim); transform: translateY(-1px); }
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: transparent; color: var(--text-mid);
+      font-size: 14px; font-weight: 600;
+      padding: 14px 20px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.12);
+      transition: border-color 200ms, color 200ms;
+    }
+    .btn-ghost:hover { border-color: rgba(255,255,255,0.3); color: #fff; }
+
+    /* ─── SCROLL FADE-IN ───────────────────────────── */
+    .fade-in { opacity: 0; transform: translateY(28px); transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1); }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+    .delay-1 { transition-delay: 0.1s; } .delay-2 { transition-delay: 0.2s; }
+    .delay-3 { transition-delay: 0.3s; } .delay-4 { transition-delay: 0.4s; }
+    @media (prefers-reduced-motion: reduce) { .fade-in { opacity: 1; transform: none; transition: none; } }
+
+    /* ─── NAV ──────────────────────────────────────── */
+    .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: 68px; background: rgba(7,26,46,0.92); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid rgba(255,255,255,0.06); transition: background 200ms; }
+    .nav-inner { max-width: 1100px; margin: 0 auto; padding: 0 24px; height: 100%; display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { font-size: 17px; font-weight: 800; letter-spacing: -0.03em; color: #fff; }
+    .nav-logo span { color: var(--cyan); }
+    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+    .nav-links a { font-size: 13px; font-weight: 500; color: var(--text-muted); transition: color 150ms; }
+    .nav-links a:hover, .nav-links a.active { color: var(--cyan); }
+    .nav-mobile-btn { display: none; flex-direction: column; gap: 5px; width: 28px; }
+    .nav-mobile-btn span { display: block; height: 2px; background: #fff; border-radius: 2px; transition: transform 220ms ease-out, opacity 150ms; transform-origin: center; }
+    .nav-mobile-btn.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-mobile-btn.active span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .nav-mobile-btn.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* ─── MOBILE NAV DRAWER ─────────────────────────── */
+    .nav-drawer { position: fixed; top: 68px; left: 0; right: 0; z-index: 99; background: rgba(7,26,46,0.98); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.08); transform: translateY(-8px); opacity: 0; pointer-events: none; transition: transform 220ms cubic-bezier(0.22,1,0.36,1), opacity 220ms; }
+    .nav-drawer.open { transform: translateY(0); opacity: 1; pointer-events: all; }
+    .nav-drawer-links { list-style: none; padding: 8px 0 4px; }
+    .nav-drawer-links li a { display: block; padding: 15px 24px; font-size: 16px; font-weight: 500; color: var(--text-mid); border-bottom: 1px solid rgba(255,255,255,0.04); transition: color 150ms, background 150ms; }
+    .nav-drawer-links li a:hover { color: var(--cyan); background: rgba(0,183,194,0.04); }
+    .nav-drawer-cta { padding: 16px 24px 20px; }
+    .nav-drawer-cta button { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 15px; background: var(--orange); color: #fff; font-size: 15px; font-weight: 700; border-radius: 4px; border: none; cursor: pointer; }
+
+    /* ─── HERO ─────────────────────────────────────── */
+    .hero { position: relative; min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 140px 24px 96px; background: var(--navy); overflow: hidden; }
+    .glow-1 { position: absolute; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(0,183,194,0.08) 0%, transparent 70%); top: -120px; left: -120px; pointer-events: none; animation: float-slow 9s ease-in-out infinite; }
+    .glow-2 { position: absolute; width: 440px; height: 440px; border-radius: 50%; background: radial-gradient(circle, rgba(255,122,0,0.05) 0%, transparent 70%); bottom: 40px; right: -60px; pointer-events: none; animation: float-slow 11s ease-in-out infinite 2s; }
+    .grid-texture { position: absolute; inset: 0; pointer-events: none; background-image: linear-gradient(rgba(0,183,194,0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(0,183,194,0.035) 1px, transparent 1px); background-size: 64px 64px; }
+    .hero-inner { position: relative; z-index: 2; max-width: 860px; margin: 0 auto; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--cyan-dim); border: 1px solid var(--cyan-border); color: var(--cyan); font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 7px 16px; border-radius: 100px; margin-bottom: 32px; }
+    .badge-dot { width: 6px; height: 6px; background: var(--cyan); border-radius: 50%; animation: pulse 2.2s ease-in-out infinite; }
+    .hero-for { font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 14px; }
+    .hero h1 { margin-bottom: 24px; }
+    .hero h1 em { font-style: normal; color: var(--cyan); }
+    .hero-sub { font-size: clamp(16px, 2vw, 19px); color: var(--text-mid); max-width: 620px; margin: 0 auto 20px; line-height: 1.7; font-weight: 300; }
+    .hero-sub strong { color: #fff; font-weight: 500; }
+    .hero-offer { display: inline-flex; align-items: center; gap: 20px; flex-wrap: wrap; justify-content: center; background: rgba(255,122,0,0.06); border: 1px solid rgba(255,122,0,0.2); border-radius: 8px; padding: 18px 28px; margin: 0 auto 36px; max-width: 600px; }
+    .hero-offer-text { text-align: left; }
+    .hero-offer-label { font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--orange); margin-bottom: 4px; }
+    .hero-offer-line { font-size: 15px; font-weight: 700; color: #fff; line-height: 1.4; }
+    .hero-offer-price { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
+    .hero-cta { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-bottom: 22px; }
+    .urgency-line { font-size: 12px; color: var(--text-dim); letter-spacing: 0.04em; display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .urgency-dot { width: 6px; height: 6px; background: var(--clay); border-radius: 50%; }
+
+    /* ─── FRICTION AUDIT ───────────────────────────── */
+    #audit { background: var(--carbon); }
+    .audit-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; margin-top: 48px; }
+    .audit-intro p { font-size: 16px; color: var(--text-mid); line-height: 1.75; margin-bottom: 16px; }
+    .audit-intro strong { color: #fff; }
+    .audit-score-box { background: rgba(7,26,46,0.7); border: 1px solid var(--cyan-border); border-radius: 10px; padding: 36px; position: relative; }
+    .audit-score-box::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--cyan), transparent); border-radius: 10px 10px 0 0; }
+    .audit-questions { list-style: none; margin-bottom: 24px; }
+    .audit-q { display: flex; align-items: flex-start; gap: 14px; padding: 13px 8px; border-bottom: 1px solid rgba(255,255,255,0.05); cursor: pointer; border-radius: 4px; transition: background 150ms; }
+    .audit-q:last-child { border-bottom: none; }
+    .audit-q-text { font-size: 14px; color: var(--text-mid); line-height: 1.55; flex: 1; user-select: none; }
+    .audit-checkbox { width: 20px; height: 20px; border-radius: 4px; flex-shrink: 0; margin-top: 1px; border: 1.5px solid rgba(255,255,255,0.2); background: transparent; display: flex; align-items: center; justify-content: center; transition: background 180ms, border-color 180ms; }
+    .audit-q.checked .audit-checkbox { background: var(--cyan); border-color: var(--cyan); }
+    .audit-q.checked .audit-checkbox::after { content: '✓'; font-size: 11px; color: #fff; font-weight: 700; }
+    .audit-q.checked .audit-q-text { color: #fff; }
+    .audit-count-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+    .audit-count-text { font-size: 13px; color: var(--text-dim); }
+    .audit-count-num { font-size: 13px; font-weight: 700; color: var(--cyan); }
+    .audit-submit-btn { width: 100%; padding: 14px; border-radius: 4px; font-size: 14px; font-weight: 700; background: var(--cyan-dim); color: var(--cyan); border: 1px solid var(--cyan-border); transition: background 200ms; cursor: pointer; font-family: inherit; }
+    .audit-submit-btn:hover { background: rgba(0,183,194,0.2); }
+    .audit-result { display: none; margin-top: 20px; }
+    .audit-result.show { display: block; }
+    .audit-score-display { text-align: center; padding: 24px; background: rgba(0,183,194,0.06); border: 1px solid var(--cyan-border); border-radius: 8px; margin-bottom: 20px; }
+    .audit-score-num { font-size: 52px; font-weight: 800; letter-spacing: -0.03em; color: var(--cyan); line-height: 1; margin-bottom: 6px; }
+    .audit-score-label { font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); }
+    .audit-verdict { font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+    .audit-verdict-sub { font-size: 14px; color: var(--text-muted); margin-bottom: 20px; line-height: 1.65; }
+    .audit-verdict-sub strong { color: var(--orange); }
+    .audit-cta-btn { width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 15px; border-radius: 4px; font-size: 14px; font-weight: 700; background: var(--orange); color: #fff; border: none; cursor: pointer; font-family: inherit; transition: background 200ms; }
+    .audit-cta-btn:hover { background: var(--orange-hover); }
+    .audit-cta-low { width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 14px; border-radius: 4px; font-size: 14px; font-weight: 700; background: transparent; color: var(--cyan); border: 1.5px solid var(--cyan); cursor: pointer; font-family: inherit; transition: background 200ms; }
+    .audit-cta-low:hover { background: var(--cyan-dim); }
+
+    /* ─── OFFER LADDER ─────────────────────────────── */
+    #offers { background: var(--mist); }
+    #offers h2 { color: var(--navy); }
+    #offers .section-sub { color: #5A6272; }
+    .ladder { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: 72px; position: relative; }
+    .ladder::before { content: ''; position: absolute; top: 28px; left: 14%; right: 14%; height: 2px; background: linear-gradient(90deg, var(--cyan), var(--orange)); opacity: 0.2; }
+    .ladder-rung { padding: 0 20px; text-align: center; position: relative; z-index: 1; }
+    /* Badge sits absolutely above icon so it doesn't disturb vertical alignment */
+    .ladder-rung-icon-wrap { position: relative; display: flex; flex-direction: column; align-items: center; height: 80px; justify-content: flex-end; margin-bottom: 20px; }
+    .ladder-entry-badge { position: absolute; top: 0; left: 50%; transform: translateX(-50%); background: var(--cyan); color: var(--navy); font-size: 9px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; padding: 3px 8px; border-radius: 100px; white-space: nowrap; }
+    .ladder-icon { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 800; border: 2px solid; flex-shrink: 0; }
+    .ladder-rung:nth-child(1) .ladder-icon { background: rgba(0,183,194,0.1); border-color: var(--cyan); color: var(--cyan); }
+    .ladder-rung:nth-child(2) .ladder-icon { background: rgba(0,183,194,0.06); border-color: rgba(0,183,194,0.4); color: var(--cyan); }
+    .ladder-rung:nth-child(3) .ladder-icon { background: rgba(255,122,0,0.08); border-color: rgba(255,122,0,0.4); color: var(--orange); }
+    .ladder-rung:nth-child(4) .ladder-icon { background: rgba(180,124,87,0.1); border-color: var(--clay); color: var(--clay); }
+    .ladder-step-label { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(7,26,46,0.4); margin-bottom: 4px; }
+    .ladder-name { font-size: 15px; font-weight: 800; color: var(--navy); margin-bottom: 6px; letter-spacing: -0.01em; }
+    .ladder-rung:nth-child(1) .ladder-name { color: var(--navy); }
+    .ladder-format { font-size: 12px; font-weight: 600; color: var(--text-dim); margin-bottom: 10px; letter-spacing: 0.04em; }
+    .ladder-desc { font-size: 13px; color: #5A6272; line-height: 1.6; }
+
+    /* ─── SIGNAL SESSION ───────────────────────────── */
+    #signal { background: var(--navy); }
+    .signal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; margin-top: 52px; }
+    .signal-card { background: var(--carbon); border: 1px solid rgba(255,122,0,0.2); border-radius: 12px; padding: 40px; position: relative; overflow: hidden; }
+    .signal-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--orange), rgba(255,122,0,0.3)); }
+    .signal-price-block { display: flex; align-items: baseline; gap: 8px; margin-bottom: 24px; }
+    .signal-price { font-size: 48px; font-weight: 800; letter-spacing: -0.03em; color: var(--orange); line-height: 1; }
+    .signal-price-label { font-size: 14px; color: var(--text-muted); }
+    .signal-what { font-size: 15px; color: var(--text-mid); line-height: 1.7; margin-bottom: 24px; }
+    .signal-delivers { list-style: none; margin-bottom: 28px; }
+    .signal-delivers li { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: var(--text-mid); padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.04); line-height: 1.5; }
+    .signal-delivers li:last-child { border-bottom: none; }
+    .signal-delivers li::before { content: '→'; color: var(--orange); flex-shrink: 0; font-weight: 700; }
+    .signal-note { font-size: 12px; color: var(--text-dim); margin-top: 16px; text-align: center; }
+    .signal-text h2 { color: #fff; margin-bottom: 16px; }
+    .signal-text p { font-size: 16px; color: var(--text-mid); line-height: 1.75; margin-bottom: 18px; }
+    .signal-text strong { color: #fff; }
+    .signal-quote { border-left: 3px solid var(--orange); background: rgba(255,122,0,0.05); padding: 18px 20px; border-radius: 0 6px 6px 0; margin-top: 8px; }
+    .signal-quote p { font-size: 15px; font-style: italic; color: var(--text-mid); margin: 0; line-height: 1.65; }
+    .signal-quote cite { display: block; font-size: 12px; font-weight: 600; color: var(--orange); font-style: normal; margin-top: 10px; }
+
+    /* ─── HOW IT WORKS ─────────────────────────────── */
+    #how { background: var(--carbon); }
+    #how h2 { color: #fff; }
+    .section-sub { font-size: 17px; color: var(--text-muted); max-width: 560px; margin-top: 10px; margin-bottom: 52px; line-height: 1.65; }
+    .steps-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; position: relative; margin-top: 0; }
+    .steps-row::before { content: ''; position: absolute; top: 27px; left: calc(16.5% + 28px); right: calc(16.5% + 28px); height: 1px; background: var(--cyan-border); }
+    .step { text-align: center; padding: 0 28px; }
+    .step-num { width: 56px; height: 56px; border-radius: 50%; background: var(--cyan-dim); border: 1px solid var(--cyan-border); display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; font-size: 18px; font-weight: 800; color: var(--cyan); position: relative; z-index: 1; transition: background 220ms, border-color 220ms; }
+    .step:hover .step-num { background: rgba(0,183,194,0.22); border-color: var(--cyan); }
+    .step h3 { color: #fff; margin-bottom: 10px; }
+    .step p { font-size: 14px; color: var(--text-muted); line-height: 1.65; }
+
+    /* ─── WHO IT'S FOR ─────────────────────────────── */
+    #who { background: var(--navy); }
+    #who h2 { color: #fff; }
+    .cards-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .symptom-card { background: rgba(30,34,42,0.8); border: 1px solid rgba(255,255,255,0.07); border-radius: 8px; padding: 32px 28px; position: relative; overflow: hidden; transition: border-color 220ms, transform 220ms; }
+    .symptom-card:hover { border-color: rgba(0,183,194,0.3); transform: translateY(-3px); }
+    .symptom-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--cyan), transparent); opacity: 0; transition: opacity 280ms; }
+    .symptom-card:hover::before { opacity: 1; }
+    .symptom-icon { font-size: 28px; margin-bottom: 16px; display: block; }
+    .symptom-trigger { font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--cyan); margin-bottom: 10px; }
+    .symptom-card h3 { color: #fff; font-size: 16px; margin-bottom: 10px; line-height: 1.4; font-weight: 700; }
+    .symptom-card p { font-size: 14px; color: var(--text-muted); line-height: 1.65; margin-bottom: 16px; }
+    .symptom-outcome { font-size: 13px; color: var(--text-mid); font-weight: 500; display: flex; align-items: flex-start; gap: 6px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.06); }
+    .symptom-outcome::before { content: '→'; color: var(--cyan); flex-shrink: 0; }
+
+    /* ─── MID CTA ──────────────────────────────────── */
+    #mid-cta { background: var(--carbon); padding: 56px 0; border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .mid-cta-inner { display: flex; align-items: center; justify-content: space-between; gap: 32px; }
+    .mid-cta-text h3 { font-size: 22px; font-weight: 700; letter-spacing: -0.015em; color: #fff; margin-bottom: 6px; }
+    .mid-cta-text p { font-size: 15px; color: var(--text-muted); }
+    .mid-cta-text strong { color: var(--orange); }
+
+    /* ─── ABOUT ────────────────────────────────────── */
+    #about { background: var(--mist); }
+    .about-grid { display: grid; grid-template-columns: 220px 1fr; gap: 56px; align-items: start; }
+    .about-photo-wrap { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+    .about-photo { width: 178px; height: 178px; border-radius: 50%; border: 3px solid var(--clay); overflow: hidden; box-shadow: 0 8px 32px rgba(180,124,87,0.18); }
+    .about-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
+    .about-name-tag { font-size: 12px; font-weight: 600; color: var(--clay); letter-spacing: 0.03em; text-align: center; }
+    #about h2 { color: var(--navy); margin-bottom: 6px; }
+    .about-title { font-size: 15px; color: var(--clay); font-weight: 500; margin-bottom: 24px; }
+    #about p { font-size: 16px; color: #2A3240; line-height: 1.75; margin-bottom: 16px; }
+    .about-signature { font-weight: 700; font-size: 19px; color: var(--navy); margin-top: 8px !important; }
+    .about-quote { border-left: 3px solid var(--clay); background: rgba(180,124,87,0.06); padding: 18px 20px; border-radius: 0 6px 6px 0; margin-top: 24px; }
+    .about-quote p { font-size: 14px; font-style: italic; color: #2A3240; margin: 0 !important; line-height: 1.7; }
+    .about-quote cite { display: block; font-size: 12px; font-weight: 600; color: var(--clay); font-style: normal; margin-top: 8px; }
+
+    /* testimonials CSS reserved — section removed until real results exist */
+
+    /* ─── FINAL CTA ────────────────────────────────── */
+    #final-cta { position: relative; padding: 120px 0; overflow: hidden; background: var(--navy); }
+    #final-cta::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(0,183,194,0.07) 0%, transparent 70%); }
+    .final-cta-inner { position: relative; z-index: 1; text-align: center; max-width: 680px; margin: 0 auto; }
+    #final-cta h2 { color: #fff; margin-bottom: 16px; font-size: clamp(28px, 5vw, 48px); }
+    #final-cta .lead { font-size: 18px; color: var(--text-mid); margin-bottom: 8px; line-height: 1.7; }
+    .final-price-callout { font-size: 32px; font-weight: 800; color: var(--orange); letter-spacing: -0.02em; margin-bottom: 32px; }
+    .final-price-callout span { font-size: 16px; font-weight: 400; color: var(--text-muted); }
+    .reassurance { font-size: 13px; color: var(--text-dim); margin-top: 20px; letter-spacing: 0.02em; }
+
+    /* ─── FOOTER ───────────────────────────────────── */
+    footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,0.06); padding: 48px 0; }
+    .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-bottom: 28px; }
+    .footer-logo { font-size: 17px; font-weight: 800; letter-spacing: -0.03em; color: #fff; }
+    .footer-logo span { color: var(--cyan); }
+    .footer-meta { font-size: 13px; color: rgba(255,255,255,0.35); margin-top: 4px; }
+    .footer-links { display: flex; gap: 24px; align-items: center; flex-wrap: wrap; }
+    .footer-links a { font-size: 13px; color: var(--text-muted); transition: color 150ms; }
+    .footer-links a:hover { color: var(--cyan); }
+    .footer-divider { color: rgba(255,255,255,0.15); }
+    .footer-copy { font-size: 12px; color: rgba(255,255,255,0.25); text-align: center; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.05); }
+
+    /* ─── MODAL ────────────────────────────────────── */
+    .modal-overlay { position: fixed; inset: 0; z-index: 200; background: rgba(7,26,46,0.88); backdrop-filter: blur(12px); display: flex; align-items: center; justify-content: center; padding: 24px; opacity: 0; pointer-events: none; transition: opacity 250ms; }
+    .modal-overlay.open { opacity: 1; pointer-events: all; }
+    .modal-box { background: var(--carbon); border: 1px solid rgba(255,122,0,0.2); border-radius: 12px; padding: 48px 40px; max-width: 460px; width: 100%; position: relative; transform: translateY(16px); transition: transform 250ms; box-shadow: 0 32px 80px rgba(0,0,0,0.4); }
+    .modal-overlay.open .modal-box { transform: translateY(0); }
+    .modal-box::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--orange), rgba(255,122,0,0.3)); border-radius: 12px 12px 0 0; }
+    .modal-close { position: absolute; top: 16px; right: 16px; color: var(--text-dim); font-size: 20px; line-height: 1; transition: color 150ms; }
+    .modal-close:hover { color: #fff; }
+    .modal-price-badge { display: inline-flex; align-items: center; background: rgba(255,122,0,0.1); border: 1px solid rgba(255,122,0,0.25); padding: 5px 12px; border-radius: 100px; margin-bottom: 16px; }
+    .modal-price-badge span { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--orange); }
+    .modal-box h3 { font-size: 22px; font-weight: 800; color: #fff; margin-bottom: 8px; letter-spacing: -0.015em; }
+    .modal-sub { font-size: 14px; color: var(--text-muted); margin-bottom: 20px; line-height: 1.6; }
+    .modal-delivers { list-style: none; margin-bottom: 20px; padding: 14px 16px; background: rgba(255,255,255,0.03); border-radius: 6px; }
+    .modal-delivers li { display: flex; align-items: flex-start; gap: 8px; font-size: 13px; color: var(--text-mid); padding: 4px 0; line-height: 1.5; }
+    .modal-delivers li::before { content: '→'; color: var(--orange); flex-shrink: 0; font-weight: 700; font-size: 12px; }
+    .form-group { margin-bottom: 14px; }
+    .form-group label { display: block; font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 6px; }
+    .form-group input { width: 100%; background: rgba(7,26,46,0.8); border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 12px 16px; font-family: inherit; font-size: 15px; color: #fff; outline: none; transition: border-color 150ms; }
+    .form-group input:focus { border-color: var(--orange); }
+    .form-group input::placeholder { color: rgba(255,255,255,0.22); }
+    .modal-submit { width: 100%; margin-top: 8px; background: var(--orange); color: #fff; font-size: 14px; font-weight: 700; padding: 15px; border-radius: 4px; border: none; cursor: pointer; font-family: inherit; transition: background 200ms, transform 150ms; }
+    .modal-submit:hover { background: var(--orange-hover); transform: translateY(-1px); }
+    .modal-note { font-size: 11px; color: var(--text-dim); text-align: center; margin-top: 10px; }
+    .modal-success { text-align: center; padding: 20px 0; display: none; }
+    .success-icon { width: 56px; height: 56px; background: rgba(255,122,0,0.1); border: 1px solid rgba(255,122,0,0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; }
+    .success-icon svg { width: 24px; height: 24px; stroke: var(--orange); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .modal-success h3 { font-size: 20px; font-weight: 800; color: #fff; margin-bottom: 8px; }
+    .modal-success p { font-size: 14px; color: var(--text-muted); margin: 0; }
+
+    /* ─── NEWSLETTER ──────────────────────────────── */
+    #newsletter {
+      background: var(--mist);
+      border-top: 1px solid rgba(7,26,46,0.07);
+      border-bottom: 1px solid rgba(7,26,46,0.07);
+      padding: 72px 0;
+    }
+    .newsletter-inner {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;
+    }
+    .newsletter-text h2 { color: var(--navy); font-size: clamp(22px, 3.5vw, 32px); margin-bottom: 12px; }
+    .newsletter-text p { font-size: 16px; color: #4A5568; line-height: 1.7; }
+    .newsletter-text p strong { color: var(--navy); }
+    .newsletter-examples { list-style: none; margin-top: 20px; }
+    .newsletter-examples li {
+      font-size: 13px; color: #5A6272; padding: 6px 0;
+      border-bottom: 1px solid rgba(7,26,46,0.06);
+      display: flex; align-items: flex-start; gap: 8px;
+    }
+    .newsletter-examples li:last-child { border-bottom: none; }
+    .newsletter-examples li::before { content: '→'; color: var(--cyan); flex-shrink: 0; font-size: 12px; }
+    .newsletter-form-wrap {
+      background: var(--navy); border: 1px solid var(--cyan-border);
+      border-radius: 10px; padding: 36px; position: relative;
+    }
+    .newsletter-form-wrap::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--cyan), transparent); border-radius: 10px 10px 0 0;
+    }
+    .newsletter-label { font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--cyan); margin-bottom: 12px; display: block; }
+    .newsletter-form-wrap h3 { font-size: 18px; font-weight: 800; color: #fff; margin-bottom: 6px; letter-spacing: -0.015em; }
+    .newsletter-sub { font-size: 13px; color: var(--text-muted); margin-bottom: 20px; line-height: 1.6; }
+    .newsletter-row { display: flex; gap: 10px; }
+    .newsletter-row input {
+      flex: 1; background: rgba(7,26,46,0.8); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 4px; padding: 12px 16px; font-family: inherit; font-size: 15px;
+      color: #fff; outline: none; transition: border-color 150ms; min-width: 0;
+    }
+    .newsletter-row input:focus { border-color: var(--cyan); }
+    .newsletter-row input::placeholder { color: rgba(255,255,255,0.22); }
+    .newsletter-btn {
+      background: var(--cyan); color: var(--navy); font-size: 13px; font-weight: 800;
+      padding: 12px 20px; border-radius: 4px; border: none; cursor: pointer;
+      font-family: inherit; white-space: nowrap; transition: background 200ms;
+      letter-spacing: 0.02em;
+    }
+    .newsletter-btn:hover { background: var(--cyan-hover); }
+    .newsletter-note { font-size: 11px; color: var(--text-dim); margin-top: 10px; }
+    .newsletter-success { display: none; text-align: center; padding: 16px 0; }
+    .newsletter-success p { font-size: 15px; font-weight: 600; color: var(--cyan); }
+    .newsletter-success span { display: block; font-size: 13px; color: var(--text-muted); margin-top: 4px; }
+
+    /* ─── METHODOLOGY CREDIBILITY ─────────────────── */
+    #methodology { background: var(--carbon); }
+    #methodology h2 { color: #fff; }
+    .method-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; margin-top: 48px; }
+    .method-text p { font-size: 16px; color: var(--text-mid); line-height: 1.75; margin-bottom: 18px; }
+    .method-text strong { color: #fff; }
+    .method-text a { color: var(--cyan); text-decoration: underline; text-underline-offset: 3px; }
+    .method-pillars { display: flex; flex-direction: column; gap: 16px; }
+    .method-pillar {
+      display: flex; align-items: flex-start; gap: 16px;
+      background: rgba(7,26,46,0.5); border: 1px solid var(--cyan-border);
+      border-radius: 8px; padding: 20px 22px;
+      transition: border-color 200ms;
+    }
+    .method-pillar:hover { border-color: rgba(0,183,194,0.35); }
+    .method-pillar-num {
+      width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0;
+      background: var(--cyan-dim); border: 1px solid var(--cyan-border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 800; color: var(--cyan);
+    }
+    .method-pillar-body h4 { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+    .method-pillar-body p { font-size: 13px; color: var(--text-muted); line-height: 1.55; margin: 0; }
+
+    /* ─── RESPONSIVE ───────────────────────────────── */
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .nav-mobile-btn { display: flex; }
+      .audit-wrap { grid-template-columns: 1fr; gap: 40px; }
+      .ladder { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+      .ladder::before { display: none; }
+      .signal-grid { grid-template-columns: 1fr; gap: 40px; }
+      .cards-3 { grid-template-columns: 1fr; gap: 16px; }
+      .steps-row { grid-template-columns: 1fr; }
+      .steps-row::before { display: none; }
+      .step { text-align: left; display: flex; align-items: flex-start; gap: 20px; padding: 24px 0; }
+      .step-num { margin: 0; flex-shrink: 0; }
+      .about-grid { grid-template-columns: 1fr; }
+      .about-photo-wrap { flex-direction: row; align-items: center; gap: 16px; margin-bottom: 24px; }
+      .about-photo { width: 88px; height: 88px; }
+      .about-name-tag { text-align: left; }
+      .footer-inner { flex-direction: column; align-items: flex-start; gap: 16px; }
+      .footer-links { flex-direction: column; gap: 10px; align-items: flex-start; }
+      .footer-divider { display: none; }
+      .mid-cta-inner { flex-direction: column; align-items: flex-start; gap: 20px; }
+      .mid-cta-inner .btn-primary { width: 100%; justify-content: center; }
+      .newsletter-inner { grid-template-columns: 1fr; gap: 36px; }
+      .method-grid { grid-template-columns: 1fr; gap: 36px; }
+    }
+    @media (max-width: 640px) {
+      .audit-q { min-height: 44px; align-items: center; padding: 10px 8px; }
+      .newsletter-row { flex-direction: column; }
+      .newsletter-btn { width: 100%; padding: 14px; font-size: 14px; }
+      .container { padding: 0 20px; }
+      .section { padding: 60px 0; }
+      #mid-cta { padding: 44px 0; }
+      .hero { padding: 100px 20px 64px; min-height: auto; }
+      .hero h1 { font-size: clamp(28px, 8vw, 40px); }
+      .hero-sub { font-size: 15px; margin-bottom: 24px; }
+      .hero-offer { flex-direction: column; align-items: stretch; text-align: left; gap: 12px; padding: 16px 20px; }
+      .hero-cta { flex-direction: column; align-items: stretch; gap: 12px; }
+      .btn-primary, .btn-secondary, .btn-ghost { width: 100%; justify-content: center; padding: 16px 20px; font-size: 15px; }
+      .hero-badge { font-size: 10px; padding: 6px 14px; }
+      h2 { font-size: clamp(22px, 6vw, 32px); }
+      .section-sub { font-size: 15px; margin-bottom: 36px; }
+      .symptom-card { padding: 22px 18px; }
+      .signal-card { padding: 28px 20px; }
+      .signal-price { font-size: 40px; }
+      .about-photo { width: 88px; height: 88px; }
+      .about-signature { font-size: 16px; }
+      .step { padding: 18px 0; gap: 14px; }
+      .step-num { width: 44px; height: 44px; font-size: 15px; }
+      .nav { height: 60px; }
+      .nav-drawer { top: 60px; }
+      .nav-logo { font-size: 15px; }
+      .nav-inner > .btn-primary { display: none; }
+      #final-cta { padding: 80px 0; }
+      #final-cta .btn-primary { width: 100%; justify-content: center; font-size: 15px !important; padding: 16px 24px !important; }
+      .final-price-callout { font-size: 26px; }
+      footer { padding: 40px 0; }
+      .modal-box { padding: 28px 20px; border-radius: 10px; }
+      .modal-box h3 { font-size: 18px; }
+      .form-group input { font-size: 16px; padding: 13px 14px; }
+      .modal-submit { padding: 15px; font-size: 15px; }
+      .ladder { grid-template-columns: 1fr; gap: 24px; }
+    }
+    @media (max-width: 400px) {
+      .hero h1 { font-size: 26px; }
+      .hero-badge { display: none; }
+    }
+
+    /* ─── KEYFRAMES ────────────────────────────────── */
+    @keyframes float-slow { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+  </style>
+</head>
+<body>
+
+<!-- ─── MODAL ─────────────────────────────────────── -->
+<div class="modal-overlay" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()" aria-label="Close">&#x2715;</button>
+    <div id="modal-form-state">
+      <div class="modal-price-badge"><span>$350 · Executive Signal Session</span></div>
+      <h3 id="modal-title">Book Your Signal Session</h3>
+      <p class="modal-sub">60 minutes. You leave with your constraint named in writing. No pitch inside the session. No obligation after it.</p>
+      <ul class="modal-delivers">
+        <li>One named constraint statement — written, specific, cross-functional</li>
+        <li>Three friction signals with implications</li>
+        <li>One recommended next action</li>
+        <li>1-page written summary within 24 hours</li>
+      </ul>
+      <div class="form-group">
+        <label for="m-name">First Name</label>
+        <input type="text" id="m-name" placeholder="Jane" autocomplete="given-name">
+      </div>
+      <div class="form-group">
+        <label for="m-email">Work Email</label>
+        <input type="email" id="m-email" placeholder="jane@company.com" autocomplete="email">
+      </div>
+      <div class="form-group">
+        <label for="m-company">Company</label>
+        <input type="text" id="m-company" placeholder="Acme Corp" autocomplete="organization">
+      </div>
+      <button class="modal-submit" onclick="submitForm()">Request My Signal Session</button>
+      <p class="modal-note">Boubacar will email you within 24 hours to confirm and send a calendar invite. 3 sessions per month.</p>
+    </div>
+    <div class="modal-success" id="modal-success-state">
+      <div class="success-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <h3>Request received.</h3>
+      <p>Boubacar will reach out within 24 hours to confirm your slot and send a calendar invite. Check your inbox — including spam.</p>
+    </div>
+  </div>
+</div>
+
+<main>
+
+<!-- ─── NAV ───────────────────────────────────────── -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="#hero" class="nav-logo">Catalyst<span>Works</span></a>
+    <ul class="nav-links">
+      <li><a href="#audit">Friction Audit</a></li>
+      <li><a href="#offers">How It Works</a></li>
+      <li><a href="#signal">Signal Session</a></li>
+      <li><a href="#about">About</a></li>
+    </ul>
+    <button class="btn-primary" onclick="openModal()" style="font-size:13px;padding:10px 20px;">Book a Signal Session</button>
+    <button class="nav-mobile-btn" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-drawer"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="nav-drawer" id="nav-drawer" role="dialog" aria-label="Mobile navigation">
+  <ul class="nav-drawer-links">
+    <li><a href="#audit" onclick="closeDrawer()">Free Friction Audit</a></li>
+    <li><a href="#offers" onclick="closeDrawer()">How It Works</a></li>
+    <li><a href="#signal" onclick="closeDrawer()">Signal Session</a></li>
+    <li><a href="#about" onclick="closeDrawer()">About</a></li>
+  </ul>
+  <div class="nav-drawer-cta">
+    <button onclick="closeDrawer(); openModal();">Book a Signal Session — $350</button>
+  </div>
+</div>
+
+<!-- ─── 1. HERO ────────────────────────────────────── -->
+<section class="hero" id="hero" aria-labelledby="hero-heading">
+  <div class="glow-1" aria-hidden="true"></div>
+  <div class="glow-2" aria-hidden="true"></div>
+  <div class="grid-texture" aria-hidden="true"></div>
+  <div class="hero-inner">
+    <div class="fade-in">
+      <div class="hero-badge"><div class="badge-dot" aria-hidden="true"></div>Constraint Elimination for Executives</div>
+    </div>
+    <div class="fade-in delay-1">
+      <p class="hero-for">For CEOs, COOs, and CIOs where growth has stalled</p>
+      <h1 id="hero-heading">You know something is wrong.<br>You just can't <em>name it</em>.</h1>
+    </div>
+    <div class="fade-in delay-2">
+      <p class="hero-sub">Growth has stalled. The same problems keep recurring. Your best people are buried. <strong>There is one constraint causing all of it.</strong> Catalyst Works finds it — and removes it.</p>
+    </div>
+    <div class="fade-in delay-3">
+      <div class="hero-offer">
+        <div class="hero-offer-text">
+          <div class="hero-offer-label">Start Here</div>
+          <div class="hero-offer-line">Executive Signal Session — 60 min, your constraint named in writing</div>
+          <div class="hero-offer-price">$350 · 3 sessions per month</div>
+        </div>
+        <button class="btn-primary" onclick="openModal()" style="white-space:nowrap;flex-shrink:0;">
+          Book a Session
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="fade-in delay-4">
+      <div class="hero-cta">
+        <button class="btn-ghost" onclick="document.getElementById('audit').scrollIntoView({behavior:'smooth'})">
+          Or take the free 2-minute audit first
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+        </button>
+      </div>
+      <p class="urgency-line"><span class="urgency-dot" aria-hidden="true"></span>3 Signal Session slots available this month</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── 2. FRICTION AUDIT ──────────────────────────── -->
+<section class="section" id="audit" aria-labelledby="audit-heading">
+  <div class="container">
+    <div class="fade-in">
+      <span class="label">Free · 2 Minutes</span>
+      <h2 id="audit-heading">The Friction Audit Starter</h2>
+      <p class="section-sub">A 10-signal diagnostic for hidden business constraints. Check every statement true for your organization right now.</p>
+    </div>
+    <div class="audit-wrap">
+      <div class="audit-intro fade-in delay-1">
+        <p>If your business is growing slower than it should, the problem isn't effort. It's <strong>one hidden constraint</strong> multiplying friction across every function.</p>
+        <p>Most executives can feel it. They can't name it. This audit is the first step to naming it.</p>
+        <p>Check everything that applies. Your score appears instantly.</p>
+        <br>
+        <p style="font-size:14px;color:var(--text-dim);line-height:1.7;margin-bottom:28px;">In Theory of Constraints, every system has one bottleneck limiting overall throughput. It's rarely where you think it is. Identifying it precisely is what unlocks growth without adding resources.</p>
+        <button class="btn-ghost" onclick="openModal()" style="font-size:13px;padding:11px 18px;">Already convinced? Book a Signal Session →</button>
+      </div>
+      <div class="audit-score-box fade-in delay-2">
+        <div class="audit-count-bar">
+          <span class="audit-count-text">Signals checked:</span>
+          <span class="audit-count-num" id="audit-count">0 / 10</span>
+        </div>
+        <ul class="audit-questions" id="audit-questions" aria-label="Friction audit questions">
+          <li class="audit-q" role="checkbox" aria-checked="false" tabindex="0" onclick="toggleAudit(this)" onkeydown="if(event.key===' '||event.key==='Enter'){toggleAudit(this);event.preventDefault();}"><div class="audit-checkbox" aria-hidden="true"></div><span class="audit-q-text">Your best people spend more than 30% of their time in meetings</span></li>
+          <li class="audit-q" role="checkbox" aria-checked="false" tabindex="0" onclick="toggleAudit(this)" onkeydown="if(event.key===' '||event.key==='Enter'){toggleAudit(this);event.preventDefault();}"><div class="audit-checkbox" aria-hidden="true"></div><span class="audit-q-text">Customers get different answers from different team members</span></li>
+          <li class="audit-q" role="checkbox" aria-checked="false" tabindex="0" onclick="toggleAudit(this)" onkeydown="if(event.key===' '||event.key==='Enter'){toggleAudit(this);event.preventDefault();}"><div class="audit-checkbox" aria-hidden="true"></div><span class="audit-q-text">You have data but it doesn't change decisions</span></li>
+          <li class="audit-q" role="checkbox" aria-checked="false" tabindex="0" onclick="toggleAudit(this)" onkeydown="if(event.key===' '||event.key==='Enter'){toggleAudit(this);event.preventDefault();}"><div class="audit-checkbox" aria-hidden="true"></div><span class="audit-q-text">Revenue grew but margin didn't</span></li>
+          <li class="audit-q" role="checkbox" aria-checked="false" tabindex="0" onclick="toggleAudit(this)" onkeydown="if(event.key===' '||event.key==='Enter'){toggleAudit(this);event.preventDefault();}"><div class="audit-checkbox" aria-hidden="true"></div><span class="audit-q-text">A new initiative is slower to launch than it was two years ago</span></li>
+          <li class="audit-q" role="checkbox" aria-checked="false" tabindex="0" onclick="toggleAudit(this)" onkeydown="if(event.key===' '||event.key==='Enter'){toggleAudit(this);event.preventDefault();}"><div class="audit-checkbox" aria-hidden="true"></div><span class="audit-q-text">Your tech stack has more than 7 tools and no one uses all of them</span></li>
+          <li class="audit-q" role="checkbox" aria-checked="false" tabindex="0" onclick="toggleAudit(this)" onkeydown="if(event.key===' '||event.key==='Enter'){toggleAudit(this);event.preventDefault();}"><div class="audit-checkbox" aria-hidden="true"></div><span class="audit-q-text">Leadership agrees in the room but execution diverges</span></li>
+          <li class="audit-q" role="checkbox" aria-checked="false" tabindex="0" onclick="toggleAudit(this)" onkeydown="if(event.key===' '||event.key==='Enter'){toggleAudit(this);event.preventDefault();}"><div class="audit-checkbox" aria-hidden="true"></div><span class="audit-q-text">You're solving the same problem for the third time</span></li>
+          <li class="audit-q" role="checkbox" aria-checked="false" tabindex="0" onclick="toggleAudit(this)" onkeydown="if(event.key===' '||event.key==='Enter'){toggleAudit(this);event.preventDefault();}"><div class="audit-checkbox" aria-hidden="true"></div><span class="audit-q-text">Cash flow surprises you more than once per quarter</span></li>
+          <li class="audit-q" role="checkbox" aria-checked="false" tabindex="0" onclick="toggleAudit(this)" onkeydown="if(event.key===' '||event.key==='Enter'){toggleAudit(this);event.preventDefault();}"><div class="audit-checkbox" aria-hidden="true"></div><span class="audit-q-text">Your best person just left and no one knows exactly why</span></li>
+        </ul>
+        <button class="audit-submit-btn" id="audit-submit-btn" onclick="showAuditResult()">See My Score</button>
+        <div class="audit-result" id="audit-result" aria-live="polite">
+          <div class="audit-score-display">
+            <div class="audit-score-num" id="audit-score-num">0</div>
+            <div class="audit-score-label">signals identified</div>
+          </div>
+          <p class="audit-verdict" id="audit-verdict"></p>
+          <p class="audit-verdict-sub" id="audit-verdict-sub"></p>
+          <div id="audit-cta-wrap"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── 3. OFFER LADDER ────────────────────────────── -->
+<section class="section" id="offers" aria-labelledby="offers-heading">
+  <div class="container">
+    <div class="fade-in">
+      <span class="label" style="color:var(--cyan)">The Path</span>
+      <h2 id="offers-heading" style="color:var(--navy)">Four stages. One direction.</h2>
+      <p class="section-sub" style="color:#5A6272">Every engagement starts with a Signal Session. What comes next depends on what we find.</p>
+    </div>
+    <div class="ladder fade-in delay-1">
+      <div class="ladder-rung" id="signal-step">
+        <div class="ladder-rung-icon-wrap">
+          <div class="ladder-entry-badge">Start Here</div>
+          <div class="ladder-icon">01</div>
+        </div>
+        <div class="ladder-step-label">Step 1</div>
+        <div class="ladder-name">Executive Signal Session</div>
+        <div class="ladder-format">60 min · Written summary in 24 hrs</div>
+        <div class="ladder-desc">Your constraint named in writing. Three friction signals. One recommended action. The starting point for everything that follows.</div>
+      </div>
+      <div class="ladder-rung">
+        <div class="ladder-rung-icon-wrap">
+          <div class="ladder-icon">02</div>
+        </div>
+        <div class="ladder-step-label">Step 2</div>
+        <div class="ladder-name">Diagnostic Sprint</div>
+        <div class="ladder-format">5 business days · Async + one readout call</div>
+        <div class="ladder-desc">Deep diagnostic. Named constraint, visual friction map, 90-day action board. You leave with the full picture and a clear path forward.</div>
+      </div>
+      <div class="ladder-rung">
+        <div class="ladder-rung-icon-wrap">
+          <div class="ladder-icon">03</div>
+        </div>
+        <div class="ladder-step-label">Step 3</div>
+        <div class="ladder-name">Constraint Audit</div>
+        <div class="ladder-format">Full engagement · Leadership team included</div>
+        <div class="ladder-desc">Full-system diagnostic across all five lenses. Constraint eliminated, system handed to you running. For organizations ready to move at scale.</div>
+      </div>
+      <div class="ladder-rung">
+        <div class="ladder-rung-icon-wrap">
+          <div class="ladder-icon">04</div>
+        </div>
+        <div class="ladder-step-label">Step 4</div>
+        <div class="ladder-name">Flywheel Retainer</div>
+        <div class="ladder-format">Ongoing · Quarterly cadence</div>
+        <div class="ladder-desc">One constraint removed per quarter. The system compounds. Within 12 months you've eliminated four and built a leadership team that can diagnose the next one.</div>
+      </div>
+    </div>
+    <div class="fade-in delay-2" style="margin-top:48px;text-align:center;">
+      <p style="font-size:15px;color:#5A6272;margin-bottom:20px;">Everything starts with 60 minutes and a named constraint.</p>
+      <button class="btn-primary" onclick="openModal()">
+        Book Your Signal Session — $350
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ─── 4. SIGNAL SESSION FEATURE ─────────────────── -->
+<section class="section" id="signal" aria-labelledby="signal-heading">
+  <div class="container">
+    <div class="signal-grid">
+      <div class="signal-card fade-in">
+        <span class="label label-orange">Entry Offer</span>
+        <div class="signal-price-block">
+          <div class="signal-price">$350</div>
+          <div class="signal-price-label">one-time · 60 minutes</div>
+        </div>
+        <p class="signal-what">A structured leadership interview using the Catalyst Works diagnostic protocol. You leave with one named constraint — written, specific, cross-functional — and a clear recommended next step.</p>
+        <ul class="signal-delivers">
+          <li>One named constraint statement</li>
+          <li>Three friction signals with implications</li>
+          <li>One recommended next action</li>
+          <li>1-page written summary within 24 hours</li>
+        </ul>
+        <button class="btn-primary" style="width:100%;justify-content:center;" onclick="openModal()">Book Your Signal Session</button>
+        <p class="signal-note">Limited to 3 sessions per month. Confirmed within 24 hours.</p>
+      </div>
+      <div class="signal-text fade-in delay-1">
+        <span class="label">Why Start Here</span>
+        <h2 id="signal-heading">No pitch. No proposal. Just your constraint — named.</h2>
+        <p>Most consultants want a six-week discovery before they tell you anything. Catalyst Works starts differently: <strong>one conversation, one named constraint, one action.</strong></p>
+        <p>The Signal Session exists because executives don't need more information. They need the right one — the exact bottleneck blocking throughput. Everything else is noise until that's found.</p>
+        <p>If the session reveals a constraint worth a full Diagnostic Sprint, Boubacar will say so. <strong>There is no sales pitch inside the session.</strong> The work is the pitch.</p>
+        <div class="signal-quote">
+          <p>"Running 3 Signal Sessions this week — 60 minutes, you leave with your constraint named in writing. $350. Want one?"</p>
+          <cite>— The DM that closes this offer</cite>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── 5. HOW IT WORKS ───────────────────────────── -->
+<section class="section" id="how" aria-labelledby="how-heading">
+  <div class="container">
+    <div class="fade-in">
+      <span class="label">Inside a Signal Session</span>
+      <h2 id="how-heading">What happens in 60 minutes</h2>
+      <p class="section-sub">Three focused phases. No preamble. No discovery theatre.</p>
+    </div>
+    <div class="steps-row">
+      <div class="step fade-in delay-1">
+        <div class="step-num" aria-hidden="true">01</div>
+        <div>
+          <h3>The Diagnostic Interview</h3>
+          <p>Boubacar runs a structured interview using the Catalyst Works diagnostic protocol — mapping friction signals, decision bottlenecks, and throughput gaps in real time.</p>
+        </div>
+      </div>
+      <div class="step fade-in delay-2">
+        <div class="step-num" aria-hidden="true">02</div>
+        <div>
+          <h3>The Constraint is Named</h3>
+          <p>Before the call ends, one constraint is identified and stated out loud — specifically, cross-functionally, with implications. Not a hypothesis. A diagnosis.</p>
+        </div>
+      </div>
+      <div class="step fade-in delay-3">
+        <div class="step-num" aria-hidden="true">03</div>
+        <div>
+          <h3>The Written Summary</h3>
+          <p>Within 24 hours: one page. Your constraint statement, three friction signals, one recommended action. Yours to keep, act on, or share with your leadership team.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── 6. WHO IT'S FOR ───────────────────────────── -->
+<section class="section" id="who" aria-labelledby="who-heading">
+  <div class="container">
+    <div class="fade-in">
+      <span class="label">Who This Is For</span>
+      <h2 id="who-heading">You recognize at least one of these</h2>
+      <p class="section-sub">The symptoms differ. The root cause is always the same — one unnamed constraint compounding across every function.</p>
+    </div>
+    <div class="cards-3">
+      <div class="symptom-card fade-in delay-1">
+        <span class="symptom-icon" aria-hidden="true">📈</span>
+        <div class="symptom-trigger">Revenue Problem</div>
+        <h3>"Revenue grew but margin didn't."</h3>
+        <p>You're selling more and making less. Every solution has moved the problem, not removed it. The constraint is upstream of where you're looking.</p>
+        <div class="symptom-outcome">Signal Session finds where margin is consumed and why.</div>
+      </div>
+      <div class="symptom-card fade-in delay-2">
+        <span class="symptom-icon" aria-hidden="true">🔁</span>
+        <div class="symptom-trigger">Recurrence Problem</div>
+        <h3>"We're solving the same problem for the third time."</h3>
+        <p>You've fixed it twice. It's back. That's not an execution failure — it's a signal the root constraint has never been touched.</p>
+        <div class="symptom-outcome">Signal Session identifies the structural cause, not the symptom.</div>
+      </div>
+      <div class="symptom-card fade-in delay-3">
+        <span class="symptom-icon" aria-hidden="true">🧠</span>
+        <div class="symptom-trigger">People Problem</div>
+        <h3>"Your best person just left and no one knows exactly why."</h3>
+        <p>Turnover is a lagging signal. By the time someone leaves, the constraint has been compounding for months. Exit interviews tell you almost nothing useful.</p>
+        <div class="symptom-outcome">Signal Session surfaces what the exit interview never will.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── MID CTA ───────────────────────────────────── -->
+<section id="mid-cta" aria-label="Mid-page call to action">
+  <div class="container">
+    <div class="mid-cta-inner fade-in">
+      <div class="mid-cta-text">
+        <h3>Ready to name your constraint?</h3>
+        <p>One call. One page. <strong>$350.</strong> No pitch inside the session.</p>
+      </div>
+      <button class="btn-primary" onclick="openModal()">
+        Book a Signal Session
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ─── 7. ABOUT ──────────────────────────────────── -->
+<section class="section" id="about" aria-labelledby="about-heading">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-photo-wrap fade-in">
+        <div class="about-photo">
+          <img src="Boubacar.JPG" alt="Boubacar Barry, Founder of Catalyst Works">
+        </div>
+        <div class="about-name-tag">Founder, Catalyst Works</div>
+      </div>
+      <div class="fade-in delay-1">
+        <span class="label label-clay">Your Guide</span>
+        <h2 id="about-heading">Not a vendor. A constraint remover.</h2>
+        <p class="about-title">Boubacar Barry — Founder, Catalyst Works</p>
+        <p>Boubacar built Catalyst Works because he kept watching the same failure repeat: smart executives, real urgency, zero movement. Not because the strategy was wrong — because the constraint had never been named.</p>
+        <p>His methodology applies Theory of Constraints to the executive layer — finding the one bottleneck blocking organizational throughput and removing it before anything else is added or changed.</p>
+        <p>He doesn't sell strategy decks. He doesn't run 12-week discovery engagements. He starts with 60 minutes and a named constraint. Everything else follows from there.</p>
+        <div class="about-quote">
+          <p>"Executives don't need more information. They need the right one — the exact constraint blocking throughput. Everything else is noise until that's found."</p>
+          <cite>Boubacar Barry, Catalyst Works</cite>
+        </div>
+        <p class="about-signature">You buy clarity. He delivers throughput.</p>
+        <div style="margin-top:28px;">
+          <button class="btn-primary" onclick="openModal()">
+            Work with Boubacar
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── 8. METHODOLOGY ───────────────────────────── -->
+<section class="section" id="methodology" aria-labelledby="methodology-heading">
+  <div class="container">
+    <span class="label label-cyan">The Framework Behind The Work</span>
+    <h2 id="methodology-heading">40 years of diagnostic science.<br>Applied to your org in 60 minutes.</h2>
+    <div class="method-grid">
+      <div class="method-text fade-in">
+        <p>The Executive Signal Session isn't intuition or consulting folklore. It's built on <strong>Theory of Constraints</strong> — a management science developed by physicist and business theorist <strong>Dr. Eliyahu Goldratt</strong> and documented in <em>The Goal</em> (1984).</p>
+        <p>Goldratt's core insight: <strong>every system has exactly one constraint limiting its output at any given time.</strong> Remove it, and throughput increases immediately. Add resources, headcount, or strategy before finding it, and you get noise.</p>
+        <p>TOC has been applied in manufacturing, healthcare, software, financial services, and government — by companies including Boeing, Intel, Ford, and over 3,000 hospitals worldwide. It is taught at Harvard Business School and used by the Israeli Defense Forces to manage logistics.</p>
+        <p>Catalyst Works applies the TOC diagnostic lens to the executive layer — the decisions, communications, and structures that constrain leadership throughput. The result is a named constraint, not a general observation.</p>
+        <a href="https://en.wikipedia.org/wiki/Theory_of_constraints" target="_blank" rel="noopener noreferrer">Read more about Theory of Constraints →</a>
+      </div>
+      <div class="method-pillars fade-in delay-1">
+        <div class="method-pillar">
+          <div class="method-pillar-num">01</div>
+          <div class="method-pillar-body">
+            <h4>Identify the constraint</h4>
+            <p>Find the single point where throughput is most limited. Not a list of problems — one specific binding constraint.</p>
+          </div>
+        </div>
+        <div class="method-pillar">
+          <div class="method-pillar-num">02</div>
+          <div class="method-pillar-body">
+            <h4>Exploit the constraint</h4>
+            <p>Extract maximum output from the constraint before spending any additional resources. Most organizations skip this step entirely.</p>
+          </div>
+        </div>
+        <div class="method-pillar">
+          <div class="method-pillar-num">03</div>
+          <div class="method-pillar-body">
+            <h4>Subordinate everything else</h4>
+            <p>Align all other decisions and priorities to support the constraint. What doesn't serve throughput stops consuming attention.</p>
+          </div>
+        </div>
+        <div class="method-pillar">
+          <div class="method-pillar-num">04</div>
+          <div class="method-pillar-body">
+            <h4>Elevate the constraint</h4>
+            <p>If throughput is still insufficient after steps 1–3, invest to expand or remove the constraint entirely. In that order.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── NEWSLETTER ────────────────────────────────── -->
+<section id="newsletter" aria-labelledby="newsletter-heading">
+  <div class="container">
+    <div class="newsletter-inner">
+      <div class="fade-in newsletter-text">
+        <span class="label">Free · Weekly</span>
+        <h2 id="newsletter-heading">The Weekly Signal</h2>
+        <p style="font-size:16px;color:var(--text-muted);line-height:1.7;margin-bottom:20px;">One constraint. One friction pattern. One insight. <strong style="color:#fff;">Every week, free.</strong></p>
+        <p style="font-size:14px;color:var(--text-dim);line-height:1.7;margin-bottom:16px;">Written for executives and operators who suspect the problem is structural but haven't been able to name it yet.</p>
+        <ul class="newsletter-examples">
+          <li>Why your best hire made your bottleneck worse</li>
+          <li>The meeting that signals a dying constraint loop</li>
+          <li>How a COO found three months of margin in one diagnostic session</li>
+          <li>Revenue up, margin flat — where the constraint usually hides</li>
+        </ul>
+      </div>
+      <div class="fade-in delay-1">
+        <div class="newsletter-form-wrap">
+          <div id="newsletter-form-state">
+            <span class="newsletter-label">The Weekly Signal</span>
+            <h3>Get the weekly constraint brief</h3>
+            <p class="newsletter-sub">No pitch. No product updates. One sharp insight delivered every week.</p>
+            <div class="newsletter-row">
+              <input type="email" id="nl-email" placeholder="your@email.com" autocomplete="email" aria-label="Email address">
+              <button class="newsletter-btn" onclick="subscribeNewsletter()">Subscribe</button>
+            </div>
+            <p class="newsletter-note">Join free. Unsubscribe any time. No spam — ever.</p>
+          </div>
+          <div class="newsletter-success" id="newsletter-success">
+            <p>You're in.</p>
+            <span>First issue lands next week. Watch your inbox.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── 9. FINAL CTA ──────────────────────────────── -->
+<section id="final-cta" aria-labelledby="final-cta-heading">
+  <div class="container">
+  <div class="final-cta-inner">
+    <div class="fade-in">
+      <span class="label" style="justify-content:center">The First Step</span>
+      <h2 id="final-cta-heading">Name your constraint.<br>Then remove it.</h2>
+    </div>
+    <div class="fade-in delay-1">
+      <p class="lead">60 minutes. One constraint named in writing. One recommended action. No pitch inside the session.</p>
+      <div class="final-price-callout">$350 <span>· Executive Signal Session</span></div>
+    </div>
+    <div class="fade-in delay-2">
+      <button class="btn-primary" onclick="openModal()" style="font-size:16px;padding:18px 36px;">
+        Book Your Signal Session
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </button>
+      <p class="reassurance">Boubacar takes 3 sessions per month. Submit today — he confirms within 24 hours.</p>
+    </div>
+  </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ─── FOOTER ────────────────────────────────────── -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div>
+        <a href="#hero" class="footer-logo">Catalyst<span>Works</span></a>
+        <div class="footer-meta">Boubacar Barry | Constraint Elimination for Executives</div>
+      </div>
+      <div class="footer-links">
+        <a href="mailto:catalystworks.ai@gmail.com">catalystworks.ai@gmail.com</a>
+      </div>
+    </div>
+    <div class="footer-copy">© 2026 Catalyst Works. All rights reserved.</div>
+  </div>
+</footer>
+
+<script>
+  /* ── Fade-in ── */
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); } });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  /* ── Nav active state ── */
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  const navObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.getAttribute('id');
+        navLinks.forEach(link => { link.classList.toggle('active', link.getAttribute('href') === '#' + id); });
+      }
+    });
+  }, { threshold: 0.4 });
+  sections.forEach(s => navObserver.observe(s));
+
+  /* ── Sticky nav ── */
+  window.addEventListener('scroll', () => {
+    document.querySelector('.nav').style.background = window.scrollY > 40 ? 'rgba(7,26,46,0.98)' : 'rgba(7,26,46,0.92)';
+  }, { passive: true });
+
+  /* ── Mobile drawer ── */
+  const hamburger = document.getElementById('hamburger');
+  const navDrawer = document.getElementById('nav-drawer');
+  function closeDrawer() {
+    hamburger.classList.remove('active');
+    hamburger.setAttribute('aria-expanded', 'false');
+    navDrawer.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  hamburger.addEventListener('click', () => {
+    const isOpen = navDrawer.classList.contains('open');
+    if (isOpen) { closeDrawer(); }
+    else { hamburger.classList.add('active'); hamburger.setAttribute('aria-expanded', 'true'); navDrawer.classList.add('open'); document.body.style.overflow = 'hidden'; }
+  });
+  window.addEventListener('scroll', () => { if (navDrawer.classList.contains('open')) closeDrawer(); }, { passive: true });
+
+  /* ── Friction Audit ── */
+  function toggleAudit(el) {
+    const checked = el.classList.toggle('checked');
+    el.setAttribute('aria-checked', checked ? 'true' : 'false');
+    const score = document.querySelectorAll('.audit-q.checked').length;
+    document.getElementById('audit-count').textContent = score + ' / 10';
+  }
+
+  function showAuditResult() {
+    const score = document.querySelectorAll('.audit-q.checked').length;
+    const scoreEl = document.getElementById('audit-score-num');
+    scoreEl.textContent = score;
+    scoreEl.style.color = score <= 3 ? 'var(--clay)' : 'var(--cyan)';
+
+    const verdictEl = document.getElementById('audit-verdict');
+    const subEl = document.getElementById('audit-verdict-sub');
+    const ctaWrap = document.getElementById('audit-cta-wrap');
+
+    // Clear previous content safely
+    ctaWrap.textContent = '';
+
+    const btn = document.createElement('button');
+    btn.addEventListener('click', openModal);
+
+    if (score <= 3) {
+      verdictEl.textContent = 'Low friction — but every system has a constraint.';
+      subEl.textContent = 'Your signals are low right now. A Signal Session will confirm what is holding the ceiling or help you see what is next.';
+      btn.className = 'audit-cta-btn';
+      btn.textContent = 'Book a Signal Session — $350';
+    } else if (score <= 6) {
+      verdictEl.textContent = 'Friction is present.';
+      subEl.textContent = 'You have a constraint you have not named yet. It is costing you throughput every week you wait.';
+      btn.className = 'audit-cta-btn';
+      btn.textContent = 'Book a Signal Session — name your constraint';
+    } else {
+      verdictEl.textContent = 'Critical. Your constraint is compounding.';
+      subEl.textContent = 'You scored ' + score + '/10. This costs you every day. The constraint is active and growing. One session is all it takes to name it.';
+      btn.className = 'audit-cta-btn';
+      btn.textContent = 'Book a Signal Session now — $350';
+    }
+
+    ctaWrap.appendChild(btn);
+    document.getElementById('audit-result').classList.add('show');
+    document.getElementById('audit-submit-btn').style.display = 'none';
+    document.getElementById('audit-result').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  /* ── Modal ── */
+  function openModal() {
+    document.getElementById('modal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => { const f = document.getElementById('m-name'); if (f) f.focus(); }, 250);
+  }
+  function closeModal() {
+    document.getElementById('modal').classList.remove('open');
+    document.body.style.overflow = '';
+    setTimeout(() => {
+      document.getElementById('modal-form-state').style.display = 'block';
+      document.getElementById('modal-success-state').style.display = 'none';
+      ['m-name','m-email','m-company'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
+    }, 300);
+  }
+  async function submitForm() {
+    const name    = document.getElementById('m-name').value.trim();
+    const email   = document.getElementById('m-email').value.trim();
+    const company = document.getElementById('m-company').value.trim();
+    if (!name || !email) {
+      ['m-name','m-email'].forEach(id => {
+        const el = document.getElementById(id);
+        if (!el.value.trim()) { el.style.borderColor = 'var(--orange)'; setTimeout(() => { el.style.borderColor = ''; }, 1500); }
+      });
+      return;
+    }
+    const btn = document.querySelector('.modal-submit');
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+    try {
+      const res = await fetch('https://formspree.io/f/xykbdrqa', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ name, email, company })
+      });
+      if (res.ok) {
+        document.getElementById('modal-form-state').style.display = 'none';
+        document.getElementById('modal-success-state').style.display = 'block';
+        setTimeout(closeModal, 4000);
+      } else {
+        btn.disabled = false;
+        btn.textContent = 'Request My Signal Session';
+        alert('Something went wrong. Please email catalystworks.ai@gmail.com directly.');
+      }
+    } catch (err) {
+      btn.disabled = false;
+      btn.textContent = 'Request My Signal Session';
+      alert('Connection error. Please email catalystworks.ai@gmail.com directly.');
+    }
+  }
+  document.getElementById('modal').addEventListener('click', e => { if (e.target === document.getElementById('modal')) closeModal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  /* ── Newsletter ── */
+  function subscribeNewsletter() {
+    const email = document.getElementById('nl-email').value.trim();
+    if (!email || !email.includes('@')) {
+      const input = document.getElementById('nl-email');
+      input.style.borderColor = 'var(--orange)';
+      setTimeout(() => { input.style.borderColor = ''; }, 1500);
+      input.focus();
+      return;
+    }
+    document.getElementById('newsletter-form-state').style.display = 'none';
+    document.getElementById('newsletter-success').style.display = 'block';
+  }
+  document.getElementById('nl-email').addEventListener('keydown', e => {
+    if (e.key === 'Enter') subscribeNewsletter();
+  });
+</script>
+</body>
+</html>
