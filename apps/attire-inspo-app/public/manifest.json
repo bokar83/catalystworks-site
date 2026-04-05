@@ -1,0 +1,14 @@
+{
+  "name": "Aminöa's AI — Attire Inspo",
+  "short_name": "Attire Inspo",
+  "description": "Your personal AI fashion stylist",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#080610",
+  "theme_color": "#c77dff",
+  "orientation": "portrait",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
