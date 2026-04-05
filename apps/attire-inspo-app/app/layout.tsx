@@ -30,7 +30,7 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className="min-h-screen overflow-x-hidden">
+      <body className="min-h-screen">
         <AuroraBackground />
         <main className="relative z-10 max-w-[480px] mx-auto pb-24 min-h-screen">
           {children}
