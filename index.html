@@ -1180,6 +1180,11 @@
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         body: JSON.stringify({ name, email, company })
       });
+      fetch('https://n8n.srv1040886.hstgr.cloud/webhook/catalystworks-contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ body: { name: name, email: email, organization: company, message: '' } })
+      }).catch(function() {});
       if (res.ok) {
         document.getElementById('modal-form-state').style.display = 'none';
         document.getElementById('modal-success-state').style.display = 'block';
