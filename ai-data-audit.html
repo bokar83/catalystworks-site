@@ -1,0 +1,1700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Data Exposure Audit for Professional Services Firms | Signal Session</title>
+  <meta name="description" content="Find out which AI tools in your firm can access client data. The Signal Session is a 90-minute diagnostic with a written posture summary delivered in 24 hours. $497.">
+  <link rel="canonical" href="https://catalystworks.consulting/ai-data-audit">
+  <link rel="icon" type="image/jpeg" href="CatalystWorks_logo.jpg">
+
+  <meta property="og:title" content="AI Data Exposure Audit for Professional Services Firms | Signal Session">
+  <meta property="og:description" content="90-minute AI posture diagnostic. Written summary in 24 hours. $497. Find out which tools in your firm can access client data.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://catalystworks.consulting/ai-data-audit">
+  <meta property="og:image" content="https://catalystworks.consulting/og-image.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="AI Data Exposure Audit for Professional Services Firms | Signal Session">
+  <meta name="twitter:description" content="90-minute AI posture diagnostic. Written summary in 24 hours. $497.">
+  <meta name="twitter:image" content="https://catalystworks.consulting/og-image.jpg">
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TBW90RVMM1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-TBW90RVMM1');
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,900;1,9..144,700;1,9..144,900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Signal Session",
+    "description": "A 90-minute structured AI posture diagnostic for professional services firms. Covers every AI-adjacent tool in your workflow and delivers a written posture summary within 24 hours.",
+    "provider": { "@type": "Organization", "name": "Catalyst Works", "url": "https://catalystworks.consulting" },
+    "offers": { "@type": "Offer", "price": "497", "priceCurrency": "USD" },
+    "duration": "PT90M"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Do I need a technical background to get value from the session?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. The session is a structured conversation, not a technical audit. You describe your workflow. I translate it into a posture assessment you can act on." }
+      },
+      {
+        "@type": "Question",
+        "name": "What happens if we find something serious?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The summary tells you what it is and what to do first. For firms where the findings require a structured remediation plan, there is a next-step engagement. The Signal Session always delivers value on its own." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the written summary confidential?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Everything discussed in the session and documented in the summary stays between us." }
+      }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://catalystworks.consulting" },
+      { "@type": "ListItem", "position": 2, "name": "AI Data Audit", "item": "https://catalystworks.consulting/ai-data-audit" }
+    ]
+  }
+  </script>
+
+  <style>
+    /* ── TOKENS ──────────────────────────────────────────── */
+    :root {
+      --slate:        #1C2333;
+      --slate-deep:   #141924;
+      --slate-darker: #0F1520;
+      --red:          #E03B3B;
+      --red-hover:    #C92F2F;
+      --red-dim:      rgba(224,59,59,0.12);
+      --warm:         #F5F0E8;
+      --warm-dim:     rgba(245,240,232,0.55);
+      --warm-muted:   rgba(245,240,232,0.35);
+      --warm-ghost:   rgba(245,240,232,0.08);
+      --green:        #4CAF50;
+      --amber:        #FFA500;
+      --mono:         'JetBrains Mono', monospace;
+      --serif:        'Fraunces', serif;
+      --sans:         'Inter', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--sans);
+      background: var(--slate);
+      color: var(--warm);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; cursor: pointer; border: none; background: none; }
+
+    .container { max-width: 1080px; margin: 0 auto; padding: 0 28px; }
+
+    /* ── BUTTONS ──────────────────────────────────────────── */
+    .btn-red {
+      display: inline-block;
+      background: var(--red);
+      color: #fff;
+      font-family: var(--sans);
+      font-weight: 600;
+      font-size: 15px;
+      letter-spacing: 0.02em;
+      padding: 14px 32px;
+      border-radius: 3px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.15s ease, transform 0.12s ease;
+      text-decoration: none;
+    }
+    .btn-red:hover { background: var(--red-hover); transform: translateY(-1px); }
+    .btn-red:active { background: #B02828; transform: none; }
+    .btn-red-lg {
+      font-size: 16px;
+      padding: 16px 40px;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    .btn-ghost-red {
+      display: inline-block;
+      background: transparent;
+      color: var(--red);
+      font-family: var(--sans);
+      font-weight: 600;
+      font-size: 14px;
+      padding: 10px 22px;
+      border-radius: 3px;
+      border: 1.5px solid var(--red);
+      cursor: pointer;
+      transition: background 0.15s ease;
+      text-decoration: none;
+    }
+    .btn-ghost-red:hover { background: var(--red-dim); }
+
+    /* ── EYEBROW ──────────────────────────────────────────── */
+    .eyebrow {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--red);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 18px;
+      height: 1px;
+      background: currentColor;
+      flex-shrink: 0;
+    }
+    .eyebrow-warm { color: var(--warm-muted); }
+    .eyebrow-warm::before { background: var(--warm-muted); }
+
+    /* ╔═══════════════════════════════════════════════
+       NAV
+    ╔═══════════════════════════════════════════════ */
+    .site-nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      height: 64px;
+      background: rgba(20,25,36,0.96);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(245,240,232,0.05);
+    }
+    .site-nav .container {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .nav-wordmark {
+      font-family: var(--mono);
+      font-size: 13px;
+      color: var(--warm);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .nav-divider {
+      width: 1px;
+      height: 18px;
+      background: rgba(245,240,232,0.12);
+    }
+    .nav-sub {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--red);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .nav-slots {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .nav-slot-count {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--warm-muted);
+      letter-spacing: 0.04em;
+    }
+    .nav-slot-count strong { color: var(--red); }
+
+    /* ╔═══════════════════════════════════════════════
+       HERO
+    ╔═══════════════════════════════════════════════ */
+    .hero {
+      background: var(--slate);
+      min-height: 100vh;
+      padding: calc(64px + 72px) 28px 64px;
+      display: flex;
+      align-items: center;
+    }
+    .hero-inner {
+      max-width: 1080px;
+      width: 100%;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 64px;
+      align-items: center;
+    }
+    .hero-left {}
+    .hero-right {}
+    .hero-eyebrow {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--red);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      width: 20px;
+      height: 1px;
+      background: var(--red);
+      display: inline-block;
+    }
+    .hero h1 {
+      font-family: var(--serif);
+      font-weight: 900;
+      font-size: clamp(42px, 6.5vw, 72px);
+      color: var(--warm);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 20px;
+    }
+    .hero h1 em {
+      font-style: italic;
+      font-weight: 700;
+      color: var(--red);
+    }
+    .hero-sub {
+      font-size: clamp(16px, 2vw, 18px);
+      color: var(--warm-dim);
+      line-height: 1.65;
+      max-width: 560px;
+      margin-bottom: 36px;
+    }
+    .hero-cta-row {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+    .hero-scarcity {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--warm-muted);
+      letter-spacing: 0.04em;
+      margin-bottom: 64px;
+    }
+    .hero-scarcity strong { color: var(--red); }
+
+    .data-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-top: 1px solid rgba(245,240,232,0.07);
+      padding-top: 40px;
+    }
+    .data-cell {
+      padding-right: 28px;
+      border-right: 1px solid rgba(245,240,232,0.07);
+      padding-left: 28px;
+    }
+    .data-cell:first-child { padding-left: 0; }
+    .data-cell:last-child { border-right: none; }
+    .data-val {
+      font-family: var(--mono);
+      font-size: clamp(28px, 4vw, 40px);
+      color: var(--red);
+      display: block;
+      line-height: 1;
+    }
+    .data-label {
+      font-size: 12px;
+      color: var(--warm-muted);
+      margin-top: 8px;
+      display: block;
+      line-height: 1.4;
+    }
+
+    /* ╔═══════════════════════════════════════════════
+       RISK TAPE
+    ╔═══════════════════════════════════════════════ */
+    .risk-tape {
+      background: var(--slate-deep);
+      height: 44px;
+      overflow: hidden;
+      border-top: 1px solid rgba(245,240,232,0.04);
+      border-bottom: 1px solid rgba(245,240,232,0.04);
+      display: flex;
+      align-items: center;
+    }
+    .tape-track {
+      display: flex;
+      align-items: center;
+      width: max-content;
+      animation: marquee 45s linear infinite;
+    }
+    .risk-tape:hover .tape-track { animation-play-state: paused; }
+    .tape-phrase {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--warm-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      white-space: nowrap;
+    }
+    .tape-sep {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--red);
+      margin: 0 20px;
+      flex-shrink: 0;
+      opacity: 0.6;
+    }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ╔═══════════════════════════════════════════════
+       PROOF ARTIFACT (section 2)
+    ╔═══════════════════════════════════════════════ */
+    .proof-section {
+      background: var(--slate-darker);
+      padding: 80px 28px;
+    }
+    .proof-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+    .proof-left h2 {
+      font-family: var(--serif);
+      font-weight: 700;
+      font-size: clamp(26px, 3.5vw, 38px);
+      color: var(--warm);
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+    .proof-left p {
+      font-size: 16px;
+      color: var(--warm-dim);
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+    .proof-left p:last-child { margin-bottom: 0; }
+
+    /* Document frame */
+    .doc-frame {
+      background: rgba(245,240,232,0.02);
+      border: 1px solid rgba(245,240,232,0.08);
+      border-radius: 4px;
+      padding: 32px;
+      position: relative;
+    }
+    .doc-frame::before {
+      content: 'SAMPLE OUTPUT';
+      position: absolute;
+      top: -1px;
+      left: 24px;
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.14em;
+      color: var(--red);
+      background: var(--red-dim);
+      border: 1px solid rgba(224,59,59,0.25);
+      padding: 3px 8px;
+      border-radius: 0 0 3px 3px;
+    }
+    .doc-header {
+      padding-top: 16px;
+      margin-bottom: 20px;
+    }
+    .doc-title {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--red);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      display: block;
+      margin-bottom: 3px;
+    }
+    .doc-subtitle {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--warm-muted);
+      display: block;
+    }
+    .doc-rule { border: none; border-top: 1px solid rgba(245,240,232,0.06); margin: 16px 0; }
+
+    .doc-meta-row {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 5px;
+    }
+    .doc-meta-key {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--warm-muted);
+      min-width: 120px;
+      flex-shrink: 0;
+    }
+    .doc-meta-val {
+      font-size: 12px;
+      color: rgba(245,240,232,0.8);
+    }
+
+    .tool-section-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--red);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin: 20px 0 8px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid rgba(224,59,59,0.2);
+    }
+
+    .tool-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(245,240,232,0.04);
+    }
+    .tool-name {
+      font-size: 12px;
+      color: rgba(245,240,232,0.75);
+    }
+    .tool-badge {
+      font-family: var(--mono);
+      font-size: 10px;
+      padding: 2px 7px;
+      border-radius: 2px;
+    }
+    .badge-red    { color: var(--red);   background: rgba(224,59,59,0.1);  border: 1px solid rgba(224,59,59,0.3); }
+    .badge-green  { color: #4CAF50;      background: rgba(76,175,80,0.08); border: 1px solid rgba(76,175,80,0.25); }
+    .badge-amber  { color: #FFA500;      background: rgba(255,165,0,0.08); border: 1px solid rgba(255,165,0,0.25); }
+    .badge-dim    { color: var(--warm-muted); background: rgba(245,240,232,0.04); border: 1px solid rgba(245,240,232,0.1); }
+
+    .score-block {
+      margin-top: 16px;
+      padding: 14px 16px;
+      background: rgba(224,59,59,0.06);
+      border: 1px solid rgba(224,59,59,0.18);
+      border-radius: 3px;
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+    }
+    .score-num {
+      font-family: var(--mono);
+      font-size: 44px;
+      color: var(--red);
+      line-height: 1;
+    }
+    .score-detail {
+      font-size: 12px;
+      color: var(--warm-muted);
+      line-height: 1.6;
+    }
+    .score-detail strong { color: var(--red); display: block; }
+
+    .doc-disclaimer {
+      font-family: var(--mono);
+      font-size: 9px;
+      color: rgba(245,240,232,0.2);
+      margin-top: 14px;
+      font-style: italic;
+    }
+
+    /* ╔═══════════════════════════════════════════════
+       PROCESS
+    ╔═══════════════════════════════════════════════ */
+    .process-section {
+      background: var(--slate);
+      padding: 80px 28px;
+      border-top: 1px solid rgba(245,240,232,0.04);
+    }
+    .process-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin-top: 48px;
+    }
+    .process-step {
+      background: rgba(245,240,232,0.02);
+      border: 1px solid rgba(245,240,232,0.06);
+      padding: 32px 28px;
+      position: relative;
+    }
+    .process-step:first-child { border-radius: 3px 0 0 3px; }
+    .process-step:last-child  { border-radius: 0 3px 3px 0; }
+    .step-num {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--red);
+      letter-spacing: 0.1em;
+      margin-bottom: 16px;
+      display: block;
+    }
+    .step-title {
+      font-family: var(--serif);
+      font-weight: 700;
+      font-size: 22px;
+      color: var(--warm);
+      margin-bottom: 8px;
+      line-height: 1.2;
+    }
+    .step-time {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--red);
+      margin-bottom: 12px;
+      display: block;
+      letter-spacing: 0.06em;
+    }
+    .step-body {
+      font-size: 14px;
+      color: var(--warm-dim);
+      line-height: 1.7;
+    }
+
+    .process-section h2 {
+      font-family: var(--serif);
+      font-weight: 700;
+      font-size: clamp(28px, 4vw, 42px);
+      color: var(--warm);
+      line-height: 1.15;
+      max-width: 560px;
+    }
+
+    /* ╔═══════════════════════════════════════════════
+       GSAP ANIMATED SECTION
+    ╔═══════════════════════════════════════════════ */
+    .gsap-section {
+      background: var(--slate-darker);
+      padding: 100px 28px;
+      border-top: 1px solid rgba(245,240,232,0.04);
+    }
+    .gsap-inner {
+      max-width: 720px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .gsap-inner h2 {
+      font-family: var(--serif);
+      font-weight: 700;
+      font-size: clamp(26px, 3.5vw, 36px);
+      color: var(--warm);
+      line-height: 1.2;
+      margin-bottom: 56px;
+    }
+
+    .gsap-doc {
+      max-width: 640px;
+      margin: 0 auto;
+      background: rgba(245,240,232,0.02);
+      border: 1px solid rgba(245,240,232,0.08);
+      border-radius: 4px;
+      padding: 40px;
+      text-align: left;
+    }
+    .gsap-actions-eyebrow {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--red);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-top: 20px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid rgba(224,59,59,0.2);
+    }
+    .gsap-action-row {
+      display: flex;
+      gap: 12px;
+      padding: 7px 0;
+    }
+    .gsap-action-num {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: rgba(224,59,59,0.6);
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .gsap-action-text {
+      font-size: 13px;
+      color: var(--warm-dim);
+      line-height: 1.6;
+    }
+    .gsap-sig-rule { border: none; border-top: 1px solid rgba(245,240,232,0.06); margin: 18px 0 12px; }
+    .gsap-sig { font-family: var(--mono); font-size: 10px; color: rgba(245,240,232,0.2); }
+    .gsap-pull {
+      font-size: 16px;
+      color: var(--warm-dim);
+      margin-top: 28px;
+      opacity: 0;
+      font-style: italic;
+    }
+
+    /* ╔═══════════════════════════════════════════════
+       PRICE BLOCK
+    ╔═══════════════════════════════════════════════ */
+    .price-section {
+      background: var(--slate-deep);
+      padding: 96px 28px;
+      border-top: 1px solid rgba(245,240,232,0.04);
+      text-align: center;
+    }
+    .price-inner { max-width: 600px; margin: 0 auto; }
+
+    .price-anchor-quote {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: clamp(17px, 2.5vw, 21px);
+      color: var(--warm-dim);
+      line-height: 1.5;
+      margin-bottom: 8px;
+      max-width: 520px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .price-anchor-cite {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: rgba(245,240,232,0.2);
+      letter-spacing: 0.06em;
+      display: block;
+      margin-bottom: 48px;
+    }
+
+    .price-vs {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+    .price-compare {
+      text-align: center;
+    }
+    .price-compare-fig {
+      font-family: var(--mono);
+      font-size: 14px;
+      color: var(--warm-muted);
+      text-decoration: line-through;
+      display: block;
+    }
+    .price-compare-label {
+      font-size: 11px;
+      color: rgba(245,240,232,0.25);
+      margin-top: 4px;
+      display: block;
+    }
+    .price-vs-divider {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: rgba(245,240,232,0.15);
+    }
+    .price-main {
+      text-align: center;
+    }
+    .price-fig {
+      font-family: var(--serif);
+      font-weight: 900;
+      font-size: clamp(64px, 12vw, 96px);
+      color: var(--warm);
+      line-height: 1;
+      display: block;
+    }
+    .price-note {
+      font-size: 14px;
+      color: var(--warm-muted);
+      margin-top: 8px;
+      display: block;
+    }
+
+    .price-includes {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin: 32px auto;
+      max-width: 380px;
+      text-align: left;
+    }
+    .price-include-item {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--warm-dim);
+    }
+    .price-include-item::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--red);
+      flex-shrink: 0;
+      margin-top: 5px;
+    }
+
+    .price-cta-wrap { max-width: 380px; margin: 0 auto; }
+    .price-cta-wrap .btn-red { width: 100%; text-align: center; display: block; }
+    .price-refund {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: rgba(245,240,232,0.25);
+      margin-top: 14px;
+      line-height: 1.6;
+      font-style: italic;
+    }
+
+    /* ╔═══════════════════════════════════════════════
+       FOUNDER BLOCK
+    ╔═══════════════════════════════════════════════ */
+    .founder-section {
+      background: var(--slate);
+      padding: 80px 28px;
+      border-top: 1px solid rgba(245,240,232,0.04);
+    }
+    .founder-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .founder-left h2 {
+      font-family: var(--serif);
+      font-weight: 700;
+      font-size: clamp(26px, 3.5vw, 38px);
+      color: var(--warm);
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+    .founder-left p {
+      font-size: 15px;
+      color: var(--warm-dim);
+      line-height: 1.75;
+      margin-bottom: 12px;
+    }
+
+    .cred-grid { margin-top: 32px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .cred-item {}
+    .cred-line { width: 20px; height: 2px; background: var(--red); margin-bottom: 12px; opacity: 0.7; }
+    .cred-stat {
+      font-family: var(--mono);
+      font-size: 32px;
+      color: var(--red);
+      display: block;
+      line-height: 1;
+    }
+    .cred-label {
+      font-size: 12px;
+      color: var(--warm-dim);
+      margin-top: 6px;
+      line-height: 1.4;
+      display: block;
+    }
+
+    .founder-right {}
+    .faq-item { border-bottom: 1px solid rgba(245,240,232,0.06); }
+    .faq-item details summary {
+      font-family: var(--serif);
+      font-weight: 700;
+      font-size: 17px;
+      color: var(--warm);
+      padding: 18px 0;
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      line-height: 1.3;
+    }
+    .faq-item details summary::-webkit-details-marker { display: none; }
+    .faq-item details summary::after {
+      content: '+';
+      font-family: var(--sans);
+      font-size: 20px;
+      font-weight: 300;
+      color: var(--red);
+      flex-shrink: 0;
+      transition: transform 0.2s ease;
+    }
+    .faq-item details[open] summary::after { transform: rotate(45deg); }
+    .faq-answer {
+      font-size: 14px;
+      color: var(--warm-dim);
+      line-height: 1.75;
+      padding-bottom: 18px;
+      padding-right: 32px;
+    }
+
+    /* ╔═══════════════════════════════════════════════
+       FINAL CTA
+    ╔═══════════════════════════════════════════════ */
+    .final-cta {
+      background: var(--red);
+      padding: 80px 28px;
+      text-align: center;
+    }
+    .final-cta h2 {
+      font-family: var(--serif);
+      font-weight: 900;
+      font-size: clamp(28px, 5vw, 52px);
+      color: #fff;
+      line-height: 1.1;
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+    }
+    .final-cta p {
+      font-size: 16px;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 32px;
+    }
+    .btn-white {
+      display: inline-block;
+      background: #fff;
+      color: var(--red);
+      font-family: var(--sans);
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      padding: 16px 44px;
+      border-radius: 3px;
+      transition: opacity 0.15s ease, transform 0.12s ease;
+    }
+    .btn-white:hover { opacity: 0.92; transform: translateY(-1px); }
+    .final-scarcity {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: rgba(255,255,255,0.5);
+      margin-top: 16px;
+      letter-spacing: 0.06em;
+    }
+    .final-scarcity strong { color: rgba(255,255,255,0.85); }
+
+    /* ╔═══════════════════════════════════════════════
+       FOOTER
+    ╔═══════════════════════════════════════════════ */
+    .site-footer {
+      background: var(--slate-darker);
+      border-top: 1px solid rgba(245,240,232,0.04);
+      padding: 40px 28px;
+    }
+    .footer-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .footer-left { font-family: var(--mono); font-size: 12px; color: rgba(245,240,232,0.25); }
+    .footer-center { font-family: var(--mono); font-size: 11px; color: rgba(245,240,232,0.15); }
+    .footer-right { font-family: var(--mono); font-size: 11px; color: rgba(245,240,232,0.15); }
+    .footer-link { color: rgba(245,240,232,0.25); text-decoration: none; }
+    .footer-link:hover { color: rgba(245,240,232,0.5); }
+
+    /* ── CONTACT SECTION ───────────────────────────────────────── */
+    .contact-section {
+      background: var(--slate-deep);
+      padding: 80px 28px;
+      border-top: 1px solid rgba(245,240,232,0.04);
+    }
+    .contact-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 72px;
+      align-items: start;
+    }
+    .contact-left h2 {
+      font-family: var(--serif);
+      font-weight: 700;
+      font-size: clamp(26px, 3.5vw, 38px);
+      color: var(--warm);
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+    .contact-left p {
+      font-size: 15px;
+      color: var(--warm-dim);
+      line-height: 1.7;
+      margin-bottom: 12px;
+    }
+    .contact-email-direct {
+      font-family: var(--mono);
+      font-size: 12px !important;
+      color: rgba(245,240,232,0.3) !important;
+    }
+    .contact-email-direct a {
+      color: var(--red);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(224,59,59,0.3);
+      transition: border-color 0.15s;
+    }
+    .contact-email-direct a:hover { border-color: var(--red); }
+    .contact-form { display: flex; flex-direction: column; gap: 12px; }
+    .contact-field input,
+    .contact-field textarea {
+      width: 100%;
+      background: rgba(245,240,232,0.04);
+      border: 1px solid rgba(245,240,232,0.1);
+      border-radius: 3px;
+      padding: 12px 16px;
+      font-family: var(--sans);
+      font-size: 14px;
+      color: var(--warm);
+      outline: none;
+      resize: none;
+      transition: border-color 0.15s, background 0.15s;
+    }
+    .contact-field input::placeholder,
+    .contact-field textarea::placeholder { color: rgba(245,240,232,0.25); }
+    .contact-field input:focus,
+    .contact-field textarea:focus {
+      border-color: var(--red);
+      background: rgba(224,59,59,0.04);
+    }
+    .contact-fine-print {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: rgba(245,240,232,0.2);
+      text-align: center;
+      margin-top: 4px;
+    }
+    .contact-confirm {
+      display: none;
+      font-family: var(--mono);
+      font-size: 13px;
+      color: var(--red);
+      padding: 16px 0;
+      text-align: center;
+    }
+
+    /* ── SUPERSCRIPTS ──────────────────────────────────────────── */
+    sup.fn {
+      font-family: var(--mono);
+      font-size: 9px;
+      color: var(--red);
+      vertical-align: super;
+      line-height: 0;
+      margin-left: 1px;
+      opacity: 0.7;
+    }
+
+    /* ── FOOTNOTES BAR ──────────────────────────────────────────── */
+    .footnotes-bar {
+      background: var(--slate-darker);
+      border-top: 1px solid rgba(245,240,232,0.04);
+      padding: 28px;
+    }
+    .footnotes-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+    .footnotes-label {
+      font-family: var(--mono);
+      font-size: 9px;
+      color: rgba(245,240,232,0.2);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 12px;
+    }
+    .footnotes-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .footnotes-list li {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: rgba(245,240,232,0.2);
+      line-height: 1.5;
+      display: flex;
+      gap: 8px;
+    }
+    .fn-num {
+      color: var(--red);
+      opacity: 0.5;
+      flex-shrink: 0;
+      min-width: 14px;
+    }
+    .footnotes-list a {
+      color: rgba(245,240,232,0.25);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(245,240,232,0.1);
+      transition: color 0.15s ease, border-color 0.15s ease;
+    }
+    .footnotes-list a:hover {
+      color: rgba(245,240,232,0.5);
+      border-color: rgba(245,240,232,0.25);
+    }
+
+    /* ── URGENCY PANEL ──────────────────────────────────────────── */
+    .urgency-panel {
+      background: rgba(245,240,232,0.03);
+      border: 1px solid rgba(245,240,232,0.08);
+      border-radius: 4px;
+      padding: 28px;
+    }
+    .urgency-panel-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--red);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 20px;
+    }
+    .urgency-stat-row {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding: 4px 0 12px;
+    }
+    .urgency-stat {
+      font-family: var(--mono);
+      font-size: 32px;
+      color: var(--red);
+      line-height: 1;
+      display: block;
+    }
+    .urgency-stat-text {
+      font-size: 12px;
+      color: var(--warm-dim);
+      line-height: 1.5;
+    }
+    .urgency-rule {
+      border: none;
+      border-top: 1px solid rgba(245,240,232,0.06);
+      margin: 4px 0 12px;
+    }
+    .urgency-cite {
+      font-family: var(--mono);
+      font-size: 9px;
+      color: rgba(245,240,232,0.2);
+      letter-spacing: 0.06em;
+      margin-top: 4px;
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+    .urgency-slot-block {
+      border-top: 1px solid rgba(245,240,232,0.06);
+      padding-top: 18px;
+    }
+    .urgency-slot-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--warm-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 10px;
+    }
+    .urgency-slot-bar {
+      display: flex;
+      gap: 5px;
+      margin-bottom: 8px;
+    }
+    .urgency-slot-filled,
+    .urgency-slot-open {
+      height: 6px;
+      flex: 1;
+      border-radius: 2px;
+    }
+    .urgency-slot-filled { background: var(--red); opacity: 0.7; }
+    .urgency-slot-open   { background: rgba(245,240,232,0.12); }
+    .urgency-slot-note {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--warm-muted);
+      line-height: 1.5;
+    }
+    .urgency-slot-note strong { color: var(--red); }
+
+    /* ── PULLQUOTE ──────────────────────────────────────────────── */
+    .pullquote {
+      border-left: 2px solid var(--red);
+      padding: 16px 20px;
+      margin: 32px 0;
+      background: rgba(224,59,59,0.04);
+    }
+    .pullquote-text {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: clamp(15px, 2vw, 18px);
+      color: var(--warm);
+      line-height: 1.55;
+      margin-bottom: 10px;
+    }
+    .pullquote-attr {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--warm-muted);
+      letter-spacing: 0.06em;
+    }
+    .pullquote-attr strong { color: rgba(245,240,232,0.6); }
+
+    /* standalone centered quote for dark sections */
+    .blockquote-center {
+      max-width: 680px;
+      margin: 0 auto 48px;
+      text-align: center;
+    }
+    .blockquote-center .pullquote-text {
+      font-size: clamp(17px, 2.5vw, 22px);
+    }
+    .blockquote-center .pullquote {
+      border-left: none;
+      border-top: 1px solid rgba(224,59,59,0.3);
+      border-bottom: 1px solid rgba(224,59,59,0.3);
+      background: none;
+      padding: 24px 0;
+    }
+
+    /* ╔═══════════════════════════════════════════════
+       RESPONSIVE
+    ╔═══════════════════════════════════════════════ */
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 48px; }
+      .hero-right { display: none; }
+      .contact-inner { grid-template-columns: 1fr; gap: 40px; }
+    }
+    @media (max-width: 768px) {
+      .hero { padding: calc(64px + 56px) 20px 56px; min-height: auto; }
+      .hero-cta-row { flex-direction: column; align-items: flex-start; }
+      .hero-cta-row .btn-red { width: 100%; text-align: center; }
+      .data-strip { grid-template-columns: repeat(2, 1fr); gap: 0; }
+      .data-cell { padding: 20px 16px; border-bottom: 1px solid rgba(245,240,232,0.06); }
+      .data-cell:nth-child(even) { border-right: none; }
+      .data-cell:nth-child(odd) { border-right: 1px solid rgba(245,240,232,0.07); }
+      .data-cell:nth-child(3), .data-cell:nth-child(4) { border-bottom: none; }
+
+      .proof-section { padding: 56px 20px; }
+      .proof-inner { grid-template-columns: 1fr; gap: 40px; }
+      .doc-frame { padding: 24px 20px; }
+      .doc-meta-row { flex-direction: column; gap: 2px; }
+
+      .process-section { padding: 56px 20px; }
+      .process-grid { grid-template-columns: 1fr; gap: 2px; }
+      .process-step:first-child { border-radius: 3px 3px 0 0; }
+      .process-step:last-child  { border-radius: 0 0 3px 3px; }
+
+      .gsap-section { padding: 64px 20px; }
+      .gsap-doc { padding: 24px 18px; }
+
+      .price-section { padding: 64px 20px; }
+      .price-vs { flex-direction: column; gap: 16px; }
+
+      .founder-section { padding: 56px 20px; }
+      .founder-inner { grid-template-columns: 1fr; gap: 48px; }
+      .cred-grid { grid-template-columns: repeat(3, 1fr); gap: 16px; }
+
+      .final-cta { padding: 56px 20px; }
+      .footer-inner { flex-direction: column; text-align: center; }
+
+      .nav-slots { display: none; }
+      .nav-divider { display: none; }
+    }
+
+    @media (max-width: 420px) {
+      .cred-grid { grid-template-columns: 1fr; gap: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="site-nav" aria-label="Main navigation">
+    <div class="container">
+      <div class="nav-brand">
+        <span class="nav-wordmark">Catalyst Works</span>
+        <div class="nav-divider"></div>
+        <span class="nav-sub">Signal Session</span>
+      </div>
+      <div class="nav-slots">
+        <span class="nav-slot-count"><strong>4 slots</strong> remaining in May</span>
+        <a href="#CALENDLY_URL" class="btn-ghost-red" onclick="gtag('event','cta_click',{location:'nav'})">Reserve a Slot</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" aria-labelledby="hero-h1">
+    <div class="hero-inner">
+
+      <!-- LEFT: headline + CTA + strip -->
+      <div class="hero-left">
+        <div class="hero-eyebrow">90-Minute AI Exposure Diagnostic &mdash; Professional Services</div>
+        <h1 id="hero-h1">
+          You have AI tools<br>touching client data.<br>
+          <em>Most firms can name three.<br>The average is twenty.</em>
+        </h1>
+        <p class="hero-sub">Find out exactly which AI tools can access your client data, what they are sending out, and what to fix first. A 90-minute structured diagnostic. Written posture summary in 24 hours.</p>
+        <div class="hero-cta-row">
+          <a href="#CALENDLY_URL" class="btn-red btn-red-lg" onclick="gtag('event','cta_click',{location:'hero'})">Reserve My Diagnostic</a>
+        </div>
+        <p class="hero-scarcity"><strong>4 slots remaining</strong> in May &mdash; 8 sessions per month, one practitioner</p>
+        <div class="data-strip" aria-label="Session at a glance">
+          <div class="data-cell"><span class="data-val">90</span><span class="data-label">Structured minutes</span></div>
+          <div class="data-cell"><span class="data-val">11</span><span class="data-label">Diagnostic questions</span></div>
+          <div class="data-cell"><span class="data-val">24h</span><span class="data-label">Written summary</span></div>
+          <div class="data-cell"><span class="data-val">$497</span><span class="data-label">Flat fee</span></div>
+        </div>
+      </div>
+
+      <!-- RIGHT: urgency panel -->
+      <div class="hero-right">
+        <div class="urgency-panel">
+          <div class="urgency-panel-label">What firms like yours are finding</div>
+          <div class="urgency-stat-row">
+            <span class="urgency-stat">$4.88M<sup class="fn">1</sup></span>
+            <span class="urgency-stat-text">Average cost of a data breach in 2024, the highest on record</span>
+          </div>
+          <div class="urgency-rule"></div>
+          <div class="urgency-stat-row">
+            <span class="urgency-stat">$670K<sup class="fn">2</sup></span>
+            <span class="urgency-stat-text">Additional breach cost when shadow AI is present, above the baseline</span>
+          </div>
+          <div class="urgency-rule"></div>
+          <div class="urgency-stat-row">
+            <span class="urgency-stat">40%<sup class="fn">3</sup></span>
+            <span class="urgency-stat-text">Of organizations will face a security incident from unauthorized AI by 2030</span>
+          </div>
+          <div class="urgency-rule"></div>
+          <div class="urgency-cite">Sources cited in footnotes below.</div>
+
+          <div class="urgency-slot-block">
+            <div class="urgency-slot-label">May availability</div>
+            <div class="urgency-slot-bar">
+              <div class="urgency-slot-filled"></div>
+              <div class="urgency-slot-filled"></div>
+              <div class="urgency-slot-filled"></div>
+              <div class="urgency-slot-filled"></div>
+              <div class="urgency-slot-open"></div>
+              <div class="urgency-slot-open"></div>
+              <div class="urgency-slot-open"></div>
+              <div class="urgency-slot-open"></div>
+            </div>
+            <div class="urgency-slot-note"><strong>4 of 8 slots taken.</strong> Sessions run once per week.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- RISK TAPE -->
+  <div class="risk-tape" aria-hidden="true">
+    <div class="tape-track" id="tape-track"></div>
+  </div>
+
+  <!-- PROOF ARTIFACT -->
+  <section class="proof-section" aria-labelledby="proof-h2">
+    <div class="proof-inner">
+      <div class="proof-left">
+        <div class="eyebrow">What this session surfaces</div>
+        <h2 id="proof-h2">AI Tools and Client Data Risk for Professional Services Firms</h2>
+        <p>Your team adopted AI tools quickly. That was the right call. But most of those tools were never configured for a firm that handles other people's information. Nobody has gone back to check.</p>
+
+        <div class="pullquote">
+          <p class="pullquote-text" id="quote-1-text">"The data shows that a gap between AI adoption and oversight already exists, and threat actors are starting to exploit it."</p>
+          <p class="pullquote-attr" id="quote-1-attr"><strong>Suja Viswesan, VP Security, IBM</strong> &mdash; IBM Cost of a Data Breach Report, 2025<sup class="fn">2</sup></p>
+        </div>
+
+        <p>The question is not whether AI is in your workflow. It is what it can see, where it is sending data, and whether you can answer for it when a client asks.</p>
+        <p>The Signal Session maps every AI surface in your firm and scores it against a single posture standard. No jargon. No 300-page framework. One written summary, delivered in 24 hours.</p>
+      </div>
+      <div class="proof-right">
+        <div class="doc-frame" id="doc-frame">
+          <div class="doc-header">
+            <span class="doc-title">Signal Session Posture Summary</span>
+            <span class="doc-subtitle">Prepared by Catalyst Works Consulting</span>
+          </div>
+          <hr class="doc-rule">
+          <div id="doc-meta" style="opacity:0;transform:translateY(12px)">
+            <div class="doc-meta-row"><span class="doc-meta-key">CLIENT</span><span class="doc-meta-val">Meridian Legal Partners</span></div>
+            <div class="doc-meta-row"><span class="doc-meta-key">DATE</span><span class="doc-meta-val">May 2026</span></div>
+            <div class="doc-meta-row"><span class="doc-meta-key">SESSION</span><span class="doc-meta-val">90 minutes</span></div>
+          </div>
+          <div class="tool-section-label" id="tools-label" style="opacity:0">AI Tools Identified</div>
+          <div id="tools-list">
+            <div class="tool-row" style="opacity:0"><span class="tool-name">ChatGPT (OpenAI)</span><span class="tool-badge badge-red">REVIEW NEEDED</span></div>
+            <div class="tool-row" style="opacity:0"><span class="tool-name">Copilot (Microsoft)</span><span class="tool-badge badge-green">CONFIGURED</span></div>
+            <div class="tool-row" style="opacity:0"><span class="tool-name">Calendly AI</span><span class="tool-badge badge-amber">EXPOSED</span></div>
+            <div class="tool-row" style="opacity:0"><span class="tool-name">Otter.ai</span><span class="tool-badge badge-dim">NOT REVIEWED</span></div>
+            <div class="tool-row" style="opacity:0"><span class="tool-name">Notion AI</span><span class="tool-badge badge-green">CONFIGURED</span></div>
+          </div>
+          <div class="score-block" id="score-block" style="opacity:0">
+            <span class="score-num" id="score-counter">0</span>
+            <div class="score-detail">
+              <strong>Posture score out of 100</strong>
+              3 tools require immediate action
+            </div>
+          </div>
+          <div class="gsap-actions-eyebrow" id="actions-label" style="opacity:0">Recommended Actions</div>
+          <div id="actions-list">
+            <div class="gsap-action-row" style="opacity:0"><span class="gsap-action-num">01</span><span class="gsap-action-text">Disconnect Otter.ai from shared client meeting calendar immediately.</span></div>
+            <div class="gsap-action-row" style="opacity:0"><span class="gsap-action-num">02</span><span class="gsap-action-text">Enable tenant isolation in Microsoft Copilot. IT action required within 7 days.</span></div>
+            <div class="gsap-action-row" style="opacity:0"><span class="gsap-action-num">03</span><span class="gsap-action-text">Review Calendly AI data retention before next client onboarding.</span></div>
+          </div>
+          <hr class="gsap-sig-rule" id="sig-rule" style="opacity:0">
+          <p class="gsap-sig" id="sig-text" style="opacity:0">Boubacar Barry, Catalyst Works Consulting</p>
+          <p class="doc-disclaimer">Composite example. Real outputs are firm-specific.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="process-section" aria-labelledby="process-h2">
+    <div class="process-inner">
+      <div class="eyebrow">How it works</div>
+      <h2 id="process-h2">Three steps. One written summary. No follow-up pitch.</h2>
+      <div class="process-grid">
+        <div class="process-step">
+          <span class="step-num">01</span>
+          <div class="step-title">Async Intake</div>
+          <span class="step-time">20 minutes, before the session</span>
+          <p class="step-body">You complete a short intake that maps every AI-adjacent tool your firm uses &mdash; email, drafting, scheduling, document review, CRM. This is what makes the 90 minutes precise instead of exploratory.</p>
+        </div>
+        <div class="process-step">
+          <span class="step-num">02</span>
+          <div class="step-title">Live Diagnostic</div>
+          <span class="step-time">90 minutes, structured</span>
+          <p class="step-body">Four phases. Tool mapping validation, data access interrogation across every AI surface, exposure scoring, and prioritization. You describe your workflow. I translate it into a risk picture with specific actions ranked by urgency.</p>
+        </div>
+        <div class="process-step">
+          <span class="step-num">03</span>
+          <div class="step-title">Written Summary</div>
+          <span class="step-time">Delivered within 24 hours</span>
+          <p class="step-body">A one-page posture summary. Scored. Firm-specific. It tells you exactly where you stand, which tools require immediate action, and what to do first. Yours to share or not share.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICE -->
+  <section class="price-section" aria-labelledby="price-h2">
+    <div class="price-inner">
+      <div class="blockquote-center">
+        <div class="pullquote">
+          <p class="pullquote-text" id="quote-2-text">"When data is entered into a generative AI tool, you are sharing that data with the AI tool's owners and, thus, entrusting them to protect this data. A data breach can have significant financial and reputational consequences for a CPA firm, and a generative AI tool's owner may attempt to disclaim liability."</p>
+          <p class="pullquote-attr" id="quote-2-attr"><strong>AICPA / CPAI</strong> &mdash; Generative AI and Risks to CPA Firms, 2024<sup class="fn">4</sup></p>
+        </div>
+      </div>
+      <div class="eyebrow eyebrow-warm" style="justify-content:center">One flat fee</div>
+      <p class="price-anchor-quote">"97% of organizations that experienced an AI-related security incident lacked proper AI access controls. 63% had no governance policies for managing AI or detecting unauthorized use."</p>
+      <span class="price-anchor-cite">IBM Cost of a Data Breach Report, 2025<sup class="fn" style="color:rgba(245,240,232,0.3)">2</sup></span>
+
+      <div class="price-vs">
+        <div class="price-compare">
+          <span class="price-compare-fig">$5,000+/mo</span>
+          <span class="price-compare-label">Fractional CISO retainer</span>
+        </div>
+        <span class="price-vs-divider">vs</span>
+        <div class="price-main" id="price-h2">
+          <span class="price-fig">$497</span>
+          <span class="price-note">One session. One summary. One fee.</span>
+        </div>
+      </div>
+
+      <div class="price-includes">
+        <div class="price-include-item">90-minute live diagnostic session</div>
+        <div class="price-include-item">Written posture summary (delivered within 24 hours)</div>
+        <div class="price-include-item">Scored by tool &mdash; specific, not generic</div>
+        <div class="price-include-item">48-hour async follow-up window for questions</div>
+      </div>
+
+      <div class="price-cta-wrap">
+        <a href="#CALENDLY_URL" class="btn-red btn-red-lg" onclick="gtag('event','cta_click',{location:'price'})">Reserve My Diagnostic</a>
+        <p class="price-refund">If the session surfaces nothing you don't already know, I refund the fee. No paperwork. No questions.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOUNDER + FAQ -->
+  <section class="founder-section" aria-labelledby="founder-h2">
+    <div class="founder-inner">
+      <div class="founder-left">
+        <div class="eyebrow">Why these questions</div>
+        <h2 id="founder-h2">The Signal Session was not designed in a conference room.</h2>
+        <p>It was built from two decades of operational work inside organizations that had the same problem and could not name it yet. The 11 questions were refined across firms that varied in size, sector, and geography but shared the same blind spot about what their AI systems could reach.</p>
+        <p>Most firms that go through the session discover at least one tool they had not accounted for. Several discover four or five.</p>
+
+        <div class="pullquote">
+          <p class="pullquote-text" id="quote-3-text">"Firms should assess whether their cybersecurity program appropriately contemplates risks associated with the firm's and its third-party vendors' use of GenAI."</p>
+          <p class="pullquote-attr" id="quote-3-attr"><strong>FINRA</strong> &mdash; Regulatory Notice 24-09, June 2024<sup class="fn">5</sup></p>
+        </div>
+
+        <div class="cred-grid">
+          <div class="cred-item">
+            <div class="cred-line"></div>
+            <span class="cred-stat">20+</span>
+            <span class="cred-label">Years of operational diagnostic work</span>
+          </div>
+          <div class="cred-item">
+            <div class="cred-line"></div>
+            <span class="cred-stat">4</span>
+            <span class="cred-label">Continents, one diagnostic standard</span>
+          </div>
+          <div class="cred-item">
+            <div class="cred-line"></div>
+            <span class="cred-stat">11</span>
+            <span class="cred-label">Questions, not a questionnaire</span>
+          </div>
+        </div>
+      </div>
+      <div class="founder-right">
+        <div class="eyebrow">Common questions</div>
+        <div class="faq-item">
+          <details>
+            <summary>Do I need a technical background?</summary>
+            <p class="faq-answer">No. The session is a structured conversation, not a technical audit. You describe your workflow. I translate it into a posture assessment you can act on immediately.</p>
+          </details>
+        </div>
+        <div class="faq-item">
+          <details>
+            <summary>What happens if we find something serious?</summary>
+            <p class="faq-answer">The summary tells you what it is and what to do first. For firms where the findings require a structured remediation plan, there is a next-step engagement. The Signal Session always delivers value on its own.</p>
+          </details>
+        </div>
+        <div class="faq-item">
+          <details>
+            <summary>Is the written summary confidential?</summary>
+            <p class="faq-answer">Yes. Everything discussed in the session and documented in the summary stays between us. The summary is yours to share or not as you see fit.</p>
+          </details>
+        </div>
+        <div class="faq-item">
+          <details>
+            <summary>What if we find nothing significant?</summary>
+            <p class="faq-answer">If the session surfaces nothing you don't already know, I refund the fee. No paperwork. That has not happened yet, but the offer stands.</p>
+          </details>
+        </div>
+        <div class="faq-item">
+          <details>
+            <summary>How quickly can I book?</summary>
+            <p class="faq-answer">Most sessions are booked within 48 hours. I run 8 sessions per month. When slots are full, they're full.</p>
+          </details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final-cta" aria-labelledby="final-h2">
+    <h2 id="final-h2">Find out what your firm's AI tools can reach.</h2>
+    <p>90 minutes. Written summary in 24 hours. $497 flat.</p>
+    <a href="#CALENDLY_URL" class="btn-white" onclick="gtag('event','cta_click',{location:'final'})">Reserve My Diagnostic</a>
+    <p class="final-scarcity"><strong>4 slots remaining</strong> in May &mdash; 8 per month, one practitioner</p>
+  </section>
+
+  <!-- CONTACT / EMAIL CAPTURE -->
+  <section class="contact-section" aria-labelledby="contact-h2">
+    <div class="contact-inner">
+      <div class="contact-left">
+        <div class="eyebrow eyebrow-warm">Not ready to book yet?</div>
+        <h2 id="contact-h2">Ask a question first.</h2>
+        <p>If you're not sure whether the Signal Session applies to your firm, send a message. One question, one honest answer. No pitch.</p>
+        <p class="contact-email-direct">Or email directly: <a href="mailto:catalystworks.ai@gmail.com">catalystworks.ai@gmail.com</a></p>
+      </div>
+      <div class="contact-right">
+        <form class="contact-form" id="contact-form">
+          <div class="contact-field">
+            <input type="text" id="contact-name" placeholder="Your name" required autocomplete="name">
+          </div>
+          <div class="contact-field">
+            <input type="email" id="contact-email" placeholder="Work email" required autocomplete="email">
+          </div>
+          <div class="contact-field">
+            <textarea id="contact-msg" placeholder="Your question" rows="3" required></textarea>
+          </div>
+          <button type="submit" class="btn-red" style="width:100%;text-align:center">Send my question</button>
+          <p class="contact-fine-print">No sales sequence. One reply from Boubacar, usually within 24 hours.</p>
+        </form>
+        <p class="contact-confirm" id="contact-confirm">Got it. You'll hear back within 24 hours.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTNOTES -->
+  <div class="footnotes-bar" aria-label="Sources and citations">
+    <div class="footnotes-inner">
+      <p class="footnotes-label">Sources</p>
+      <ol class="footnotes-list">
+        <li><span class="fn-num">1</span><span>IBM Security / Ponemon Institute. <em>Cost of a Data Breach Report 2024.</em> July 2024. <a href="https://newsroom.ibm.com/2024-07-30-ibm-report-escalating-data-breach-disruption-pushes-costs-to-new-highs" target="_blank" rel="noopener">newsroom.ibm.com</a></span></li>
+        <li><span class="fn-num">2</span><span>IBM Security / Ponemon Institute. <em>Cost of a Data Breach Report 2025.</em> July 2025. Shadow AI organizations observed $670K higher breach costs. 97% of AI breach victims lacked proper access controls. <a href="https://newsroom.ibm.com/2025-07-30-ibm-report-13-of-organizations-reported-breaches-of-ai-models-or-applications,-97-of-which-reported-lacking-proper-ai-access-controls" target="_blank" rel="noopener">newsroom.ibm.com</a></span></li>
+        <li><span class="fn-num">3</span><span>Gartner. <em>Predicts 2025: Shadow AI Creates Security and Compliance Risks.</em> October 2024. Arun Chandrasekaran, Distinguished VP Analyst. Reported by <a href="https://www.infosecurity-magazine.com/news/gartner-40-firms-hit-shadow-ai/" target="_blank" rel="noopener">Infosecurity Magazine</a></span></li>
+        <li><span class="fn-num">4</span><span>AICPA / CPAI. <em>Generative AI and Risks to CPA Firms.</em> 2024. Also published in <a href="https://www.journalofaccountancy.com/issues/2023/oct/generative-ai-and-risks-to-cpa-firms.html" target="_blank" rel="noopener">Journal of Accountancy</a></span></li>
+        <li><span class="fn-num">5</span><span>FINRA. <em>Regulatory Notice 24-09: Generative Artificial Intelligence.</em> June 27, 2024. <a href="https://www.finra.org/rules-guidance/notices/24-09" target="_blank" rel="noopener">finra.org</a></span></li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span class="footer-left"><a href="https://catalystworks.consulting" class="footer-link">Catalyst Works Consulting</a></span>
+      <span class="footer-center">catalystworks.consulting/ai-data-audit</span>
+      <span class="footer-right">&copy; 2026 Catalyst Works Consulting</span>
+    </div>
+  </footer>
+
+  <script>
+    // ── RISK TAPE ────────────────────────────────────────────
+    (function() {
+      var phrases = [
+        'Unaudited vendor LLM access',
+        'Shadow AI in client intake flows',
+        'No retention policy on chat logs',
+        'Third-party model trained on your data',
+        'AI scheduling tool connected to client portal',
+        'Undisclosed AI in client deliverables',
+        'CRM with AI layer nobody configured',
+        'Email AI reading privileged correspondence',
+        'Document review tool with third-party indexing',
+        'Drafting assistant synced to full inbox'
+      ];
+      var doubled = phrases.concat(phrases);
+      var track = document.getElementById('tape-track');
+      doubled.forEach(function(phrase, i) {
+        var span = document.createElement('span');
+        span.className = 'tape-phrase';
+        span.textContent = phrase;
+        track.appendChild(span);
+        if (i < doubled.length - 1) {
+          var dot = document.createElement('span');
+          dot.className = 'tape-sep';
+          track.appendChild(dot);
+        }
+      });
+    })();
+
+    // ── GSAP ANIMATION ──────────────────────────────────────────
+    window.__timelines = window.__timelines || [];
+    (function() {
+      if (typeof gsap === 'undefined') {
+        document.querySelectorAll('#doc-frame [style*="opacity:0"]').forEach(function(el) {
+          el.style.opacity = '1';
+          el.style.transform = 'none';
+        });
+        var pull = document.getElementById('gsap-pull');
+        if (pull) pull.style.opacity = '0.7';
+        return;
+      }
+
+      gsap.registerPlugin(ScrollTrigger);
+
+      var tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: '#doc-frame',
+          start: 'top 70%',
+          once: true
+        },
+        delay: 0.3
+      });
+      window.__timelines.push(tl);
+
+      tl.to('#doc-meta', { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }, 0);
+
+      tl.to('#tools-label', { opacity: 1, y: 0, duration: 0.3, ease: 'power2.out' }, 0.6);
+
+      var toolRows = document.querySelectorAll('#tools-list .tool-row');
+      toolRows.forEach(function(row, i) {
+        tl.to(row, { opacity: 1, duration: 0.3, ease: 'power2.out' }, 0.9 + i * 0.15);
+      });
+
+      tl.to('#score-block', { opacity: 1, duration: 0.4 }, 1.9);
+      tl.to({ val: 0 }, {
+        val: 62,
+        duration: 0.7,
+        ease: 'power1.inOut',
+        snap: { val: 1 },
+        onUpdate: function() {
+          var el = document.getElementById('score-counter');
+          if (el) el.textContent = Math.round(this.targets()[0].val);
+        }
+      }, 2.0);
+
+      tl.to('#actions-label', { opacity: 1, duration: 0.3 }, 2.9);
+
+      var actionRows = document.querySelectorAll('#actions-list .gsap-action-row');
+      actionRows.forEach(function(row, i) {
+        tl.to(row, { opacity: 1, duration: 0.35, ease: 'power2.out' }, 3.1 + i * 0.22);
+      });
+
+      tl.to(['#sig-rule', '#sig-text'], { opacity: 1, duration: 0.4 }, 4.2);
+    })();
+    // ── CONTACT FORM ───────────────────────────────────────────
+    var contactForm = document.getElementById('contact-form');
+    if (contactForm) {
+      contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        var formEl = this;
+        var payload = {
+          name: document.getElementById('contact-name').value,
+          email: document.getElementById('contact-email').value,
+          message: document.getElementById('contact-msg').value
+        };
+        fetch('https://n8n.srv1040886.hstgr.cloud/webhook/ai-data-audit-contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        }).catch(function() {}).finally(function() {
+          gtag('event', 'contact_form_submit');
+          formEl.style.display = 'none';
+          document.getElementById('contact-confirm').style.display = 'block';
+        });
+      });
+    }
+  </script>
+
+  <noscript>
+    <style>
+      #doc-meta, #tools-label, #score-block, #actions-label,
+      #sig-rule, #sig-text,
+      #tools-list .tool-row, #actions-list .gsap-action-row {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+    </style>
+  </noscript>
+
+</body>
+</html>
