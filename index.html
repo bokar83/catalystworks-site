@@ -651,8 +651,14 @@
 
     /* ─── HYPERFRAMES SHARED ──────────────────────── */
     .hf-canvas { display: block; }
+    .hf-mobile-fallback { display: none; }
     @media (prefers-reduced-motion: reduce) {
       .hf-canvas { display: none !important; }
+      .hf-mobile-fallback { display: block; }
+    }
+    @media (max-width: 640px) {
+      .hf-canvas { display: none !important; }
+      .hf-mobile-fallback { display: flex; }
     }
 
     /* ─── CONCEPT B: DIAGNOSTIC IN MOTION ─────────── */
@@ -968,6 +974,15 @@
     <p style="font-size:16px;color:var(--text-mid);line-height:1.75;margin:16px 0 36px;max-width:620px;">The diagnostic draws on eight distinct ways of reading a system, not one. Each session moves through all of them in sequence. The constraint is what survives that process — specific, named, and actionable.</p>
     <div class="diag-canvas-card fade-in" style="margin-top:0;">
       <canvas id="diag-canvas" class="hf-canvas" aria-label="Animated visualization of the eight-lens diagnostic process"></canvas>
+      <div class="hf-mobile-fallback" style="align-items:center;justify-content:center;padding:40px 24px;flex-direction:column;gap:12px;background:var(--carbon);border-radius:12px;">
+        <p style="font-size:15px;color:var(--text-mid);text-align:center;line-height:1.7;">Eight lenses. One named constraint. The diagnostic runs through all of them in sequence — structured, not intuitive.</p>
+      </div>
+    </div>
+    <div class="fade-in" style="margin-top:32px;text-align:center;">
+      <button class="btn-primary" onclick="openModal()">
+        See the diagnostic in action — Book a Signal Session
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </button>
     </div>
   </div>
 </section>
