@@ -34,8 +34,9 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Typography v1.1 (2026-04-29): Spectral display + Public Sans body. Inter retired (reflex-reject per Impeccable audit). -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,500;0,600;0,700;0,800;1,400;1,700&family=Public+Sans:wght@400;500;600;700&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,500;0,600;0,700;0,800;1,400;1,700&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <script type="application/ld+json">
   {
@@ -192,7 +193,7 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; font-size: 16px; }
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-family: 'Public Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       background: var(--navy); color: var(--white);
       line-height: 1.6; overflow-x: hidden; -webkit-font-smoothing: antialiased;
     }
@@ -217,9 +218,9 @@
     .label-orange { color: var(--orange); }
 
     /* ─── TYPOGRAPHY ───────────────────────────────── */
-    h1 { font-size: clamp(36px, 6vw, 64px); font-weight: 800; letter-spacing: -0.035em; line-height: 1.12; color: #fff; }
-    h2 { font-size: clamp(26px, 4vw, 38px); font-weight: 700; letter-spacing: -0.02em; line-height: 1.18; }
-    h3 { font-size: 16px; font-weight: 700; line-height: 1.35; }
+    h1 { font-family: 'Spectral', Georgia, 'Times New Roman', serif; font-size: clamp(36px, 6vw, 64px); font-weight: 700; letter-spacing: -0.02em; line-height: 1.1; color: #fff; }
+    h2 { font-family: 'Spectral', Georgia, 'Times New Roman', serif; font-size: clamp(26px, 4vw, 38px); font-weight: 700; letter-spacing: -0.015em; line-height: 1.2; }
+    h3 { font-family: 'Public Sans', -apple-system, sans-serif; font-size: 16px; font-weight: 700; line-height: 1.35; }
 
     /* ─── BUTTONS ──────────────────────────────────── */
     .btn-primary {
@@ -256,7 +257,7 @@
     @media (prefers-reduced-motion: reduce) { .fade-in { opacity: 1; transform: none; transition: none; } }
 
     /* ─── NAV ──────────────────────────────────────── */
-    .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: 68px; background: rgba(7,26,46,0.92); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid rgba(255,255,255,0.06); transition: background 200ms; }
+    .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: 68px; background: var(--navy); border-bottom: 1px solid rgba(180,124,87,0.25); transition: background 200ms; }
     .nav-inner { max-width: 1100px; margin: 0 auto; padding: 0 24px; height: 100%; display: flex; align-items: center; justify-content: space-between; }
     .nav-logo { font-size: 17px; font-weight: 800; letter-spacing: -0.03em; color: #fff; }
     .nav-logo span { color: var(--cyan); }
@@ -270,7 +271,7 @@
     .nav-mobile-btn.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
     /* ─── MOBILE NAV DRAWER ─────────────────────────── */
-    .nav-drawer { position: fixed; top: 68px; left: 0; right: 0; z-index: 99; background: rgba(7,26,46,0.98); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.08); transform: translateY(-8px); opacity: 0; pointer-events: none; transition: transform 220ms cubic-bezier(0.22,1,0.36,1), opacity 220ms; }
+    .nav-drawer { position: fixed; top: 68px; left: 0; right: 0; z-index: 99; background: var(--navy); border-bottom: 1px solid rgba(180,124,87,0.25); transform: translateY(-8px); opacity: 0; pointer-events: none; transition: transform 220ms cubic-bezier(0.22,1,0.36,1), opacity 220ms; }
     .nav-drawer.open { transform: translateY(0); opacity: 1; pointer-events: all; }
     .nav-drawer-links { list-style: none; padding: 8px 0 4px; }
     .nav-drawer-links li a { display: block; padding: 15px 24px; font-size: 16px; font-weight: 500; color: var(--text-mid); border-bottom: 1px solid rgba(255,255,255,0.04); transition: color 150ms, background 150ms; }
@@ -288,7 +289,7 @@
     .badge-dot { width: 6px; height: 6px; background: var(--cyan); border-radius: 50%; animation: pulse 2.2s ease-in-out infinite; }
     .hero-for { font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 14px; }
     .hero h1 { margin-bottom: 24px; }
-    .hero h1 em { font-style: normal; color: var(--cyan); }
+    .hero h1 em { font-style: italic; color: var(--clay); font-weight: 400; }
     .hero-sub { font-size: clamp(16px, 2vw, 19px); color: var(--text-mid); max-width: 620px; margin: 0 auto 20px; line-height: 1.7; font-weight: 300; }
     .hero-sub strong { color: #fff; font-weight: 500; }
     .hero-offer { display: inline-flex; align-items: center; gap: 20px; flex-wrap: wrap; justify-content: center; background: rgba(255,122,0,0.06); border: 1px solid rgba(255,122,0,0.2); border-radius: 8px; padding: 18px 28px; margin: 0 auto 36px; max-width: 600px; }
@@ -1452,7 +1453,7 @@
 
   function drawLabel(txt, nx, ny, ang, active, alpha, w, h) {
     var fs = Math.max(10, Math.round(h * 0.042));
-    ctx.font = (active ? '700 ' : '500 ') + fs + 'px Inter,sans-serif';
+    ctx.font = (active ? '700 ' : '500 ') + fs + 'px Public Sans,sans-serif';
     var tw = ctx.measureText(txt).width;
     var px = 8, py = 5;
     var dotClear = DOT_R + (active ? 3 : 0) + LABEL_PAD;
@@ -1568,7 +1569,7 @@
       // Scene 1: word build
       if (s.introAlpha > 0.01) {
         ctx.globalAlpha = s.introAlpha;
-        ctx.font = '700 '+px(h,0.088,14)+'px Inter,sans-serif';
+        ctx.font = '700 '+px(h,0.088,14)+'px Public Sans,sans-serif';
         ctx.fillStyle = '#fff'; ctx.textAlign = 'center';
         var vis = problemWords.slice(0, Math.ceil(wordState.count));
         var wlines=[], wl='';
@@ -1608,7 +1609,7 @@
         // Nucleus label — pill
         var nucLabel = s.convergePct > 0.4 ? 'CONSTRAINT' : 'PROBLEM';
         var nucFs = px(h, 0.038, 11);
-        ctx.font = '700 '+nucFs+'px Inter,sans-serif';
+        ctx.font = '700 '+nucFs+'px Public Sans,sans-serif';
         var nucTW = ctx.measureText(nucLabel).width;
         var nucPx=7, nucPy=4;
         ctx.globalAlpha = s.orbitAlpha * 0.9;
@@ -1657,10 +1658,10 @@
         ctx.globalAlpha = s.constraintA;
         ctx.fillStyle='rgba(255,122,0,'+(s.constraintA*0.12)+')'; ctx.fillRect(0,0,w,h);
         var cfs = px(h, 0.12, 18);
-        ctx.font='800 '+cfs+'px Inter,sans-serif'; ctx.fillStyle=ORANGE; ctx.textAlign='center';
+        ctx.font='800 '+cfs+'px Public Sans,sans-serif'; ctx.fillStyle=ORANGE; ctx.textAlign='center';
         ctx.fillText('CONSTRAINT', cx, cy+h*0.05);
         var sfs = px(h, 0.046, 12);
-        ctx.font='400 '+sfs+'px Inter,sans-serif';
+        ctx.font='400 '+sfs+'px Public Sans,sans-serif';
         ctx.fillStyle='rgba(255,255,255,0.7)';
         ctx.fillText('named. written. actionable.', cx, cy+h*0.15);
         ctx.globalAlpha=1;
@@ -1673,13 +1674,13 @@
         ctx.fillStyle='rgba(7,26,46,0.97)'; ctx.strokeStyle='rgba(255,122,0,0.5)'; ctx.lineWidth=1.5;
         ctx.beginPath(); ctx.roundRect(cxC,cyC,cw2,ch2,10); ctx.fill(); ctx.stroke();
         ctx.fillStyle=ORANGE; ctx.fillRect(cxC,cyC,cw2,3);
-        var tfs=px(h,0.052,12); ctx.font='700 '+tfs+'px Inter,sans-serif';
+        var tfs=px(h,0.052,12); ctx.font='700 '+tfs+'px Public Sans,sans-serif';
         ctx.fillStyle='rgba(255,122,0,0.95)'; ctx.textAlign='center';
         ctx.fillText('NAMED CONSTRAINT', cx, cyC+h*0.1);
-        var bfs=px(h,0.04,11); ctx.font='400 '+bfs+'px Inter,sans-serif';
+        var bfs=px(h,0.04,11); ctx.font='400 '+bfs+'px Public Sans,sans-serif';
         ctx.fillStyle='rgba(255,255,255,0.7)';
         ctx.fillText('Throughput blocked at handoff layer', cx, cyC+h*0.2);
-        ctx.fillStyle='rgba(0,183,194,0.8)'; ctx.font='400 '+px(h,0.036,11)+'px Inter,sans-serif';
+        ctx.fillStyle='rgba(0,183,194,0.8)'; ctx.font='400 '+px(h,0.036,11)+'px Public Sans,sans-serif';
         ctx.fillText('→  3 friction signals identified', cx, cyC+h*0.32);
         ctx.fillText('→  1 recommended next action', cx, cyC+h*0.41);
         ctx.fillText('→  Written summary within 24h', cx, cyC+h*0.50);
@@ -1689,9 +1690,9 @@
       // Brand close
       if (s.brandAlpha > 0.01) {
         ctx.globalAlpha=s.brandAlpha;
-        ctx.font='800 '+px(h,0.095,16)+'px Inter,sans-serif'; ctx.fillStyle='#fff'; ctx.textAlign='center';
+        ctx.font='800 '+px(h,0.095,16)+'px Public Sans,sans-serif'; ctx.fillStyle='#fff'; ctx.textAlign='center';
         ctx.fillText('Catalyst Works', cx, cy-h*0.04);
-        ctx.font='400 '+px(h,0.042,12)+'px Inter,sans-serif'; ctx.fillStyle=CYAN;
+        ctx.font='400 '+px(h,0.042,12)+'px Public Sans,sans-serif'; ctx.fillStyle=CYAN;
         ctx.fillText('catalystworks.consulting', cx, cy+h*0.07);
         ctx.globalAlpha=1;
       }
@@ -1800,7 +1801,7 @@
       for (var wi=0;wi<3;wi++) {
         if(words1[wi].a<0.01) continue;
         ctx.globalAlpha=words1[wi].a;
-        ctx.font=words1[wi].w+' '+px(h,0.13,18)+'px Inter,sans-serif';
+        ctx.font=words1[wi].w+' '+px(h,0.13,18)+'px Public Sans,sans-serif';
         ctx.fillStyle=words1[wi].c; ctx.textAlign='center';
         ctx.fillText(words1[wi].t, cx, sy+drawn*bh); drawn++;
         ctx.globalAlpha=1;
@@ -1809,7 +1810,7 @@
       if (s.sankofaA>0.01) {
         ctx.globalAlpha=s.sankofaA;
         var visW=SANKOFA.slice(0,Math.ceil(wordState.count));
-        ctx.font=px(h,0.072,13)+'px Inter,sans-serif';
+        ctx.font=px(h,0.072,13)+'px Public Sans,sans-serif';
         var sLines=[],sLine=[];
         for (var si=0;si<visW.length;si++) {
           sLine.push(visW[si]);
@@ -1843,15 +1844,15 @@
         for(var ci=0;ci<visC&&ci<CITIES.length;ci++){
           var px2=startX+ci*sp;
           ctx.beginPath(); ctx.arc(px2,cy,5,0,Math.PI*2); ctx.fillStyle=CLAY; ctx.fill();
-          ctx.font=px(h,0.055,12)+'px Inter,sans-serif'; ctx.fillStyle='rgba(255,255,255,0.8)'; ctx.textAlign='center';
+          ctx.font=px(h,0.055,12)+'px Public Sans,sans-serif'; ctx.fillStyle='rgba(255,255,255,0.8)'; ctx.textAlign='center';
           ctx.fillText(CITIES[ci],px2,cy-h*0.1);
         }
         ctx.globalAlpha=1;
       }
 
-      if(s.tag1>0.01){ctx.globalAlpha=s.tag1;ctx.font='bold '+px(h,0.088,14)+'px Inter,sans-serif';ctx.fillStyle='#fff';ctx.textAlign='center';ctx.fillText('20 years. 4 languages.',cx,cy-h*0.06);ctx.globalAlpha=1;}
-      if(s.tag2>0.01){ctx.globalAlpha=s.tag2;ctx.font='bold '+px(h,0.088,14)+'px Inter,sans-serif';ctx.fillStyle=CLAY;ctx.textAlign='center';ctx.fillText('One method.',cx,cy+h*0.06);ctx.globalAlpha=1;}
-      if(s.brandA>0.01){ctx.globalAlpha=s.brandA*0.8;ctx.font=px(h,0.052,12)+'px Inter,sans-serif';ctx.fillStyle=CYAN;ctx.textAlign='center';ctx.fillText('catalystworks.consulting',cx,cy+h*0.22);ctx.globalAlpha=1;}
+      if(s.tag1>0.01){ctx.globalAlpha=s.tag1;ctx.font='bold '+px(h,0.088,14)+'px Public Sans,sans-serif';ctx.fillStyle='#fff';ctx.textAlign='center';ctx.fillText('20 years. 4 languages.',cx,cy-h*0.06);ctx.globalAlpha=1;}
+      if(s.tag2>0.01){ctx.globalAlpha=s.tag2;ctx.font='bold '+px(h,0.088,14)+'px Public Sans,sans-serif';ctx.fillStyle=CLAY;ctx.textAlign='center';ctx.fillText('One method.',cx,cy+h*0.06);ctx.globalAlpha=1;}
+      if(s.brandA>0.01){ctx.globalAlpha=s.brandA*0.8;ctx.font=px(h,0.052,12)+'px Public Sans,sans-serif';ctx.fillStyle=CYAN;ctx.textAlign='center';ctx.fillText('catalystworks.consulting',cx,cy+h*0.22);ctx.globalAlpha=1;}
 
       ctx.restore();
       requestAnimationFrame(draw);
