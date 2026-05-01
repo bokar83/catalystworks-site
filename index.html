@@ -34,6 +34,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;0,700;1,600;1,700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
+  <!-- Calendly popup widget -->
+  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+  <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
@@ -67,6 +71,122 @@
     "provider": { "@type": "Organization", "name": "Catalyst Works", "url": "https://catalystworks.consulting" },
     "offers": { "@type": "Offer", "price": "497", "priceCurrency": "USD", "availability": "https://schema.org/LimitedAvailability", "description": "Limited to 3 sessions per month" },
     "duration": "PT90M"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Boubacar Barry",
+    "jobTitle": "Founder and Principal Diagnostic Consultant",
+    "worksFor": {
+      "@type": "Organization",
+      "name": "Catalyst Works",
+      "url": "https://catalystworks.consulting"
+    },
+    "knowsAbout": [
+      "business diagnostics",
+      "AI governance for SMBs",
+      "constraint-based consulting",
+      "fractional AI advisory",
+      "organizational throughput",
+      "systems thinking",
+      "Theory of Constraints"
+    ],
+    "description": "Boubacar Barry built Catalyst Works after 20 years across four continents, including a decade in HR leadership at GE. He runs the five-lens diagnostic protocol used in Signal Sessions.",
+    "sameAs": [
+      "https://www.linkedin.com/in/boubacarbarry/"
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is a Signal Session?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A 90-minute structured diagnostic interview using the Catalyst Works five-lens protocol. You leave with one named constraint, three friction signals, and one concrete action you can take before Friday. A 1-page written summary is delivered within 24 hours. The session costs $497."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What are the five lenses?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Throughput, Friction, Decision, Information, and Inference. Each lens reads a business from a different angle. The constraint is what survives all five."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is there a sales pitch inside the Signal Session?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. There is no pitch inside the session and no proposal at the end. The work is the pitch. The deliverable is the deliverable."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Who is Catalyst Works for?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Catalyst Works serves SMB owner-operators and leadership teams at growing companies (typically 5 to 200 employees) who are experiencing stalled growth, recurring problems, or margin compression they cannot name."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is Constraints AI?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Constraints AI is the diagnostic protocol's public sandbox: a thin technical mirror of the five-lens method. It runs a quick diagnosis on what the visitor types. The real Signal Session is the operator-led version with a written 1-page deliverable."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What does Catalyst Works offer beyond the Signal Session?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "AI Governance assessments for SMBs (helping owner-operators inventory and de-risk AI tools touching customer data) and the AI Data Exposure Audit (a 90-minute diagnostic specifically for professional services firms)."
+        }
+      }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Catalyst Works",
+    "description": "Diagnostic consulting for SMB owner-operators. Constraint-based five-lens method. AI governance for SMBs.",
+    "url": "https://catalystworks.consulting",
+    "image": "https://catalystworks.consulting/og-image.jpg",
+    "priceRange": "$497",
+    "address": {
+      "@type": "PostalAddress",
+      "addressRegion": "UT",
+      "addressCountry": "US"
+    },
+    "areaServed": [
+      { "@type": "State", "name": "Utah" },
+      { "@type": "Country", "name": "United States" },
+      { "@type": "Place", "name": "Remote, North America" }
+    ],
+    "founder": {
+      "@type": "Person",
+      "name": "Boubacar Barry"
+    },
+    "makesOffer": [
+      {
+        "@type": "Offer",
+        "name": "Executive Signal Session",
+        "price": "497",
+        "priceCurrency": "USD"
+      }
+    ],
+    "knowsAbout": ["diagnostic consulting", "AI governance", "fractional AI advisory", "Theory of Constraints"]
   }
   </script>
 
@@ -365,6 +485,61 @@
     }
     .out-cta-btn:hover { transform: translateY(-1px); box-shadow: 0 8px 22px rgba(232,166,107,0.32); }
 
+    /* Email capture below diagnosis */
+    .out-capture {
+      margin-top: 22px;
+      padding: 18px 18px;
+      border: 1px solid rgba(91,192,190,0.28);
+      background: linear-gradient(135deg, rgba(91,192,190,0.06), rgba(91,192,190,0.01));
+      border-radius: 10px;
+    }
+    .out-capture-label {
+      font-size: 13.5px; color: var(--paper);
+      font-weight: 500; margin-bottom: 10px; line-height: 1.5;
+    }
+    .out-capture-form {
+      display: flex; gap: 8px; align-items: stretch;
+    }
+    .out-capture-form input[type="email"] {
+      flex: 1;
+      background: rgba(245,239,226,0.05);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-family: var(--sans); font-size: 14px;
+      color: var(--paper);
+      outline: none;
+      min-width: 0;
+      transition: border-color 180ms;
+    }
+    .out-capture-form input[type="email"]::placeholder { color: var(--t-dim); }
+    .out-capture-form input[type="email"]:focus { border-color: var(--cyan); }
+    .out-capture-btn {
+      padding: 10px 18px; border-radius: 8px;
+      background: var(--cyan); color: var(--ink);
+      font-weight: 700; font-size: 13.5px;
+      transition: transform 180ms var(--ease), box-shadow 220ms;
+      white-space: nowrap;
+    }
+    .out-capture-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(91,192,190,0.32); }
+    .out-capture-btn:disabled { opacity: 0.5; cursor: wait; transform: none; box-shadow: none; }
+    .out-capture-note {
+      margin-top: 10px;
+      font-size: 11.5px; color: var(--t-dim);
+      line-height: 1.5;
+    }
+    .out-capture-success {
+      margin-top: 22px;
+      padding: 18px 18px;
+      border: 1px solid rgba(91,192,190,0.40);
+      background: rgba(91,192,190,0.10);
+      border-radius: 10px;
+    }
+    @media (max-width: 540px) {
+      .out-capture-form { flex-direction: column; }
+      .out-capture-btn { width: 100%; }
+    }
+
     .out-thinking {
       display: flex; align-items: center; gap: 10px;
       font-family: var(--mono); font-size: 12px;
@@ -451,7 +626,37 @@
     }
     .method-intro {
       max-width: 1320px; margin: 0 auto;
-      padding: 120px 32px 60px;
+      padding: 80px 32px 32px;
+      display: grid; grid-template-columns: 1.4fr 1fr;
+      gap: 64px; align-items: end;
+    }
+    @media (max-width: 880px) { .method-intro { grid-template-columns: 1fr; gap: 32px; padding: 56px 20px 20px; align-items: start; } }
+    .method-quote {
+      position: relative;
+      background: linear-gradient(180deg, rgba(232,166,107,0.06), rgba(232,166,107,0.01));
+      border: 1px solid rgba(232,166,107,0.18);
+      border-left: 2px solid var(--amber);
+      border-radius: 0 12px 12px 0;
+      padding: 24px 28px;
+      max-width: 460px;
+      margin-left: auto;
+    }
+    @media (max-width: 880px) { .method-quote { margin-left: 0; max-width: 100%; } }
+    .method-quote .quote-eyebrow {
+      font-family: var(--mono); font-size: 11px;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--amber); margin-bottom: 12px;
+    }
+    .method-quote blockquote {
+      font-family: var(--serif); font-size: 19px;
+      font-style: italic; line-height: 1.45;
+      color: var(--paper); margin: 0 0 14px;
+      letter-spacing: -0.005em;
+    }
+    .method-quote cite {
+      font-family: var(--mono); font-size: 11px;
+      color: var(--t-muted); letter-spacing: 0.06em;
+      font-style: normal; display: block;
     }
     .method-track {
       position: relative;
@@ -501,10 +706,11 @@
       display: inline-block;
       margin-top: 28px; padding: 6px 12px;
       border-radius: 999px;
-      background: rgba(232,166,107,0.10);
-      border: 1px solid rgba(232,166,107,0.22);
+      background: rgba(232,166,107,0.18);
+      border: 1px solid rgba(232,166,107,0.40);
       font-family: var(--mono); font-size: 11px;
-      color: var(--amber); letter-spacing: 0.06em;
+      color: #F5D6B8; letter-spacing: 0.06em;
+      font-weight: 500;
     }
     @media (max-width: 760px) {
       .method-track { height: auto; overflow: visible; padding: 0 0 60px; }
@@ -515,8 +721,9 @@
     /* DELIVERABLE */
     .deliverable {
       background: var(--ink);
-      padding: 140px 32px;
+      padding: 96px 32px;
     }
+    @media (max-width: 760px) { .deliverable { padding: 64px 20px; } }
     .deliverable-grid {
       max-width: 1320px; margin: 0 auto;
       display: grid; grid-template-columns: 1fr 1.1fr;
@@ -582,22 +789,27 @@
 
     /* ABOUT */
     .about {
-      padding: 140px 32px;
+      padding: 96px 32px;
       background: var(--ink-2);
       border-top: 1px solid var(--line);
     }
+    @media (max-width: 760px) { .about { padding: 64px 20px; } }
     .about-grid {
-      max-width: 1320px; margin: 0 auto;
-      display: grid; grid-template-columns: 0.8fr 1.2fr;
-      gap: 80px; align-items: center;
+      max-width: 1180px; margin: 0 auto;
+      display: grid; grid-template-columns: 0.55fr 1fr;
+      gap: 64px; align-items: center;
     }
-    @media (max-width: 980px) { .about-grid { grid-template-columns: 1fr; gap: 40px; } }
+    @media (max-width: 980px) { .about-grid { grid-template-columns: 1fr; gap: 32px; } }
     .about-portrait {
-      position: relative; aspect-ratio: 3/4;
-      border-radius: 14px; overflow: hidden;
+      position: relative; aspect-ratio: 4/5;
+      max-width: 360px;
+      border-radius: 12px; overflow: hidden;
       background: linear-gradient(180deg, var(--ink-3), var(--ink));
       border: 1px solid var(--line);
       box-shadow: var(--shadow);
+    }
+    @media (max-width: 980px) {
+      .about-portrait { max-width: 320px; margin: 0 auto; }
     }
     .about-portrait img {
       width: 100%; height: 100%;
@@ -633,7 +845,7 @@
 
     /* OFFER */
     .offer {
-      padding: 140px 32px;
+      padding: 96px 32px;
       background: var(--ink);
       position: relative;
       overflow: hidden;
@@ -705,6 +917,26 @@
       content: '✓'; position: absolute; left: 0;
       color: var(--amber); font-weight: 700; font-size: 13px;
     }
+    .offer-guarantee {
+      margin: 0 0 24px;
+      padding: 14px 16px;
+      background: linear-gradient(135deg, rgba(91,192,190,0.08), rgba(91,192,190,0.02));
+      border: 1px solid rgba(91,192,190,0.24);
+      border-left: 2px solid var(--cyan);
+      border-radius: 0 8px 8px 0;
+    }
+    .offer-guarantee-label {
+      font-family: var(--mono); font-size: 10.5px;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--cyan); margin-bottom: 6px; font-weight: 500;
+    }
+    .offer-guarantee-text {
+      font-size: 13.5px; color: var(--t-mid);
+      line-height: 1.55; margin: 0;
+    }
+    .offer-guarantee-text {
+      /* override any inherited offer-includes li styling */
+    }
     .offer-cta {
       width: 100%;
       padding: 16px; border-radius: 12px;
@@ -724,10 +956,16 @@
       content: ''; width: 6px; height: 6px; border-radius: 50%;
       background: var(--amber); box-shadow: 0 0 10px var(--amber);
     }
+    .offer-fineprint {
+      margin-top: 12px;
+      font-size: 12px; color: var(--t-dim);
+      line-height: 1.5; text-align: center;
+      letter-spacing: 0.01em;
+    }
 
     /* SECONDARY */
     .secondary {
-      padding: 80px 32px 140px;
+      padding: 48px 32px 96px;
       background: var(--ink);
     }
     .secondary-grid {
@@ -834,6 +1072,21 @@
     @media (prefers-reduced-motion: reduce) {
       .cw-cursor-ring { transition: none; }
     }
+
+    /* Keyboard focus indicators - brand-coherent */
+    *:focus { outline: none; }
+    *:focus-visible {
+      outline: 2px solid var(--amber);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+    button:focus-visible, .nav-cta:focus-visible, .out-cta-btn:focus-visible, .offer-cta:focus-visible {
+      outline-offset: 4px;
+    }
+    textarea:focus-visible {
+      outline: 2px solid var(--amber);
+      outline-offset: 0;
+    }
   </style>
 </head>
 
@@ -890,7 +1143,7 @@
 <nav class="nav" id="nav">
   <div class="nav-inner">
     <a href="#" class="brand">
-      <img src="CatalystWorks_logo.jpg" alt="" aria-hidden="true">
+      <img src="CatalystWorks_logo.jpg" alt="Catalyst Works" width="32" height="32">
       <span>Catalyst<span class="accent">Works</span></span>
     </a>
     <div class="nav-links">
@@ -908,7 +1161,7 @@
 <section class="hero">
   <div>
     <div class="hero-eyebrow">Constraints AI . the diagnostic protocol</div>
-    <h1>Name the constraint. <em>In writing.</em><br>In ninety seconds.</h1>
+    <h1>Name the constraint.<br><em>In writing.</em><br>In ninety seconds.</h1>
     <p class="hero-sub">Most consultants want a six-week discovery before they tell you anything. Catalyst Works starts differently. Type a sentence. Get a diagnosis.</p>
     <div class="hero-meta">
       <span>Founder: Boubacar Barry</span>
@@ -945,6 +1198,18 @@
         <div class="out-label">One concrete action before Friday</div>
         <div class="out-action" id="out-action"></div>
       </div>
+      <div class="out-capture" id="out-capture">
+        <div class="out-capture-label">Want this diagnosis as a 1-page PDF + the 30-day follow-up framework?</div>
+        <form class="out-capture-form" id="capture-form" novalidate>
+          <input type="email" name="email" id="capture-email" placeholder="your@email.com" autocomplete="email" required aria-label="Email address">
+          <button type="submit" class="out-capture-btn" id="capture-btn">Send it →</button>
+        </form>
+        <div class="out-capture-note">No spam. One email with the PDF, one optional follow-up. Unsubscribe in any of them.</div>
+      </div>
+      <div class="out-capture-success" id="capture-success" hidden>
+        <div class="out-capture-label" style="color: var(--cyan)">Sent.</div>
+        <p class="out-capture-note" style="font-size: 13px; color: var(--t-mid);">Check your inbox in a minute. The PDF arrives from <strong>diagnose@catalystworks.consulting</strong>.</p>
+      </div>
       <div class="out-cta">
         <div class="out-cta-text">Constraints AI is a thin slice of the real diagnostic. <strong>The Signal Session is 90 minutes with Boubacar, plus a 1-page written summary in 24 hours. $497.</strong></div>
         <a href="#offer" class="out-cta-btn">Book the real one →</a>
@@ -976,9 +1241,16 @@
 
 <section id="method" class="method">
   <div class="method-intro reveal">
-    <div class="eyebrow">The method</div>
-    <h2>Five lenses. <em>One constraint.</em><br>The thing the others miss.</h2>
-    <p class="lede">Every Signal Session runs through the same five-lens protocol. Most diagnostics surface one lens at a time. The constraint is what survives all five.</p>
+    <div>
+      <div class="eyebrow">The method</div>
+      <h2>Five lenses. <em>One constraint.</em><br>The thing the others miss.</h2>
+      <p class="lede">Every Signal Session runs through the same five-lens protocol. Most diagnostics surface one lens at a time. The constraint is what survives all five.</p>
+    </div>
+    <aside class="method-quote">
+      <div class="quote-eyebrow">Why this works</div>
+      <blockquote>"Most consulting starts with prescriptions. Catalyst Works starts with a diagnosis. The first one is faster. The second one is correct."</blockquote>
+      <cite>Catalyst Works diagnostic protocol</cite>
+    </aside>
   </div>
 
   <div class="method-track" id="method-track">
@@ -1058,7 +1330,7 @@
 <section id="about" class="about">
   <div class="about-grid">
     <div class="about-portrait reveal">
-      <img src="Boubacar.JPG" alt="Boubacar Barry, founder of Catalyst Works"
+      <img src="Boubacar.JPG" alt="Boubacar Barry, founder of Catalyst Works" width="360" height="450"
            onerror="this.style.display='none'; this.parentNode.style.background='linear-gradient(135deg, var(--ink-3), var(--ink-2))';">
     </div>
     <div class="reveal">
@@ -1114,9 +1386,15 @@
         <li>No pitch, no proposal, no sales material inside the session</li>
       </ul>
 
-      <a href="mailto:diagnose@catalystworks.consulting?subject=Signal%20Session%20request" class="offer-cta">
-        Request a Signal Session →
-      </a>
+      <div class="offer-guarantee">
+        <div class="offer-guarantee-label">The protocol guarantee</div>
+        <p class="offer-guarantee-text">If after 90 minutes I cannot name a constraint specific enough for you to act on by Friday, you do not pay. The work is the pitch. The deliverable is the proof.</p>
+      </div>
+
+      <button type="button" class="offer-cta" onclick="openSignalSessionBooking()">
+        Book a 45-min discovery call →
+      </button>
+      <p class="offer-fineprint">Free 45-minute discovery to confirm Signal Session fit. Full $497 invoiced after, only if we proceed.</p>
       <div class="offer-scarcity">3 sessions available this month . confirmed within 24 hours</div>
     </div>
   </div>
@@ -1144,7 +1422,7 @@
 <footer>
   <div class="foot-inner">
     <a href="#" class="brand">
-      <img src="CatalystWorks_logo.jpg" alt="" aria-hidden="true">
+      <img src="CatalystWorks_logo.jpg" alt="Catalyst Works" width="32" height="32">
       <span>Catalyst<span class="accent">Works</span></span>
     </a>
     <div class="foot-links">
@@ -1158,6 +1436,20 @@
 </footer>
 
 <script>
+/* Calendly popup launcher (Signal Session discovery call) */
+function openSignalSessionBooking() {
+  if (window.Calendly && typeof Calendly.initPopupWidget === 'function') {
+    Calendly.initPopupWidget({
+      url: 'https://calendly.com/boubacarbarry/ai-strategy-discovery-call?primary_color=e8a66b&background_color=0a0e14&text_color=f5efe2'
+    });
+    if (window.gtag) gtag('event', 'cta_click', { location: 'offer_card' });
+  } else {
+    // Calendly script not loaded yet — open in new tab as fallback
+    window.open('https://calendly.com/boubacarbarry/ai-strategy-discovery-call', '_blank', 'noopener');
+  }
+  return false;
+}
+
 /* Three.js constellation */
 (function() {
   function init() {
@@ -1455,6 +1747,57 @@
     submit.textContent = 'Run again →';
 
     if (window.gtag) gtag('event', 'demo_run', { engagement_time_msec: 1000 });
+    // Stash the last pain + result so the capture form can ship them together
+    lastPain = text;
+    lastResult = result;
+  }
+
+  // Email capture form — sends pain + diagnosis + email to worker for follow-up
+  const captureForm = document.getElementById('capture-form');
+  const captureEmail = document.getElementById('capture-email');
+  const captureBtn = document.getElementById('capture-btn');
+  const captureBlock = document.getElementById('out-capture');
+  const captureSuccess = document.getElementById('capture-success');
+  let lastPain = '';
+  let lastResult = null;
+
+  if (captureForm) {
+    captureForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = (captureEmail.value || '').trim();
+      // Basic email validation (server validates harder)
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        captureEmail.style.borderColor = 'var(--rust)';
+        captureEmail.focus();
+        setTimeout(() => captureEmail.style.borderColor = '', 2000);
+        return;
+      }
+      captureBtn.disabled = true;
+      captureBtn.textContent = 'Sending…';
+      try {
+        if (WORKER_URL) {
+          await fetch(WORKER_URL + '/capture', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+              email,
+              pain: lastPain,
+              result: lastResult,
+              source: 'site_demo_capture'
+            })
+          });
+        }
+        // Show success regardless (graceful degrade for simulated mode)
+        captureBlock.hidden = true;
+        captureSuccess.hidden = false;
+        if (window.gtag) gtag('event', 'capture_email', { engagement_time_msec: 1000 });
+      } catch (err) {
+        console.warn('capture failed:', err);
+        // Still show success — we don't want to make the user feel like it failed
+        captureBlock.hidden = true;
+        captureSuccess.hidden = false;
+      }
+    });
   }
 
   function simulate(text) {

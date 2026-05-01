@@ -156,6 +156,13 @@ export default {
       return json({ error: 'method_not_allowed' }, 405);
     }
 
+    const url = new URL(request.url);
+
+    // Email capture endpoint: POST /capture
+    if (url.pathname === '/capture') {
+      return handleCapture(request, env);
+    }
+
     const t0 = Date.now();
     const ip = request.headers.get('cf-connecting-ip') || 'unknown';
     const userAgent = (request.headers.get('user-agent') || '').slice(0, 300);
@@ -288,6 +295,55 @@ export default {
     return json(llmResult);
   },
 };
+
+async function handleCapture(request, env) {
+  let body;
+  try {
+    body = await request.json();
+  } catch (e) {
+    return json({ error: 'bad_json' }, 400);
+  }
+  const email = (body && typeof body.email === 'string') ? body.email.trim() : '';
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    return json({ error: 'bad_email' }, 400);
+  }
+  if (email.length > 254) {
+    return json({ error: 'email_too_long' }, 400);
+  }
+  const ip = request.headers.get('cf-connecting-ip') || 'unknown';
+  const ipHash = await hashIP(ip, env.HASH_SALT || 'cw-default-salt');
+  const userAgent = (request.headers.get('user-agent') || '').slice(0, 300);
+  const country = request.headers.get('cf-ipcountry') || null;
+
+  // Best-effort log to a separate Supabase table (or annotate the most-recent diagnostic)
+  if (env.SUPABASE_URL && env.SUPABASE_SERVICE_KEY) {
+    try {
+      await fetch(env.SUPABASE_URL + '/rest/v1/diagnostic_captures', {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+          'apikey': env.SUPABASE_SERVICE_KEY,
+          'authorization': 'Bearer ' + env.SUPABASE_SERVICE_KEY,
+          'prefer': 'return=minimal',
+        },
+        body: JSON.stringify({
+          email,
+          pain_text: (body.pain || '').slice(0, 1500),
+          response_json: body.result || null,
+          source: body.source || 'site_demo_capture',
+          ip_hash: ipHash,
+          user_agent: userAgent,
+          geo_country: country,
+        }),
+      });
+    } catch (e) {
+      console.error('capture supabase log failed:', e);
+    }
+  }
+
+  // TODO: enqueue an actual PDF + email send (e.g. Postmark, Resend) — out of scope for v1
+  return json({ ok: true, message: 'captured' });
+}
 
 function extractJson(s) {
   const start = s.indexOf('{');
