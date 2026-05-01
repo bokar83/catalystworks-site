@@ -600,16 +600,15 @@
       box-shadow: var(--shadow);
     }
     .about-portrait img {
-      width: 165%; height: 145%;
+      width: 100%; height: 100%;
       object-fit: cover;
-      object-position: 38% 35%;
-      filter: contrast(1.05) saturate(0.92);
-      position: absolute; top: -18%; left: -22%;
+      object-position: center top;
+      filter: contrast(1.02) saturate(0.96);
     }
     .about-portrait::after {
       content: ''; position: absolute; inset: 0;
-      background: linear-gradient(180deg, transparent 38%, rgba(10,14,20,0.55) 78%, rgba(10,14,20,0.92) 100%),
-                  linear-gradient(0deg, rgba(10,14,20,0.85) 0%, rgba(10,14,20,0.0) 18%);
+      background: linear-gradient(180deg, transparent 65%, rgba(10,14,20,0.55) 100%);
+      pointer-events: none;
     }
     .about-meta-row {
       display: grid; grid-template-columns: repeat(4, 1fr);
@@ -781,14 +780,6 @@
     .foot-links { display: flex; gap: 22px; flex-wrap: wrap; }
     .foot-links a { font-size: 13px; color: var(--t-muted); transition: color 200ms; }
     .foot-links a:hover { color: var(--amber); }
-    .foot-cities {
-      width: 100%; padding-top: 24px;
-      border-top: 1px solid var(--line-2); margin-top: 16px;
-      font-family: var(--mono); font-size: 11px;
-      color: var(--t-dim); letter-spacing: 0.06em;
-      display: flex; gap: 18px; flex-wrap: wrap;
-    }
-    .foot-cities span { color: var(--amber); }
     .foot-copy {
       width: 100%; padding-top: 16px;
       font-size: 11px; color: var(--t-dim);
@@ -803,10 +794,96 @@
       .reveal { opacity: 1; transform: none; }
       #constellation { display: none; }
     }
+
+    /* Custom cursor . desktop only */
+    @media (pointer: fine) {
+      html, body { cursor: none; }
+      a, button, textarea, .demo { cursor: none; }
+      .cw-cursor {
+        position: fixed; top: 0; left: 0;
+        pointer-events: none;
+        z-index: 9999;
+        will-change: transform, width, height, opacity;
+      }
+      .cw-cursor-dot {
+        width: 6px; height: 6px;
+        background: var(--amber);
+        border-radius: 50%;
+        box-shadow: 0 0 12px rgba(232,166,107,0.6);
+        transition: opacity 200ms var(--ease);
+      }
+      .cw-cursor-ring {
+        width: 32px; height: 32px;
+        border: 1px solid rgba(232,166,107,0.45);
+        border-radius: 50%;
+        transition: width 280ms var(--ease), height 280ms var(--ease), border-color 280ms, background 280ms, opacity 200ms;
+      }
+      .cw-cursor-ring.is-hover-link {
+        width: 56px; height: 56px;
+        border-color: rgba(232,166,107,0.75);
+        background: rgba(232,166,107,0.05);
+      }
+      .cw-cursor-dot.is-hover-link {
+        opacity: 0.4;
+      }
+      .cw-cursor.is-hidden { opacity: 0 !important; }
+    }
+    @media (pointer: coarse) {
+      .cw-cursor { display: none !important; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .cw-cursor-ring { transition: none; }
+    }
   </style>
 </head>
 
 <body>
+
+<div class="cw-cursor cw-cursor-dot" id="cw-cursor-dot" aria-hidden="true"></div>
+<div class="cw-cursor cw-cursor-ring" id="cw-cursor-ring" aria-hidden="true"></div>
+
+<script>
+(function() {
+  if (window.matchMedia('(pointer: coarse)').matches) return;
+  const dot = document.getElementById('cw-cursor-dot');
+  const ring = document.getElementById('cw-cursor-ring');
+  if (!dot || !ring) return;
+
+  let mx = window.innerWidth / 2, my = window.innerHeight / 2;
+  let rx = mx, ry = my;
+
+  document.addEventListener('mousemove', (e) => {
+    mx = e.clientX; my = e.clientY;
+    dot.style.transform = 'translate3d(' + mx + 'px,' + my + 'px,0) translate(-50%, -50%)';
+  });
+
+  document.addEventListener('mouseleave', () => {
+    dot.classList.add('is-hidden');
+    ring.classList.add('is-hidden');
+  });
+  document.addEventListener('mouseenter', () => {
+    dot.classList.remove('is-hidden');
+    ring.classList.remove('is-hidden');
+  });
+
+  const updateHover = (e) => {
+    const t = e.target;
+    const isLink = t.closest && (t.closest('a, button, [role="button"], textarea, .demo, .sec-card, .lens') !== null);
+    dot.classList.toggle('is-hover-link', isLink);
+    ring.classList.toggle('is-hover-link', isLink);
+  };
+  document.addEventListener('mouseover', updateHover);
+  document.addEventListener('mouseout', updateHover);
+
+  function tick() {
+    rx += (mx - rx) * 0.18;
+    ry += (my - ry) * 0.18;
+    ring.style.transform = 'translate3d(' + rx + 'px,' + ry + 'px,0) translate(-50%, -50%)';
+    requestAnimationFrame(tick);
+  }
+  tick();
+})();
+</script>
 
 <canvas id="constellation"></canvas>
 
@@ -830,7 +907,7 @@
 
 <section class="hero">
   <div>
-    <div class="hero-eyebrow">Live diagnostic . powered by Claude</div>
+    <div class="hero-eyebrow">Constraints AI . the diagnostic protocol</div>
     <h1>Name the constraint. <em>In writing.</em><br>In ninety seconds.</h1>
     <p class="hero-sub">Most consultants want a six-week discovery before they tell you anything. Catalyst Works starts differently. Type a sentence. Get a diagnosis.</p>
     <div class="hero-meta">
@@ -842,7 +919,7 @@
 
   <div class="demo">
     <div class="demo-head">
-      <div class="demo-title">Try the diagnostic</div>
+      <div class="demo-title">Constraints AI</div>
       <div class="demo-quota"><strong id="quota">live</strong> . diagnostic</div>
     </div>
 
@@ -853,7 +930,7 @@
         Run the diagnostic <span class="arr">→</span>
       </button>
     </div>
-    <div class="demo-hint">Press <kbd>⌘</kbd> + <kbd>Enter</kbd> to run . responses are written by Claude . your text is not stored</div>
+    <div class="demo-hint">Press <kbd>⌘</kbd> + <kbd>Enter</kbd> to run . responses are protocol-driven, not advice . your text is not stored</div>
 
     <div class="demo-out" id="demo-out">
       <div class="out-row">
@@ -869,7 +946,7 @@
         <div class="out-action" id="out-action"></div>
       </div>
       <div class="out-cta">
-        <div class="out-cta-text">This is what a Signal Session feels like, in 30 seconds. <strong>The real one is 90 minutes, with a 1-page written summary in 24 hours.</strong></div>
+        <div class="out-cta-text">Constraints AI is a thin slice of the real diagnostic. <strong>The Signal Session is 90 minutes with Boubacar, plus a 1-page written summary in 24 hours. $497.</strong></div>
         <a href="#offer" class="out-cta-btn">Book the real one →</a>
       </div>
     </div>
@@ -981,7 +1058,7 @@
 <section id="about" class="about">
   <div class="about-grid">
     <div class="about-portrait reveal">
-      <img src="boubacar-portrait.png" alt="Boubacar Barry, founder of Catalyst Works"
+      <img src="Boubacar.JPG" alt="Boubacar Barry, founder of Catalyst Works"
            onerror="this.style.display='none'; this.parentNode.style.background='linear-gradient(135deg, var(--ink-3), var(--ink-2))';">
     </div>
     <div class="reveal">
@@ -1076,9 +1153,6 @@
       <a href="ai-data-audit.html">AI Data Audit</a>
       <a href="https://www.linkedin.com/company/catalyst-works-ai/" rel="noopener" target="_blank">LinkedIn</a>
     </div>
-    <div class="foot-cities">
-      Serving operators in <span>Salt Lake City</span> <span>Atlanta</span> <span>Miami</span> <span>Dubai</span> <span>Conakry</span> <span>Port Louis</span>
-    </div>
     <div class="foot-copy">© 2026 Catalyst Works . Diagnostic consulting for SMB owner-operators . The work is the pitch.</div>
   </div>
 </footer>
@@ -1126,14 +1200,32 @@
     const geometry = new THREE.BufferGeometry();
     geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
 
+    function createGlowSprite() {
+      const c = document.createElement('canvas');
+      c.width = c.height = 64;
+      const ctx = c.getContext('2d');
+      const g = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
+      g.addColorStop(0,    'rgba(232,166,107,1)');
+      g.addColorStop(0.25, 'rgba(232,166,107,0.85)');
+      g.addColorStop(0.55, 'rgba(232,166,107,0.32)');
+      g.addColorStop(1,    'rgba(232,166,107,0)');
+      ctx.fillStyle = g;
+      ctx.fillRect(0, 0, 64, 64);
+      const tex = new THREE.CanvasTexture(c);
+      tex.needsUpdate = true;
+      return tex;
+    }
+
     const material = new THREE.PointsMaterial({
-      color: 0xE8A66B,
-      size: 0.5,
+      map: createGlowSprite(),
+      color: 0xFFFFFF,
+      size: 1.6,
       sizeAttenuation: true,
       transparent: true,
-      opacity: 0.78,
+      opacity: 1,
       blending: THREE.AdditiveBlending,
       depthWrite: false,
+      alphaTest: 0.001,
     });
 
     const points = new THREE.Points(geometry, material);
@@ -1459,7 +1551,7 @@
     };
   }
 
-  if (!WORKER_URL) elQuota.textContent = 'simulated';
+  if (!WORKER_URL) elQuota.textContent = 'protocol';
 })();
 </script>
 
