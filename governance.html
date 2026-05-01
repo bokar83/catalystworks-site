@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="color-scheme: dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#F8F4EC">
   <title>AI Governance for SMBs | Catalyst Works</title>
   <meta name="description" content="Catalyst Works helps SMB owner-operators find out how AI is being used in their business, where the exposure is, and what to do about it. Written policy. Tool inventory. 14 days.">
   <link rel="icon" type="image/jpeg" href="CatalystWorks_logo.jpg">
@@ -49,20 +50,22 @@
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
-      --navy:       #071A2E;
-      --carbon:     #1E222A;
-      --cyan:       #00B7C2;
-      --orange:     #FF7A00;
-      --clay:       #B47C57;
-      --text-muted: rgba(255,255,255,0.55);
-      --text-mid:   rgba(255,255,255,0.75);
-      --text-dim:   rgba(255,255,255,0.35);
+      /* Notebook palette v2.0 (light theme). Token NAMES preserved. */
+      --navy:       #F8F4EC;     /* paper cream - page bg */
+      --carbon:     #FFFFFF;     /* white - card surfaces */
+      --cyan:       #B45309;     /* amber/tobacco - brand accent */
+      --orange:     #0F1419;     /* ink - CTAs */
+      --clay:       #B47C57;     /* preserved */
+      --surface-light:#FFFFFF;
+      --text-muted: rgba(15,20,25,0.65);
+      --text-mid:   rgba(15,20,25,0.80);
+      --text-dim:   rgba(15,20,25,0.55);
     }
     html { scroll-behavior: smooth; }
     body {
       font-family: 'Public Sans', -apple-system, sans-serif;
       background: var(--navy);
-      color: #fff;
+      color: var(--orange);
       line-height: 1.6;
     }
     h1, h2 { font-family: 'Spectral', Georgia, serif; font-weight: 700; letter-spacing: -0.015em; }
@@ -81,12 +84,13 @@
       display: flex; align-items: center; justify-content: space-between;
       height: 64px;
     }
-    .nav-logo { font-size: 17px; font-weight: 800; letter-spacing: -0.02em; }
+    .nav-logo { font-size: 17px; font-weight: 800; letter-spacing: -0.02em; display: inline-flex; align-items: center; gap: 10px; }
+    .nav-logo img { width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0; }
     .nav-logo span { color: var(--cyan); }
     .nav-back { font-size: 13px; color: var(--text-muted); display: flex; align-items: center; gap: 6px; }
-    .nav-back:hover { color: #fff; }
+    .nav-back:hover { color: var(--orange); }
     .nav-cta {
-      background: var(--orange); color: #fff;
+      background: var(--orange); color: var(--surface-light);
       border: none; border-radius: 8px;
       padding: 9px 18px; font-size: 13px; font-weight: 600;
       cursor: pointer; white-space: nowrap;
@@ -101,11 +105,11 @@
     .gov-hero {
       padding: 100px 24px 80px;
       text-align: center;
-      background: radial-gradient(ellipse at 50% 0%, rgba(0,183,194,0.08) 0%, transparent 70%);
+      background: radial-gradient(ellipse at 50% 0%, rgba(180,83,9,0.08) 0%, transparent 70%);
     }
     .gov-hero-badge {
       display: inline-flex; align-items: center; gap: 8px;
-      background: rgba(0,183,194,0.1); border: 1px solid rgba(0,183,194,0.25);
+      background: rgba(180,83,9,0.1); border: 1px solid rgba(180,83,9,0.25);
       border-radius: 100px; padding: 5px 14px;
       font-size: 11px; font-weight: 700; letter-spacing: 0.08em;
       text-transform: uppercase; color: var(--cyan);
@@ -125,7 +129,7 @@
     }
     .btn-primary {
       display: inline-flex; align-items: center; gap: 10px;
-      background: var(--orange); color: #fff;
+      background: var(--orange); color: var(--surface-light);
       border: none; border-radius: 10px;
       padding: 14px 28px; font-size: 15px; font-weight: 600;
       cursor: pointer; text-decoration: none;
@@ -134,11 +138,11 @@
     .btn-ghost {
       display: inline-flex; align-items: center; gap: 8px;
       background: transparent; color: var(--text-muted);
-      border: 1px solid rgba(255,255,255,0.12); border-radius: 10px;
+      border: 1px solid rgba(15,20,25,0.24); border-radius: 10px;
       padding: 14px 28px; font-size: 15px; font-weight: 500;
       cursor: pointer; text-decoration: none; margin-left: 16px;
     }
-    .btn-ghost:hover { border-color: rgba(255,255,255,0.3); color: #fff; }
+    .btn-ghost:hover { border-color: rgba(15,20,25,0.30); color: var(--orange); }
 
     /* STAT ROW */
     .stat-row {
@@ -147,8 +151,8 @@
     }
     @media (max-width: 640px) { .stat-row { grid-template-columns: 1fr; } }
     .stat-card {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.07);
+      background: rgba(15,20,25,0.06);
+      border: 1px solid rgba(15,20,25,0.14);
       border-radius: 12px; padding: 28px 24px; text-align: center;
     }
     .stat-num {
@@ -172,8 +176,8 @@
     .risk-list { list-style: none; display: flex; flex-direction: column; gap: 16px; }
     .risk-item {
       display: flex; gap: 14px; align-items: flex-start;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.07);
+      background: rgba(15,20,25,0.06);
+      border: 1px solid rgba(15,20,25,0.14);
       border-radius: 10px; padding: 18px 20px;
     }
     .risk-dot {
@@ -181,7 +185,7 @@
       background: var(--orange); flex-shrink: 0; margin-top: 6px;
     }
     .risk-text { font-size: 14px; color: var(--text-mid); line-height: 1.6; }
-    .risk-text strong { color: #fff; font-weight: 600; display: block; margin-bottom: 2px; }
+    .risk-text strong { color: var(--orange); font-weight: 600; display: block; margin-bottom: 2px; }
 
     /* WHAT YOU GET */
     .section-label {
@@ -194,8 +198,8 @@
     }
     @media (max-width: 640px) { .deliverables-grid { grid-template-columns: 1fr; } }
     .deliverable-card {
-      background: rgba(0,183,194,0.05);
-      border: 1px solid rgba(0,183,194,0.15);
+      background: rgba(180,83,9,0.05);
+      border: 1px solid rgba(180,83,9,0.15);
       border-radius: 12px; padding: 24px;
     }
     .deliverable-card h4 { font-size: 15px; font-weight: 700; margin-bottom: 8px; }
@@ -208,8 +212,8 @@
     }
     @media (max-width: 768px) { .who-grid { grid-template-columns: 1fr; } }
     .who-card {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.07);
+      background: rgba(15,20,25,0.06);
+      border: 1px solid rgba(15,20,25,0.14);
       border-radius: 12px; padding: 24px;
     }
     .who-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 8px; color: var(--clay); }
@@ -217,8 +221,8 @@
 
     /* SIGNAL SESSION CTA */
     .signal-cta {
-      background: rgba(255,122,0,0.06);
-      border: 1px solid rgba(255,122,0,0.2);
+      background: rgba(15,20,25,0.06);
+      border: 1px solid rgba(15,20,25,0.2);
       border-radius: 16px; padding: 48px;
       text-align: center; margin: 64px 0;
     }
@@ -237,8 +241,8 @@
     /* OBJECTIONS */
     .objection-list { display: flex; flex-direction: column; gap: 16px; margin-top: 40px; }
     .objection {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.07);
+      background: rgba(15,20,25,0.06);
+      border: 1px solid rgba(15,20,25,0.14);
       border-radius: 10px; padding: 20px 24px;
     }
     .objection-q { font-size: 14px; font-weight: 700; margin-bottom: 8px; color: var(--text-mid); }
@@ -247,7 +251,7 @@
     /* FINAL CTA */
     .final-gov-cta {
       text-align: center; padding: 80px 24px;
-      border-top: 1px solid rgba(255,255,255,0.06);
+      border-top: 1px solid rgba(15,20,25,0.12);
     }
     .final-gov-cta h2 {
       font-size: clamp(24px, 4vw, 42px);
@@ -259,7 +263,7 @@
     /* FOOTER */
     footer {
       background: #050e1a;
-      border-top: 1px solid rgba(255,255,255,0.06);
+      border-top: 1px solid rgba(15,20,25,0.12);
       padding: 32px 24px;
     }
     .footer-inner {
@@ -267,11 +271,12 @@
       display: flex; justify-content: space-between; align-items: center;
       flex-wrap: wrap; gap: 16px;
     }
-    .footer-logo { font-size: 16px; font-weight: 800; }
+    .footer-logo { font-size: 16px; font-weight: 800; display: inline-flex; align-items: center; gap: 10px; }
+    .footer-logo img { width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0; }
     .footer-logo span { color: var(--cyan); }
     .footer-links { display: flex; gap: 20px; align-items: center; }
     .footer-links a { font-size: 13px; color: var(--text-muted); }
-    .footer-links a:hover { color: #fff; }
+    .footer-links a:hover { color: var(--orange); }
     .footer-copy {
       max-width: 1100px; margin: 16px auto 0;
       font-size: 12px; color: var(--text-dim);
@@ -287,7 +292,7 @@
 <!-- NAV -->
 <nav>
   <div class="nav-inner">
-    <a href="/" class="nav-logo">Catalyst<span>Works</span></a>
+    <a href="/" class="nav-logo"><img src="CatalystWorks_logo.jpg" alt="" width="32" height="32" aria-hidden="true">Catalyst<span>Works</span></a>
     <a href="/" class="nav-back">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
       Back to main site
@@ -302,7 +307,7 @@
 <div class="gov-hero">
   <div class="gov-hero-badge">AI Governance for SMBs</div>
   <h1>Your employees are using AI with your customer data.<br><em>Do you know which tools? Do you have a policy?</em></h1>
-  <p>Most owner-operators between 5 and 200 employees have AI tools touching their business that they have never formally reviewed. This is not a technology problem. It is an accountability gap — and it is fixable.</p>
+  <p>Most owner-operators between 5 and 200 employees have AI tools touching their business that they have never formally reviewed. This is not a technology problem. It is an accountability gap, and it is fixable.</p>
   <a href="#book" class="btn-primary">
     Start with a Signal Session
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
@@ -315,8 +320,8 @@
   <div class="container">
     <div class="stat-row">
       <div class="stat-card fade-in">
-        <div class="stat-num">12–20</div>
-        <div class="stat-label">AI tools the average SMB has touching their business — most owners can name three</div>
+        <div class="stat-num">12-20</div>
+        <div class="stat-label">AI tools the average SMB has touching their business. Most owners can name three.</div>
       </div>
       <div class="stat-card fade-in">
         <div class="stat-num">14</div>
@@ -324,20 +329,20 @@
       </div>
       <div class="stat-card fade-in">
         <div class="stat-num">4</div>
-        <div class="stat-label">US state AI laws now in effect — Utah, Texas, Illinois, Colorado</div>
+        <div class="stat-label">US state AI laws now in effect: Utah, Texas, Illinois, Colorado</div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- PROBLEM -->
-<section class="section" style="background:rgba(255,255,255,0.02);border-top:1px solid rgba(255,255,255,0.05);border-bottom:1px solid rgba(255,255,255,0.05);">
+<section class="section" style="background:rgba(15,20,25,0.04);border-top:1px solid rgba(15,20,25,0.10);border-bottom:1px solid rgba(15,20,25,0.10);">
   <div class="container">
     <div class="problem-grid">
       <div class="fade-in">
         <div class="section-label">The Problem</div>
         <h2>AI governance is not an enterprise problem. It became yours the day your team started using AI tools.</h2>
-        <p>Your CRM has AI features. Your accounting software does too. Your team is using ChatGPT, Copilot, and tools you have not approved — with client data, with contract terms, with information that belongs to your customers.</p>
+        <p>Your CRM has AI features. Your accounting software does too. Your team is using ChatGPT, Copilot, and tools you have not approved, with client data, with contract terms, with information that belongs to your customers.</p>
         <p>There is no malice in this. There is also no policy, no accountability structure, and no plan for what happens when something goes wrong.</p>
         <p>That is the gap. It is common. And it is the kind of gap that costs more to clean up after an incident than to close before one.</p>
       </div>
@@ -388,7 +393,7 @@
     <div class="deliverables-grid">
       <div class="deliverable-card fade-in">
         <h4>Full AI Tool Inventory</h4>
-        <p>Every AI tool touching your business — including the ones embedded in software you already use. Named, categorized by risk level, with an accountable owner assigned to each.</p>
+        <p>Every AI tool touching your business, including the ones embedded in software you already use. Named, categorized by risk level, with an accountable owner assigned to each.</p>
       </div>
       <div class="deliverable-card fade-in">
         <h4>Written Acceptable Use Policy</h4>
@@ -407,12 +412,12 @@
 </section>
 
 <!-- WHO IT'S FOR -->
-<section class="section" style="background:rgba(255,255,255,0.02);border-top:1px solid rgba(255,255,255,0.05);border-bottom:1px solid rgba(255,255,255,0.05);">
+<section class="section" style="background:rgba(15,20,25,0.04);border-top:1px solid rgba(15,20,25,0.10);border-bottom:1px solid rgba(15,20,25,0.10);">
   <div class="container">
     <div class="fade-in">
       <div class="section-label">Who This Is For</div>
       <h2 style="font-size:clamp(22px,3vw,32px);font-weight:800;letter-spacing:-0.03em;margin-bottom:8px;">Built for owner-operators who do not have a full-time AI officer.</h2>
-      <p style="font-size:16px;color:var(--text-muted);line-height:1.7;max-width:600px;">Most SMBs cannot afford a dedicated AI Risk Officer or compliance team. This is the fractional version of that role — scoped, fixed-fee, and designed for organizations that need governance without overhead.</p>
+      <p style="font-size:16px;color:var(--text-muted);line-height:1.7;max-width:600px;">Most SMBs cannot afford a dedicated AI Risk Officer or compliance team. This is the fractional version of that role, scoped, fixed-fee, and designed for organizations that need governance without overhead.</p>
     </div>
     <div class="who-grid">
       <div class="who-card fade-in">
@@ -420,12 +425,12 @@
         <p>Legal, accounting, consulting, architecture, HR firms handling client data with AI tools that have never been formally reviewed.</p>
       </div>
       <div class="who-card fade-in">
-        <h4>Owner-operators with 5–200 employees</h4>
+        <h4>Owner-operators with 5-200 employees</h4>
         <p>Growing fast enough that AI has become embedded in operations, but without the infrastructure to govern it systematically.</p>
       </div>
       <div class="who-card fade-in">
         <h4>Businesses serving enterprise clients</h4>
-        <p>Any firm where clients or prospects are starting to ask about AI governance in due diligence — and where "we don't have a policy" is no longer an acceptable answer.</p>
+        <p>Any firm where clients or prospects are starting to ask about AI governance in due diligence, and where "we don't have a policy" is no longer an acceptable answer.</p>
       </div>
     </div>
   </div>
@@ -456,7 +461,7 @@
       <div class="objection-list">
         <div class="objection">
           <div class="objection-q">"We're too small to need this."</div>
-          <div class="objection-a">Size determines the complexity of governance, not whether you need it. A three-person firm with one AI tool touching client data is exposed. The governance is sized to match your operation — not enterprise overhead applied to a small business.</div>
+          <div class="objection-a">Size determines the complexity of governance, not whether you need it. A three-person firm with one AI tool touching client data is exposed. The governance is sized to match your operation, not enterprise overhead applied to a small business.</div>
         </div>
         <div class="objection">
           <div class="objection-q">"We already have a privacy policy."</div>
@@ -472,7 +477,7 @@
         </div>
         <div class="objection">
           <div class="objection-q">"Is this legal advice?"</div>
-          <div class="objection-a">No. Catalyst Works produces operational governance documentation — tool inventories, acceptable use policies, risk summaries, and action plans. Any policy affecting employee rights, client data, or regulatory compliance should be reviewed by qualified legal counsel before implementation. This is the infrastructure that makes your lawyer's job easier and your vendor conversations sharper.</div>
+          <div class="objection-a">No. Catalyst Works produces operational governance documentation: tool inventories, acceptable use policies, risk summaries, and action plans. Any policy affecting employee rights, client data, or regulatory compliance should be reviewed by qualified legal counsel before implementation. This is the infrastructure that makes your lawyer's job easier and your vendor conversations sharper.</div>
         </div>
       </div>
     </div>
@@ -485,7 +490,7 @@
     <h2 class="fade-in">The question is not whether you have AI exposure.<br>The question is whether you know what it is.</h2>
     <p class="fade-in">Start with a Signal Session. 90 minutes. One clear picture of where you stand and what to do next.</p>
     <a href="/" class="btn-primary fade-in" style="margin:0 auto;" onclick="event.preventDefault(); window.location.href='/?book=1';">
-      Book a Signal Session — $497
+      Book a Signal Session. $497
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
     </a>
   </div>
@@ -496,7 +501,7 @@
 <!-- FOOTER -->
 <footer>
   <div class="footer-inner">
-    <a href="/" class="footer-logo">Catalyst<span>Works</span></a>
+    <a href="/" class="footer-logo"><img src="CatalystWorks_logo.jpg" alt="" width="32" height="32" aria-hidden="true">Catalyst<span>Works</span></a>
     <div class="footer-links">
       <a href="/">Home</a>
       <a href="mailto:diagnose@catalystworks.consulting">diagnose@catalystworks.consulting</a>
