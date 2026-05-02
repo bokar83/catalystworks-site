@@ -1669,9 +1669,9 @@ function openSignalSessionBooking() {
   const elAction = document.getElementById('out-action');
   const elQuota = document.getElementById('quota');
 
-  // Set this after deploying _worker.js to Cloudflare Workers.
+  // n8n webhook running the locked Constraints AI prompt against OpenRouter (gpt-4o-mini).
   // Empty string = simulated mode (no API calls, no cost).
-  const WORKER_URL = '';
+  const WORKER_URL = 'https://n8n.srv1040886.hstgr.cloud/webhook/catalystworks-constraints-ai';
 
   input.addEventListener('keydown', (e) => {
     if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') {
