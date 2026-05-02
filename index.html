@@ -1199,16 +1199,16 @@
         <div class="out-action" id="out-action"></div>
       </div>
       <div class="out-capture" id="out-capture">
-        <div class="out-capture-label">Want this diagnosis as a 1-page PDF + the 30-day follow-up framework?</div>
+        <div class="out-capture-label">Want me to write three sharper reframes for this and email them to you in 24 hours?</div>
         <form class="out-capture-form" id="capture-form" novalidate>
           <input type="email" name="email" id="capture-email" placeholder="your@email.com" autocomplete="email" required aria-label="Email address">
-          <button type="submit" class="out-capture-btn" id="capture-btn">Send it →</button>
+          <button type="submit" class="out-capture-btn" id="capture-btn">Send the reframes →</button>
         </form>
-        <div class="out-capture-note">No spam. One email with the PDF, one optional follow-up. Unsubscribe in any of them.</div>
+        <div class="out-capture-note">Boubacar reads each one and writes back personally. No drip sequence. No newsletter signup.</div>
       </div>
       <div class="out-capture-success" id="capture-success" hidden>
-        <div class="out-capture-label" style="color: var(--cyan)">Sent.</div>
-        <p class="out-capture-note" style="font-size: 13px; color: var(--t-mid);">Check your inbox in a minute. The PDF arrives from <strong>diagnose@catalystworks.consulting</strong>.</p>
+        <div class="out-capture-label" style="color: var(--cyan)">Got it.</div>
+        <p class="out-capture-note" style="font-size: 13px; color: var(--t-mid);">You will hear back from <strong>diagnose@catalystworks.consulting</strong> within 24 hours with three reframes specific to what you typed.</p>
       </div>
       <div class="out-cta">
         <div class="out-cta-text">Constraints AI is a thin slice of the real diagnostic. <strong>The Signal Session is 90 minutes with Boubacar, plus a 1-page written summary in 24 hours. $497.</strong></div>
@@ -1392,10 +1392,10 @@
       </div>
 
       <button type="button" class="offer-cta" onclick="openSignalSessionBooking()">
-        Book a 45-min discovery call →
+        Book the Signal Session →
       </button>
-      <p class="offer-fineprint">Free 45-minute discovery to confirm Signal Session fit. Full $497 invoiced after, only if we proceed.</p>
-      <div class="offer-scarcity">3 sessions available this month . confirmed within 24 hours</div>
+      <p class="offer-fineprint">$497 charged at booking. Refund in full if I do not name a constraint you can act on. No discovery call. No proposal. The session is the work.</p>
+      <div class="offer-scarcity">3 sessions per month . confirmation within 24 hours</div>
     </div>
   </div>
 </section>
@@ -1440,12 +1440,11 @@
 function openSignalSessionBooking() {
   if (window.Calendly && typeof Calendly.initPopupWidget === 'function') {
     Calendly.initPopupWidget({
-      url: 'https://calendly.com/boubacarbarry/ai-strategy-discovery-call?primary_color=e8a66b&background_color=0a0e14&text_color=f5efe2'
+      url: 'https://calendly.com/boubacarbarry/signal-session-business-constraint-diagnostic?primary_color=e8a66b&background_color=0a0e14&text_color=f5efe2'
     });
     if (window.gtag) gtag('event', 'cta_click', { location: 'offer_card' });
   } else {
-    // Calendly script not loaded yet — open in new tab as fallback
-    window.open('https://calendly.com/boubacarbarry/ai-strategy-discovery-call', '_blank', 'noopener');
+    window.open('https://calendly.com/boubacarbarry/signal-session-business-constraint-diagnostic', '_blank', 'noopener');
   }
   return false;
 }
