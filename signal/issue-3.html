@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Weekly Signal Issue 3 | Your employees are already running AI you have not approved</title>
+  <meta name="description" content="I run shadow AI on purpose. Most operators are running it by accident. The difference is a framework for what goes in and what stays out.">
+  <meta property="og:title" content="Your employees are already running AI you have not approved">
+  <meta property="og:description" content="269 unsanctioned AI tools per 1,000 employees at small firms. That is not a future risk. That is your present state.">
+  <meta property="og:image" content="https://catalystworks.consulting/og-image.jpg">
+  <meta property="og:url" content="https://catalystworks.consulting/signal/issue-3">
+  <link rel="canonical" href="https://catalystworks.consulting/signal/issue-3">
+  <link rel="icon" type="image/jpeg" href="../CatalystWorks_logo.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --ink: #0A0E14;
+      --paper: #F5EFE2;
+      --amber: #E8A66B;
+      --cyan: #5BC0BE;
+      --muted: rgba(245,239,226,0.5);
+      --border: rgba(245,239,226,0.1);
+      --card-bg: rgba(245,239,226,0.04);
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--ink);
+      color: var(--paper);
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 20px 48px;
+      display: flex; align-items: center; justify-content: space-between;
+      transition: background 0.3s;
+    }
+    nav.scrolled {
+      background: rgba(10,14,20,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo img { width: 28px; height: 28px; border-radius: 4px; object-fit: cover; }
+    .nav-logo span { font-size: 13px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--paper); opacity: 0.7; }
+    .nav-back { font-size: 13px; color: var(--muted); text-decoration: none; display: flex; align-items: center; gap: 6px; transition: color 0.2s; }
+    .nav-back:hover { color: var(--amber); }
+
+    /* ARTICLE */
+    .article-wrap {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 140px 48px 100px;
+    }
+
+    /* META */
+    .article-meta {
+      display: flex; align-items: center; gap: 16px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+    .meta-issue {
+      font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--amber);
+      background: rgba(232,166,107,0.1);
+      padding: 4px 10px; border-radius: 2px;
+    }
+    .meta-date { font-size: 13px; color: var(--muted); }
+    .meta-dot { color: var(--border); }
+
+    /* HEADLINE */
+    .article-title {
+      font-family: 'Spectral', serif;
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--paper);
+      margin-bottom: 20px;
+      letter-spacing: -0.3px;
+    }
+    .article-deck {
+      font-size: 19px;
+      line-height: 1.65;
+      color: var(--muted);
+      margin-bottom: 52px;
+      font-family: 'Spectral', serif;
+      font-style: italic;
+      font-weight: 300;
+    }
+
+    /* ACCENT LINE */
+    .accent-line {
+      width: 48px; height: 2px;
+      background: var(--amber);
+      margin-bottom: 48px;
+    }
+
+    /* BODY TEXT */
+    .article-body p {
+      font-family: 'Spectral', serif;
+      font-size: 19px;
+      line-height: 1.8;
+      color: var(--paper);
+      margin-bottom: 28px;
+    }
+
+    /* PULL QUOTE */
+    .pull-quote {
+      border-left: 3px solid var(--amber);
+      padding: 24px 32px;
+      margin: 40px 0;
+      background: var(--card-bg);
+      border-radius: 0 4px 4px 0;
+    }
+    .pull-quote p {
+      font-family: 'Spectral', serif !important;
+      font-size: 22px !important;
+      line-height: 1.5 !important;
+      color: var(--paper) !important;
+      font-style: italic;
+      margin: 0 !important;
+    }
+
+    /* STAT BLOCK */
+    .stat-block {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 36px 40px;
+      margin: 40px 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+    .stat-item {}
+    .stat-number {
+      font-family: 'Spectral', serif;
+      font-size: 52px;
+      font-weight: 300;
+      color: var(--amber);
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+    .stat-label {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--muted);
+    }
+    .stat-source {
+      font-size: 11px;
+      color: rgba(245,239,226,0.25);
+      margin-top: 6px;
+    }
+    .stat-divider {
+      grid-column: 1 / -1;
+      border: none;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ACTION BOX */
+    .action-box {
+      border: 1px solid rgba(232,166,107,0.3);
+      border-radius: 6px;
+      padding: 32px 36px;
+      margin: 40px 0;
+      background: rgba(232,166,107,0.04);
+    }
+    .action-label {
+      font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--amber); margin-bottom: 16px;
+    }
+    .action-box p {
+      font-family: 'Spectral', serif;
+      font-size: 17px !important;
+      line-height: 1.75 !important;
+      color: var(--paper) !important;
+      margin-bottom: 20px !important;
+    }
+    .message-template {
+      background: var(--card-bg);
+      border-left: 2px solid rgba(245,239,226,0.2);
+      padding: 20px 24px;
+      border-radius: 0 4px 4px 0;
+      font-family: 'Inter', sans-serif !important;
+      font-size: 14px !important;
+      line-height: 1.7 !important;
+      color: rgba(245,239,226,0.7) !important;
+      font-style: italic;
+      margin: 0 !important;
+    }
+
+    /* SIGNATURE */
+    .signature {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding-top: 40px;
+      border-top: 1px solid var(--border);
+      margin-top: 12px;
+    }
+    .sig-avatar {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--border);
+    }
+    .sig-name {
+      font-family: 'Inter', sans-serif;
+      font-size: 16px; font-weight: 600;
+      color: var(--paper); margin-bottom: 2px;
+    }
+    .sig-title {
+      font-size: 13px; color: var(--muted);
+    }
+    .sig-title a { color: var(--amber); text-decoration: none; }
+
+    /* SOURCES */
+    .sources {
+      margin-top: 60px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
+    }
+    .sources-label {
+      font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+      color: rgba(245,239,226,0.25); margin-bottom: 14px;
+    }
+    .sources p {
+      font-size: 13px !important;
+      line-height: 1.6 !important;
+      color: rgba(245,239,226,0.3) !important;
+      font-family: 'Inter', sans-serif !important;
+      margin-bottom: 8px !important;
+    }
+    .sources a { color: var(--amber); text-decoration: none; }
+
+    /* SUBSCRIBE CTA */
+    .subscribe-cta {
+      margin-top: 72px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 40px;
+      text-align: center;
+    }
+    .subscribe-cta h3 {
+      font-family: 'Spectral', serif;
+      font-size: 24px; font-weight: 400;
+      color: var(--paper); margin-bottom: 12px;
+    }
+    .subscribe-cta p {
+      font-size: 15px; color: var(--muted);
+      margin-bottom: 24px;
+    }
+    .sub-form { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+    .sub-form input[type="email"] {
+      flex: 1; min-width: 220px; max-width: 320px;
+      background: rgba(245,239,226,0.06);
+      border: 1px solid var(--border);
+      color: var(--paper);
+      font-family: 'Inter', sans-serif; font-size: 14px;
+      padding: 12px 18px; border-radius: 4px; outline: none;
+    }
+    .sub-form input[type="email"]::placeholder { color: rgba(245,239,226,0.25); }
+    .sub-form button {
+      background: var(--amber); color: var(--ink);
+      font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 600;
+      padding: 12px 24px; border: none; border-radius: 4px; cursor: pointer;
+    }
+
+    /* NAV PREV/NEXT */
+    .issue-nav {
+      display: flex; justify-content: space-between;
+      margin-top: 64px; padding-top: 32px;
+      border-top: 1px solid var(--border);
+    }
+    .issue-nav a {
+      font-size: 13px; color: var(--muted); text-decoration: none;
+      display: flex; align-items: center; gap: 8px; transition: color 0.2s;
+    }
+    .issue-nav a:hover { color: var(--amber); }
+
+    @media (max-width: 640px) {
+      nav { padding: 16px 20px; }
+      .article-wrap { padding: 110px 20px 80px; }
+      .stat-block { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="nav">
+    <a href="/" class="nav-logo">
+      <img src="../CatalystWorks_logo.jpg" alt="Catalyst Works">
+      <span>Catalyst Works</span>
+    </a>
+    <a href="/signal" class="nav-back">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+        <path d="M13 7H1M7 13L1 7l6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      All issues
+    </a>
+  </nav>
+
+  <article class="article-wrap">
+
+    <!-- META -->
+    <div class="article-meta">
+      <span class="meta-issue">Issue 3</span>
+      <span class="meta-dot">&bull;</span>
+      <span class="meta-date">May 7, 2026</span>
+      <span class="meta-dot">&bull;</span>
+      <span class="meta-date">AI Governance</span>
+    </div>
+
+    <h1 class="article-title">Your employees are already running AI you have not approved</h1>
+    <p class="article-deck">I run shadow AI on purpose. Most operators are running it by accident. The difference is a framework for what goes in and what stays out.</p>
+
+    <div class="accent-line"></div>
+
+    <div class="article-body">
+
+      <p>I run shadow AI on purpose.</p>
+
+      <p>Not the dangerous kind. The productive kind. Agents that draft, review, propose, and publish while I sleep. An orchestrator that fires at 3am without me. Content that queues, deploys, and reports back before I open my laptop.</p>
+
+      <p>I built it intentionally. I know exactly what is running, what it touches, and what it cannot touch.</p>
+
+      <p>Most operators have the opposite problem. They have shadow AI too. They just do not know it yet.</p>
+
+      <div class="pull-quote">
+        <p>"Two years ago, I was the same operator. I looked at my own stack and realized I had made dozens of AI decisions without calling them that."</p>
+      </div>
+
+      <p>Tools I used. Data I fed in. Workflows I handed to a model without thinking about what came out the other end. That audit changed how I built everything that followed.</p>
+
+      <p>Now when I look at a 30-person company, I see it immediately. The ops manager summarizes contracts in ChatGPT. The HR coordinator runs candidate notes through a free tool she found on Reddit. Neither thinks she is doing anything wrong. She is not. She is doing what I did. Using what works. Moving faster.</p>
+
+      <p>The difference is she has no framework for what goes in and what stays out.</p>
+
+      <div class="stat-block">
+        <div class="stat-item">
+          <div class="stat-number">269</div>
+          <div class="stat-label">Unsanctioned AI tools running per 1,000 employees at small firms (11 to 50 people)</div>
+          <div class="stat-source">Reco Security, 2025 State of Shadow AI Report</div>
+        </div>
+        <hr class="stat-divider">
+        <div class="stat-item">
+          <div class="stat-number">54%</div>
+          <div class="stat-label">Of those tools have been used to upload sensitive company data</div>
+          <div class="stat-source">Same source</div>
+        </div>
+      </div>
+
+      <div class="pull-quote">
+        <p>"That is not a future risk. That is your present state."</p>
+      </div>
+
+      <p>The question is not whether you have shadow AI. You do. The question is whether you find it on your terms or someone else's.</p>
+
+      <div class="action-box">
+        <p class="action-label">One thing to do this week</p>
+        <p>Send this to your team today:</p>
+        <p class="message-template">
+          "Quick question, no judgment: what AI tools are you actually using day-to-day, including anything personal you use for work? ChatGPT, Claude, Notion AI, browser extensions, anything. I am building a real picture of what we are working with so I can support you better."
+        </p>
+      </div>
+
+      <p>What comes back will be the most honest technology inventory your company has ever produced.</p>
+
+      <p>I know. I ran the same audit on myself first.</p>
+
+      <p>The inventory is not the audit. It is the beginning of a conversation you are already behind on.</p>
+
+      <!-- SIGNATURE -->
+      <div class="signature">
+        <img src="../CatalystWorks_logo.jpg" alt="Boubacar" class="sig-avatar">
+        <div>
+          <div class="sig-name">Boubacar</div>
+          <div class="sig-title">Catalyst Works &nbsp;&bull;&nbsp; <a href="https://catalystworks.consulting">catalystworks.consulting</a></div>
+        </div>
+      </div>
+
+      <!-- SOURCES -->
+      <div class="sources">
+        <div class="sources-label">Sources</div>
+        <p>Reco Security, "The 2025 State of Shadow AI Report" &nbsp;&bull;&nbsp; <a href="https://www.reco.ai/blog/popular-doesnt-mean-secure-the-2025-state-of-shadow-ai-report-findings" target="_blank" rel="noopener">reco.ai</a></p>
+        <p>JumpCloud, "11 Stats About Shadow AI in 2026" &nbsp;&bull;&nbsp; <a href="https://jumpcloud.com/blog/11-stats-about-shadow-ai-in-2026" target="_blank" rel="noopener">jumpcloud.com</a></p>
+      </div>
+
+      <!-- ISSUE NAV -->
+      <div class="issue-nav">
+        <a href="/signal/issue-2">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path d="M13 7H1M7 13L1 7l6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Issue 2
+        </a>
+        <a href="/signal">All issues</a>
+      </div>
+
+    </div>
+
+    <!-- SUBSCRIBE CTA -->
+    <div class="subscribe-cta">
+      <h2 style="font-family:'Spectral',serif;font-size:24px;font-weight:400;color:var(--paper);margin-bottom:12px;">Get the next issue</h2>
+      <p>One insight per week for operators building AI into their business.</p>
+      <form class="sub-form" onsubmit="handleSub(event)">
+        <label for="sub-email" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;">Email address</label>
+        <input id="sub-email" type="email" placeholder="Your email" required>
+        <button type="submit">Subscribe free</button>
+      </form>
+    </div>
+
+  </article>
+
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    async function handleSub(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('button');
+      const email = e.target.querySelector('input').value;
+      btn.textContent = 'Subscribing...';
+      btn.disabled = true;
+      try {
+        const res = await fetch('https://mail.srv1040886.hstgr.cloud/subscription/form', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams({ email, l: 'e78a3008-c023-4eb5-a03f-f4202bf7ce8c', name: '' })
+        });
+        btn.textContent = 'You are in.';
+        btn.style.background = '#5BC0BE';
+        e.target.querySelector('input').value = '';
+      } catch {
+        btn.textContent = 'Try again';
+        btn.disabled = false;
+      }
+    }
+  </script>
+</body>
+</html>

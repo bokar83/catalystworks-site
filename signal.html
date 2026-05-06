@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Weekly Signal | Catalyst Works</title>
+  <meta name="description" content="The Weekly Signal by Boubacar Barry. One insight per week for business operators navigating AI. Subscribe free.">
+  <meta property="og:title" content="The Weekly Signal | Catalyst Works">
+  <meta property="og:description" content="One insight per week for operators building AI into their business. By Boubacar Barry, Catalyst Works.">
+  <meta property="og:image" content="https://catalystworks.consulting/og-image.jpg">
+  <meta property="og:url" content="https://catalystworks.consulting/signal">
+  <link rel="icon" type="image/jpeg" href="CatalystWorks_logo.jpg">
+  <link rel="canonical" href="https://catalystworks.consulting/signal">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #0A0E14;
+      --paper: #F5EFE2;
+      --amber: #E8A66B;
+      --cyan: #5BC0BE;
+      --rust: #C95F4D;
+      --muted: rgba(245,239,226,0.45);
+      --border: rgba(245,239,226,0.1);
+      --card-bg: rgba(245,239,226,0.04);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--ink);
+      color: var(--paper);
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 20px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.3s, backdrop-filter 0.3s;
+    }
+    nav.scrolled {
+      background: rgba(10,14,20,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    .nav-logo img {
+      width: 28px;
+      height: 28px;
+      border-radius: 4px;
+      object-fit: cover;
+    }
+    .nav-logo span {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--paper);
+      opacity: 0.7;
+    }
+    .nav-cta {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      color: var(--ink);
+      background: var(--amber);
+      padding: 9px 20px;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .nav-cta:hover { opacity: 0.85; }
+
+    /* HERO */
+    .hero {
+      padding: 160px 48px 80px;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    .hero-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-family: 'Spectral', serif;
+      font-size: clamp(36px, 5vw, 56px);
+      font-weight: 300;
+      line-height: 1.15;
+      color: var(--paper);
+      margin-bottom: 24px;
+      letter-spacing: -0.5px;
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--amber);
+    }
+    .hero-desc {
+      font-size: 18px;
+      line-height: 1.7;
+      color: var(--muted);
+      max-width: 560px;
+      margin-bottom: 48px;
+    }
+
+    /* SUBSCRIBE FORM */
+    .subscribe-block {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+    .subscribe-block input[type="email"] {
+      flex: 1;
+      min-width: 240px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      color: var(--paper);
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      padding: 14px 20px;
+      border-radius: 4px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .subscribe-block input[type="email"]:focus {
+      border-color: rgba(232,166,107,0.5);
+    }
+    .subscribe-block input[type="email"]::placeholder {
+      color: rgba(245,239,226,0.3);
+    }
+    .subscribe-block button {
+      background: var(--amber);
+      color: var(--ink);
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      padding: 14px 28px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: opacity 0.2s;
+      white-space: nowrap;
+    }
+    .subscribe-block button:hover { opacity: 0.85; }
+    .subscribe-note {
+      font-size: 12px;
+      color: rgba(245,239,226,0.3);
+      letter-spacing: 0.3px;
+    }
+
+    /* DIVIDER */
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 0 48px;
+    }
+
+    /* ISSUES SECTION */
+    .issues-section {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 72px 48px 120px;
+    }
+    .section-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 40px;
+    }
+
+    /* ISSUE CARD */
+    .issue-card {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 0 32px;
+      padding: 40px 0;
+      border-bottom: 1px solid var(--border);
+      text-decoration: none;
+      transition: background 0.2s;
+      border-radius: 4px;
+    }
+    .issue-card:hover .issue-title { color: var(--amber); }
+    .issue-card:last-child { border-bottom: none; }
+
+    .issue-number-col {
+      padding-top: 4px;
+    }
+    .issue-number {
+      font-family: 'Spectral', serif;
+      font-size: 42px;
+      font-weight: 300;
+      color: rgba(245,239,226,0.12);
+      line-height: 1;
+      letter-spacing: -1px;
+    }
+    .issue-date {
+      font-size: 11px;
+      color: rgba(245,239,226,0.3);
+      letter-spacing: 0.5px;
+      margin-top: 8px;
+    }
+
+    .issue-content-col {}
+    .issue-tag {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--amber);
+      background: rgba(232,166,107,0.1);
+      padding: 3px 8px;
+      border-radius: 2px;
+      margin-bottom: 12px;
+    }
+    .issue-title {
+      font-family: 'Spectral', serif;
+      font-size: 24px;
+      font-weight: 400;
+      line-height: 1.3;
+      color: var(--paper);
+      margin-bottom: 12px;
+      transition: color 0.2s;
+    }
+    .issue-excerpt {
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--muted);
+      margin-bottom: 20px;
+      max-width: 580px;
+    }
+    .issue-read-link {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--amber);
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .issue-read-link svg {
+      transition: transform 0.2s;
+    }
+    .issue-card:hover .issue-read-link svg {
+      transform: translateX(4px);
+    }
+
+    /* COMING SOON CARD */
+    .issue-card.coming-soon {
+      opacity: 0.4;
+      pointer-events: none;
+    }
+    .issue-card.coming-soon .issue-number {
+      color: rgba(245,239,226,0.06);
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .footer-left {
+      font-size: 13px;
+      color: rgba(245,239,226,0.3);
+    }
+    .footer-right {
+      display: flex;
+      gap: 24px;
+    }
+    .footer-right a {
+      font-size: 13px;
+      color: rgba(245,239,226,0.3);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-right a:hover { color: var(--amber); }
+
+    /* RESPONSIVE */
+    @media (max-width: 640px) {
+      nav { padding: 16px 20px; }
+      .hero { padding: 120px 20px 60px; }
+      .divider { margin: 0 20px; }
+      .issues-section { padding: 48px 20px 80px; }
+      .issue-card { grid-template-columns: 1fr; gap: 0; }
+      .issue-number-col { display: none; }
+      footer { padding: 32px 20px; flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <a href="/" class="nav-logo">
+      <img src="CatalystWorks_logo.jpg" alt="Catalyst Works">
+      <span>Catalyst Works</span>
+    </a>
+    <a href="#subscribe" class="nav-cta">Subscribe free</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <p class="hero-eyebrow">The Weekly Signal</p>
+    <h1>One insight per week.<br><em>No noise.</em></h1>
+    <p class="hero-desc">
+      For operators building AI into their business. Written by Boubacar Barry
+      after running AI operations that fire at 3am without him.
+      Every issue: one thing you missed, one thing to do, cited and direct.
+    </p>
+
+    <!-- SUBSCRIBE FORM -->
+    <div id="subscribe">
+      <form class="subscribe-block" id="subscribe-form" onsubmit="handleSubscribe(event)">
+        <label for="hero-email" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;">Email address</label>
+        <input id="hero-email" type="email" placeholder="Your email address" required autocomplete="email">
+        <button type="submit">Get the Signal</button>
+      </form>
+      <p class="subscribe-note">Free. One email per week. Unsubscribe any time.</p>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ISSUES -->
+  <section class="issues-section">
+    <p class="section-label">All issues</p>
+
+    <!-- Issue 3 -->
+    <a href="/signal/issue-3" class="issue-card">
+      <div class="issue-number-col">
+        <div class="issue-number">03</div>
+        <div class="issue-date">May 7<br>2026</div>
+      </div>
+      <div class="issue-content-col">
+        <span class="issue-tag">AI Governance</span>
+        <h2 class="issue-title">Your employees are already running AI you have not approved</h2>
+        <p class="issue-excerpt">
+          I run shadow AI on purpose. Most operators are running it by accident.
+          The difference is a framework for what goes in and what stays out.
+          269 unsanctioned tools per 1,000 employees. That is your present state.
+        </p>
+        <span class="issue-read-link">
+          Read issue
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </div>
+    </a>
+
+    <!-- Issue 2 -->
+    <a href="/signal/issue-2" class="issue-card">
+      <div class="issue-number-col">
+        <div class="issue-number">02</div>
+        <div class="issue-date">Apr 28<br>2026</div>
+      </div>
+      <div class="issue-content-col">
+        <span class="issue-tag">AI Strategy</span>
+        <h2 class="issue-title">Before you buy another AI tool, read this</h2>
+        <p class="issue-excerpt">
+          The most expensive mistake in AI adoption is not the wrong tool.
+          It is skipping the diagnosis. More than 80% of AI projects fail.
+          Not because of bad AI. Because of broken processes that were already there.
+        </p>
+        <span class="issue-read-link">
+          Read issue
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </div>
+    </a>
+
+    <!-- Issue 1 -->
+    <a href="/signal/issue-1" class="issue-card">
+      <div class="issue-number-col">
+        <div class="issue-number">01</div>
+        <div class="issue-date">Apr 21<br>2026</div>
+      </div>
+      <div class="issue-content-col">
+        <span class="issue-tag">AI Operations</span>
+        <h2 class="issue-title">Revenue is up. That is the problem.</h2>
+        <p class="issue-excerpt">
+          The constraint hiding inside your best quarter. When growth masks broken
+          systems, the next bottleneck is already forming. Here is how to see it
+          before it costs you.
+        </p>
+        <span class="issue-read-link">
+          Read issue
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </div>
+    </a>
+
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p class="footer-left">The Weekly Signal &nbsp;&bull;&nbsp; Catalyst Works &nbsp;&bull;&nbsp; &copy; 2026</p>
+    <div class="footer-right">
+      <a href="/">Home</a>
+      <a href="https://www.linkedin.com/in/boubacarbarry/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="mailto:boubacar@catalystworks.consulting">Contact</a>
+    </div>
+  </footer>
+
+  <script>
+    // Scroll nav effect
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    // Subscribe form -- posts to Listmonk public subscribe endpoint
+    async function handleSubscribe(e) {
+      e.preventDefault();
+      const form = e.target;
+      const email = form.querySelector('input[type="email"]').value;
+      const btn = form.querySelector('button');
+      btn.textContent = 'Subscribing...';
+      btn.disabled = true;
+
+      try {
+        const res = await fetch('https://mail.srv1040886.hstgr.cloud/subscription/form', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams({ email, l: 'e78a3008-c023-4eb5-a03f-f4202bf7ce8c', name: '' })
+        });
+        if (res.ok || res.status === 303) {
+          btn.textContent = 'You are in.';
+          btn.style.background = '#5BC0BE';
+          form.querySelector('input').value = '';
+        } else {
+          throw new Error('Failed');
+        }
+      } catch {
+        btn.textContent = 'Try again';
+        btn.disabled = false;
+      }
+    }
+  </script>
+</body>
+</html>
