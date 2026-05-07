@@ -783,8 +783,32 @@
       border-radius: 0 4px 4px 0;
     }
     .doc-sig {
-      margin-top: 32px; font-family: var(--serif); font-style: italic;
-      font-size: 13px; color: rgba(10,14,20,0.55); text-align: right;
+      margin-top: 36px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(10,14,20,0.12);
+      text-align: right;
+    }
+    .doc-sig-line {
+      font-family: var(--serif); font-style: italic;
+      font-size: 13px; color: rgba(10,14,20,0.55);
+      margin-bottom: 4px;
+    }
+    .doc-sig-image {
+      display: block; margin: 8px 0 4px auto;
+      max-width: 180px; height: auto;
+      filter: brightness(0.15) contrast(1.1);
+      opacity: 0.85;
+    }
+    .doc-sig-name {
+      font-family: var(--serif); font-weight: 600;
+      font-size: 14px; color: var(--ink);
+      margin-top: 4px;
+    }
+    .doc-sig-title {
+      font-family: var(--mono); font-size: 10.5px;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: rgba(10,14,20,0.55);
+      margin-top: 2px;
     }
 
     /* ABOUT */
@@ -842,6 +866,42 @@
       line-height: 1.7; margin-bottom: 16px;
     }
     .about p strong { color: var(--paper); font-weight: 600; }
+
+    /* THESIS BLOCK */
+    .thesis-block {
+      padding: 96px 32px 48px;
+      background: var(--ink);
+      position: relative;
+    }
+    .thesis-inner {
+      max-width: 720px; margin: 0 auto;
+      text-align: center;
+    }
+    .thesis-anchor {
+      font-family: var(--serif);
+      font-size: clamp(20px, 2.4vw, 26px);
+      line-height: 1.5;
+      color: var(--t-mid);
+      margin: 24px auto 32px;
+      max-width: 36ch;
+      font-style: italic;
+    }
+    .thesis-claim {
+      font-family: var(--serif);
+      font-size: clamp(24px, 3vw, 34px);
+      line-height: 1.35;
+      color: var(--paper);
+      margin: 0 auto 28px;
+      max-width: 32ch;
+      font-weight: 500;
+    }
+    .thesis-bridge {
+      font-size: 17px;
+      line-height: 1.7;
+      color: var(--t-mid);
+      max-width: 56ch;
+      margin: 0 auto;
+    }
 
     /* OFFER */
     .offer {
@@ -1164,7 +1224,7 @@
     <h1>Name the constraint.<br><em>In writing.</em><br>In ninety seconds.</h1>
     <p class="hero-sub">Most consultants want a six-week discovery before they tell you anything. Catalyst Works starts differently. Type a sentence. Get a diagnosis.</p>
     <div class="hero-meta">
-      <span>Founder: Boubacar Barry</span>
+      <span>Founder: Boubacar</span>
       <span>20 years . 4 continents</span>
       <span>$497 . 90 minutes</span>
     </div>
@@ -1322,7 +1382,12 @@
       <h4>One concrete action before Friday</h4>
       <div class="doc-action">Schedule a 45-minute walkthrough between operations lead and finance lead, with one shared spreadsheet listing every client and the gross margin each function believes is true. Reconcile in the room.</div>
 
-      <div class="doc-sig">Boubacar Barry, Catalyst Works</div>
+      <div class="doc-sig">
+        <div class="doc-sig-line">Sincerely,</div>
+        <img class="doc-sig-image" src="Boubacar_signature.png" alt="Boubacar's signature" width="180" height="60">
+        <div class="doc-sig-name">Boubacar</div>
+        <div class="doc-sig-title">Catalyst Works</div>
+      </div>
     </div>
   </div>
 </section>
@@ -1330,13 +1395,13 @@
 <section id="about" class="about">
   <div class="about-grid">
     <div class="about-portrait reveal">
-      <img src="Boubacar.JPG" alt="Boubacar Barry, founder of Catalyst Works" width="360" height="450"
+      <img src="Boubacar.JPG" alt="Boubacar, founder of Catalyst Works" width="360" height="450"
            onerror="this.style.display='none'; this.parentNode.style.background='linear-gradient(135deg, var(--ink-3), var(--ink-2))';">
     </div>
     <div class="reveal">
       <div class="eyebrow">The operator behind it</div>
       <h2>A diagnostic <em>partner</em>.<br>Not a vendor.</h2>
-      <p>Boubacar Barry built Catalyst Works after twenty years across four continents. A decade in HR leadership at GE spanning the US, MENA, and West Africa. A $500K executive development program in Mauritius. A communications consulting firm in Guinea.</p>
+      <p>Boubacar built Catalyst Works after twenty years across four continents. A decade in HR leadership at GE spanning the US, MENA, and West Africa. A $500K executive development program in Mauritius. A communications consulting firm in Guinea.</p>
       <p>The pattern showed up across every operation he ran. <strong>The growth ceiling is rarely where the operator thinks it is.</strong> It is one constraint, compounding quietly, hidden behind activity.</p>
       <p>Catalyst Works exists because most consulting starts with prescriptions. Diagnosis comes first.</p>
 
@@ -1359,6 +1424,15 @@
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+<section id="thesis" class="thesis-block" aria-label="What I see">
+  <div class="thesis-inner">
+    <div class="eyebrow" style="justify-content: center;">What I see</div>
+    <p class="thesis-anchor reveal">I trusted people when they were too afraid to tell me the truth. Believed the performance instead of pressing for honesty.</p>
+    <p class="thesis-claim reveal">The biggest constraint in most SMBs is not strategy. It is that the founder cannot get straight answers from the people closest to them.</p>
+    <p class="thesis-bridge reveal">Performance replaces truth. Loyalty replaces honesty. Strategy work that does not fix that loop is wasted. The Signal Session below names the loop in your business.</p>
   </div>
 </section>
 
