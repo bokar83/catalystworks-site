@@ -44,25 +44,38 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <!-- Typography v1.1 (2026-04-29): Spectral display + Public Sans body. Inter retired. -->
-  <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,500;0,600;0,700;0,800;1,400;1,700&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,500;0,600;0,700;0,800;1,400;1,700&family=Public+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
-      --navy:       #071A2E;
-      --carbon:     #1E222A;
-      --cyan:       #00B7C2;
-      --orange:     #FF7A00;
-      --clay:       #B47C57;
-      --text-muted: rgba(255,255,255,0.55);
-      --text-mid:   rgba(255,255,255,0.75);
-      --text-dim:   rgba(255,255,255,0.35);
+      --ink:        #0A0E14;
+      --ink-2:      #0F141C;
+      --ink-3:      #161D27;
+      --paper:      #F5EFE2;
+      --amber:      #E8A66B;
+      --amber-2:    #D08A50;
+      --cyan:       #5BC0BE;
+      --line:       rgba(245,239,226,0.12);
+      --line-2:     rgba(245,239,226,0.06);
+      --t-mid:      rgba(245,239,226,0.78);
+      --t-muted:    rgba(245,239,226,0.55);
+      --t-dim:      rgba(245,239,226,0.35);
+      --serif:      'Spectral', Georgia, serif;
+      --mono:       'JetBrains Mono', ui-monospace, monospace;
+      --navy:       var(--ink);
+      --carbon:     var(--ink-3);
+      --orange:     var(--amber);
+      --clay:       var(--amber-2);
+      --text-muted: var(--t-muted);
+      --text-mid:   var(--t-mid);
+      --text-dim:   var(--t-dim);
     }
     html { scroll-behavior: smooth; }
     body {
       font-family: 'Public Sans', -apple-system, sans-serif;
       background: var(--navy);
-      color: #fff;
+      color: var(--paper);
       line-height: 1.6;
     }
     h1, h2 { font-family: 'Spectral', Georgia, serif; font-weight: 700; letter-spacing: -0.015em; }

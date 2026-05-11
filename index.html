@@ -1207,6 +1207,49 @@
     .sec-card .arr span { transition: transform 220ms var(--ease); }
     .sec-card:hover .arr span { transform: translateX(4px); }
 
+    /* RELATED LINKS — SEO anchor-text variation row below secondary cards */
+    .related-links {
+      max-width: 1320px; margin: 56px auto 0;
+      padding: 32px 0 0;
+      border-top: 1px solid var(--line-2);
+    }
+    .related-links-eyebrow {
+      font-family: var(--mono); font-size: 11px;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--t-muted); margin-bottom: 18px;
+      text-align: center;
+    }
+    .related-links-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 10px;
+    }
+    .related-links-grid a {
+      display: block;
+      padding: 13px 18px;
+      background: rgba(22,29,39,0.4);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      font-size: 14px;
+      color: var(--t-mid);
+      transition: border-color 220ms var(--ease), color 220ms, transform 220ms var(--ease), background 220ms;
+      line-height: 1.45;
+    }
+    .related-links-grid a:hover {
+      border-color: rgba(232,166,107,0.36);
+      color: var(--paper);
+      background: rgba(28,36,48,0.6);
+      transform: translateY(-1px);
+    }
+    .related-links-grid a strong {
+      color: var(--amber);
+      font-weight: 500;
+    }
+    @media (max-width: 760px) {
+      .related-links { margin-top: 40px; }
+      .related-links-grid { grid-template-columns: 1fr; }
+    }
+
     /* FOOTER */
     footer {
       padding: 56px 32px 36px;
@@ -1243,6 +1286,13 @@
         padding: 10px 6px;
       }
       footer .brand { padding-left: 0; }
+      /* T3.3: tighten hero H1 on the smallest phones — clamp top edge drops from
+         40px to 34px and line-height tightens for the narrower measure. */
+      .hero h1 {
+        font-size: clamp(34px, 9vw, 44px);
+        line-height: 1.02;
+        letter-spacing: -0.03em;
+      }
     }
 
     .reveal { opacity: 0; transform: translateY(28px); transition: opacity 800ms var(--ease), transform 800ms var(--ease); }
@@ -1707,6 +1757,19 @@
       <p>Built specifically for professional services firms. CPA, legal, advisory, consulting. Find out what your AI tools can actually reach.</p>
       <span class="arr">See the AI data audit <span>→</span></span>
     </a>
+  </div>
+
+  <div class="related-links" aria-label="Related diagnostic protocols">
+    <div class="related-links-eyebrow">More from the diagnostic protocol</div>
+    <div class="related-links-grid">
+      <a href="lens/throughput.html">Read the <strong>throughput lens</strong> explainer</a>
+      <a href="lens/decision.html">How <strong>reversible decisions</strong> get treated like one-way doors</a>
+      <a href="lens/information.html">Why the <strong>signal you need</strong> is not in the room</a>
+      <a href="for/professional-services.html">Constraint patterns in <strong>partner-led firms</strong></a>
+      <a href="for/hvac.html">Speed-to-lead diagnostics for <strong>residential trades</strong></a>
+      <a href="for/healthcare-smb.html">Operational diagnostics for <strong>healthcare practices</strong></a>
+      <a href="signal">The Weekly Signal — <strong>one structural problem named per week</strong></a>
+    </div>
   </div>
 </section>
 
