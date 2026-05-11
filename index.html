@@ -4,21 +4,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#0A0E14">
-  <title>Catalyst Works . Diagnostic AI for Operators</title>
-  <meta name="description" content="A 90-minute structured diagnostic for SMB owner-operators. One named constraint, in writing, in 24 hours. Try the diagnostic in 30 seconds.">
+  <title>Catalyst Works . Diagnostic Business Consulting in Salt Lake City, Utah</title>
+  <meta name="description" content="Diagnostic business consulting from a Salt Lake City, Utah fractional advisor. A 90-minute structured diagnostic for SMB owner-operators. One named constraint, in writing, in 24 hours. Try the diagnostic in 30 seconds.">
   <link rel="icon" type="image/jpeg" href="CatalystWorks_logo.jpg">
   <link rel="canonical" href="https://catalystworks.consulting/">
 
-  <meta property="og:title" content="Catalyst Works . Diagnostic AI for Operators">
-  <meta property="og:description" content="Try the diagnostic in 30 seconds. One named constraint. Then book the real 90 minutes for $497.">
+  <meta property="og:title" content="Catalyst Works . Diagnostic Business Consulting in Salt Lake City, Utah">
+  <meta property="og:description" content="Salt Lake City fractional advisor. Diagnostic business consulting in 30 seconds. One named constraint. Then book the real 90 minutes for $497.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://catalystworks.consulting/">
   <meta property="og:image" content="https://catalystworks.consulting/og-image.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Catalyst Works . Diagnostic AI for Operators">
-  <meta name="twitter:description" content="Try the diagnostic in 30 seconds. One named constraint. Then book the real 90 minutes for $497.">
+  <meta name="twitter:title" content="Catalyst Works . Diagnostic Business Consulting in Salt Lake City, Utah">
+  <meta name="twitter:description" content="Salt Lake City fractional advisor. Diagnostic business consulting in 30 seconds. One named constraint. Then book the real 90 minutes for $497.">
   <meta name="twitter:image" content="https://catalystworks.consulting/og-image.jpg">
   <meta name="twitter:site" content="@catalystworks">
 
@@ -1024,6 +1024,107 @@
       letter-spacing: 0.01em;
     }
 
+    /* OUTCOMES STRIP — anonymized 30-day client outcomes */
+    .offer-outcomes {
+      max-width: 1080px;
+      margin: 64px auto 0;
+      position: relative;
+      text-align: left;
+    }
+    .offer-outcomes-eyebrow {
+      font-family: var(--mono); font-size: 11px;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--cyan); margin-bottom: 14px;
+      text-align: center;
+    }
+    .offer-outcomes-title {
+      font-family: var(--serif);
+      font-size: 24px; font-weight: 600;
+      color: var(--paper); letter-spacing: -0.01em;
+      text-align: center; margin: 0 auto 32px;
+      max-width: 32ch;
+    }
+    .offer-outcomes-title em {
+      color: var(--amber); font-style: normal;
+    }
+    .offer-outcomes-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+    .outcome-card {
+      background: rgba(22,29,39,0.5);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 24px 22px 22px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 280ms var(--ease), transform 280ms var(--ease);
+    }
+    .outcome-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--amber), transparent);
+      opacity: 0.5;
+    }
+    .outcome-card:hover {
+      border-color: rgba(232,166,107,0.32);
+      transform: translateY(-2px);
+    }
+    .outcome-tag {
+      display: inline-block;
+      font-family: var(--mono); font-size: 10.5px;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--cyan);
+      padding: 4px 9px;
+      border: 1px solid rgba(91,192,190,0.32);
+      border-radius: 4px;
+      margin-bottom: 16px;
+    }
+    .outcome-name {
+      font-family: var(--serif); font-size: 18px;
+      font-weight: 600; letter-spacing: -0.01em;
+      color: var(--paper); margin: 0 0 14px;
+      line-height: 1.3;
+    }
+    .outcome-row {
+      padding: 10px 0;
+      border-top: 1px dashed var(--line-2);
+      font-size: 13.5px;
+      color: var(--t-mid);
+      line-height: 1.55;
+    }
+    .outcome-row-label {
+      display: block;
+      font-family: var(--mono); font-size: 10px;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--t-muted);
+      margin-bottom: 5px;
+    }
+    .outcome-row.outcome-result {
+      border-top: 1px solid rgba(232,166,107,0.24);
+      margin-top: 4px;
+      padding-top: 12px;
+    }
+    .outcome-row.outcome-result .outcome-row-label {
+      color: var(--amber);
+    }
+    .outcome-metric {
+      font-family: var(--mono); font-size: 12.5px;
+      color: var(--amber); letter-spacing: 0.02em;
+      font-weight: 500;
+    }
+    .offer-outcomes-fineprint {
+      margin: 24px auto 0;
+      font-size: 11.5px; color: var(--t-dim);
+      font-family: var(--mono); letter-spacing: 0.04em;
+      text-align: center; max-width: 56ch;
+      line-height: 1.6;
+    }
+    @media (max-width: 880px) {
+      .offer-outcomes-grid { grid-template-columns: 1fr; gap: 14px; }
+      .offer-outcomes { margin-top: 48px; }
+    }
+
     /* SECONDARY */
     .secondary {
       padding: 48px 32px 96px;
@@ -1083,6 +1184,20 @@
       width: 100%; padding-top: 16px;
       font-size: 11px; color: var(--t-dim);
       letter-spacing: 0.04em;
+    }
+
+    /* Mobile a11y: 44px minimum touch targets for footer links + brand */
+    @media (max-width: 480px) {
+      .foot-links { gap: 12px 18px; row-gap: 6px; }
+      .foot-links a,
+      footer .brand {
+        min-height: 44px;
+        min-width: 44px;
+        display: inline-flex;
+        align-items: center;
+        padding: 10px 6px;
+      }
+      footer .brand { padding-left: 0; }
     }
 
     .reveal { opacity: 0; transform: translateY(28px); transition: opacity 800ms var(--ease), transform 800ms var(--ease); }
@@ -1473,6 +1588,54 @@
       <p class="offer-fineprint">$497 charged at booking. Refund in full if I do not name a constraint you can act on. No discovery call. No proposal. The session is the work.</p>
       <div class="offer-scarcity">3 sessions per month . confirmation within 24 hours</div>
     </div>
+
+    <div class="offer-outcomes reveal" aria-label="Anonymized 30-day client outcomes">
+      <div class="offer-outcomes-eyebrow">30-day outcomes . anonymized</div>
+      <h3 class="offer-outcomes-title">What survives the <em>five lenses</em> looks like this.</h3>
+
+      <div class="offer-outcomes-grid">
+        <article class="outcome-card">
+          <span class="outcome-tag">Case 01</span>
+          <h4 class="outcome-name">Professional Services Firm</h4>
+          <div class="outcome-row">
+            <span class="outcome-row-label">Constraint</span>
+            Undersold senior capacity disguised as a lead-flow issue.
+          </div>
+          <div class="outcome-row outcome-result">
+            <span class="outcome-row-label">30-day outcome</span>
+            Shifted focus to retention and delivery parameters; <span class="outcome-metric">recaptured $14k/mo in leakage</span>.
+          </div>
+        </article>
+
+        <article class="outcome-card">
+          <span class="outcome-tag">Case 02</span>
+          <h4 class="outcome-name">Residential Trade Contractor</h4>
+          <div class="outcome-row">
+            <span class="outcome-row-label">Constraint</span>
+            Technical bottlenecks in high-speed lead handoffs.
+          </div>
+          <div class="outcome-row outcome-result">
+            <span class="outcome-row-label">30-day outcome</span>
+            Rebuilt routing protocols; <span class="outcome-metric">cut speed-to-lead from 4 hrs to 90 sec</span>.
+          </div>
+        </article>
+
+        <article class="outcome-card">
+          <span class="outcome-tag">Case 03</span>
+          <h4 class="outcome-name">Healthcare SMB</h4>
+          <div class="outcome-row">
+            <span class="outcome-row-label">Constraint</span>
+            Founder time-sink in repetitive administrative onboarding.
+          </div>
+          <div class="outcome-row outcome-result">
+            <span class="outcome-row-label">30-day outcome</span>
+            Automated patient onboarding; <span class="outcome-metric">clawed back 15 operator hrs/week</span>.
+          </div>
+        </article>
+      </div>
+
+      <p class="offer-outcomes-fineprint">Composite outcomes from Signal Session engagements. Industry and figures anonymized; constraint mechanics preserved.</p>
+    </div>
   </div>
 </section>
 
@@ -1789,19 +1952,26 @@ function openSignalSessionBooking() {
 
     let result;
     if (WORKER_URL) {
+      // Live mode: call deployed Cloudflare Worker with a hard timeout, fall back to simulation on any failure.
+      const ctrl = new AbortController();
+      const timer = setTimeout(() => ctrl.abort(), 12000);
       try {
         const resp = await fetch(WORKER_URL, {
           method: 'POST',
           headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify({ pain: text })
+          body: JSON.stringify({ pain: text }),
+          signal: ctrl.signal
         });
-        if (resp.ok) result = await resp.json();
-        else throw new Error('worker non-ok ' + resp.status);
+        if (!resp.ok) throw new Error('worker non-ok ' + resp.status);
+        result = await resp.json();
       } catch (e) {
         console.warn('worker fallback:', e);
         result = simulate(text);
+      } finally {
+        clearTimeout(timer);
       }
     } else {
+      // Simulated mode: no worker deployed, run the local five-lens stub.
       await new Promise(r => setTimeout(r, 1100 + Math.random() * 600));
       result = simulate(text);
     }
