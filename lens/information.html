@@ -63,12 +63,44 @@
     </a>
     <div class="nav-links">
       <a href="../index.html#method">Method</a>
-      <a href="../index.html#offer">Signal Session</a>
+      <a href="../signal">The Weekly Signal</a>
       <a href="../governance.html">AI Governance</a>
+      <a href="../index.html#offer">Signal Session</a>
     </div>
     <a href="../index.html#offer" class="nav-cta">Book a session →</a>
+    <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-drawer"><span></span></button>
   </div>
 </nav>
+
+<div class="nav-drawer" id="nav-drawer" hidden>
+  <a href="../index.html">Home</a>
+  <a href="../index.html#method">The method</a>
+  <a href="../signal">The Weekly Signal</a>
+  <a href="../governance.html">AI Governance</a>
+  <a href="../ai-data-audit.html">AI Data Audit</a>
+  <a href="../index.html#offer" class="nav-drawer-cta">Book the Signal Session →</a>
+</div>
+
+<script>
+(function(){
+  var btn = document.querySelector('.nav-toggle');
+  var drawer = document.getElementById('nav-drawer');
+  if (!btn || !drawer) return;
+  drawer.hidden = false;
+  btn.addEventListener('click', function(){
+    var open = drawer.classList.toggle('is-open');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  });
+  drawer.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      drawer.classList.remove('is-open');
+      btn.setAttribute('aria-expanded', 'false');
+      btn.setAttribute('aria-label', 'Open menu');
+    });
+  });
+})();
+</script>
 
 <header class="hero">
   <div class="eyebrow">Lens 04 of 05 . Information</div>

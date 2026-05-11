@@ -3,15 +3,23 @@ DirectorySlash Off
 
 RewriteEngine On
 
-# Highest precedence: when /signal is requested AND signal.html exists, serve it.
-# Without this, LiteSpeed sees the signal/ directory and 301-redirects to /signal/
-# which then 403s because Options -Indexes blocks directory listing.
-RewriteRule ^signal$ signal.html [NC,L]
+# Highest precedence: /signal and /signal/ both serve signal.html. Without this,
+# LiteSpeed sees the signal/ directory and 301-redirects /signal → /signal/, which
+# then 403s because Options -Indexes blocks directory listing. Two rules cover
+# both with-slash and without-slash entry points.
+RewriteRule ^signal/?$ signal.html [NC,L]
 
 # Clean URLs: append .html for any path without an extension. Handles top-level
-# (/governance -> /governance.html), nested (/lens/throughput -> /lens/throughput.html,
-# /for/hvac -> /for/hvac.html, /signal/issue-3 -> /signal/issue-3.html), and arbitrary
+# (/governance → /governance.html), nested (/lens/throughput → /lens/throughput.html,
+# /for/hvac → /for/hvac.html, /signal/issue-3 → /signal/issue-3.html), and arbitrary
 # depth. The character class [^\.]+ matches across "/" because slashes are not dots.
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^([^\.]+)$ $1.html [NC,L]
+
+# Force browsers to revalidate HTML on every load so 403 fixes propagate immediately
+# rather than living in client caches for hours. Static assets keep long TTL via
+# default LiteSpeed behavior.
+<FilesMatch "\.(html|htm)$">
+  Header set Cache-Control "no-cache, must-revalidate, max-age=0"
+</FilesMatch>

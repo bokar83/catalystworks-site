@@ -261,9 +261,39 @@
     }
     .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 12px 32px rgba(245,239,226,0.16); }
     .nav-cta::after { content: '→'; font-weight: 400; }
+
+    /* Mobile hamburger + slide-in drawer (added 2026-05-11 — mobile nav reachable) */
+    .nav-toggle {
+      display: none; background: transparent; border: 1px solid var(--line);
+      width: 40px; height: 40px; border-radius: 8px; padding: 0;
+      align-items: center; justify-content: center; cursor: pointer;
+      transition: border-color 180ms, background 180ms;
+    }
+    .nav-toggle:hover { border-color: rgba(232,166,107,0.4); background: rgba(232,166,107,0.05); }
+    .nav-toggle span { display: block; width: 18px; height: 1.5px; background: var(--paper); position: relative; transition: transform 220ms, opacity 220ms; }
+    .nav-toggle span::before, .nav-toggle span::after { content: ''; position: absolute; left: 0; width: 18px; height: 1.5px; background: var(--paper); transition: transform 220ms, top 220ms; }
+    .nav-toggle span::before { top: -6px; }
+    .nav-toggle span::after  { top: 6px; }
+    .nav-toggle[aria-expanded="true"] span { background: transparent; }
+    .nav-toggle[aria-expanded="true"] span::before { top: 0; transform: rotate(45deg); }
+    .nav-toggle[aria-expanded="true"] span::after  { top: 0; transform: rotate(-45deg); }
+    .nav-drawer {
+      position: fixed; top: 0; left: 0; right: 0; padding: 72px 24px 28px;
+      background: rgba(10,14,20,0.98); backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--line);
+      transform: translateY(-100%); transition: transform 320ms var(--ease);
+      z-index: 49; display: flex; flex-direction: column; gap: 4px;
+    }
+    .nav-drawer.is-open { transform: translateY(0); }
+    .nav-drawer a { display: block; padding: 16px 8px; font-size: 17px; color: var(--paper); border-bottom: 1px solid var(--line-2); font-family: var(--serif); font-weight: 500; text-decoration: none; }
+    .nav-drawer a:last-child { border-bottom: none; }
+    .nav-drawer .nav-drawer-cta { margin-top: 14px; text-align: center; background: var(--paper); color: var(--ink); border-radius: 10px; font-family: var(--sans); font-weight: 600; font-size: 15px; padding: 14px 18px; }
+    @media (min-width: 761px) { .nav-drawer { display: none; } }
     @media (max-width: 760px) {
       .nav-links { display: none; }
       .nav { padding: 12px 18px; }
+      .nav-toggle { display: inline-flex; }
+      .nav .nav-cta { display: none; }
     }
 
     /* HERO */
@@ -1425,8 +1455,40 @@
       <a href="#offer">Pricing</a>
     </div>
     <a href="#offer" class="nav-cta">Book a Signal Session</a>
+    <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-drawer"><span></span></button>
   </div>
 </nav>
+
+<div class="nav-drawer" id="nav-drawer" hidden>
+  <a href="#method">The method</a>
+  <a href="#deliverable">The deliverable</a>
+  <a href="#about">About</a>
+  <a href="signal">The Weekly Signal</a>
+  <a href="governance">AI Governance</a>
+  <a href="ai-data-audit.html">AI Data Audit</a>
+  <a href="#offer" class="nav-drawer-cta">Book the Signal Session →</a>
+</div>
+
+<script>
+(function(){
+  var btn = document.querySelector('.nav-toggle');
+  var drawer = document.getElementById('nav-drawer');
+  if (!btn || !drawer) return;
+  drawer.hidden = false;
+  btn.addEventListener('click', function(){
+    var open = drawer.classList.toggle('is-open');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  });
+  drawer.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      drawer.classList.remove('is-open');
+      btn.setAttribute('aria-expanded', 'false');
+      btn.setAttribute('aria-label', 'Open menu');
+    });
+  });
+})();
+</script>
 
 <main>
 

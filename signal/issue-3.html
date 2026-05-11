@@ -300,13 +300,85 @@
       <img src="../CatalystWorks_logo.jpg" alt="Catalyst Works">
       <span>Catalyst Works</span>
     </a>
+    <div class="nav-links">
+      <a href="/#method">Method</a>
+      <a href="/signal">All issues</a>
+      <a href="/governance">AI Governance</a>
+      <a href="/#offer">Signal Session</a>
+    </div>
     <a href="/signal" class="nav-back">
       <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
         <path d="M13 7H1M7 13L1 7l6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
-      All issues
+      Archive
     </a>
+    <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-drawer"><span></span></button>
   </nav>
+
+  <div class="nav-drawer" id="nav-drawer" hidden>
+    <a href="/">Home</a>
+    <a href="/#method">The method</a>
+    <a href="/signal">The Weekly Signal — All issues</a>
+    <a href="/governance">AI Governance</a>
+    <a href="/ai-data-audit.html">AI Data Audit</a>
+    <a href="/#offer" class="nav-drawer-cta">Book the Signal Session →</a>
+  </div>
+
+  <style>
+    .nav-links { display: flex; gap: 22px; align-items: center; }
+    .nav-links a { font-size: 13px; color: var(--muted); transition: color 180ms; font-weight: 500; text-decoration: none; }
+    .nav-links a:hover { color: var(--paper); }
+    .nav-toggle {
+      display: none; background: transparent; border: 1px solid var(--border);
+      width: 40px; height: 40px; border-radius: 8px; padding: 0;
+      align-items: center; justify-content: center; cursor: pointer;
+    }
+    .nav-toggle:hover { border-color: rgba(232,166,107,0.4); background: rgba(232,166,107,0.05); }
+    .nav-toggle span { display: block; width: 18px; height: 1.5px; background: var(--paper); position: relative; transition: transform 220ms, opacity 220ms; }
+    .nav-toggle span::before, .nav-toggle span::after { content: ''; position: absolute; left: 0; width: 18px; height: 1.5px; background: var(--paper); transition: transform 220ms, top 220ms; }
+    .nav-toggle span::before { top: -6px; }
+    .nav-toggle span::after  { top: 6px; }
+    .nav-toggle[aria-expanded="true"] span { background: transparent; }
+    .nav-toggle[aria-expanded="true"] span::before { top: 0; transform: rotate(45deg); }
+    .nav-toggle[aria-expanded="true"] span::after  { top: 0; transform: rotate(-45deg); }
+    @media (max-width: 760px) {
+      .nav-toggle { display: inline-flex; }
+      #nav > .nav-links, #nav > .nav-back { display: none; }
+    }
+    .nav-drawer {
+      position: fixed; top: 0; left: 0; right: 0; padding: 72px 24px 28px;
+      background: rgba(10,14,20,0.98); backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border);
+      transform: translateY(-100%); transition: transform 320ms cubic-bezier(0.4,0,0.2,1);
+      z-index: 49; display: flex; flex-direction: column; gap: 4px;
+    }
+    .nav-drawer.is-open { transform: translateY(0); }
+    .nav-drawer a { display: block; padding: 16px 8px; font-size: 17px; color: var(--paper); border-bottom: 1px solid var(--border); font-family: 'Spectral', serif; font-weight: 500; text-decoration: none; }
+    .nav-drawer a:last-child { border-bottom: none; }
+    .nav-drawer .nav-drawer-cta { margin-top: 14px; text-align: center; background: var(--paper); color: var(--ink); border-radius: 10px; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 15px; padding: 14px 18px; }
+    @media (min-width: 761px) { .nav-drawer { display: none; } }
+  </style>
+
+  <script>
+  (function(){
+    var btn = document.querySelector('.nav-toggle');
+    var drawer = document.getElementById('nav-drawer');
+    if (!btn || !drawer) return;
+    drawer.hidden = false;
+    btn.addEventListener('click', function(){
+      var open = drawer.classList.toggle('is-open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    });
+    drawer.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', function(){
+        drawer.classList.remove('is-open');
+        btn.setAttribute('aria-expanded', 'false');
+        btn.setAttribute('aria-label', 'Open menu');
+      });
+    });
+  })();
+  </script>
 
   <article class="article-wrap">
 
