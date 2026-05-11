@@ -241,8 +241,8 @@
     ╔═══════════════════════════════════════════════ */
     .hero {
       background: var(--slate);
-      min-height: calc(100vh - 104px); /* compensates for stacked unified-nav + site-nav heights */
-      padding: 72px 28px 64px;
+      min-height: 100vh;
+      padding: 140px 28px 64px; /* clears fixed unified-nav (64px) + sticky slot-bar (48px) + breathing */
       display: flex;
       align-items: center;
     }
@@ -1245,10 +1245,13 @@
 <body>
 
   <!-- NAV -->
-  <!-- Site-wide unified top nav (added 2026-05-11 for cross-page consistency) -->
+  <!-- Site-wide unified top nav (floating + transparent, matches index.html) -->
   <nav class="cw-unified-nav" aria-label="Site navigation">
     <div class="cw-unified-inner">
-      <a href="/" class="cw-unified-logo">Catalyst<span>Works</span></a>
+      <a href="/" class="cw-unified-logo">
+        <img src="/CatalystWorks_logo.jpg" alt="Catalyst Works" width="32" height="32" decoding="async">
+        Catalyst<span>Works</span>
+      </a>
       <div class="cw-unified-links">
         <a href="/#method">Method</a>
         <a href="/signal">The Weekly Signal</a>
@@ -1269,10 +1272,28 @@
   </div>
 
   <style>
-    .cw-unified-nav { position: sticky; top: 0; z-index: 99; background: rgba(7,26,46,0.92); backdrop-filter: blur(14px); border-bottom: 1px solid rgba(255,255,255,0.08); }
-    .cw-unified-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 12px 24px; }
-    .cw-unified-logo { font-family: 'Fraunces', serif; font-size: 16px; font-weight: 700; color: #fff; text-decoration: none; letter-spacing: -0.01em; }
-    .cw-unified-logo span { color: #FFA500; }
+    .cw-unified-nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 99;
+      background: rgba(10,14,20,0); backdrop-filter: blur(0);
+      transition: background 300ms ease, backdrop-filter 300ms ease, border-color 300ms;
+      border-bottom: 1px solid transparent;
+      padding: 16px 32px;
+    }
+    .cw-unified-nav.scrolled {
+      background: rgba(10,14,20,0.78);
+      backdrop-filter: blur(16px) saturate(1.4);
+      -webkit-backdrop-filter: blur(16px) saturate(1.4);
+      border-bottom-color: rgba(245,239,226,0.06);
+    }
+    .cw-unified-inner { max-width: 1320px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .cw-unified-logo {
+      display: inline-flex; align-items: center; gap: 12px;
+      font-family: 'Fraunces', serif;
+      font-size: 19px; font-weight: 700;
+      color: #F5EFE2; text-decoration: none; letter-spacing: -0.01em;
+    }
+    .cw-unified-logo img { width: 32px; height: 32px; border-radius: 50%; }
+    .cw-unified-logo span { color: #E8A66B; }
     .cw-unified-links { display: flex; gap: 22px; align-items: center; }
     .cw-unified-links a { font-size: 13px; color: rgba(255,255,255,0.6); transition: color 180ms; font-weight: 500; text-decoration: none; }
     .cw-unified-links a:hover { color: #fff; }
@@ -1324,19 +1345,40 @@
   })();
   </script>
 
-  <nav class="site-nav" aria-label="Page navigation">
+  <!-- Page-level slot counter (sits beneath the floating site nav; no brand text — that's
+       owned by the unified nav above so we don't duplicate "Catalyst Works" twice) -->
+  <div class="site-slot-bar" aria-label="Reservation slots">
     <div class="container">
-      <div class="nav-brand">
-        <span class="nav-wordmark">Catalyst Works</span>
-        <div class="nav-divider"></div>
-        <span class="nav-sub">Signal Session</span>
-      </div>
+      <span class="nav-sub">Signal Session . AI Data Exposure Audit</span>
       <div class="nav-slots">
         <span class="nav-slot-count"><strong>4 slots</strong> remaining in May</span>
         <a href="https://calendly.com/boubacarbarry/signal-session-ai-data-exposure-audit" target="_blank" class="btn-ghost-red" onclick="gtag('event','cta_click',{location:'nav'})">Reserve a Slot</a>
       </div>
     </div>
-  </nav>
+  </div>
+
+  <style>
+    .site-slot-bar {
+      position: sticky; top: 56px; z-index: 90;
+      height: 48px;
+      background: rgba(20,25,36,0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(245,240,232,0.05);
+    }
+    .site-slot-bar .container {
+      height: 100%;
+      display: flex; align-items: center; justify-content: space-between;
+      max-width: 1320px; margin: 0 auto;
+      padding: 0 32px;
+    }
+    .site-slot-bar .nav-sub { color: var(--warm-muted); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; }
+    @media (max-width: 760px) {
+      .site-slot-bar { top: 56px; height: auto; padding: 8px 0; }
+      .site-slot-bar .nav-sub { display: none; }
+      .site-slot-bar .container { padding: 0 16px; }
+    }
+  </style>
 
   <!-- HERO -->
   <section class="hero" aria-labelledby="hero-h1">
@@ -1778,6 +1820,19 @@
       }
     </style>
   </noscript>
+
+  <script>
+  (function(){
+    var nav = document.querySelector('.cw-unified-nav');
+    if (!nav) return;
+    var update = function(){
+      if (window.scrollY > 8) nav.classList.add('scrolled');
+      else nav.classList.remove('scrolled');
+    };
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+  })();
+  </script>
 
 </body>
 </html>

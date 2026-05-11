@@ -9,7 +9,7 @@
   <meta property="og:description" content="One insight per week for operators building AI into their business. By Boubacar, Catalyst Works.">
   <meta property="og:image" content="https://catalystworks.consulting/og-image.jpg">
   <meta property="og:url" content="https://catalystworks.consulting/signal">
-  <link rel="icon" type="image/jpeg" href="CatalystWorks_logo.jpg">
+  <link rel="icon" type="image/jpeg" href="/CatalystWorks_logo.jpg">
   <link rel="canonical" href="https://catalystworks.consulting/signal">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -41,40 +41,48 @@
     }
 
     /* NAV */
+    /* NAV — floating + transparent, matches index.html */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 100;
-      padding: 20px 48px;
+      padding: 16px 32px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      transition: background 0.3s, backdrop-filter 0.3s;
+      gap: 24px;
+      background: rgba(10,14,20,0); backdrop-filter: blur(0);
+      transition: background 300ms ease, backdrop-filter 300ms ease, border-color 300ms;
+      border-bottom: 1px solid transparent;
     }
     nav.scrolled {
-      background: rgba(10,14,20,0.92);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
+      background: rgba(10,14,20,0.78);
+      backdrop-filter: blur(16px) saturate(1.4);
+      -webkit-backdrop-filter: blur(16px) saturate(1.4);
+      border-bottom-color: rgba(245,239,226,0.06);
     }
     .nav-logo {
-      display: flex;
+      display: inline-flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
       text-decoration: none;
+      font-family: 'Spectral', serif;
+      font-weight: 600;
+      font-size: 19px;
+      color: var(--paper);
+      letter-spacing: -0.01em;
     }
     .nav-logo img {
-      width: 28px;
-      height: 28px;
-      border-radius: 4px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
       object-fit: cover;
     }
     .nav-logo span {
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
       color: var(--paper);
-      opacity: 0.7;
+    }
+    .nav-logo .accent {
+      color: var(--amber);
     }
     .nav-cta {
       font-family: 'Inter', sans-serif;
@@ -323,8 +331,8 @@
   <!-- NAV (unified across site) -->
   <nav id="nav">
     <a href="/" class="nav-logo">
-      <img src="CatalystWorks_logo.jpg" alt="Catalyst Works">
-      <span>Catalyst Works</span>
+      <img src="/CatalystWorks_logo.jpg" alt="Catalyst Works" width="32" height="32" decoding="async">
+      Catalyst<span class="accent">Works</span>
     </a>
     <div class="nav-links">
       <a href="/#method">Method</a>

@@ -193,5 +193,18 @@
   </div>
 </footer>
 
+
+<script>
+(function(){
+  var nav = document.querySelector('.nav');
+  if (!nav) return;
+  var update = function(){
+    if (window.scrollY > 8) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  };
+  update();
+  window.addEventListener('scroll', update, { passive: true });
+})();
+</script>
 </body>
 </html>

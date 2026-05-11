@@ -40,18 +40,22 @@
     /* NAV */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      padding: 20px 48px;
+      padding: 16px 32px;
       display: flex; align-items: center; justify-content: space-between;
-      transition: background 0.3s;
+      gap: 24px;
+      background: rgba(10,14,20,0); backdrop-filter: blur(0);
+      transition: background 300ms ease, backdrop-filter 300ms ease, border-color 300ms;
+      border-bottom: 1px solid transparent;
     }
     nav.scrolled {
-      background: rgba(10,14,20,0.92);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
+      background: rgba(10,14,20,0.78);
+      backdrop-filter: blur(16px) saturate(1.4);
+      -webkit-backdrop-filter: blur(16px) saturate(1.4);
+      border-bottom-color: var(--border);
     }
-    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-    .nav-logo img { width: 28px; height: 28px; border-radius: 4px; object-fit: cover; }
-    .nav-logo span { font-size: 13px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--paper); opacity: 0.7; }
+    .nav-logo { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; font-family: 'Spectral', serif; font-size: 19px; font-weight: 600; color: var(--paper); letter-spacing: -0.01em; }
+    .nav-logo img { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; }
+    .nav-logo span { color: var(--paper); } .nav-logo .accent { color: var(--amber); }
     .nav-back { font-size: 13px; color: var(--muted); text-decoration: none; display: flex; align-items: center; gap: 6px; transition: color 0.2s; }
     .nav-back:hover { color: var(--amber); }
 
@@ -269,8 +273,8 @@
 
   <nav id="nav">
     <a href="/" class="nav-logo">
-      <img src="../CatalystWorks_logo.jpg" alt="Catalyst Works">
-      <span>Catalyst Works</span>
+      <img src="../CatalystWorks_logo.jpg" alt="Catalyst Works" width="32" height="32" decoding="async">
+      Catalyst<span class="accent">Works</span>
     </a>
     <div class="nav-links">
       <a href="/#method">Method</a>
