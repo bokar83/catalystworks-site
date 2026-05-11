@@ -179,15 +179,19 @@
     /* ╔═══════════════════════════════════════════════
        NAV
     ╔═══════════════════════════════════════════════ */
+    /* Page-level nav stacked BELOW the site-wide unified nav (added 2026-05-11) */
     .site-nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      height: 64px;
+      position: sticky;
+      top: 56px; /* sits under the .cw-unified-nav which is ~48px tall at top:0 */
+      z-index: 90;
+      height: 56px;
       background: rgba(20,25,36,0.96);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       border-bottom: 1px solid rgba(245,240,232,0.05);
+    }
+    @media (max-width: 760px) {
+      .site-nav { top: 49px; height: 52px; }
     }
     .site-nav .container {
       height: 100%;
@@ -237,8 +241,8 @@
     ╔═══════════════════════════════════════════════ */
     .hero {
       background: var(--slate);
-      min-height: 100vh;
-      padding: calc(64px + 72px) 28px 64px;
+      min-height: calc(100vh - 104px); /* compensates for stacked unified-nav + site-nav heights */
+      padding: 72px 28px 64px;
       display: flex;
       align-items: center;
     }
