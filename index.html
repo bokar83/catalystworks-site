@@ -683,11 +683,30 @@
       border-radius: 22px;
       position: relative;
       overflow: hidden;
-      transition: border-color 320ms, transform 320ms var(--ease);
+      transition: border-color 320ms, transform 320ms var(--ease), background 320ms;
       color: inherit;
       text-decoration: none;
+      cursor: pointer;
     }
-    a.lens:hover { border-color: rgba(232,166,107,0.32); transform: translateY(-2px); }
+    a.lens:hover {
+      border-color: rgba(232,166,107,0.55);
+      background: linear-gradient(180deg, rgba(28,36,48,1) 0%, rgba(18,24,33,1) 100%);
+      transform: translateY(-3px);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.4), 0 0 0 1px rgba(232,166,107,0.18);
+    }
+    a.lens:hover h3 { color: var(--amber); transition: color 220ms; }
+    a.lens:hover .lens-cta { opacity: 1; transform: translateX(0); }
+    .lens-cta {
+      display: inline-flex; align-items: center; gap: 8px;
+      margin-top: 22px;
+      font-family: var(--mono); font-size: 11.5px;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--amber);
+      opacity: 0.5;
+      transform: translateX(-4px);
+      transition: opacity 280ms var(--ease), transform 280ms var(--ease);
+    }
+    .lens-cta::after { content: '→'; font-size: 14px; }
     .lens::before {
       content: ''; position: absolute; inset: 0;
       background: radial-gradient(ellipse at 80% -20%, rgba(232,166,107,0.10), transparent 50%);
@@ -1059,22 +1078,42 @@
       gap: 18px;
     }
     .outcome-card {
+      display: block;
       background: rgba(22,29,39,0.5);
       border: 1px solid var(--line);
       border-radius: 14px;
       padding: 24px 22px 22px;
       position: relative;
       overflow: hidden;
-      transition: border-color 280ms var(--ease), transform 280ms var(--ease);
+      transition: border-color 280ms var(--ease), transform 280ms var(--ease), background 280ms;
+      color: inherit;
+      text-decoration: none;
+      cursor: pointer;
     }
     .outcome-card::before {
       content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
       background: linear-gradient(90deg, transparent, var(--amber), transparent);
       opacity: 0.5;
     }
-    .outcome-card:hover {
-      border-color: rgba(232,166,107,0.32);
-      transform: translateY(-2px);
+    a.outcome-card:hover {
+      border-color: rgba(232,166,107,0.55);
+      background: rgba(28,36,48,0.85);
+      transform: translateY(-3px);
+      box-shadow: 0 14px 36px rgba(0,0,0,0.45), 0 0 0 1px rgba(232,166,107,0.18);
+    }
+    a.outcome-card:hover .outcome-name { color: var(--amber); transition: color 220ms; }
+    a.outcome-card:hover .outcome-cta { opacity: 1; transform: translateX(0); }
+    .outcome-cta {
+      display: block;
+      margin-top: 18px;
+      padding-top: 14px;
+      border-top: 1px dashed var(--line-2);
+      font-family: var(--mono); font-size: 11px;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--amber);
+      opacity: 0.55;
+      transform: translateX(-4px);
+      transition: opacity 280ms var(--ease), transform 280ms var(--ease);
     }
     .outcome-tag {
       display: inline-block;
@@ -1226,10 +1265,10 @@
         will-change: transform, width, height, opacity;
       }
       .cw-cursor-dot {
-        width: 6px; height: 6px;
+        width: 9px; height: 9px;
         background: var(--amber);
         border-radius: 50%;
-        box-shadow: 0 0 12px rgba(232,166,107,0.6);
+        box-shadow: 0 0 14px rgba(232,166,107,0.7);
         transition: opacity 200ms var(--ease);
       }
       .cw-cursor-ring {
@@ -1332,6 +1371,7 @@
       <a href="#method">The method</a>
       <a href="#deliverable">The deliverable</a>
       <a href="#about">About</a>
+      <a href="signal">The Weekly Signal</a>
       <a href="#offer">Pricing</a>
     </div>
     <a href="#offer" class="nav-cta">Book a Signal Session</a>
@@ -1442,30 +1482,35 @@
         <h3>Throughput</h3>
         <p>Where in the system does work slow down? Most operators think they have a capacity problem. Almost none of them do. They have a flow problem. Throughput shows where the line waits.</p>
         <span class="lens-tag">Theory of Constraints</span>
+        <span class="lens-cta">Read the lens</span>
       </a>
       <a href="lens/friction.html" class="lens">
         <div class="lens-num">Lens 02</div>
         <h3>Friction</h3>
         <p>What is costing the team energy that the customer never sees? Friction is invisible in the P&amp;L and visible in turnover. Three friction signals per session, named with examples.</p>
         <span class="lens-tag">Operations + culture</span>
+        <span class="lens-cta">Read the lens</span>
       </a>
       <a href="lens/decision.html" class="lens">
         <div class="lens-num">Lens 03</div>
         <h3>Decision</h3>
         <p>Where do decisions stall? Where does authority sit far from information? Owner-led firms hit a ceiling here long before a market ceiling. The lens names which decision is stuck.</p>
         <span class="lens-tag">Org design</span>
+        <span class="lens-cta">Read the lens</span>
       </a>
       <a href="lens/information.html" class="lens">
         <div class="lens-num">Lens 04</div>
         <h3>Information</h3>
         <p>What does the team know that leadership does not? What does leadership measure that nobody else can act on? Information asymmetry is the constraint that compounds the fastest.</p>
         <span class="lens-tag">Systems thinking</span>
+        <span class="lens-cta">Read the lens</span>
       </a>
       <a href="lens/inference.html" class="lens">
         <div class="lens-num">Lens 05</div>
         <h3>Inference</h3>
         <p>Where does the business reason from the wrong evidence? Most stalled growth is an inference error. The lens surfaces the wrong assumption keeping the right strategy off the table.</p>
         <span class="lens-tag">Decision science</span>
+        <span class="lens-cta">Read the lens</span>
       </a>
       <div class="lens" style="background: linear-gradient(180deg, rgba(232,166,107,0.10), rgba(180,124,87,0.04)); border-color: rgba(232,166,107,0.32);">
         <div class="lens-num">The constraint</div>
@@ -1600,7 +1645,7 @@
       <h3 class="offer-outcomes-title">What survives the <em>five lenses</em> looks like this.</h3>
 
       <div class="offer-outcomes-grid">
-        <article class="outcome-card">
+        <a href="for/professional-services.html" class="outcome-card">
           <span class="outcome-tag">Case 01</span>
           <h4 class="outcome-name">Professional Services Firm</h4>
           <div class="outcome-row">
@@ -1611,9 +1656,10 @@
             <span class="outcome-row-label">30-day outcome</span>
             Shifted focus to retention and delivery parameters; <span class="outcome-metric">recaptured $14k/mo in leakage</span>.
           </div>
-        </article>
+          <span class="outcome-cta">See the protocol for this industry →</span>
+        </a>
 
-        <article class="outcome-card">
+        <a href="for/hvac.html" class="outcome-card">
           <span class="outcome-tag">Case 02</span>
           <h4 class="outcome-name">Residential Trade Contractor</h4>
           <div class="outcome-row">
@@ -1624,9 +1670,10 @@
             <span class="outcome-row-label">30-day outcome</span>
             Rebuilt routing protocols; <span class="outcome-metric">cut speed-to-lead from 4 hrs to 90 sec</span>.
           </div>
-        </article>
+          <span class="outcome-cta">See the protocol for this industry →</span>
+        </a>
 
-        <article class="outcome-card">
+        <a href="for/healthcare-smb.html" class="outcome-card">
           <span class="outcome-tag">Case 03</span>
           <h4 class="outcome-name">Healthcare SMB</h4>
           <div class="outcome-row">
@@ -1637,7 +1684,8 @@
             <span class="outcome-row-label">30-day outcome</span>
             Automated patient onboarding; <span class="outcome-metric">clawed back 15 operator hrs/week</span>.
           </div>
-        </article>
+          <span class="outcome-cta">See the protocol for this industry →</span>
+        </a>
       </div>
 
       <p class="offer-outcomes-fineprint">Composite outcomes from Signal Session engagements. Industry and figures anonymized; constraint mechanics preserved.</p>

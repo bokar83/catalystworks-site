@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Weekly Signal &middot; Issue 02 &middot; Before you buy another AI tool, read this &middot; Catalyst Works</title>
+  <meta name="description" content="The most expensive mistake in AI adoption is not the wrong tool. It is skipping the diagnosis. More than 80% of AI projects fail — not because of bad AI, but because of broken processes that were already there.">
+  <meta property="og:title" content="The Weekly Signal · Issue 02 · Before you buy another AI tool, read this · Catalyst Works">
+  <meta property="og:description" content="The most expensive mistake in AI adoption is not the wrong tool. It is skipping the diagnosis. More than 80% of AI projects fail — not because of bad AI, but because of broken processes that were already there.">
+  <meta property="og:image" content="https://catalystworks.consulting/og-image.jpg">
+  <meta property="og:url" content="https://catalystworks.consulting/signal/issue-2">
+  <meta name="twitter:title" content="The Weekly Signal · Issue 02 · Before you buy another AI tool, read this · Catalyst Works">
+  <meta name="twitter:description" content="The most expensive mistake in AI adoption is not the wrong tool. It is skipping the diagnosis. More than 80% of AI projects fail — not because of bad AI, but because of broken processes that were already there.">
+  <link rel="canonical" href="https://catalystworks.consulting/signal/issue-2">
+  <link rel="icon" type="image/jpeg" href="../CatalystWorks_logo.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --ink: #0A0E14;
+      --paper: #F5EFE2;
+      --amber: #E8A66B;
+      --cyan: #5BC0BE;
+      --muted: rgba(245,239,226,0.5);
+      --border: rgba(245,239,226,0.1);
+      --card-bg: rgba(245,239,226,0.04);
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--ink);
+      color: var(--paper);
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 20px 48px;
+      display: flex; align-items: center; justify-content: space-between;
+      transition: background 0.3s;
+    }
+    nav.scrolled {
+      background: rgba(10,14,20,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo img { width: 28px; height: 28px; border-radius: 4px; object-fit: cover; }
+    .nav-logo span { font-size: 13px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--paper); opacity: 0.7; }
+    .nav-back { font-size: 13px; color: var(--muted); text-decoration: none; display: flex; align-items: center; gap: 6px; transition: color 0.2s; }
+    .nav-back:hover { color: var(--amber); }
+
+    /* ARTICLE */
+    .article-wrap {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 140px 48px 100px;
+    }
+
+    /* META */
+    .article-meta {
+      display: flex; align-items: center; gap: 16px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+    .meta-issue {
+      font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--amber);
+      background: rgba(232,166,107,0.1);
+      padding: 4px 10px; border-radius: 2px;
+    }
+    .meta-date { font-size: 13px; color: var(--muted); }
+    .meta-tag { font-size: 13px; color: var(--muted); }
+    .meta-dot { color: var(--border); }
+
+    /* HEADLINE */
+    .article-title {
+      font-family: 'Spectral', serif;
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--paper);
+      margin-bottom: 20px;
+      letter-spacing: -0.3px;
+    }
+    .article-deck {
+      font-size: 19px;
+      line-height: 1.65;
+      color: var(--muted);
+      margin-bottom: 52px;
+      font-family: 'Spectral', serif;
+      font-style: italic;
+      font-weight: 300;
+    }
+
+    /* ACCENT LINE */
+    .accent-line {
+      width: 48px; height: 2px;
+      background: var(--amber);
+      margin-bottom: 48px;
+    }
+
+    /* BODY TEXT */
+    .article-body p {
+      font-family: 'Spectral', serif;
+      font-size: 19px;
+      line-height: 1.8;
+      color: var(--paper);
+      margin-bottom: 28px;
+    }
+
+    /* SECTION HEADING */
+    .article-body h2 {
+      font-family: 'Spectral', serif;
+      font-size: 26px;
+      font-weight: 400;
+      color: var(--paper);
+      margin-top: 48px;
+      margin-bottom: 24px;
+      letter-spacing: -0.2px;
+    }
+
+    /* NUMBERED STEPS */
+    .step-list {
+      list-style: none;
+      counter-reset: step;
+      margin: 8px 0 28px;
+    }
+    .step-list li {
+      counter-increment: step;
+      position: relative;
+      padding-left: 56px;
+      margin-bottom: 28px;
+    }
+    .step-list li::before {
+      content: counter(step);
+      position: absolute;
+      left: 0; top: 2px;
+      width: 36px; height: 36px;
+      border: 1px solid var(--amber);
+      border-radius: 50%;
+      color: var(--amber);
+      font-family: 'Spectral', serif;
+      font-size: 16px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .step-list li p {
+      font-family: 'Spectral', serif;
+      font-size: 18px;
+      line-height: 1.75;
+      color: var(--paper);
+      margin: 0;
+    }
+    .step-list li strong {
+      color: var(--paper);
+      font-weight: 600;
+    }
+
+    /* PULL QUOTE */
+    .pull-quote {
+      border-left: 3px solid var(--amber);
+      padding: 24px 32px;
+      margin: 40px 0;
+      background: var(--card-bg);
+      border-radius: 0 4px 4px 0;
+    }
+    .pull-quote p {
+      font-family: 'Spectral', serif !important;
+      font-size: 22px !important;
+      line-height: 1.5 !important;
+      color: var(--paper) !important;
+      font-style: italic;
+      margin: 0 !important;
+    }
+
+    /* SIGNATURE */
+    .signature {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding-top: 40px;
+      border-top: 1px solid var(--border);
+      margin-top: 12px;
+    }
+    .sig-avatar {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--border);
+    }
+    .sig-name {
+      font-family: 'Inter', sans-serif;
+      font-size: 16px; font-weight: 600;
+      color: var(--paper); margin-bottom: 2px;
+    }
+    .sig-title {
+      font-size: 13px; color: var(--muted);
+    }
+    .sig-title a { color: var(--amber); text-decoration: none; }
+
+    /* SOURCES */
+    .sources {
+      margin-top: 60px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
+    }
+    .sources-label {
+      font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+      color: rgba(245,239,226,0.25); margin-bottom: 14px;
+    }
+    .sources p {
+      font-size: 13px !important;
+      line-height: 1.6 !important;
+      color: rgba(245,239,226,0.3) !important;
+      font-family: 'Inter', sans-serif !important;
+      margin-bottom: 8px !important;
+    }
+    .sources a { color: var(--amber); text-decoration: none; }
+
+    /* SUBSCRIBE CTA */
+    .subscribe-cta {
+      margin-top: 72px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 40px;
+      text-align: center;
+    }
+    .subscribe-cta h3 {
+      font-family: 'Spectral', serif;
+      font-size: 24px; font-weight: 400;
+      color: var(--paper); margin-bottom: 12px;
+    }
+    .subscribe-cta p {
+      font-size: 15px; color: var(--muted);
+      margin-bottom: 24px;
+    }
+    .sub-form { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+    .sub-form input[type="email"] {
+      flex: 1; min-width: 220px; max-width: 320px;
+      background: rgba(245,239,226,0.06);
+      border: 1px solid var(--border);
+      color: var(--paper);
+      font-family: 'Inter', sans-serif; font-size: 14px;
+      padding: 12px 18px; border-radius: 4px; outline: none;
+    }
+    .sub-form input[type="email"]::placeholder { color: rgba(245,239,226,0.25); }
+    .sub-form button {
+      background: var(--amber); color: var(--ink);
+      font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 600;
+      padding: 12px 24px; border: none; border-radius: 4px; cursor: pointer;
+    }
+
+    /* NAV PREV/NEXT */
+    .issue-nav {
+      display: flex; justify-content: space-between;
+      margin-top: 64px; padding-top: 32px;
+      border-top: 1px solid var(--border);
+    }
+    .issue-nav a {
+      font-size: 13px; color: var(--muted); text-decoration: none;
+      display: flex; align-items: center; gap: 8px; transition: color 0.2s;
+    }
+    .issue-nav a:hover { color: var(--amber); }
+
+    @media (max-width: 640px) {
+      nav { padding: 16px 20px; }
+      .article-wrap { padding: 110px 20px 80px; }
+      .step-list li { padding-left: 48px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="nav">
+    <a href="../index.html" class="nav-logo">
+      <img src="../CatalystWorks_logo.jpg" alt="Catalyst Works">
+      <span>Catalyst Works</span>
+    </a>
+    <a href="../signal" class="nav-back">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+        <path d="M13 7H1M7 13L1 7l6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      All issues
+    </a>
+  </nav>
+
+  <article class="article-wrap">
+
+    <!-- META -->
+    <div class="article-meta">
+      <span class="meta-issue">Issue 02</span>
+      <span class="meta-dot">&bull;</span>
+      <span class="meta-date">Apr 28, 2026</span>
+      <span class="meta-dot">&bull;</span>
+      <span class="meta-tag">AI Strategy</span>
+    </div>
+
+    <h1 class="article-title">Before you buy another AI tool, read this.</h1>
+    <p class="article-deck">The most expensive mistake in AI adoption is not the wrong tool. It is skipping the diagnosis. Eighty percent of AI projects fail. Not because of bad AI. Because of broken processes that were already there.</p>
+
+    <div class="accent-line"></div>
+
+    <div class="article-body">
+
+      <p>Most operators evaluating AI start at the tool. Wrong end of the rope.</p>
+
+      <p>The tool is the last decision in a chain of four. When the chain runs in reverse, tool first and problem last, the AI gets implemented against an undiagnosed constraint. The constraint absorbs the tool. Nothing measurable changes.</p>
+
+      <p>The vendor blames adoption. The operator blames the AI. Both are wrong.</p>
+
+      <h2>The four-step chain in the correct order</h2>
+
+      <ol class="step-list">
+        <li>
+          <p><strong>Name the operational constraint.</strong> What is the one bottleneck slowing the business right now. Not "we need more leads." That is a feeling. "Senior capacity is being burned on work two levels below its pay grade." That is a constraint.</p>
+        </li>
+        <li>
+          <p><strong>Map the workflow that touches the constraint.</strong> Who hands what to whom. Where the friction lives. What gets repeated. What gets dropped. Write it down before any tool conversation starts.</p>
+        </li>
+        <li>
+          <p><strong>Identify the leverage point.</strong> Of the steps in that workflow, which one would deliver the most relief if it ran ten times faster, or did not need a human at all, or could be predicted instead of reacted to.</p>
+        </li>
+        <li>
+          <p><strong>Pick the tool.</strong> Now the tool conversation is short. The constraint and the leverage point have done 90 percent of the selection for you.</p>
+        </li>
+      </ol>
+
+      <div class="pull-quote">
+        <p>"The tool decision is the last decision. Most operators make it first."</p>
+      </div>
+
+      <h2>Why 80% of AI projects fail</h2>
+
+      <p>The numbers from McKinsey and Gartner over 2024 and 2025 are consistent. Somewhere between 70 and 85 percent of enterprise AI initiatives never deliver measurable ROI. The headline reads "the AI did not work." The mechanism is upstream.</p>
+
+      <p>The pattern repeats. A procurement team picks a tool because it is what the competitor uses. The constraint inside their own business is never named. The tool gets deployed against the wrong workflow. The pilot reports low adoption. The vendor blames change management. The operator blames the model.</p>
+
+      <p>The actual cause is different. The AI did exactly what it was asked to do. Against a problem that was not the constraint.</p>
+
+      <h2>What this looks like in practice</h2>
+
+      <p>A CFO buys an AI accounts-payable tool because invoices are slow. The AI processes invoices flawlessly. Six months later, invoice cycle-time is unchanged. The constraint was never AP. It was the approval routing one step upstream. A workflow problem disguised as a data problem.</p>
+
+      <p>A founder buys an AI sales tool to improve conversion. Conversion does not move. The constraint was never the rep's pitch. It was the lead qualification one stage earlier. The wrong leads were being passed to the rep. Better software does not fix a wrong input.</p>
+
+      <h2>Before you buy another AI tool</h2>
+
+      <p>Spend the first 90 minutes naming the constraint. Then the tool decision takes 20 minutes. Most operators do the opposite. Most operators are wrong.</p>
+
+      <p>The diagnosis is the work. The tool is the receipt. Run the chain in the correct order and the failure rate inverts. Skip the diagnosis and you join the 80 percent.</p>
+
+      <p>That is the whole letter. Read it twice before the next vendor demo.</p>
+
+      <!-- SIGNATURE -->
+      <div class="signature">
+        <img src="../CatalystWorks_logo.jpg" alt="Boubacar" class="sig-avatar">
+        <div>
+          <div class="sig-name">Boubacar</div>
+          <div class="sig-title">Catalyst Works &nbsp;&bull;&nbsp; <a href="https://catalystworks.consulting">catalystworks.consulting</a></div>
+        </div>
+      </div>
+
+      <!-- SOURCES -->
+      <div class="sources">
+        <div class="sources-label">Sources</div>
+        <p>McKinsey, "The state of AI in 2024" &nbsp;&bull;&nbsp; <a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai" target="_blank" rel="noopener">mckinsey.com</a></p>
+        <p>Gartner research on enterprise AI project failure rates, 2024-2025</p>
+        <p>Catalyst Works five-lens diagnostic protocol &nbsp;&bull;&nbsp; <a href="../lens/throughput">Throughput lens</a></p>
+      </div>
+
+      <!-- ISSUE NAV -->
+      <div class="issue-nav">
+        <a href="../signal">All issues</a>
+        <a href="/signal/issue-3">
+          Issue 3
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="transform:rotate(180deg);">
+            <path d="M13 7H1M7 13L1 7l6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+
+    </div>
+
+    <!-- SUBSCRIBE CTA -->
+    <div class="subscribe-cta">
+      <h2 style="font-family:'Spectral',serif;font-size:24px;font-weight:400;color:var(--paper);margin-bottom:12px;">Get the next issue</h2>
+      <p>One insight per week for operators building AI into their business.</p>
+      <form class="sub-form" onsubmit="handleSub(event)">
+        <label for="sub-email" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;">Email address</label>
+        <input id="sub-email" type="email" placeholder="Your email" required>
+        <button type="submit">Subscribe free</button>
+      </form>
+    </div>
+
+  </article>
+
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    async function handleSub(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('button');
+      const email = e.target.querySelector('input').value;
+      btn.textContent = 'Subscribing...';
+      btn.disabled = true;
+      try {
+        const res = await fetch('https://mail.srv1040886.hstgr.cloud/subscription/form', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams({ email, l: 'e78a3008-c023-4eb5-a03f-f4202bf7ce8c', name: '' })
+        });
+        btn.textContent = 'You are in.';
+        btn.style.background = '#5BC0BE';
+        e.target.querySelector('input').value = '';
+      } catch {
+        btn.textContent = 'Try again';
+        btn.disabled = false;
+      }
+    }
+  </script>
+</body>
+</html>

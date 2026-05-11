@@ -1,11 +1,17 @@
 Options -Indexes
+DirectorySlash Off
 
 RewriteEngine On
 
+# Highest precedence: when /signal is requested AND signal.html exists, serve it.
+# Without this, LiteSpeed sees the signal/ directory and 301-redirects to /signal/
+# which then 403s because Options -Indexes blocks directory listing.
+RewriteRule ^signal$ signal.html [NC,L]
+
 # Clean URLs: append .html for any path without an extension. Handles top-level
-# (/signal -> /signal.html), nested (/lens/throughput -> /lens/throughput.html,
-# /for/hvac -> /for/hvac.html), and arbitrary depth. The character class [^\.]+
-# matches across "/" because slashes are not dots.
+# (/governance -> /governance.html), nested (/lens/throughput -> /lens/throughput.html,
+# /for/hvac -> /for/hvac.html, /signal/issue-3 -> /signal/issue-3.html), and arbitrary
+# depth. The character class [^\.]+ matches across "/" because slashes are not dots.
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^([^\.]+)$ $1.html [NC,L]
