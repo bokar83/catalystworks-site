@@ -2,12 +2,10 @@ Options -Indexes
 
 RewriteEngine On
 
-# Clean URLs: /signal -> /signal.html
+# Clean URLs: append .html for any path without an extension. Handles top-level
+# (/signal -> /signal.html), nested (/lens/throughput -> /lens/throughput.html,
+# /for/hvac -> /for/hvac.html), and arbitrary depth. The character class [^\.]+
+# matches across "/" because slashes are not dots.
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^([^\.]+)$ $1.html [NC,L]
-
-# Signal archive subfolder: /signal/issue-3 -> /signal/issue-3.html
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^signal/([^\.]+)$ signal/$1.html [NC,L]
