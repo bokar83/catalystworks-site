@@ -40,7 +40,9 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+  <!-- Three.js r149 is the last release that ships the UMD build referenced here.
+       Pinned to a fixed version + crossorigin so future Three releases cannot break the hero. -->
+  <script src="https://unpkg.com/three@0.149.0/build/three.min.js" crossorigin="anonymous"></script>
 
   <script type="application/ld+json">
   {
@@ -672,6 +674,7 @@
     }
     .lens {
       flex-shrink: 0;
+      display: block;
       width: 88vw; max-width: 720px;
       margin-right: 6vw;
       padding: 56px 56px;
@@ -680,8 +683,11 @@
       border-radius: 22px;
       position: relative;
       overflow: hidden;
-      transition: border-color 320ms;
+      transition: border-color 320ms, transform 320ms var(--ease);
+      color: inherit;
+      text-decoration: none;
     }
+    a.lens:hover { border-color: rgba(232,166,107,0.32); transform: translateY(-2px); }
     .lens::before {
       content: ''; position: absolute; inset: 0;
       background: radial-gradient(ellipse at 80% -20%, rgba(232,166,107,0.10), transparent 50%);
@@ -1370,36 +1376,36 @@
 
   <div class="method-track" id="method-track">
     <div class="method-rail" id="method-rail">
-      <div class="lens">
+      <a href="lens/throughput.html" class="lens">
         <div class="lens-num">Lens 01</div>
         <h3>Throughput</h3>
         <p>Where in the system does work slow down? Most operators think they have a capacity problem. Almost none of them do. They have a flow problem. Throughput shows where the line waits.</p>
         <span class="lens-tag">Theory of Constraints</span>
-      </div>
-      <div class="lens">
+      </a>
+      <a href="lens/friction.html" class="lens">
         <div class="lens-num">Lens 02</div>
         <h3>Friction</h3>
         <p>What is costing the team energy that the customer never sees? Friction is invisible in the P&amp;L and visible in turnover. Three friction signals per session, named with examples.</p>
         <span class="lens-tag">Operations + culture</span>
-      </div>
-      <div class="lens">
+      </a>
+      <a href="lens/decision.html" class="lens">
         <div class="lens-num">Lens 03</div>
         <h3>Decision</h3>
         <p>Where do decisions stall? Where does authority sit far from information? Owner-led firms hit a ceiling here long before a market ceiling. The lens names which decision is stuck.</p>
         <span class="lens-tag">Org design</span>
-      </div>
-      <div class="lens">
+      </a>
+      <a href="lens/information.html" class="lens">
         <div class="lens-num">Lens 04</div>
         <h3>Information</h3>
         <p>What does the team know that leadership does not? What does leadership measure that nobody else can act on? Information asymmetry is the constraint that compounds the fastest.</p>
         <span class="lens-tag">Systems thinking</span>
-      </div>
-      <div class="lens">
+      </a>
+      <a href="lens/inference.html" class="lens">
         <div class="lens-num">Lens 05</div>
         <h3>Inference</h3>
         <p>Where does the business reason from the wrong evidence? Most stalled growth is an inference error. The lens surfaces the wrong assumption keeping the right strategy off the table.</p>
         <span class="lens-tag">Decision science</span>
-      </div>
+      </a>
       <div class="lens" style="background: linear-gradient(180deg, rgba(232,166,107,0.10), rgba(180,124,87,0.04)); border-color: rgba(232,166,107,0.32);">
         <div class="lens-num">The constraint</div>
         <h3 style="color: var(--amber);">What survives all five.</h3>
