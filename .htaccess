@@ -17,9 +17,9 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^([^\.]+)$ $1.html [NC,L]
 
-# Force browsers to revalidate HTML on every load so 403 fixes propagate immediately
-# rather than living in client caches for hours. Static assets keep long TTL via
-# default LiteSpeed behavior.
-<FilesMatch "\.(html|htm)$">
+# Force browsers to revalidate HTML + CSS on every load so style/layout fixes
+# propagate immediately rather than living in client caches for hours.
+# Static assets (images, fonts) keep long TTL via default LiteSpeed behavior.
+<FilesMatch "\.(html|htm|css)$">
   Header set Cache-Control "no-cache, must-revalidate, max-age=0"
 </FilesMatch>
