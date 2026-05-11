@@ -1514,9 +1514,9 @@
       </div>
 
       <button type="button" class="offer-cta" onclick="openSignalSessionBooking()">
-        Book a 45-min discovery call →
+        Book the Signal Session — $497 →
       </button>
-      <p class="offer-fineprint">Free 45-minute discovery to confirm Signal Session fit. Full $497 invoiced after, only if we proceed.</p>
+      <p class="offer-fineprint">Direct booking. $497 charged at confirmation. No discovery call in between. The work is the pitch.</p>
       <div class="offer-scarcity">3 sessions available this month . confirmed within 24 hours</div>
     </div>
 
@@ -1606,16 +1606,16 @@
 </footer>
 
 <script>
-/* Calendly popup launcher (Signal Session discovery call) */
+/* Calendly popup launcher (paid Signal Session — $497, 90 min, direct booking) */
 function openSignalSessionBooking() {
   if (window.Calendly && typeof Calendly.initPopupWidget === 'function') {
     Calendly.initPopupWidget({
-      url: 'https://calendly.com/boubacarbarry/ai-strategy-discovery-call?primary_color=e8a66b&background_color=0a0e14&text_color=f5efe2'
+      url: 'https://calendly.com/boubacarbarry/signal-session-business-constraint-diagnostic?primary_color=e8a66b&background_color=0a0e14&text_color=f5efe2'
     });
     if (window.gtag) gtag('event', 'cta_click', { location: 'offer_card' });
   } else {
     // Calendly script not loaded yet — open in new tab as fallback
-    window.open('https://calendly.com/boubacarbarry/ai-strategy-discovery-call', '_blank', 'noopener');
+    window.open('https://calendly.com/boubacarbarry/signal-session-business-constraint-diagnostic', '_blank', 'noopener');
   }
   return false;
 }
