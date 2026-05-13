@@ -2091,11 +2091,11 @@ function openSignalSessionBooking() {
   const WORKER_URL = 'https://n8n.srv1040886.hstgr.cloud/webhook/catalystworks-constraints-ai';
 
   // Capture endpoint — separate from the diagnostic. Routes through agentsHQ
-  // FastAPI (POST /api/constraints-capture) instead of n8n, because n8n's
-  // /capture sub-route returns 404 and dropped every submission silently
-  // between 2026-05-11 and 2026-05-12. See
-  // docs/integrations/constraints_ai_capture_followup_2026-05-12.md.
-  const CAPTURE_URL = 'https://agentshq.boubacarbarry.com/api/constraints-capture';
+  // FastAPI (Traefik strips /api/orc before passing /constraints-capture to
+  // the orchestrator) instead of n8n, because n8n's /capture sub-route
+  // returns 404 and dropped every submission silently between 2026-05-11
+  // and 2026-05-12. See docs/integrations/constraints_ai_capture_followup_2026-05-12.md.
+  const CAPTURE_URL = 'https://agentshq.boubacarbarry.com/api/orc/constraints-capture';
 
   input.addEventListener('keydown', (e) => {
     if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') {
