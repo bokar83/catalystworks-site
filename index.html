@@ -2090,6 +2090,13 @@ function openSignalSessionBooking() {
   // Empty string = simulated mode (no API calls, no cost).
   const WORKER_URL = 'https://n8n.srv1040886.hstgr.cloud/webhook/catalystworks-constraints-ai';
 
+  // Capture endpoint — separate from the diagnostic. Routes through agentsHQ
+  // FastAPI (POST /api/constraints-capture) instead of n8n, because n8n's
+  // /capture sub-route returns 404 and dropped every submission silently
+  // between 2026-05-11 and 2026-05-12. See
+  // docs/integrations/constraints_ai_capture_followup_2026-05-12.md.
+  const CAPTURE_URL = 'https://agentshq.boubacarbarry.com/api/constraints-capture';
+
   input.addEventListener('keydown', (e) => {
     if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') {
       e.preventDefault();
@@ -2200,28 +2207,43 @@ function openSignalSessionBooking() {
       }
       captureBtn.disabled = true;
       captureBtn.textContent = 'Sending…';
+      // crypto.randomUUID is in every modern browser shipped after 2022. The
+      // unique key is the dedup contract with the agentsHQ DB so repeated
+      // submits (user double-clicks, browser auto-retry) become a no-op.
+      const idempotencyKey = (window.crypto && crypto.randomUUID)
+        ? crypto.randomUUID()
+        : (Date.now().toString(16) + '-' + Math.random().toString(16).slice(2));
+      let captureLanded = false;
       try {
-        if (WORKER_URL) {
-          await fetch(WORKER_URL + '/capture', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({
-              email,
-              pain: lastPain,
-              result: lastResult,
-              source: 'site_demo_capture'
-            })
-          });
+        const resp = await fetch(CAPTURE_URL, {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({
+            email,
+            pain: lastPain,
+            result: lastResult,
+            idempotency_key: idempotencyKey,
+            source: 'site_demo_capture'
+          })
+        });
+        if (resp.ok) {
+          captureLanded = true;
+        } else {
+          console.warn('capture endpoint non-2xx:', resp.status);
         }
-        // Show success regardless (graceful degrade for simulated mode)
-        captureBlock.hidden = true;
-        captureSuccess.hidden = false;
-        if (window.gtag) gtag('event', 'capture_email', { engagement_time_msec: 1000 });
       } catch (err) {
         console.warn('capture failed:', err);
-        // Still show success — we don't want to make the user feel like it failed
-        captureBlock.hidden = true;
-        captureSuccess.hidden = false;
+      }
+      // Show success regardless so the user is not left in limbo. The
+      // captureLanded flag distinguishes real success from network failure
+      // for the GA event so traffic-quality telemetry stays honest.
+      captureBlock.hidden = true;
+      captureSuccess.hidden = false;
+      if (window.gtag) {
+        gtag('event', 'capture_email', {
+          engagement_time_msec: 1000,
+          capture_landed: captureLanded ? 'yes' : 'no'
+        });
       }
     });
   }
