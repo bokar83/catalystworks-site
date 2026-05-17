@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What Boubacar does · Catalyst Works Consulting</title>
+<style>
+  :root {
+    --bg: #071A2E;
+    --bg-2: #0D2A45;
+    --card: #0D2A45;
+    --line: #1F3551;
+    --ink: #F3F6F9;
+    --ink-dim: #9AA3B2;
+    --primary: #00B7C2;
+    --primary-light: #E6F9FA;
+    --accent: #FF7A00;
+    --mono: ui-monospace, SFMono-Regular, "SF Mono", Consolas, monospace;
+    --serif: Spectral, "Source Serif 4", Georgia, serif;
+    --sans: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 40px 24px;
+    font: 16px/1.6 var(--sans);
+    background: var(--bg);
+    color: var(--ink);
+  }
+  .wrap { max-width: 720px; margin: 0 auto; }
+
+  header { margin-bottom: 32px; }
+  .kicker {
+    color: var(--primary);
+    font: 600 11px/1 var(--mono);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  h1 {
+    font-family: var(--serif);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    font-size: 34px;
+    line-height: 1.15;
+    margin: 12px 0 8px;
+  }
+  .sub {
+    color: var(--ink-dim);
+    font-size: 14px;
+  }
+
+  h2 {
+    font-family: var(--serif);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    font-size: 20px;
+    margin: 36px 0 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--line);
+  }
+  h3 {
+    font: 600 12px var(--mono);
+    color: var(--primary);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin: 18px 0 6px;
+  }
+
+  p { margin: 10px 0; }
+
+  .lede {
+    font-size: 17px;
+    line-height: 1.55;
+  }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 22px 26px;
+    margin: 16px 0;
+  }
+
+  .example {
+    border-left: 3px solid var(--accent);
+    background: rgba(255, 122, 0, 0.04);
+  }
+
+  .before, .after {
+    margin: 10px 0;
+    padding: 12px 16px;
+    border-radius: 6px;
+    font-family: var(--serif);
+    font-size: 15px;
+    line-height: 1.5;
+  }
+  .before {
+    background: rgba(154, 163, 178, 0.08);
+    color: var(--ink-dim);
+    text-decoration: line-through;
+    text-decoration-color: rgba(255, 122, 0, 0.45);
+    text-decoration-thickness: 1px;
+  }
+  .after {
+    background: rgba(0, 183, 194, 0.08);
+    color: var(--ink);
+    border-left: 2px solid var(--primary);
+  }
+  .label {
+    font: 600 10px var(--mono);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .why {
+    font-size: 14px;
+    color: var(--ink-dim);
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px dashed var(--line);
+  }
+  .why strong { color: var(--ink); }
+
+  .cta {
+    background: linear-gradient(135deg, rgba(0, 183, 194, 0.10), rgba(0, 183, 194, 0.02));
+    border-left: 3px solid var(--primary);
+    padding: 18px 22px;
+    margin: 24px 0 12px;
+    border-radius: 0 10px 10px 0;
+  }
+  .cta a {
+    color: var(--primary);
+    text-decoration: none;
+    border-bottom: 1px solid var(--primary);
+    font-weight: 600;
+  }
+  .cta a:hover { color: var(--primary-light); }
+
+  .footer {
+    margin-top: 40px;
+    padding-top: 18px;
+    border-top: 1px solid var(--line);
+    font-size: 12px;
+    color: var(--ink-dim);
+    line-height: 1.6;
+  }
+  .footer strong { color: var(--ink); }
+
+  ul { padding-left: 20px; margin: 8px 0; }
+  ul li { margin: 4px 0; }
+
+  /* Mobile */
+  @media (max-width: 640px) {
+    body { padding: 24px 0; }
+    .wrap { padding: 0 18px; }
+    h1 { font-size: 26px; }
+    h2 { font-size: 17px; margin: 28px 0 10px; }
+    .card { padding: 16px 18px; margin: 14px 0; border-radius: 8px; }
+    .lede { font-size: 16px; }
+    .before, .after { font-size: 14px; padding: 10px 12px; }
+    .cta { padding: 14px 16px; }
+  }
+
+  /* Print · A4 */
+  @media print {
+    :root {
+      --bg: #ffffff;
+      --bg-2: #fafafa;
+      --card: #ffffff;
+      --line: #cccccc;
+      --ink: #111111;
+      --ink-dim: #555555;
+    }
+    body { background: #fff; color: #111; padding: 0; font-size: 11pt; }
+    .wrap { max-width: 100%; padding: 0; }
+    h1 { font-size: 22pt; }
+    h2 { font-size: 13pt; page-break-after: avoid; }
+    h3 { page-break-after: avoid; }
+    .card { border: 1px solid #cccccc; page-break-inside: avoid; background: #ffffff; }
+    .example { background: #fff7ed; border-left: 3px solid #c2410c; }
+    .before { background: #f4f4f4; color: #555; }
+    .after { background: #ecfeff; color: #111; border-left: 2px solid #0e7490; }
+    .cta {
+      background: #ecfeff;
+      border-left: 3px solid #0e7490;
+      page-break-inside: avoid;
+    }
+    .cta a { color: #0e7490; }
+    .footer { color: #555; border-top: 1px solid #ccc; }
+    @page { margin: 14mm; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="kicker">Catalyst Works Consulting</div>
+  <h1>What I do, in one page.</h1>
+  <div class="sub">A sample of the work, for anyone curious whether it might be useful.</div>
+</header>
+
+<p class="lede">
+  I help operators sharpen the surfaces where their business gets judged before anyone talks to them. The LinkedIn profile that decides whether a buyer DMs you. The website headline that decides whether they stay 6 seconds or 30. The About page that turns a referral into a call.
+</p>
+
+<p class="lede">
+  The motion is small and direct. I read the surface. I pick the worst-pulling part. I rewrite one specific thing and tell you why. No three-option menus. No 40-slide audit deck. One finding, one fix, the reasoning behind both.
+</p>
+
+<h2>A sample, with the names changed</h2>
+
+<div class="card example">
+  <p style="margin-top:0;">A B2B logistics SaaS founder I worked with had a headline that sounded like every other founder on the platform, and an About section that closed with the softest possible ask. Two surfaces, both costing him connect-to-conversation rate.</p>
+
+  <h3>Finding 1 · the headline</h3>
+  <span class="label">before</span>
+  <div class="before">Founder | Building the future of freight | Ex-Big-4 | Investor</div>
+
+  <span class="label">after</span>
+  <div class="after">I cut 3-day load-tendering cycles down to 4 hours for mid-market 3PLs. Without ripping out their TMS.</div>
+
+  <h3>Finding 2 · the About CTA (last paragraph)</h3>
+  <span class="label">before</span>
+  <div class="before">Always open to interesting conversations. Reach out if you want to connect.</div>
+
+  <span class="label">after</span>
+  <div class="after">If you run a 3PL doing $20M-$100M in revenue and your dispatchers still rekey loads from email into your TMS, send me a message with the word AUDIT. I will send you a 1-page breakdown of where the friction is costing you margin. No pitch attached.</div>
+
+  <div class="why">
+    <p><strong>Why these two, not five.</strong> The headline is the line the most people read, by an order of magnitude. The About CTA is the line that converts a curious scroll into a real conversation. Fix those two and the rest of the profile starts pulling its weight. Touching every section at once is how audits become wallpaper.</p>
+    <p style="margin-top:10px;"><strong>Why this rewrite, not three options.</strong> Conviction is the work. Giving a founder three rewrites makes them the editor of their own profile, which is the exact job they hired you to do. Pick one. Stand on it. If they push back, you have a real conversation about what they actually believe.</p>
+  </div>
+</div>
+
+<p>
+  The same motion travels across industries. The surface I read changes (LinkedIn for a coach, a product page for a SaaS founder, a service grid for a contractor). The bones do not. Read the worst part. Name the pattern. Rewrite one line. Cite the principle. Move.
+</p>
+
+<h2>How to work together</h2>
+
+<div class="cta">
+  <p style="margin:0;">
+    If something on this page made you think about a specific surface of your own business that has been quietly underperforming, that is the right reason to reach out. Email <a href="mailto:boubacar@catalystworks.consulting">boubacar@catalystworks.consulting</a> or message me on <a href="https://www.linkedin.com/in/boubacarbarry/">LinkedIn</a> with the one surface you want a second pair of eyes on. I will reply within a working day. I reply, that's the loop. Nothing else fires unless you ask.
+  </p>
+</div>
+
+<div class="footer">
+  <p><strong>This is a sample. Format is the same one shipped to a peer-tier operator last week, who replied within 90 minutes.</strong></p>
+  <p>Boubacar Barry · Catalyst Works Consulting · <a href="https://catalystworks.consulting" style="color:var(--ink-dim);">catalystworks.consulting</a></p>
+</div>
+
+</div>
+</body>
+</html>
