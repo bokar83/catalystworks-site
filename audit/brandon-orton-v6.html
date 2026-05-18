@@ -1,0 +1,756 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>LinkedIn audit for Brandon Orton · V6 · Catalyst Works</title>
+<style>
+  :root {
+    --bg: #071A2E;
+    --bg-2: #0D2A45;
+    --card: #0D2A45;
+    --line: #1F3551;
+    --ink: #F3F6F9;
+    --ink-dim: #9AA3B2;
+    --primary: #00B7C2;
+    --primary-light: #E6F9FA;
+    --accent: #FF7A00;
+    --mono: ui-monospace, SFMono-Regular, "SF Mono", Consolas, monospace;
+    --serif: Spectral, "Source Serif 4", Georgia, serif;
+    --sans: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    padding: 40px 24px 80px;
+    font: 16px/1.6 var(--sans);
+    background: var(--bg);
+    color: var(--ink);
+  }
+  .wrap { max-width: 760px; margin: 0 auto; }
+
+  header { margin-bottom: 28px; }
+  .kicker {
+    color: var(--primary);
+    font: 600 11px/1 var(--mono);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  h1 {
+    font-family: var(--serif);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    font-size: 34px;
+    line-height: 1.15;
+    margin: 12px 0 8px;
+  }
+  .sub {
+    color: var(--ink-dim);
+    font-size: 14px;
+  }
+  .meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 14px;
+    padding: 12px 14px;
+    background: rgba(0, 183, 194, 0.05);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    font: 500 12px/1.4 var(--mono);
+    color: var(--ink-dim);
+    letter-spacing: 0.04em;
+  }
+  .meta-row span strong { color: var(--ink); font-weight: 600; }
+
+  h2 {
+    font-family: var(--serif);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    font-size: 22px;
+    margin: 44px 0 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--line);
+  }
+  h3 {
+    font: 600 12px var(--mono);
+    color: var(--primary);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin: 22px 0 8px;
+  }
+  h4 {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: 17px;
+    margin: 18px 0 6px;
+    color: var(--ink);
+  }
+
+  p { margin: 10px 0; }
+  .lede { font-size: 17px; line-height: 1.55; }
+
+  .toc {
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 18px 22px;
+    margin: 24px 0 32px;
+  }
+  .toc .label {
+    font: 600 10px var(--mono);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--primary);
+    display: block;
+    margin-bottom: 10px;
+  }
+  .toc ol {
+    margin: 0;
+    padding-left: 22px;
+    columns: 2;
+    column-gap: 24px;
+  }
+  .toc li { margin: 4px 0; break-inside: avoid; }
+  .toc a {
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 14px;
+    border-bottom: 1px dotted transparent;
+  }
+  .toc a:hover { border-bottom-color: var(--primary); color: var(--primary); }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 22px 26px;
+    margin: 16px 0;
+  }
+  .card.example {
+    border-left: 3px solid var(--accent);
+    background: rgba(255, 122, 0, 0.04);
+  }
+  .card.note {
+    border-left: 3px solid var(--primary);
+    background: linear-gradient(135deg, rgba(0, 183, 194, 0.08), rgba(0, 183, 194, 0.02));
+  }
+
+  .label {
+    font: 600 10px var(--mono);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .before, .after {
+    margin: 8px 0 12px;
+    padding: 12px 16px;
+    border-radius: 6px;
+    font-family: var(--serif);
+    font-size: 15px;
+    line-height: 1.5;
+  }
+  .before {
+    background: rgba(154, 163, 178, 0.08);
+    color: var(--ink-dim);
+    text-decoration: line-through;
+    text-decoration-color: rgba(255, 122, 0, 0.45);
+    text-decoration-thickness: 1px;
+  }
+  .after {
+    background: rgba(0, 183, 194, 0.08);
+    color: var(--ink);
+    border-left: 2px solid var(--primary);
+  }
+  .after.alt {
+    background: rgba(0, 183, 194, 0.04);
+    border-left-color: rgba(0, 183, 194, 0.4);
+  }
+
+  .why {
+    font-size: 14px;
+    color: var(--ink-dim);
+    margin-top: 16px;
+    padding-top: 12px;
+    border-top: 1px dashed var(--line);
+  }
+  .why strong { color: var(--ink); }
+
+  ul, ol { padding-left: 22px; margin: 8px 0; }
+  ul li, ol li { margin: 6px 0; }
+
+  .path-stack { margin: 18px 0; }
+  .path {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--line);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 10px 0;
+  }
+  .path.recommended { border-left-color: var(--primary); background: rgba(0, 183, 194, 0.04); }
+  .path.upgrade { border-left-color: var(--accent); background: rgba(255, 122, 0, 0.03); }
+  .path.dismiss { border-left-color: rgba(154, 163, 178, 0.4); }
+  .path-tag {
+    display: inline-block;
+    font: 600 10px var(--mono);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 3px;
+    margin-right: 8px;
+  }
+  .path-tag.rec { background: rgba(0, 183, 194, 0.18); color: var(--primary); }
+  .path-tag.upg { background: rgba(255, 122, 0, 0.18); color: var(--accent); }
+  .path-tag.dis { background: rgba(154, 163, 178, 0.15); color: var(--ink-dim); }
+  .path h4 { margin: 4px 0 8px; display: inline-block; }
+  .path p { font-size: 15px; margin: 6px 0; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 14px 0;
+    font-size: 14px;
+  }
+  th, td {
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--line);
+  }
+  th {
+    font: 600 11px var(--mono);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--primary);
+    background: rgba(0, 183, 194, 0.04);
+  }
+  td { color: var(--ink); }
+  td.score-current { color: var(--ink-dim); font-family: var(--mono); font-size: 13px; }
+  td.score-a { color: var(--primary); font-family: var(--mono); font-size: 13px; font-weight: 600; }
+  td.score-b { color: var(--accent); font-family: var(--mono); font-size: 13px; font-weight: 600; }
+  tr.total td {
+    border-top: 2px solid var(--line);
+    border-bottom: none;
+    padding-top: 14px;
+    font-weight: 700;
+    font-size: 15px;
+  }
+  tr.total td.score-current,
+  tr.total td.score-a,
+  tr.total td.score-b { font-size: 14px; }
+
+  .week-stack { margin: 16px 0; }
+  .week {
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    gap: 16px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .week:last-child { border-bottom: none; }
+  .week-tag {
+    font: 600 11px var(--mono);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--primary);
+  }
+  .week-tag .dates {
+    display: block;
+    color: var(--ink-dim);
+    font-size: 11px;
+    margin-top: 2px;
+    letter-spacing: 0.05em;
+  }
+  .week-body { font-size: 15px; }
+  .week-body p { margin: 4px 0; }
+
+  .closing {
+    background: linear-gradient(135deg, rgba(0, 183, 194, 0.10), rgba(0, 183, 194, 0.02));
+    border-left: 3px solid var(--primary);
+    padding: 22px 26px;
+    margin: 32px 0 12px;
+    border-radius: 0 10px 10px 0;
+  }
+  .closing p { font-size: 15.5px; line-height: 1.6; }
+  .closing p + p { margin-top: 14px; }
+  .closing strong { color: var(--ink); }
+
+  .footer {
+    margin-top: 48px;
+    padding-top: 18px;
+    border-top: 1px solid var(--line);
+    font-size: 12px;
+    color: var(--ink-dim);
+    line-height: 1.6;
+  }
+  .footer a { color: var(--ink-dim); }
+
+  .pull {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 18px;
+    line-height: 1.45;
+    color: var(--ink);
+    border-left: 2px solid var(--accent);
+    padding: 6px 0 6px 18px;
+    margin: 18px 0;
+  }
+
+  .caption-block {
+    margin: 14px 0;
+    padding: 14px 16px;
+    background: rgba(0, 183, 194, 0.04);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+  }
+  .caption-block .src {
+    font: 600 11px var(--mono);
+    color: var(--ink-dim);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    display: block;
+  }
+  .caption-block .cap {
+    font-family: var(--serif);
+    font-size: 15px;
+    line-height: 1.5;
+  }
+
+  /* Mobile */
+  @media (max-width: 640px) {
+    body { padding: 24px 0 60px; }
+    .wrap { padding: 0 18px; }
+    h1 { font-size: 26px; }
+    h2 { font-size: 18px; margin: 32px 0 10px; }
+    .lede { font-size: 16px; }
+    .card { padding: 16px 18px; margin: 14px 0; border-radius: 8px; }
+    .before, .after { font-size: 14px; padding: 10px 12px; }
+    .toc ol { columns: 1; }
+    .week { grid-template-columns: 1fr; gap: 4px; }
+    .week-tag { font-size: 10px; }
+    table { font-size: 13px; }
+    th, td { padding: 8px 8px; }
+    .closing { padding: 16px 18px; }
+    .meta-row { font-size: 11px; gap: 10px; }
+    .pull { font-size: 16px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="kicker">Catalyst Works · LinkedIn audit · V6 lean</div>
+  <h1>Brandon, your profile is still selling doTERRA.</h1>
+  <div class="sub">A multi-section audit for Brandon Orton, written for you because you asked for one and because I want you to see what I do.</div>
+  <div class="meta-row">
+    <span><strong>Read time:</strong> ~8 min</span>
+    <span><strong>Date:</strong> 18 May 2026</span>
+    <span><strong>Version:</strong> V6 lean (full V7 is the paid version)</span>
+    <span><strong>Audience:</strong> Brandon, peer to peer</span>
+  </div>
+</header>
+
+<div class="toc">
+  <span class="label">Sections</span>
+  <ol>
+    <li><a href="#opening">Opening note</a></li>
+    <li><a href="#working">What is working right now</a></li>
+    <li><a href="#leak">The single biggest leak</a></li>
+    <li><a href="#foundation">The foundation question</a></li>
+    <li><a href="#rewrites">Section-by-section rewrites</a></li>
+    <li><a href="#foundations">Profile foundations missing</a></li>
+    <li><a href="#beyond">Why this is not just LinkedIn</a></li>
+    <li><a href="#arc">30-day arc</a></li>
+    <li><a href="#scores">Scoring snapshot</a></li>
+    <li><a href="#closing">Closing note</a></li>
+  </ol>
+</div>
+
+<h2 id="opening">1. Opening note</h2>
+
+<p class="lede">
+  This is the V6 lean version of a multi-section audit I am building as a paid product for cold prospects. It runs about 8 minutes. You get it free because you are my accountability partner and because I want you to see what I do beyond the one-liner version that goes to people I have never met.
+</p>
+
+<p>
+  Tone is peer to peer. I will be direct because that is the whole point of the format. None of this is a pitch. There is no rate sheet at the end. If anything here lands, the best thing you can do for me is send the people in your network my way. The kind of folks who would want this same audit. That is the only ask.
+</p>
+
+<p>
+  Push back where this does not land. The audit is right for what you want, not what looks good on paper.
+</p>
+
+<h2 id="working">2. What is working right now</h2>
+
+<div class="card">
+  <p style="margin-top:0;">Before any of the leaks, name the wins. Most creatives on LinkedIn would trade for what you already have on the page.</p>
+  <ul>
+    <li><strong>Featured section is filled.</strong> Most creatives leave this empty. You have 4+ items pinned, which is the single highest-value real estate on a LinkedIn profile after the headline.</li>
+    <li><strong>The pinned video has real signal.</strong> 41 reactions and 13 comments on the top Featured item. That is social proof a stranger can see in 3 seconds.</li>
+    <li><strong>Recognizable client names are visible.</strong> doTERRA on the brand-film side. Children's Service Society of Utah on the nonprofit side. Both names carry weight in their categories. A buyer scanning your page learns you have shipped at scale and you have shipped for cause-driven work.</li>
+    <li><strong>"Creative Director · Filmmaker" is two clean hats.</strong> Not ambiguous. You direct, and you make the film. No agency-jargon stack to decode.</li>
+  </ul>
+  <p>The bones are good. What follows is not a rebuild. It is a re-aim.</p>
+</div>
+
+<h2 id="leak">3. The single biggest leak: stale identity</h2>
+
+<p class="lede">
+  Your profile sells doTERRA. You no longer work at doTERRA.
+</p>
+
+<p>
+  The Experience section still lists doTERRA as your current employer. That means LinkedIn auto-fills "Creative Director at doTERRA" into the byline that appears under your name in search results, comment threads, DM previews, and "people you may know" cards. Roughly 90% of the surfaces where someone first sees you are pulled from current-employer auto-text, not from your headline. So even when your headline is right, the byline a stranger sees somewhere else on LinkedIn is wrong.
+</p>
+
+<div class="pull">
+  Until Experience is fixed, every other edit you make gets fought by auto-text.
+</div>
+
+<p>
+  Featured content does the actual work of proving you ship strong stuff. The problem is the headline and the byline are not promising what the Featured section delivers. A prospect bounces before they get to the proof.
+</p>
+
+<p>
+  Fix the identity layer first. Everything else compounds after that.
+</p>
+
+<h2 id="foundation">4. The foundation question (answer this first)</h2>
+
+<p>
+  Three identity paths. You answer this. Everything downstream branches off the answer.
+</p>
+
+<div class="path-stack">
+
+  <div class="path recommended">
+    <span class="path-tag rec">Recommended · start here</span>
+    <h4>Path A: Solo independent director</h4>
+    <p><strong>Brand is "Brandon Orton."</strong> No agency name. You are the product. Lean, honest, ships fast. Experience reads "Independent Director / Filmmaker (Self-Employed)" with the start date you actually went out on your own.</p>
+    <p>Why this first: zero entity setup, zero name-debates, zero website rework when you change the agency name in 6 months. The 30-day arc finishes inside this path. You can upgrade to Path B later without breaking anything you ship this month.</p>
+  </div>
+
+  <div class="path upgrade">
+    <span class="path-tag upg">Upgrade · 6 to 12 months out</span>
+    <h4>Path B: Named agency</h4>
+    <p>Pick a name, register the entity, register the domain, build the agency LinkedIn page. Higher leverage long-term. You can hire under it. Clients can refer their procurement team to a company name instead of a person. Pricing conversations get easier because you are pricing a studio, not your hours.</p>
+    <p>Why later, not now: the name is the hardest part. You will spend 2 weeks debating it. That is 2 weeks not shipping the case studies that earn the next 3 clients. Earn the volume first, name the agency once the volume justifies the friction.</p>
+  </div>
+
+  <div class="path dismiss">
+    <span class="path-tag dis">Dismiss</span>
+    <h4>Path C: Stay employee-flavored, chase staff contracts</h4>
+    <p>Pitch yourself as a Creative Director available for studio or big-brand staff roles. Dismissed because you have already left that lane. The fact that you are running your own client load right now means the in-house path is the wrong fit for the next 12 months. Worth naming so we do not pretend it is on the table.</p>
+  </div>
+
+</div>
+
+<p>
+  The rest of this document assumes <strong>Path A</strong> as the working answer. Where Path B changes the recommendation, I show both side by side. If you pick differently, the same structure still applies, you just swap the labels.
+</p>
+
+<h2 id="rewrites">5. Section-by-section rewrites</h2>
+
+<h3>5a · Headline</h3>
+
+<div class="card example">
+  <span class="label">Current</span>
+  <div class="before">Creative Director | Filmmaker</div>
+
+  <span class="label">Path A · option 1 (recommended)</span>
+  <div class="after">I direct films for brands and nonprofits that need a story their audience actually feels.</div>
+
+  <span class="label">Path A · option 2</span>
+  <div class="after alt">Independent director. Brand films and nonprofit storytelling. doTERRA, Children's Service Society of Utah, and others.</div>
+
+  <span class="label">Path A · option 3</span>
+  <div class="after alt">Director and filmmaker for cause-driven brands. 14 years in the chair, currently independent.</div>
+
+  <span class="label">Path B · option 1</span>
+  <div class="after">Founder, [Agency Name] · Brand films and nonprofit storytelling for clients who need a story that moves people.</div>
+
+  <span class="label">Path B · option 2</span>
+  <div class="after alt">Director and founder of [Agency Name]. We make films for brands and nonprofits that need to be felt, not just seen.</div>
+
+  <div class="why">
+    <p><strong>Why these read better.</strong> Current headline names two job titles. New headlines name the work, the cohort served, and the promise the work delivers. "A story their audience actually feels" is a brand promise, not a label. The names of past clients in option 2 do the credibility work for you without the profile having to load that data anywhere else first.</p>
+  </div>
+</div>
+
+<h3>5b · About</h3>
+
+<div class="card example">
+  <span class="label">Current</span>
+  <div class="before">I am driven to create compelling stories through impactful and memorable images.</div>
+
+  <span class="label">Path A · rewrite</span>
+  <div class="after">
+I direct films. For brands that need a story that lands, and for nonprofits that need their mission to actually move someone.<br><br>
+Fourteen years in the director's chair. Brand campaigns for doTERRA. Nonprofit storytelling for Children's Service Society of Utah. A handful of others I will name when they go live.<br><br>
+What I care about is the moment a viewer stops scrolling because something true just happened on screen. Not the awards. Not the equipment. The one cut, in the one minute, where you can feel the difference.<br><br>
+Currently independent. Available for: brand films (15 to 90 seconds), longer-form nonprofit pieces, and campaign-anchor films for product launches. Reach out if you are 6 to 10 weeks out from a shoot and you want a director who will push the story before he picks the lens.
+  </div>
+
+  <span class="label">Path B · rewrite</span>
+  <div class="after alt">
+[Agency Name] is a small studio I founded to make films for brands and nonprofits who need their story to land.<br><br>
+We do brand films, nonprofit campaigns, and product-launch anchor pieces. Recent work: doTERRA, Children's Service Society of Utah, and a handful of other clients we will name as the work goes live.<br><br>
+The work is small on purpose. One director (me), a tight crew, and the same story-first approach across every project. If you are looking for a studio that will push the brief before they pick the lens, we should talk.<br><br>
+Reach out at [agency-email] or DM here. We typically book 6 to 10 weeks out.
+  </div>
+
+  <div class="why">
+    <p><strong>What changed.</strong> Current About is 16 words. New About is ~140 words. The current sentence is true but generic. It does not name the work, the clients, the timeline a buyer should plan around, or the kind of person who should reach out. The rewrite does all four. The closing paragraph is the line that turns a curious scroll into a real DM.</p>
+    <p><strong>Why no buzzwords.</strong> No "passionate." No "visual storyteller." No "I help brands tell." Every line names a specific thing a viewer or a buyer would recognize. The story-not-the-lens line is the one most creative directors will repost. Keep it.</p>
+  </div>
+</div>
+
+<h3>5c · Experience (the critical fix)</h3>
+
+<div class="card example">
+  <p style="margin-top:0;"><strong>This is the fix that unlocks every other edit.</strong> Until this is done, headline and About rewrites get fought by the byline auto-text everywhere else on LinkedIn.</p>
+
+  <span class="label">Current Experience top entry</span>
+  <div class="before">Creative Director · doTERRA · (no end date)</div>
+
+  <span class="label">Path A · what to change</span>
+  <div class="after">
+<strong>Step 1.</strong> Edit the doTERRA entry. Add the actual end date (the month and year you left).<br>
+<strong>Step 2.</strong> Add a new current-role entry above it:<br><br>
+Role: Independent Director / Filmmaker<br>
+Company: Self-Employed (or leave blank, LinkedIn handles either)<br>
+Start date: the month and year you actually went out on your own<br>
+Location: Utah, United States<br>
+Description: 2 to 4 sentences, same voice as the new About. Name the work, name a couple recent clients, name the kinds of projects.
+  </div>
+
+  <span class="label">Path B · what to change</span>
+  <div class="after alt">
+Same steps, except the new current-role entry reads:<br><br>
+Role: Founder &amp; Director<br>
+Company: [Agency Name] · LinkedIn company page once it exists<br>
+Start date: agency launch date<br>
+Description: 2 to 4 sentences, agency framing, same client list.
+  </div>
+
+  <div class="why">
+    <p><strong>Why this is the unlock.</strong> The instant the current-role entry flips from doTERRA to "Independent Director" or "Founder," LinkedIn rebuilds every auto-byline across search, comments, DMs, and "people you may know" cards. Your profile starts working in the surfaces you cannot directly edit. This is the single highest-leverage edit on the page.</p>
+  </div>
+</div>
+
+<h3>5d · Featured captions</h3>
+
+<p>
+  Each pinned item gets a one-line caption that names the WORK, the CLIENT, and the OUTCOME. Right now most captions either inherit a generic platform title or are blank. Rewrite each one with this pattern.
+</p>
+
+<div class="caption-block">
+  <span class="src">Featured item 1 · the pinned video (41 reactions, 13 comments)</span>
+  <div class="cap">"Brand film I directed. At the 2-minute mark, the moment everything turns. The cut that landed this campaign in front of [X] viewers and earned [outcome]."</div>
+</div>
+
+<div class="caption-block">
+  <span class="src">Featured item 2 · Children's Service Society of Utah link</span>
+  <div class="cap">"Nonprofit campaign film for Children's Service Society of Utah. Every child deserves a safe place. The film helped CSS [recruit X foster families / raise $X / outcome]."</div>
+</div>
+
+<div class="caption-block">
+  <span class="src">Featured item 3 · doTERRA "Pursue What's Pure"</span>
+  <div class="cap">"Brand film I directed for doTERRA. Pursue What's Pure campaign. [Outcome metric: views, reach, in-store lift, internal-launch use, whatever you have]."</div>
+</div>
+
+<div class="caption-block">
+  <span class="src">Featured item 4 · the cut-off "Sl..." item</span>
+  <div class="cap">Cannot see this from the screenshot. If it is older or off-brand for where you are headed, unpin it. Featured is real estate. Four strong items beats five mixed ones.</div>
+</div>
+
+<div class="card">
+  <p style="margin:0;"><strong>Outcome metric note.</strong> If you do not have a hard number for any of these, use the qualitative outcome. "Used as the anchor film at the 2024 corporate launch." "Drove a 3x bump in foster-family inquiries." "Most-shared piece in the brand's social calendar that quarter." Real and specific beats round and vague.</p>
+</div>
+
+<h3>5e · Recommendations</h3>
+
+<div class="card">
+  <p style="margin-top:0;">You almost certainly have 1 or 2 recommendations already from the doTERRA tenure. The play is to add 3 more that anchor the current chapter.</p>
+  <ul>
+    <li><strong>Ask 1: doTERRA producer or director-tier contact</strong> who can name the campaign you directed and the outcome it drove.</li>
+    <li><strong>Ask 2: Children's Service Society of Utah contact</strong> who can speak to how the film moved the mission, not just the production quality.</li>
+    <li><strong>Ask 3: the most recent agency client</strong> you shipped for. Even if it is small. Recency is the signal.</li>
+  </ul>
+  <p>What to ask them for: "2 to 3 sentences about the outcome the work drove, not the personality I bring to the room." The personality-recs are nice. The outcome-recs are the ones that convert a profile-viewer into a DM.</p>
+  <p><strong>Template you can paste into a DM:</strong></p>
+  <div class="after">
+"Hey [name]. I am tightening up my LinkedIn this month and would love a recommendation focused on the outcome the [doTERRA campaign / CSS film / project name] drove rather than my work style. 2 or 3 sentences is plenty. Happy to draft a starter version for you to edit if that is easier. No rush, end of next week is great."
+  </div>
+</div>
+
+<h3>5f · Activity (posting cadence)</h3>
+
+<div class="card">
+  <p style="margin-top:0;">You have under-posted. That is fine. Most directors do. The fix is small.</p>
+  <ul>
+    <li><strong>1 substantive post per week.</strong> Case-study, BTS shot, or thought piece on the craft. 4 to 6 paragraphs. One image or short clip.</li>
+    <li><strong>2 to 3 comment threads per week on others' posts.</strong> Other directors, agency owners, brand-side marketers in your network. Substantive comment, not "great post." 2 to 4 sentences.</li>
+    <li><strong>4 weeks to build a cadence visible enough that profile-viewers see "this person is active here."</strong> Not viral. Visible.</li>
+  </ul>
+  <p>The point is not engagement-farming. The point is that when a prospect lands on your profile and clicks Activity, they see proof you are present in the space, not a ghost.</p>
+</div>
+
+<h2 id="foundations">6. Profile foundations missing (off-LinkedIn)</h2>
+
+<p>These are the gaps outside LinkedIn that LinkedIn keeps pointing at and finding nothing.</p>
+
+<div class="card">
+  <h4>Email</h4>
+  <p>Generic @me.com works for personal correspondence. It undermines business credibility when a prospect emails you back. Recommend: agency-domain email, or at minimum <code style="font-family:var(--mono); font-size:13px; background:rgba(0,183,194,0.08); padding:1px 6px; border-radius:3px;">brandon@brandonorton.com</code>. Domain costs about $12 per year. Email hosting via Google Workspace is $7 per month. Total spend to look like a business: ~$100 per year.</p>
+
+  <h4>Website</h4>
+  <p>You do not have one. A single-page landing site solves this in a weekend. Domain, showreel, bio, contact form, project list. Nothing fancy. Built right, it is the conversion layer LinkedIn is currently dumping leads into and watching them disappear.</p>
+  <p><strong>Offer:</strong> I will build this for you. Free. Same showcase reason as this audit. If you want it, just tell me. No pressure, no follow-up, no string. The whole point is for you to have something to point people at when they DM you "where can I see more of your work."</p>
+
+  <h4>LinkedIn custom URL</h4>
+  <p>Already clean at <code style="font-family:var(--mono); font-size:13px; background:rgba(0,183,194,0.08); padding:1px 6px; border-radius:3px;">linkedin.com/in/brandonorton</code>. No change needed.</p>
+
+  <h4>Banner image</h4>
+  <p>Likely still the default LinkedIn blue or a generic stock image. Worth confirming. If default, replace with a still frame from a recent project. Wide aspect ratio. The banner is the largest single image on the page and it is currently selling nothing.</p>
+
+  <h4>Contact info tab</h4>
+  <p>Likely empty or out of date. Add agency-domain email and website URL once both exist. Hide phone. Skip Twitter unless you actually post there. Add Instagram only if it is current and on-brand.</p>
+</div>
+
+<h2 id="beyond">7. Why this is not just a LinkedIn fix</h2>
+
+<p>
+  LinkedIn is the discovery layer. Conversion happens off-platform. A prospect who is convinced by your headline, About, and Featured does not buy from LinkedIn. They DM you, you reply, you point them at a website, they look at the website, they email you, you book a call.
+</p>
+
+<p>
+  No website means a chunk of those convinced prospects fall out of the funnel between "DM you" and "email you." There is nowhere to send them that consolidates the proof. So they go cold.
+</p>
+
+<div class="pull">
+  Fixing LinkedIn without fixing the website is like cleaning the storefront window while the front door is locked.
+</div>
+
+<p>
+  The 30-day arc below assumes both happen in parallel. That is why the free landing-site offer is in this document and not a separate conversation.
+</p>
+
+<h2 id="arc">8. The 30-day arc</h2>
+
+<div class="card">
+  <div class="week-stack">
+    <div class="week">
+      <div class="week-tag">Week 1<span class="dates">May 19 to May 25</span></div>
+      <div class="week-body">
+        <p>Pick the identity path. Path A is the default if you do not want to decide yet.</p>
+        <p>Update Experience section. End doTERRA tenure with the actual end date. Add the current-role entry. This is the single highest-leverage edit on the entire profile.</p>
+        <p>Edit the headline live. Pick one of the options in 5a. Ship it. You can tune the words later.</p>
+      </div>
+    </div>
+    <div class="week">
+      <div class="week-tag">Week 2<span class="dates">May 26 to June 1</span></div>
+      <div class="week-body">
+        <p>Rewrite the About using the template in 5b.</p>
+        <p>If you want the free landing site: tell me this week so I can ship it inside Week 2. Domain + 1 page + contact form. Live by end of week.</p>
+        <p>Set up the agency-domain email (or brandon@brandonorton.com). Forward it to your existing inbox so nothing changes operationally.</p>
+      </div>
+    </div>
+    <div class="week">
+      <div class="week-tag">Week 3<span class="dates">June 2 to June 8</span></div>
+      <div class="week-body">
+        <p>Post 1 case study. Pick doTERRA or CSS. Frame it around the outcome the film drove, not the production craft. 4 to 6 paragraphs. One still image.</p>
+        <p>Post 1 BTS shot. Single image, 2 paragraphs, name the project and one specific thing you learned.</p>
+        <p>Post 1 thought piece. Pick one belief you hold about directing that most peers do not. Write the 200-word version.</p>
+        <p>DM 3 past clients with the recommendation template in 5e.</p>
+      </div>
+    </div>
+    <div class="week">
+      <div class="week-tag">Week 4<span class="dates">June 9 to June 15</span></div>
+      <div class="week-body">
+        <p>Post 1 client-win post (could be a recent project or a recommendation you just received).</p>
+        <p>Post 1 BTS shot.</p>
+        <p>Comment substantively on 8 to 10 posts from other creative directors, agency owners, or brand-side marketers in your network. Not "great post." 2 to 4 sentences each.</p>
+      </div>
+    </div>
+    <div class="week">
+      <div class="week-tag">Week 5<span class="dates">June 16</span></div>
+      <div class="week-body">
+        <p>Baseline review. Pull the numbers. Profile views (LinkedIn shows you the last 90 days). DM volume. If the landing site is live: page visits and any form submissions.</p>
+        <p>Iterate. If headline option 1 is not pulling, swap to option 2. If the case-study format works, double down. If Activity is flat despite the cadence, post pattern is wrong, change the topic mix.</p>
+        <p>From here it is maintenance. 1 post per week, 2 to 3 comment threads, 1 case study per month, profile review every quarter.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h2 id="scores">9. Scoring snapshot</h2>
+
+<p>
+  Numbers are diagnostic estimates, not metrics from LinkedIn analytics. Score out of 100 per section, then total out of 700.
+</p>
+
+<div class="card" style="padding: 18px 20px;">
+<table>
+  <thead>
+    <tr>
+      <th>Section</th>
+      <th>Current</th>
+      <th>Path A · 30 days</th>
+      <th>Path B · 6 months</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>Headline</td><td class="score-current">35/100</td><td class="score-a">85/100</td><td class="score-b">90/100</td></tr>
+    <tr><td>About</td><td class="score-current">25/100</td><td class="score-a">80/100</td><td class="score-b">85/100</td></tr>
+    <tr><td>Experience (current employer)</td><td class="score-current">10/100</td><td class="score-a">90/100</td><td class="score-b">90/100</td></tr>
+    <tr><td>Featured (captions)</td><td class="score-current">50/100</td><td class="score-a">80/100</td><td class="score-b">90/100</td></tr>
+    <tr><td>Recommendations</td><td class="score-current">30/100</td><td class="score-a">70/100</td><td class="score-b">80/100</td></tr>
+    <tr><td>Activity</td><td class="score-current">20/100</td><td class="score-a">60/100</td><td class="score-b">80/100</td></tr>
+    <tr><td>Off-LinkedIn (website + email)</td><td class="score-current">5/100</td><td class="score-a">75/100</td><td class="score-b">90/100</td></tr>
+    <tr class="total">
+      <td>Total</td>
+      <td class="score-current">175/700 (25/100)</td>
+      <td class="score-a">540/700 (77/100)</td>
+      <td class="score-b">605/700 (86/100)</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<p>
+  Read the table as: the work to go from 25/100 to 77/100 is 30 days of focused edits. The work to go from 77/100 to 86/100 is 6 months of compounding (agency entity, name, page, more recommendations, consistent activity). The first jump is the one that matters. The second is upside.
+</p>
+
+<h2 id="closing">10. Closing note</h2>
+
+<div class="closing">
+  <p>
+    <strong>This is the V6 lean version.</strong> The full V7 audit adds a post pipeline, a DM funnel, and a 90-day strategy. I am building V7 as a paid product for cold prospects. You get V6 free because you are my accountability partner and because the format works better when I am writing for someone who will tell me what is wrong with it.
+  </p>
+  <p>
+    <strong>The landing site offer is real.</strong> If you want the 1-page site, just tell me. I will build it. Same showcase reason as this audit. No charge. No follow-up.
+  </p>
+  <p>
+    <strong>If any of this lands, the best thing you can do is send people my way.</strong> Other creative directors. Agency owners. Nonprofit marketing folks. Anyone who would benefit from this same diagnostic. That is all I would ask.
+  </p>
+  <p>
+    <strong>Push back where this does not land.</strong> The audit is right for what YOU want, not what looks good on paper. If Path A is wrong for you, tell me. If a rewrite reads off-voice, tell me. The point is to ship the version that actually fits, not the version I wrote first.
+  </p>
+</div>
+
+<div class="footer">
+  <p><strong>Catalyst Works Consulting</strong> · LinkedIn audit V6 lean · prepared 18 May 2026 for Brandon Orton</p>
+  <p>Link is unindexed. Share at will, anyone with the URL can read it.</p>
+</div>
+
+</div>
+</body>
+</html>
