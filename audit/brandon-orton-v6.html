@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/jpeg" href="/CatalystWorks_logo.jpg">
 <meta name="robots" content="noindex, nofollow">
 <title>LinkedIn audit for Brandon Orton · V6 · Catalyst Works</title>
 <style>
@@ -31,24 +32,52 @@
   }
   .wrap { max-width: 760px; margin: 0 auto; padding: 0 18px; }
 
-  /* Sticky nav (mobile-first) */
+  /* Fixed transparent nav, blur-darkens on scroll (matches catalystworks.consulting) */
+  body { padding-top: 64px; }
   .report-nav {
-    position: sticky;
-    top: 0;
+    position: fixed;
+    top: 0; left: 0; right: 0;
     z-index: 100;
-    background: var(--bg-2);
-    border-bottom: 1px solid var(--line);
-    padding: 12px 18px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 12px;
+    padding: 14px 18px;
+    background: rgba(7, 26, 46, 0);
+    backdrop-filter: blur(0);
+    -webkit-backdrop-filter: blur(0);
+    border-bottom: 1px solid transparent;
+    transition: background 300ms cubic-bezier(0.4, 0, 0.2, 1),
+                backdrop-filter 300ms,
+                -webkit-backdrop-filter 300ms,
+                border-color 300ms;
   }
-  .nav-brand {
-    font: 600 12px var(--mono);
+  .report-nav.scrolled {
+    background: rgba(7, 26, 46, 0.82);
+    backdrop-filter: blur(16px) saturate(1.4);
+    -webkit-backdrop-filter: blur(16px) saturate(1.4);
+    border-bottom-color: rgba(31, 53, 81, 0.6);
+  }
+  .nav-brand-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: #F3F6F9;
+    font: 600 16px var(--serif);
+    letter-spacing: -0.01em;
+  }
+  .nav-brand-link img {
+    border-radius: 4px;
+    display: block;
+  }
+  .nav-brand-text { display: inline-block; }
+  .nav-accent {
     color: var(--primary);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+    font-weight: 700;
+  }
+  @media (max-width: 480px) {
+    .nav-brand-text { display: none; }
   }
   .nav-links { display: none; }
   .hamburger {
@@ -261,15 +290,34 @@
     color: var(--ink);
     line-height: 1.25;
   }
-  .section-chevron {
-    color: var(--ink-dim);
-    font-size: 14px;
-    transition: transform 0.2s ease;
+  .section-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    margin-left: auto;
+    border: 1.5px solid rgba(0, 183, 194, 0.4);
+    border-radius: 50%;
+    font: 700 22px/1 var(--sans);
+    color: var(--primary);
+    background: rgba(0, 183, 194, 0.08);
+    transition: background 200ms, border-color 200ms, color 200ms, transform 220ms cubic-bezier(0.4, 0, 0.2, 1);
     flex-shrink: 0;
   }
-  .report-section[open] > summary > .section-chevron {
-    transform: rotate(180deg);
-    color: var(--primary);
+  .section-toggle::before { content: "+"; line-height: 1; display: block; }
+  details[open] > summary .section-toggle {
+    background: rgba(255, 122, 0, 0.12);
+    border-color: rgba(255, 122, 0, 0.5);
+    color: var(--accent);
+    transform: rotate(45deg);
+  }
+  summary:hover .section-toggle {
+    background: rgba(0, 183, 194, 0.16);
+    border-color: rgba(0, 183, 194, 0.7);
+  }
+  details[open] > summary:hover .section-toggle {
+    background: rgba(255, 122, 0, 0.2);
   }
   .report-section-body {
     padding: 4px 18px 18px;
@@ -465,6 +513,17 @@
   .closing p + p { margin-top: 14px; }
   .closing strong { color: var(--ink); }
 
+  /* Referral-ask link — anchor pops in accent orange */
+  .referral-link {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+    border-bottom: 1px dashed rgba(255, 122, 0, 0.4);
+    transition: border-color 200ms;
+    word-break: break-word;
+  }
+  .referral-link:hover { border-bottom-color: var(--accent); }
+
   .footer {
     margin-top: 40px;
     padding-top: 18px;
@@ -552,10 +611,10 @@
 
   /* Desktop layout */
   @media (min-width: 769px) {
-    body { padding: 0 0 80px; }
+    body { padding: 72px 0 80px; }
     .wrap { padding: 0 24px; }
     .report-nav {
-      padding: 14px 24px;
+      padding: 18px 32px;
       justify-content: flex-start;
       gap: 28px;
     }
@@ -622,7 +681,10 @@
 <body>
 
 <nav class="report-nav" id="report-nav">
-  <div class="nav-brand">Brandon · LinkedIn Audit V6</div>
+  <a href="#" class="nav-brand-link" aria-label="Catalyst Works">
+    <img src="/CatalystWorks_logo.jpg" alt="" width="32" height="32" decoding="async">
+    <span class="nav-brand-text">Catalyst<span class="nav-accent">Works</span></span>
+  </a>
   <ul class="nav-links">
     <li><a href="#tldr">TL;DR</a></li>
     <li><a href="#whats-working">Working</a></li>
@@ -678,7 +740,7 @@
     <li><strong>The fix:</strong> Path A (solo director under your own name) over the next 30 days. Path B (named agency) is the 6-month upgrade.</li>
     <li><strong>Current score:</strong> 25/100. Projected after 30-day Path A execution: 77/100.</li>
     <li><strong>Bonus:</strong> I'll build you a 1-page landing site free. Same showcase reason as this audit. No charge.</li>
-    <li><strong>The ask:</strong> if this lands, send people my way. Other creative directors, agency owners, nonprofit marketing folks.</li>
+    <li><strong>The ask:</strong> if this lands, send people my way. Other creative directors, agency owners, nonprofit marketing folks. Easiest way to make the intro: forward them this page &rarr; <a href="https://catalystworks.consulting/proof/companion-v1" class="referral-link">catalystworks.consulting/proof/companion-v1</a></li>
   </ul>
   <p class="tldr-cta">Keep reading below for the section-by-section breakdown + 30-day arc. Skip to any section using the nav above.</p>
 </section>
@@ -701,7 +763,7 @@
   <summary>
     <span class="section-number">01</span>
     <span class="section-title">What is working right now</span>
-    <span class="section-chevron">▾</span>
+    <span class="section-toggle" aria-hidden="true"></span>
   </summary>
   <div class="report-section-body">
     <div class="card">
@@ -721,7 +783,7 @@
   <summary>
     <span class="section-number">02</span>
     <span class="section-title">The single biggest leak: stale identity</span>
-    <span class="section-chevron">▾</span>
+    <span class="section-toggle" aria-hidden="true"></span>
   </summary>
   <div class="report-section-body">
     <p class="lede">
@@ -750,7 +812,7 @@
   <summary>
     <span class="section-number">03</span>
     <span class="section-title">The foundation question (answer this first)</span>
-    <span class="section-chevron">▾</span>
+    <span class="section-toggle" aria-hidden="true"></span>
   </summary>
   <div class="report-section-body">
     <p>
@@ -791,7 +853,7 @@
   <summary>
     <span class="section-number">04</span>
     <span class="section-title">Section-by-section rewrites</span>
-    <span class="section-chevron">▾</span>
+    <span class="section-toggle" aria-hidden="true"></span>
   </summary>
   <div class="report-section-body">
     <h3>4a · Headline</h3>
@@ -1103,7 +1165,7 @@ Then draft 5 paragraphs, 180-260 words. Active voice. End with one image suggest
   <summary>
     <span class="section-number">05</span>
     <span class="section-title">Profile foundations missing (off-LinkedIn)</span>
-    <span class="section-chevron">▾</span>
+    <span class="section-toggle" aria-hidden="true"></span>
   </summary>
   <div class="report-section-body">
     <p>These are the gaps outside LinkedIn that LinkedIn keeps pointing at and finding nothing.</p>
@@ -1132,7 +1194,7 @@ Then draft 5 paragraphs, 180-260 words. Active voice. End with one image suggest
   <summary>
     <span class="section-number">06</span>
     <span class="section-title">Why this is not just a LinkedIn fix</span>
-    <span class="section-chevron">▾</span>
+    <span class="section-toggle" aria-hidden="true"></span>
   </summary>
   <div class="report-section-body">
     <p>
@@ -1157,7 +1219,7 @@ Then draft 5 paragraphs, 180-260 words. Active voice. End with one image suggest
   <summary>
     <span class="section-number">07</span>
     <span class="section-title">The 30-day arc</span>
-    <span class="section-chevron">▾</span>
+    <span class="section-toggle" aria-hidden="true"></span>
   </summary>
   <div class="report-section-body">
     <div class="card">
@@ -1212,7 +1274,7 @@ Then draft 5 paragraphs, 180-260 words. Active voice. End with one image suggest
   <summary>
     <span class="section-number">08</span>
     <span class="section-title">Scoring snapshot</span>
-    <span class="section-chevron">▾</span>
+    <span class="section-toggle" aria-hidden="true"></span>
   </summary>
   <div class="report-section-body">
     <p>
@@ -1266,6 +1328,9 @@ Then draft 5 paragraphs, 180-260 words. Active voice. End with one image suggest
     <strong>If any of this lands, the best thing you can do is send people my way.</strong> Other creative directors. Agency owners. Nonprofit marketing folks. Anyone who would benefit from this same diagnostic. That is all I would ask.
   </p>
   <p>
+    Easiest path: forward them this page so they see what I do in 60 seconds &rarr; <a href="https://catalystworks.consulting/proof/companion-v1" class="referral-link">catalystworks.consulting/proof/companion-v1</a>. Beats trying to explain it yourself.
+  </p>
+  <p>
     <strong>Push back where this does not land.</strong> The audit is right for what YOU want, not what looks good on paper. If Path A is wrong for you, tell me. If a rewrite reads off-voice, tell me. The point is to ship the version that actually fits, not the version I wrote first.
   </p>
 </div>
@@ -1279,6 +1344,15 @@ Then draft 5 paragraphs, 180-260 words. Active voice. End with one image suggest
 
 <script>
 (function() {
+  // Transparent nav -- blur-darken on scroll, matches catalystworks.consulting
+  var reportNav = document.getElementById('report-nav');
+  function syncNav() {
+    if (window.scrollY > 8) reportNav.classList.add('scrolled');
+    else reportNav.classList.remove('scrolled');
+  }
+  window.addEventListener('scroll', syncNav, { passive: true });
+  syncNav();
+
   var hamburger = document.getElementById('hamburger');
   var overlay = document.getElementById('nav-overlay');
   var closeBtn = overlay.querySelector('.overlay-close');
