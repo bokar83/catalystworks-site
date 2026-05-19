@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Lead Rescue OS for trade shops · Signal Works</title>
+<meta name="description" content="Catch missed calls + book same-day callbacks for HVAC and roofing shops. 30 recovered leads in 30 days or I keep working until you hit it.">
+<link rel="icon" type="image/jpeg" href="/CatalystWorks_logo.jpg">
+<link rel="canonical" href="https://catalystworks.consulting/lead-rescue-os">
+<style>
+  :root {
+    --bg: #0A0E14;
+    --bg-2: #11161F;
+    --card: #141A24;
+    --line: rgba(245,239,226,0.08);
+    --ink: #F5EFE2;
+    --ink-dim: #9AA3B2;
+    --primary: #00B7C2;
+    --primary-soft: rgba(0,183,194,0.08);
+    --accent: #E8A66B;
+    --mono: ui-monospace, SFMono-Regular, "SF Mono", Consolas, monospace;
+    --serif: Spectral, "Source Serif 4", Georgia, serif;
+    --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font: 16px/1.6 var(--sans);
+    background: var(--bg);
+    color: var(--ink);
+    padding: 32px 20px 72px;
+    min-height: 100vh;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; }
+
+  .nav-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 28px;
+    text-decoration: none;
+    color: var(--ink);
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 17px;
+    letter-spacing: -0.01em;
+  }
+  .nav-brand img {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .kicker {
+    color: var(--primary);
+    font: 600 11px/1 var(--mono);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  h1 {
+    font-family: var(--serif);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    font-size: 34px;
+    line-height: 1.15;
+    margin-bottom: 14px;
+  }
+  .lede {
+    font-size: 18px;
+    line-height: 1.5;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+  .lede strong { color: var(--primary); font-weight: 600; }
+
+  .reply-context {
+    color: var(--ink-dim);
+    font-size: 14px;
+    margin-top: 14px;
+  }
+
+  .tldr {
+    background: var(--primary-soft);
+    border-left: 3px solid var(--primary);
+    border-radius: 6px;
+    padding: 18px 20px;
+    margin: 28px 0 8px;
+  }
+  .tldr .label {
+    font: 600 10px var(--mono);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--primary);
+    display: block;
+    margin-bottom: 6px;
+  }
+  .tldr p {
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--ink);
+  }
+
+  h2 {
+    font-family: var(--serif);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    font-size: 22px;
+    margin: 40px 0 14px;
+    color: var(--ink);
+  }
+
+  p { margin: 10px 0; color: var(--ink); }
+  p.dim { color: var(--ink-dim); font-size: 14px; }
+
+  .steps {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin: 18px 0;
+  }
+  .step {
+    background: var(--card);
+    border-radius: 10px;
+    padding: 16px 18px;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+  .step-num {
+    flex: 0 0 32px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: var(--bg);
+    font: 700 14px var(--mono);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .step-body { flex: 1; }
+  .step-title {
+    font-weight: 600;
+    font-size: 15px;
+    margin-bottom: 4px;
+    color: var(--ink);
+  }
+  .step-text {
+    font-size: 14px;
+    color: var(--ink-dim);
+    line-height: 1.5;
+  }
+  .step-icon {
+    flex: 0 0 28px;
+    color: var(--primary);
+    margin-top: 2px;
+  }
+
+  .math {
+    background: var(--card);
+    border-radius: 10px;
+    padding: 20px 22px;
+    margin: 18px 0;
+  }
+  .math-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 10px 0;
+    border-bottom: 1px dashed var(--line);
+    font-size: 15px;
+  }
+  .math-row:last-child { border-bottom: 0; }
+  .math-row.total {
+    padding-top: 16px;
+    margin-top: 8px;
+    border-top: 1px solid var(--line);
+    border-bottom: 0;
+    font-weight: 600;
+  }
+  .math-label { color: var(--ink-dim); }
+  .math-val { color: var(--ink); font-family: var(--mono); font-size: 14px; }
+  .math-row.total .math-val { color: var(--primary); font-size: 18px; }
+  .math-note {
+    margin-top: 14px;
+    font-size: 13px;
+    color: var(--ink-dim);
+    line-height: 1.5;
+    font-style: italic;
+  }
+
+  .callout {
+    background: var(--primary-soft);
+    border-radius: 10px;
+    padding: 18px 22px;
+    margin: 18px 0;
+    border-left: 3px solid var(--primary);
+  }
+  .callout p { font-size: 15px; line-height: 1.55; }
+  .callout strong { color: var(--primary); font-weight: 600; }
+
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin: 18px 0;
+  }
+  .price-card {
+    background: var(--card);
+    border-radius: 10px;
+    padding: 18px 20px;
+  }
+  .price-card.featured {
+    background: var(--primary-soft);
+    border-left: 3px solid var(--primary);
+  }
+  .price-tag {
+    font: 600 11px var(--mono);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin-bottom: 6px;
+  }
+  .price-amt {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: 24px;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+  .price-amt span {
+    font-family: var(--sans);
+    font-weight: 400;
+    font-size: 15px;
+    color: var(--ink-dim);
+  }
+  .price-text { font-size: 14px; color: var(--ink-dim); line-height: 1.5; }
+
+  .cta-wrap {
+    margin: 36px 0 24px;
+    padding: 24px;
+    background: var(--card);
+    border-radius: 12px;
+    text-align: center;
+  }
+  .cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    background: var(--primary);
+    color: var(--bg);
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 16px;
+    margin-top: 8px;
+    transition: transform 120ms ease, background 120ms ease;
+  }
+  .cta-btn:hover { background: #00CDD9; transform: translateY(-1px); }
+  .cta-alt {
+    display: block;
+    margin-top: 14px;
+    font-size: 14px;
+    color: var(--ink-dim);
+  }
+  .cta-alt a { color: var(--primary); text-decoration: none; }
+
+  footer {
+    margin-top: 48px;
+    padding-top: 24px;
+    font-size: 13px;
+    color: var(--ink-dim);
+    text-align: center;
+    line-height: 1.6;
+  }
+  footer a { color: var(--primary); text-decoration: none; }
+
+  @media (min-width: 1024px) {
+    body { padding: 56px 24px 96px; font-size: 17px; }
+    h1 { font-size: 44px; }
+    .lede { font-size: 20px; }
+    h2 { font-size: 26px; }
+    .step-title { font-size: 16px; }
+    .step-text { font-size: 15px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <a class="nav-brand" href="https://catalystworks.consulting/">
+    <img src="/CatalystWorks_logo.jpg" alt="">
+    Signal Works
+  </a>
+
+  <header>
+    <div class="kicker">Lead Rescue OS · for HVAC + Roofing shops</div>
+    <h1>Stop losing $450K a year to missed calls.</h1>
+    <p class="lede">I catch your missed calls, book the callbacks, and route them to your tech the same day. <strong>30 recovered leads in 30 days</strong> or I keep working until you hit it.</p>
+    <p class="reply-context">You replied YES to my email. This is what you asked for. 4 minute read.</p>
+  </header>
+
+  <div class="tldr">
+    <span class="label">TL;DR</span>
+    <p>You miss roughly 30% of inbound calls. On a 4-10 truck shop, that's about 60 leads a month walking to your competitor. I install Twilio + Vapi + n8n + your CRM so every missed call gets caught, every after-hours lead gets a callback booked, and every qualified job lands in your dispatcher's queue same-day. You own the stack. I configure, train, document, walk away.</p>
+  </div>
+
+  <h2>What this is</h2>
+  <p>A done-for-you missed-call recovery system. When someone calls your shop and you don't pick up (lunch, on a roof, after 5pm, weekend), an AI voice agent answers within 2 rings, qualifies the lead, books a callback slot, and drops the job in your CRM with the lead's name, address, problem, and urgency.</p>
+  <p>No more voicemails that never get returned. No more after-hours leads going to the next shop on Google.</p>
+
+  <h2>How it works</h2>
+  <div class="steps">
+    <div class="step">
+      <div class="step-icon" aria-hidden="true">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      </div>
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <div class="step-title">Customer calls your shop</div>
+        <div class="step-text">Your line is busy, after-hours, or your office is on a job. Twilio routes the call to our AI agent within 2 rings.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-icon" aria-hidden="true">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+      </div>
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <div class="step-title">AI agent qualifies the lead</div>
+        <div class="step-text">Vapi voice agent (sounds human, trained on your shop) asks 4-6 questions: name, address, problem, urgency, preferred callback window.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-icon" aria-hidden="true">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      </div>
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <div class="step-title">Callback lands in your CRM</div>
+        <div class="step-text">n8n pushes the qualified lead into your dispatcher's queue (ServiceTitan, Housecall Pro, Jobber, whatever you run). Tagged "AI-rescued" so you can track ROI.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-icon" aria-hidden="true">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      </div>
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <div class="step-title">Your tech calls back same-day</div>
+        <div class="step-text">SMS reminder fires 15 min before the callback window. Your tech or CSR calls with full context. Booking rate jumps because the lead is already pre-qualified.</div>
+      </div>
+    </div>
+  </div>
+
+  <h2>The math</h2>
+  <div class="math">
+    <div class="math-row">
+      <span class="math-label">Monthly inbound calls (typical 4-10 truck shop)</span>
+      <span class="math-val">200</span>
+    </div>
+    <div class="math-row">
+      <span class="math-label">Missed call rate (industry research)</span>
+      <span class="math-val">30%</span>
+    </div>
+    <div class="math-row">
+      <span class="math-label">Missed calls per month</span>
+      <span class="math-val">60</span>
+    </div>
+    <div class="math-row">
+      <span class="math-label">Recovery rate with Lead Rescue OS</span>
+      <span class="math-val">50%</span>
+    </div>
+    <div class="math-row">
+      <span class="math-label">Recovered leads per month</span>
+      <span class="math-val">30</span>
+    </div>
+    <div class="math-row">
+      <span class="math-label">Avg ticket (HVAC service + roofing repair mix)</span>
+      <span class="math-val">$1,250</span>
+    </div>
+    <div class="math-row total">
+      <span class="math-label">Recovered revenue per month</span>
+      <span class="math-val">$37,500</span>
+    </div>
+    <div class="math-row total">
+      <span class="math-label">Recovered revenue per year</span>
+      <span class="math-val">$450,000</span>
+    </div>
+    <p class="math-note">Assumptions, not promises. 30% miss rate and 50% recovery are industry benchmarks (Invoca, Service Direct). Your numbers depend on call volume, ticket size, and your tech response speed. We pull your actual Google / LSA / phone log baseline in week 1 and recalibrate.</p>
+  </div>
+
+  <h2>What you keep</h2>
+  <div class="callout">
+    <p>You own the stack. <strong>Twilio is on your account. Vapi is on your account. n8n runs on your server (or mine if you prefer). Your CRM stays your CRM.</strong> I configure everything, train you and your CSR, document the whole build, and walk away. Or stay on monthly retainer if you want me handling tweaks. Your call.</p>
+    <p style="margin-top: 10px;">No proprietary lock-in. No "we host it for you, so you can't leave." If you fire me tomorrow, the system keeps running.</p>
+  </div>
+
+  <h2>How I de-risk this for you</h2>
+  <div class="callout">
+    <p><strong>30 recovered leads in 30 days, or I keep working until you hit it.</strong></p>
+    <p style="margin-top: 10px;">No escape hatches, no "results may vary" fine print. If month 1 lands at 22 recovered leads instead of 30, I work month 2 free until we cross the line. The only way this doesn't work is if your shop genuinely has no inbound demand, in which case you'd know on the discovery call and I wouldn't take the project.</p>
+  </div>
+
+  <h2>Pricing</h2>
+  <div class="pricing-grid">
+    <div class="price-card featured">
+      <div class="price-tag">Founding cohort</div>
+      <div class="price-amt">$6,000 <span>+ $1,500/mo</span></div>
+      <p class="price-text">First HVAC shop + first roofing shop. Same build, lower upfront, in exchange for a named case study after month 2. I am pre-revenue, you get a discount, we both win.</p>
+    </div>
+    <div class="price-card">
+      <div class="price-tag">Standard</div>
+      <div class="price-amt">$8,000 <span>+ $1,500/mo</span></div>
+      <p class="price-text">After founding cohort closes. $8K covers configuration, Vapi voice agent training, n8n workflows, CRM integration, CSR training, full documentation. $1,500/mo covers monitoring, tuning, monthly recovery report. Cancel anytime.</p>
+    </div>
+  </div>
+  <p class="dim">No prepay required. 50% to start, 50% on go-live. Twilio + Vapi usage costs run separately on your accounts, typically $200-400/mo at this volume.</p>
+
+  <div class="cta-wrap">
+    <h2 style="margin-top: 0; font-size: 22px;">Next step</h2>
+    <p>30-minute call. I look at your current call log, miss rate, average ticket, and tell you straight if this is a fit. If it is, we scope the build. If it isn't, you save 4 weeks chasing the wrong fix.</p>
+    <a class="cta-btn" href="https://calendly.com/boubacarbarry/signal-works-fit">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      Book the 30-min fit call
+    </a>
+    <span class="cta-alt">Or just <a href="mailto:boubacar@catalystworks.consulting?subject=Lead%20Rescue%20OS%20-%20interested">reply to my email</a> and we'll find a time.</span>
+  </div>
+
+  <footer>
+    Boubacar Barry, Signal Works (a brand of <a href="https://catalystworks.consulting/">Catalyst Works Consulting</a>).<br>
+    Built for HVAC + roofing shops that want every lead answered. Truthful pricing, truthful math, no marketing fluff.
+  </footer>
+
+</div>
+</body>
+</html>
