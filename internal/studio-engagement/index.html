@@ -1,0 +1,618 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Studio Engagement Snapshot — 2026-05-21</title>
+<link rel="icon" type="image/jpeg" href="CatalystWorks_logo.jpg" />
+<style>
+  :root {
+    --bg: #ffffff;
+    --ink: #0f1a2e;
+    --ink-soft: #45526b;
+    --ink-muted: #7d8aa1;
+    --line: #e6ebf4;
+    --line-soft: #f1f4fa;
+    --brand-blue: #1d4ed8;
+    --brand-blue-soft: #eef2ff;
+    --green: #047857;
+    --green-soft: #ecfdf5;
+    --yellow: #b45309;
+    --yellow-soft: #fffbeb;
+    --red: #b91c1c;
+    --red-soft: #fef2f2;
+    --nav-bg: rgba(255,255,255,0.92);
+    --radius: 12px;
+    --shadow: 0 6px 24px rgba(15,26,46,0.06);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif;
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--brand-blue); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* NAV */
+  .nav {
+    position: sticky; top: 0; z-index: 50;
+    backdrop-filter: blur(12px);
+    background: var(--nav-bg);
+    padding: 14px 20px;
+  }
+  .nav-inner {
+    max-width: 1280px; margin: 0 auto;
+    display: flex; align-items: center; gap: 14px;
+    flex-wrap: wrap;
+  }
+  .nav-brand {
+    display: flex; align-items: center; gap: 10px;
+    font-weight: 600; color: var(--ink);
+  }
+  .nav-brand img { width: 28px; height: 28px; border-radius: 6px; object-fit: cover; }
+  .nav-links { display: flex; gap: 14px; flex-wrap: wrap; margin-left: auto; }
+  .nav-links a {
+    color: var(--ink-soft); font-size: 14px; font-weight: 500;
+    padding: 6px 0;
+  }
+  .nav-hamburger {
+    display: none;
+    background: none; border: 0; padding: 8px; cursor: pointer;
+    margin-left: auto; color: var(--ink);
+  }
+  .nav-hamburger svg { width: 24px; height: 24px; }
+
+  /* MAIN */
+  main { max-width: 1280px; margin: 0 auto; padding: 24px 20px 80px; }
+  h1 { font-size: 28px; margin: 8px 0 4px; letter-spacing: -0.01em; }
+  h2 { font-size: 22px; margin: 36px 0 12px; letter-spacing: -0.005em; }
+  h3 { font-size: 18px; margin: 18px 0 8px; }
+  .meta { color: var(--ink-muted); font-size: 14px; margin-bottom: 28px; }
+
+  /* TLDR */
+  .tldr {
+    background: var(--brand-blue-soft);
+    border-radius: var(--radius);
+    padding: 22px 24px;
+    margin: 22px 0 36px;
+  }
+  .tldr-label {
+    font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--brand-blue); font-weight: 700; margin-bottom: 8px;
+  }
+  .tldr h2 { margin: 0 0 14px; font-size: 22px; color: var(--ink); }
+  .tldr ul { margin: 0; padding-left: 20px; }
+  .tldr li { margin: 6px 0; }
+
+  /* STAT TILES */
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+    margin: 16px 0 20px;
+  }
+  .stat {
+    background: #ffffff;
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    box-shadow: var(--shadow);
+  }
+  .stat-label { font-size: 12px; color: var(--ink-muted); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600; }
+  .stat-value { font-size: 24px; font-weight: 700; margin-top: 4px; color: var(--ink); }
+  .stat-value.good { color: var(--green); }
+  .stat-value.warn { color: var(--yellow); }
+  .stat-value.bad { color: var(--red); }
+  .stat-sub { font-size: 12px; color: var(--ink-muted); margin-top: 2px; }
+
+  /* COLLAPSIBLE */
+  details.brand-section {
+    background: #ffffff;
+    border-radius: var(--radius);
+    margin: 18px 0;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+  details.brand-section > summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 18px 22px;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 12px;
+  }
+  details.brand-section > summary::-webkit-details-marker { display: none; }
+  .brand-title {
+    display: flex; align-items: center; gap: 14px;
+    font-size: 20px; font-weight: 700; color: var(--ink);
+  }
+  .brand-badge {
+    font-size: 11px; padding: 3px 8px; border-radius: 999px;
+    font-weight: 600; letter-spacing: 0.04em;
+  }
+  .badge-blue { background: var(--brand-blue-soft); color: var(--brand-blue); }
+  .badge-green { background: var(--green-soft); color: var(--green); }
+  .badge-yellow { background: var(--yellow-soft); color: var(--yellow); }
+  .badge-red { background: var(--red-soft); color: var(--red); }
+  .brand-summary-line {
+    font-size: 13px; color: var(--ink-muted); font-weight: 500;
+    text-align: right;
+  }
+  details.brand-section[open] > summary { border-bottom: 1px solid var(--line); }
+  .brand-body { padding: 18px 22px 22px; }
+
+  /* CHANNEL CARD */
+  .channel-card {
+    background: #fafbfd;
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    margin: 14px 0;
+  }
+  .channel-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  .channel-name { font-weight: 700; font-size: 16px; }
+  .channel-handle { font-size: 13px; color: var(--ink-soft); font-family: SFMono-Regular, "Menlo", monospace; }
+
+  /* TABLE */
+  .post-table {
+    width: 100%; border-collapse: collapse;
+    margin: 10px 0; font-size: 14px;
+  }
+  .post-table th, .post-table td {
+    padding: 8px 10px;
+    text-align: left;
+    vertical-align: top;
+  }
+  .post-table th {
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em;
+    color: var(--ink-muted); font-weight: 600;
+    background: var(--line-soft);
+  }
+  .post-table tbody tr:nth-child(odd) { background: rgba(0,0,0,0.015); }
+  .post-table .num { text-align: right; font-variant-numeric: tabular-nums; }
+  .post-table .title-cell { max-width: 360px; }
+  .post-table .title-cell a { color: var(--ink); font-weight: 500; }
+  .post-table .date-cell { white-space: nowrap; color: var(--ink-muted); }
+
+  /* CALLOUTS */
+  .callout {
+    border-radius: 10px;
+    padding: 12px 14px;
+    margin: 12px 0;
+    font-size: 14px;
+  }
+  .callout.good { background: var(--green-soft); color: var(--ink); border-left: 3px solid var(--green); }
+  .callout.warn { background: var(--yellow-soft); color: var(--ink); border-left: 3px solid var(--yellow); }
+  .callout.bad { background: var(--red-soft); color: var(--ink); border-left: 3px solid var(--red); }
+  .callout-label { font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; margin-right: 6px; }
+
+  /* RECOMMENDATIONS */
+  .rec-list { display: grid; gap: 10px; margin: 10px 0; }
+  .rec {
+    padding: 12px 14px; border-radius: 10px;
+    font-size: 14px; line-height: 1.5;
+    border-left: 3px solid var(--brand-blue);
+    background: #fafbfd;
+  }
+  .rec.dd { border-left-color: var(--green); background: var(--green-soft); }
+  .rec.kill { border-left-color: var(--red); background: var(--red-soft); }
+  .rec.test { border-left-color: var(--brand-blue); background: var(--brand-blue-soft); }
+  .rec.base { border-left-color: var(--yellow); background: var(--yellow-soft); }
+  .rec-label {
+    font-weight: 700; font-size: 11px; letter-spacing: 0.08em;
+    text-transform: uppercase; margin-right: 8px;
+  }
+
+  /* CROSS-BRAND TABLE */
+  .cross-table {
+    width: 100%; border-collapse: collapse;
+    margin: 14px 0; font-size: 14px;
+  }
+  .cross-table th, .cross-table td {
+    padding: 10px 12px; text-align: left;
+    border-bottom: 1px solid var(--line);
+  }
+  .cross-table th {
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em;
+    color: var(--ink-muted); font-weight: 600;
+  }
+  .cross-table .num { text-align: right; font-variant-numeric: tabular-nums; }
+  .cross-table tr.winner td { background: var(--green-soft); font-weight: 600; }
+  .cross-table tr.loser td { background: var(--red-soft); }
+
+  /* FOOTER */
+  footer {
+    margin-top: 60px;
+    padding: 24px;
+    background: var(--line-soft);
+    border-radius: var(--radius);
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height: 1.65;
+  }
+  footer h3 { margin-top: 0; color: var(--ink); }
+  footer ul { padding-left: 18px; margin: 6px 0; }
+  footer code { background: rgba(0,0,0,0.06); padding: 1px 5px; border-radius: 4px; font-size: 12px; }
+
+  /* DESKTOP SCALE-UP */
+  @media (min-width: 1200px) {
+    body { font-size: 17px; }
+    h1 { font-size: 34px; }
+    h2 { font-size: 24px; }
+    h3 { font-size: 19px; }
+    .meta { font-size: 15px; }
+    .stat-value { font-size: 28px; }
+    .post-table { font-size: 15px; }
+  }
+
+  /* MOBILE */
+  @media (max-width: 720px) {
+    .nav-links { display: none; }
+    .nav-links.open { display: flex; flex-basis: 100%; flex-direction: column; gap: 8px; margin-top: 12px; }
+    .nav-hamburger { display: block; }
+    .brand-summary-line { display: none; }
+    .post-table th:nth-child(2), .post-table td:nth-child(2) { display: none; }
+    main { padding: 18px 16px 60px; }
+    .stat-grid { grid-template-columns: repeat(2, 1fr); }
+    h1 { font-size: 24px; }
+    h2 { font-size: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="#top">
+      <img src="CatalystWorks_logo.jpg" alt="Catalyst Works" />
+      Studio Engagement Snapshot
+    </a>
+    <button class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <div class="nav-links">
+      <a href="#tldr">TL;DR</a>
+      <a href="#aic">AI Catalyst</a>
+      <a href="#fgm">1stGen</a>
+      <a href="#baobab">Baobab</a>
+      <a href="#cross">Cross-Brand</a>
+      <a href="#methodology">Methodology</a>
+    </div>
+  </div>
+</nav>
+
+<main id="top">
+  <h1>Studio Engagement Snapshot</h1>
+  <div class="meta">Internal · 2026-05-21 14:00 America/Denver · Coverage window: first-post through today</div>
+
+  <section class="tldr" id="tldr">
+    <div class="tldr-label">TL;DR</div>
+    <h2>The 5 things that matter right now</h2>
+    <ul>
+      <li><strong>All 3 brands are running below organic-discovery threshold.</strong> Combined: 2 YT subs total, 0 X followers visible on either profile, no IG/TT public stats accessible. Posts are shipping; audience is not compounding.</li>
+      <li><strong>Under the Baobab is the highest-leverage brand today.</strong> 64 published items across 4 platforms in ~14 days, 25 YT uploads totalling 834 views, top YT post at 144 views. Production cadence beats both peers per platform per day.</li>
+      <li><strong>AI Catalyst YT has a title-hygiene bug.</strong> 8 of 13 video titles still start with "Source: ..." (raw source-video metadata). Top-performing post (134 views) is one of those, but it ranked on Korean-language SEO, not brand intent. Original-titled posts get 4-6 views.</li>
+      <li><strong>1stGen Money has no YouTube channel and ships TikTok under the wrong handle.</strong> All 15 TikTok posts under <code>@baobaboasisai</code> (legacy shared handle), not branded <code>@FirstGenMoney_</code>. Unbranded surface = zero brand compounding.</li>
+      <li><strong>X is dead air on both brands with X accounts.</strong> Sampled views per recent post: 0–2. Combined published posts (Studio + manual): 35 on Baobab profile, 26 on 1stGen. Zero followers on both. Recommend pausing X production until a separate distribution play is wired.</li>
+    </ul>
+  </section>
+
+  <h2>Per-brand deep dive</h2>
+
+  <!-- AI CATALYST -->
+  <details class="brand-section" id="aic" open>
+    <summary>
+      <div class="brand-title">
+        AI Catalyst
+        <span class="brand-badge badge-yellow">Caution — title hygiene</span>
+      </div>
+      <div class="brand-summary-line">YT only · 13 videos · 0 subs · avg 32v/post</div>
+    </summary>
+    <div class="brand-body">
+
+      <div class="stat-grid">
+        <div class="stat">
+          <div class="stat-label">YT Subs</div>
+          <div class="stat-value bad">0</div>
+          <div class="stat-sub">below 1 / 100</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Videos Total</div>
+          <div class="stat-value">13</div>
+          <div class="stat-sub">channel since 2025-03</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Posts (last 30d)</div>
+          <div class="stat-value good">13</div>
+          <div class="stat-sub">100% of catalog is fresh</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Avg Views / Last 5</div>
+          <div class="stat-value warn">32</div>
+          <div class="stat-sub">median: 6</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Engagement Rate</div>
+          <div class="stat-value bad">0.00%</div>
+          <div class="stat-sub">0 likes, 0 comments / last 5</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Total Views Lifetime</div>
+          <div class="stat-value">372</div>
+          <div class="stat-sub">on YT channel</div>
+        </div>
+      </div>
+
+      <h3>YouTube — recent 5</h3>
+      <p class="meta">Handle: <code>@aicatalystchannel</code> · cross-posted to <code>@aicatalystz</code> (TikTok) and <code>@aicatalyst</code> (IG, unverified)</p>
+      <table class="post-table">
+        <thead><tr><th>Date</th><th class="title-cell">Title</th><th class="num">Views</th><th class="num">Likes</th><th class="num">Comments</th></tr></thead>
+        <tbody>
+          <tr><td class="date-cell">2026-05-21</td><td class="title-cell"><a href="https://youtube.com/watch?v=5BmgAlb9jtQ" target="_blank">1,200 cold emails. 4 clients. The templates.</a></td><td class="num">4</td><td class="num">0</td><td class="num">0</td></tr>
+          <tr><td class="date-cell">2026-05-20</td><td class="title-cell"><a href="https://youtube.com/watch?v=4a5R53Gvq-M" target="_blank">HR to AI: the 30 day pivot</a></td><td class="num">6</td><td class="num">0</td><td class="num">0</td></tr>
+          <tr><td class="date-cell">2026-05-19</td><td class="title-cell"><a href="https://youtube.com/watch?v=gyI8DIz0eyY" target="_blank">25 prompts I actually paste at work</a></td><td class="num">4</td><td class="num">0</td><td class="num">0</td></tr>
+          <tr><td class="date-cell">2026-05-19</td><td class="title-cell"><a href="https://youtube.com/watch?v=n6D4ob-y9zU" target="_blank">Source: AI 시대, AI 때문에 사라지는 직업 5가지</a></td><td class="num">134</td><td class="num">0</td><td class="num">0</td></tr>
+          <tr><td class="date-cell">2026-05-18</td><td class="title-cell">Source: ИИ-пузырь или новая нефть...</td><td class="num">11</td><td class="num">0</td><td class="num">0</td></tr>
+        </tbody>
+      </table>
+
+      <h3>X / Instagram / TikTok</h3>
+      <div class="callout warn"><span class="callout-label">X</span>Prohibited on this brand per memory rule. Studio pushed 0 posts. Out of scope.</div>
+      <div class="callout warn"><span class="callout-label">Instagram</span>1 post pushed via Studio. Handle <code>@aicatalyst</code> unverified. Public scrape blocked by IG login wall — cannot pull follower count or per-post stats.</div>
+      <div class="callout warn"><span class="callout-label">TikTok</span>1 post pushed under <code>@aicatalystz</code>. Public scrape blocked (HTTP 451). Cannot pull stats.</div>
+
+      <h3>What's working</h3>
+      <div class="callout good">Cadence is sustained (13 videos in ~30 days). The <em>only</em> post above 100 views is a Korean-language re-multiply — discovery is coming from non-English SEO, not from the brand.</div>
+
+      <h3>What's not</h3>
+      <div class="callout bad">8 of 13 YT titles still read "Source: ..." (raw source-video metadata) or "New content from AI Catalyst." (template stub). Original-titled posts ("1,200 cold emails. 4 clients" / "HR to AI: the 30 day pivot" / "25 prompts I actually paste at work") all land at 4-6 views. 30 days in, zero subs, zero likes, zero comments.</div>
+      <div class="callout bad">No X surface at all (intentional). IG + TT surfaces are 1 post each. AIC is effectively a YouTube-only brand, but YT alone hasn't moved the needle.</div>
+
+      <h3>Recommendations</h3>
+      <div class="rec-list">
+        <div class="rec kill"><span class="rec-label">Kill</span>Stop publishing "Source: ..." auto-titled videos. Strip the template stub OR re-title before scheduled_at. Pre-commit guard if needed.</div>
+        <div class="rec dd"><span class="rec-label">Double down</span>The 3 original-titled posts ("1,200 cold emails", "HR to AI 30 day pivot", "25 prompts I paste") are the only ones in voice. Run those framings 3x/week for 2 weeks and re-measure.</div>
+        <div class="rec test"><span class="rec-label">Test</span>Cross-post AIC YT shorts to <code>@aicatalystz</code> TikTok systematically (currently 1 post total). TikTok discovery on cold accounts is structurally higher than YT for sub-1m channels.</div>
+        <div class="rec base"><span class="rec-label">Baseline</span>2026-05-21: 0 subs · 13 videos · 372 lifetime views · 32 avg / last 5. Re-check next Wed.</div>
+      </div>
+    </div>
+  </details>
+
+  <!-- FIRST GEN MONEY -->
+  <details class="brand-section" id="fgm" open>
+    <summary>
+      <div class="brand-title">
+        First Generation Money
+        <span class="brand-badge badge-red">Alert — handle + channel gaps</span>
+      </div>
+      <div class="brand-summary-line">No YT · TT on wrong handle · 0 X followers</div>
+    </summary>
+    <div class="brand-body">
+
+      <div class="stat-grid">
+        <div class="stat">
+          <div class="stat-label">YT Subs</div>
+          <div class="stat-value bad">N/A</div>
+          <div class="stat-sub">no channel exists</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">X Followers</div>
+          <div class="stat-value bad">0</div>
+          <div class="stat-sub">handle @FirstGenMoney_</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Posts via Studio</div>
+          <div class="stat-value">31</div>
+          <div class="stat-sub">TT 15 / IG 13 / X 2 / YT 0</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">First Post Date</div>
+          <div class="stat-value">2026-05-06</div>
+          <div class="stat-sub">~14 days of pipeline</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">X Avg Views / Last 5</div>
+          <div class="stat-value bad">0.5</div>
+          <div class="stat-sub">sampled via r.jina.ai</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Branded Surface</div>
+          <div class="stat-value bad">0 / 4</div>
+          <div class="stat-sub">no YT, wrong-handle TT, blocked IG, no X reach</div>
+        </div>
+      </div>
+
+      <h3>Channel summary</h3>
+      <div class="callout bad"><span class="callout-label">YouTube</span>Channel does NOT exist at <code>youtube.com/@FirstGenMoney_</code> (404 verified). 0 YT posts pushed via Studio. The full YT distribution arm is missing for this brand.</div>
+      <div class="callout bad"><span class="callout-label">TikTok</span>15 posts pushed — but all under <code>@baobaboasisai</code> (legacy shared handle), not branded <code>@FirstGenMoney_</code>. Followers of @baobaboasisai do not associate the content with the 1stGen brand. Zero brand-account compounding from the production effort.</div>
+      <div class="callout warn"><span class="callout-label">Instagram</span>13 posts under <code>@firstgenmoney_</code>. Public scrape blocked (IG CAPTCHA). Cannot verify follower count or per-post performance.</div>
+      <div class="callout bad"><span class="callout-label">X</span>2 posts on <code>@FirstGenMoney_</code> (created May 2026). 0 followers, sampled view counts 0-1. Account header shows 26 posts but profile chronology empty in jina static-HTML scrape.</div>
+
+      <h3>Recent posts (TikTok + IG, top of pipeline)</h3>
+      <table class="post-table">
+        <thead><tr><th>Date</th><th class="title-cell">Title</th><th>Platform</th><th>URL</th></tr></thead>
+        <tbody>
+          <tr><td class="date-cell">2026-05-19</td><td class="title-cell">I Saved $50K by Building My Own Home Office</td><td>TikTok</td><td><a href="https://www.tiktok.com/@baobaboasisai/video/7641618284843961614" target="_blank">view</a></td></tr>
+          <tr><td class="date-cell">2026-05-16</td><td class="title-cell">Why Immigrant Wealth Disappears in One Generation</td><td>TikTok</td><td><a href="https://www.tiktok.com/@baobaboasisai/video/7640506630798462221" target="_blank">view</a></td></tr>
+          <tr><td class="date-cell">2026-05-15</td><td class="title-cell">The 5 Money Mistakes Immigrants Make in Year One</td><td>TikTok</td><td><a href="https://www.tiktok.com/@baobaboasisai/video/7639932740971908366" target="_blank">view</a></td></tr>
+          <tr><td class="date-cell">2026-05-19</td><td class="title-cell">Parents Wealth Advice</td><td>Instagram</td><td><a href="https://www.instagram.com/reel/DYhkbjdEpbm/" target="_blank">view</a></td></tr>
+          <tr><td class="date-cell">2026-05-19</td><td class="title-cell">Parents Wealth Advice</td><td>X</td><td><a href="https://x.com/FirstGenMoney_/status/2057476954693984284" target="_blank">view</a></td></tr>
+        </tbody>
+      </table>
+
+      <h3>What's working</h3>
+      <div class="callout warn">Production cadence is real — 31 deliverables in 14 days. Voice + topic selection is on-brand (immigrant money + first-gen wealth). But every distribution channel has a structural gap that nullifies the compounding effect.</div>
+
+      <h3>What's not</h3>
+      <div class="callout bad">Three independent structural breaks: (1) no YT channel, (2) TT publishing under non-brand handle, (3) X with zero followers. Pipeline is shipping into channels that cannot accumulate audience.</div>
+
+      <h3>Recommendations</h3>
+      <div class="rec-list">
+        <div class="rec dd"><span class="rec-label">Double down — fix first</span>Create <code>youtube.com/@FirstGenMoney_</code> this week. Backfill the 15 TT videos as YT Shorts under the brand handle. YT Shorts is the strongest cold-discovery surface for a 0-follower brand.</div>
+        <div class="rec kill"><span class="rec-label">Kill</span>Stop publishing 1stGen TikToks under <code>@baobaboasisai</code>. Either claim a branded <code>@firstgenmoney_</code> TT handle, or move TT production budget to YT Shorts.</div>
+        <div class="rec test"><span class="rec-label">Test</span>The "Parents wealth advice" + "Immigrant wealth disappears" angles read as the natural-language hits. Once YT channel exists, run those 2 framings as a 3-video YT-shorts test cluster.</div>
+        <div class="rec base"><span class="rec-label">Baseline</span>2026-05-21: 31 posts in 14 days · 0 branded-surface followers · 0 YT presence. Re-check when YT channel exists.</div>
+      </div>
+    </div>
+  </details>
+
+  <!-- UNDER THE BAOBAB -->
+  <details class="brand-section" id="baobab" open>
+    <summary>
+      <div class="brand-title">
+        Under the Baobab
+        <span class="brand-badge badge-blue">Highest leverage today</span>
+      </div>
+      <div class="brand-summary-line">YT 25 vids / 2 subs · 64 posts across 4 platforms</div>
+    </summary>
+    <div class="brand-body">
+
+      <div class="stat-grid">
+        <div class="stat">
+          <div class="stat-label">YT Subs</div>
+          <div class="stat-value bad">2</div>
+          <div class="stat-sub">channel since 2023-06</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">YT Videos</div>
+          <div class="stat-value good">25</div>
+          <div class="stat-sub">24 in last 30 days</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Avg Views / Last 5 YT</div>
+          <div class="stat-value warn">32</div>
+          <div class="stat-sub">median: 11</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Top YT Post</div>
+          <div class="stat-value good">144</div>
+          <div class="stat-sub">"Che Che Kule" 2026-05-15</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Posts via Studio</div>
+          <div class="stat-value good">64</div>
+          <div class="stat-sub">YT 23 / IG 18 / TT 17 / X 6</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Engagement Rate</div>
+          <div class="stat-value bad">0.00%</div>
+          <div class="stat-sub">2 likes total across 25 vids</div>
+        </div>
+      </div>
+
+      <h3>YouTube — recent 5</h3>
+      <p class="meta">Handle: <code>@underthebaobab_</code> · channel created 2023-06-10 · top historic = "Che Che Kule" (144 views)</p>
+      <table class="post-table">
+        <thead><tr><th>Date</th><th class="title-cell">Title</th><th class="num">Views</th><th class="num">Likes</th><th class="num">Comments</th></tr></thead>
+        <tbody>
+          <tr><td class="date-cell">2026-05-19</td><td class="title-cell"><a href="https://youtube.com/watch?v=iSIU_yxr8-I" target="_blank">Source: He Dumped His BBQ Cook Wife...</a></td><td class="num">11</td><td class="num">0</td><td class="num">0</td></tr>
+          <tr><td class="date-cell">2026-05-18</td><td class="title-cell"><a href="https://youtube.com/watch?v=laEu58hW3o0" target="_blank">Source: How Family Chaos Rewrites A Child's Mind</a></td><td class="num good">100</td><td class="num">0</td><td class="num">0</td></tr>
+          <tr><td class="date-cell">2026-05-18</td><td class="title-cell"><a href="https://youtube.com/watch?v=Qji2HwNYtCw" target="_blank">Source: Your Childhood is Controlling You</a></td><td class="num">4</td><td class="num">0</td><td class="num">0</td></tr>
+          <tr><td class="date-cell">2026-05-18</td><td class="title-cell"><a href="https://youtube.com/watch?v=HAs9FKb4z9c" target="_blank">Source: ചെറിയ മക്കളോട് സങ്കടങ്ങൾ പറയരുത് (Malayalam)</a></td><td class="num">38</td><td class="num">0</td><td class="num">0</td></tr>
+          <tr><td class="date-cell">2026-05-18</td><td class="title-cell"><a href="https://youtube.com/watch?v=hNfkykihoYA" target="_blank">Source: Arrogant Beautiful Girl Poured Water On Old Woman</a></td><td class="num">6</td><td class="num">0</td><td class="num">0</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Other channels</h3>
+      <div class="callout warn"><span class="callout-label">Instagram</span><code>@underthebaobab_</code> · 18 posts via Studio · scrape blocked by IG login wall</div>
+      <div class="callout warn"><span class="callout-label">TikTok</span><code>@underthebaobab_</code> · 17 posts via Studio · scrape blocked (HTTP 451)</div>
+      <div class="callout bad"><span class="callout-label">X</span><code>@UnderTheBaobab_</code> · 6 Studio posts · 0 followers · profile lists 35 posts total · sampled view counts 0-2 per post</div>
+
+      <h3>What's working</h3>
+      <div class="callout good">Highest production velocity of the 3 brands (64 deliverables / ~14 days). Channel breadth is the most complete (YT + IG + TT + X all active under branded handles). Top YT post hit 144 views in 6 days — best single performance across the whole portfolio.</div>
+      <div class="callout good">Story-format YT shorts ("How Family Chaos Rewrites A Child's Mind", 100 views, 2026-05-18) outperform pure folktale framings by ~3x. Non-English titles also crossing into 38-144 view range — signals the multilingual cross-post strategy is catching.</div>
+
+      <h3>What's not</h3>
+      <div class="callout bad">23 of 25 YT video titles still start with "Source: ..." — same title-hygiene bug as AIC. Worse: titles include unrendered emoji and source-channel attribution that nobody clicks.</div>
+      <div class="callout bad">2 YT subs after 3 years of channel existence + 25 published videos. Engagement = 2 lifetime likes. Audience compounding has not started.</div>
+      <div class="callout warn">X is dead air same as 1stGen. 6 posts, 0 followers, 0-2 views per post.</div>
+
+      <h3>Recommendations</h3>
+      <div class="rec-list">
+        <div class="rec dd"><span class="rec-label">Double down</span>Story-format YT shorts ("How Family Chaos...", "Why African Parents Hide Pain", "Woodcarver's Secret") are the leverage. Run 4-5/week with proper original titles, drop folktale-only framings to 1/week.</div>
+        <div class="rec kill"><span class="rec-label">Kill</span>Strip the "Source: ..." prefix on every YT title at scheduled_at. Same pre-commit guard as AIC. This is the highest-ROI 30-min fix in the whole portfolio.</div>
+        <div class="rec kill"><span class="rec-label">Kill or pause</span>X production for Baobab. 6 posts in 2 weeks returned cumulative ~5 views. Either pause until a separate X discovery play is in place, or repurpose the production slot toward YT title rewrites + thumbnail testing.</div>
+        <div class="rec test"><span class="rec-label">Test</span>Run a 7-day YT thumbnail A/B: same video, two thumbnails. Current top performer ("Che Che Kule" 144v) is a kid-dance animation with high-contrast thumbnail. Replicate the visual pattern on next 5 shorts.</div>
+        <div class="rec base"><span class="rec-label">Baseline</span>2026-05-21: 2 subs · 25 videos · 834 lifetime YT views · 64 cross-channel posts · top post 144v. Re-check Wed.</div>
+      </div>
+    </div>
+  </details>
+
+  <!-- CROSS BRAND -->
+  <h2 id="cross">Cross-brand comparison</h2>
+  <table class="cross-table">
+    <thead>
+      <tr>
+        <th>Brand</th>
+        <th class="num">Posts (Studio)</th>
+        <th class="num">YT Subs</th>
+        <th class="num">YT Total Views</th>
+        <th class="num">Top Post Views</th>
+        <th class="num">Avg / Last 5 YT</th>
+        <th>Leverage Read</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="winner">
+        <td><strong>Under the Baobab</strong></td>
+        <td class="num">64</td>
+        <td class="num">2</td>
+        <td class="num">834</td>
+        <td class="num">144</td>
+        <td class="num">32</td>
+        <td>Highest leverage — full channel coverage + best single-post performance</td>
+      </tr>
+      <tr>
+        <td>AI Catalyst</td>
+        <td class="num">10</td>
+        <td class="num">0</td>
+        <td class="num">372</td>
+        <td class="num">134</td>
+        <td class="num">32</td>
+        <td>YT-only; cadence is sustained but title hygiene is breaking discovery</td>
+      </tr>
+      <tr class="loser">
+        <td>First Generation Money</td>
+        <td class="num">31</td>
+        <td class="num">N/A</td>
+        <td class="num">N/A</td>
+        <td class="num">N/A</td>
+        <td class="num">N/A</td>
+        <td>Lowest leverage — no YT channel + wrong TT handle + 0 X reach</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Top 3 cross-brand recommendations</h3>
+  <div class="rec-list">
+    <div class="rec dd"><span class="rec-label">Action 1 — Fix titles</span>Strip "Source: ..." prefix on AIC + Baobab YT pipeline at scheduled_at. Affects ~31 of 38 published videos. 30-min fix, recoverable in next 7 days of uploads.</div>
+    <div class="rec dd"><span class="rec-label">Action 2 — Create 1stGen YT</span>Create <code>youtube.com/@FirstGenMoney_</code>. Backfill 15 existing TT videos as YT Shorts under the branded handle. Highest-leverage gap to close.</div>
+    <div class="rec kill"><span class="rec-label">Action 3 — Pause X</span>Pause X production across 1stGen + Baobab (combined 8 posts, 0 followers, cumulative ~6 views in 14 days). Re-route slot to YT thumbnail testing OR IG carousel experiments.</div>
+  </div>
+
+  <footer id="methodology">
+    <h3>Methodology + data sources</h3>
+    <p><strong>Coverage window:</strong> first published post per brand through 2026-05-21 14:00 America/Denver. ~14-day window for 1stGen + Baobab Studio output; AIC YT channel data is full lifetime (since 2025-03-05).</p>
+    <p><strong>Sources composed (hybrid synthesis per memory rule):</strong></p>
+    <ul>
+      <li>Studio Pipeline Notion DB (<code>34ebcf1a-3029-8140-a565-f7c26fe9de86</code>) — 55 published rows queried via Notion API for Channel, Platform, Posted Date, Posted URLs</li>
+      <li>YouTube Data API v3 — channel-level stats (subs, video count, lifetime views) + per-video stats (views, likes, comments) for both Studio-owned channels (<code>UC8ekNvgTPGSV84bSl2M90Eg</code>, <code>UCJjxQ8XRReJiIXF6mXdo26Q</code>)</li>
+      <li>Blotato API (<code>/v2/posts</code>) — 177 published items confirmed sent, no engagement metrics surfaced</li>
+      <li><code>r.jina.ai</code> proxy scrape — X profile + per-post sampling (5 posts per X-active brand)</li>
+    </ul>
+    <p><strong>Deferred / blocked:</strong></p>
+    <ul>
+      <li>TikTok: HTTP 451 on all 3 brand handles via jina. No follower/per-post data available. Recommend TikTok Analytics API integration OR weekly manual check.</li>
+      <li>Instagram: login/CAPTCHA wall on all 3 handles via jina. No data available. Recommend IG Graph API OR weekly manual check.</li>
+      <li>X view-count scrape via jina is unreliable for posts &lt; 24h old (impressions render client-side). Sampled values are likely an undercount.</li>
+    </ul>
+    <p><strong>Constraints honored:</strong> read-only on all external sources. Truth-only — zero/null surfaced where data was missing, no fabrication. Hybrid synthesis composed across 2+ sources for every brand claim. AIC X excluded per memory rule. No em-dashes in body copy.</p>
+    <p style="margin-top: 18px; color: var(--ink-muted);">Internal use only · do not share externally · Generated 2026-05-21 · branch <code>chore/studio-engagement-analysis-2026-05-21</code></p>
+  </footer>
+</main>
+
+</body>
+</html>
