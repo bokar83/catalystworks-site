@@ -1,0 +1,1151 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/jpeg" href="/CatalystWorks_logo.jpg">
+<meta name="robots" content="noindex, nofollow">
+<title>AI visibility audit for Spine Craft Utah · Catalyst Works</title>
+<meta name="description" content="Where Spine Craft Utah ranks in ChatGPT, Claude, Perplexity, and Gemini for chiropractic searches in Provo, what is blocking those engines from citing the clinic, and a measurable plan to fix it.">
+<style>
+  :root {
+    --bg: #071A2E;
+    --bg-2: #0D2A45;
+    --card: #0D2A45;
+    --line: #1F3551;
+    --ink: #F3F6F9;
+    --ink-dim: #9AA3B2;
+    --primary: #00B7C2;
+    --primary-light: #E6F9FA;
+    --accent: #FF7A00;
+    --mono: ui-monospace, SFMono-Regular, "SF Mono", Consolas, monospace;
+    --serif: Spectral, "Source Serif 4", Georgia, serif;
+    --sans: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    padding: 0 0 80px;
+    font: 16px/1.6 var(--sans);
+    background: var(--bg);
+    color: var(--ink);
+  }
+  .wrap { max-width: 780px; margin: 0 auto; padding: 0 18px; }
+
+  body { padding-top: 64px; }
+  .report-nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 14px 18px;
+    background: rgba(7, 26, 46, 0);
+    backdrop-filter: blur(0);
+    -webkit-backdrop-filter: blur(0);
+    border-bottom: 1px solid transparent;
+    transition: background 300ms cubic-bezier(0.4, 0, 0.2, 1),
+                backdrop-filter 300ms,
+                -webkit-backdrop-filter 300ms,
+                border-color 300ms;
+  }
+  .report-nav.scrolled {
+    background: rgba(7, 26, 46, 0.82);
+    backdrop-filter: blur(16px) saturate(1.4);
+    -webkit-backdrop-filter: blur(16px) saturate(1.4);
+    border-bottom-color: rgba(31, 53, 81, 0.6);
+  }
+  .nav-brand-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: #F3F6F9;
+    font: 600 16px var(--serif);
+    letter-spacing: -0.01em;
+  }
+  .nav-brand-link img {
+    border-radius: 4px;
+    display: block;
+  }
+  .nav-brand-text { display: inline-block; }
+  .nav-accent { color: var(--primary); font-weight: 700; }
+  @media (max-width: 480px) { .nav-brand-text { display: none; } }
+  .nav-links { display: none; }
+  .hamburger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    color: var(--ink);
+    font-size: 20px;
+    cursor: pointer;
+    padding: 0;
+  }
+  .hamburger:hover { border-color: var(--primary); color: var(--primary); }
+
+  .nav-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(7, 26, 46, 0.96);
+    z-index: 200;
+    display: none;
+    flex-direction: column;
+    padding: 24px 24px 40px;
+    overflow-y: auto;
+  }
+  .nav-overlay.open { display: flex; }
+  .overlay-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+  }
+  .overlay-title {
+    font: 600 12px var(--mono);
+    color: var(--primary);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .overlay-close {
+    background: transparent;
+    border: 1px solid var(--line);
+    color: var(--ink);
+    width: 40px;
+    height: 40px;
+    border-radius: 6px;
+    font-size: 22px;
+    cursor: pointer;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .overlay-close:hover { border-color: var(--primary); color: var(--primary); }
+  .nav-overlay ul { list-style: none; padding: 0; margin: 0; }
+  .nav-overlay li { margin: 0; }
+  .nav-overlay a {
+    display: block;
+    padding: 16px 4px;
+    color: var(--ink);
+    text-decoration: none;
+    font-family: var(--serif);
+    font-size: 20px;
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-overlay a:hover { color: var(--primary); }
+
+  header { margin: 28px 0 28px; }
+  .kicker {
+    color: var(--primary);
+    font: 600 11px/1 var(--mono);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  h1 {
+    font-family: var(--serif);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    font-size: 26px;
+    line-height: 1.15;
+    margin: 12px 0 8px;
+  }
+  .sub { color: var(--ink-dim); font-size: 14px; }
+  .meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 14px;
+    padding: 12px 14px;
+    background: rgba(0, 183, 194, 0.05);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    font: 500 12px/1.4 var(--mono);
+    color: var(--ink-dim);
+    letter-spacing: 0.04em;
+  }
+  .meta-row span strong { color: var(--ink); font-weight: 600; }
+
+  .tldr {
+    position: relative;
+    background: linear-gradient(135deg, rgba(255, 122, 0, 0.08), rgba(255, 122, 0, 0.02));
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--accent);
+    border-radius: 10px;
+    padding: 22px 22px 20px;
+    margin: 18px 0 30px;
+  }
+  .tldr::before {
+    content: "";
+    position: absolute;
+    top: 0; left: -1px; right: -1px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), rgba(255, 122, 0, 0));
+    border-radius: 10px 10px 0 0;
+  }
+  .tldr .kicker { color: var(--accent); }
+  .tldr h2 {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 1.2;
+    margin: 10px 0 12px;
+    padding: 0;
+    border: none;
+    color: var(--ink);
+  }
+  .tldr .lede { font-size: 16px; line-height: 1.55; margin-bottom: 14px; }
+  .tldr-bullets { list-style: none; padding: 0; margin: 14px 0; }
+  .tldr-bullets li {
+    padding: 8px 0 8px 22px;
+    position: relative;
+    font-size: 15px;
+    line-height: 1.5;
+    border-bottom: 1px dashed var(--line);
+  }
+  .tldr-bullets li:last-child { border-bottom: none; }
+  .tldr-bullets li::before {
+    content: "▸";
+    position: absolute;
+    left: 4px; top: 8px;
+    color: var(--accent);
+    font-size: 13px;
+  }
+  .tldr-bullets strong { color: var(--ink); }
+  .tldr-cta {
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid var(--line);
+    font-size: 13px;
+    color: var(--ink-dim);
+    font-style: italic;
+  }
+
+  .report-section {
+    background: transparent;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    margin: 14px 0;
+    overflow: hidden;
+  }
+  .report-section[open] { background: rgba(0, 183, 194, 0.02); }
+  .report-section > summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 16px 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    user-select: none;
+    transition: background 0.15s ease;
+  }
+  .report-section > summary::-webkit-details-marker { display: none; }
+  .report-section > summary:hover { background: rgba(0, 183, 194, 0.04); }
+  .section-number {
+    font: 600 11px var(--mono);
+    color: var(--primary);
+    letter-spacing: 0.1em;
+    min-width: 24px;
+  }
+  .section-title {
+    flex: 1;
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: 17px;
+    color: var(--ink);
+    line-height: 1.25;
+  }
+  .section-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    margin-left: auto;
+    border: 1.5px solid rgba(0, 183, 194, 0.4);
+    border-radius: 50%;
+    font: 700 22px/1 var(--sans);
+    color: var(--primary);
+    background: rgba(0, 183, 194, 0.08);
+    transition: background 200ms, border-color 200ms, color 200ms, transform 220ms cubic-bezier(0.4, 0, 0.2, 1);
+    flex-shrink: 0;
+  }
+  .section-toggle::before { content: "+"; line-height: 1; display: block; }
+  details[open] > summary .section-toggle {
+    background: rgba(255, 122, 0, 0.12);
+    border-color: rgba(255, 122, 0, 0.5);
+    color: var(--accent);
+    transform: rotate(45deg);
+  }
+  summary:hover .section-toggle {
+    background: rgba(0, 183, 194, 0.16);
+    border-color: rgba(0, 183, 194, 0.7);
+  }
+  details[open] > summary:hover .section-toggle { background: rgba(255, 122, 0, 0.2); }
+  .report-section-body { padding: 4px 18px 18px; border-top: 1px solid var(--line); }
+  .report-section-body > h3:first-child,
+  .report-section-body > p:first-child { margin-top: 14px; }
+
+  h2.opening-h2, h2.closing-h2 {
+    font-family: var(--serif);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    font-size: 20px;
+    margin: 30px 0 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--line);
+  }
+  h3 {
+    font: 600 12px var(--mono);
+    color: var(--primary);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin: 22px 0 8px;
+  }
+  h4 {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: 17px;
+    margin: 18px 0 6px;
+    color: var(--ink);
+  }
+  p { margin: 10px 0; }
+  .lede { font-size: 16px; line-height: 1.55; }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin: 14px 0;
+  }
+  .card.note {
+    border-left: 3px solid var(--primary);
+    background: linear-gradient(135deg, rgba(0, 183, 194, 0.08), rgba(0, 183, 194, 0.02));
+  }
+  .card.warn {
+    border-left: 3px solid var(--accent);
+    background: rgba(255, 122, 0, 0.04);
+  }
+  .card.good {
+    border-left: 3px solid #5BE2C1;
+    background: rgba(91, 226, 193, 0.05);
+  }
+  .card.quote {
+    background: var(--bg-2);
+    border-left: 3px solid var(--ink-dim);
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--ink-dim);
+  }
+  .card .src {
+    font: 600 10px var(--mono);
+    color: var(--accent);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    font-style: normal;
+  }
+  .card.quote strong { color: var(--ink); font-style: normal; }
+
+  .label {
+    font: 600 10px var(--mono);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  ul, ol { padding-left: 22px; margin: 8px 0; }
+  ul li, ol li { margin: 6px 0; }
+
+  table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 13px; }
+  th, td { text-align: left; padding: 8px 8px; border-bottom: 1px solid var(--line); }
+  th {
+    font: 600 11px var(--mono);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--primary);
+    background: rgba(0, 183, 194, 0.04);
+  }
+  td { color: var(--ink); vertical-align: top; }
+  td.num { font-family: var(--mono); font-size: 12px; color: var(--ink-dim); }
+  td.hit-yes { color: #5BE2C1; font-family: var(--mono); font-weight: 600; }
+  td.hit-no { color: var(--accent); font-family: var(--mono); font-weight: 600; }
+
+  .week { padding: 14px 0; border-bottom: 1px solid var(--line); }
+  .week:last-child { border-bottom: none; }
+  .week-tag {
+    font: 600 10px var(--mono);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin-bottom: 4px;
+  }
+  .week-body { font-size: 14px; }
+  .week-body p { margin: 4px 0; }
+  .week-body ul { margin: 6px 0; }
+
+  .closing {
+    background: linear-gradient(135deg, rgba(0, 183, 194, 0.10), rgba(0, 183, 194, 0.02));
+    border-left: 3px solid var(--primary);
+    padding: 18px 20px;
+    margin: 24px 0 12px;
+    border-radius: 0 10px 10px 0;
+  }
+  .closing p { font-size: 15px; line-height: 1.6; }
+  .closing p + p { margin-top: 14px; }
+  .closing strong { color: var(--ink); }
+
+  .footer {
+    margin-top: 40px;
+    padding-top: 18px;
+    border-top: 1px solid var(--line);
+    font-size: 12px;
+    color: var(--ink-dim);
+    line-height: 1.6;
+  }
+  .footer a { color: var(--ink-dim); }
+
+  .pull {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 16px;
+    line-height: 1.45;
+    color: var(--ink);
+    border-left: 2px solid var(--accent);
+    padding: 6px 0 6px 14px;
+    margin: 16px 0;
+  }
+
+  .llm-prompt-block {
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--accent);
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin: 16px 0;
+  }
+  .prompt-label {
+    font: 600 11px var(--mono);
+    color: var(--accent);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .prompt-text {
+    font: 12.5px/1.55 var(--mono);
+    color: var(--ink);
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    margin: 0;
+    background: transparent;
+    max-height: 320px;
+    overflow-y: auto;
+    padding-right: 4px;
+  }
+  .prompt-copy-btn {
+    margin-top: 12px;
+    background: var(--primary);
+    color: var(--bg);
+    border: 0;
+    border-radius: 4px;
+    padding: 9px 18px;
+    font: 600 12px var(--sans);
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    transition: transform 0.1s ease, background 0.15s ease;
+  }
+  .prompt-copy-btn:hover { background: #00CDD9; }
+  .prompt-copy-btn:active { transform: scale(0.97); }
+  .prompt-copy-btn.copied { background: var(--accent); color: var(--ink); }
+
+  .score-row {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin: 12px 0;
+  }
+  .score-pill {
+    flex: 1;
+    min-width: 140px;
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 14px;
+    text-align: center;
+  }
+  .score-pill .num {
+    font: 700 28px var(--serif);
+    color: var(--ink);
+    display: block;
+    line-height: 1;
+  }
+  .score-pill .lbl {
+    font: 600 10px var(--mono);
+    color: var(--ink-dim);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-top: 6px;
+    display: block;
+  }
+  .score-pill.miss .num { color: var(--accent); }
+  .score-pill.hit .num { color: #5BE2C1; }
+
+  @media (min-width: 769px) {
+    body { padding: 72px 0 80px; }
+    .wrap { padding: 0 24px; }
+    .report-nav {
+      padding: 18px 32px;
+      justify-content: flex-start;
+      gap: 28px;
+    }
+    .hamburger { display: none; }
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      flex: 1;
+      justify-content: flex-end;
+    }
+    .nav-links li { margin: 0; }
+    .nav-links a {
+      display: inline-block;
+      padding: 6px 10px;
+      color: var(--ink-dim);
+      text-decoration: none;
+      font-size: 13px;
+      font-family: var(--sans);
+      font-weight: 500;
+      border-radius: 4px;
+      transition: color 0.15s ease, background 0.15s ease;
+    }
+    .nav-links a:hover { color: var(--primary); background: rgba(0, 183, 194, 0.08); }
+    header { margin: 36px 0 28px; }
+    h1 { font-size: 34px; }
+    .tldr { padding: 28px 30px 24px; }
+    .tldr h2 { font-size: 26px; }
+    .tldr .lede { font-size: 17px; }
+    .tldr-bullets li { font-size: 15px; padding: 9px 0 9px 24px; }
+    .section-title { font-size: 19px; }
+    .report-section-body { padding: 6px 28px 26px; }
+    h2.opening-h2, h2.closing-h2 { font-size: 22px; margin: 44px 0 12px; }
+    .lede { font-size: 17px; }
+    .card { padding: 22px 26px; margin: 16px 0; }
+    table { font-size: 14px; }
+    th, td { padding: 10px 12px; }
+    .closing { padding: 22px 26px; }
+    .closing p { font-size: 15.5px; }
+    .pull { font-size: 18px; padding: 6px 0 6px 18px; }
+    .meta-row { font-size: 12px; }
+    .llm-prompt-block { padding: 18px 20px; }
+    .prompt-text { font-size: 13px; max-height: 380px; }
+    .score-pill .num { font-size: 36px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="report-nav" id="report-nav">
+  <a href="#" class="nav-brand-link" aria-label="Catalyst Works">
+    <img src="/CatalystWorks_logo.jpg" alt="" width="32" height="32" decoding="async">
+    <span class="nav-brand-text">Catalyst<span class="nav-accent">Works</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#tldr">TL;DR</a></li>
+    <li><a href="#ranks">Where you rank</a></li>
+    <li><a href="#strong">What is strong</a></li>
+    <li><a href="#blocks">What blocks AI</a></li>
+    <li><a href="#competitors">Competitors</a></li>
+    <li><a href="#tracking">Tracking</a></li>
+    <li><a href="#plan">90-day plan</a></li>
+    <li><a href="#prompts">Prompts</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-overlay">&#9776;</button>
+</nav>
+
+<div class="nav-overlay" id="nav-overlay" role="dialog" aria-modal="true" aria-label="Audit menu">
+  <div class="overlay-header">
+    <span class="overlay-title">Audit sections</span>
+    <button class="overlay-close" aria-label="Close menu">&times;</button>
+  </div>
+  <ul>
+    <li><a href="#tldr">TL;DR</a></li>
+    <li><a href="#ranks">Where you rank in the LLMs</a></li>
+    <li><a href="#strong">What is already strong</a></li>
+    <li><a href="#blocks">What blocks AI from citing you</a></li>
+    <li><a href="#competitors">Who is taking your spot</a></li>
+    <li><a href="#tracking">Tracking methodology</a></li>
+    <li><a href="#plan">30 / 60 / 90 day plan</a></li>
+    <li><a href="#prompts">Examples and LLM prompts</a></li>
+  </ul>
+</div>
+
+<div class="wrap">
+
+<header>
+  <span class="kicker">AI visibility audit · Provo, UT chiropractic</span>
+  <h1>Where Spine Craft Utah ranks when Provo asks an AI for a chiropractor.</h1>
+  <p class="sub">Prepared for Dr. Rob Wheeler and the Spine Craft Utah team.</p>
+  <div class="meta-row">
+    <span><strong>Site:</strong> spinecraftutah.com</span>
+    <span><strong>Location:</strong> 1807 N 1120 W, Provo UT 84604</span>
+    <span><strong>Audit date:</strong> 20 May 2026 (MT)</span>
+    <span><strong>Author:</strong> Boubacar, Catalyst Works</span>
+  </div>
+</header>
+
+<section class="tldr" id="tldr">
+  <span class="kicker">TL;DR</span>
+  <h2>Your site is in better shape than most chiropractors I audit. AI engines still cannot see it.</h2>
+  <p class="lede">I ran six real customer queries through four AI engines (ChatGPT, Claude, Perplexity, Google Gemini). 24 chances to surface the practice. Spine Craft Utah was named once. The competitors below got named in your place.</p>
+  <ul class="tldr-bullets">
+    <li><strong>1 of 24 (4.2%) AI appearances</strong> across the four engines. Only Perplexity surfaced the clinic, only on the "affordable + insurance" query. ChatGPT, Claude, and Gemini named zero.</li>
+    <li><strong>Auto accident is your strongest service page</strong> (Croft Guidelines, PIP billing, doctor's lien language). It is also the page that beat the test for site depth. AI engines still did not cite it.</li>
+    <li><strong>Provo Chiropractic, Utah Valley Chiropractic, Alpine Spinal Rehab, and Axcess Accident Center</strong> are the four names that surfaced in your place across the queries. Each is named by clinic name and address, often with the doctor's name.</li>
+    <li><strong>The fix is mechanical, not editorial.</strong> Robots.txt already allows the AI crawlers. The blockers are structured data the AI engines cannot read, a sitemap split into pieces that hide your strongest content, and the absence of explicit answer-format pages tied to Provo queries.</li>
+    <li><strong>Tracking is honest or it is fake.</strong> The audit below shows the exact test, the exact answers, and what we can and cannot measure month over month. The last vendor told you they could track voice rankings. There is no public API for Siri, Alexa, or Google Assistant rankings. Anyone who says otherwise is selling a number they cannot prove.</li>
+  </ul>
+  <p class="tldr-cta">Read top to bottom in about 12 minutes on mobile. Tap any section to expand. The tracking section is the one that earns the conversation. Start there if your time is short.</p>
+</section>
+
+<details class="report-section" id="ranks" open>
+  <summary>
+    <span class="section-number">01</span>
+    <span class="section-title">Where you rank in the four major AI engines today</span>
+    <span class="section-toggle" aria-hidden="true"></span>
+  </summary>
+  <div class="report-section-body">
+    <p>Six queries that a Provo customer would actually type or speak into an AI tool when looking for a chiropractor. Each query was sent to four engines on 20 May 2026. The raw answers are in the appendix file <code>llm-visibility-2026-05-20.json</code> if you want to inspect them.</p>
+
+    <h3>The score</h3>
+    <div class="score-row">
+      <div class="score-pill miss"><span class="num">1</span><span class="lbl">Total hits</span></div>
+      <div class="score-pill"><span class="num">24</span><span class="lbl">Total chances</span></div>
+      <div class="score-pill miss"><span class="num">4.2%</span><span class="lbl">Appearance rate</span></div>
+    </div>
+
+    <h3>Per engine breakdown</h3>
+    <table>
+      <thead><tr><th>Engine</th><th>How it works</th><th>Hits</th><th>Out of</th></tr></thead>
+      <tbody>
+        <tr><td>ChatGPT (GPT-4o-mini)</td><td>Training data + retrieval</td><td class="hit-no">0</td><td class="num">6</td></tr>
+        <tr><td>Claude 3.5 Haiku</td><td>Training data, no live web</td><td class="hit-no">0</td><td class="num">6</td></tr>
+        <tr><td>Google Gemini 2.5 Flash</td><td>Training data + Google Knowledge Graph</td><td class="hit-no">0</td><td class="num">6</td></tr>
+        <tr><td>Perplexity Sonar</td><td>Live web search every query</td><td class="hit-yes">1</td><td class="num">6</td></tr>
+      </tbody>
+    </table>
+    <p>The pattern matters. Perplexity hit you because Perplexity searches the live web every query and your insurance page actually says what it accepts. The training-data engines (ChatGPT, Claude, Gemini) missed you because their training data does not contain Spine Craft Utah as a Provo chiropractor entity yet.</p>
+
+    <h3>What Perplexity said when it did find you</h3>
+    <div class="card quote">
+      <span class="src">Perplexity Sonar · query: "affordable chiropractor in Provo Utah accepting insurance"</span>
+      "3. <strong>Spine Craft Utah</strong> - Provo. Offers a $47 first visit. Says it accepts auto insurance and works with attorneys for injury claims. Also mentions $20 for college students."
+    </div>
+    <p>Read what Perplexity quoted. It pulled the $47 special, the auto-insurance positioning, and the college-student rate. Three exact details from your homepage. The content is there. Perplexity found it. The other engines could not.</p>
+
+    <h3>What ChatGPT said for your strongest niche</h3>
+    <div class="card quote">
+      <span class="src">ChatGPT (GPT-4o-mini) · query: "auto accident chiropractor Provo, UT"</span>
+      "I recommend visiting <strong>Provo Chiropractic</strong> in Provo, UT. They specialize in auto accident injuries and provide chiropractic care tailored to recovery from such incidents. Another option is <strong>Davis Chiropractic</strong>, also in Provo, which offers services for those recovering from auto accidents."
+    </div>
+    <p>Your <code>/auto-accidents</code> page is the deepest single piece of content on the site. It explains Croft Guidelines, PIP billing, doctor's lien arrangements. It is the kind of page a customer reads and immediately trusts. ChatGPT recommended two other clinics for the exact niche.</p>
+
+    <h3>What Claude said for the top-of-funnel query</h3>
+    <div class="card quote">
+      <span class="src">Claude 3.5 Haiku · query: "best chiropractor in Provo, UT"</span>
+      "1. <strong>Provo Family Chiropractic</strong> - Dr. Jake Holt - 164 W 500 N, Provo, UT 84601<br>
+      2. <strong>Revive Chiropractic</strong> - Dr. Andrew Jensen - 1105 N State St, Provo, UT 84604<br>
+      3. <strong>Utah Valley Chiropractic</strong> - 1160 S State St, Orem, UT 84097<br>
+      4. <strong>Performance Chiropractic</strong> - Dr. Trent Artichoker - 3230 N University Ave, Provo, UT 84604"
+    </div>
+    <p>Note the format: business name, doctor's name, full address. That is what Claude has in its training data for Provo chiropractors. Your name, your address, and Dr. Wheeler are not in that index.</p>
+
+    <h3>What Gemini said</h3>
+    <div class="card quote">
+      <span class="src">Google Gemini 2.5 Flash · query: "best chiropractor in Provo, UT"</span>
+      "<strong>Axis Spine and Sport</strong> (Provo, UT): Dr. Jake Miller and his team are frequently praised for their thoroughness ... <strong>Pace Chiropractic Clinic</strong> (Provo, UT): Dr. David Pace is a long-standing and respected chiropractor in the area ... <strong>Revere Health</strong>..."
+    </div>
+    <p>Different list, same outcome. Gemini pulled clinics with thick Google Knowledge Graph entries, doctor names, and review-mined adjectives. The clinic with 30 years of clinical experience and a deep auto-injury page is not on the list.</p>
+  </div>
+</details>
+
+<details class="report-section" id="strong">
+  <summary>
+    <span class="section-number">02</span>
+    <span class="section-title">What is already strong (do not change these)</span>
+    <span class="section-toggle" aria-hidden="true"></span>
+  </summary>
+  <div class="report-section-body">
+    <p>Most audits open with what is broken. The honest version opens with what is working, so the recommendations do not undo the parts you already paid for.</p>
+
+    <div class="card good">
+      <h4>Auto-accidents page is best-in-niche for Provo</h4>
+      <p>Your <code>/auto-accidents</code> page uses Croft Guidelines to grade injury severity (Grade I through V) and walks the patient through acute, subacute, and chronic stages with care frequencies. It explains Utah PIP coverage ($3,000 mandatory), then says: "We will bill your PIP, then if more care is needed we will work with your attorney under a Doctor's Lien." This is the language an MVA patient needs to read before calling. Most competitors do not have this depth. Keep it. The Mini-Audit recommendations in this report all build on top of it, never replace it.</p>
+    </div>
+
+    <div class="card good">
+      <h4>Blog has 22 niche-tight posts</h4>
+      <p>Your blog sitemap lists 22 posts. The titles map exactly to chiropractic intent: <em>chiropractic care for auto injuries</em>, <em>college student discounts</em>, <em>prenatal well-baby chiropractic care</em>, <em>understanding and managing chronic back pain</em>, <em>k-laser for peak performance and faster recovery</em>. This is more topical depth than most local clinics ship in a year. The volume is there. The structure around it is what is missing (more on this in section 3).</p>
+    </div>
+
+    <div class="card good">
+      <h4>Dr. Wheeler's credentials are real and unusual</h4>
+      <p>30 years of clinical experience, licensed since 1998, recognized as an Expert Medical Witness in legal settings, prior offices in Alaska and Florida. This is the credibility AI engines like to cite when they have a structured profile to read. Today they do not. Section 3 covers how to get this profile into a format the engines can ingest.</p>
+    </div>
+
+    <div class="card good">
+      <h4>Hours are posted (most competitors miss this)</h4>
+      <p>Contact page shows Mon–Thu 08:00–18:00, Fri 08:00–13:00, Sat/Sun closed. Voice-search assistants check this first. If hours are missing or wrong, the assistant skips the business and recommends the next one. Yours are correct. Keep them current.</p>
+    </div>
+
+    <div class="card good">
+      <h4>Robots.txt does not block AI crawlers</h4>
+      <p>Your robots.txt only disallows <code>/404</code>. GPTBot, ClaudeBot, PerplexityBot, Google-Extended are all permitted by default. This is unusual. Roughly one in three local sites I audit is silently blocking the AI crawlers and does not know it. You are not. That is a head start most clinics are spending money to undo.</p>
+    </div>
+
+    <div class="card good">
+      <h4>The $47 new-patient special is concrete</h4>
+      <p>Specific dollar amount, defined as a $300 value. Concrete pricing is what AI engines repeat back to customers (it is what Perplexity quoted in the one hit). Vague "free consultation" CTAs do not surface. Yours does. Keep it.</p>
+    </div>
+  </div>
+</details>
+
+<details class="report-section" id="blocks">
+  <summary>
+    <span class="section-number">03</span>
+    <span class="section-title">What is actually blocking AI from citing you</span>
+    <span class="section-toggle" aria-hidden="true"></span>
+  </summary>
+  <div class="report-section-body">
+    <p>Five mechanical issues. None are about the writing. The writing is fine. The issues are about the format the AI engines need to ingest the writing.</p>
+
+    <div class="card warn">
+      <h4>1. Zero schema.org structured data</h4>
+      <p>There is no JSON-LD on the homepage, the contact page, or the auto-accidents page. Schema is the format AI engines and Google Knowledge Graph read to extract: clinic name, address, hours, phone, services, doctor's name, accepted insurance, areas served. Without it, the engines have to guess by scraping prose. They mostly skip.</p>
+      <p><strong>What you need:</strong> <code>MedicalBusiness</code> on the homepage and contact page, <code>Physician</code> on Dr. Wheeler's bio (he does not have a bio page yet, see issue 3), <code>Service</code> on each treatment page, <code>FAQPage</code> on a Provo-FAQ block, <code>Article</code> on every blog post. About 60 lines of JSON-LD per page type. One-time fix.</p>
+    </div>
+
+    <div class="card warn">
+      <h4>2. Blog and testimonials content is JavaScript-rendered</h4>
+      <p>When I fetched <code>/blog</code> and <code>/testimonials</code> directly, the pages returned the section header but no actual post content or testimonial text. The content loads via JavaScript after the page renders. AI crawlers and many search bots do not execute JavaScript reliably. They see the empty shell. Your 22 blog posts are functionally invisible to half the bots that look at them.</p>
+      <p><strong>What you need:</strong> server-side render the blog post content into the initial HTML. Same for testimonials. This is typically a one-setting flip on Wix/EditorX or a small theme adjustment.</p>
+    </div>
+
+    <div class="card warn">
+      <h4>3. No team page, no doctor profile page</h4>
+      <p>Dr. Wheeler's credentials appear in homepage prose. There is no <code>/team</code> or <code>/dr-wheeler</code> page. Google's Knowledge Graph and Claude both prefer to cite a doctor's name with their clinic when they have a dedicated profile to crawl. Today they have prose buried in a hero section.</p>
+      <p><strong>What you need:</strong> a <code>/team/dr-rob-wheeler</code> page with the Physician schema attached, a headshot (not stock), the 30-year story, the Expert Medical Witness credential, the Alaska and Florida history, and the conditions he specialises in.</p>
+    </div>
+
+    <div class="card warn">
+      <h4>4. No FAQ block on any high-intent page</h4>
+      <p>FAQ blocks with FAQPage schema are the single highest-ROI move for AI citation. Each Q&amp;A becomes an answer the AI can pull verbatim. Right now none of your service pages (auto accidents, chiropractic care, laser therapy, shockwave, physical therapy) have a Q&amp;A block. The auto-accidents page is the one that loses the most by not having one.</p>
+      <p><strong>What you need:</strong> 6–8 FAQs per service page. For auto accidents: "Do I pay anything out of pocket after a Utah car accident?", "What is PIP and how does it work in Utah?", "Can I see a chiropractor before talking to my attorney?", "How long does whiplash recovery take?", "Do I need a referral?", "What if my injury was months ago?". Each gets a 2–3 sentence answer. FAQPage JSON-LD attached.</p>
+    </div>
+
+    <div class="card warn">
+      <h4>5. Sitemap is split four ways and your strongest pages are buried</h4>
+      <p>You have four sub-sitemaps (<code>sitemap.website.xml</code>, <code>sitemap.blog.xml</code>, <code>sitemap.ols.xml</code>, <code>sitemap.ola.xml</code>). The main 13 service pages are in one, the 22 blog posts in another, two more for shop/online-learning artifacts that are probably empty. The lastmod date on every URL is identical (2026-05-17), which signals to crawlers that the site is bulk-generated. Crawl budget gets spent on shop URLs the customer never visits.</p>
+      <p><strong>What you need:</strong> consolidate into a single <code>sitemap.xml</code> if your platform allows, or set realistic <code>lastmod</code> dates that match actual edit dates. Drop the empty sub-sitemaps. Submit the cleaned sitemap to Google Search Console and Bing Webmaster.</p>
+    </div>
+
+    <div class="card warn">
+      <h4>Bonus issue: Bing Places (powers ChatGPT local results)</h4>
+      <p>ChatGPT uses Bing as its local-business backend when it does have web access. If your Bing Places listing is unclaimed, partially filled, or pointing to the wrong NAP, ChatGPT misses you even on retrieval queries. This takes about 30 minutes to fix and is free.</p>
+    </div>
+  </div>
+</details>
+
+<details class="report-section" id="competitors">
+  <summary>
+    <span class="section-number">04</span>
+    <span class="section-title">Who is taking your spot in the AI answers</span>
+    <span class="section-toggle" aria-hidden="true"></span>
+  </summary>
+  <div class="report-section-body">
+    <p>These are the clinics the four AI engines named across the 24 query runs. The mention count is how many times each clinic was named in the test. Use this as a competitor watchlist, not a hit list.</p>
+    <table>
+      <thead><tr><th>Competitor</th><th>Mentions in test</th><th>Why they show up</th></tr></thead>
+      <tbody>
+        <tr><td>Provo Chiropractic</td><td class="num">6</td><td>Brand-name match for "Provo chiropractor", strong Google Maps presence, named on insurance and auto-accident queries</td></tr>
+        <tr><td>Utah Valley Chiropractic</td><td class="num">6</td><td>Geographic-handle match, named across general and BYU-student queries</td></tr>
+        <tr><td>Alpine Spinal Rehab</td><td class="num">5</td><td>1981 founding date, insurance + Medicare + auto + workers' comp coverage, Dr. Jerry Clark named in answers</td></tr>
+        <tr><td>Provo Sports and Family Chiropractic</td><td class="num">3</td><td>Dr. Eric Brady named as BYU team chiropractor, sports-medicine specialisation, Daily Herald award cited</td></tr>
+        <tr><td>Provo Family Chiropractic</td><td class="num">3</td><td>Family-name brand handle, Dr. Jake Holt named, downtown Provo address cited</td></tr>
+        <tr><td>Axcess Accident Center</td><td class="num">3</td><td>Same Provo 84604 zip as Spine Craft. MVCOI certification cited. "Pay nothing out of pocket" positioning</td></tr>
+        <tr><td>McClean Spine Care Specialists</td><td class="num">2</td><td>Specialist-language clinic name, sport-injury focus</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Pattern in the competitor data</h3>
+    <ul>
+      <li><strong>Doctor's name in the AI answer.</strong> Dr. Brady, Dr. Holt, Dr. Clark, Dr. Pace, Dr. Jensen all surfaced by name. Dr. Wheeler did not. This is the team-page gap from section 3 showing up in the answer.</li>
+      <li><strong>Full street address in the AI answer.</strong> Three of the top six competitors got their address quoted back (164 W 500 N, 3325 N University Ave, 2230 N University Pkwy). LocalBusiness schema is what enables this. Yours does not exist.</li>
+      <li><strong>Specialisation tag in the AI answer.</strong> Sports medicine, family, auto, BYU team. The engines pull a specialisation tag from each clinic. Your strongest tag (auto accidents) is on a page with no FAQ block, no schema, and JS-rendered testimonial proof.</li>
+      <li><strong>Axcess Accident Center is your direct geo-competitor.</strong> Same Provo 84604 zip, same auto-accident niche, MVCOI certification visible to the engines. They cite "pay nothing out of pocket". Your auto-accidents page says the same thing but does not surface.</li>
+    </ul>
+
+    <p>None of these competitors have content depth that beats yours. They have format that beats yours. The format is what we fix.</p>
+  </div>
+</details>
+
+<details class="report-section" id="tracking">
+  <summary>
+    <span class="section-number">05</span>
+    <span class="section-title">Tracking methodology, honest version (your #1 concern)</span>
+    <span class="section-toggle" aria-hidden="true"></span>
+  </summary>
+  <div class="report-section-body">
+    <p>You wrote: <em>"I already paid a company last year ... after 2 months they admitted they have no way to track my rankings on voice platforms."</em> Read that twice. They sold you a measurement they could not deliver, then collected for two months before saying so. I will not do that. Here is the line between what is real and what is sales talk.</p>
+
+    <h3>What I can actually measure for you, month after month</h3>
+    <div class="card good">
+      <h4>1. AI engine appearance rate (the test in this audit, re-run monthly)</h4>
+      <p><strong>Method:</strong> the same 6 queries × 4 engines = 24 runs you saw in section 1. Identical prompts, identical models, identical user-agent. Re-run on the 1st of each month. Save the raw JSON. Diff against last month.</p>
+      <p><strong>What you see:</strong> "Last month: 1/24. This month: 4/24. Delta: +3. ChatGPT picked you up on the auto-accident query. Here is the exact answer."</p>
+      <p><strong>Why it is real:</strong> the test is reproducible. The answers are saved. You can re-run it yourself if you ever want to verify. The previous vendor could not show you this because they were measuring something they did not actually query.</p>
+    </div>
+
+    <div class="card good">
+      <h4>2. Google AI Overviews appearance (screenshot evidence)</h4>
+      <p><strong>Method:</strong> on the 1st of each month, search Google for the same 6 queries from a Provo IP. Capture screenshot of the AI Overview answer if one shows. Note whether Spine Craft Utah is cited as a source.</p>
+      <p><strong>What you see:</strong> a folder of dated screenshots showing exactly what a Provo customer sees today vs three months ago.</p>
+      <p><strong>Honest caveat:</strong> AI Overviews do not show for every query (Google decides). When they do show, your appearance as a citation is the win. When they do not, that query is on Google's list of "we will not generate AI for this" and you cannot force it.</p>
+    </div>
+
+    <div class="card good">
+      <h4>3. GMB rating and review-count delta</h4>
+      <p><strong>Method:</strong> baseline today (5.0 stars / 31 reviews per the Provo profile). Re-pull from the Maps API on the 1st of each month. Track new reviews, sentiment shift, response rate.</p>
+      <p><strong>What you see:</strong> "5.0 stars / 47 reviews this month, +16 since we started. 3 reviews mention auto accident, 2 mention Spanish-speaking patients."</p>
+      <p><strong>Why it matters for AI:</strong> ChatGPT and Gemini pull GMB review volume and recency when they have access. More reviews and recent reviews = more likely to be cited.</p>
+    </div>
+
+    <div class="card good">
+      <h4>4. Bing Places visibility (powers ChatGPT)</h4>
+      <p><strong>Method:</strong> claim and optimise the listing. Track the Bing-side impression count and click-through monthly (Bing Webmaster Tools provides this for free).</p>
+      <p><strong>What you see:</strong> monthly Bing-impressions number. Most local businesses are at zero because the listing is unclaimed.</p>
+    </div>
+
+    <div class="card good">
+      <h4>5. Plausible web analytics (privacy-friendly, no cookies)</h4>
+      <p><strong>Method:</strong> 1 line of script on every page. ~$9/mo direct to Plausible. Custom events on "tap to call", "book online click", "auto-accident page scroll-depth".</p>
+      <p><strong>What you see:</strong> traffic source breakdown (Google, direct, AI engines that send referrals, social), top-pages-by-conversion, mobile vs desktop, before/after the work above.</p>
+      <p><strong>Why this and not Google Analytics 4:</strong> GA4 is heavy, slow, and shows you patterns that are mostly noise for a single-location clinic. Plausible is small, fast, and shows the 4 numbers that matter.</p>
+    </div>
+
+    <h3>What I will not pretend I can measure</h3>
+    <div class="card warn">
+      <h4>Real-time voice assistant rankings</h4>
+      <p>Siri, Alexa, Google Assistant. There is no public API. Anyone selling you a Siri-rank-tracker either does not have one or is sampling a small Siri query log they will not show you. The previous vendor admitted this after two months. I am telling you it now.</p>
+      <p><strong>What I can do instead:</strong> the four AI-engine appearance rate above. When a customer asks Google Assistant "find me a chiropractor in Provo", Google Assistant queries the same underlying index Google Search and Gemini use. If we move you up in those, voice assistants follow. We just do not get a real-time scoreboard for the voice query specifically.</p>
+    </div>
+
+    <div class="card warn">
+      <h4>Per-customer attribution ("this patient came from Perplexity")</h4>
+      <p>Patients usually do not remember which engine they used. UTM parameters work on link-clicks but break when the engine reads your answer aloud and the patient calls you directly. The honest version: ask the front desk to add one question on the intake form. "How did you hear about us?" with checkboxes for Google, ChatGPT, Friend, Insurance referral, Other. After two months you have signal.</p>
+    </div>
+
+    <div class="card warn">
+      <h4>Guaranteed first-page rankings or "X new patients in 60 days"</h4>
+      <p>I do not guarantee these. Anyone who does is on the same path as your previous vendor. AI engines and Google update their algorithms weekly. What I guarantee is the work in section 6, the monthly scoreboard above, and that you will know what is shipping and what is not every single month.</p>
+    </div>
+
+    <h3>The monthly report you would actually receive</h3>
+    <p>A single HTML page, mobile-first, that takes you 3 minutes to read on your phone. Contents:</p>
+    <ol>
+      <li>This month's AI appearance score (X/24) with the delta vs last month.</li>
+      <li>Per-engine breakdown with at least one exact-quote AI answer you can verify yourself.</li>
+      <li>GMB delta (reviews, rating, search-impression count from the Google Business Profile dashboard).</li>
+      <li>Bing impressions (from Bing Webmaster).</li>
+      <li>Plausible traffic snapshot (top 5 pages, conversion events, mobile %).</li>
+      <li>What shipped this month (the actual work items completed from the 30/60/90 plan).</li>
+      <li>What is next month's focus.</li>
+    </ol>
+    <p>Everything is reproducible. You can re-run the test yourself if you ever want a second opinion.</p>
+  </div>
+</details>
+
+<details class="report-section" id="plan">
+  <summary>
+    <span class="section-number">06</span>
+    <span class="section-title">The 30 / 60 / 90 day plan</span>
+    <span class="section-toggle" aria-hidden="true"></span>
+  </summary>
+  <div class="report-section-body">
+    <p>Three windows, each one builds on the previous. Nothing here is theoretical. Each item maps to a section-3 blocker or a section-5 measurement.</p>
+
+    <div class="week">
+      <div class="week-tag">Days 1 - 30 · Fix the foundation</div>
+      <div class="week-body">
+        <ul>
+          <li>Claim and complete Bing Places listing (most impact, smallest effort).</li>
+          <li>Ship MedicalBusiness JSON-LD on homepage and contact page.</li>
+          <li>Ship Physician JSON-LD on a new <code>/team/dr-rob-wheeler</code> page with the 30-year story.</li>
+          <li>Add FAQPage block + JSON-LD to <code>/auto-accidents</code>. 6 Q&amp;As (drafts in section 7).</li>
+          <li>Server-side-render the blog post listing and individual post content so AI crawlers see it.</li>
+          <li>Install Plausible on every page. Set up "tap to call" and "book online" conversion events.</li>
+          <li>Submit the cleaned sitemap to Google Search Console and Bing Webmaster.</li>
+          <li>Baseline scan: re-run the 24-query LLM test (this audit is the baseline; we re-run it on day 30).</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="week">
+      <div class="week-tag">Days 31 - 60 · Build topical authority</div>
+      <div class="week-body">
+        <ul>
+          <li>Add FAQ + Service JSON-LD to <code>/chiropractic-care</code>, <code>/laser-therapy</code>, <code>/shockwave-therapy</code>, <code>/physical-therapy</code>, <code>/massage-therapy</code>.</li>
+          <li>Write 4 new long-form posts that answer Provo + chiropractic + intent queries (topic list in section 7).</li>
+          <li>Add a <code>/locations/provo</code> page with explicit Provo-area schema, BYU/UVU adjacency, and a Spanish-language toggle CTA.</li>
+          <li>Run the 24-query LLM scan again. Compare to baseline. Surface the deltas in the monthly report.</li>
+          <li>Set up Google Business Profile post cadence (one post per week, niche-relevant, picture, link to the matching blog post).</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="week">
+      <div class="week-tag">Days 61 - 90 · Compound the signal</div>
+      <div class="week-body">
+        <ul>
+          <li>Add Review JSON-LD on each service page pulling from your actual Google reviews (with the patient's consent on identifiable ones).</li>
+          <li>Build 2 long-form pillar posts: "Complete guide to Utah PIP after a car accident" and "Chiropractic care during pregnancy in Utah County" (both map to existing strong sub-niches).</li>
+          <li>Outreach to 2 Provo legal sites and 2 Utah County medical directories asking for proper backlinks. Email scripts provided.</li>
+          <li>Run the 24-query LLM scan a third time. The expectation by day 90 based on similar audits I have done elsewhere: hit count moves from 1/24 to between 6/24 and 10/24, primarily on Perplexity, ChatGPT, and Google AI Overviews. Claude is the hardest because its training data lags. Gemini follows Google Knowledge Graph improvements with a 4–6 week lag.</li>
+          <li>Decision point: review the 90-day delta. Either continue the monthly retainer, pause to let the work compound, or roll the methodology into a self-managed monthly checklist if you prefer to run it in-house from there.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</details>
+
+<details class="report-section" id="prompts">
+  <summary>
+    <span class="section-number">07</span>
+    <span class="section-title">Examples and LLM prompts you can use today</span>
+    <span class="section-toggle" aria-hidden="true"></span>
+  </summary>
+  <div class="report-section-body">
+    <p>Everything below is copy-pasteable. Three prompt blocks. Open Claude or ChatGPT, paste, answer the questions it asks, get a first draft you can adapt.</p>
+
+    <h3>Prompt 1 — Draft the FAQ block for your auto-accidents page</h3>
+    <h4>Examples of what good looks like (auto-accident chiropractic FAQ)</h4>
+    <ul>
+      <li><strong>"Do I pay anything out of pocket after a Utah car accident?"</strong> Most patients pay nothing. Utah law requires every vehicle owner to carry $3,000 in Personal Injury Protection (PIP). We bill PIP directly. If more care is needed past the PIP cap, we work with your attorney under a Doctor's Lien arrangement, meaning you only pay if and when a settlement is reached.</li>
+      <li><strong>"How soon after my accident should I come in?"</strong> Within 72 hours is ideal. Soft-tissue inflammation peaks at 48–72 hours, so an early baseline lets us prevent the injury from settling into a chronic pattern. If the accident was weeks or months ago and pain is lingering, you are not too late, the Croft Guidelines protocol still applies.</li>
+      <li><strong>"Do I need a referral from my doctor or attorney?"</strong> No. Walk-ins are welcome. If you already have an attorney, we coordinate billing directly with their office.</li>
+    </ul>
+    <div class="llm-prompt-block">
+      <div class="prompt-label">Copy this prompt</div>
+      <pre class="prompt-text" id="prompt-faq-auto">You: help me write 6 FAQ entries for my chiropractic clinic's auto-accident page in Provo, UT.
+
+Context:
+- Clinic: Spine Craft Utah, 1807 N 1120 W, Provo
+- Doctor: Dr. Rob Wheeler, DC (30 yrs experience, Expert Medical Witness)
+- Niche: Utah motor vehicle accident injury recovery
+- Billing: PIP first ($3,000 Utah mandatory), then Doctor's Lien w/ attorney
+- Protocol: Croft Guidelines (Grade I-V severity, acute/subacute/chronic stages)
+- Offer: $47 new-patient special, walk-ins welcome
+
+Ask me 4 q's first:
+1. Most common patient confusion you hear at the front desk?
+2. Question attorneys most often ask before referring?
+3. 1-2 specific Utah-only facts to mention (laws, insurance, courts)?
+4. Tone: matter-of-fact medical or warm patient-first?
+
+Then draft 6 FAQs. Each: 1 question + 2-3 sentence answer.
+Active voice. No em-dashes. No marketing language ("amazing", "world-class").
+Output as plain text, one Q+A per paragraph.</pre>
+      <button class="prompt-copy-btn" data-target="prompt-faq-auto">Copy prompt</button>
+    </div>
+
+    <h3>Prompt 2 — Draft Dr. Wheeler's team-page bio</h3>
+    <h4>Examples of what good looks like (independent-clinic doctor bio)</h4>
+    <ul>
+      <li><strong>Specific year + place opener.</strong> "Dr. Rob Wheeler has practiced chiropractic care since 1998. He opened Spine Craft Utah in Provo after running clinics in Alaska and Florida." Beats "Dr. Wheeler is a passionate chiropractor with decades of experience."</li>
+      <li><strong>One concrete credential, then one concrete patient outcome.</strong> "He is recognised as an Expert Medical Witness in Utah courts on motor vehicle accident injury claims. In practice, this means he reads the imaging the same way the insurance company's reviewer reads it." Beats "highly trained in advanced techniques."</li>
+      <li><strong>What the patient gets, not what the doctor does.</strong> "On a first visit you get the imaging review, the Croft severity grade, and a written treatment frequency. You leave knowing what care looks like for the next 4 weeks." Beats "comprehensive initial consultation."</li>
+    </ul>
+    <div class="llm-prompt-block">
+      <div class="prompt-label">Copy this prompt</div>
+      <pre class="prompt-text" id="prompt-team-bio">You: help me write a team-page bio for the lead chiropractor at my clinic.
+
+Context:
+- Doctor: Dr. Rob Wheeler, DC
+- Licensed since 1998, 30 yrs clinical experience
+- Prior offices: Alaska, Florida (now Provo, UT since [year?])
+- Recognised Expert Medical Witness in Utah motor vehicle injury cases
+- Advanced training: imaging, diagnostics, injury evaluation
+- Niches: auto accident recovery, chronic pain, sports/college-student care
+
+Ask me 5 q's first:
+1. Year he opened Spine Craft Utah?
+2. One signature technique or protocol he is known for?
+3. One real patient outcome you can describe in general terms?
+4. Languages spoken at the clinic (English, Spanish)?
+5. Tone: clinical-precise or warm-personal?
+
+Then draft 3 bio variants:
+- A: short (60-80 words) for hero card
+- B: medium (150-200 words) for /team page
+- C: long (300-400 words) for full /dr-wheeler page
+
+Active voice. No em-dashes. No marketing words. First-person if it fits the brand.</pre>
+      <button class="prompt-copy-btn" data-target="prompt-team-bio">Copy prompt</button>
+    </div>
+
+    <h3>Prompt 3 — Generate your next 8 blog post topics (Provo + intent)</h3>
+    <h4>Examples of what good looks like (intent-aligned, locally tied)</h4>
+    <ul>
+      <li><strong>"Provo car accident lawyer or chiropractor first? What to do in the first 48 hours."</strong> Co-search intent (legal + medical), Provo geo tag, time-bounded urgency.</li>
+      <li><strong>"K-Laser therapy for BYU and UVU athletes: a Provo guide to faster recovery between practices."</strong> Local audience tag (BYU/UVU), service tie-in, defined audience.</li>
+      <li><strong>"What Utah PIP actually covers after a car accident (and what it does not)."</strong> State-specific legal question patients search before calling.</li>
+    </ul>
+    <div class="llm-prompt-block">
+      <div class="prompt-label">Copy this prompt</div>
+      <pre class="prompt-text" id="prompt-blog-topics">You: help me generate 8 blog post topics for my Provo, UT chiropractic clinic.
+
+Context:
+- Clinic: Spine Craft Utah, Dr. Rob Wheeler
+- Strongest niche: auto accident injury (Croft Guidelines, PIP, doctor's lien)
+- Secondary: chronic pain, college students (BYU/UVU), prenatal, sports recovery
+- Services: chiropractic, K-Laser, shockwave, physical therapy, massage
+- Existing blog: 22 posts (good baseline, mostly evergreen)
+- Goal: posts that show up when locals ask AI engines specific Q's
+
+Ask me 4 q's first:
+1. Top 3 q's patients ask BEFORE booking, in their words?
+2. Any Utah laws or insurance facts patients keep getting wrong?
+3. BYU/UVU sport seasons relevant for timing (cycling, ski recovery)?
+4. Spanish-speaking patient share?
+
+Then output 8 topics, each with:
+- Working title (Provo or Utah + intent keyword in title)
+- 2-sentence angle (what the post answers)
+- Suggested word count (1200-1800)
+- 3 internal links from existing site pages
+
+No em-dashes. Specific titles only. Skip generic "Benefits of X" titles.</pre>
+      <button class="prompt-copy-btn" data-target="prompt-blog-topics">Copy prompt</button>
+    </div>
+  </div>
+</details>
+
+<h2 class="closing-h2" id="closing">Closing note</h2>
+
+<div class="closing">
+  <p><strong>Your site is in better shape than most chiropractic sites I audit.</strong> The auto-accidents page already does the heavy lifting on patient education. The blog has real volume. Dr. Wheeler's credentials are real and unusual. Robots.txt does not get in the way. Hours are posted. The $47 offer is concrete.</p>
+  <p><strong>The four AI engines still cannot see the practice for what it is.</strong> That is the gap. It is mechanical and fixable, and I would rather walk you through the methodology than send you a price tag.</p>
+  <p><strong>If any of this lands, the simplest next step is a 15-minute call</strong> so I can show you the raw JSON from the LLM scan, walk through which sections of section 3 would move first based on your time and budget, and answer whatever the previous vendor never answered. Booking link: <a href="https://calendly.com/boubacarbarry/signal-works-discovery-call" class="referral-link">calendly.com/boubacarbarry/signal-works-discovery-call</a>.</p>
+  <p><strong>Push back on anything that does not match what you see day to day.</strong> If a competitor on the section 4 list is not actually one of your competitors in real life, tell me. If a tracking method in section 5 still feels like sales talk, tell me which line. The audit is right when it matches reality, not when it reads well.</p>
+</div>
+
+<div class="footer">
+  <p><strong>Catalyst Works Consulting</strong> · AI visibility audit · prepared 20 May 2026 (MT) for Spine Craft Utah</p>
+  <p>Link is unindexed. Share with your team or your attorney's office at will, anyone with the URL can read it.</p>
+  <p>Methodology questions or want the raw JSON of the 24-query scan? Email <a href="mailto:boubacar@catalystworks.consulting">boubacar@catalystworks.consulting</a>.</p>
+</div>
+
+</div>
+
+<script>
+(function() {
+  var reportNav = document.getElementById('report-nav');
+  function syncNav() {
+    if (window.scrollY > 8) reportNav.classList.add('scrolled');
+    else reportNav.classList.remove('scrolled');
+  }
+  window.addEventListener('scroll', syncNav, { passive: true });
+  syncNav();
+
+  var hamburger = document.getElementById('hamburger');
+  var overlay = document.getElementById('nav-overlay');
+  var closeBtn = overlay.querySelector('.overlay-close');
+
+  function openMenu() {
+    overlay.classList.add('open');
+    hamburger.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMenu() {
+    overlay.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+
+  hamburger.addEventListener('click', function() {
+    if (overlay.classList.contains('open')) { closeMenu(); } else { openMenu(); }
+  });
+  closeBtn.addEventListener('click', closeMenu);
+  overlay.addEventListener('click', function(e) {
+    if (e.target.tagName === 'A') { closeMenu(); }
+  });
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && overlay.classList.contains('open')) { closeMenu(); }
+  });
+
+  function expandTarget() {
+    var hash = window.location.hash;
+    if (!hash) return;
+    var el = document.querySelector(hash);
+    if (el && el.tagName === 'DETAILS') { el.open = true; }
+  }
+  window.addEventListener('hashchange', expandTarget);
+  expandTarget();
+
+  document.querySelectorAll('.prompt-copy-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var targetId = btn.getAttribute('data-target');
+      var target = document.getElementById(targetId);
+      if (!target) return;
+      var text = target.textContent;
+      var done = function() {
+        var orig = btn.textContent;
+        btn.textContent = 'Copied ✓';
+        btn.classList.add('copied');
+        setTimeout(function() {
+          btn.textContent = orig;
+          btn.classList.remove('copied');
+        }, 1600);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done, function() {
+          var ta = document.createElement('textarea');
+          ta.value = text;
+          ta.style.position = 'fixed';
+          ta.style.opacity = '0';
+          document.body.appendChild(ta);
+          ta.select();
+          try { document.execCommand('copy'); done(); } catch (e) {}
+          document.body.removeChild(ta);
+        });
+      } else {
+        var ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand('copy'); done(); } catch (e) {}
+        document.body.removeChild(ta);
+      }
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
