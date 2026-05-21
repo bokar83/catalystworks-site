@@ -1,0 +1,537 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Conferences 2026 Prep Kit · Catalyst Works</title>
+<link rel="icon" type="image/jpeg" href="/CatalystWorks_logo.jpg">
+<style>
+  :root {
+    --bg: #071A2E;
+    --bg-2: #0D2A45;
+    --card: #0D2A45;
+    --line: #1F3551;
+    --ink: #F3F6F9;
+    --ink-dim: #9AA3B2;
+    --primary: #00B7C2;
+    --primary-light: #E6F9FA;
+    --accent: #FF7A00;
+    --good: #16A34A;
+    --mono: ui-monospace, SFMono-Regular, "SF Mono", Consolas, monospace;
+    --serif: Spectral, "Source Serif 4", Georgia, serif;
+    --sans: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 0;
+    font: 16px/1.6 var(--sans);
+    background: var(--bg);
+    color: var(--ink);
+  }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 24px; }
+
+  nav.top {
+    padding: 18px 24px;
+    background: var(--bg);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    backdrop-filter: blur(8px);
+  }
+  nav.top .inner {
+    max-width: 880px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  nav.top img {
+    height: 32px;
+    width: auto;
+    border-radius: 6px;
+  }
+  nav.top .brand {
+    font: 600 14px var(--sans);
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+  nav.top .brand small {
+    color: var(--ink-dim);
+    font-weight: 400;
+    margin-left: 8px;
+  }
+
+  header.hero {
+    padding: 48px 0 24px;
+  }
+  .kicker {
+    color: var(--primary);
+    font: 600 11px/1 var(--mono);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  h1 {
+    font-family: var(--serif);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    font-size: 38px;
+    line-height: 1.15;
+    margin: 14px 0 10px;
+  }
+  .sub {
+    color: var(--ink-dim);
+    font-size: 16px;
+    max-width: 640px;
+  }
+  .meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    margin-top: 16px;
+    font: 13px var(--mono);
+    color: var(--ink-dim);
+  }
+  .meta-row span strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  h2 {
+    font-family: var(--serif);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    font-size: 22px;
+    margin: 44px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--line);
+  }
+  h3 {
+    font: 600 12px var(--mono);
+    color: var(--primary);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin: 20px 0 8px;
+  }
+
+  .cards {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-top: 12px;
+  }
+  @media (min-width: 720px) {
+    .cards { grid-template-columns: 1fr 1fr 1fr; }
+  }
+  .conf-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  .conf-card h3 {
+    margin-top: 0;
+    color: var(--accent);
+  }
+  .conf-card .conf-name {
+    font: 700 17px var(--serif);
+    color: var(--ink);
+    margin: 4px 0 6px;
+  }
+  .conf-card .conf-meta {
+    color: var(--ink-dim);
+    font-size: 13px;
+    margin-bottom: 14px;
+    flex: 1;
+  }
+  .conf-card a.btn {
+    display: inline-block;
+    background: var(--primary);
+    color: #071A2E;
+    text-decoration: none;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font: 600 14px var(--sans);
+    text-align: center;
+  }
+  .conf-card a.btn:hover { background: var(--primary-light); }
+
+  .copy-block {
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin: 12px 0;
+    position: relative;
+  }
+  .copy-block .label {
+    font: 600 11px var(--mono);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+    margin-bottom: 8px;
+  }
+  .copy-block pre {
+    margin: 0;
+    padding: 0;
+    white-space: pre-wrap;
+    word-break: break-word;
+    font: 14px/1.6 var(--sans);
+    color: var(--ink);
+    background: transparent;
+  }
+  .copy-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: var(--primary);
+    color: #071A2E;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 10px;
+    font: 600 11px var(--mono);
+    letter-spacing: 0.06em;
+    cursor: pointer;
+  }
+  .copy-btn.copied {
+    background: var(--good);
+    color: #fff;
+  }
+
+  details {
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin: 10px 0;
+  }
+  details summary {
+    cursor: pointer;
+    font: 600 14px var(--sans);
+    color: var(--ink);
+    list-style: none;
+  }
+  details summary::-webkit-details-marker { display: none; }
+  details summary::before {
+    content: "+";
+    color: var(--primary);
+    font-weight: 600;
+    margin-right: 8px;
+  }
+  details[open] summary::before { content: "-"; }
+  details > *:not(summary) {
+    margin-top: 12px;
+  }
+
+  .specs {
+    font: 14px var(--sans);
+    color: var(--ink);
+  }
+  .specs li { margin: 4px 0; }
+
+  .file-list {
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 14px 18px;
+    font: 13px var(--mono);
+    color: var(--ink-dim);
+  }
+  .file-list a {
+    color: var(--primary);
+    text-decoration: none;
+  }
+  .file-list a:hover { text-decoration: underline; }
+
+  footer {
+    margin: 64px 0 32px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    color: var(--ink-dim);
+    font-size: 13px;
+    text-align: center;
+  }
+
+  @media (max-width: 640px) {
+    .wrap { padding: 0 18px; }
+    h1 { font-size: 28px; }
+    h2 { font-size: 18px; }
+    nav.top { padding: 14px 18px; }
+    header.hero { padding: 28px 0 16px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="top">
+  <div class="inner">
+    <img src="/CatalystWorks_logo.jpg" alt="Catalyst Works">
+    <div class="brand">Catalyst Works <small>internal · conferences 2026</small></div>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<header class="hero">
+  <div class="kicker">Speaker Prep Kit</div>
+  <h1>3 conferences. 1 prep kit. ~3.5 hours to submit all three.</h1>
+  <p class="sub">Bios, abstracts, headshot specs, reel script, photographer options, and a step-by-step submission checklist for AI Tinkerers SLC, MicroConf Europe Reykjavik, and AfroTech Houston.</p>
+  <div class="meta-row">
+    <span><strong>Locked:</strong> 2026-05-21</span>
+    <span><strong>Owner:</strong> Boubacar</span>
+    <span><strong>Total submit time:</strong> ~3.5 hrs</span>
+  </div>
+</header>
+
+<h2>The 3 conferences</h2>
+<div class="cards">
+
+  <div class="conf-card">
+    <h3>Rolling CFP</h3>
+    <div class="conf-name">AI Tinkerers SLC</div>
+    <div class="conf-meta">Local meetup, demo format, 20 min + Q&amp;A. Lowest friction. Strongest starter venue.</div>
+    <a class="btn" href="https://slc.aitinkerers.org/" target="_blank" rel="noopener">Open submission page</a>
+  </div>
+
+  <div class="conf-card">
+    <h3>Sept 21-23</h3>
+    <div class="conf-name">MicroConf Europe</div>
+    <div class="conf-meta">Reykjavik, Iceland. Single-track, 25 min. Bootstrapped SaaS audience. Travel covered for accepted speakers.</div>
+    <a class="btn" href="https://microconf.com/pitches" target="_blank" rel="noopener">Open submission page</a>
+  </div>
+
+  <div class="conf-card">
+    <h3>Nov 2-6</h3>
+    <div class="conf-name">AfroTech Conference</div>
+    <div class="conf-meta">Houston, TX. 25,000+ attendees. Largest Black tech conference in the US. Breakout slot is the right first ask.</div>
+    <a class="btn" href="https://app.sessionboard.com/submit/afrotech-conference-2026/36e83672-778f-402c-90b7-eed6a5592466" target="_blank" rel="noopener">Open submission page</a>
+  </div>
+
+</div>
+
+<h2>Bios (copy + paste)</h2>
+
+<div class="copy-block">
+  <div class="label">1-line (53 chars)</div>
+  <pre id="bio-1">Boubacar builds AI workflow stacks for solo operators.</pre>
+  <button class="copy-btn" data-target="bio-1">Copy</button>
+</div>
+
+<div class="copy-block">
+  <div class="label">3-line (195 chars)</div>
+  <pre id="bio-3">I am Boubacar. I build AI workflow stacks for solo consultants and small business operators. Based in South Jordan, Utah. Guinean by way of two decades in industry, now running Catalyst Works.</pre>
+  <button class="copy-btn" data-target="bio-3">Copy</button>
+</div>
+
+<div class="copy-block">
+  <div class="label">100-word (AI Tinkerers + AfroTech short-form)</div>
+  <pre id="bio-100">I am Boubacar. I build AI workflow stacks for solo consultants and small business operators who want the leverage of a full team without the headcount.
+
+After 14 years in industry roles at GE and RBL Group, I left to build Catalyst Works, an AI consultancy that ships motion, not slide decks. The system underneath the work is open IP that I document and teach as I build it.
+
+Originally from Guinea. Currently in South Jordan, Utah. Father of four. Spending the next 18 months building before the next chapter.</pre>
+  <button class="copy-btn" data-target="bio-100">Copy</button>
+</div>
+
+<div class="copy-block">
+  <div class="label">250-word (MicroConf abstract field, AfroTech long-form)</div>
+  <pre id="bio-250">I am Boubacar. I build AI workflow stacks for solo consultants and small business operators.
+
+The work has two sides. The visible side is Catalyst Works, an AI consultancy where I rewrite the surfaces of a business that get judged before anyone talks to the owner. The LinkedIn headline that decides whether a buyer DMs. The website hero that decides whether they stay six seconds or thirty. The About page that turns a referral into a call.
+
+The invisible side is the system underneath. I run a self-hosted multi-agent stack on a private VPS that handles research, drafting, scheduling, and publishing across five brands I operate solo. The same engine that produces my own marketing also delivers client work. I document the build openly because the stack is meant to be transferable to other operators, not locked behind a vendor wall.
+
+Before this I spent 14 years at GE and at RBL Group, doing technology and operations work in roles where I was always one layer removed from owning the outcome. In 2026 I left to find out what I could ship when there was no fallback. No active job. 18 months of runway. One year in.
+
+Originally from Conakry, Guinea. Currently based in South Jordan, Utah. Father of four. First-generation operator building the asset stack I wish I had inherited.
+
+I speak about the operator stack, async agent loops, and what it actually takes to run a multi-brand business solo with AI as the leverage layer.</pre>
+  <button class="copy-btn" data-target="bio-250">Copy</button>
+</div>
+
+<h2>Talk abstracts (copy + paste)</h2>
+
+<details>
+  <summary>1. AI Tinkerers SLC: The Operator Stack</summary>
+  <div class="copy-block">
+    <div class="label">Title</div>
+    <pre id="t1-title">The Operator Stack: How I Run 5 Brands Solo With Claude, n8n, and a $200 VPS</pre>
+    <button class="copy-btn" data-target="t1-title">Copy title</button>
+  </div>
+  <div class="copy-block">
+    <div class="label">Abstract</div>
+    <pre id="t1-abs">Most solo operators I know are drowning in tools. Twelve SaaS subscriptions, three Notion workspaces, four Zapier accounts, an AI subscription stack that costs more than their first car, and somehow the actual work still does not get shipped on time.
+
+I went the other direction. One self-hosted VPS at $200 a month. One orchestrator. One Notion content board. One Telegram bot for approvals. From that stack I run Catalyst Works (consulting), Signal Works (productized AI presence), Ghost Works (ghostwriting), HumanAtWork (a 61-SKU digital catalog), and three faceless content channels. All solo. Same engine, different surfaces.
+
+This talk is the architecture walkthrough. I will open the actual code, show the actual containers, run a live job, and explain why it costs less than half what most operators spend on tooling.
+
+What you will learn:
+- The single-orchestrator pattern that lets one VPS host every business motion you run
+- How to wire Claude into a daily cron loop without burning your API budget in a week
+- Where n8n still earns its place even when Claude can write the same workflow in a prompt
+- The two things I tried that did not work, and what I replaced them with
+
+Who this is for: Solo operators, indie hackers, small agency owners, and tinkerers who want to see a production AI stack run live, not described in slides.</pre>
+    <button class="copy-btn" data-target="t1-abs">Copy abstract</button>
+  </div>
+</details>
+
+<details>
+  <summary>2. MicroConf Europe: I Replaced My VA, My Designer, and My SDR With One Async Agent Loop</summary>
+  <div class="copy-block">
+    <div class="label">Title</div>
+    <pre id="t2-title">I Replaced My VA, My Designer, and My SDR With One Async Agent Loop. Here is the Architecture.</pre>
+    <button class="copy-btn" data-target="t2-title">Copy title</button>
+  </div>
+  <div class="copy-block">
+    <div class="label">Abstract</div>
+    <pre id="t2-abs">The dream of the bootstrapped founder has always been the same: ship more without hiring more. For the last decade the path was virtual assistants in another timezone, freelance designers on call, and an SDR contractor who maybe sent three good emails a week. The path worked, sort of, but the management overhead ate the leverage.
+
+In 2026 I rebuilt the entire support layer of my business as a single async agent loop. The loop proposes work, waits for me to approve or reject from Telegram, then executes. The same loop drafts cold outreach, ships design assets, queues social posts, and watches the inbox for replies. I never sit in front of it. I respond to its pings between client calls.
+
+This talk is not a vibe. It is the architecture. I will show the database schema for the proposal queue, the prompt structure for the approval messages, the failure modes that nearly killed it in week three, and the exact moment I realized the agent had gotten faster than I could read its proposals.
+
+What you will learn:
+- The async-approval pattern that turns LLM agents into reliable workers without losing the human checkpoint
+- How to design proposal messages so you can decide in under 10 seconds on your phone
+- The three guardrails that prevent agent loops from quietly burning your inventory or your reputation
+- Real cost numbers: what this loop runs me per month and what it would have cost as a fractional team
+
+Who this is for: Bootstrapped SaaS founders, agency owners, and solo consultants who have already tried the VA route and felt the management overhead eat the leverage.</pre>
+    <button class="copy-btn" data-target="t2-abs">Copy abstract</button>
+  </div>
+</details>
+
+<details>
+  <summary>3. AfroTech: First-Gen Operator</summary>
+  <div class="copy-block">
+    <div class="label">Title</div>
+    <pre id="t3-title">First-Gen Operator: Building an AI Agency From South Jordan Utah With Guinean Roots</pre>
+    <button class="copy-btn" data-target="t3-title">Copy title</button>
+  </div>
+  <div class="copy-block">
+    <div class="label">Abstract</div>
+    <pre id="t3-abs">I grew up in Conakry, Guinea. I spent 14 years inside large American institutions doing technology work I was good at but never owned. In 2026 I left to find out what a first-generation operator could build alone with AI as the leverage layer. No fallback. 18 months of runway. One year in.
+
+This is the talk I wish I had heard from someone who looked like me five years ago. Not the polished founder story. The real version. The week I almost ran out of money before the first invoice cleared. The decision to stop chasing every shiny opportunity and lock onto one swim lane. The architecture I built when I realized I could not afford a team but could afford a VPS and a willingness to learn the tools deeply.
+
+I will share the stack, the failures, the unit economics, and the specific moments where being a Black African immigrant operator changed the path in ways that are not in the standard founder playbook. I will not pretend the path is the same for everyone. It is not. I will share what worked for me and let you decide what travels.
+
+What you will learn:
+- The five-motion solo portfolio structure I use to spread risk across consulting, productized services, content, and a digital catalog
+- How to build an asset stack your kids can inherit, even when you are starting from a single laptop and a single network of one
+- The specific community resources that matter when you are first-gen in tech and do not have inherited capital or inherited contacts
+- Honest numbers on what a year of all-in solo building actually costs, in dollars and in everything else
+
+Who this is for: First-generation operators, Black and African founders in tech, immigrants navigating the American startup ecosystem.</pre>
+    <button class="copy-btn" data-target="t3-abs">Copy abstract</button>
+  </div>
+</details>
+
+<h2>Headshot specs at-a-glance</h2>
+<div class="specs">
+  <ul>
+    <li><strong>1200 x 1200 px minimum</strong>, square crop, JPEG, sRGB</li>
+    <li><strong>Background:</strong> light gray (#E5E7EB) or off-white seamless</li>
+    <li><strong>Framing:</strong> shoulders-up, eyes upper-third, direct to camera</li>
+    <li><strong>Lighting:</strong> soft and even, no hard shadows</li>
+    <li><strong>Wardrobe:</strong> collared shirt or merino crew, solid color</li>
+    <li><strong>Expression:</strong> warm smile, not toothy</li>
+    <li><strong>Filename:</strong> <code>boubacar-barry-headshot-2026.jpg</code></li>
+    <li><strong>File size:</strong> under 500 KB after optimization</li>
+  </ul>
+  <p style="color: var(--ink-dim); font-size: 13px;">Self-shoot path (free, ~30 min) and pro shoot options ($150-$500 SLC market) in <code>headshot-guidance.md</code> + <code>headshot-options.md</code>.</p>
+</div>
+
+<h2>Sample reel preview</h2>
+<details>
+  <summary>180-second structure (full script in <code>sample-reel-script.md</code>)</summary>
+  <ul class="specs">
+    <li><strong>0:00-0:05 Hook:</strong> "I am Boubacar. I build AI workflow stacks for solo consultants and small business operators. Let me show you one."</li>
+    <li><strong>0:05-1:05 Demo:</strong> screen-record of ONE agentsHQ pipeline (sequence_engine / studio_publisher / republish_queue)</li>
+    <li><strong>1:05-1:35 Why it matters:</strong> direct-to-camera, the pattern not the pipeline</li>
+    <li><strong>1:35-2:00 CTA:</strong> "If you run a conference, a meetup, or a community where this would land, let me know"</li>
+    <li><strong>2:00-2:10 Outro slate:</strong> static name + URL</li>
+  </ul>
+  <p style="color: var(--ink-dim); font-size: 13px;">Production: phone + tripod + window light + AirPods shutter. ~3 hours end-to-end. YouTube unlisted. Link in submission.</p>
+</details>
+
+<h2>Submission checklist</h2>
+<details>
+  <summary>Pre-flight (do once, applies to all 3): ~55 min</summary>
+  <ul class="specs">
+    <li>P1: Copy 100-word + 250-word bios to clipboard manager (5 min)</li>
+    <li>P2: Confirm abstract-to-conference mapping (5 min)</li>
+    <li>P3: Headshot to Drive (30-180 min, see headshot-guidance.md)</li>
+    <li>P4: Sample reel recorded + uploaded YouTube unlisted (~180 min if fresh)</li>
+    <li>P5: LinkedIn current (10 min)</li>
+    <li>P6: catalystworks.consulting + contact form working (5 min)</li>
+  </ul>
+</details>
+
+<details>
+  <summary>AI Tinkerers SLC: ~20 min</summary>
+  <p>Open submission link, paste 100-word bio + Section 1 abstract from <code>talk-abstracts.md</code>, link reel. Demo format, no slides needed.</p>
+</details>
+
+<details>
+  <summary>MicroConf Europe: ~25 min</summary>
+  <p>Confirm passport valid through March 2027 BEFORE submitting. Use 250-word bio + Section 2 abstract. Upload headshot, paste reel URL, add LinkedIn + CW URLs.</p>
+</details>
+
+<details>
+  <summary>AfroTech: ~40 min</summary>
+  <p>Create SessionBoard account first. Select Breakout (30 min) not Keynote for first-time. Use 250-word bio + Section 3 abstract. Lean into first-gen + Guinean origin, do not soften it.</p>
+</details>
+
+<h2>All 7 prep files</h2>
+<div class="file-list">
+  <ul>
+    <li><a href="bios.md">bios.md</a> - 4 bio variants (1-line, 3-line, 100-word, 250-word)</li>
+    <li><a href="talk-abstracts.md">talk-abstracts.md</a> - 3 full abstracts</li>
+    <li><a href="headshot-guidance.md">headshot-guidance.md</a> - specs + self-shoot + pro-shoot paths</li>
+    <li><a href="sample-reel-script.md">sample-reel-script.md</a> - 180-sec script + production notes</li>
+    <li><a href="cfp-submission-checklist.md">cfp-submission-checklist.md</a> - step-by-step per conference</li>
+    <li><a href="headshot-options.md">headshot-options.md</a> - 3 SLC photographer paths</li>
+    <li><a href="index.html">index.html</a> - this page</li>
+  </ul>
+</div>
+
+<footer>
+  Catalyst Works internal &middot; conferences 2026 prep kit &middot; locked 2026-05-21
+</footer>
+
+</div>
+
+<script>
+  document.querySelectorAll('.copy-btn').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const target = document.getElementById(btn.dataset.target);
+      if (!target) return;
+      try {
+        await navigator.clipboard.writeText(target.innerText);
+        const original = btn.innerText;
+        btn.innerText = 'Copied';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.innerText = original;
+          btn.classList.remove('copied');
+        }, 1500);
+      } catch (e) {
+        // fallback: select text
+        const range = document.createRange();
+        range.selectNodeContents(target);
+        const sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
