@@ -833,9 +833,9 @@ footer a{color:var(--amber-deep);text-decoration:underline;text-underline-offset
   /* ---- registration capture: validate -> POST lead -> reveal pay step. Never lose a lead silently. ---- */
   var regForm=document.getElementById('register');
   if(regForm){
-    /* TODO(systems): point at production Supabase REST insert into workshop_leads (project jscucboftaoaphticqci)
-       or a Worker endpoint. While empty, submit shows the email fallback instead of dropping the contact. */
-    var LEAD_ENDPOINT='';
+    /* Wired 2026-06-12: proven capture path (same as /ai-policy-checklist). Beehiiv tag via
+       magnet=ic_workshop_0625; channel attribution flows from short-link UTM params. */
+    var LEAD_ENDPOINT='https://agentshq.boubacarbarry.com/api/orc/beehiiv-subscribe';
     var nameI=document.getElementById('rf-name'),emailI=document.getElementById('rf-email'),bizI=document.getElementById('rf-biz');
     var submitBtn=document.getElementById('regSubmit');
     var emailRe=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -849,7 +849,18 @@ footer a{color:var(--amber-deep);text-decoration:underline;text-underline-offset
       setErr(nameI,!okName); setErr(emailI,!okEmail);
       if(!okName||!okEmail){(okName?emailI:nameI).focus();return;}
       submitBtn.setAttribute('aria-busy','true'); submitBtn.disabled=true;
-      var payload={name:nameI.value.trim(),email:emailI.value.trim(),business:bizI.value.trim(),source:'ic-workshop-2026-06-24',ts:new Date().toISOString()};
+      var qs=new URLSearchParams(window.location.search||'');
+      var biz=bizI.value.trim();
+      var utmContent=(qs.get('utm_content')||'');
+      if(biz){utmContent=(utmContent?utmContent+'|':'')+'biz:'+biz.slice(0,80);}
+      var payload={
+        name:nameI.value.trim(),
+        email:emailI.value.trim(),
+        utm_source:(qs.get('utm_source')||'ic_workshop_direct').slice(0,64),
+        utm_content:utmContent.slice(0,120),
+        form_location:'ic_workshop_registration',
+        magnet:'ic_workshop_0625'
+      };
       function done(){regForm.classList.add('done');var pay=document.getElementById('regPay');if(pay){try{pay.focus();}catch(_){}}}
       function fail(){submitBtn.removeAttribute('aria-busy');submitBtn.disabled=false;regForm.classList.add('hasformerr');}
       if(!LEAD_ENDPOINT){fail();return;}
