@@ -9,6 +9,20 @@ RewriteEngine On
 # both with-slash and without-slash entry points.
 RewriteRule ^signal/?$ signal.html [NC,L]
 
+# IC workshop June 25 (2026-06-12): registration page lives at /workshop/.
+# Serve the directory index explicitly (DirectorySlash Off would otherwise
+# send /workshop into the clean-URL rule and 404 on workshop.html).
+RewriteRule ^workshop/?$ workshop/index.html [NC,L]
+
+# Workshop short links: one per channel, UTM baked behind the 301.
+# Never reuse a slug across campaigns.
+RewriteRule ^w/svc/?$ /workshop/?utm_source=chamber&utm_medium=email&utm_campaign=ic_workshop_0625&utm_content=south_valley [R=301,L,QSA]
+RewriteRule ^w/sjc/?$ /workshop/?utm_source=chamber&utm_medium=email&utm_campaign=ic_workshop_0625&utm_content=south_jordan [R=301,L,QSA]
+RewriteRule ^w/li/?$ /workshop/?utm_source=linkedin&utm_medium=post&utm_campaign=ic_workshop_0625 [R=301,L,QSA]
+RewriteRule ^w/x/?$ /workshop/?utm_source=x&utm_medium=post&utm_campaign=ic_workshop_0625 [R=301,L,QSA]
+RewriteRule ^w/nl/?$ /workshop/?utm_source=newsletter&utm_medium=email&utm_campaign=ic_workshop_0625 [R=301,L,QSA]
+RewriteRule ^w/ads/?$ /workshop/?utm_source=meta&utm_medium=paid&utm_campaign=ic_workshop_0625 [R=301,L,QSA]
+
 # Clean URLs: append .html for any path without an extension. Handles top-level
 # (/governance → /governance.html), nested (/lens/throughput → /lens/throughput.html,
 # /for/hvac → /for/hvac.html, /signal/issue-3 → /signal/issue-3.html), and arbitrary
