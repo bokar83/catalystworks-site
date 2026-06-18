@@ -23,6 +23,7 @@ RewriteRule ^w/x/?$ /workshop/?utm_source=x&utm_medium=post&utm_campaign=ic_work
 RewriteRule ^w/nl/?$ /workshop/?utm_source=newsletter&utm_medium=email&utm_campaign=ic_workshop_0625 [R=301,L,QSA]
 RewriteRule ^w/ads/?$ /workshop/?utm_source=meta&utm_medium=paid&utm_campaign=ic_workshop_0625 [R=301,L,QSA]
 RewriteRule ^w/fb/?$ /workshop/?utm_source=facebook&utm_medium=page_button&utm_campaign=ic_workshop_0625 [R=301,L,QSA]
+RewriteRule ^w/sbdc/?$ /workshop/?utm_source=sbdc&utm_medium=partner&utm_campaign=ic_workshop_0625 [R=301,L,QSA]
 
 # Clean URLs: append .html for any path without an extension. Handles top-level
 # (/governance → /governance.html), nested (/lens/throughput → /lens/throughput.html,
