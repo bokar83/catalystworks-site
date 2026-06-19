@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="color-scheme" content="light only">
+<meta name="robots" content="noindex,follow">
+<title>AI Without Getting Burned | Catalyst Works</title>
+<meta name="description" content="A 90-minute working session for Utah owners. You leave with one real thing running, not a page of notes. Thursday June 25, 7:00 to 8:30pm, SLCC Miller Campus, Sandy.">
+
+<meta property="og:title" content="AI Without Getting Burned, a live Utah working session">
+<meta property="og:description" content="90 minutes, hands on. You leave with one real thing running, not a page of notes. June 25, Sandy.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://catalystworks.consulting/seat/assets/checklist-cover.png">
+<meta property="og:url" content="https://catalystworks.consulting/seat/">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23071A2E'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='22' font-weight='700' fill='%23B47C57' text-anchor='middle'%3EC%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,600;0,700;0,800;1,400&family=Public+Sans:wght@400;500;600;700&family=JetBrains+Mono&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,600;0,700;0,800;1,400&family=Public+Sans:wght@400;500;600;700&family=JetBrains+Mono&display=swap"></noscript>
+
+<style>
+:root{
+  --navy:#071A2E;
+  --navy-2:#0C2740;
+  --clay:#B47C57;
+  --clay-deep:#9A6541;
+  --clay-soft:#C99B7C;
+  --action:#00B7C2;
+  --action-deep:#018A92;
+  --paper:#F4EEE4;
+  --paper-2:#ECE3D4;
+  --ink:#071A2E;
+  --ease:cubic-bezier(0.22,1,0.36,1);
+  --font-display:'Spectral',Georgia,'Times New Roman',serif;
+  --font-body:'Public Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --font-mono:'JetBrains Mono','Courier New',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{
+  font-family:var(--font-body);color:var(--paper);background:var(--navy);
+  line-height:1.5;-webkit-font-smoothing:antialiased;
+  /* the hard requirement: one screen, no scroll */
+  height:100dvh;overflow:hidden;position:relative;
+  display:flex;align-items:center;justify-content:center;
+}
+/* film-grain depth, no WebGL (reused from Page A) */
+body::after{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.5;mix-blend-mode:soft-light;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.84' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E")}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+
+/* organic clay + action glows behind everything */
+.glow-clay{position:fixed;left:-22%;top:-16%;width:70%;height:55%;z-index:0;opacity:.4;filter:blur(80px);pointer-events:none;
+  background:radial-gradient(60% 60% at 50% 50%,var(--clay) 0%,rgba(180,124,87,0) 70%)}
+.glow-act{position:fixed;right:-24%;bottom:-22%;width:66%;height:58%;z-index:0;opacity:.22;filter:blur(80px);pointer-events:none;
+  background:radial-gradient(60% 60% at 50% 50%,var(--action) 0%,rgba(0,183,194,0) 70%)}
+
+.screen{position:relative;z-index:2;width:100%;max-width:430px;margin:0 auto;
+  padding:max(18px,env(safe-area-inset-top)) 24px max(18px,env(safe-area-inset-bottom));
+  display:flex;flex-direction:column;height:100dvh}
+
+/* ---- brand mark ---- */
+.mk{display:flex;align-items:center;gap:10px;flex:0 0 auto}
+.mk-logo{width:34px;height:34px;object-fit:contain;display:block}
+.mk-word{font-family:var(--font-display);font-weight:700;font-size:1.06rem;letter-spacing:.01em;text-transform:uppercase;line-height:1;color:var(--paper)}
+.mk-word i{font-style:normal;color:var(--clay-soft)}
+
+/* ---- center stack: book + headline + essentials ---- */
+.core{flex:1 1 auto;display:flex;flex-direction:column;justify-content:center;gap:0;min-height:0;padding:6px 0}
+
+.eyebrow{display:flex;align-items:center;gap:12px;color:var(--action);
+  font-family:var(--font-mono);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:14px}
+.eyebrow .ln{height:8px;flex:1;max-width:120px;opacity:.85;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 420 10' preserveAspectRatio='none'%3E%3Cpath d='M2,5.9 L29.8,3.7 L63.5,5.2 L100.5,2.8 L123.4,4.7 L156.2,5 L187.8,3.2 L218.5,4.7 L237.6,4.4 L255,5.5 L279.9,3.7 L312.3,4.7 L334.4,5.8 L361.8,5.4 L385.2,4.7 L418,5.1 L418,7.9 L385.2,7.5 L361.8,8.9 L334.4,6.7 L312.3,8.4 L279.9,8.4 L255,8.6 L237.6,6.2 L218.5,7 L187.8,6.1 L156.2,7.8 L123.4,6.6 L100.5,8 L63.5,6.2 L29.8,6.9 L2,6.3 Z' fill='%2300B7C2'/%3E%3C/svg%3E") no-repeat center/100% 100%}
+
+.headrow{display:flex;align-items:center;gap:18px}
+.head-copy{flex:1 1 auto;min-width:0}
+h1{font-family:var(--font-display);font-weight:800;font-size:clamp(1.9rem,1.3rem+4.2vw,2.5rem);line-height:1.02;letter-spacing:-0.02em;color:var(--paper)}
+h1 em{font-style:normal;color:var(--clay-soft);position:relative;white-space:nowrap}
+h1 em::after{content:"";position:absolute;left:-2%;right:-2%;bottom:-.05em;height:.2em;z-index:-1;transform:rotate(-.9deg);
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 18' preserveAspectRatio='none'%3E%3Cpath d='M2,9.5 L15.3,8.3 L29.8,6.1 L52.1,8.8 L66.5,7.3 L92.8,7.7 L117.4,7.2 L140.6,8.2 L159.5,9.7 L183.9,8.2 L199.6,9.7 L220.6,10.2 L238.2,10.8 L257.6,10.8 L284,10.9 L298,12.2 L298,12.9 L284,14.1 L257.6,15.8 L238.2,15.6 L220.6,13.7 L199.6,13.6 L183.9,12.8 L159.5,15.2 L140.6,12.3 L117.4,13 L92.8,11.9 L66.5,11.5 L52.1,13.4 L29.8,11.2 L15.3,11.3 L2,10.3 Z' fill='%23B47C57'/%3E%3C/svg%3E") no-repeat center/100% 100%}
+
+/* compact 3D book (reused recipe from Page A, scaled down) */
+.book{position:relative;flex:0 0 auto;width:96px;height:128px;transform:rotateY(-22deg) rotateX(2deg) rotate(-1.5deg);
+  filter:drop-shadow(0 18px 22px rgba(0,0,0,.5))}
+.book img{display:block;width:100%;height:100%;object-fit:cover;border-radius:2px 4px 4px 2px;position:relative;z-index:2}
+.book::after{content:"";position:absolute;right:-6px;top:3px;bottom:3px;width:8px;z-index:1;border-radius:0 4px 4px 0;
+  background:repeating-linear-gradient(180deg,#e2d6c2 0,#e2d6c2 2px,#cdbfa6 2px,#cdbfa6 4px)}
+.book::before{content:"";position:absolute;left:-2px;top:1.4%;bottom:1.4%;width:9px;z-index:3;border-radius:2px 0 0 2px;
+  background:linear-gradient(90deg,rgba(0,0,0,.42),rgba(255,255,255,.08) 42%,rgba(0,0,0,.32))}
+
+.lead{font-family:var(--font-display);font-size:clamp(1rem,.9rem+1.2vw,1.16rem);line-height:1.42;color:rgba(244,238,228,.9);margin-top:18px;max-width:34ch}
+
+/* essentials line, pasted-tag feel via rough ink underline */
+.essentials{display:flex;align-items:flex-start;gap:11px;margin-top:18px;font-size:.92rem;line-height:1.45;color:var(--paper)}
+.essentials .pin{flex:0 0 auto;width:18px;height:18px;color:var(--action);margin-top:.12em}
+.essentials b{font-weight:600}
+.essentials .sub{display:block;color:rgba(244,238,228,.72);font-size:.86rem;margin-top:1px}
+
+/* ---- action zone, pinned to the bottom of the screen ---- */
+.act{flex:0 0 auto;padding-top:16px}
+/* ink-stamped primary CTA, rough fill behind crisp text (reused from Page A) */
+.cta{display:flex;align-items:center;justify-content:center;gap:11px;width:100%;font-family:var(--font-body);font-weight:700;font-size:1.08rem;letter-spacing:.01em;
+  background:transparent;color:#fff;padding:18px 26px;border:none;cursor:pointer;position:relative;isolation:isolate;
+  transition:transform .12s var(--ease)}
+.cta::before{content:"";position:absolute;inset:0 -4px;z-index:-1;background:var(--action);filter:url(#roughBtn);transform:rotate(-.5deg);transition:background .2s var(--ease)}
+.cta:hover{transform:translateY(-1px)}
+.cta:hover::before{background:var(--action-deep)}
+.cta:active{transform:translateY(0)}
+.cta svg{width:18px;height:18px}
+.cta .price{font-family:var(--font-mono);font-weight:600;margin-left:1px;opacity:.95}
+
+.secondary{display:block;text-align:center;margin-top:15px;font-size:.86rem;color:rgba(244,238,228,.72)}
+.secondary a{color:var(--clay-soft);text-decoration:underline;text-underline-offset:3px;font-weight:600;transition:color .18s var(--ease)}
+.secondary a:hover{color:var(--paper)}
+
+a:focus-visible,.cta:focus-visible{outline:3px solid var(--action);outline-offset:3px;border-radius:2px}
+
+/* desktop: card-center it, never let it sprawl */
+@media(min-width:600px){
+  body{padding:24px}
+  .screen{height:auto;max-height:96dvh;max-width:460px;border-radius:6px;
+    background:linear-gradient(180deg,var(--navy) 0%,var(--navy-2) 100%);
+    box-shadow:0 50px 90px -30px rgba(0,0,0,.6);
+    padding:30px 34px 32px}
+  .core{padding:14px 0}
+}
+/* very short viewports: trim the lead so the CTA always stays on screen */
+@media(max-height:620px){
+  .lead{display:none}
+  .core{padding:0}
+  .book{width:80px;height:107px}
+  h1{font-size:1.72rem}
+  .eyebrow{margin-bottom:10px}
+}
+</style>
+</head>
+<body>
+
+<!-- SVG filter defs: rough ink edge for the stamp CTA (reused from Page A) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <filter id="roughBtn"><feTurbulence type="fractalNoise" baseFrequency="0.045 0.12" numOctaves="3" seed="7" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="6"/></filter>
+  </defs>
+</svg>
+
+<span class="glow-clay" aria-hidden="true"></span>
+<span class="glow-act" aria-hidden="true"></span>
+
+<main class="screen">
+
+  <a class="mk" href="https://catalystworks.consulting/" aria-label="Catalyst Works home">
+    <img src="assets/cw-logo.png" alt="Catalyst Works" class="mk-logo">
+    <span class="mk-word">Catalyst <i>Works</i></span>
+  </a>
+
+  <div class="core">
+    <div class="eyebrow"><span><span data-cfg="dateLong">Thursday, June 25</span> &middot; in person</span><span class="ln" aria-hidden="true"></span></div>
+
+    <div class="headrow">
+      <div class="head-copy">
+        <h1>AI without <em>getting burned</em>.</h1>
+      </div>
+      <div class="book" aria-hidden="true">
+        <img src="assets/checklist-cover.png" alt="">
+      </div>
+    </div>
+
+    <p class="lead">A 90-minute working session for Utah owners. You leave with one real thing running, not a page of notes.</p>
+
+    <div class="essentials">
+      <svg class="pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+      <span>
+        <b><span data-cfg="dateShort">Thursday, June 25</span> &middot; 7:00 to 8:30pm</b>
+        <span class="sub">SLCC Miller Campus, <span data-cfg="city">Sandy</span></span>
+      </span>
+    </div>
+  </div>
+
+  <div class="act">
+    <a class="cta cta-buy" id="buyCta" data-medium="qr_seat" href="#">
+      <span class="cta-label">Grab your seat <span class="price" data-cfg="price">$97</span></span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+    <p class="secondary" id="secondaryPath">Not ready? <a id="checklistLink" href="https://catalystworks.consulting/ai-checklist/">Get the free AI checklist</a></p>
+  </div>
+
+</main>
+
+<script>
+/* ============================================================
+   PAGE B CONFIG  ---  QR-CODE DESTINATION (/seat/, mapped from /w/ss)
+   ------------------------------------------------------------
+   Sibling of /ai-checklist/ (Page A). Same CONFIG shape so a single
+   run-update touches both pages the same way.
+
+   price defaults to the WEEK-OF value ($97). This page is shown via QR
+   6/23 to 6/24, AFTER presale ends 6/21. CONFIRM the exact price before
+   deploy; change ONLY the values in this block to point at a new run.
+
+   nextWorkshop = null -> no date set. The page drops the date language,
+   hides the buy CTA, and points everyone to the free checklist instead.
+   ============================================================ */
+var CONFIG = {
+  magnet: 'ic_workshop_leadmagnet',     // stable, matches Page A
+  cohort: '2026_06_25',                 // segments THIS run
+
+  nextWorkshop: {
+    dateShort: 'Thursday, June 25',
+    dateLong:  'Thursday, June 25',
+    city:      'Sandy',
+    price:     '$97',                                                  // WEEK-OF price (presale was $47; confirm before deploy)
+    stripeUrl: 'https://buy.stripe.com/8x24gBeu3b7Y9bqfjngEg0a',       // cohort Stripe checkout (same link as Page A; swap if a week-of price link exists)
+    checklistUrl: 'https://catalystworks.consulting/ai-checklist/'     // Page A, the free lead magnet
+  }
+  // To run with NO scheduled date, use:  nextWorkshop: null
+};
+
+(function(){
+  var d=document;
+  var W=CONFIG.nextWorkshop;
+  function setCfg(key,val){d.querySelectorAll('[data-cfg="'+key+'"]').forEach(function(el){el.textContent=val;});}
+  function buyHref(medium){
+    if(!W||!W.stripeUrl)return '';
+    var qs=new URLSearchParams(window.location.search||'');
+    var src=(qs.get('utm_source')||'silicon_slopes');   // QR lands via /w/ss (silicon_slopes); fall back to it
+    var med=(qs.get('utm_medium')||medium||'event');
+    var sep=W.stripeUrl.indexOf('?')>-1?'&':'?';
+    return W.stripeUrl+sep+'utm_source='+encodeURIComponent(src)+'&utm_medium='+encodeURIComponent(med)+'&utm_campaign=ic_workshop_0625&client_reference_id='+encodeURIComponent(CONFIG.cohort||'');
+  }
+  function checklistHref(){
+    var base=(W&&W.checklistUrl)?W.checklistUrl:'https://catalystworks.consulting/ai-checklist/';
+    var qs=new URLSearchParams(window.location.search||'');
+    var src=(qs.get('utm_source')||'silicon_slopes');
+    var sep=base.indexOf('?')>-1?'&':'?';
+    return base+sep+'utm_source='+encodeURIComponent(src)+'&utm_medium=qr_seat_secondary&utm_campaign=ic_workshop_leadmagnet&utm_content='+(CONFIG.cohort||'');
+  }
+
+  if(W){
+    setCfg('dateShort',W.dateShort);setCfg('dateLong',W.dateLong);setCfg('city',W.city);
+    if(W.price)setCfg('price',W.price);
+    d.querySelectorAll('.cta-buy').forEach(function(b){b.setAttribute('href',buyHref(b.getAttribute('data-medium')||'event'));});
+    var cl=d.getElementById('checklistLink'); if(cl)cl.setAttribute('href',checklistHref());
+  } else {
+    /* no date scheduled: hide the buy path, make the free checklist the primary action */
+    var h1=d.querySelector('h1'); if(h1)h1.innerHTML='Put AI to work <em>without</em> getting burned.';
+    var lead=d.querySelector('.lead'); if(lead)lead.textContent='The short checklist I run before I let AI near anything that matters. One page, free, and I will tell you when the next live session opens.';
+    var ess=d.querySelector('.essentials'); if(ess)ess.style.display='none';
+    var buy=d.getElementById('buyCta');
+    if(buy){
+      buy.setAttribute('href',checklistHref());
+      buy.removeAttribute('data-medium');
+      buy.querySelector('.cta-label').innerHTML='Get the free AI checklist';
+      var pr=buy.querySelector('.price'); if(pr)pr.remove();
+    }
+    var sec=d.getElementById('secondaryPath'); if(sec)sec.style.display='none';
+  }
+})();
+</script>
+</body>
+</html>
