@@ -14,6 +14,13 @@ RewriteRule ^signal/?$ signal.html [NC,L]
 # send /workshop into the clean-URL rule and 404 on workshop.html).
 RewriteRule ^workshop/?$ workshop/index.html [NC,L]
 
+# IC lead-magnet opt-in (free AI checklist) lives at /ai-checklist/.
+# Same directory-index pattern as /workshop. Captures cold Meta-ad traffic.
+RewriteRule ^ai-checklist/?$ ai-checklist/index.html [NC,L]
+# Short link for the lead-magnet (Meta ads + any channel): /w/start -> opt-in page.
+# Campaign = stable magnet base; utm_content carries the current cohort for per-run segmentation.
+RewriteRule ^w/start/?$ /ai-checklist/?utm_source=meta&utm_medium=paid&utm_campaign=ic_workshop_leadmagnet&utm_content=cohort:2026_06_25 [R=301,L,QSA]
+
 # Workshop short links: one per channel, UTM baked behind the 301.
 # Never reuse a slug across campaigns.
 RewriteRule ^w/svc/?$ /workshop/?utm_source=chamber&utm_medium=email&utm_campaign=ic_workshop_0625&utm_content=south_valley [R=301,L,QSA]
