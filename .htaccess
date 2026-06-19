@@ -31,7 +31,7 @@ RewriteRule ^w/li/?$ /workshop/?utm_source=linkedin&utm_medium=post&utm_campaign
 RewriteRule ^w/x/?$ /workshop/?utm_source=x&utm_medium=post&utm_campaign=ic_workshop_0625 [R=301,L,QSA]
 RewriteRule ^w/nl/?$ /workshop/?utm_source=newsletter&utm_medium=email&utm_campaign=ic_workshop_0625 [R=301,L,QSA]
 RewriteRule ^w/ads/?$ /workshop/?utm_source=meta&utm_medium=paid&utm_campaign=ic_workshop_0625 [R=301,L,QSA]
-RewriteRule ^w/fb/?$ /workshop/?utm_source=facebook&utm_medium=page_button&utm_campaign=ic_workshop_0625 [R=301,L,QSA]
+RewriteRule ^w/fb/?$ /ai-checklist/?utm_source=facebook&utm_medium=paid&utm_campaign=ic_workshop_leadmagnet&utm_content=fb_ad [R=301,L,QSA]
 RewriteRule ^w/sbdc/?$ /workshop/?utm_source=sbdc&utm_medium=partner&utm_campaign=ic_workshop_0625 [R=301,L,QSA]
 RewriteRule ^w/beccy/?$ /workshop/?utm_source=beccy&utm_medium=email&utm_campaign=ic_workshop_0625 [R=301,L,QSA]
 RewriteRule ^w/ss/?$ /seat/?utm_source=silicon_slopes&utm_medium=event&utm_campaign=ic_workshop_0625 [R=301,L,QSA]
