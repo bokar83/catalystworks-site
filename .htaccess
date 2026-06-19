@@ -17,6 +17,8 @@ RewriteRule ^workshop/?$ workshop/index.html [NC,L]
 # IC lead-magnet opt-in (free AI checklist) lives at /ai-checklist/.
 # Same directory-index pattern as /workshop. Captures cold Meta-ad traffic.
 RewriteRule ^ai-checklist/?$ ai-checklist/index.html [NC,L]
+# IC simple one-screen QR conversion page (StartFEST + /w/ss) lives at /seat/.
+RewriteRule ^seat/?$ seat/index.html [NC,L]
 # Short link for the lead-magnet (Meta ads + any channel): /w/start -> opt-in page.
 # Campaign = stable magnet base; utm_content carries the current cohort for per-run segmentation.
 RewriteRule ^w/start/?$ /ai-checklist/?utm_source=meta&utm_medium=paid&utm_campaign=ic_workshop_leadmagnet&utm_content=cohort:2026_06_25 [R=301,L,QSA]
@@ -32,7 +34,7 @@ RewriteRule ^w/ads/?$ /workshop/?utm_source=meta&utm_medium=paid&utm_campaign=ic
 RewriteRule ^w/fb/?$ /workshop/?utm_source=facebook&utm_medium=page_button&utm_campaign=ic_workshop_0625 [R=301,L,QSA]
 RewriteRule ^w/sbdc/?$ /workshop/?utm_source=sbdc&utm_medium=partner&utm_campaign=ic_workshop_0625 [R=301,L,QSA]
 RewriteRule ^w/beccy/?$ /workshop/?utm_source=beccy&utm_medium=email&utm_campaign=ic_workshop_0625 [R=301,L,QSA]
-RewriteRule ^w/ss/?$ /workshop/?utm_source=silicon_slopes&utm_medium=event&utm_campaign=ic_workshop_0625 [R=301,L,QSA]
+RewriteRule ^w/ss/?$ /seat/?utm_source=silicon_slopes&utm_medium=event&utm_campaign=ic_workshop_0625 [R=301,L,QSA]
 
 # Clean URLs: append .html for any path without an extension. Handles top-level
 # (/governance → /governance.html), nested (/lens/throughput → /lens/throughput.html,
