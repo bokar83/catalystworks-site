@@ -73,6 +73,9 @@ a{color:inherit;text-decoration:none}
 
 .eyebrow{display:flex;align-items:center;gap:12px;color:var(--action);
   font-family:var(--font-mono);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:14px}
+/* audience-first kicker: names who this is for, visually subordinate to the headline */
+.for-who{font-family:var(--font-mono);font-size:.66rem;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--clay-soft);margin-bottom:9px;line-height:1.35}
 .eyebrow .ln{height:8px;flex:1;max-width:120px;opacity:.85;
   background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 420 10' preserveAspectRatio='none'%3E%3Cpath d='M2,5.9 L29.8,3.7 L63.5,5.2 L100.5,2.8 L123.4,4.7 L156.2,5 L187.8,3.2 L218.5,4.7 L237.6,4.4 L255,5.5 L279.9,3.7 L312.3,4.7 L334.4,5.8 L361.8,5.4 L385.2,4.7 L418,5.1 L418,7.9 L385.2,7.5 L361.8,8.9 L334.4,6.7 L312.3,8.4 L279.9,8.4 L255,8.6 L237.6,6.2 L218.5,7 L187.8,6.1 L156.2,7.8 L123.4,6.6 L100.5,8 L63.5,6.2 L29.8,6.9 L2,6.3 Z' fill='%2300B7C2'/%3E%3C/svg%3E") no-repeat center/100% 100%}
 
@@ -113,7 +116,10 @@ h1 em::after{content:"";position:absolute;left:-2%;right:-2%;bottom:-.05em;heigh
 .cta svg{width:18px;height:18px}
 .cta .price{font-family:var(--font-mono);font-weight:600;margin-left:1px;opacity:.95}
 
-.secondary{display:block;text-align:center;margin-top:15px;font-size:.86rem;color:rgba(244,238,228,.72)}
+/* whisper: intimate aside under the CTA, removes the "not ready yet" objection at the point of action */
+.whisper{text-align:center;margin-top:13px;font-family:var(--font-display);font-style:italic;
+  font-size:.92rem;line-height:1.4;color:rgba(244,238,228,.82);max-width:36ch;margin-left:auto;margin-right:auto}
+.secondary{display:block;text-align:center;margin-top:13px;font-size:.86rem;color:rgba(244,238,228,.72)}
 .secondary a{color:var(--clay-soft);text-decoration:underline;text-underline-offset:3px;font-weight:600;transition:color .18s var(--ease)}
 .secondary a:hover{color:var(--paper)}
 
@@ -137,7 +143,7 @@ a:focus-visible,.cta:focus-visible{outline:3px solid var(--action);outline-offse
 }
 /* very short viewports: trim the lead so the CTA always stays on screen */
 @media(max-height:620px){
-  .lead{display:none}
+  .lead,.whisper{display:none}
   .core{padding:0}
   .book{width:80px;height:107px}
   h1{font-size:1.72rem}
@@ -165,6 +171,7 @@ a:focus-visible,.cta:focus-visible{outline:3px solid var(--action);outline-offse
   </a>
 
   <div class="core">
+    <p class="for-who">For the Utah owner who knows AI matters and is not sure where to start.</p>
     <div class="eyebrow"><span><span data-cfg="dateLong">Thursday, June 25</span> &middot; in person</span><span class="ln" aria-hidden="true"></span></div>
 
     <div class="headrow">
@@ -193,6 +200,7 @@ a:focus-visible,.cta:focus-visible{outline:3px solid var(--action);outline-offse
       <span class="cta-label">Grab your seat <span class="price" data-cfg="price">$47</span></span>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
     </a>
+    <p class="whisper">If you keep waiting to feel ready, you are choosing to watch other owners move first. Come spend 90 minutes with me instead.</p>
     <p class="secondary" id="secondaryPath">Not ready? <a id="checklistLink" href="https://catalystworks.consulting/ai-checklist/">Get the free AI checklist</a></p>
   </div>
 
@@ -258,6 +266,8 @@ var CONFIG = {
     var h1=d.querySelector('h1'); if(h1)h1.innerHTML='Put AI to work <em>without</em> getting burned.';
     var lead=d.querySelector('.lead'); if(lead)lead.textContent='The short checklist I run before I let AI near anything that matters. One page, free, and I will tell you when the next live session opens.';
     var ess=d.querySelector('.essentials'); if(ess)ess.style.display='none';
+    var fw=d.querySelector('.for-who'); if(fw)fw.style.display='none';
+    var wh=d.querySelector('.whisper'); if(wh)wh.style.display='none';
     var buy=d.getElementById('buyCta');
     if(buy){
       buy.setAttribute('href',checklistHref());
