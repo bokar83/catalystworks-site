@@ -862,12 +862,224 @@
 
     /* print border override for new palette */
 
+    /* ── White-Label Pricing Section ────────────────────── */
+    .pricing-section {
+      background: #1A2E4A;
+      padding: 64px 24px;
+      text-align: center;
+    }
+
+    .pricing-heading {
+      font-size: clamp(1.5rem, 3.5vw, 2.25rem);
+      font-weight: 900;
+      color: #E8A020;
+      letter-spacing: -0.5px;
+      margin-bottom: 12px;
+    }
+
+    .pricing-subhead {
+      font-size: 1rem;
+      color: #c4c9d8;
+      max-width: 520px;
+      margin: 0 auto 48px;
+      line-height: 1.6;
+    }
+
+    .pricing-cards {
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+      align-items: stretch;
+      flex-wrap: wrap;
+      max-width: 1060px;
+      margin: 0 auto;
+    }
+
+    .pricing-card {
+      background: rgba(255,255,255,0.05);
+      border: 1.5px solid rgba(255,255,255,0.15);
+      border-radius: 16px;
+      padding: 36px 28px;
+      flex: 1 1 280px;
+      max-width: 320px;
+      text-align: left;
+      position: relative;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .pricing-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .pricing-card.featured {
+      border-color: #E8A020;
+      background: rgba(232,160,32,0.08);
+      box-shadow: 0 8px 40px rgba(232,160,32,0.20);
+      transform: scale(1.03);
+    }
+
+    .pricing-card.featured:hover {
+      transform: scale(1.03) translateY(-4px);
+    }
+
+    .pricing-badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 999px;
+      margin-bottom: 16px;
+    }
+
+    .badge-free {
+      background: rgba(196,201,216,0.15);
+      color: #c4c9d8;
+    }
+
+    .badge-founder {
+      background: #E8A020;
+      color: #1A2E4A;
+    }
+
+    .badge-coming {
+      background: rgba(196,201,216,0.10);
+      color: #7a8099;
+    }
+
+    .pricing-tier {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #7a8099;
+      margin-bottom: 8px;
+    }
+
+    .pricing-card.featured .pricing-tier {
+      color: #E8A020;
+    }
+
+    .pricing-price {
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: #ffffff;
+      letter-spacing: -1px;
+      margin-bottom: 4px;
+      line-height: 1;
+    }
+
+    .pricing-price-note {
+      font-size: 0.8rem;
+      color: #7a8099;
+      margin-bottom: 24px;
+    }
+
+    .pricing-divider {
+      height: 1px;
+      background: rgba(255,255,255,0.10);
+      margin-bottom: 20px;
+    }
+
+    .pricing-card.featured .pricing-divider {
+      background: rgba(232,160,32,0.25);
+    }
+
+    .pricing-features {
+      list-style: none;
+      margin-bottom: 28px;
+    }
+
+    .pricing-features li {
+      font-size: 0.875rem;
+      color: #c4c9d8;
+      padding: 6px 0;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      line-height: 1.45;
+    }
+
+    .pricing-features li::before {
+      content: "✓";
+      color: #E8A020;
+      font-weight: 800;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .pricing-card:not(.featured) .pricing-features li::before {
+      color: #7a8099;
+    }
+
+    .btn-pricing {
+      display: block;
+      width: 100%;
+      text-align: center;
+      font-family: inherit;
+      font-size: 0.9375rem;
+      font-weight: 700;
+      padding: 14px 20px;
+      border-radius: 10px;
+      cursor: pointer;
+      text-decoration: none;
+      border: none;
+      transition: transform 0.15s, box-shadow 0.15s, opacity 0.15s;
+    }
+
+    .btn-pricing-founder {
+      background: linear-gradient(135deg, #E8A020 0%, #c98010 100%);
+      color: #ffffff;
+      box-shadow: 0 4px 16px rgba(232,160,32,0.40);
+    }
+
+    .btn-pricing-founder:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(232,160,32,0.55);
+    }
+
+    .btn-pricing-ghost {
+      background: transparent;
+      color: #7a8099;
+      border: 1.5px solid rgba(255,255,255,0.12);
+      cursor: default;
+      opacity: 0.7;
+    }
+
+    .pricing-spots {
+      font-size: 0.78rem;
+      color: #E8A020;
+      font-weight: 700;
+      text-align: center;
+      margin-top: 12px;
+      letter-spacing: 0.3px;
+    }
+
+    @media (max-width: 720px) {
+      .pricing-cards {
+        flex-direction: column;
+        align-items: center;
+      }
+      .pricing-card {
+        max-width: 100%;
+        width: 100%;
+      }
+      .pricing-card.featured {
+        order: -1;
+        transform: none;
+      }
+      .pricing-card.featured:hover {
+        transform: translateY(-4px);
+      }
+    }
+
     /* ── Print styles ─────────────────────────────────────── */
     @media print {
       body { background: #fff; }
 
       .nav, .hero, .output-hero, .cta-card, .restart-row, .footer,
-      #screen-input, .cta-btns { display: none !important; }
+      .pricing-section, #screen-input, .cta-btns { display: none !important; }
 
       #screen-output { display: block !important; }
 
@@ -937,7 +1149,72 @@
   <div class="hero">
     <p class="hero-eyebrow">AI Readiness Audit. 2 minutes.</p>
     <h1 class="hero-title">Find out exactly where AI can save you time. Start this week.</h1>
-    <p class="hero-sub">Answer 5 questions. Get a custom readiness score, your top 3 automation priorities, and a specific tool for each — free, instant, no call required.</p>
+    <p class="hero-sub">Answer 5 questions. Get a custom readiness score, your top 3 automation priorities, and a specific tool for each. Free, instant, no call required.</p>
+    <div style="margin-top:20px;">
+      <span style="display:inline-block;background:rgba(232,160,32,0.18);border:1.5px solid rgba(232,160,32,0.55);border-radius:999px;padding:6px 18px;font-size:0.78rem;font-weight:700;color:#E8A020;letter-spacing:1px;text-transform:uppercase;">White-Labeled for Your Agency</span>
+    </div>
+  </div>
+
+  <!-- ══ PRICING SECTION ══ -->
+  <div class="pricing-section">
+    <h2 class="pricing-heading">White-Label This Tool</h2>
+    <p class="pricing-subhead">Put your brand on a lead-gen machine that pre-qualifies SMB clients automatically.</p>
+
+    <div class="pricing-cards">
+
+      <!-- Free -->
+      <div class="pricing-card">
+        <span class="pricing-badge badge-free">Free</span>
+        <p class="pricing-tier">Always Free</p>
+        <p class="pricing-price">$0</p>
+        <p class="pricing-price-note">No credit card. No expiry.</p>
+        <div class="pricing-divider"></div>
+        <ul class="pricing-features">
+          <li>Unlimited audits</li>
+          <li>Catalyst Works branded</li>
+          <li>AI readiness score</li>
+          <li>Top 3 automation priorities</li>
+          <li>Tool recommendation per priority</li>
+        </ul>
+      </div>
+
+      <!-- Founder Access (featured) -->
+      <div class="pricing-card featured">
+        <span class="pricing-badge badge-founder">Founder Rate</span>
+        <p class="pricing-tier">White-Label Founder</p>
+        <p class="pricing-price">$497</p>
+        <p class="pricing-price-note">One-time. Locked forever.</p>
+        <div class="pricing-divider"></div>
+        <ul class="pricing-features">
+          <li>Your brand, your colors</li>
+          <li>Embedded on your site</li>
+          <li>Unlimited client audits</li>
+          <li>Leads route directly to you</li>
+          <li>Priority email support</li>
+          <li>Price locked in for life</li>
+        </ul>
+        <a href="mailto:boubacar@catalystworks.consulting?subject=White-Label%20Founder%20Spot" class="btn-pricing btn-pricing-founder">Contact me today</a>
+        <p class="pricing-spots">5 spots only. First come, first served.</p>
+      </div>
+
+      <!-- Pro -->
+      <div class="pricing-card">
+        <span class="pricing-badge badge-coming">Coming Soon</span>
+        <p class="pricing-tier">White-Label Pro</p>
+        <p class="pricing-price">$1,200</p>
+        <p class="pricing-price-note">Per year. Launches after founder spots fill.</p>
+        <div class="pricing-divider"></div>
+        <ul class="pricing-features">
+          <li>Everything in Founder</li>
+          <li>API access</li>
+          <li>Webhook and Zapier integration</li>
+          <li>Priority support</li>
+          <li>Custom scoring configuration</li>
+        </ul>
+        <button class="btn-pricing btn-pricing-ghost" disabled>Coming soon</button>
+      </div>
+
+    </div>
   </div>
 
   <div class="card-wrap">
