@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sample Report — Groundwork AI Readiness Audit</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:   #2C4A7C;
+      --navy2:  #1e3560;
+      --teal:   #E8A020;
+      --teal2:  #c98010;
+      --white:  #ffffff;
+      --gray50: #F7F6F2;
+      --gray100:#eef0eb;
+      --gray300:#c4c9d8;
+      --gray500:#7a8099;
+      --gray700:#3d4466;
+      --red:    #e05252;
+      --amber:  #f59e0b;
+      --green:  #22c55e;
+      --radius: 12px;
+      --shadow: 0 4px 24px rgba(44,74,124,0.10);
+      --shadow-lg: 0 8px 40px rgba(44,74,124,0.14);
+    }
+
+    html { font-size: 16px; scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--gray50);
+      color: var(--navy);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Nav */
+    .nav {
+      background: var(--navy);
+      padding: 18px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--white);
+      letter-spacing: -0.5px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+    }
+
+    .cw-mark {
+      height: 32px;
+      width: 32px;
+      border-radius: 8px;
+      object-fit: cover;
+      background: var(--white);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.18);
+      flex-shrink: 0;
+    }
+
+    .nav-divider {
+      width: 1px;
+      height: 22px;
+      background: rgba(255,255,255,0.25);
+      margin: 0 10px;
+      flex-shrink: 0;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .nav-back {
+      font-size: 0.82rem;
+      color: var(--gray300);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: color 0.15s;
+    }
+
+    .nav-back:hover { color: var(--white); }
+
+    .nav-badge {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--teal);
+      border: 1px solid var(--teal);
+      border-radius: 999px;
+      padding: 3px 10px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    /* Sample badge banner */
+    .sample-banner {
+      background: linear-gradient(90deg, #7B3F00 0%, #a0520f 100%);
+      color: var(--white);
+      text-align: center;
+      padding: 10px 24px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .sample-banner span {
+      background: var(--teal);
+      color: var(--white);
+      border-radius: 6px;
+      padding: 2px 10px;
+      margin-right: 10px;
+      font-size: 0.72rem;
+    }
+
+    /* Output hero */
+    .output-hero {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 100%);
+      padding: 40px 24px 48px;
+      text-align: center;
+    }
+
+    .output-hero-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--gray300);
+      margin-bottom: 8px;
+    }
+
+    .output-hero-sub {
+      font-size: 0.9rem;
+      color: var(--gray500);
+    }
+
+    .output-body {
+      flex: 1;
+      padding: 40px 16px 80px;
+      max-width: 1100px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    /* Score card */
+    .score-card {
+      background: var(--white);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      padding: 36px 32px;
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .score-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--gray500);
+      margin-bottom: 12px;
+    }
+
+    .score-number {
+      font-size: 104px;
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -4px;
+      margin-bottom: 12px;
+    }
+
+    .score-number.red   { color: var(--red); }
+    .score-number.amber { color: var(--amber); }
+    .score-number.green { color: var(--green); }
+
+    .score-band {
+      display: inline-block;
+      font-size: 0.85rem;
+      font-weight: 700;
+      background: rgba(224,82,82,0.10);
+      color: var(--red);
+      border-radius: 999px;
+      padding: 5px 16px;
+      margin-bottom: 12px;
+    }
+
+    .score-tagline {
+      font-size: 0.9rem;
+      color: var(--gray700);
+      max-width: 520px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* Grid */
+    .output-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    @media (max-width: 700px) {
+      .output-grid { grid-template-columns: 1fr; }
+    }
+
+    .section-card {
+      background: var(--white);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      padding: 28px 24px;
+    }
+
+    .section-title {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--gray500);
+      margin-bottom: 20px;
+    }
+
+    .chart-wrap {
+      width: 100%;
+      aspect-ratio: 1;
+      max-height: 260px;
+    }
+
+    /* Priority list */
+    .priority-list { list-style: none; }
+
+    .priority-item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--gray100);
+    }
+
+    .priority-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .priority-item:first-child { padding-top: 0; }
+
+    .priority-rank {
+      flex-shrink: 0;
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, var(--teal) 0%, var(--teal2) 100%);
+      color: var(--white);
+      font-weight: 800;
+      font-size: 0.9rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 2px;
+    }
+
+    .priority-content { flex: 1; }
+
+    .priority-title {
+      font-weight: 700;
+      font-size: 0.9375rem;
+      margin-bottom: 4px;
+      color: var(--navy);
+    }
+
+    .priority-detail {
+      font-size: 0.825rem;
+      color: var(--gray700);
+      line-height: 1.55;
+      margin-bottom: 8px;
+    }
+
+    .priority-meta {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      font-size: 0.72rem;
+      font-weight: 600;
+      border-radius: 6px;
+      padding: 3px 8px;
+    }
+
+    .tag-hours {
+      background: rgba(232,160,32,0.12);
+      color: var(--teal2);
+    }
+
+    .tag-tool {
+      background: rgba(44,74,124,0.08);
+      color: var(--navy2);
+    }
+
+    /* ROI strip */
+    .roi-card {
+      background: var(--navy);
+      border-radius: 16px;
+      padding: 28px 32px;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .roi-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 6px;
+    }
+
+    .roi-value {
+      font-size: 1.85rem;
+      font-weight: 900;
+      color: var(--white);
+      letter-spacing: -0.5px;
+    }
+
+    .roi-sub {
+      font-size: 0.82rem;
+      color: var(--gray300);
+      margin-top: 4px;
+    }
+
+    .roi-items {
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+
+    .roi-item-label {
+      font-size: 0.72rem;
+      color: var(--gray500);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 4px;
+    }
+
+    .roi-item-value {
+      font-size: 1.125rem;
+      font-weight: 700;
+      color: var(--white);
+    }
+
+    /* CTA strip */
+    .cta-card {
+      background: linear-gradient(135deg, var(--teal) 0%, var(--teal2) 100%);
+      border-radius: 16px;
+      padding: 36px 32px;
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .cta-title {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--white);
+      margin-bottom: 8px;
+      letter-spacing: -0.3px;
+    }
+
+    .cta-sub {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.85);
+      margin-bottom: 24px;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.6;
+    }
+
+    .cta-btns {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-cta-primary {
+      background: var(--navy);
+      color: var(--white);
+      padding: 16px 28px;
+      font-size: 1.0625rem;
+      border-radius: var(--radius);
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: transform 0.15s, box-shadow 0.15s;
+      box-shadow: 0 4px 16px rgba(44,74,124,0.30);
+    }
+
+    .btn-cta-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(44,74,124,0.40);
+    }
+
+    /* Disclaimer */
+    .disclaimer-card {
+      background: var(--white);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      padding: 24px 28px;
+      margin-bottom: 24px;
+      border-left: 4px solid var(--teal);
+    }
+
+    .disclaimer-title {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--teal2);
+      margin-bottom: 8px;
+    }
+
+    .disclaimer-text {
+      font-size: 0.875rem;
+      color: var(--gray700);
+      line-height: 1.6;
+    }
+
+    .disclaimer-text strong { color: var(--navy); }
+
+    /* Footer */
+    .footer {
+      background: var(--navy);
+      padding: 20px 32px;
+      text-align: center;
+      font-size: 0.78rem;
+      color: var(--gray500);
+    }
+
+    .footer a { color: var(--teal); text-decoration: none; }
+
+    @media (max-width: 600px) {
+      .nav { padding: 14px 20px; }
+      .output-hero { padding: 28px 20px 36px; }
+      .score-number { font-size: 76px; }
+      .roi-card { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <a class="logo" href="https://audit.catalystworks.consulting">
+    <img class="cw-mark" src="../assets/cw-logo.jpg" alt="Catalyst Works" />
+    <div class="nav-divider"></div>
+    Groundwork<span style="color:var(--teal)"> AI</span>
+  </a>
+  <div class="nav-right">
+    <a class="nav-back" href="https://audit.catalystworks.consulting">← Back to audit tool</a>
+    <span class="nav-badge">Sample Report</span>
+  </div>
+</nav>
+
+<div class="sample-banner">
+  <span>SAMPLE REPORT</span>
+  This is a pre-filled example showing what your report looks like. The data below is illustrative, not real.
+</div>
+
+<div class="output-hero">
+  <p class="output-hero-title">AI Readiness Report &mdash; Legal Services &mdash; 11–50 Employees</p>
+  <p class="output-hero-sub">Meridian Legal Partners &nbsp;·&nbsp; Sample illustration &nbsp;·&nbsp; No real data used</p>
+</div>
+
+<div class="output-body">
+
+  <!-- Score card -->
+  <div class="score-card">
+    <p class="score-label">AI Readiness Score</p>
+    <div class="score-number red">42</div>
+    <span class="score-band">&#9888; High Urgency &mdash; Act Now</span>
+    <p class="score-tagline">You have significant manual work that can be automated quickly. Start with Priority #1 this week.</p>
+  </div>
+
+  <!-- Grid: radar + priorities -->
+  <div class="output-grid">
+
+    <div class="section-card">
+      <p class="section-title">Readiness Dimensions</p>
+      <div class="chart-wrap">
+        <canvas id="radar-chart"></canvas>
+      </div>
+    </div>
+
+    <div class="section-card">
+      <p class="section-title">Top 3 Automation Priorities</p>
+      <ul class="priority-list" id="priority-list">
+
+        <li class="priority-item">
+          <div class="priority-rank">1</div>
+          <div class="priority-content">
+            <p class="priority-title">Automate client intake + conflict checks</p>
+            <p class="priority-detail">Capture new client info via a smart form and auto-run against your existing client list for conflicts.</p>
+            <div class="priority-meta">
+              <span class="tag tag-hours">3–5 hrs/week</span>
+              <span class="tag tag-tool">Clio Grow</span>
+            </div>
+          </div>
+        </li>
+
+        <li class="priority-item">
+          <div class="priority-rank">2</div>
+          <div class="priority-content">
+            <p class="priority-title">Document assembly for standard agreements</p>
+            <p class="priority-detail">Generate first drafts of NDAs, retainers, and engagement letters from a template with one click.</p>
+            <div class="priority-meta">
+              <span class="tag tag-hours">4–7 hrs/week</span>
+              <span class="tag tag-tool">Lawyaw or Contract Express</span>
+            </div>
+          </div>
+        </li>
+
+        <li class="priority-item">
+          <div class="priority-rank">3</div>
+          <div class="priority-content">
+            <p class="priority-title">Deadline tracking + client nudges</p>
+            <p class="priority-detail">Replace manual calendar checks with automated deadline alerts to your team and status emails to clients.</p>
+            <div class="priority-meta">
+              <span class="tag tag-hours">2–4 hrs/week</span>
+              <span class="tag tag-tool">MyCase or Clio Manage</span>
+            </div>
+          </div>
+        </li>
+
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- ROI strip -->
+  <div class="roi-card">
+    <div class="roi-left">
+      <p class="roi-label">Estimated Time Savings</p>
+      <p class="roi-value">9–18 hrs/week</p>
+      <p class="roi-sub">Based on your 3 workflows combined</p>
+    </div>
+    <div class="roi-items">
+      <div class="roi-item">
+        <p class="roi-item-label">Annual Hrs Saved</p>
+        <p class="roi-item-value">468–936 hrs</p>
+      </div>
+      <div class="roi-item">
+        <p class="roi-item-label">Estimated Value</p>
+        <p class="roi-item-value">$58K–$117K</p>
+      </div>
+      <div class="roi-item">
+        <p class="roi-item-label">Payback Period</p>
+        <p class="roi-item-value">3–6 weeks</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Disclaimer -->
+  <div class="disclaimer-card">
+    <p class="disclaimer-title">About this sample</p>
+    <p class="disclaimer-text">
+      <strong>Meridian Legal Partners</strong> is a fictional firm used purely for illustration.
+      Scores and ROI estimates are calculated from a set of sample workflows and industry benchmarks.
+      Your actual report will reflect your firm's specific answers and may differ significantly.
+      <a href="https://audit.catalystworks.consulting" style="color:var(--navy);font-weight:700;text-decoration:underline;">Run your own free audit</a> to see real numbers for your business.
+    </p>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-card">
+    <h2 class="cta-title">See what your firm's score looks like</h2>
+    <p class="cta-sub">Takes 3 minutes. No signup. Get your real AI Readiness Score and a prioritized action list built for your specific workflows.</p>
+    <div class="cta-btns">
+      <a href="https://audit.catalystworks.consulting" class="btn-cta-primary">
+        Get your firm's free audit &rarr;
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<footer class="footer">
+  <a href="https://audit.catalystworks.consulting">Groundwork AI</a> &mdash; Built by <a href="https://catalystworks.consulting" target="_blank">Catalyst Works</a>. Sample data for illustration only.
+</footer>
+
+<script>
+// Pre-baked radar values for Meridian Legal Partners sample (score ~42, legal + mid-size)
+const dimensions = {
+  'Process Automation':  48,
+  'Data Readiness':      38,
+  'Team Adaptability':   54,
+  'Cost Efficiency':     45,
+  'Quick Win Potential': 62,
+};
+
+const labels = Object.keys(dimensions);
+const values = Object.values(dimensions);
+
+const ctx = document.getElementById('radar-chart').getContext('2d');
+
+new Chart(ctx, {
+  type: 'radar',
+  data: {
+    labels,
+    datasets: [{
+      label: 'Readiness Score',
+      data: values,
+      backgroundColor: 'rgba(44,74,124,0.18)',
+      borderColor: '#E8A020',
+      borderWidth: 2.5,
+      pointBackgroundColor: '#E8A020',
+      pointBorderColor: '#fff',
+      pointBorderWidth: 2,
+      pointRadius: 5,
+      pointHoverRadius: 7,
+    }],
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: true,
+    animation: { duration: 900, easing: 'easeOutQuart' },
+    scales: {
+      r: {
+        min: 0,
+        max: 100,
+        ticks: {
+          display: false,
+          stepSize: 25,
+        },
+        grid: {
+          color: 'rgba(44,74,124,0.10)',
+        },
+        angleLines: {
+          color: 'rgba(44,74,124,0.12)',
+        },
+        pointLabels: {
+          font: { size: 11, weight: '600', family: 'Inter' },
+          color: '#3d4466',
+        },
+      },
+    },
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        callbacks: {
+          label: (ctx) => ` ${ctx.raw}/100`,
+        },
+      },
+    },
+  },
+});
+</script>
+
+</body>
+</html>
