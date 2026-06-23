@@ -1,0 +1,1846 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Groundwork AI | AI Readiness Audit</title>
+  <link rel="icon" href="assets/cw-icon.ico" type="image/x-icon" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <style>
+    /* ── Reset ──────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ── Variables ───────────────────────────────────────── */
+    :root {
+      --navy:   #2C4A7C;
+      --navy2:  #1e3560;
+      --teal:   #E8A020;
+      --teal2:  #c98010;
+      --white:  #ffffff;
+      --gray50: #F7F6F2;
+      --gray100:#eef0eb;
+      --gray300:#c4c9d8;
+      --gray500:#7a8099;
+      --gray700:#3d4466;
+      --red:    #e05252;
+      --amber:  #f59e0b;
+      --green:  #22c55e;
+      --radius: 12px;
+      --shadow: 0 4px 24px rgba(44,74,124,0.10);
+      --shadow-lg: 0 8px 40px rgba(44,74,124,0.14);
+    }
+
+    /* ── Base ─────────────────────────────────────────────── */
+    html { font-size: 16px; scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--gray50);
+      color: var(--navy);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Layout shells ───────────────────────────────────── */
+    #screen-input, #screen-output {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    #screen-output { display: none; flex-direction: column; }
+
+    /* ── Nav / Header ────────────────────────────────────── */
+    .nav {
+      background: var(--navy);
+      padding: 18px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--white);
+      letter-spacing: -0.5px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+    }
+
+    /* Catalyst Works brand mark -- sits in a white chip so the dark-bg
+       logo reads as an intentional coin on the navy nav. */
+    .cw-mark {
+      height: 32px;
+      width: 32px;
+      border-radius: 8px;
+      object-fit: cover;
+      background: var(--white);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.18);
+      flex-shrink: 0;
+    }
+
+    .nav-divider {
+      width: 1px;
+      height: 22px;
+      background: rgba(255,255,255,0.25);
+      margin: 0 10px;
+      flex-shrink: 0;
+    }
+
+    .logo-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      background: var(--teal);
+      border-radius: 50%;
+      margin-top: 2px;
+    }
+
+    .nav-badge {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--teal);
+      border: 1px solid var(--teal);
+      border-radius: 999px;
+      padding: 3px 10px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    /* ── Hero / Input screen ─────────────────────────────── */
+    .hero {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 100%);
+      padding: 64px 24px 48px;
+      text-align: center;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 16px;
+    }
+
+    .hero-title {
+      font-size: clamp(1.75rem, 4vw, 2.75rem);
+      font-weight: 900;
+      color: var(--white);
+      line-height: 1.18;
+      letter-spacing: -0.5px;
+      max-width: 640px;
+      margin: 0 auto 16px;
+    }
+
+    .hero-sub {
+      font-size: 1rem;
+      color: var(--gray300);
+      max-width: 480px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* ── Card ─────────────────────────────────────────────── */
+    .card-wrap {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      padding: 40px 16px 64px;
+    }
+
+    .card {
+      background: var(--white);
+      border-radius: 16px;
+      box-shadow: var(--shadow-lg);
+      padding: 40px 36px;
+      width: 100%;
+      max-width: 640px;
+    }
+
+    @media (max-width: 520px) {
+      .card { padding: 28px 20px; }
+    }
+
+    /* ── Form elements ───────────────────────────────────── */
+    .field { margin-bottom: 24px; }
+
+    .field:last-of-type { margin-bottom: 32px; }
+
+    label {
+      display: block;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+
+    label span.req { color: var(--teal); }
+
+    .field-hint {
+      font-size: 0.78rem;
+      color: var(--gray500);
+      margin-bottom: 8px;
+      margin-top: -4px;
+      display: block;
+    }
+
+    select, textarea {
+      width: 100%;
+      font-family: inherit;
+      font-size: 0.9375rem;
+      color: var(--navy);
+      background: var(--white);
+      border: 1.5px solid var(--gray300);
+      border-radius: var(--radius);
+      padding: 12px 14px;
+      transition: border-color 0.18s, box-shadow 0.18s;
+      appearance: none;
+      outline: none;
+    }
+
+    select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%237a8099' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 40px;
+      cursor: pointer;
+    }
+
+    select:focus, textarea:focus {
+      border-color: var(--teal);
+      box-shadow: 0 0 0 3px rgba(232,160,32,0.20);
+    }
+
+    select.error, textarea.error {
+      border-color: var(--red);
+      box-shadow: 0 0 0 3px rgba(224,82,82,0.12);
+    }
+
+    textarea { resize: vertical; min-height: 80px; line-height: 1.55; }
+
+    .char-count {
+      font-size: 0.72rem;
+      color: var(--gray500);
+      text-align: right;
+      margin-top: 4px;
+    }
+
+    .char-count.warn { color: var(--teal); font-weight: 600; }
+
+    .error-msg {
+      font-size: 0.78rem;
+      color: var(--red);
+      margin-top: 5px;
+      display: none;
+    }
+
+    .error-msg.visible { display: block; }
+
+    /* Re-prompt nudge */
+    .nudge {
+      background: rgba(232,160,32,0.08);
+      border: 1px solid rgba(232,160,32,0.35);
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 0.82rem;
+      color: var(--navy2);
+      line-height: 1.55;
+      margin-top: 6px;
+      display: none;
+    }
+    .nudge.visible { display: block; }
+    .nudge strong { color: var(--teal2); }
+
+    /* ── Two-column row ──────────────────────────────────── */
+    .row-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    @media (max-width: 480px) { .row-2 { grid-template-columns: 1fr; } }
+
+    /* ── Button ───────────────────────────────────────────── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 700;
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s, opacity 0.15s;
+      text-decoration: none;
+      line-height: 1;
+    }
+
+    .btn:active { transform: translateY(1px); }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--teal) 0%, var(--teal2) 100%);
+      color: var(--white);
+      padding: 16px 28px;
+      width: 100%;
+      font-size: 1.0625rem;
+      box-shadow: 0 4px 16px rgba(232,160,32,0.35);
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 6px 24px rgba(232,160,32,0.50);
+      transform: translateY(-1px);
+    }
+
+    .btn-primary:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .btn-secondary {
+      background: var(--navy);
+      color: var(--white);
+      padding: 13px 22px;
+    }
+
+    .btn-secondary:hover { background: var(--navy2); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--navy);
+      padding: 13px 22px;
+      border: 2px solid var(--gray300);
+    }
+
+    .btn-outline:hover { border-color: var(--navy); }
+
+    .btn-cta {
+      background: linear-gradient(135deg, var(--teal) 0%, var(--teal2) 100%);
+      color: var(--white);
+      padding: 18px 32px;
+      font-size: 1.0625rem;
+      box-shadow: 0 4px 20px rgba(232,160,32,0.35);
+    }
+
+    .btn-cta:hover {
+      box-shadow: 0 8px 28px rgba(232,160,32,0.50);
+      transform: translateY(-2px);
+    }
+
+    .btn svg { flex-shrink: 0; }
+
+    /* Loading spinner */
+    .spinner {
+      width: 20px;
+      height: 20px;
+      border: 2.5px solid rgba(255,255,255,0.40);
+      border-top-color: var(--white);
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── Output Screen ───────────────────────────────────── */
+    .output-hero {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 100%);
+      padding: 40px 24px 48px;
+      text-align: center;
+    }
+
+    .output-hero-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--gray300);
+      margin-bottom: 8px;
+    }
+
+    .output-hero-sub {
+      font-size: 0.9rem;
+      color: var(--gray500);
+    }
+
+    .output-body {
+      flex: 1;
+      padding: 40px 16px 80px;
+      max-width: 1100px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    /* ── Score card ──────────────────────────────────────── */
+    .score-card {
+      background: var(--white);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      padding: 36px 32px;
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .score-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--gray500);
+      margin-bottom: 12px;
+    }
+
+    .score-number {
+      font-size: 104px;
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -4px;
+      margin-bottom: 12px;
+    }
+
+    .score-number.red    { color: var(--red); }
+    .score-number.amber  { color: var(--amber); }
+    .score-number.green  { color: var(--green); }
+
+    .score-band {
+      display: inline-block;
+      font-size: 0.825rem;
+      font-weight: 700;
+      border-radius: 999px;
+      padding: 4px 16px;
+    }
+
+    .score-band.red    { background: rgba(224,82,82,0.1);  color: var(--red); }
+    .score-band.amber  { background: rgba(245,158,11,0.1); color: var(--amber); }
+    .score-band.green  { background: rgba(34,197,94,0.1);  color: var(--green); }
+
+    .score-tagline {
+      margin-top: 14px;
+      font-size: 1rem;
+      color: var(--gray700);
+      font-weight: 500;
+    }
+
+    /* ── Two column output grid ──────────────────────────── */
+    .output-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+
+    @media (max-width: 760px) { .output-grid { grid-template-columns: 1fr; } }
+
+    /* ── Section cards ───────────────────────────────────── */
+    .section-card {
+      background: var(--white);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      padding: 28px;
+    }
+
+    .section-title {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--teal2);
+      margin-bottom: 20px;
+    }
+
+    /* ── Chart container ─────────────────────────────────── */
+    .chart-wrap {
+      position: relative;
+      height: 280px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ── Priority list ───────────────────────────────────── */
+    .priority-list { list-style: none; }
+
+    .priority-item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--gray100);
+    }
+
+    .priority-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .priority-item:first-child { padding-top: 0; }
+
+    .priority-rank {
+      flex-shrink: 0;
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, var(--teal) 0%, var(--teal2) 100%);
+      color: var(--white);
+      font-weight: 800;
+      font-size: 0.9rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 2px;
+    }
+
+    .priority-content { flex: 1; }
+
+    .priority-title {
+      font-weight: 700;
+      font-size: 0.9375rem;
+      margin-bottom: 4px;
+      color: var(--navy);
+    }
+
+    .priority-detail {
+      font-size: 0.825rem;
+      color: var(--gray700);
+      line-height: 1.55;
+      margin-bottom: 8px;
+    }
+
+    .priority-meta {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      font-size: 0.72rem;
+      font-weight: 600;
+      border-radius: 6px;
+      padding: 3px 8px;
+    }
+
+    .tag-hours {
+      background: rgba(232,160,32,0.12);
+      color: var(--teal2);
+    }
+
+    .tag-tool {
+      background: rgba(44,74,124,0.08);
+      color: var(--navy2);
+    }
+
+    /* ── ROI strip ───────────────────────────────────────── */
+    .roi-card {
+      background: var(--navy);
+      border-radius: 16px;
+      padding: 28px 32px;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .roi-left {}
+
+    .roi-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 6px;
+    }
+
+    .roi-value {
+      font-size: 1.85rem;
+      font-weight: 900;
+      color: var(--white);
+      letter-spacing: -0.5px;
+    }
+
+    .roi-sub {
+      font-size: 0.82rem;
+      color: var(--gray300);
+      margin-top: 4px;
+    }
+
+    .roi-items {
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+
+    .roi-item {}
+
+    .roi-item-label {
+      font-size: 0.72rem;
+      color: var(--gray500);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 4px;
+    }
+
+    .roi-item-value {
+      font-size: 1.125rem;
+      font-weight: 700;
+      color: var(--white);
+    }
+
+    /* ── CTA strip ───────────────────────────────────────── */
+    .cta-card {
+      background: linear-gradient(135deg, var(--teal) 0%, var(--teal2) 100%);
+      border-radius: 16px;
+      padding: 36px 32px;
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .cta-title {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--white);
+      margin-bottom: 8px;
+      letter-spacing: -0.3px;
+    }
+
+    .cta-sub {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.85);
+      margin-bottom: 24px;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.6;
+    }
+
+    .cta-btns {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-cta-primary {
+      background: var(--navy);
+      color: var(--white);
+      padding: 16px 28px;
+      font-size: 0.9375rem;
+      border-radius: var(--radius);
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: transform 0.15s, box-shadow 0.15s;
+      box-shadow: 0 4px 16px rgba(44,74,124,0.30);
+    }
+
+    .btn-cta-primary {
+      font-size: 1.0625rem;
+    }
+
+    .btn-cta-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(44,74,124,0.40);
+    }
+
+    /* ── Demo FAB ─────────────────────────────────────────── */
+    .demo-fab {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 50;
+      background: var(--navy);
+      color: var(--teal);
+      font-family: inherit;
+      font-size: 0.9375rem;
+      font-weight: 800;
+      letter-spacing: 0.2px;
+      border: none;
+      border-radius: 999px;
+      padding: 14px 24px;
+      cursor: pointer;
+      box-shadow: 0 6px 24px rgba(44,74,124,0.35);
+      transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
+    }
+
+    .demo-fab:hover {
+      background: var(--navy2);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(44,74,124,0.45);
+    }
+
+    .demo-fab:active { transform: translateY(0); }
+
+    @media (max-width: 520px) {
+      .demo-fab { bottom: 16px; right: 16px; padding: 12px 18px; font-size: 0.875rem; }
+    }
+
+    @media print { .demo-fab { display: none !important; } }
+
+    /* ── Email gate modal ─────────────────────────────────── */
+    .gate-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      /* Light wash, not a black-out -- the report stays visible behind. */
+      background: rgba(247,246,242,0.55);
+      backdrop-filter: blur(3px);
+      -webkit-backdrop-filter: blur(3px);
+    }
+
+    .gate-overlay.visible { display: flex; animation: gateFade 0.25s ease both; }
+
+    @keyframes gateFade { from { opacity: 0; } to { opacity: 1; } }
+
+    .gate-card {
+      background: var(--white);
+      border-radius: 18px;
+      box-shadow: 0 20px 60px rgba(44,74,124,0.28);
+      border-top: 4px solid var(--teal);
+      padding: 36px 32px 28px;
+      width: 100%;
+      max-width: 440px;
+      text-align: center;
+      animation: gateRise 0.32s cubic-bezier(0.16,1,0.3,1) both;
+    }
+
+    @keyframes gateRise {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .gate-check {
+      width: 52px;
+      height: 52px;
+      margin: 0 auto 16px;
+      background: rgba(34,197,94,0.12);
+      color: var(--green);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      font-weight: 800;
+    }
+
+    .gate-heading {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--navy);
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+
+    .gate-sub {
+      font-size: 0.9375rem;
+      color: var(--gray700);
+      line-height: 1.55;
+      margin-bottom: 22px;
+    }
+
+    .gate-input {
+      width: 100%;
+      font-family: inherit;
+      font-size: 1rem;
+      color: var(--navy);
+      background: var(--white);
+      border: 1.5px solid var(--gray300);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      outline: none;
+      transition: border-color 0.18s, box-shadow 0.18s;
+      margin-bottom: 6px;
+    }
+
+    .gate-input:focus {
+      border-color: var(--teal);
+      box-shadow: 0 0 0 3px rgba(232,160,32,0.20);
+    }
+
+    .gate-input.error {
+      border-color: var(--red);
+      box-shadow: 0 0 0 3px rgba(224,82,82,0.12);
+    }
+
+    .gate-error {
+      font-size: 0.8rem;
+      color: var(--red);
+      text-align: left;
+      margin-bottom: 12px;
+      display: none;
+    }
+
+    .gate-error.visible { display: block; }
+
+    .gate-submit { margin-top: 10px; }
+
+    .gate-skip {
+      display: inline-block;
+      margin-top: 16px;
+      font-size: 0.85rem;
+      color: var(--gray500);
+      cursor: pointer;
+      text-decoration: underline;
+    }
+
+    .gate-skip:hover { color: var(--navy); }
+
+    @media print { .gate-overlay { display: none !important; } }
+
+    .btn-cta-secondary {
+      background: rgba(255,255,255,0.18);
+      color: var(--white);
+      padding: 16px 28px;
+      font-size: 0.9375rem;
+      border-radius: var(--radius);
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.15s;
+    }
+
+    .btn-cta-secondary:hover { background: rgba(255,255,255,0.28); }
+
+    /* restart link */
+    .restart-row {
+      text-align: center;
+      padding-bottom: 16px;
+    }
+
+    .restart-link {
+      font-size: 0.85rem;
+      color: var(--gray500);
+      cursor: pointer;
+      text-decoration: underline;
+    }
+
+    .restart-link:hover { color: var(--navy); }
+
+    /* ── Footer ───────────────────────────────────────────── */
+    .footer {
+      background: var(--navy);
+      padding: 20px 32px;
+      text-align: center;
+      font-size: 0.78rem;
+      color: var(--gray500);
+    }
+
+    .footer a { color: var(--teal); text-decoration: none; }
+
+    /* ── Progress bar (input) ────────────────────────────── */
+    .progress-bar-wrap {
+      height: 3px;
+      background: var(--gray100);
+      border-radius: 999px;
+      margin-bottom: 28px;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--teal), var(--teal2));
+      border-radius: 999px;
+      transition: width 0.4s ease;
+      width: 0%;
+    }
+
+    /* print border override for new palette */
+
+    /* ── Print styles ─────────────────────────────────────── */
+    @media print {
+      body { background: #fff; }
+
+      .nav, .hero, .output-hero, .cta-card, .restart-row, .footer,
+      #screen-input, .cta-btns { display: none !important; }
+
+      #screen-output { display: block !important; }
+
+      .output-body { padding: 0; max-width: 100%; }
+
+      .output-grid { grid-template-columns: 1fr 1fr; }
+
+      .section-card, .score-card, .roi-card {
+        box-shadow: none;
+        border: 1px solid #ddd;
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+
+      .roi-card { background: var(--navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+      .score-number { font-size: 72px; }
+
+      .print-header {
+        display: block !important;
+        text-align: center;
+        padding: 24px 0 16px;
+        font-size: 1.5rem;
+        font-weight: 800;
+        color: var(--navy);
+        border-bottom: 2px solid var(--teal);
+        margin-bottom: 24px;
+        /* teal = #E8A020 in new palette */
+      }
+
+      .print-footer {
+        display: block !important;
+        text-align: center;
+        margin-top: 32px;
+        font-size: 0.8rem;
+        color: #999;
+      }
+    }
+
+    .print-header { display: none; }
+    .print-footer { display: none; }
+
+    /* ── Animations ───────────────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade-up { animation: fadeUp 0.5s ease both; }
+    .fade-up-2 { animation: fadeUp 0.5s 0.1s ease both; }
+    .fade-up-3 { animation: fadeUp 0.5s 0.2s ease both; }
+    .fade-up-4 { animation: fadeUp 0.5s 0.3s ease both; }
+    .fade-up-5 { animation: fadeUp 0.5s 0.4s ease both; }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════════
+     INPUT SCREEN
+══════════════════════════════════════════════════════════ -->
+<div id="screen-input">
+  <nav class="nav">
+    <a class="logo" href="#"><img class="cw-mark" src="assets/cw-logo.jpg" alt="Catalyst Works" /><span class="nav-divider"></span><span style="color:var(--white)">Groundwork</span><span class="logo-dot"></span><span style="color:var(--teal)">AI</span></a>
+    <span class="nav-badge">Free Audit</span>
+  </nav>
+
+  <div class="hero">
+    <p class="hero-eyebrow">AI Readiness Audit. 2 minutes.</p>
+    <h1 class="hero-title">Find out exactly where AI can save you time. Start this week.</h1>
+    <p class="hero-sub">Answer 5 questions. Get a custom readiness score, your top 3 automation priorities, and a specific tool for each — free, instant, no call required.</p>
+  </div>
+
+  <div class="card-wrap">
+    <div class="card">
+      <div class="progress-bar-wrap">
+        <div class="progress-bar-fill" id="progress-fill"></div>
+      </div>
+
+      <form id="audit-form" novalidate>
+
+        <!-- Industry -->
+        <div class="field">
+          <label for="industry">Your industry <span class="req">*</span></label>
+          <select id="industry" name="industry" required>
+            <option value="" disabled selected>Select your industry…</option>
+            <option value="accounting">Accounting / CPA</option>
+            <option value="legal">Legal / Law</option>
+            <option value="hvac">HVAC / Trades</option>
+            <option value="dental">Dental / Medical</option>
+            <option value="realestate">Real Estate</option>
+            <option value="retail">Retail</option>
+            <option value="restaurant">Restaurant / Food Service</option>
+            <option value="construction">Construction</option>
+            <option value="financial">Financial Services</option>
+            <option value="other">Other</option>
+          </select>
+          <p class="error-msg" id="err-industry">Please select your industry.</p>
+        </div>
+
+        <!-- Company size -->
+        <div class="field">
+          <label for="size">Company size <span class="req">*</span></label>
+          <select id="size" name="size" required>
+            <option value="" disabled selected>Number of employees…</option>
+            <option value="1">1–5 employees</option>
+            <option value="2">6–20 employees</option>
+            <option value="3">21–50 employees</option>
+            <option value="4">51–200 employees</option>
+          </select>
+          <p class="error-msg" id="err-size">Please select your company size.</p>
+        </div>
+
+        <!-- Workflow 1 -->
+        <div class="field">
+          <label for="task1">Your most time-consuming task <span class="req">*</span></label>
+          <span class="field-hint">e.g. "I manually send invoices to 20+ clients every month and track payments in a spreadsheet."</span>
+          <textarea id="task1" name="task1" placeholder="Describe what eats most of your week…" rows="3" required></textarea>
+          <p class="char-count" id="count-task1">0 / 15 words minimum</p>
+          <div class="nudge" id="nudge-task1">
+            <strong>Make it specific — you'll get a better result.</strong> Instead of "I handle billing," try: "I manually email every client their invoice on the 1st, then follow up if unpaid by the 10th. Takes about 4 hours."
+          </div>
+          <p class="error-msg" id="err-task1">Please describe this task (at least 5 words).</p>
+        </div>
+
+        <!-- Workflow 2 -->
+        <div class="field">
+          <label for="task2">Your biggest communication challenge <span class="req">*</span></label>
+          <span class="field-hint">e.g. "Clients don't respond to our follow-up emails so deals stall for weeks."</span>
+          <textarea id="task2" name="task2" placeholder="Where does communication break down or slow you down…" rows="3" required></textarea>
+          <p class="char-count" id="count-task2">0 / 15 words minimum</p>
+          <div class="nudge" id="nudge-task2">
+            <strong>Try to name the specific friction.</strong> e.g. "I send the same onboarding email to every new client and forget to follow up when they don't reply."
+          </div>
+          <p class="error-msg" id="err-task2">Please describe this challenge (at least 5 words).</p>
+        </div>
+
+        <!-- Workflow 3 -->
+        <div class="field">
+          <label for="task3">Where you lose the most money to human error <span class="req">*</span></label>
+          <span class="field-hint">e.g. "We miss billing hours because we forget to log them — probably losing $3K/month."</span>
+          <textarea id="task3" name="task3" placeholder="Where do mistakes, missed steps, or re-work cost you money…" rows="3" required></textarea>
+          <p class="char-count" id="count-task3">0 / 15 words minimum</p>
+          <div class="nudge" id="nudge-task3">
+            <strong>Be concrete.</strong> e.g. "We double-book appointments because two staff use different calendars. We lose 2-3 jobs/month from this."
+          </div>
+          <p class="error-msg" id="err-task3">Please describe this area (at least 5 words).</p>
+        </div>
+
+        <button type="submit" class="btn btn-primary" id="submit-btn">
+          <span id="submit-label">Run My AI Audit →</span>
+        </button>
+
+      </form>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <a href="#">Groundwork AI</a> — Built by <a href="https://catalystworks.consulting" target="_blank">Catalyst Works</a>. Free tool. No signup required.
+  </footer>
+
+  <!-- Demo button (fixed, bottom-right) -->
+  <button type="button" id="demo-btn" class="demo-fab" aria-label="View a sample demo report">View Demo →</button>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     EMAIL GATE MODAL
+══════════════════════════════════════════════════════════ -->
+<div id="email-gate" class="gate-overlay" role="dialog" aria-modal="true" aria-labelledby="gate-heading">
+  <div class="gate-card">
+    <div class="gate-check">✓</div>
+    <h2 class="gate-heading" id="gate-heading">Your report is ready.</h2>
+    <p class="gate-sub">Enter your email and we send it straight to you. Free. Takes 5 seconds.</p>
+    <form id="gate-form" novalidate>
+      <input type="email" id="gate-email" class="gate-input" placeholder="you@yourcompany.com" autocomplete="email" required />
+      <p class="gate-error" id="gate-error">Please enter a valid email.</p>
+      <button type="submit" class="btn btn-primary gate-submit" id="gate-submit">
+        <span id="gate-submit-label">Send my report</span>
+      </button>
+    </form>
+    <span class="gate-skip" id="gate-skip">No thanks, just show my results</span>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     OUTPUT SCREEN
+══════════════════════════════════════════════════════════ -->
+<div id="screen-output">
+  <nav class="nav">
+    <a class="logo" href="#"><img class="cw-mark" src="assets/cw-logo.jpg" alt="Catalyst Works" /><span class="nav-divider"></span><span style="color:var(--white)">Groundwork</span><span class="logo-dot"></span><span style="color:var(--teal)">AI</span></a>
+    <span class="nav-badge">Your Report</span>
+  </nav>
+
+  <!-- Print header (only shows in print) -->
+  <div class="print-header">Groundwork AI — AI Readiness Audit Report</div>
+
+  <div class="output-hero">
+    <p class="output-hero-title" id="result-industry-label">AI Readiness Report</p>
+    <p class="output-hero-sub" id="result-size-label">Generated instantly · No data stored</p>
+  </div>
+
+  <div class="output-body">
+
+    <!-- Score card -->
+    <div class="score-card fade-up">
+      <p class="score-label">Your AI Readiness Score</p>
+      <div class="score-number" id="score-display">—</div>
+      <span class="score-band" id="score-band">—</span>
+      <p class="score-tagline" id="score-tagline">—</p>
+    </div>
+
+    <!-- Grid: radar + priorities -->
+    <div class="output-grid">
+
+      <div class="section-card fade-up-2">
+        <p class="section-title">Readiness Dimensions</p>
+        <div class="chart-wrap">
+          <canvas id="radar-chart"></canvas>
+        </div>
+      </div>
+
+      <div class="section-card fade-up-3">
+        <p class="section-title">Top 3 Automation Priorities</p>
+        <ul class="priority-list" id="priority-list">
+          <!-- injected by JS -->
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- ROI strip -->
+    <div class="roi-card fade-up-4">
+      <div class="roi-left">
+        <p class="roi-label">Estimated Time Savings</p>
+        <p class="roi-value" id="roi-hours">—</p>
+        <p class="roi-sub" id="roi-sub">Based on your 3 workflows combined</p>
+      </div>
+      <div class="roi-items">
+        <div class="roi-item">
+          <p class="roi-item-label">Annual Hrs Saved</p>
+          <p class="roi-item-value" id="roi-annual">—</p>
+        </div>
+        <div class="roi-item">
+          <p class="roi-item-label">Estimated Value</p>
+          <p class="roi-item-value" id="roi-value">—</p>
+        </div>
+        <div class="roi-item">
+          <p class="roi-item-label">Payback Period</p>
+          <p class="roi-item-value" id="roi-payback">—</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-card fade-up-5">
+      <h2 class="cta-title">Ready to automate Priority #1?</h2>
+      <p class="cta-sub" id="cta-sub">Get a free implementation playbook. One page, one clear path for your top automation. No sales pitch. Just the next steps.</p>
+      <div class="cta-btns">
+        <a id="cta-btn-primary" href="https://calendly.com/boubacarbarry" target="_blank" class="btn-cta-primary">
+          ↗ Get Your Full AI Roadmap — Book a Free Strategy Call
+        </a>
+        <button class="btn-cta-secondary" onclick="window.print()">
+          ↓ Download Report (PDF)
+        </button>
+      </div>
+    </div>
+
+    <!-- Restart -->
+    <div class="restart-row">
+      <span class="restart-link" id="restart-link">← Run another audit</span>
+    </div>
+
+  </div>
+
+  <div class="print-footer">Groundwork AI by Catalyst Works — catalystworks.consulting — Free AI Readiness Tool</div>
+
+  <footer class="footer">
+    <a href="#">Groundwork AI</a> — Built by <a href="https://catalystworks.consulting" target="_blank">Catalyst Works</a>. Results are estimates based on industry benchmarks.
+  </footer>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     JAVASCRIPT
+══════════════════════════════════════════════════════════ -->
+<script>
+// ── Constants / Data ──────────────────────────────────────
+
+const INDUSTRY_LABELS = {
+  accounting:   'Accounting / CPA',
+  legal:        'Legal / Law',
+  hvac:         'HVAC / Trades',
+  dental:       'Dental / Medical',
+  realestate:   'Real Estate',
+  retail:       'Retail',
+  restaurant:   'Restaurant / Food Service',
+  construction: 'Construction',
+  financial:    'Financial Services',
+  other:        'Professional Services',
+};
+
+const SIZE_LABELS = {
+  '1': '1–5 employees',
+  '2': '6–20 employees',
+  '3': '21–50 employees',
+  '4': '51–200 employees',
+};
+
+// Industry: modifier to base score (some industries have more low-hanging fruit)
+const INDUSTRY_SCORE_MOD = {
+  accounting:   15,
+  legal:        10,
+  financial:    12,
+  dental:       10,
+  realestate:   8,
+  hvac:         14,
+  construction: 10,
+  retail:       8,
+  restaurant:   7,
+  other:        6,
+};
+
+// Hourly rate by industry (used for ROI estimate)
+const INDUSTRY_HOURLY_RATE = {
+  accounting:   85,
+  legal:        125,
+  financial:    95,
+  dental:       75,
+  realestate:   65,
+  hvac:         65,
+  construction: 60,
+  retail:       25,
+  restaurant:   22,
+  other:        55,
+};
+
+// Company size: base score (larger = more complexity = harder to automate quickly)
+const SIZE_BASE = { '1': 70, '2': 60, '3': 52, '4': 44 };
+
+// ── Keyword scoring for workflows ─────────────────────────
+
+const HIGH_POTENTIAL_KEYWORDS = [
+  'manual', 'manually', 'spreadsheet', 'excel', 'google sheet',
+  'email', 'copy', 'paste', 'copy-paste', 'copy paste',
+  'data entry', 'entering', 'type', 'typing', 'handwrite',
+  'invoice', 'invoicing', 'billing', 'bill', 'payment',
+  'follow up', 'follow-up', 'reminder', 'remind',
+  'schedule', 'scheduling', 'calendar', 'appointment', 'booking',
+  'report', 'reporting', 'export', 'download',
+  'tracking', 'track', 'log', 'logging', 'record',
+  'onboard', 'onboarding', 'new client', 'intake',
+  'document', 'paperwork', 'form', 'contract',
+  'order', 'ordering', 'purchase order', 'quote',
+  'checklist', 'same thing', 'repetitive', 'every week', 'every month', 'same',
+  'forget', 'miss', 'missed', 'drop', 'slip',
+];
+
+const LOW_POTENTIAL_KEYWORDS = [
+  'creative', 'creativity', 'design', 'brainstorm',
+  'relationship', 'trust', 'feel', 'emotion', 'listen',
+  'judgment', 'decide', 'decision', 'strategy',
+  'negotiate', 'persuade', 'sell', 'convince',
+  'mentor', 'coach', 'counsel', 'therapy', 'counsel',
+];
+
+function scoreWorkflow(text) {
+  const t = text.toLowerCase();
+  const wordCount = t.split(/\s+/).filter(Boolean).length;
+  let score = 0;
+
+  HIGH_POTENTIAL_KEYWORDS.forEach(kw => {
+    if (t.includes(kw)) score += 8;
+  });
+
+  LOW_POTENTIAL_KEYWORDS.forEach(kw => {
+    if (t.includes(kw)) score -= 6;
+  });
+
+  // Longer descriptions = more specific = slight bonus
+  if (wordCount >= 20) score += 5;
+  if (wordCount >= 30) score += 3;
+
+  return Math.max(0, Math.min(30, score));
+}
+
+// ── Radar dimensions ──────────────────────────────────────
+
+function calcRadarDimensions(industry, size, t1Score, t2Score, t3Score) {
+  const base = SIZE_BASE[size] || 60;
+  const indMod = INDUSTRY_SCORE_MOD[industry] || 6;
+
+  const avgWorkflow = (t1Score + t2Score + t3Score) / 3;
+  const norm = (v) => Math.max(10, Math.min(98, v));
+
+  return {
+    'Process Automation':   norm(base + indMod * 0.6 + t1Score * 1.5),
+    'Data Readiness':       norm(base - 8 + indMod * 0.4 + t2Score),
+    'Team Adaptability':    norm(base - 4 + (5 - parseInt(size)) * 4 + avgWorkflow * 0.4),
+    'Cost Efficiency':      norm(base + indMod * 0.7 + t3Score * 1.4),
+    'Quick Win Potential':  norm(base + indMod * 0.9 + (t1Score + t3Score) * 0.8),
+  };
+}
+
+// ── Main score ────────────────────────────────────────────
+
+function calcScore(industry, size, t1Score, t2Score, t3Score) {
+  const base   = SIZE_BASE[size] || 60;
+  const indMod = INDUSTRY_SCORE_MOD[industry] || 6;
+  const wfBonus = Math.round((t1Score + t2Score + t3Score) / 3 * 0.6);
+  return Math.max(5, Math.min(99, base + indMod + wfBonus));
+}
+
+// ── ROI estimates ─────────────────────────────────────────
+
+function calcROI(industry, size, t1Score, t2Score, t3Score) {
+  const rate  = INDUSTRY_HOURLY_RATE[industry] || 55;
+  const wfAvg = (t1Score + t2Score + t3Score) / 3;
+  // Hours saved/week: 3-16 range based on workflow density
+  const minHrs = Math.round(3  + wfAvg * 0.25 + parseInt(size) * 0.5);
+  const maxHrs = Math.round(6  + wfAvg * 0.5  + parseInt(size) * 1);
+  const midHrs = Math.round((minHrs + maxHrs) / 2);
+  const annualMin = Math.round(minHrs * rate * 52 / 1000) * 1000;
+  const annualMax = Math.round(maxHrs * rate * 52 / 1000) * 1000;
+  const payback   = wfAvg > 12 ? '3–6 weeks' : wfAvg > 6 ? '6–12 weeks' : '3–5 months';
+
+  return {
+    hrsMin: minHrs, hrsMax: maxHrs, midHrs,
+    annualMin, annualMax,
+    valueStr: `$${(annualMin/1000).toFixed(0)}K–$${(annualMax/1000).toFixed(0)}K`,
+    annualHrs: `${minHrs * 52}–${maxHrs * 52} hrs`,
+    payback,
+  };
+}
+
+// ── Priority generation (industry + keyword aware) ────────
+
+const INDUSTRY_PRIORITIES = {
+  accounting: [
+    { title: 'Automate client document collection',
+      detail: 'Replace manual email chains with a portal that sends reminders automatically when docs are missing.',
+      tool: 'TaxDome', hrs: '4–6 hrs/week' },
+    { title: 'Streamline invoice & payment follow-up',
+      detail: 'Set up automated payment reminders that trigger on due dates — no more manual follow-up emails.',
+      tool: 'QuickBooks + Zapier', hrs: '2–3 hrs/week' },
+    { title: 'Auto-populate recurring reports',
+      detail: 'Connect your accounting software to auto-generate monthly client reports without manual export + formatting.',
+      tool: 'Karbon or Canopy', hrs: '3–5 hrs/week' },
+  ],
+  legal: [
+    { title: 'Automate client intake + conflict checks',
+      detail: 'Capture new client info via a smart form and auto-run against your existing client list for conflicts.',
+      tool: 'Clio Grow', hrs: '3–5 hrs/week' },
+    { title: 'Document assembly for standard agreements',
+      detail: 'Generate first drafts of NDAs, retainers, and engagement letters from a template with one click.',
+      tool: 'Lawyaw or Contract Express', hrs: '4–7 hrs/week' },
+    { title: 'Deadline tracking + client nudges',
+      detail: 'Replace manual calendar checks with automated deadline alerts to your team and status emails to clients.',
+      tool: 'MyCase or Clio Manage', hrs: '2–4 hrs/week' },
+  ],
+  hvac: [
+    { title: 'Automate service appointment reminders',
+      detail: 'Send automated text reminders 24h and 1h before appointments — reduces no-shows by 30–40% on average.',
+      tool: 'Jobber', hrs: '3–5 hrs/week' },
+    { title: 'Streamline post-service follow-up & reviews',
+      detail: 'Auto-send a "How did we do?" text after each completed job, then route 5-star responses to Google review.',
+      tool: 'ServiceTitan or Podium', hrs: '2–3 hrs/week' },
+    { title: 'Automate parts ordering from job tickets',
+      detail: 'When a tech logs a parts need on a job ticket, automatically trigger a purchase order to your supplier.',
+      tool: 'Jobber + QuickBooks', hrs: '2–4 hrs/week' },
+  ],
+  dental: [
+    { title: 'Automate appointment reminders + confirmations',
+      detail: 'Replace manual reminder calls with automated text/email sequences that handle confirmations and reschedules.',
+      tool: 'Weave or NexHealth', hrs: '5–8 hrs/week' },
+    { title: 'Streamline new patient intake forms',
+      detail: 'Send digital intake forms before the appointment — pre-fills the chart automatically when submitted.',
+      tool: 'Tebra or Carepatron', hrs: '3–4 hrs/week' },
+    { title: 'Automate insurance verification',
+      detail: 'Trigger automated eligibility checks 48h before each appointment instead of manual calls to insurance.',
+      tool: 'Pverify or Rectangle Health', hrs: '4–6 hrs/week' },
+  ],
+  realestate: [
+    { title: 'Automate lead follow-up sequences',
+      detail: 'New inquiries trigger a 5-step text + email follow-up over 14 days automatically — no manual tracking.',
+      tool: 'Follow Up Boss or LionDesk', hrs: '4–6 hrs/week' },
+    { title: 'Streamline showing scheduling',
+      detail: 'Replace back-and-forth scheduling texts with a booking link that syncs to your calendar and sends reminders.',
+      tool: 'Calendly + ShowingTime', hrs: '2–4 hrs/week' },
+    { title: 'Automate transaction milestone notifications',
+      detail: 'When a deal moves to a new stage, auto-notify all parties (buyer, seller, lender, attorney) with the update.',
+      tool: 'Dotloop or SkySlope', hrs: '3–5 hrs/week' },
+  ],
+  retail: [
+    { title: 'Automate inventory reorder alerts',
+      detail: 'Set threshold levels per SKU — auto-trigger a purchase order or supplier email when stock hits the floor.',
+      tool: 'Lightspeed or Cin7', hrs: '3–5 hrs/week' },
+    { title: 'Streamline customer win-back campaigns',
+      detail: 'Auto-trigger a "We miss you" offer to customers who haven\'t purchased in 60+ days — no manual export needed.',
+      tool: 'Klaviyo', hrs: '2–3 hrs/week' },
+    { title: 'Automate end-of-day sales reconciliation',
+      detail: 'Connect your POS to your accounting software to eliminate manual daily entry and cash-count discrepancies.',
+      tool: 'QuickBooks + Shopify or Square', hrs: '1–2 hrs/day' },
+  ],
+  restaurant: [
+    { title: 'Automate reservation reminders + no-show reduction',
+      detail: 'Send automated text confirmations 24h before reservations with a one-tap confirm or cancel option.',
+      tool: 'OpenTable or Resy', hrs: '3–4 hrs/week' },
+    { title: 'Streamline staff scheduling + shift notifications',
+      detail: 'Replace manual schedule-building with a tool that shows availability and auto-texts schedule changes.',
+      tool: '7shifts or When I Work', hrs: '4–6 hrs/week' },
+    { title: 'Automate vendor order templates',
+      detail: 'Set up recurring order templates by day of week — review + approve in one click instead of rebuilding each time.',
+      tool: 'BlueCart or MarketMan', hrs: '2–3 hrs/week' },
+  ],
+  construction: [
+    { title: 'Automate project milestone notifications',
+      detail: 'When a phase is marked complete, auto-notify the client, subcontractor, and next crew — no manual calls.',
+      tool: 'Buildertrend or CoConstruct', hrs: '4–6 hrs/week' },
+    { title: 'Streamline subcontractor invoice processing',
+      detail: 'Standardize invoice submission and auto-route for approval, eliminating the paper-chase on payment.',
+      tool: 'Procore + QuickBooks', hrs: '3–5 hrs/week' },
+    { title: 'Automate daily job site reports',
+      detail: 'Field staff complete a 2-min daily log on mobile — it auto-compiles and emails to the PM and client nightly.',
+      tool: 'Buildertrend or Fieldwire', hrs: '2–3 hrs/week' },
+  ],
+  financial: [
+    { title: 'Automate client onboarding & KYC document collection',
+      detail: 'Replace email chains with a secure portal that tracks what\'s submitted and auto-reminds clients on missing docs.',
+      tool: 'Docupace or Orion', hrs: '5–8 hrs/week' },
+    { title: 'Streamline portfolio review prep',
+      detail: 'Auto-pull account summaries and performance data before each review meeting — pre-populates the agenda.',
+      tool: 'Redtail CRM + eMoney', hrs: '3–5 hrs/week' },
+    { title: 'Automate compliance reporting workflows',
+      detail: 'Set recurring triggers for required reports — auto-collect data and draft the submission for your review.',
+      tool: 'Riskalyze or Compliance.ai', hrs: '4–6 hrs/week' },
+  ],
+  other: [
+    { title: 'Automate client communication follow-ups',
+      detail: 'Set up automated email sequences that go out at defined intervals — no more manual "just checking in" emails.',
+      tool: 'HubSpot CRM (free) or ActiveCampaign', hrs: '3–5 hrs/week' },
+    { title: 'Streamline document collection & e-signatures',
+      detail: 'Replace emailing PDFs back and forth with a portal that tracks status and sends automatic reminders.',
+      tool: 'PandaDoc or DocuSign', hrs: '2–4 hrs/week' },
+    { title: 'Automate recurring reporting',
+      detail: 'Connect your data sources to auto-generate weekly or monthly reports without manual export and formatting.',
+      tool: 'Zapier + Google Sheets or Notion', hrs: '2–3 hrs/week' },
+  ],
+};
+
+// Keyword-based priority boosting — pick the best 3 for the user
+function selectPriorities(industry, inputs) {
+  const base = INDUSTRY_PRIORITIES[industry] || INDUSTRY_PRIORITIES.other;
+  const combined = inputs.join(' ').toLowerCase();
+
+  // Score each priority by keyword overlap
+  const scored = base.map((p, i) => {
+    let relevance = 0;
+    const keywords = p.title.toLowerCase().split(/\W+/).concat(p.detail.toLowerCase().split(/\W+/));
+    keywords.forEach(kw => {
+      if (kw.length > 4 && combined.includes(kw)) relevance++;
+    });
+    return { ...p, relevance, idx: i };
+  });
+
+  // Sort by relevance then original order, take top 3
+  scored.sort((a, b) => b.relevance - a.relevance || a.idx - b.idx);
+  return scored.slice(0, 3);
+}
+
+// ── Score band ────────────────────────────────────────────
+
+function scoreMeta(score) {
+  if (score <= 40) return {
+    cls: 'red',
+    band: '⚠ High Urgency — Act Now',
+    tagline: 'You have significant manual work that can be automated quickly. Start with Priority #1 this week.',
+  };
+  if (score <= 70) return {
+    cls: 'amber',
+    band: '↗ Ready to Accelerate',
+    tagline: 'You have solid processes but clear automation gaps. Fixing the top 3 could reclaim 8–14 hrs/week.',
+  };
+  return {
+    cls: 'green',
+    band: '✓ Strong Foundation',
+    tagline: 'You\'re ahead of most businesses your size. Focus on optimizing your top priorities to widen the gap.',
+  };
+}
+
+// ── Chart instance ────────────────────────────────────────
+
+let radarChart = null;
+
+function renderRadar(dimensions) {
+  const labels = Object.keys(dimensions);
+  const values = Object.values(dimensions);
+
+  const ctx = document.getElementById('radar-chart').getContext('2d');
+
+  if (radarChart) { radarChart.destroy(); }
+
+  radarChart = new Chart(ctx, {
+    type: 'radar',
+    data: {
+      labels,
+      datasets: [{
+        label: 'Your Score',
+        data: values,
+        backgroundColor: 'rgba(44,74,124,0.18)',
+        borderColor: '#E8A020',
+        borderWidth: 2.5,
+        pointBackgroundColor: '#E8A020',
+        pointBorderColor: '#fff',
+        pointBorderWidth: 2,
+        pointRadius: 5,
+        pointHoverRadius: 7,
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        r: {
+          min: 0, max: 100,
+          ticks: {
+            stepSize: 25,
+            color: '#7a8099',
+            font: { size: 10, family: 'Inter' },
+            backdropColor: 'transparent',
+          },
+          pointLabels: {
+            color: '#2C4A7C',
+            font: { size: 11, weight: '600', family: 'Inter' },
+          },
+          grid:      { color: 'rgba(196,201,216,0.5)' },
+          angleLines: { color: 'rgba(196,201,216,0.5)' },
+        }
+      },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: '#2C4A7C',
+          titleColor: '#E8A020',
+          bodyColor: '#fff',
+          callbacks: {
+            label: (ctx) => ` ${ctx.parsed.r} / 100`,
+          }
+        }
+      },
+    }
+  });
+}
+
+// ── Render priorities ─────────────────────────────────────
+
+function renderPriorities(priorities) {
+  const list = document.getElementById('priority-list');
+  list.innerHTML = '';
+  priorities.forEach((p, i) => {
+    const li = document.createElement('li');
+    li.className = 'priority-item';
+    li.innerHTML = `
+      <div class="priority-rank">${i + 1}</div>
+      <div class="priority-content">
+        <p class="priority-title">${p.title}</p>
+        <p class="priority-detail">${p.detail}</p>
+        <div class="priority-meta">
+          <span class="tag tag-hours">⏱ ${p.hrs} saved</span>
+          <span class="tag tag-tool">🔧 ${p.tool}</span>
+        </div>
+      </div>
+    `;
+    list.appendChild(li);
+  });
+}
+
+// ── Run the audit ─────────────────────────────────────────
+
+// Holds the most recent audit context so the email gate can POST it.
+let LAST_AUDIT = null;
+
+function runAudit(industry, size, task1, task2, task3, gated) {
+  const t1Score = scoreWorkflow(task1);
+  const t2Score = scoreWorkflow(task2);
+  const t3Score = scoreWorkflow(task3);
+
+  const score      = calcScore(industry, size, t1Score, t2Score, t3Score);
+  const dimensions = calcRadarDimensions(industry, size, t1Score, t2Score, t3Score);
+  const roi        = calcROI(industry, size, t1Score, t2Score, t3Score);
+  const priorities = selectPriorities(industry, [task1, task2, task3]);
+  const meta       = scoreMeta(score);
+
+  // Strip emoji/arrow prefix from the band for a clean stored value.
+  const bandClean = meta.band.replace(/^[^\w]+/, '').trim();
+  LAST_AUDIT = { industry, size, score, band: bandClean };
+
+  // Populate output
+  document.getElementById('result-industry-label').textContent =
+    `${INDUSTRY_LABELS[industry]} — AI Readiness Report`;
+  document.getElementById('result-size-label').textContent =
+    `${SIZE_LABELS[size]} · Generated ${new Date().toLocaleDateString('en-US', { month:'long', day:'numeric', year:'numeric' })}`;
+
+  const scoreEl = document.getElementById('score-display');
+  scoreEl.textContent = score;
+  scoreEl.className   = `score-number ${meta.cls}`;
+
+  const bandEl = document.getElementById('score-band');
+  bandEl.textContent = meta.band;
+  bandEl.className   = `score-band ${meta.cls}`;
+
+  document.getElementById('score-tagline').textContent = meta.tagline;
+
+  // ROI
+  document.getElementById('roi-hours').textContent  =
+    `${roi.hrsMin}–${roi.hrsMax} hours saved / week`;
+  document.getElementById('roi-annual').textContent  = roi.annualHrs;
+  document.getElementById('roi-value').textContent   = roi.valueStr;
+  document.getElementById('roi-payback').textContent = roi.payback;
+  document.getElementById('roi-sub').textContent =
+    `Assumes $${INDUSTRY_HOURLY_RATE[industry] || 55}/hr blended rate · Based on your 3 workflows`;
+
+  // Priorities
+  renderPriorities(priorities);
+
+  // Radar
+  renderRadar(dimensions);
+
+  // Reveal output. When gated, show the email gate first; the report is
+  // already populated underneath so the gate's light wash shows it behind.
+  document.getElementById('screen-input').style.display  = 'none';
+  document.getElementById('screen-output').style.display = 'flex';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  if (gated) {
+    openEmailGate();
+  }
+}
+
+// ── Email gate ────────────────────────────────────────────
+
+const GROUNDWORK_ENDPOINT = 'https://agentshq.boubacarbarry.com/api/orc/groundwork-audit';
+
+function openEmailGate() {
+  const gate = document.getElementById('email-gate');
+  gate.classList.add('visible');
+  // Focus the input shortly after the rise animation starts.
+  setTimeout(() => { document.getElementById('gate-email').focus(); }, 120);
+}
+
+function closeEmailGate() {
+  document.getElementById('email-gate').classList.remove('visible');
+}
+
+function isValidEmail(v) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+}
+
+// POST the captured email + audit context. Always resolves -- a failed
+// POST must never block the visitor from seeing their report.
+async function submitGateEmail(email) {
+  const a = LAST_AUDIT || {};
+  try {
+    await fetch(GROUNDWORK_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        email: email,
+        industry: a.industry || '',
+        size: a.size || '',
+        score: typeof a.score === 'number' ? a.score : null,
+        band: a.band || '',
+      }),
+    });
+  } catch (err) {
+    // Swallow -- demo must not break. The user still gets their results.
+    console.warn('groundwork-audit POST failed (non-blocking):', err);
+  }
+}
+
+document.getElementById('gate-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const input = document.getElementById('gate-email');
+  const errEl = document.getElementById('gate-error');
+  const email = input.value.trim();
+
+  if (!isValidEmail(email)) {
+    input.classList.add('error');
+    errEl.classList.add('visible');
+    input.focus();
+    return;
+  }
+  input.classList.remove('error');
+  errEl.classList.remove('visible');
+
+  // Show a brief sending state, fire the POST, then reveal regardless.
+  const btn = document.getElementById('gate-submit');
+  const label = document.getElementById('gate-submit-label');
+  btn.disabled = true;
+  label.innerHTML = '<div class="spinner"></div> Sending…';
+
+  submitGateEmail(email).finally(() => {
+    closeEmailGate();
+    btn.disabled = false;
+    label.textContent = 'Send my report';
+  });
+});
+
+document.getElementById('gate-email').addEventListener('input', function() {
+  this.classList.remove('error');
+  document.getElementById('gate-error').classList.remove('visible');
+});
+
+document.getElementById('gate-skip').addEventListener('click', closeEmailGate);
+
+// ── Form validation + word count ──────────────────────────
+
+const MIN_WORDS = 5;
+const NUDGE_WORDS = 15;
+
+function wordCount(str) {
+  return str.trim().split(/\s+/).filter(Boolean).length;
+}
+
+function updateWordCount(id, countId, nudgeId) {
+  const el = document.getElementById(id);
+  const countEl = document.getElementById(countId);
+  const nudgeEl = document.getElementById(nudgeId);
+
+  el.addEventListener('input', () => {
+    const wc = wordCount(el.value);
+    countEl.textContent = `${wc} / ${NUDGE_WORDS} words minimum`;
+    countEl.classList.toggle('warn', wc >= MIN_WORDS && wc < NUDGE_WORDS);
+
+    // Show nudge if under 15 words but field has some content
+    if (wc > 0 && wc < NUDGE_WORDS) {
+      nudgeEl.classList.add('visible');
+    } else {
+      nudgeEl.classList.remove('visible');
+    }
+
+    // Clear errors on type
+    el.classList.remove('error');
+    document.getElementById('err-' + id).classList.remove('visible');
+  });
+}
+
+updateWordCount('task1', 'count-task1', 'nudge-task1');
+updateWordCount('task2', 'count-task2', 'nudge-task2');
+updateWordCount('task3', 'count-task3', 'nudge-task3');
+
+// Progress bar
+function updateProgress() {
+  const fields = ['industry', 'size', 'task1', 'task2', 'task3'];
+  let filled = 0;
+  fields.forEach(id => {
+    const el = document.getElementById(id);
+    if (el && el.value && el.value.trim().length > 0 && wordCount(el.value) >= 1) filled++;
+  });
+  document.getElementById('progress-fill').style.width = `${(filled / fields.length) * 100}%`;
+}
+
+['industry', 'size', 'task1', 'task2', 'task3'].forEach(id => {
+  document.getElementById(id).addEventListener('input', updateProgress);
+  document.getElementById(id).addEventListener('change', updateProgress);
+});
+
+// ── Form submit ───────────────────────────────────────────
+
+document.getElementById('audit-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  const industry = document.getElementById('industry').value;
+  const size     = document.getElementById('size').value;
+  const task1    = document.getElementById('task1').value.trim();
+  const task2    = document.getElementById('task2').value.trim();
+  const task3    = document.getElementById('task3').value.trim();
+
+  let valid = true;
+
+  // Validate industry
+  if (!industry) {
+    document.getElementById('industry').classList.add('error');
+    document.getElementById('err-industry').classList.add('visible');
+    valid = false;
+  }
+
+  // Validate size
+  if (!size) {
+    document.getElementById('size').classList.add('error');
+    document.getElementById('err-size').classList.add('visible');
+    valid = false;
+  }
+
+  // Validate task fields (min 5 words)
+  [['task1','err-task1'], ['task2','err-task2'], ['task3','err-task3']].forEach(([id, errId]) => {
+    const val = document.getElementById(id).value.trim();
+    if (wordCount(val) < MIN_WORDS) {
+      document.getElementById(id).classList.add('error');
+      document.getElementById(errId).classList.add('visible');
+      valid = false;
+    }
+  });
+
+  if (!valid) {
+    // Scroll to first error
+    const firstErr = document.querySelector('.error');
+    if (firstErr) firstErr.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return;
+  }
+
+  // Show loading state
+  const btn = document.getElementById('submit-btn');
+  const label = document.getElementById('submit-label');
+  btn.disabled = true;
+  label.innerHTML = '<div class="spinner"></div> Analyzing your workflows…';
+
+  // Simulate a brief analysis pause (UX trust signal)
+  setTimeout(() => {
+    runAudit(industry, size, task1, task2, task3, true);
+    btn.disabled = false;
+    label.innerHTML = 'Run My AI Audit →';
+  }, 1400);
+});
+
+// Clear errors on change
+['industry', 'size'].forEach(id => {
+  document.getElementById(id).addEventListener('change', () => {
+    document.getElementById(id).classList.remove('error');
+    document.getElementById('err-' + id).classList.remove('visible');
+  });
+});
+
+// ── Demo mode ─────────────────────────────────────────────
+// Pre-seeds realistic sample data and runs the audit so anyone can see
+// a full report in one click (hackathon demo / cold-traffic preview).
+
+const DEMO_DATA = {
+  industry: 'legal',
+  size: '3',
+  task1: 'I manually review and respond to every client intake form. Takes 3-4 hours per day and I miss follow-ups constantly.',
+  task2: 'Client onboarding emails get sent manually one by one. When I forget, new clients go silent for days.',
+  task3: 'We double-bill clients because two team members log hours in different places. Costs us $2-3K per month in write-offs.',
+};
+
+document.getElementById('demo-btn').addEventListener('click', () => {
+  // Reflect the sample data back into the form so "Run another audit"
+  // shows a populated, editable starting point.
+  document.getElementById('industry').value = DEMO_DATA.industry;
+  document.getElementById('size').value     = DEMO_DATA.size;
+  document.getElementById('task1').value    = DEMO_DATA.task1;
+  document.getElementById('task2').value    = DEMO_DATA.task2;
+  document.getElementById('task3').value    = DEMO_DATA.task3;
+  updateProgress();
+  // Demo path: no email gate -- reveal the full report immediately.
+  runAudit(DEMO_DATA.industry, DEMO_DATA.size, DEMO_DATA.task1, DEMO_DATA.task2, DEMO_DATA.task3, false);
+});
+
+// ── Restart ───────────────────────────────────────────────
+
+document.getElementById('restart-link').addEventListener('click', () => {
+  document.getElementById('audit-form').reset();
+  document.getElementById('progress-fill').style.width = '0%';
+  ['nudge-task1','nudge-task2','nudge-task3'].forEach(id => {
+    document.getElementById(id).classList.remove('visible');
+  });
+  ['count-task1','count-task2','count-task3'].forEach(id => {
+    document.getElementById(id).textContent = '0 / 15 words minimum';
+  });
+  document.getElementById('screen-output').style.display = 'none';
+  document.getElementById('screen-input').style.display  = 'flex';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+</script>
+</body>
+</html>
