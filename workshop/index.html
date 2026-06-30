@@ -213,6 +213,19 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--amber-deep);outline
 .qbody p strong{color:var(--ink);font-weight:600}
 
 /* ---- outcomes: editorial numbered list ---- */
+/* The Daily Three — named walk-out deliverable */
+.daily3{margin-top:36px;background:var(--ink);color:var(--paper);border-radius:14px;padding:38px 38px 30px;position:relative;overflow:hidden}
+.daily3::before{content:"";position:absolute;inset:0;background:radial-gradient(120% 80% at 0% 0%,rgba(232,99,42,.22),transparent 60%);pointer-events:none}
+.d3-head{position:relative;z-index:1;max-width:60ch}
+.d3-kick{font-family:var(--mono);font-weight:600;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--molten)}
+.d3-title{font-family:var(--display);text-transform:uppercase;font-weight:400;font-size:clamp(1.5rem,1.2rem+1.1vw,2.1rem);line-height:1.02;margin:10px 0 12px;color:var(--paper)}
+.d3-sub{font-size:1.02rem;line-height:1.55;color:rgba(239,231,214,.84);max-width:58ch}
+.d3-grid{position:relative;z-index:1;display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:28px}
+.d3-card{background:rgba(239,231,214,.06);border:1px solid rgba(239,231,214,.14);border-radius:10px;padding:22px 20px 24px}
+.d3-card .d3-n{font-family:var(--display);font-size:1.5rem;color:var(--amber-hot);letter-spacing:.04em}
+.d3-card h4{font-family:var(--display);text-transform:uppercase;font-weight:400;font-size:1.18rem;line-height:1.06;margin:8px 0 9px;color:var(--paper)}
+.d3-card p{font-size:.96rem;line-height:1.5;color:rgba(239,231,214,.8)}
+@media(max-width:760px){.daily3{padding:30px 24px 22px}.d3-grid{grid-template-columns:1fr;gap:14px}}
 .olist{margin-top:40px}
 .oitem{display:grid;grid-template-columns:120px 1fr auto;gap:34px;padding:30px 0 38px;align-items:start;position:relative}
 .oitem:nth-child(even){transform:translateX(26px)}
@@ -457,6 +470,33 @@ footer a{color:var(--amber-deep);text-decoration:underline;text-underline-offset
     <div class="shead"><span class="no">02</span><span class="lab">What you leave with</span></div>
     <h2>Not notes. Something that <em>works</em>.</h2>
     <p class="lede">Most AI talks send you home with a slide deck and a vague feeling. This one is built backward from what you can use the same day.</p>
+
+    <!-- ===== The Daily Three: the concrete walk-out deliverable ===== -->
+    <div class="daily3">
+      <div class="d3-head">
+        <span class="d3-kick">The Daily Three</span>
+        <h3 class="d3-title">Leave with three AI tools you will use every day.</h3>
+        <p class="d3-sub">We set these up together in the room, on your laptop, with your own work. Simple enough that you keep using them on Monday, and the Monday after that.</p>
+      </div>
+      <div class="d3-grid">
+        <div class="d3-card">
+          <span class="d3-n">01</span>
+          <h4>The 5-Angle Pressure-Test</h4>
+          <p>Make AI argue against your decision from five expert angles before you commit to it. You catch the hole in the plan while it is still cheap to fix.</p>
+        </div>
+        <div class="d3-card">
+          <span class="d3-n">02</span>
+          <h4>The Pre-Mortem</h4>
+          <p>Have AI tell you why your plan fails before you spend the money. You walk in with the failure already mapped, so you spend on the thing that actually moves it.</p>
+        </div>
+        <div class="d3-card">
+          <span class="d3-n">03</span>
+          <h4>The Plain-Answer Filter</h4>
+          <p>Stop AI from overcomplicating. You get back the clean, usable answer you can act on, not a wall of options you have to sort through yourself.</p>
+        </div>
+      </div>
+    </div>
+
     <div class="olist">
       <div class="oitem rv">
         <div class="on">01</div>

@@ -96,6 +96,13 @@ h1 em::after{content:"";position:absolute;left:-2%;right:-2%;bottom:-.05em;heigh
   background:linear-gradient(90deg,rgba(0,0,0,.42),rgba(255,255,255,.08) 42%,rgba(0,0,0,.32))}
 
 .lead{font-family:var(--font-display);font-size:clamp(1rem,.9rem+1.2vw,1.16rem);line-height:1.42;color:rgba(244,238,228,.9);margin-top:18px;max-width:34ch}
+.daily3{margin-top:22px;background:rgba(244,238,228,.05);border:1px solid rgba(244,238,228,.14);border-radius:12px;padding:20px 22px 18px;max-width:42ch}
+.daily3 .d3-kick{font-family:var(--font-mono);font-weight:600;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--action)}
+.daily3 .d3-lead{font-family:var(--font-display);font-size:1rem;line-height:1.4;color:rgba(244,238,228,.92);margin:8px 0 12px}
+.d3-list{list-style:none;display:flex;flex-direction:column;gap:11px}
+.d3-list li{position:relative;padding-left:20px;font-size:.92rem;line-height:1.45;color:rgba(244,238,228,.84)}
+.d3-list li::before{content:"";position:absolute;left:0;top:.52em;width:8px;height:8px;border-radius:50%;background:var(--clay-soft)}
+.d3-list li b{color:var(--paper);font-weight:600}
 
 /* essentials line, pasted-tag feel via rough ink underline */
 .essentials{display:flex;align-items:flex-start;gap:11px;margin-top:18px;font-size:.92rem;line-height:1.45;color:var(--paper)}
@@ -184,6 +191,16 @@ a:focus-visible,.cta:focus-visible{outline:3px solid var(--action);outline-offse
     </div>
 
     <p class="lead">A 90-minute working session for Utah owners. You leave with one real thing running, not a page of notes.</p>
+
+    <div class="daily3">
+      <span class="d3-kick">The Daily Three</span>
+      <p class="d3-lead">Plus three AI tools you set up in the room and use every day:</p>
+      <ul class="d3-list">
+        <li><b>The 5-Angle Pressure-Test.</b> Make AI argue against your decision from five angles before you commit.</li>
+        <li><b>The Pre-Mortem.</b> Have AI tell you why your plan fails before you spend the money.</li>
+        <li><b>The Plain-Answer Filter.</b> Stop AI from overcomplicating and get a clean answer you can act on.</li>
+      </ul>
+    </div>
 
     <div class="essentials">
       <svg class="pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>
