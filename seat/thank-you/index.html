@@ -130,7 +130,30 @@ s.parentNode.insertBefore(t,s)}(window, document,'script',
 fbq('init', '1826865671807664');
 fbq('track', 'PageView');
 </script>
-<script>fbq('track', 'Purchase', {value: 47.00, currency: 'USD'});</script>
+<script>
+/* Purchase fires ONCE per real purchase only.
+   Gate: arrival from Stripe (session_id query param appended by the payment link,
+   or checkout.stripe.com referrer as fallback). Plain reloads / direct visits do
+   NOT fire. eventID = Stripe Checkout Session id so Meta de-duplicates. */
+(function(){
+  var qs = new URLSearchParams(window.location.search);
+  var sid = qs.get('session_id');
+  var refHost = '';
+  try { refHost = document.referrer ? new URL(document.referrer).hostname : ''; } catch(e){}
+  var fromStripe = /(^|\.)stripe\.com$/.test(refHost);
+  if (!sid && !fromStripe) return; /* direct visit or reload: no Purchase */
+  var KEY = 'cw_seat47_purchase_eid';
+  var eid = sid || '';
+  try {
+    var prev = localStorage.getItem(KEY);
+    if (prev && (prev === eid || !sid)) return; /* this purchase already tracked in this browser */
+  } catch(e){}
+  if (!eid) eid = 'ty47-' + Date.now() + '-' + Math.random().toString(36).slice(2, 10);
+  try { localStorage.setItem(KEY, eid); } catch(e){}
+  fbq('track', 'Purchase', {value: 47.00, currency: 'USD'}, {eventID: eid});
+  if (sid) { try { history.replaceState(null, '', window.location.pathname); } catch(e){} }
+})();
+</script>
 <noscript><img height="1" width="1" style="display:none"
 src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"
 /></noscript>
