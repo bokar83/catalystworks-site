@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Your Full Website Report</title>
+<meta name="description" content="The full read on your website: every finding, your AI search readiness breakdown, and a fix plan in plain language.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230f1115'/%3E%3Cpath d='M16 6 L24 11 V17 C24 22 20.5 25.5 16 27 C11.5 25.5 8 22 8 17 V11 Z' fill='none' stroke='%23c9a84c' stroke-width='2'/%3E%3Ccircle cx='16' cy='15' r='3' fill='%23c9a84c'/%3E%3C/svg%3E">
+<style>
+  :root {
+    --bg: #0f1115; --panel: #161a22; --panel-2: #1c2230;
+    --ink: #e8eaed; --ink-dim: #9aa3b2;
+    --accent: #c9a84c; --accent-2: #e8c468; --line: #232936;
+    --ok: #5fb878; --warn: #e8c468; --risk: #ff7a5c;
+    --radius: 14px; --shadow: 0 20px 60px -20px rgba(0,0,0,0.7);
+  }
+  html[data-brand="sw"] { --accent: #34d3b5; --accent-2: #5ee9cf; --ok: #34d3b5; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); }
+  body {
+    color: var(--ink);
+    font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased; min-height: 100vh;
+    background:
+      radial-gradient(1200px 600px at 80% -10%, rgba(201,168,76,0.08), transparent 60%),
+      var(--bg);
+  }
+  html[data-brand="sw"] body {
+    background:
+      radial-gradient(1200px 600px at 80% -10%, rgba(52,211,181,0.09), transparent 60%),
+      var(--bg);
+  }
+  .wrap { max-width: 680px; margin: 0 auto; padding: 28px 18px 96px; }
+  .brand { display: flex; align-items: center; gap: 10px; margin-bottom: 30px; }
+  .brand .mark { width: 34px; height: 34px; }
+  .brand .name { font-weight: 700; font-size: 16px; color: #fff; }
+  .brand .name span { color: var(--accent); }
+
+  h1 { font-size: 28px; line-height: 1.15; margin: 0 0 10px; color: #fff; letter-spacing: -0.02em; }
+  .sub { color: var(--ink-dim); font-size: 15px; margin: 0 0 24px; }
+
+  .state { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 26px 20px; text-align: center; box-shadow: var(--shadow); }
+  .state .spinner { width: 26px; height: 26px; border-radius: 50%; margin: 0 auto 14px;
+    border: 3px solid var(--line); border-top-color: var(--accent); animation: spin .8s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .state p { margin: 0; color: var(--ink-dim); }
+  .state .err { color: var(--risk); }
+  .bind-form { display: flex; flex-direction: column; gap: 10px; margin-top: 16px; }
+  @media (min-width: 480px) { .bind-form { flex-direction: row; } }
+  .bind-form input { flex: 1; min-width: 0; background: #0d0f14; border: 1px solid var(--line);
+    border-radius: 10px; color: var(--ink); font-size: 15px; padding: 13px 14px; outline: none; }
+  .bind-form input:focus { border-color: var(--accent); }
+  .btn { appearance: none; border: none; cursor: pointer; background: var(--accent); color: #0a0c10;
+    font-weight: 700; font-size: 15px; padding: 13px 20px; border-radius: 10px; white-space: nowrap; }
+  .btn[disabled] { opacity: .55; cursor: not-allowed; }
+
+  .report { display: none; }
+  .report.active { display: block; animation: fadein .5s ease; }
+  @keyframes fadein { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  .report-head { display: flex; align-items: center; gap: 18px; margin: 0 0 8px; }
+  .gauge { width: 96px; height: 96px; flex: 0 0 auto; position: relative; }
+  .gauge svg { transform: rotate(-90deg); }
+  .gauge .gnum { position: absolute; inset: 0; display: grid; place-items: center;
+    font-size: 27px; font-weight: 800; color: #fff; }
+  .gauge .gnum small { font-size: 11px; color: var(--ink-dim); font-weight: 600; }
+  .meta { color: var(--ink-dim); font-size: 13.5px; margin: 2px 0 0; }
+  .summary { background: var(--panel); border-left: 3px solid var(--accent); border-radius: 10px;
+    padding: 16px 18px; margin: 22px 0 0; color: var(--ink); font-size: 15.5px; }
+
+  h2.section { font-size: 19px; color: #fff; margin: 34px 0 6px; letter-spacing: -0.01em; }
+  .section-sub { color: var(--ink-dim); font-size: 14px; margin: 0 0 14px; }
+
+  .finding { background: var(--panel); border: 1px solid var(--line); border-radius: 12px;
+    padding: 16px; margin-top: 14px; }
+  .finding-top { display: flex; align-items: flex-start; gap: 12px; }
+  .finding-cat { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: var(--ink-dim); margin-bottom: 3px; }
+  .finding h3 { font-size: 16px; margin: 0 0 6px; color: #fff; font-weight: 600; line-height: 1.3; }
+  .finding .detail { color: var(--ink-dim); font-size: 14.5px; margin: 0; }
+  .finding .cost { color: var(--ink); font-size: 14px; margin: 8px 0 0; }
+  .badge { display: inline-block; padding: 3px 9px; border-radius: 6px; font-size: 11px; font-weight: 700;
+    letter-spacing: .05em; text-transform: uppercase; flex: 0 0 auto; }
+  .badge.good { background: var(--ok); color: #0a0c10; }
+  .badge.warning { background: var(--warn); color: #0a0c10; }
+  .badge.risk { background: var(--risk); color: #0a0c10; }
+  .meter { height: 6px; background: #0d0f14; border-radius: 999px; overflow: hidden; margin-top: 12px; }
+  .meter > span { display: block; height: 100%; border-radius: 999px; }
+  .meter > span.good { background: var(--ok); }
+  .meter > span.warning { background: var(--warn); }
+  .meter > span.risk { background: var(--risk); }
+
+  .geo-row { display: flex; gap: 12px; align-items: flex-start; background: var(--panel);
+    border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; margin-top: 10px; }
+  .geo-dot { width: 12px; height: 12px; border-radius: 50%; margin-top: 6px; flex: 0 0 auto; }
+  .geo-dot.ok { background: var(--ok); }
+  .geo-dot.no { background: var(--risk); }
+  .geo-row .glabel { font-weight: 600; color: #fff; font-size: 15px; }
+  .geo-row .gvalue { color: var(--ink); font-size: 14px; margin-top: 2px; }
+  .geo-row .gnote { color: var(--ink-dim); font-size: 13px; margin-top: 3px; }
+
+  .fix { background: var(--panel); border: 1px solid var(--line); border-radius: 12px;
+    padding: 16px; margin-top: 12px; display: flex; gap: 14px; }
+  .fix .num { width: 34px; height: 34px; flex: 0 0 auto; border-radius: 50%; background: var(--accent);
+    color: #0a0c10; font-weight: 800; display: grid; place-items: center; font-size: 16px; }
+  .fix h3 { font-size: 15.5px; margin: 0 0 4px; color: #fff; }
+  .fix p { margin: 0; color: var(--ink-dim); font-size: 14px; }
+
+  .honesty { color: var(--ink-dim); font-size: 13.5px; font-style: italic; margin: 30px 2px 0; }
+  .next { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 20px 18px; margin-top: 26px; }
+  .next h4 { margin: 0 0 6px; color: #fff; font-size: 16px; }
+  .next p { margin: 0; color: var(--ink-dim); font-size: 14.5px; }
+  .next a { color: var(--accent); text-decoration: none; font-weight: 600; }
+
+  .printbar { text-align: right; margin: 8px 0 0; }
+  .printbar button { appearance: none; background: none; border: 1px solid var(--line); color: var(--ink-dim);
+    border-radius: 8px; padding: 8px 14px; font-size: 13px; cursor: pointer; }
+  .foot { margin-top: 48px; text-align: center; color: var(--ink-dim); font-size: 12px; }
+
+  @media print {
+    body { background: #fff; color: #111; }
+    .brand .name, h1, h2.section, .finding h3, .fix h3, .geo-row .glabel { color: #111; }
+    .state, .printbar { display: none !important; }
+    .finding, .fix, .geo-row, .next, .summary { border-color: #ccc; background: #fff; }
+    .sub, .meta, .finding .detail, .fix p, .geo-row .gnote, .honesty { color: #444; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="brand">
+    <svg class="mark" viewBox="0 0 32 32" aria-hidden="true">
+      <rect width="32" height="32" rx="7" fill="#161a22"/>
+      <path d="M16 6 L24 11 V17 C24 22 20.5 25.5 16 27 C11.5 25.5 8 22 8 17 V11 Z" fill="none" stroke="var(--accent)" stroke-width="2"/>
+      <circle cx="16" cy="15" r="3" fill="var(--accent)"/>
+    </svg>
+    <div class="name" id="brandName">Catalyst <span>Works</span></div>
+  </header>
+
+  <h1>Here is the full read on your site.</h1>
+  <p class="sub">Every signal my tools checked, in plain language, with the fix order I'd follow.</p>
+
+  <div class="state" id="state">
+    <div class="spinner" id="stateSpin"></div>
+    <p id="stateMsg">Confirming your payment and building your report...</p>
+    <form class="bind-form" id="bindForm" style="display:none;">
+      <input type="text" id="bindUrl" placeholder="yourwebsite.com" inputmode="url" aria-label="The website you scanned">
+      <button type="submit" class="btn" id="bindBtn">Build my report</button>
+    </form>
+  </div>
+
+  <div class="report" id="report">
+    <div class="printbar"><button type="button" onclick="window.print()">Print or save as PDF</button></div>
+    <div class="report-head">
+      <div class="gauge" id="gauge"></div>
+      <div>
+        <div class="meta" id="metaLine"></div>
+        <div class="meta" id="metaDate"></div>
+      </div>
+    </div>
+    <div class="summary" id="summary" style="display:none;"></div>
+
+    <h2 class="section">Every finding, in full</h2>
+    <p class="section-sub">Worst first. Each one is a signal my tools actually read on your site.</p>
+    <div id="findings"></div>
+
+    <h2 class="section">AI Search Readiness, piece by piece</h2>
+    <p class="section-sub" id="geoScoreLine"></p>
+    <div id="geoRows"></div>
+    <p class="honesty" id="geoHonesty"></p>
+
+    <h2 class="section">Your fix plan, in the order I'd do it</h2>
+    <div id="fixes"></div>
+
+    <p class="honesty" id="reportHonesty"></p>
+
+    <div class="next">
+      <h4>Want a human pass on this?</h4>
+      <p>This report is my tools reading your site from the outside. If you want me to walk through it with you and map the fixes to your business, that's the <a href="/audit">walkthrough audit</a>. No pressure either way; the plan above stands on its own.</p>
+    </div>
+  </div>
+
+  <footer class="foot">
+    <span id="footBrand">Catalyst Works</span> &middot; Full Website Report
+  </footer>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var params = new URLSearchParams(location.search);
+  var API_BASE = (params.get("api") || "https://agentshq.boubacarbarry.com/api/orc").replace(/\/$/, "");
+  var SURFACE = /geolisted/i.test(location.hostname) ? "sw" : "cw";
+  document.documentElement.setAttribute("data-brand", SURFACE);
+  if (SURFACE === "sw") {
+    document.getElementById("brandName").innerHTML = 'Signal <span>Works</span>';
+    document.getElementById("footBrand").textContent = "Signal Works";
+  }
+
+  var state = document.getElementById("state");
+  var stateMsg = document.getElementById("stateMsg");
+  var stateSpin = document.getElementById("stateSpin");
+  var bindForm = document.getElementById("bindForm");
+  var bindUrl = document.getElementById("bindUrl");
+  var bindBtn = document.getElementById("bindBtn");
+  var reportEl = document.getElementById("report");
+
+  var SESSION_ID = (params.get("session_id") || "").trim();
+
+  function esc(s) {
+    var d = document.createElement("div");
+    d.textContent = s == null ? "" : String(s);
+    return d.innerHTML;
+  }
+  function safeStatus(st) {
+    return (st === "good" || st === "warning" || st === "risk") ? st : "warning";
+  }
+
+  function showError(msg, askUrl) {
+    stateSpin.style.display = "none";
+    stateMsg.innerHTML = '<span class="' + (askUrl ? "" : "err") + '">' + esc(msg) + "</span>";
+    bindForm.style.display = askUrl ? "flex" : "none";
+  }
+
+  function fetchReport(extraUrl) {
+    stateSpin.style.display = "block";
+    stateMsg.textContent = "Confirming your payment and building your report...";
+    var body = { session_id: SESSION_ID };
+    if (extraUrl) body.url = extraUrl;
+    fetch(API_BASE + "/quick-audit/report", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body)
+    }).then(function (r) { return r.json(); })
+      .then(function (data) {
+        if (data && data.ok && data.report) {
+          state.style.display = "none";
+          renderReport(data.report);
+          reportEl.classList.add("active");
+          return;
+        }
+        showError((data && data.error) || "Something went wrong building the report. Reload this page in a moment.",
+                  !!(data && data.need_url));
+      })
+      .catch(function () {
+        showError("I could not reach the report service just now. Reload this page in a moment.", false);
+      });
+  }
+
+  function renderGauge(score) {
+    var pct = Math.max(0, Math.min(100, score));
+    var r = 42, c = 2 * Math.PI * r;
+    var off = c * (1 - pct / 100);
+    var color = pct >= 70 ? "var(--ok)" : (pct >= 45 ? "var(--warn)" : "var(--risk)");
+    document.getElementById("gauge").innerHTML =
+      '<svg width="96" height="96" viewBox="0 0 96 96">' +
+      '<circle cx="48" cy="48" r="' + r + '" fill="none" stroke="#0d0f14" stroke-width="8"/>' +
+      '<circle cx="48" cy="48" r="' + r + '" fill="none" stroke="' + color + '" stroke-width="8" ' +
+      'stroke-linecap="round" stroke-dasharray="' + c + '" stroke-dashoffset="' + off + '"/>' +
+      "</svg>" +
+      '<div class="gnum">' + pct + "<small>/100</small></div>";
+  }
+
+  function renderReport(rep) {
+    renderGauge(rep.overall_score || 0);
+    document.getElementById("metaLine").textContent = "Report for " + (rep.url || "");
+    document.getElementById("metaDate").textContent = "Generated " + (rep.generated_at || "");
+
+    if (rep.summary) {
+      var sm = document.getElementById("summary");
+      sm.textContent = rep.summary;
+      sm.style.display = "block";
+    }
+
+    var findingsEl = document.getElementById("findings");
+    findingsEl.innerHTML = "";
+    (rep.findings || []).forEach(function (f) {
+      var st = safeStatus(f.status);
+      var div = document.createElement("div");
+      div.className = "finding";
+      var cost = f.cost_line && f.cost_line !== f.detail
+        ? '<p class="cost">' + esc(f.cost_line) + "</p>" : "";
+      div.innerHTML =
+        '<div class="finding-top">' +
+          '<div class="finding-body" style="flex:1;min-width:0;">' +
+            '<div class="finding-cat">' + esc(f.category || "") + "</div>" +
+            "<h3>" + esc(f.headline || "") + "</h3>" +
+            '<p class="detail">' + esc(f.detail || "") + "</p>" + cost +
+          "</div>" +
+          '<span class="badge ' + st + '">' + st + "</span>" +
+        "</div>" +
+        '<div class="meter"><span class="' + st + '" style="width:' + (Number(f.score) || 0) + '%"></span></div>';
+      findingsEl.appendChild(div);
+    });
+
+    var geo = rep.geo || {};
+    document.getElementById("geoScoreLine").textContent =
+      "Readiness score " + (geo.score || 0) + "/100. This is whether an AI assistant can read and represent your business, checked signal by signal.";
+    var geoRows = document.getElementById("geoRows");
+    geoRows.innerHTML = "";
+    (geo.rows || []).forEach(function (row) {
+      var div = document.createElement("div");
+      div.className = "geo-row";
+      div.innerHTML =
+        '<span class="geo-dot ' + (row.ok ? "ok" : "no") + '"></span>' +
+        "<div>" +
+          '<div class="glabel">' + esc(row.label || "") + "</div>" +
+          '<div class="gvalue">' + esc(row.value || "") + "</div>" +
+          '<div class="gnote">' + esc(row.note || "") + "</div>" +
+        "</div>";
+      geoRows.appendChild(div);
+    });
+    document.getElementById("geoHonesty").textContent = geo.honesty || "";
+
+    var fixesEl = document.getElementById("fixes");
+    fixesEl.innerHTML = "";
+    (rep.fixes || []).forEach(function (fx) {
+      var div = document.createElement("div");
+      div.className = "fix";
+      div.innerHTML =
+        '<div class="num">' + (Number(fx.order) || 0) + "</div>" +
+        "<div><h3>" + esc(fx.title || "") + "</h3>" +
+        "<p>" + esc(fx.text || "") + "</p></div>";
+      fixesEl.appendChild(div);
+    });
+
+    document.getElementById("reportHonesty").textContent = rep.honesty || "";
+  }
+
+  bindForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var v = (bindUrl.value || "").trim();
+    if (!v) return;
+    bindBtn.disabled = true;
+    fetchReport(v);
+    setTimeout(function () { bindBtn.disabled = false; }, 4000);
+  });
+
+  // Test hook: page can be rendered without a session by injecting a report
+  // object (used by the offline end-to-end proof; harmless in production).
+  window.__renderReportForTest = function (rep) {
+    state.style.display = "none";
+    renderReport(rep);
+    reportEl.classList.add("active");
+  };
+
+  if (!SESSION_ID) {
+    showError("This page opens from your payment confirmation link. If you just paid, use the link Stripe sent you back to.", false);
+  } else {
+    fetchReport("");
+  }
+})();
+</script>
+</body>
+</html>

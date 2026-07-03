@@ -157,6 +157,31 @@
 
   .humility { color: var(--ink); font-size: 15px; margin: 22px 2px 0; font-style: italic; }
 
+  /* Locked finding cards (paid tripwire enabled only; server withholds text) */
+  .finding.locked { border-style: dashed; opacity: .92; }
+  .finding.locked .ficon { background: rgba(201,168,76,0.12); }
+  html[data-brand="sw"] .finding.locked .ficon { background: rgba(52,211,181,0.12); }
+  .finding.locked .locknote { color: var(--ink-dim); font-size: 14px; margin: 0; }
+
+  /* Paid full-report CTA (renders only when the API says payment is enabled) */
+  .paid-cta {
+    display: none; margin-top: 20px; border-radius: 14px;
+    border: 1px solid var(--accent); background: linear-gradient(180deg, var(--panel), var(--panel-2));
+    padding: 22px 18px; box-shadow: var(--shadow);
+  }
+  .paid-cta.active { display: block; animation: fadein .4s ease; }
+  .paid-cta h4 { margin: 0 0 8px; color: #fff; font-size: 18px; }
+  .paid-cta p { margin: 0 0 14px; color: var(--ink-dim); font-size: 14.5px; }
+  .paid-cta .btn-link {
+    display: inline-block; text-decoration: none; text-align: center;
+    background: var(--accent); color: #0a0c10; font-weight: 700; font-size: 16px;
+    padding: 14px 24px; border-radius: 10px; letter-spacing: .01em;
+    transition: transform .08s ease, filter .15s;
+  }
+  .paid-cta .btn-link:hover { filter: brightness(1.06); }
+  .paid-cta .btn-link:active { transform: translateY(1px); }
+  .paid-cta .fine { font-size: 12.5px; color: var(--ink-dim); margin: 12px 0 0; }
+
   /* Email gate */
   .gate {
     position: relative; margin-top: 20px; border-radius: 14px; overflow: hidden;
@@ -259,6 +284,8 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"
     <div id="findings"></div>
 
     <p class="humility">I can't tell from outside which of these is costing you the most. That's the conversation.</p>
+
+    <div class="paid-cta" id="paidCta"></div>
 
     <div class="gate" id="gate">
       <div class="gate-blur">
@@ -520,6 +547,22 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"
       var st = f.status || "warning";
       var icon = ICONS[f.key] || "&#128202;";
       var div = document.createElement("div");
+      if (f.locked) {
+        // Locked finding stub (paid tripwire enabled): the server withheld
+        // the text, we only know the category and how it scored.
+        div.className = "finding locked";
+        div.innerHTML =
+          '<div class="finding-top">' +
+            '<div class="ficon ' + st + '">&#128274;</div>' +
+            '<div class="finding-body">' +
+              '<div class="finding-cat">' + esc(f.category || "") + "</div>" +
+              '<p class="locknote">In the full report.</p>' +
+            "</div>" +
+            '<span class="badge ' + st + '">' + st + "</span>" +
+          "</div>";
+        findingsEl.appendChild(div);
+        return;
+      }
       div.className = "finding";
       div.innerHTML =
         '<div class="finding-top">' +
@@ -539,6 +582,37 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"
         if (bar) bar.style.width = (f.score || 0) + "%";
       });
     });
+    renderPaidCta(p);
+  }
+
+  // ---- Paid full-report CTA ($47 tripwire) --------------------------------
+  // Renders ONLY when the API says payment is enabled (Stripe link + key are
+  // live server-side). Until then this stays invisible and the page behaves
+  // exactly as before.
+  var paidCta = document.getElementById("paidCta");
+  function renderPaidCta(p) {
+    if (!paidCta) return;
+    var pay = p.payment || {};
+    if (!pay.enabled || !pay.link_url || !p.scan_id) {
+      paidCta.classList.remove("active");
+      paidCta.innerHTML = "";
+      return;
+    }
+    var lockedN = (p.findings || []).filter(function (f) { return f.locked; }).length;
+    var href = pay.link_url +
+      (pay.link_url.indexOf("?") > -1 ? "&" : "?") +
+      "client_reference_id=" + encodeURIComponent(p.scan_id);
+    var price = pay.price || "$47";
+    var countLine = lockedN > 0
+      ? ("My tools flagged " + lockedN + " more finding" + (lockedN === 1 ? "" : "s") + " on this scan that I have not shown you yet. ")
+      : "";
+    paidCta.innerHTML =
+      "<h4>Want everything my tools found?</h4>" +
+      "<p>" + countLine +
+      "The full report covers every finding, your complete AI search readiness breakdown, and a fix plan in the order I'd do it. It builds from the scan you just ran and opens the moment you pay.</p>" +
+      '<a class="btn-link" href="' + esc(href) + '" rel="noopener">Get my full report, ' + esc(price) + "</a>" +
+      '<p class="fine">One-time payment. Built from this exact scan. A copy also goes to your email.</p>';
+    paidCta.classList.add("active");
   }
 
   // ---- Email gate --------------------------------------------------------
