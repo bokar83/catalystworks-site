@@ -27,16 +27,16 @@ RewriteRule ^w/start/?$ /ai-checklist/?utm_source=meta&utm_medium=paid&utm_campa
 
 # Workshop short links: one per channel, UTM baked behind the 301.
 # Never reuse a slug across campaigns.
-RewriteRule ^w/svc/?$ /workshop/?utm_source=chamber&utm_medium=email&utm_campaign=ic_workshop_0625&utm_content=south_valley [R=301,L,QSA]
-RewriteRule ^w/sjc/?$ /workshop/?utm_source=chamber&utm_medium=email&utm_campaign=ic_workshop_0625&utm_content=south_jordan [R=301,L,QSA]
-RewriteRule ^w/li/?$ /workshop/?utm_source=linkedin&utm_medium=post&utm_campaign=ic_workshop_0625 [R=301,L,QSA]
-RewriteRule ^w/x/?$ /workshop/?utm_source=x&utm_medium=post&utm_campaign=ic_workshop_0625 [R=301,L,QSA]
-RewriteRule ^w/nl/?$ /workshop/?utm_source=newsletter&utm_medium=email&utm_campaign=ic_workshop_0625 [R=301,L,QSA]
-RewriteRule ^w/ads/?$ /workshop/?utm_source=meta&utm_medium=paid&utm_campaign=ic_workshop_0625 [R=301,L,QSA]
+RewriteRule ^w/svc/?$ /workshop/?utm_source=chamber&utm_medium=email&utm_campaign=ic_workshop_0730&utm_content=south_valley [R=301,L,QSA]
+RewriteRule ^w/sjc/?$ /workshop/?utm_source=chamber&utm_medium=email&utm_campaign=ic_workshop_0730&utm_content=south_jordan [R=301,L,QSA]
+RewriteRule ^w/li/?$ /workshop/?utm_source=linkedin&utm_medium=post&utm_campaign=ic_workshop_0730 [R=301,L,QSA]
+RewriteRule ^w/x/?$ /workshop/?utm_source=x&utm_medium=post&utm_campaign=ic_workshop_0730 [R=301,L,QSA]
+RewriteRule ^w/nl/?$ /workshop/?utm_source=newsletter&utm_medium=email&utm_campaign=ic_workshop_0730 [R=301,L,QSA]
+RewriteRule ^w/ads/?$ /workshop/?utm_source=meta&utm_medium=paid&utm_campaign=ic_workshop_0730 [R=301,L,QSA]
 RewriteRule ^w/fb/?$ /ai-checklist/?utm_source=facebook&utm_medium=paid&utm_campaign=ic_workshop_leadmagnet&utm_content=fb_ad [R=301,L,QSA]
-RewriteRule ^w/sbdc/?$ /workshop/?utm_source=sbdc&utm_medium=partner&utm_campaign=ic_workshop_0625 [R=301,L,QSA]
-RewriteRule ^w/beccy/?$ /workshop/?utm_source=beccy&utm_medium=email&utm_campaign=ic_workshop_0625 [R=301,L,QSA]
-RewriteRule ^w/ss/?$ /seat/?utm_source=silicon_slopes&utm_medium=event&utm_campaign=ic_workshop_0625 [R=301,L,QSA]
+RewriteRule ^w/sbdc/?$ /workshop/?utm_source=sbdc&utm_medium=partner&utm_campaign=ic_workshop_0730 [R=301,L,QSA]
+RewriteRule ^w/beccy/?$ /workshop/?utm_source=beccy&utm_medium=email&utm_campaign=ic_workshop_0730 [R=301,L,QSA]
+RewriteRule ^w/ss/?$ /seat/?utm_source=silicon_slopes&utm_medium=event&utm_campaign=ic_workshop_0730 [R=301,L,QSA]
 
 # Free ($0) RSVP demand-test short link: /w/july16 -> /free-workshop-july16/.
 # Channel tagging for this one uses ?src=sbdc|svc|chamber appended by the sharer

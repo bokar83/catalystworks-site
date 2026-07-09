@@ -280,7 +280,7 @@ var CONFIG = {
     var src=(qs.get('utm_source')||'silicon_slopes');   // QR lands via /w/ss (silicon_slopes); fall back to it
     var med=(qs.get('utm_medium')||medium||'event');
     var sep=W.stripeUrl.indexOf('?')>-1?'&':'?';
-    return W.stripeUrl+sep+'utm_source='+encodeURIComponent(src)+'&utm_medium='+encodeURIComponent(med)+'&utm_campaign=ic_workshop_0625&client_reference_id='+encodeURIComponent(CONFIG.cohort||'');
+    return W.stripeUrl+sep+'utm_source='+encodeURIComponent(src)+'&utm_medium='+encodeURIComponent(med)+'&utm_campaign=ic_workshop_0730&client_reference_id='+encodeURIComponent(CONFIG.cohort||'');
   }
   function checklistHref(){
     var base=(W&&W.checklistUrl)?W.checklistUrl:'https://catalystworks.consulting/ai-checklist/';
