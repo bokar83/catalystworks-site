@@ -403,16 +403,24 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"
   </div>
 </section>
 
-<!-- ===== proof: real tool, real demand, founding room ===== -->
+<!-- ===== proof: real tool (inline demo), real demand, founding room ===== -->
 <style>
-.pf-sec .pf-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:26px}
-@media(max-width:860px){.pf-sec .pf-grid{grid-template-columns:1fr}}
-.pf-sec .pf-card{background:var(--paper-2,#F4ECE0);border:1px solid rgba(26,20,16,.14);border-radius:3px;padding:22px 20px;display:flex;flex-direction:column}
+.pf-sec .pf-demo{margin:28px 0 6px}
+.pf-sec .pf-frame{max-width:780px;margin:0 auto;border:1px solid rgba(26,20,16,.18);border-radius:8px;overflow:hidden;background:#fff;box-shadow:0 20px 44px -24px rgba(26,20,16,.6)}
+.pf-sec .pf-bar{display:flex;align-items:center;padding:9px 13px;background:var(--ink,#1A1410)}
+.pf-sec .pf-bar i{width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:7px}
+.pf-sec .pf-bar i:nth-child(1){background:#ff6058}.pf-sec .pf-bar i:nth-child(2){background:#ffbd2e}.pf-sec .pf-bar i:nth-child(3){background:#28ca41}
+.pf-sec .pf-bar span{font-family:var(--mono);font-size:.72rem;color:rgba(255,255,255,.72);margin-left:9px;letter-spacing:.02em}
+.pf-sec .pf-frame img{display:block;width:100%;height:auto}
+.pf-sec figure{margin:0}
+.pf-sec figcaption{max-width:720px;margin:16px auto 0;text-align:center;font-family:var(--serif);font-size:1.02rem;line-height:1.5;color:var(--ink-2,#2A2018)}
+.pf-sec figcaption .try{display:inline-block;margin-top:10px;font-family:var(--mono);font-weight:600;font-size:.82rem;color:var(--amber-deep,#B4611A);text-decoration:none;border-bottom:2px solid rgba(180,97,26,.4)}
+.pf-sec figcaption .try:hover{border-color:var(--amber-deep,#B4611A)}
+.pf-sec .pf-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-top:30px}
+@media(max-width:760px){.pf-sec .pf-grid{grid-template-columns:1fr}.pf-sec .pf-frame{max-width:100%}}
+.pf-sec .pf-card{background:var(--paper-2,#F4ECE0);border:1px solid rgba(26,20,16,.14);border-radius:3px;padding:22px 20px}
 .pf-sec .pf-k{font-family:var(--mono);font-weight:700;font-size:.8rem;letter-spacing:.03em;text-transform:uppercase;color:var(--amber-deep,#B4611A);margin-bottom:10px}
-.pf-sec .pf-card p{font-family:var(--serif);font-size:1rem;line-height:1.46;color:var(--ink-2,#2A2018);margin:0 0 14px}
-.pf-sec .cta-ghost{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-weight:600;font-size:.86rem;color:var(--ink);text-decoration:none;border:2px solid var(--ink);border-radius:3px;padding:9px 15px;margin-top:auto;align-self:flex-start}
-.pf-sec .cta-ghost:hover{background:var(--ink);color:var(--paper)}
-.pf-sec .cta-ghost svg{width:15px;height:15px}
+.pf-sec .pf-card p{font-family:var(--serif);font-size:1rem;line-height:1.46;color:var(--ink-2,#2A2018);margin:0}
 </style>
 <section class="sec torn pf-sec">
   <svg class="tear" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0,0 L1440,0 L1440,27.9 L1400,22 L1360,31 L1320,24 L1280,34 L1240,22 L1200,33 L1160,25 L1120,36 L1080,21 L1040,34 L1000,25 L960,37 L920,22 L880,34 L840,20 L800,33 L760,24 L720,36 L680,21 L640,34 L600,25 L560,37 L520,22 L480,34 L440,20 L400,33 L360,24 L320,36 L280,21 L240,34 L200,25 L160,37 L120,22 L80,34 L40,20 L0,30 Z" fill="var(--paper)"/></svg>
@@ -420,14 +428,16 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"
     <div class="shead"><span class="lab">Why trust a first-time room</span></div>
     <h2>I would rather show you than <em>tell you</em></h2>
     <p class="lede">This is the first time I am running this as an open, public workshop. So instead of a wall of logos, here is the proof I can put in front of you today.</p>
-    <div class="pf-grid">
-      <div class="pf-card">
-        <div class="pf-k">A real tool, running right now</div>
-        <p>Not a slide about AI. An actual tool I built and put online. Open it in a new tab and it works this second: you answer a few questions and it shows a business owner where AI can save them time.</p>
-        <a href="https://audit.catalystworks.consulting/?utm_source=workshop_page&utm_medium=proof&utm_campaign=ic_workshop_0730" class="cta-ghost" target="_blank" rel="noopener">Open the tool I built
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </a>
+    <figure class="pf-demo">
+      <div class="pf-frame">
+        <div class="pf-bar"><i></i><i></i><i></i><span>audit.catalystworks.consulting</span></div>
+        <img src="/workshop/ic-workshop-registration-FINAL-assets/groundwork-demo-output.jpg" alt="A live AI readiness report from the tool Boubacar built: an overall score of 77, a strong-foundation rating, a readiness-dimensions chart, and the top three automation priorities for a law firm with hours saved per week" loading="lazy" width="1080" height="980">
       </div>
+      <figcaption>This is a real report from an AI tool I built and put online. A business owner answers a few questions and the tool scores where AI can save them time, then names the first jobs to automate. Not a slide about AI. A working tool.
+        <a class="try" href="https://audit.catalystworks.consulting/?utm_source=workshop_page&utm_medium=proof&utm_campaign=ic_workshop_0730" target="_blank" rel="noopener">Open it and try it yourself</a>
+      </figcaption>
+    </figure>
+    <div class="pf-grid">
       <div class="pf-card">
         <div class="pf-k">Owners already asked to license it</div>
         <p>At a startup event I demoed a tool I built. Before I left, three business owners asked if they could put it to work in their own business. I did not pitch them. They watched it run and asked. That is why I am teaching this in person.</p>
