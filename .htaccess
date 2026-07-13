@@ -13,6 +13,9 @@ RewriteRule ^signal/?$ signal.html [NC,L]
 # Serve the directory index explicitly (DirectorySlash Off would otherwise
 # send /workshop into the clean-URL rule and 404 on workshop.html).
 RewriteRule ^workshop/?$ workshop/index.html [NC,L]
+# A/B variant B of the workshop page (paid/ad traffic lands here via /w/ads).
+# Same directory-index pattern as /workshop so /workshop-b and /workshop-b/ both serve.
+RewriteRule ^workshop-b/?$ workshop-b/index.html [NC,L]
 
 # IC lead-magnet opt-in (free AI checklist) lives at /ai-checklist/.
 # Same directory-index pattern as /workshop. Captures cold Meta-ad traffic.
@@ -32,7 +35,7 @@ RewriteRule ^w/sjc/?$ /workshop/?utm_source=chamber&utm_medium=email&utm_campaig
 RewriteRule ^w/li/?$ /workshop/?utm_source=linkedin&utm_medium=post&utm_campaign=ic_workshop_0730 [R=301,L,QSA]
 RewriteRule ^w/x/?$ /workshop/?utm_source=x&utm_medium=post&utm_campaign=ic_workshop_0730 [R=301,L,QSA]
 RewriteRule ^w/nl/?$ /workshop/?utm_source=newsletter&utm_medium=email&utm_campaign=ic_workshop_0730 [R=301,L,QSA]
-RewriteRule ^w/ads/?$ /workshop/?utm_source=meta&utm_medium=paid&utm_campaign=ic_workshop_0730 [R=301,L,QSA]
+RewriteRule ^w/ads/?$ /workshop-b/?utm_source=meta&utm_medium=paid&utm_campaign=ic_workshop_0730 [R=301,L,QSA]
 RewriteRule ^w/fb/?$ /ai-checklist/?utm_source=facebook&utm_medium=paid&utm_campaign=ic_workshop_leadmagnet&utm_content=fb_ad [R=301,L,QSA]
 RewriteRule ^w/sbdc/?$ /workshop/?utm_source=sbdc&utm_medium=partner&utm_campaign=ic_workshop_0730 [R=301,L,QSA]
 RewriteRule ^w/beccy/?$ /workshop/?utm_source=beccy&utm_medium=email&utm_campaign=ic_workshop_0730 [R=301,L,QSA]
