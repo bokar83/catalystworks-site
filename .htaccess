@@ -24,6 +24,9 @@ RewriteRule ^ai-checklist/?$ ai-checklist/index.html [NC,L]
 RewriteRule ^seat/?$ seat/index.html [NC,L]
 # IC free ($0) RSVP demand-test page (pre-sell before venue lock) lives at /free-workshop-july16/.
 RewriteRule ^free-workshop-july16/?$ free-workshop-july16/index.html [NC,L]
+# IC July 30 comp-seat RSVP page (free invites Boubacar shares 1:1 only, NOT
+# linked from any public page; noindex on the page itself). Confirms a $0 seat.
+RewriteRule ^rsvp-0730/?$ rsvp-0730/index.html [NC,L]
 # Short link for the lead-magnet (Meta ads + any channel): /w/start -> opt-in page.
 # Campaign = stable magnet base; utm_content carries the current cohort for per-run segmentation.
 RewriteRule ^w/start/?$ /ai-checklist/?utm_source=meta&utm_medium=paid&utm_campaign=ic_workshop_leadmagnet&utm_content=cohort:2026_06_25 [R=301,L,QSA]
@@ -35,7 +38,13 @@ RewriteRule ^w/sjc/?$ /workshop/?utm_source=chamber&utm_medium=email&utm_campaig
 RewriteRule ^w/li/?$ /workshop/?utm_source=linkedin&utm_medium=post&utm_campaign=ic_workshop_0730 [R=301,L,QSA]
 RewriteRule ^w/x/?$ /workshop/?utm_source=x&utm_medium=post&utm_campaign=ic_workshop_0730 [R=301,L,QSA]
 RewriteRule ^w/nl/?$ /workshop/?utm_source=newsletter&utm_medium=email&utm_campaign=ic_workshop_0730 [R=301,L,QSA]
-RewriteRule ^w/ads/?$ /workshop-b/?utm_source=meta&utm_medium=paid&utm_campaign=ic_workshop_0730 [R=301,L,QSA]
+# SPLIT TEST (July 30 workshop) -- two paid Meta tracks under one campaign,
+# distinguished by utm_content so seats are attributable per track.
+# Track 1 DIRECT: cold ad -> $47 seat page (variant B). utm_content=track_direct.
+RewriteRule ^w/ads/?$ /workshop-b/?utm_source=meta&utm_medium=paid&utm_campaign=ic_workshop_0730&utm_content=track_direct [R=301,L,QSA]
+# Track 2 FREE-FIRST: cold ad -> free AI checklist (email capture + Meta Lead)
+# then its built-in CTA to the $47 July 30 seat. utm_content=track_free.
+RewriteRule ^w/free/?$ /ai-checklist/?utm_source=meta&utm_medium=paid&utm_campaign=ic_workshop_0730&utm_content=track_free [R=301,L,QSA]
 RewriteRule ^w/fb/?$ /ai-checklist/?utm_source=facebook&utm_medium=paid&utm_campaign=ic_workshop_leadmagnet&utm_content=fb_ad [R=301,L,QSA]
 RewriteRule ^w/sbdc/?$ /workshop/?utm_source=sbdc&utm_medium=partner&utm_campaign=ic_workshop_0730 [R=301,L,QSA]
 RewriteRule ^w/beccy/?$ /workshop/?utm_source=beccy&utm_medium=email&utm_campaign=ic_workshop_0730 [R=301,L,QSA]
@@ -45,6 +54,12 @@ RewriteRule ^w/ss/?$ /seat/?utm_source=silicon_slopes&utm_medium=event&utm_campa
 # Channel tagging for this one uses ?src=sbdc|svc|chamber appended by the sharer
 # (read client-side, see the page's script), not a per-channel 301 like above.
 RewriteRule ^w/july16/?$ /free-workshop-july16/?utm_source=ic_workshop_free_direct&utm_campaign=ic_workshop_free_0716 [R=301,L,QSA]
+
+# DISCRETE comp-seat link for July 30 -- Boubacar shares this 1:1 only (never
+# posted publicly, never linked from the paid page). Confirms a free seat with
+# NO Stripe charge; fires a CompleteRegistration pixel event so comps stay
+# separable from paid Purchase and free-track Lead events.
+RewriteRule ^w/vip/?$ /rsvp-0730/?utm_source=direct_invite&utm_medium=comp&utm_campaign=ic_workshop_0730&utm_content=track_comp [R=301,L,QSA]
 
 # Clean URLs: append .html for any path without an extension. Handles top-level
 # (/governance → /governance.html), nested (/lens/throughput → /lens/throughput.html,

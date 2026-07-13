@@ -501,9 +501,17 @@ var CONFIG = {
     if(!W||!W.stripeUrl)return '';
     var qs=new URLSearchParams(window.location.search||'');
     var src=(qs.get('utm_source')||'ai_checklist');
+    // Split-test attribution: when this checklist is the free-first ad track
+    // (utm_content=track_free via /w/free), tag the Stripe client_reference_id
+    // with _track_free so a seat bought after the free capture is attributable
+    // to the free track vs the direct track. Other entry points (/w/fb,
+    // /w/start) carry a different utm_content and are unaffected.
+    var utmC=(qs.get('utm_content')||'');
+    var cref=CONFIG.cohort||'';
+    if(/track_free/.test(utmC)){cref=(cref?cref+'_':'')+'track_free';}
     // pass-through attribution to Stripe (Stripe ignores unknown params; useful in success webhooks/links)
     var sep=W.stripeUrl.indexOf('?')>-1?'&':'?';
-    return W.stripeUrl+sep+'utm_source='+encodeURIComponent(src)+'&utm_medium='+medium+'&utm_campaign=ic_workshop_leadmagnet&client_reference_id='+encodeURIComponent(CONFIG.cohort||'');
+    return W.stripeUrl+sep+'utm_source='+encodeURIComponent(src)+'&utm_medium='+medium+'&utm_campaign=ic_workshop_leadmagnet&client_reference_id='+encodeURIComponent(cref);
   }
   if(W){
     var longDate=fmtDate(W.date,{weekday:'long',month:'long',day:'numeric'});  // "Thursday, July 30"
@@ -593,7 +601,14 @@ var CONFIG = {
         form_location:'ic_ai_checklist_optin',
         magnet:CONFIG.magnet
       };
-      function done(){optin.classList.add('done');var t=d.getElementById('thanks');if(t){try{t.focus();}catch(_){}}window.scrollTo({top:Math.max(0,optin.getBoundingClientRect().top+window.pageYOffset-90),behavior:'smooth'});}
+      function done(){
+        /* Meta Lead event: fires ONLY on a confirmed email capture. This is the
+           optimization event for the free-first paid track (/w/free, Leads
+           objective). Distinct from the $47 Purchase (on /seat/thank-you) and
+           the comp CompleteRegistration (/rsvp-0730), so all three tracks stay
+           separable in the pixel. */
+        try{if(window.fbq){fbq('track','Lead',{content_name:'ic_ai_checklist',content_category:'ic_workshop_0730'});}}catch(_){}
+        optin.classList.add('done');var t=d.getElementById('thanks');if(t){try{t.focus();}catch(_){}}window.scrollTo({top:Math.max(0,optin.getBoundingClientRect().top+window.pageYOffset-90),behavior:'smooth'});}
       function fail(){submitBtn.removeAttribute('aria-busy');submitBtn.disabled=false;optin.classList.add('hasformerr');}
       if(!LEAD_ENDPOINT){fail();return;}
       fetch(LEAD_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)})

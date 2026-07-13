@@ -696,8 +696,17 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"
     var qs=new URLSearchParams(window.location.search||'');
     var src=(qs.get('utm_source')||'workshop_page');
     var med=(qs.get('utm_medium')||medium||'cta');
+    /* Split-test attribution: when this page is reached via the paid DIRECT
+       track (/w/ads carries utm_content=track_direct), carry that into the
+       Stripe client_reference_id so a direct-track seat is distinguishable
+       from a free-track seat (which buys with cref ..._track_free from the
+       checklist page). The variant_b tag below stays put so the older A/B
+       variant read is preserved. */
+    var utmC=(qs.get('utm_content')||'');
+    var cref='ic_workshop_0730_b';
+    if(/^track_/.test(utmC)){cref=cref+'_'+utmC.replace(/[^a-z0-9_]/gi,'');}
     var sep=STRIPE_URL.indexOf('?')>-1?'&':'?';
-    return STRIPE_URL+sep+'utm_source='+encodeURIComponent(src)+'&utm_medium='+encodeURIComponent(med)+'&utm_campaign=ic_workshop_0730&utm_content=variant_b&client_reference_id='+encodeURIComponent('ic_workshop_0730_b');
+    return STRIPE_URL+sep+'utm_source='+encodeURIComponent(src)+'&utm_medium='+encodeURIComponent(med)+'&utm_campaign=ic_workshop_0730&utm_content=variant_b&client_reference_id='+encodeURIComponent(cref);
   }
   document.querySelectorAll('.cta-buy').forEach(function(b){
     b.setAttribute('href',buyHref(b.getAttribute('data-medium')||'cta'));
