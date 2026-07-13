@@ -257,11 +257,10 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"
    ============================================================ */
 var CONFIG = {
   magnet: 'ic_workshop_leadmagnet',     // stable, matches Page A
-  cohort: '2026_06_25',                 // segments THIS run
+  // cohort is DERIVED from nextWorkshop.date below (YYYY-MM-DD -> YYYY_MM_DD). Do NOT hand-edit a cohort literal here.
 
   nextWorkshop: {
-    dateShort: 'Thursday, July 30',
-    dateLong:  'Thursday, July 30',
+    date:      '2026-07-30',            // <== EDIT ONLY THIS per run (ISO YYYY-MM-DD). cohort + every shown date follow automatically.
     city:      'Sandy',
     price:     '$47',                                                  // StartFEST in-person rate (anchored vs $97 week-of); QR-only discount 6/23-6/25
     stripeUrl: 'https://buy.stripe.com/8x24gBeu3b7Y9bqfjngEg0a',       // $47 presale/StartFEST Stripe checkout (verified charges $47.00, active)
@@ -273,6 +272,11 @@ var CONFIG = {
 (function(){
   var d=document;
   var W=CONFIG.nextWorkshop;
+  /* Single source of truth = W.date (ISO YYYY-MM-DD). Cohort key + all shown dates derive from it. */
+  function isoParts(iso){var p=String(iso||'').split('-');return (p.length===3&&p[0]&&p[1]&&p[2])?{y:+p[0],m:+p[1],d:+p[2]}:null;}
+  function cohortKey(iso){var p=isoParts(iso);return p?(p.y+'_'+('0'+p.m).slice(-2)+'_'+('0'+p.d).slice(-2)):'';}
+  function fmtDate(iso,opts){var p=isoParts(iso);if(!p)return '';try{return new Date(p.y,p.m-1,p.d).toLocaleDateString('en-US',opts);}catch(e){return '';}}
+  CONFIG.cohort=(W&&W.date)?cohortKey(W.date):'';   // e.g. 2026-07-30 -> 2026_07_30
   function setCfg(key,val){d.querySelectorAll('[data-cfg="'+key+'"]').forEach(function(el){el.textContent=val;});}
   function buyHref(medium){
     if(!W||!W.stripeUrl)return '';
@@ -291,7 +295,8 @@ var CONFIG = {
   }
 
   if(W){
-    setCfg('dateShort',W.dateShort);setCfg('dateLong',W.dateLong);setCfg('city',W.city);
+    var human=fmtDate(W.date,{weekday:'long',month:'long',day:'numeric'});  // "Thursday, July 30"
+    setCfg('dateShort',human);setCfg('dateLong',human);setCfg('city',W.city);
     if(W.price)setCfg('price',W.price);
     d.querySelectorAll('.cta-buy').forEach(function(b){b.setAttribute('href',buyHref(b.getAttribute('data-medium')||'event'));});
     var cl=d.getElementById('checklistLink'); if(cl)cl.setAttribute('href',checklistHref());

@@ -466,13 +466,12 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"
 var CONFIG = {
   // Stable capture identity (NEVER bake a date into the magnet name):
   magnet: 'ic_workshop_leadmagnet',   // same for every run -> one clean segment of all checklist takers
-  cohort: '2026_06_25',               // segments THIS run's leads; set to the next run's date key, or '' if unknown
+  // cohort is DERIVED from nextWorkshop.date below (YYYY-MM-DD -> YYYY_MM_DD). Do NOT hand-edit a cohort literal here.
 
   // The next live workshop. Set to null when there is no scheduled date yet
   // (page auto-hides buy CTA + date language and runs email-capture only).
   nextWorkshop: {
-    dateShort: 'July 30',                       // short label used inline + on the CTA
-    dateLong:  'Thursday, July 30',             // long label used in sentences
+    date:      '2026-07-30',                     // <== EDIT ONLY THIS per run (ISO YYYY-MM-DD). cohort + every shown date follow automatically.
     city:      'Sandy',                         // city / venue area
     price:     '$47',                           // current ticket price (presale now, $97 week-of)
     stripeUrl: 'https://buy.stripe.com/8x24gBeu3b7Y9bqfjngEg0a',  // cohort Stripe checkout (presale)
@@ -487,6 +486,11 @@ var CONFIG = {
 
   /* ---- bind CONFIG into the page ---- */
   var W=CONFIG.nextWorkshop;
+  /* Single source of truth = W.date (ISO YYYY-MM-DD). Cohort key + all shown dates derive from it. */
+  function isoParts(iso){var p=String(iso||'').split('-');return (p.length===3&&p[0]&&p[1]&&p[2])?{y:+p[0],m:+p[1],d:+p[2]}:null;}
+  function cohortKey(iso){var p=isoParts(iso);return p?(p.y+'_'+('0'+p.m).slice(-2)+'_'+('0'+p.d).slice(-2)):'';}
+  function fmtDate(iso,opts){var p=isoParts(iso);if(!p)return '';try{return new Date(p.y,p.m-1,p.d).toLocaleDateString('en-US',opts);}catch(e){return '';}}
+  CONFIG.cohort=(W&&W.date)?cohortKey(W.date):'';   // e.g. 2026-07-30 -> 2026_07_30
   function setCfg(key,val){d.querySelectorAll('[data-cfg="'+key+'"]').forEach(function(el){el.textContent=val;});}
   function regHref(medium){
     var base=(W&&W.regUrl)?W.regUrl:'https://catalystworks.consulting/workshop/';
@@ -502,7 +506,9 @@ var CONFIG = {
     return W.stripeUrl+sep+'utm_source='+encodeURIComponent(src)+'&utm_medium='+medium+'&utm_campaign=ic_workshop_leadmagnet&client_reference_id='+encodeURIComponent(CONFIG.cohort||'');
   }
   if(W){
-    setCfg('dateShort',W.dateShort);setCfg('dateLong',W.dateLong);setCfg('city',W.city);
+    var longDate=fmtDate(W.date,{weekday:'long',month:'long',day:'numeric'});  // "Thursday, July 30"
+    var shortDate=fmtDate(W.date,{month:'long',day:'numeric'});                // "July 30"
+    setCfg('dateShort',shortDate);setCfg('dateLong',longDate);setCfg('city',W.city);
     if(W.price)setCfg('price',W.price);
     /* wire every buy CTA to the cohort Stripe link */
     d.querySelectorAll('.cta-buy').forEach(function(b){b.setAttribute('href',buyHref(b.getAttribute('data-medium')||'page'));});
