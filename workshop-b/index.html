@@ -729,6 +729,13 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"
   }
   document.querySelectorAll('.cta-buy').forEach(function(b){
     b.setAttribute('href',buyHref(b.getAttribute('data-medium')||'cta'));
+    /* Mid-funnel signal: fire InitiateCheckout on CTA click so Meta sees intent
+       (the seat is a direct Stripe handoff, so this is the only pre-Stripe event
+       we can emit). Non-blocking, never preventDefault; guarded so a missing
+       pixel can never break the buy link. */
+    b.addEventListener('click',function(){
+      try{ if(window.fbq) fbq('track','InitiateCheckout',{value:47.00,currency:'USD',content_name:'IC Workshop 2026-07-30 seat'}); }catch(e){}
+    });
   });
 
   /* cursor */
