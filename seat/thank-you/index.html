@@ -143,14 +143,18 @@ fbq('track', 'PageView');
   var fromStripe = /(^|\.)stripe\.com$/.test(refHost);
   if (!sid && !fromStripe) return; /* direct visit or reload: no Purchase */
   var KEY = 'cw_seat47_purchase_eid';
+  /* eventID = Stripe Checkout Session id so the browser Purchase de-dupes
+     against the server-side CAPI Purchase (which keys on the same session id).
+     No random fallback: a random id would never match the server event and
+     would double-count every sale. Requires success_url to carry
+     ?session_id={CHECKOUT_SESSION_ID}. */
   var eid = sid || '';
   try {
     var prev = localStorage.getItem(KEY);
     if (prev && (prev === eid || !sid)) return; /* this purchase already tracked in this browser */
   } catch(e){}
-  if (!eid) eid = 'ty47-' + Date.now() + '-' + Math.random().toString(36).slice(2, 10);
-  try { localStorage.setItem(KEY, eid); } catch(e){}
-  fbq('track', 'Purchase', {value: 47.00, currency: 'USD'}, {eventID: eid});
+  try { localStorage.setItem(KEY, eid || ('nosid-' + Date.now())); } catch(e){}
+  fbq('track', 'Purchase', {value: 47.00, currency: 'USD'}, eid ? {eventID: eid} : undefined);
   if (sid) { try { history.replaceState(null, '', window.location.pathname); } catch(e){} }
 })();
 </script>

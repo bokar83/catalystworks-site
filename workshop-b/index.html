@@ -726,10 +726,19 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"
     b.setAttribute('href',buyHref(b.getAttribute('data-medium')||'cta'));
     /* Mid-funnel signal: fire InitiateCheckout on CTA click so Meta sees intent
        (the seat is a direct Stripe handoff, so this is the only pre-Stripe event
-       we can emit). Non-blocking, never preventDefault; guarded so a missing
-       pixel can never break the buy link. */
-    b.addEventListener('click',function(){
-      try{ if(window.fbq) fbq('track','InitiateCheckout',{value:47.00,currency:'USD',content_name:'IC Workshop 2026-07-30 seat'}); }catch(e){}
+       we can emit). Mobile-safe: some mobile browsers tear the page down on
+       navigation before an async pixel beacon flushes, silently dropping the
+       event. So we preventDefault, fire IC with a unique eventID, then navigate
+       after a short delay so the beacon lands. New-tab (modifier/aux click) and
+       a missing pixel both fall through to the native link and never break it. */
+    b.addEventListener('click',function(ev){
+      if(ev.metaKey||ev.ctrlKey||ev.shiftKey||ev.altKey||ev.button===1) return;
+      if(!window.fbq) return; /* no pixel: let the native Stripe link proceed */
+      var href=b.getAttribute('href');
+      ev.preventDefault();
+      var eid='ic-'+Date.now()+'-'+Math.random().toString(36).slice(2,10);
+      try{ fbq('track','InitiateCheckout',{value:47.00,currency:'USD',content_name:'IC Workshop 2026-07-30 seat'},{eventID:eid}); }catch(e){}
+      setTimeout(function(){ window.location.href=href; },200);
     });
   });
 
