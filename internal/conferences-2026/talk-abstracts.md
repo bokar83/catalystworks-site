@@ -31,7 +31,7 @@ Solo operators, indie hackers, small agency owners, and tinkerers who want to se
 
 **About me:**
 
-I am Boubacar. I build AI workflow stacks for solo consultants and small business operators. South Jordan, Utah. Catalyst Works founder. First time speaking at AI Tinkerers SLC.
+I am Boubacar. I build AI workflow stacks for solo consultants and small business operators. Salt Lake City, Utah. Catalyst Works founder. First time speaking at AI Tinkerers SLC.
 
 ---
 
@@ -62,13 +62,13 @@ Bootstrapped SaaS founders, agency owners, and solo consultants who have already
 
 **About me:**
 
-I am Boubacar. I left a 14-year career at GE and RBL to build Catalyst Works, an AI consultancy that ships motion not slide decks. Based in South Jordan, Utah. Originally from Guinea. Father of four. Building in public because the system underneath the work is meant to be transferable.
+I am Boubacar. I left a 14-year career at GE and RBL to build Catalyst Works, an AI consultancy that ships motion not slide decks. Based in Salt Lake City, Utah. Originally from Guinea. Father of four. Building in public because the system underneath the work is meant to be transferable.
 
 ---
 
 ## 3. AfroTech Conference 2026 (Houston, Nov 2-6)
 
-**Title:** First-Gen Operator: Building an AI Agency From South Jordan Utah With Guinean Roots
+**Title:** First-Gen Operator: Building an AI Agency From Salt Lake City Utah With Guinean Roots
 
 **Format:** 30-minute story-driven keynote with technical artifacts. Single-track or breakout, both work.
 
@@ -93,7 +93,7 @@ First-generation operators, Black and African founders in tech, immigrants navig
 
 **About me:**
 
-I am Boubacar. I build AI workflow stacks for solo consultants and small business operators. Founder of Catalyst Works. South Jordan, Utah by way of Conakry, Guinea. Father of four. First-generation, first-time founder, first time at AfroTech.
+I am Boubacar. I build AI workflow stacks for solo consultants and small business operators. Founder of Catalyst Works. Salt Lake City, Utah by way of Conakry, Guinea. Father of four. First-generation, first-time founder, first time at AfroTech.
 
 ---
 

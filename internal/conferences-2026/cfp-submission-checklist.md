@@ -61,7 +61,7 @@ Once pre-flight is done, the 3 CFP submissions below are quick.
 | # | Step | Time |
 |---|---|---|
 | 1 | Open https://microconf.com/pitches and click "Submit an application" | 2 min |
-| 2 | Fill personal details (name = Boubacar Barry, location = South Jordan, UT) | 3 min |
+| 2 | Fill personal details (name = Boubacar Barry, location = Salt Lake City, UT) | 3 min |
 | 3 | Paste talk title + abstract from `talk-abstracts.md` Section 2 | 5 min |
 | 4 | Paste 250-word bio from `bios.md` | 3 min |
 | 5 | Upload headshot from Drive (or paste shareable link if upload fails) | 5 min |
@@ -84,7 +84,7 @@ Once pre-flight is done, the 3 CFP submissions below are quick.
 
 **Format:** Multi-track. Keynote, breakout (30 min), or workshop (60 to 90 min). 25,000+ attendees, largest Black tech conference in the US.
 
-**Assigned abstract:** "First-Gen Operator: Building an AI Agency From South Jordan Utah With Guinean Roots"
+**Assigned abstract:** "First-Gen Operator: Building an AI Agency From Salt Lake City Utah With Guinean Roots"
 
 **Bio to paste:** 250-word variant from `bios.md`.
 

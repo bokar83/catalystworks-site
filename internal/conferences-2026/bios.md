@@ -21,7 +21,7 @@ Boubacar builds AI workflow stacks for solo operators.
 Use for: panel intros, podcast guest cards, MC read-aloud copy.
 
 ```
-I am Boubacar. I build AI workflow stacks for solo consultants and small business operators. Based in South Jordan, Utah. Guinean by way of two decades in industry, now running Catalyst Works.
+I am Boubacar. I build AI workflow stacks for solo consultants and small business operators. Based in Salt Lake City, Utah. Guinean by way of two decades in industry, now running Catalyst Works.
 ```
 
 (195 chars)
@@ -37,7 +37,7 @@ I am Boubacar. I build AI workflow stacks for solo consultants and small busines
 
 After 14 years in industry roles at GE and RBL Group, I left to build Catalyst Works, an AI consultancy that ships motion, not slide decks. The system underneath the work is open IP that I document and teach as I build it.
 
-Originally from Guinea. Currently in South Jordan, Utah. Father of four. Spending the next 18 months building before the next chapter.
+Originally from Guinea. Currently in Salt Lake City, Utah. Father of four. Spending the next 18 months building before the next chapter.
 ```
 
 (523 chars / ~95 words)
@@ -57,7 +57,7 @@ The invisible side is the system underneath. I run a self-hosted multi-agent sta
 
 Before this I spent 14 years at GE and at RBL Group, doing technology and operations work in roles where I was always one layer removed from owning the outcome. In 2026 I left to find out what I could ship when there was no fallback. No active job. 18 months of runway. One year in.
 
-Originally from Conakry, Guinea. Currently based in South Jordan, Utah. Father of four. First-generation operator building the asset stack I wish I had inherited.
+Originally from Conakry, Guinea. Currently based in Salt Lake City, Utah. Father of four. First-generation operator building the asset stack I wish I had inherited.
 
 I speak about the operator stack, async agent loops, and what it actually takes to run a multi-brand business solo with AI as the leverage layer.
 ```
@@ -73,5 +73,5 @@ I speak about the operator stack, async agent loops, and what it actually takes 
 - No em-dashes. Hyphens, commas, parens, colons only.
 - No "10X", "transformed", "revolutionized", "game-changing", "best-in-class".
 - No credential stacking ("Ex-GE | Ex-RBL | Founder | AI Strategist | Speaker"). One sentence per role, max.
-- Truth-only. Every claim above traces to lived fact (14 years industry, 5 brands, self-hosted VPS, Guinea origin, South Jordan residence, 4 kids).
+- Truth-only. Every claim above traces to lived fact (14 years industry, 5 brands, self-hosted VPS, Guinea origin, Salt Lake City base, 4 kids).
 - No fabricated speaking history. These bios assume zero prior conference appearances. Once a conference accepts and the talk happens, add a single line: "Previously spoke at [conference] on [topic]."
