@@ -1,0 +1,11 @@
+{
+  "$comment": "PREVIEW-ONLY config. Blankets the throwaway vercel.app preview with X-Robots-Tag: noindex so it can never duplicate-index the real catalystworks.consulting pages. Hostinger (the production host) ignores vercel.json entirely, so the live /workshop keeps its index,follow meta. Safe to leave in the repo; only Vercel reads it.",
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Robots-Tag", "value": "noindex, nofollow" }
+      ]
+    }
+  ]
+}
