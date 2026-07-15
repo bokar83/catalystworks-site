@@ -22,6 +22,9 @@ RewriteRule ^workshop-b/?$ workshop-b/index.html [NC,L]
 RewriteRule ^ai-checklist/?$ ai-checklist/index.html [NC,L]
 # IC simple one-screen QR conversion page (StartFEST + /w/ss) lives at /seat/.
 RewriteRule ^seat/?$ seat/index.html [NC,L]
+# Free ($0) Stripe checkout success page (after_completion redirect target for the
+# $0 free-seat payment link). Confirms the free July 30 reservation.
+RewriteRule ^free-thank-you/?$ free-thank-you/index.html [NC,L]
 # IC free ($0) RSVP demand-test page (pre-sell before venue lock) lives at /free-workshop-july16/.
 RewriteRule ^free-workshop-july16/?$ free-workshop-july16/index.html [NC,L]
 # IC July 30 comp-seat RSVP page (free invites Boubacar shares 1:1 only, NOT
