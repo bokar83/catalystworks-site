@@ -203,9 +203,19 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"/></
     var sep=STRIPE_URL.indexOf('?')>-1?'&':'?';
     return STRIPE_URL+sep+'utm_source='+encodeURIComponent(src)+'&utm_medium='+encodeURIComponent(medium)+'&utm_campaign=ic_workshop_0730&client_reference_id='+encodeURIComponent(cref);
   }
+  /* Reliable InitiateCheckout: fire the pixel BEFORE navigating, then redirect
+     after a short beat so the beacon lands on mobile/iOS (a bare fbq on an <a>
+     that navigates away drops the event). preventDefault + delayed go. */
   document.querySelectorAll('.cta-buy').forEach(function(b){
     b.setAttribute('href',buyHref(b.getAttribute('data-medium')||'page'));
-    b.addEventListener('click',function(){try{if(window.fbq)fbq('track','InitiateCheckout',{content_name:'ic_workshop_0730',value:47,currency:'USD'});}catch(e){}});
+    b.addEventListener('click',function(ev){
+      var dest=this.getAttribute('href'); if(!dest)return;
+      ev.preventDefault();
+      var eid='ic-'+Date.now()+'-'+Math.random().toString(36).slice(2,8);
+      try{if(window.fbq)fbq('track','InitiateCheckout',{content_name:'ic_workshop_0730',value:47,currency:'USD'},{eventID:eid});}catch(e){}
+      var sent=false,go=function(){if(sent)return;sent=true;window.location.href=dest;};
+      setTimeout(go,220);
+    });
   });
 })();
 </script>

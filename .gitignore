@@ -2,3 +2,4 @@
 worker-deploy/.wrangler/
 worker-deploy/node_modules/
 worker-deploy/.dev.vars
+.vercel
