@@ -198,10 +198,12 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"/></
   function buyHref(medium){
     var src=(qs.get('utm_source')||'workshop');
     var utmC=(qs.get('utm_content')||'');
-    var cref=COHORT;
-    if(/track_free/.test(utmC)){cref=cref+'_track_free';}
+    /* Unified seat count: ONE flat client_reference_id across free + paid so
+       cref === 'ic_workshop_0730' counts every seat. Cohort rides in utm_content
+       and the free-track tag in utm_term, so attribution survives the flat cref. */
+    var track=/track_free/.test(utmC)?'track_free':'';
     var sep=STRIPE_URL.indexOf('?')>-1?'&':'?';
-    return STRIPE_URL+sep+'utm_source='+encodeURIComponent(src)+'&utm_medium='+encodeURIComponent(medium)+'&utm_campaign=ic_workshop_0730&client_reference_id='+encodeURIComponent(cref);
+    return STRIPE_URL+sep+'utm_source='+encodeURIComponent(src)+'&utm_medium='+encodeURIComponent(medium)+'&utm_campaign=ic_workshop_0730&utm_content='+encodeURIComponent(COHORT)+(track?'&utm_term='+track:'')+'&client_reference_id=ic_workshop_0730';
   }
   /* Reliable InitiateCheckout: fire the pixel BEFORE navigating, then redirect
      after a short beat so the beacon lands on mobile/iOS (a bare fbq on an <a>

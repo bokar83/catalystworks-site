@@ -165,7 +165,7 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"/></
 <script>
 /* Free SEAT flow: the CTA goes to a $0 Stripe checkout so Stripe captures the
    email and the reservation lands in the SAME Stripe records as the $47 seats
-   (both carry client_reference_id=2026_07_30 -> one filterable count). We fire
+   (both carry client_reference_id=ic_workshop_0730 -> one filterable count). We fire
    the Meta Lead event on click BEFORE navigating (preventDefault + eventID +
    short beat + redirect) so the beacon lands on mobile. Purchase is reserved
    for real $47 sales; the free reservation reports Lead here + CompleteRegistration
@@ -177,9 +177,9 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"/></
   function freeHref(medium){
     var src=(qs.get('utm_source')||'ai_checklist');
     var sep=FREE_STRIPE.indexOf('?')>-1?'&':'?';
-    return FREE_STRIPE+sep+'client_reference_id='+encodeURIComponent(COHORT)
+    return FREE_STRIPE+sep+'client_reference_id=ic_workshop_0730'
       +'&utm_source='+encodeURIComponent(src)+'&utm_medium='+encodeURIComponent(medium)
-      +'&utm_campaign=ic_workshop_0730_free';
+      +'&utm_campaign=ic_workshop_0730_free&utm_content='+encodeURIComponent(COHORT)+'&utm_term=track_free';
   }
   document.querySelectorAll('.cta-free').forEach(function(b){
     b.setAttribute('href',freeHref(b.getAttribute('data-medium')||'page'));
