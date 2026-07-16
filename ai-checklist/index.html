@@ -45,6 +45,19 @@ a{color:inherit}
 .pill{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.72rem;
   text-transform:uppercase;letter-spacing:.08em;color:var(--free-deep);font-weight:600;white-space:nowrap}
 .pip{width:7px;height:7px;border-radius:50%;background:var(--free);box-shadow:0 0 0 4px rgba(27,122,75,.18)}
+.mast-right{display:flex;align-items:center;gap:12px}
+.navtoggle{display:none;background:none;border:0;cursor:pointer;padding:8px;margin:-8px -8px -8px 0;color:var(--ink)}
+.navtoggle svg{display:block;width:26px;height:26px}
+.navmenu{display:none}
+@media(max-width:640px){
+  .navtoggle{display:inline-flex}
+  .mast .pill{display:none}
+  .navmenu{display:block;background:var(--card);border:1px solid var(--line);border-radius:12px;margin:10px 0 0;padding:6px;overflow:hidden}
+  .navmenu[hidden]{display:none}
+  .navmenu a{display:block;padding:13px 14px;font-weight:600;text-decoration:none;color:var(--ink);border-radius:8px}
+  .navmenu a+a{border-top:1px solid var(--line)}
+  .navmenu a.nav-cta{color:var(--free-deep)}
+}
 
 .hero{padding:30px 0 8px}
 .freebadge{display:inline-flex;align-items:stretch;border-radius:12px;overflow:hidden;
@@ -125,7 +138,19 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"/></
   <div class="wrap">
     <a class="mk" href="https://catalystworks.consulting/" aria-label="Catalyst Works home">
       <img src="assets/cw-logo.png" alt="" class="mk-logo" onerror="this.style.display='none'">Catalyst <i>Works</i></a>
-    <span class="pill"><span class="pip" aria-hidden="true"></span>Limited free seats &middot; July 30</span>
+    <div class="mast-right">
+      <span class="pill"><span class="pip" aria-hidden="true"></span>Limited free seats &middot; July 30</span>
+      <button class="navtoggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navmenu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="wrap">
+    <nav class="navmenu" id="navmenu" aria-label="Page menu" hidden>
+      <a href="#reserve" class="nav-cta">Claim my free seat</a>
+      <a href="#what">What you'll build</a>
+      <a href="mailto:boubacar@catalystworks.consulting">Questions</a>
+    </nav>
   </div>
 </header>
 
@@ -137,7 +162,7 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"/></
     </div>
     <div class="eyebrow">In-person workshop &middot; Sandy, Utah</div>
     <h1>A limited number of free seats to the <em>July 30</em> workshop.</h1>
-    <p class="sub">A 90-minute, hands-on evening in Sandy where you build AI tools you actually use, on your own laptop. Only a limited number of free seats, and no card needed. When they are gone, they are gone.</p>
+    <p class="sub">A 90-minute, hands-on evening in Sandy where you set up AI tools you actually use, on your own laptop. No card needed, and there are only so many free seats. When they are gone, they are gone.</p>
     <div class="cta-row">
       <form class="cta-form" id="reserve" data-medium="hero" novalidate>
         <input type="email" class="cta-email" name="email" required autocomplete="email" inputmode="email" placeholder="you@yourbusiness.com" aria-label="Your email">
@@ -158,9 +183,10 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"/></
   </div>
 </section>
 
-<section class="detail">
+<section class="detail" id="what">
   <div class="wrap">
-    <p>You keep hearing AI matters. Nobody has shown you where to start, what to skip, or where it quietly costs you later. Come spend one evening in the room with me and build something you actually use. <b>Kept to a small group on purpose.</b></p>
+    <p>You keep hearing AI matters. Nobody has shown you where to start, what to skip, or where it costs you later. Spend one evening in the room with me and set up tools you actually use.</p>
+    <p>I run a business on these tools every day, here in Utah. This is my real setup, taught in person. <b>Kept to a small group on purpose.</b></p>
   </div>
 </section>
 </main>
@@ -223,6 +249,16 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"/></
       setTimeout(go,220);
     });
   });
+  /* Mobile menu: in-page actions only, no exit links, so the nav never leaks a
+     cold click off the page. */
+  var navT=document.querySelector('.navtoggle'),navM=document.getElementById('navmenu');
+  if(navT&&navM){
+    navT.addEventListener('click',function(){
+      if(navM.hasAttribute('hidden')){navM.removeAttribute('hidden');navT.setAttribute('aria-expanded','true');}
+      else{navM.setAttribute('hidden','');navT.setAttribute('aria-expanded','false');}
+    });
+    navM.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){navM.setAttribute('hidden','');navT.setAttribute('aria-expanded','false');});});
+  }
 })();
 </script>
 </body>
