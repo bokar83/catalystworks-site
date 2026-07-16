@@ -69,6 +69,13 @@ h1 em{font-style:normal;color:var(--free-deep)}
 .cta:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
 .cta svg{width:19px;height:19px}
 .cta-note{font-family:var(--mono);font-size:.8rem;color:var(--ink-faint);margin-top:12px}
+.cta-form{display:flex;flex-wrap:wrap;gap:10px;align-items:stretch;max-width:460px}
+.cta-email{flex:1 1 210px;min-width:0;font-family:var(--body);font-size:1rem;color:var(--ink);
+  background:var(--card);border:1.5px solid var(--line-2);border-radius:12px;padding:15px 16px}
+.cta-email::placeholder{color:var(--ink-faint)}
+.cta-email:focus{outline:none;border-color:var(--free);box-shadow:0 0 0 3px rgba(27,122,75,.18)}
+.cta-email[aria-invalid="true"]{border-color:var(--amber-deep);box-shadow:0 0 0 3px rgba(194,74,24,.2)}
+.cta-form .cta{flex:0 0 auto;border:none;cursor:pointer;font-family:var(--body)}
 
 .ticket{margin:28px 0 4px;background:var(--card);border:1px solid var(--line);border-radius:16px;
   display:grid;grid-template-columns:repeat(4,1fr);overflow:hidden}
@@ -132,11 +139,14 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"/></
     <h1>A limited number of free seats to the <em>July 30</em> workshop.</h1>
     <p class="sub">A 90-minute, hands-on evening in Sandy where you build AI tools you actually use, on your own laptop. Only a limited number of free seats, and no card needed. When they are gone, they are gone.</p>
     <div class="cta-row">
-      <a href="https://buy.stripe.com/dRm4gB4Tt8ZQ1IY2wBgEg0k" class="cta cta-free" data-medium="hero">
-        Claim my free seat <span class="price">$0</span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-      </a>
-      <p class="cta-note">One step, just your email &middot; your confirmation lands in your inbox</p>
+      <form class="cta-form" id="reserve" data-medium="hero" novalidate>
+        <input type="email" class="cta-email" name="email" required autocomplete="email" inputmode="email" placeholder="you@yourbusiness.com" aria-label="Your email">
+        <button type="submit" class="cta cta-free" data-medium="hero">
+          Claim my free seat <span class="price">$0</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </button>
+      </form>
+      <p class="cta-note">One step, just your email. Your confirmation lands in your inbox.</p>
     </div>
 
     <div class="ticket" role="group" aria-label="Workshop details">
@@ -172,8 +182,10 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"/></
    on the /free-thank-you page. */
 (function(){
   var FREE_STRIPE='https://buy.stripe.com/dRm4gB4Tt8ZQ1IY2wBgEg0k';
+  var CAPTURE_URL='https://agentshq.boubacarbarry.com/api/orc/beehiiv-subscribe';
   var COHORT='2026_07_30';
   var qs=new URLSearchParams(window.location.search||'');
+  var emailRe=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   function freeHref(medium){
     var src=(qs.get('utm_source')||'ai_checklist');
     var sep=FREE_STRIPE.indexOf('?')>-1?'&':'?';
@@ -181,11 +193,29 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"/></
       +'&utm_source='+encodeURIComponent(src)+'&utm_medium='+encodeURIComponent(medium)
       +'&utm_campaign=ic_workshop_0730_free&utm_content='+encodeURIComponent(COHORT)+'&utm_term=track_free';
   }
-  document.querySelectorAll('.cta-free').forEach(function(b){
-    b.setAttribute('href',freeHref(b.getAttribute('data-medium')||'page'));
-    b.addEventListener('click',function(ev){
-      var dest=this.getAttribute('href'); if(!dest)return;
+  /* Fire-and-forget lead capture. Even though the $0 Stripe checkout collects an
+     email, we capture it on our side FIRST so a free-seat abandon (never finishes
+     Stripe) is still a recoverable lead. keepalive lets the POST outlive the
+     navigation; any error is swallowed so it never blocks the redirect. */
+  function capture(email,medium){
+    try{
+      fetch(CAPTURE_URL,{method:'POST',keepalive:true,headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({email:email,utm_source:(qs.get('utm_source')||'ai_checklist'),
+          form_location:'ic_workshop_free_'+medium,magnet:'ic_workshop_free_0730'})}).catch(function(){});
+    }catch(e){}
+  }
+  /* One click: validate email -> background capture -> fire Lead -> redirect to
+     the $0 Stripe checkout after a short beat so the pixel beacon lands. */
+  document.querySelectorAll('.cta-form').forEach(function(f){
+    var medium=f.getAttribute('data-medium')||'page';
+    var input=f.querySelector('.cta-email');
+    f.addEventListener('submit',function(ev){
       ev.preventDefault();
+      var email=(input.value||'').trim();
+      if(!emailRe.test(email)){input.focus();input.setAttribute('aria-invalid','true');return;}
+      input.removeAttribute('aria-invalid');
+      capture(email,medium);
+      var dest=freeHref(medium);
       var eid='lead-'+Date.now()+'-'+Math.random().toString(36).slice(2,8);
       try{sessionStorage.setItem('cw_free_lead_eid',eid);}catch(e){}
       try{if(window.fbq)fbq('track','Lead',{content_name:'ic_free_seat_0730',content_category:'ic_workshop_0730'},{eventID:eid});}catch(e){}

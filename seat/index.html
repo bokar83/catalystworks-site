@@ -123,6 +123,14 @@ h1 em::after{content:"";position:absolute;left:-2%;right:-2%;bottom:-.05em;heigh
 .cta svg{width:18px;height:18px}
 .cta .price{font-family:var(--font-mono);font-weight:600;margin-left:1px;opacity:.95}
 
+/* email-gate field: capture the email before Stripe */
+.cta-email{width:100%;font-family:var(--font-body);font-size:1rem;color:var(--ink);
+  background:var(--paper);border:1.5px solid rgba(7,26,46,.28);border-radius:3px;
+  padding:15px 16px;margin-bottom:11px}
+.cta-email::placeholder{color:rgba(7,26,46,.5)}
+.cta-email:focus{outline:none;border-color:var(--action);box-shadow:0 0 0 3px rgba(0,183,194,.25)}
+.cta-email[aria-invalid="true"]{border-color:#C0392B;box-shadow:0 0 0 3px rgba(192,57,43,.22)}
+
 /* whisper: intimate aside under the CTA, removes the "not ready yet" objection at the point of action */
 .whisper{text-align:center;margin-top:13px;font-family:var(--font-display);font-style:italic;
   font-size:.92rem;line-height:1.4;color:rgba(244,238,228,.82);max-width:36ch;margin-left:auto;margin-right:auto}
@@ -230,8 +238,9 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"
 
   <div class="act">
     <p class="rate-note"><span class="tag">Days of 47</span> <s>$97</s> in person only</p>
+    <input type="email" class="cta-email" id="seatEmail" name="email" required autocomplete="email" inputmode="email" placeholder="you@yourbusiness.com" aria-label="Your email">
     <a class="cta cta-buy" id="buyCta" data-medium="qr_seat" href="#">
-      <span class="cta-label">Grab your seat <span class="price" data-cfg="price">$47</span></span>
+      <span class="cta-label">Reserve my seat <span class="price" data-cfg="price">$47</span></span>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
     </a>
     <p class="whisper">If you keep waiting to feel ready, you are choosing to watch other owners move first. Come spend 90 minutes with me instead.</p>
@@ -300,10 +309,39 @@ var CONFIG = {
     var human=fmtDate(W.date,{weekday:'long',month:'long',day:'numeric'});  // "Thursday, July 30"
     setCfg('dateShort',human);setCfg('dateLong',human);setCfg('city',W.city);
     if(W.price)setCfg('price',W.price);
-    d.querySelectorAll('.cta-buy').forEach(function(b){b.setAttribute('href',buyHref(b.getAttribute('data-medium')||'event'));});
+    /* Email-gate checkout: capture the email on our side (background, non-blocking)
+       BEFORE Stripe, so an abandoned checkout is still a recoverable lead. The
+       redirect to Stripe is never blocked by the capture. Attribution preserved. */
+    var CAPTURE_URL='https://agentshq.boubacarbarry.com/api/orc/beehiiv-subscribe';
+    var emailRe=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    var emailEl=d.getElementById('seatEmail');
+    var pageQs=new URLSearchParams(window.location.search||'');
+    function capture(email,medium){
+      try{
+        fetch(CAPTURE_URL,{method:'POST',keepalive:true,headers:{'Content-Type':'application/json'},
+          body:JSON.stringify({email:email,utm_source:(pageQs.get('utm_source')||'silicon_slopes'),
+            form_location:'ic_workshop_paid_seat_'+medium,magnet:'ic_workshop_0730'})}).catch(function(){});
+      }catch(e){}
+    }
+    d.querySelectorAll('.cta-buy').forEach(function(b){
+      b.setAttribute('href',buyHref(b.getAttribute('data-medium')||'event'));
+      b.addEventListener('click',function(ev){
+        ev.preventDefault();
+        var dest=b.getAttribute('href'); if(!dest||dest==='#')return;
+        var email=emailEl?(emailEl.value||'').trim():'';
+        if(!emailRe.test(email)){if(emailEl){emailEl.focus();emailEl.setAttribute('aria-invalid','true');}return;}
+        if(emailEl)emailEl.removeAttribute('aria-invalid');
+        capture(email,b.getAttribute('data-medium')||'seat');
+        var eid='ic-'+Date.now()+'-'+Math.random().toString(36).slice(2,8);
+        try{if(window.fbq)fbq('track','InitiateCheckout',{content_name:'ic_workshop_0730',value:47,currency:'USD'},{eventID:eid});}catch(e){}
+        var sent=false,go=function(){if(sent)return;sent=true;window.location.href=dest;};
+        setTimeout(go,220);
+      });
+    });
     var cl=d.getElementById('checklistLink'); if(cl)cl.setAttribute('href',checklistHref());
   } else {
     /* no date scheduled: hide the buy path, make the free checklist the primary action */
+    var se=d.getElementById('seatEmail'); if(se)se.style.display='none';
     var h1=d.querySelector('h1'); if(h1)h1.innerHTML='Put AI to work <em>without</em> getting burned.';
     var lead=d.querySelector('.lead'); if(lead)lead.textContent='The short checklist I run before I let AI near anything that matters. One page, free, and I will tell you when the next live session opens.';
     var ess=d.querySelector('.essentials'); if(ess)ess.style.display='none';

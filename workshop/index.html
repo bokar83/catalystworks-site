@@ -69,6 +69,14 @@ h1.poster em{font-style:normal;color:var(--amber);display:block}
 .cta:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
 .cta svg{width:19px;height:19px}
 .cta-note{font-family:var(--mono);font-size:.8rem;color:var(--ink-faint);margin-top:12px}
+.cta-form{display:flex;flex-wrap:wrap;gap:10px;align-items:stretch;max-width:460px}
+.cta-email{flex:1 1 210px;min-width:0;font-family:var(--body);font-size:1rem;color:var(--ink);
+  background:var(--card);border:1.5px solid var(--line-2);border-radius:12px;padding:15px 16px}
+.cta-email::placeholder{color:var(--ink-faint)}
+.cta-email:focus{outline:none;border-color:var(--amber);box-shadow:0 0 0 3px rgba(232,99,42,.18)}
+.cta-email[aria-invalid="true"]{border-color:var(--amber-deep);box-shadow:0 0 0 3px rgba(194,74,24,.2)}
+.cta-form .cta{flex:0 0 auto;border:none;cursor:pointer;font-family:var(--body)}
+.close .cta-form{margin-left:auto;margin-right:auto}
 
 .ticket{margin:30px 0 4px;background:var(--card);border:1px solid var(--line);border-radius:16px;
   display:grid;grid-template-columns:repeat(4,1fr);overflow:hidden}
@@ -142,11 +150,14 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"/></
     <h1 class="poster">AI Without<em>Getting Burned</em></h1>
     <p class="lead">A 90-minute, hands-on workshop in Sandy. You leave with 3 AI tools set up on <b>your own laptop</b>, and they are yours to keep.</p>
     <div class="cta-row">
-      <a href="https://buy.stripe.com/8x24gBeu3b7Y9bqfjngEg0a" class="cta cta-buy" data-medium="hero">
-        Grab my seat <span class="price">$47</span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-      </a>
-      <p class="cta-note">Secure checkout &middot; you get your seat confirmation by email</p>
+      <form class="cta-form" id="reserve" data-medium="hero" novalidate>
+        <input type="email" class="cta-email" name="email" required autocomplete="email" inputmode="email" placeholder="you@yourbusiness.com" aria-label="Your email">
+        <button type="submit" class="cta cta-buy" data-medium="hero">
+          Reserve my seat <span class="price">$47</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </button>
+      </form>
+      <p class="cta-note">Enter your email, then straight to secure checkout. Your seat confirmation lands in your inbox.</p>
     </div>
 
     <div class="ticket" role="group" aria-label="Workshop details">
@@ -169,10 +180,13 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"/></
   <div class="wrap">
     <h2>Save your seat for <em>July 30</em></h2>
     <div class="sub">Thu July 30 &middot; 7:00 to 8:30 pm &middot; Sandy, UT</div>
-    <a href="https://buy.stripe.com/8x24gBeu3b7Y9bqfjngEg0a" class="cta cta-buy" data-medium="close">
-      Grab my seat <span class="price">$47</span>
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-    </a>
+    <form class="cta-form" data-medium="close" novalidate>
+      <input type="email" class="cta-email" name="email" required autocomplete="email" inputmode="email" placeholder="you@yourbusiness.com" aria-label="Your email">
+      <button type="submit" class="cta cta-buy" data-medium="close">
+        Reserve my seat <span class="price">$47</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </button>
+    </form>
   </div>
 </section>
 </main>
@@ -186,15 +200,21 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"/></
 
 <div class="sticky" aria-hidden="false">
   <div class="sm">Thu July 30 &middot; 7:00 pm<br>Sandy, UT</div>
-  <a href="https://buy.stripe.com/8x24gBeu3b7Y9bqfjngEg0a" class="cta cta-buy" data-medium="sticky">Grab my seat <span class="price">$47</span></a>
+  <a href="#reserve" class="cta cta-jump">Reserve my seat <span class="price">$47</span></a>
 </div>
 
 <script>
-/* Stripe attribution: preserves cohort + free-track split-test tagging. */
+/* Email-gate checkout: capture the email on our side (background, non-blocking)
+   BEFORE sending the visitor to Stripe, so an abandoned checkout is still a
+   recoverable lead. The redirect to Stripe NEVER waits on and is NEVER blocked
+   by the capture. Stripe attribution (flat client_reference_id + cohort/free-track
+   tags) is preserved exactly. */
 (function(){
   var STRIPE_URL='https://buy.stripe.com/8x24gBeu3b7Y9bqfjngEg0a';
+  var CAPTURE_URL='https://agentshq.boubacarbarry.com/api/orc/beehiiv-subscribe';
   var COHORT='2026_07_30';
   var qs=new URLSearchParams(window.location.search||'');
+  var emailRe=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   function buyHref(medium){
     var src=(qs.get('utm_source')||'workshop');
     var utmC=(qs.get('utm_content')||'');
@@ -205,18 +225,40 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"/></
     var sep=STRIPE_URL.indexOf('?')>-1?'&':'?';
     return STRIPE_URL+sep+'utm_source='+encodeURIComponent(src)+'&utm_medium='+encodeURIComponent(medium)+'&utm_campaign=ic_workshop_0730&utm_content='+encodeURIComponent(COHORT)+(track?'&utm_term='+track:'')+'&client_reference_id=ic_workshop_0730';
   }
-  /* Reliable InitiateCheckout: fire the pixel BEFORE navigating, then redirect
-     after a short beat so the beacon lands on mobile/iOS (a bare fbq on an <a>
-     that navigates away drops the event). preventDefault + delayed go. */
-  document.querySelectorAll('.cta-buy').forEach(function(b){
-    b.setAttribute('href',buyHref(b.getAttribute('data-medium')||'page'));
-    b.addEventListener('click',function(ev){
-      var dest=this.getAttribute('href'); if(!dest)return;
+  /* Fire-and-forget lead capture. keepalive lets the POST outlive the navigation
+     to Stripe. Any error is swallowed so it can never block the sale. */
+  function capture(email,medium){
+    try{
+      fetch(CAPTURE_URL,{method:'POST',keepalive:true,headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({email:email,utm_source:(qs.get('utm_source')||'workshop'),
+          form_location:'ic_workshop_paid_'+medium,magnet:'ic_workshop_0730'})}).catch(function(){});
+    }catch(e){}
+  }
+  /* One click: validate email -> background capture -> fire InitiateCheckout ->
+     redirect to Stripe after a short beat so the pixel beacon lands on mobile. */
+  document.querySelectorAll('.cta-form').forEach(function(f){
+    var medium=f.getAttribute('data-medium')||'page';
+    var input=f.querySelector('.cta-email');
+    f.addEventListener('submit',function(ev){
       ev.preventDefault();
+      var email=(input.value||'').trim();
+      if(!emailRe.test(email)){input.focus();input.setAttribute('aria-invalid','true');return;}
+      input.removeAttribute('aria-invalid');
+      capture(email,medium);
+      var dest=buyHref(medium);
       var eid='ic-'+Date.now()+'-'+Math.random().toString(36).slice(2,8);
       try{if(window.fbq)fbq('track','InitiateCheckout',{content_name:'ic_workshop_0730',value:47,currency:'USD'},{eventID:eid});}catch(e){}
       var sent=false,go=function(){if(sent)return;sent=true;window.location.href=dest;};
       setTimeout(go,220);
+    });
+  });
+  /* Sticky bar jump: send the visitor to the hero email field and focus it,
+     so every checkout path still passes through the email gate. */
+  document.querySelectorAll('.cta-jump').forEach(function(b){
+    b.addEventListener('click',function(ev){
+      ev.preventDefault();
+      var f=document.getElementById('reserve');
+      if(f){f.scrollIntoView({behavior:'smooth',block:'center'});var i=f.querySelector('.cta-email');if(i)setTimeout(function(){i.focus();},400);}
     });
   });
 })();
