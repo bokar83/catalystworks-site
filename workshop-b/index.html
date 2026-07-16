@@ -50,6 +50,19 @@ a{color:inherit}
 .pill{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.72rem;
   text-transform:uppercase;letter-spacing:.08em;color:var(--ink-soft);white-space:nowrap}
 .pip{width:7px;height:7px;border-radius:50%;background:var(--amber);box-shadow:0 0 0 4px rgba(232,99,42,.18)}
+.mast-right{display:flex;align-items:center;gap:12px}
+.navtoggle{display:none;background:none;border:0;cursor:pointer;padding:8px;margin:-8px -8px -8px 0;color:var(--ink)}
+.navtoggle svg{display:block;width:26px;height:26px}
+.navmenu{display:none}
+@media(max-width:640px){
+  .navtoggle{display:inline-flex}
+  .mast .pill{display:none}
+  .navmenu{display:block;background:var(--card);border:1px solid var(--line);border-radius:12px;margin:10px 0 0;padding:6px;overflow:hidden}
+  .navmenu[hidden]{display:none}
+  .navmenu a{display:block;padding:13px 14px;font-weight:600;text-decoration:none;color:var(--ink);border-radius:8px}
+  .navmenu a+a{border-top:1px solid var(--line)}
+  .navmenu a.nav-cta{color:var(--amber-deep)}
+}
 
 .hero{padding:34px 0 8px}
 .eyebrow{font-family:var(--mono);font-size:.76rem;text-transform:uppercase;letter-spacing:.14em;
@@ -139,7 +152,19 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"/></
   <div class="wrap">
     <a class="mk" href="https://catalystworks.consulting/" aria-label="Catalyst Works home">
       <img src="../CatalystWorks_logo.jpg" alt="" class="mk-logo">Catalyst <i>Works</i></a>
-    <span class="pill"><span class="pip" aria-hidden="true"></span>Live workshop &middot; Sandy, UT</span>
+    <div class="mast-right">
+      <span class="pill"><span class="pip" aria-hidden="true"></span>Live workshop &middot; Sandy, UT</span>
+      <button class="navtoggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navmenu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="wrap">
+    <nav class="navmenu" id="navmenu" aria-label="Page menu" hidden>
+      <a href="#reserve" class="nav-cta">Reserve my seat</a>
+      <a href="#what">What you'll build</a>
+      <a href="mailto:boubacar@catalystworks.consulting">Questions</a>
+    </nav>
   </div>
 </header>
 
@@ -147,8 +172,8 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"/></
 <section class="hero">
   <div class="wrap">
     <div class="eyebrow">A live workshop &middot; Thursday, July 30</div>
-    <h1 class="poster">You don't need 50 AI tools.<em>You need the 3 worth your time.</em></h1>
-    <p class="lead">A 90-minute, hands-on workshop in Sandy. You leave with those three tools set up on <b>your own laptop</b>, and they are yours to keep.</p>
+    <h1 class="poster">You don't need 50 AI tools.<em>You need the ones worth your time.</em></h1>
+    <p class="lead">A 90-minute, hands-on workshop in Sandy. You leave with them set up on <b>your own laptop</b>, working, and yours to keep.</p>
     <div class="cta-row">
       <form class="cta-form" id="reserve" data-medium="hero" novalidate>
         <input type="email" class="cta-email" name="email" required autocomplete="email" inputmode="email" placeholder="you@yourbusiness.com" aria-label="Your email">
@@ -169,10 +194,11 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"/></
   </div>
 </section>
 
-<section class="detail">
+<section class="detail" id="what">
   <div class="wrap">
-    <p>Most AI advice hands you a list of 50 apps and walks off. This does the opposite. In one evening, in the room with me, you set up the three tools I actually use to run a business, on the laptop you work on. You walk out with them working, not with a page of notes you never open again.</p>
-    <p><b>Kept to a small group on purpose,</b> so you get real answers to your own questions. Bring your laptop and you will build something you keep.</p>
+    <p>Most AI advice hands you a list of 50 apps and walks off. This does the opposite. In one evening, in the room with me, you set up the tools I actually use to run my business, on the laptop you work on. You walk out with them working, not with a page of notes you never open again.</p>
+    <p>I run a business on these tools every day, here in Utah. This is my real setup, taught in person. Not a slideshow, and not a course you never finish.</p>
+    <p><b>Kept to a small group on purpose,</b> so you get real answers to your own questions. Bring your laptop and you leave with something you keep.</p>
   </div>
 </section>
 
@@ -260,6 +286,16 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"/></
       if(f){f.scrollIntoView({behavior:'smooth',block:'center'});var i=f.querySelector('.cta-email');if(i)setTimeout(function(){i.focus();},400);}
     });
   });
+  /* Mobile menu: in-page actions only (reserve / what you build / questions),
+     no exit links, so the nav never leaks a cold click off the page. */
+  var navT=document.querySelector('.navtoggle'),navM=document.getElementById('navmenu');
+  if(navT&&navM){
+    navT.addEventListener('click',function(){
+      if(navM.hasAttribute('hidden')){navM.removeAttribute('hidden');navT.setAttribute('aria-expanded','true');}
+      else{navM.setAttribute('hidden','');navT.setAttribute('aria-expanded','false');}
+    });
+    navM.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){navM.setAttribute('hidden','');navT.setAttribute('aria-expanded','false');});});
+  }
 })();
 </script>
 </body>
