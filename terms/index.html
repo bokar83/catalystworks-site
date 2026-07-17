@@ -4,16 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#0A0E14">
-  <title>Support | Catalyst Works</title>
-  <meta name="description" content="Need a hand? Reach a real person at Catalyst Works. Email hello@catalystworks.consulting or call +1 801-888-1963. A reply within one business day.">
+  <title>Terms of Service | Catalyst Works</title>
+  <meta name="description" content="The terms that govern your use of Catalyst Works, its website, and its paid workshops and consulting services. Payments are processed by Stripe.">
   <link rel="icon" type="image/jpeg" href="../CatalystWorks_logo.jpg">
-  <link rel="canonical" href="https://catalystworks.consulting/support">
+  <link rel="canonical" href="https://catalystworks.consulting/terms">
   <meta name="robots" content="index, follow">
 
-  <meta property="og:title" content="Support | Catalyst Works">
-  <meta property="og:description" content="Reach a real person at Catalyst Works. Email hello@catalystworks.consulting or call +1 801-888-1963.">
+  <meta property="og:title" content="Terms of Service | Catalyst Works">
+  <meta property="og:description" content="The terms that govern your use of Catalyst Works and its services.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://catalystworks.consulting/support">
+  <meta property="og:url" content="https://catalystworks.consulting/terms">
   <meta property="og:image" content="https://catalystworks.consulting/og-image.jpg">
   <meta name="twitter:card" content="summary_large_image">
 
@@ -139,80 +139,71 @@
       letter-spacing: -0.03em;
       font-weight: 700;
       color: var(--paper);
-      margin-bottom: 22px;
+      margin-bottom: 14px;
       text-wrap: balance;
     }
-    .lede {
-      font-size: clamp(17px, 1.8vw, 20px);
+    .effective {
+      font-family: var(--mono); font-size: 12px;
+      color: var(--t-muted); letter-spacing: 0.04em;
+      margin-bottom: 40px;
+    }
+    .intro {
+      font-size: clamp(16px, 1.7vw, 19px);
       color: var(--t-mid);
-      line-height: 1.6;
-      max-width: 60ch;
+      line-height: 1.65;
+      max-width: 62ch;
       margin-bottom: 44px;
     }
 
-    .card {
-      background: linear-gradient(180deg, rgba(22,29,39,0.6) 0%, rgba(15,20,28,0.85) 100%);
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 32px 30px;
-      box-shadow: var(--shadow);
-      margin-bottom: 24px;
-    }
-    .card h2 {
-      font-family: var(--serif); font-size: 22px;
+    section.policy { margin-bottom: 36px; }
+    section.policy h2 {
+      font-family: var(--serif); font-size: 24px;
       font-weight: 700; letter-spacing: -0.015em;
       color: var(--paper); margin-bottom: 14px;
     }
-    .card p {
+    section.policy p {
       font-size: 16px; color: var(--t-mid);
-      line-height: 1.65; margin-bottom: 14px;
+      line-height: 1.7; margin-bottom: 14px;
     }
-    .card p:last-child { margin-bottom: 0; }
-    .card p strong { color: var(--paper); font-weight: 600; }
+    section.policy p:last-child { margin-bottom: 0; }
+    section.policy p strong { color: var(--paper); font-weight: 600; }
+    section.policy a { color: var(--amber); font-weight: 500; }
+    section.policy a:hover { text-decoration: underline; }
 
-    .contact-row {
-      display: flex; flex-wrap: wrap; gap: 12px;
-      margin-top: 20px;
+    ul.policy-list { list-style: none; margin: 0 0 14px; padding: 0; }
+    ul.policy-list li {
+      font-size: 16px; color: var(--t-mid);
+      line-height: 1.65; padding: 8px 0 8px 22px;
+      position: relative; border-bottom: 1px dashed var(--line-2);
     }
-    .contact-btn {
-      display: inline-flex; align-items: center; gap: 10px;
-      padding: 14px 22px; border-radius: 12px;
-      font-weight: 600; font-size: 15px;
-      transition: transform 180ms var(--ease), box-shadow 220ms, border-color 220ms;
+    ul.policy-list li:last-child { border-bottom: none; }
+    ul.policy-list li::before {
+      content: '\2192'; position: absolute; left: 0; color: var(--amber);
     }
-    .contact-btn.primary { background: var(--paper); color: var(--ink); }
-    .contact-btn.primary:hover { transform: translateY(-1px); box-shadow: 0 12px 28px rgba(245,239,226,0.18); }
-    .contact-btn.ghost {
-      background: transparent; color: var(--paper);
-      border: 1px solid var(--line);
-    }
-    .contact-btn.ghost:hover { transform: translateY(-1px); border-color: rgba(232,166,107,0.45); box-shadow: 0 10px 24px rgba(0,0,0,0.35); }
-    .contact-btn .ico { font-family: var(--mono); font-size: 13px; color: var(--amber); }
-    .contact-btn.primary .ico { color: var(--ink); }
+    ul.policy-list li strong { color: var(--paper); font-weight: 600; }
 
-    .expect {
-      display: flex; align-items: flex-start; gap: 12px;
-      padding: 16px 18px;
-      background: rgba(91,192,190,0.06);
-      border: 1px solid rgba(91,192,190,0.24);
-      border-left: 2px solid var(--cyan);
-      border-radius: 0 10px 10px 0;
-      margin-top: 20px;
-    }
-    .expect .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 12px var(--cyan); margin-top: 7px; flex-shrink: 0; }
-    .expect p { font-size: 15px; color: var(--t-mid); line-height: 1.6; margin: 0; }
-    .expect p strong { color: var(--paper); font-weight: 600; }
-
-    .pay-note {
-      margin-top: 20px;
-      padding: 16px 18px;
+    .cancel-box {
+      margin: 0 0 14px;
+      padding: 18px 20px;
       background: rgba(232,166,107,0.06);
       border: 1px solid rgba(232,166,107,0.22);
       border-left: 2px solid var(--amber);
       border-radius: 0 10px 10px 0;
-      font-size: 15px; color: var(--t-mid); line-height: 1.6;
     }
-    .pay-note a { color: var(--amber); font-weight: 600; }
+    .cancel-box p { font-size: 16px; color: var(--t-mid); line-height: 1.7; margin: 0; }
+    .cancel-box a { color: var(--amber); font-weight: 600; }
+
+    .divider { height: 1px; background: var(--line-2); margin: 8px 0 36px; }
+
+    .contact-box {
+      margin-top: 8px;
+      padding: 22px 24px;
+      background: linear-gradient(180deg, rgba(22,29,39,0.6) 0%, rgba(15,20,28,0.85) 100%);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+    }
+    .contact-box p { margin-bottom: 0; }
 
     /* FOOTER */
     footer {
@@ -297,34 +288,76 @@
 
 <main>
   <div class="page">
-    <div class="eyebrow">Support</div>
-    <h1>Need a hand? You reach a real person.</h1>
-    <p class="lede">Catalyst Works is one operator, not a support queue. When you send a note, I read it myself, and I answer it myself.</p>
+    <div class="eyebrow">Terms</div>
+    <h1>Terms of Service</h1>
+    <div class="effective">Effective date: July 17, 2026</div>
 
-    <div class="card">
-      <h2>What Catalyst Works is</h2>
-      <p>Catalyst Works helps business owners put AI to work on the parts of the week that eat their time. I find the one thing slowing you down, and I help you fix it.</p>
-    </div>
+    <p class="intro">These terms govern your use of the Catalyst Works website, catalystworks.consulting, and the services we offer through it, including workshops and consulting. By using the site or buying a service, you agree to these terms. We keep them plain and short on purpose.</p>
 
-    <div class="card">
-      <h2>Reach me</h2>
-      <p>Email is best, and the phone works too. Either way it comes straight to me.</p>
-      <div class="contact-row">
-        <a href="mailto:hello@catalystworks.consulting" class="contact-btn primary"><span class="ico">@</span>hello@catalystworks.consulting</a>
-        <a href="tel:+18018881963" class="contact-btn ghost"><span class="ico">&#9742;</span>+1 801-888-1963</a>
-      </div>
-      <div class="expect">
-        <span class="dot"></span>
-        <p><strong>What to expect:</strong> Send a note any time. You will hear back from me within one business day, usually sooner. No ticket number, no bot, and no runaround to get to a person.</p>
-      </div>
-    </div>
+    <section class="policy">
+      <h2>Who we are</h2>
+      <p>Catalyst Works is a consulting practice founded by Boubacar Barry. We help business owners put AI to work on the parts of the week that eat their time. In these terms, "we" and "us" mean Catalyst Works, and "you" means the person or business using the site or buying a service.</p>
+    </section>
 
-    <div class="card">
-      <h2>Payment or receipt questions</h2>
-      <div class="pay-note">
-        Questions about a charge or a receipt? Email <a href="mailto:hello@catalystworks.consulting">hello@catalystworks.consulting</a> and I will sort it out fast.
+    <section class="policy">
+      <h2>Our services</h2>
+      <p>We offer paid and free workshop seats and consulting and AI-advisory services. We describe each service on the site or in the materials we send you, and we provide it as described. We may update, reschedule, or discontinue a service, and if a change affects something you already paid for, we will work with you in good faith to make it right.</p>
+    </section>
+
+    <section class="policy">
+      <h2>Payments</h2>
+      <ul class="policy-list">
+        <li>Prices are shown at the point of purchase and are in US dollars unless stated otherwise.</li>
+        <li><strong>Payments are processed by Stripe.</strong> Your card details go to Stripe, not to us, and are handled under Stripe's own terms and privacy policy.</li>
+        <li>You agree to provide accurate payment information and confirm you are authorized to use the payment method you enter.</li>
+      </ul>
+    </section>
+
+    <section class="policy">
+      <h2>Cancellations and workshop registrations</h2>
+      <div class="cancel-box">
+        <p>To cancel or ask about a workshop registration or another purchase, email <a href="mailto:hello@catalystworks.consulting">hello@catalystworks.consulting</a> and we will help you. We handle these case by case, and we will always talk it through with you.</p>
       </div>
-    </div>
+    </section>
+
+    <section class="policy">
+      <h2>Acceptable use</h2>
+      <p>Please use the site and our services lawfully and in good faith. Do not try to break, overload, or gain unauthorized access to the site, do not misuse our materials, and do not use anything we provide to harm others or break the law. We may suspend access if the site or a service is being misused.</p>
+    </section>
+
+    <section class="policy">
+      <h2>Intellectual property</h2>
+      <p>The Catalyst Works name, the site, our written materials, methods, frameworks, and deliverables are our intellectual property, or are used with permission. When you buy a service, you may use the deliverables we give you for your own business. You may not resell, republish, or redistribute our materials as your own without our written permission. Anything you share with us stays yours.</p>
+    </section>
+
+    <section class="policy">
+      <h2>No guarantee of results</h2>
+      <p>We bring real experience and honest work to every engagement. We do not guarantee a specific business outcome, revenue figure, or result, because those depend on many things outside our control, including how the work is put into practice. What you buy is the service and the deliverable we describe, not a promised result.</p>
+    </section>
+
+    <section class="policy">
+      <h2>Limitation of liability</h2>
+      <p>To the fullest extent allowed by law, Catalyst Works is not liable for any indirect, incidental, or consequential damages arising from your use of the site or our services. Where liability cannot be excluded, our total liability is limited to the amount you paid us for the service the claim relates to. Nothing in these terms limits any liability that cannot be limited under the law that applies to you.</p>
+    </section>
+
+    <section class="policy">
+      <h2>Governing law</h2>
+      <p>These terms are governed by the laws of the State of Utah, United States, without regard to its conflict-of-law rules. Any dispute relating to these terms or our services will be handled under Utah and United States law.</p>
+    </section>
+
+    <section class="policy">
+      <h2>Changes to these terms</h2>
+      <p>We may update these terms from time to time. When we do, we will update this page and change the effective date at the top. If you keep using the site or our services after a change, that means you accept the updated terms.</p>
+    </section>
+
+    <div class="divider"></div>
+
+    <section class="policy">
+      <h2>Contact</h2>
+      <div class="contact-box">
+        <p>Questions about these terms? Email <a href="mailto:hello@catalystworks.consulting">hello@catalystworks.consulting</a> and a real person will get back to you.</p>
+      </div>
+    </section>
   </div>
 </main>
 
