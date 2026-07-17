@@ -213,29 +213,60 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"/></
   var STRIPE_URL='https://buy.stripe.com/8x24gBeu3b7Y9bqfjngEg0a';
   var CAPTURE_URL='https://agentshq.boubacarbarry.com/api/orc/beehiiv-subscribe';
   var COHORT='2026_07_30';
+  /* Hard ceiling on how long a visitor waits for the capture before we send them
+     to checkout anyway. A slow phone must never be stranded on a dead button. */
+  var CAPTURE_TIMEOUT_MS=3000;
+  /* Minimum beat before navigating, so the InitiateCheckout beacon lands. */
+  var PIXEL_BEAT_MS=250;
   var qs=new URLSearchParams(window.location.search||'');
   var emailRe=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  function buyHref(medium){
+  function buyHref(medium,email){
     var src=(qs.get('utm_source')||'workshop');
     var utmC=(qs.get('utm_content')||'');
     /* Unified seat count: ONE flat client_reference_id across free + paid so
        cref === 'ic_workshop_0730' counts every seat. Cohort rides in utm_content
-       and the free-track tag in utm_term, so attribution survives the flat cref. */
+       and the free-track tag in utm_term, so attribution survives the flat cref.
+       track_free reads utm_content and is the live paid split test -- do not
+       change the shape of this without checking /w/free in .htaccess. */
     var track=/track_free/.test(utmC)?'track_free':'';
     var sep=STRIPE_URL.indexOf('?')>-1?'&':'?';
-    return STRIPE_URL+sep+'utm_source='+encodeURIComponent(src)+'&utm_medium='+encodeURIComponent(medium)+'&utm_campaign=ic_workshop_0730&utm_content='+encodeURIComponent(COHORT)+(track?'&utm_term='+track:'')+'&client_reference_id=ic_workshop_0730';
+    /* prefilled_email: they already typed it here, so Stripe must not ask again.
+       Also gives the abandonment alert a real customer_details.email to read --
+       today it is null by construction, which is why every alert says
+       "no contact captured" whether or not we captured one. */
+    return STRIPE_URL+sep+'utm_source='+encodeURIComponent(src)+'&utm_medium='+encodeURIComponent(medium)+'&utm_campaign=ic_workshop_0730&utm_content='+encodeURIComponent(COHORT)+(track?'&utm_term='+track:'')+'&client_reference_id=ic_workshop_0730'+'&prefilled_email='+encodeURIComponent(email);
   }
-  /* Fire-and-forget lead capture. keepalive lets the POST outlive the navigation
-     to Stripe. Any error is swallowed so it can never block the sale. */
+  function postLead(email,medium){
+    return fetch(CAPTURE_URL,{method:'POST',keepalive:true,
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({email:email,utm_source:(qs.get('utm_source')||'workshop'),
+        form_location:'ic_workshop_paid_'+medium,magnet:'ic_workshop_0730'})
+    }).then(function(r){return !!r.ok;});
+  }
+  /* Capture the lead and WAIT for it to land before navigating.
+     The previous version fired fetch(keepalive) and navigated 220ms later.
+     keepalive is meant to outlive an unload; here it did not. 16 real CTA clicks
+     across this page and /ai-checklist produced ZERO subscribers, while
+     /free-workshop-july16 -- same endpoint, same handler shape, but NO redirect
+     after the POST -- captured every lead it took. All real traffic is the
+     Facebook/Instagram in-app browser, where keepalive is unreliable. Awaiting
+     the response is the only version that cannot lose the lead to that race.
+     Retries once, then reports. A capture failure must NEVER block the sale. */
   function capture(email,medium){
-    try{
-      fetch(CAPTURE_URL,{method:'POST',keepalive:true,headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({email:email,utm_source:(qs.get('utm_source')||'workshop'),
-          form_location:'ic_workshop_paid_'+medium,magnet:'ic_workshop_0730'})}).catch(function(){});
-    }catch(e){}
+    return postLead(email,medium).catch(function(){return false;})
+      .then(function(ok){return ok?true:postLead(email,medium).catch(function(){return false;});})
+      .then(function(ok){
+        if(!ok){
+          /* Never silent again. The empty catch that used to live here is why
+             this ran for days losing every lead with nobody able to see it. */
+          try{console.error('[cw] lead capture FAILED');}catch(e){}
+          try{if(window.fbq)fbq('trackCustom','LeadCaptureFailed',{content_name:'ic_workshop_0730'});}catch(e){}
+        }
+        return ok;
+      });
   }
-  /* One click: validate email -> background capture -> fire InitiateCheckout ->
-     redirect to Stripe after a short beat so the pixel beacon lands on mobile. */
+  /* One click: validate -> fire InitiateCheckout -> AWAIT capture -> redirect to
+     Stripe with the email prefilled. */
   document.querySelectorAll('.cta-form').forEach(function(f){
     var medium=f.getAttribute('data-medium')||'page';
     var input=f.querySelector('.cta-email');
@@ -244,12 +275,18 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"/></
       var email=(input.value||'').trim();
       if(!emailRe.test(email)){input.focus();input.setAttribute('aria-invalid','true');return;}
       input.removeAttribute('aria-invalid');
-      capture(email,medium);
-      var dest=buyHref(medium);
+      var btn=f.querySelector('button[type=submit]');
+      if(btn){btn.setAttribute('aria-busy','true');btn.disabled=true;}
+      var dest=buyHref(medium,email);
       var eid='ic-'+Date.now()+'-'+Math.random().toString(36).slice(2,8);
       try{if(window.fbq)fbq('track','InitiateCheckout',{content_name:'ic_workshop_0730',value:47,currency:'USD'},{eventID:eid});}catch(e){}
-      var sent=false,go=function(){if(sent)return;sent=true;window.location.href=dest;};
-      setTimeout(go,220);
+      var t0=Date.now(),sent=false;
+      var go=function(){if(sent)return;sent=true;window.location.href=dest;};
+      var timer=setTimeout(go,CAPTURE_TIMEOUT_MS);
+      capture(email,medium).then(function(){
+        clearTimeout(timer);
+        setTimeout(go,Math.max(0,PIXEL_BEAT_MS-(Date.now()-t0)));
+      });
     });
   });
   /* Sticky bar jump: send the visitor to the hero email field and focus it,
