@@ -121,6 +121,15 @@ footer a{color:var(--amber-deep)}
 .cta[aria-busy="true"]{opacity:.72;pointer-events:none;animation:ctapulse 1s ease-in-out infinite}
 @keyframes ctapulse{0%,100%{opacity:.55}50%{opacity:.9}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important}.cta[aria-busy="true"]{animation:none;opacity:.6}}
+/* Required refund-policy consent on the PAID checkout. Sits on its own full-width
+   row before the pay button; the button stays disabled until it is ticked. Paid
+   path only -- the free flow (/ai-checklist) has no such gate. */
+.agree-row{flex:1 1 100%;display:flex;align-items:flex-start;gap:9px;text-align:left;
+  font-family:var(--body);font-size:.85rem;line-height:1.45;color:var(--ink-soft);cursor:pointer}
+.agree-row input{flex:0 0 auto;width:18px;height:18px;margin-top:2px;accent-color:var(--amber-deep);cursor:pointer}
+.agree-row a{color:var(--amber-deep);font-weight:600;text-decoration:underline}
+.agree-row.flash input{outline:2px solid var(--amber-deep);outline-offset:2px;border-radius:3px}
+.cta-buy:disabled{opacity:.5;cursor:not-allowed;box-shadow:none;transform:none;pointer-events:none}
 </style>
 
 <!-- Meta Pixel Code -->
@@ -159,6 +168,10 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"/></
     <div class="cta-row">
       <form class="cta-form" id="reserve" data-medium="hero" novalidate>
         <input type="email" class="cta-email" name="email" required autocomplete="email" inputmode="email" placeholder="you@yourbusiness.com" aria-label="Your email">
+        <label class="agree-row">
+          <input type="checkbox" class="agree-refund" aria-label="I have read and agree to the Refund Policy">
+          <span>I have read and agree to the <a href="/terms#refunds" target="_blank" rel="noopener">Refund Policy</a></span>
+        </label>
         <button type="submit" class="cta cta-buy" data-medium="hero">
           Reserve my seat <span class="price">$47</span>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
@@ -189,6 +202,10 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"/></
     <div class="sub">Thu July 30 &middot; 7:00 to 8:30 pm &middot; Sandy, UT</div>
     <form class="cta-form" data-medium="close" novalidate>
       <input type="email" class="cta-email" name="email" required autocomplete="email" inputmode="email" placeholder="you@yourbusiness.com" aria-label="Your email">
+      <label class="agree-row">
+        <input type="checkbox" class="agree-refund" aria-label="I have read and agree to the Refund Policy">
+        <span>I have read and agree to the <a href="/terms#refunds" target="_blank" rel="noopener">Refund Policy</a></span>
+      </label>
       <button type="submit" class="cta cta-buy" data-medium="close">
         Reserve my seat <span class="price">$47</span>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
@@ -277,8 +294,21 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"/></
   document.querySelectorAll('.cta-form').forEach(function(f){
     var medium=f.getAttribute('data-medium')||'page';
     var input=f.querySelector('.cta-email');
+    /* Required refund-policy consent: the pay button stays disabled until the box
+       is ticked, and the submit handler re-checks it as a backstop so a stale or
+       programmatic submit can never slip past the gate. */
+    var agree=f.querySelector('.agree-refund');
+    var submitBtn=f.querySelector('button[type=submit]');
+    if(agree&&submitBtn){
+      submitBtn.disabled=!agree.checked;
+      agree.addEventListener('change',function(){
+        submitBtn.disabled=!agree.checked;
+        if(agree.checked){var rr=agree.closest('.agree-row');if(rr)rr.classList.remove('flash');}
+      });
+    }
     f.addEventListener('submit',function(ev){
       ev.preventDefault();
+      if(agree&&!agree.checked){var r=agree.closest('.agree-row');if(r)r.classList.add('flash');agree.focus();return;}
       var email=(input.value||'').trim();
       if(!emailRe.test(email)){input.focus();input.setAttribute('aria-invalid','true');return;}
       input.removeAttribute('aria-invalid');

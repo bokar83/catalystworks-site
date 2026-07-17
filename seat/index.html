@@ -42,9 +42,11 @@ html,body{height:100%}
 body{
   font-family:var(--font-body);color:var(--paper);background:var(--navy);
   line-height:1.5;-webkit-font-smoothing:antialiased;
-  /* the hard requirement: one screen, no scroll */
-  height:100dvh;overflow:hidden;position:relative;
-  display:flex;align-items:center;justify-content:center;
+  /* Poster fills one screen when it fits; if the content is taller than the
+     viewport (the required refund-policy consent on this paid checkout can tip a
+     small screen over), the page scrolls instead of overlapping its own text. */
+  min-height:100dvh;overflow-y:auto;position:relative;
+  display:flex;align-items:flex-start;justify-content:center;
 }
 /* film-grain depth, no WebGL (reused from Page A) */
 body::after{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.5;mix-blend-mode:soft-light;
@@ -60,7 +62,7 @@ a{color:inherit;text-decoration:none}
 
 .screen{position:relative;z-index:2;width:100%;max-width:430px;margin:0 auto;
   padding:max(18px,env(safe-area-inset-top)) 24px max(18px,env(safe-area-inset-bottom));
-  display:flex;flex-direction:column;height:100dvh}
+  display:flex;flex-direction:column;min-height:100dvh}
 
 /* ---- brand mark ---- */
 .mk{display:flex;align-items:center;gap:10px;flex:0 0 auto}
@@ -131,6 +133,15 @@ h1 em::after{content:"";position:absolute;left:-2%;right:-2%;bottom:-.05em;heigh
 .cta-email:focus{outline:none;border-color:var(--action);box-shadow:0 0 0 3px rgba(0,183,194,.25)}
 .cta-email[aria-invalid="true"]{border-color:#C0392B;box-shadow:0 0 0 3px rgba(192,57,43,.22)}
 
+/* Required refund-policy consent on the PAID checkout, before the pay button.
+   The button reads disabled until the box is ticked; a click guard backstops it. */
+.agree-row{display:flex;align-items:flex-start;gap:9px;margin:0 0 12px;text-align:left;
+  font-family:var(--font-body);font-size:.85rem;line-height:1.45;color:rgba(244,238,228,.9);cursor:pointer}
+.agree-row input{flex:0 0 auto;width:18px;height:18px;margin-top:2px;accent-color:var(--action);cursor:pointer}
+.agree-row a{color:var(--action);font-weight:600;text-decoration:underline}
+.agree-row.flash input{outline:2px solid var(--action);outline-offset:2px;border-radius:3px}
+.cta.is-disabled{opacity:.45;cursor:not-allowed}
+
 /* whisper: intimate aside under the CTA, removes the "not ready yet" objection at the point of action */
 .whisper{text-align:center;margin-top:13px;font-family:var(--font-display);font-style:italic;
   font-size:.92rem;line-height:1.4;color:rgba(244,238,228,.82);max-width:36ch;margin-left:auto;margin-right:auto}
@@ -150,7 +161,7 @@ a:focus-visible,.cta:focus-visible{outline:3px solid var(--action);outline-offse
 /* desktop: card-center it, never let it sprawl */
 @media(min-width:600px){
   body{padding:24px}
-  .screen{height:auto;max-height:96dvh;max-width:460px;border-radius:6px;
+  .screen{height:auto;min-height:auto;max-height:96dvh;max-width:460px;border-radius:6px;
     background:linear-gradient(180deg,var(--navy) 0%,var(--navy-2) 100%);
     box-shadow:0 50px 90px -30px rgba(0,0,0,.6);
     padding:30px 34px 32px}
@@ -239,6 +250,10 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"
   <div class="act">
     <p class="rate-note"><span class="tag">Days of 47</span> <s>$97</s> in person only</p>
     <input type="email" class="cta-email" id="seatEmail" name="email" required autocomplete="email" inputmode="email" placeholder="you@yourbusiness.com" aria-label="Your email">
+    <label class="agree-row">
+      <input type="checkbox" id="agreeRefund" class="agree-refund" aria-label="I have read and agree to the Refund Policy">
+      <span>I have read and agree to the <a href="/terms#refunds" target="_blank" rel="noopener">Refund Policy</a></span>
+    </label>
     <a class="cta cta-buy" id="buyCta" data-medium="qr_seat" href="#">
       <span class="cta-label">Reserve my seat <span class="price" data-cfg="price">$47</span></span>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
@@ -323,11 +338,24 @@ var CONFIG = {
             form_location:'ic_workshop_paid_seat_'+medium,magnet:'ic_workshop_0730'})}).catch(function(){});
       }catch(e){}
     }
+    /* Required refund-policy consent: the pay button reads disabled until the box
+       is ticked, and the click handler re-checks it as a backstop. */
+    var agreeEl=d.getElementById('agreeRefund');
+    function syncAgree(){
+      var ok=!agreeEl||agreeEl.checked;
+      d.querySelectorAll('.cta-buy').forEach(function(b){
+        if(ok){b.classList.remove('is-disabled');b.removeAttribute('aria-disabled');}
+        else{b.classList.add('is-disabled');b.setAttribute('aria-disabled','true');}
+      });
+    }
+    if(agreeEl){agreeEl.addEventListener('change',function(){var ar=agreeEl.closest('.agree-row');if(ar&&agreeEl.checked)ar.classList.remove('flash');syncAgree();});}
+    syncAgree();
     d.querySelectorAll('.cta-buy').forEach(function(b){
       b.setAttribute('href',buyHref(b.getAttribute('data-medium')||'event'));
       b.addEventListener('click',function(ev){
         ev.preventDefault();
         var dest=b.getAttribute('href'); if(!dest||dest==='#')return;
+        if(agreeEl&&!agreeEl.checked){var ar=agreeEl.closest('.agree-row');if(ar)ar.classList.add('flash');agreeEl.focus();return;}
         var email=emailEl?(emailEl.value||'').trim():'';
         if(!emailRe.test(email)){if(emailEl){emailEl.focus();emailEl.setAttribute('aria-invalid','true');}return;}
         if(emailEl)emailEl.removeAttribute('aria-invalid');
@@ -342,6 +370,7 @@ var CONFIG = {
   } else {
     /* no date scheduled: hide the buy path, make the free checklist the primary action */
     var se=d.getElementById('seatEmail'); if(se)se.style.display='none';
+    var ar0=d.querySelector('.agree-row'); if(ar0)ar0.style.display='none';
     var h1=d.querySelector('h1'); if(h1)h1.innerHTML='Put AI to work <em>without</em> getting burned.';
     var lead=d.querySelector('.lead'); if(lead)lead.textContent='The short checklist I run before I let AI near anything that matters. One page, free, and I will tell you when the next live session opens.';
     var ess=d.querySelector('.essentials'); if(ess)ess.style.display='none';
