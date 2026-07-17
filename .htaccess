@@ -53,6 +53,24 @@ RewriteRule ^w/ads/?$ /workshop-b/?utm_source=meta&utm_medium=paid&utm_campaign=
 # then its built-in CTA to the $47 July 30 seat. utm_content=track_free.
 RewriteRule ^w/free/?$ /ai-checklist/?utm_source=meta&utm_medium=paid&utm_campaign=ic_workshop_0730&utm_content=track_free [R=301,L,QSA]
 RewriteRule ^w/fb/?$ /ai-checklist/?utm_source=facebook&utm_medium=paid&utm_campaign=ic_workshop_leadmagnet&utm_content=fb_ad [R=301,L,QSA]
+
+# ORGANIC free-seat link -- for a hand-posted FB/social post, NOT an ad buy.
+# Exists because every /w/ free-seat slug above bakes utm_medium=paid: sharing
+# one in an organic post logs the click as paid Meta traffic and corrupts the
+# ad-spend read. This is the attribution-honest slug for anything Boubacar
+# posts by hand.
+# utm_content MUST NOT contain the substring "track_free": /workshop/ and
+# /workshop-b/ attribute the split test with /track_free/.test(utm_content),
+# so a value like "track_free_organic" would silently register organic clicks
+# as the paid free-first arm. "organic_fb" cannot match, which is the point.
+RewriteRule ^w/fb-organic/?$ /ai-checklist/?utm_source=facebook&utm_medium=organic&utm_campaign=ic_workshop_0730&utm_content=organic_fb [R=301,L,QSA]
+
+# Paid-seat counterpart to /w/free. Was a 404, which is a trap: the free line
+# had a short link and the paid line did not. Direct/hand-shared attribution,
+# no channel baked in -- the per-channel paid slugs above stay the way to
+# attribute a specific campaign.
+RewriteRule ^w/paid/?$ /workshop/?utm_source=direct&utm_medium=link&utm_campaign=ic_workshop_0730&utm_content=direct_paid [R=301,L,QSA]
+
 RewriteRule ^w/sbdc/?$ /workshop/?utm_source=sbdc&utm_medium=partner&utm_campaign=ic_workshop_0730 [R=301,L,QSA]
 RewriteRule ^w/beccy/?$ /workshop/?utm_source=beccy&utm_medium=email&utm_campaign=ic_workshop_0730 [R=301,L,QSA]
 RewriteRule ^w/ss/?$ /seat/?utm_source=silicon_slopes&utm_medium=event&utm_campaign=ic_workshop_0730 [R=301,L,QSA]
