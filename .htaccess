@@ -27,6 +27,7 @@ RewriteRule ^seat/?$ seat/index.html [NC,L]
 # /support and /privacy into the clean-URL rule and 404 on support.html.
 RewriteRule ^support/?$ support/index.html [NC,L]
 RewriteRule ^privacy/?$ privacy/index.html [NC,L]
+RewriteRule ^terms/?$ terms/index.html [NC,L]
 # SW cold-email link consistency (2026-07-15): signature shows
 # catalystworks.consulting/geolisted so recipients see one CW domain.
 # Send them straight through to the geolisted.co landing page.
