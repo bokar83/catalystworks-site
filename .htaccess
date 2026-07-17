@@ -35,11 +35,18 @@ RewriteRule ^geolisted/?$ https://geolisted.co/ [R=301,L]
 # Free ($0) Stripe checkout success page (after_completion redirect target for the
 # $0 free-seat payment link). Confirms the free July 30 reservation.
 RewriteRule ^free-thank-you/?$ free-thank-you/index.html [NC,L]
-# IC free ($0) RSVP demand-test page (pre-sell before venue lock) lives at /free-workshop-july16/.
-RewriteRule ^free-workshop-july16/?$ free-workshop-july16/index.html [NC,L]
-# IC July 30 comp-seat RSVP page (free invites Boubacar shares 1:1 only, NOT
-# linked from any public page; noindex on the page itself). Confirms a $0 seat.
-RewriteRule ^rsvp-0730/?$ rsvp-0730/index.html [NC,L]
+# The July 16 free session was CANCELLED and its page only hit Beehiiv while
+# advertising a dead date. Repoint any straggler still holding an old
+# SBDC-newsletter link straight to the live July 30 free-seat capture, which
+# actually reserves the $0 seat (email captured + prefilled into the Stripe
+# reservation). Organic medium keeps ad-spend attribution honest. The old
+# HTML stays on disk but is unreachable via its canonical URL.
+RewriteRule ^free-workshop-july16/?$ /ai-checklist/?utm_source=sbdc&utm_medium=organic&utm_campaign=ic_workshop_0730&utm_content=stale_july16_redirect [R=301,L]
+# The July 30 comp-seat RSVP page booked NOTHING (Beehiiv-only) yet told
+# visitors "your seat is held" -- a false claim. Repoint to the live free-seat
+# capture that actually reserves the $0 seat. Organic medium keeps attribution
+# honest. NOTE: /w/vip below still resolves here via a second 301 hop.
+RewriteRule ^rsvp-0730/?$ /ai-checklist/?utm_source=direct_invite&utm_medium=organic&utm_campaign=ic_workshop_0730&utm_content=stale_rsvp0730_redirect [R=301,L]
 # Short link for the lead-magnet (Meta ads + any channel): /w/start -> opt-in page.
 # Campaign = stable magnet base; utm_content carries the current cohort for per-run segmentation.
 RewriteRule ^w/start/?$ /ai-checklist/?utm_source=meta&utm_medium=paid&utm_campaign=ic_workshop_leadmagnet&utm_content=cohort:2026_06_25 [R=301,L,QSA]
@@ -81,10 +88,11 @@ RewriteRule ^w/sbdc/?$ /workshop/?utm_source=sbdc&utm_medium=partner&utm_campaig
 RewriteRule ^w/beccy/?$ /workshop/?utm_source=beccy&utm_medium=email&utm_campaign=ic_workshop_0730 [R=301,L,QSA]
 RewriteRule ^w/ss/?$ /seat/?utm_source=silicon_slopes&utm_medium=event&utm_campaign=ic_workshop_0730 [R=301,L,QSA]
 
-# Free ($0) RSVP demand-test short link: /w/july16 -> /free-workshop-july16/.
-# Channel tagging for this one uses ?src=sbdc|svc|chamber appended by the sharer
-# (read client-side, see the page's script), not a per-channel 301 like above.
-RewriteRule ^w/july16/?$ /free-workshop-july16/?utm_source=ic_workshop_free_direct&utm_campaign=ic_workshop_free_0716 [R=301,L,QSA]
+# Old SBDC-newsletter short link for the CANCELLED July 16 free session. Its old
+# target (/free-workshop-july16/) now 301s to the live July 30 free-seat capture;
+# point this straight there too so a straggler clicking the old newsletter link
+# lands on the working capture in a single hop, not a double 301.
+RewriteRule ^w/july16/?$ /ai-checklist/?utm_source=sbdc&utm_medium=organic&utm_campaign=ic_workshop_0730&utm_content=stale_july16_shortlink [R=301,L]
 
 # DISCRETE comp-seat link for July 30 -- Boubacar shares this 1:1 only (never
 # posted publicly, never linked from the paid page). Confirms a free seat with
