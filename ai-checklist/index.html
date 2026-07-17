@@ -112,7 +112,14 @@ footer a{color:var(--amber-deep)}
   .ticket .cell:nth-child(2){border-right:0}
   .ticket .cell:nth-child(1),.ticket .cell:nth-child(2){border-bottom:1px dashed var(--line-2)}
 }
-@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+/* Busy state while the lead capture is in flight. The button now waits for the
+   POST to land (up to 3s on a bad connection) instead of firing and forgetting,
+   so the visitor MUST see that the tap registered. Without this they tap, see
+   nothing move, and leave -- which would trade a lead-loss bug for an
+   abandonment bug. Mirrors the pattern already proven on /free-workshop-july16. */
+.cta[aria-busy="true"]{opacity:.72;pointer-events:none;animation:ctapulse 1s ease-in-out infinite}
+@keyframes ctapulse{0%,100%{opacity:.55}50%{opacity:.9}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}.cta[aria-busy="true"]{animation:none;opacity:.6}}
 </style>
 
 <!-- Meta Pixel Code -->
@@ -210,28 +217,57 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"/></
   var FREE_STRIPE='https://buy.stripe.com/dRm4gB4Tt8ZQ1IY2wBgEg0k';
   var CAPTURE_URL='https://agentshq.boubacarbarry.com/api/orc/beehiiv-subscribe';
   var COHORT='2026_07_30';
+  /* Hard ceiling on how long a visitor waits for the capture before we send them
+     to checkout anyway. A slow phone must never be stranded on a dead button. */
+  var CAPTURE_TIMEOUT_MS=3000;
+  /* Minimum beat before navigating, so the Meta Lead beacon lands on mobile. */
+  var PIXEL_BEAT_MS=250;
   var qs=new URLSearchParams(window.location.search||'');
   var emailRe=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  function freeHref(medium){
+  function freeHref(medium,email){
     var src=(qs.get('utm_source')||'ai_checklist');
     var sep=FREE_STRIPE.indexOf('?')>-1?'&':'?';
+    /* prefilled_email: the visitor already typed it here, so Stripe must not ask
+       a second time. On a free offer the second ask reads as evidence the thing
+       was never free. It also gives the abandonment alert a real
+       customer_details.email to read instead of null. */
     return FREE_STRIPE+sep+'client_reference_id=ic_workshop_0730'
       +'&utm_source='+encodeURIComponent(src)+'&utm_medium='+encodeURIComponent(medium)
-      +'&utm_campaign=ic_workshop_0730_free&utm_content='+encodeURIComponent(COHORT)+'&utm_term=track_free';
+      +'&utm_campaign=ic_workshop_0730_free&utm_content='+encodeURIComponent(COHORT)+'&utm_term=track_free'
+      +'&prefilled_email='+encodeURIComponent(email);
   }
-  /* Fire-and-forget lead capture. Even though the $0 Stripe checkout collects an
-     email, we capture it on our side FIRST so a free-seat abandon (never finishes
-     Stripe) is still a recoverable lead. keepalive lets the POST outlive the
-     navigation; any error is swallowed so it never blocks the redirect. */
+  function postLead(email,medium){
+    return fetch(CAPTURE_URL,{method:'POST',keepalive:true,
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({email:email,utm_source:(qs.get('utm_source')||'ai_checklist'),
+        form_location:'ic_workshop_free_'+medium,magnet:'ic_workshop_free_0730'})
+    }).then(function(r){return !!r.ok;});
+  }
+  /* Capture the lead and WAIT for it to land before navigating.
+     The previous version fired fetch(keepalive) and navigated 220ms later.
+     keepalive is meant to outlive an unload; here it did not. 16 real CTA clicks
+     across this page and /workshop produced ZERO subscribers, while
+     /free-workshop-july16 -- same endpoint, same handler shape, but NO redirect
+     after the POST -- captured every lead it took. All real traffic is the
+     Facebook/Instagram in-app browser, where keepalive is unreliable. Awaiting
+     the response is the only version that cannot lose the lead to that race.
+     Retries once, then reports. A capture failure must NEVER block the seat. */
   function capture(email,medium){
-    try{
-      fetch(CAPTURE_URL,{method:'POST',keepalive:true,headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({email:email,utm_source:(qs.get('utm_source')||'ai_checklist'),
-          form_location:'ic_workshop_free_'+medium,magnet:'ic_workshop_free_0730'})}).catch(function(){});
-    }catch(e){}
+    return postLead(email,medium).catch(function(){return false;})
+      .then(function(ok){return ok?true:postLead(email,medium).catch(function(){return false;});})
+      .then(function(ok){
+        if(!ok){
+          /* Never silent again. The empty catch that used to live here is why
+             this ran for days losing every lead with nobody able to see it.
+             LeadCaptureFailed makes the failure rate visible in the pixel. */
+          try{console.error('[cw] lead capture FAILED');}catch(e){}
+          try{if(window.fbq)fbq('trackCustom','LeadCaptureFailed',{content_name:'ic_free_seat_0730'});}catch(e){}
+        }
+        return ok;
+      });
   }
-  /* One click: validate email -> background capture -> fire Lead -> redirect to
-     the $0 Stripe checkout after a short beat so the pixel beacon lands. */
+  /* One click: validate -> fire Lead -> AWAIT capture -> redirect to the $0
+     Stripe checkout with the email prefilled. */
   document.querySelectorAll('.cta-form').forEach(function(f){
     var medium=f.getAttribute('data-medium')||'page';
     var input=f.querySelector('.cta-email');
@@ -240,13 +276,19 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"/></
       var email=(input.value||'').trim();
       if(!emailRe.test(email)){input.focus();input.setAttribute('aria-invalid','true');return;}
       input.removeAttribute('aria-invalid');
-      capture(email,medium);
-      var dest=freeHref(medium);
+      var btn=f.querySelector('button[type=submit]');
+      if(btn){btn.setAttribute('aria-busy','true');btn.disabled=true;}
+      var dest=freeHref(medium,email);
       var eid='lead-'+Date.now()+'-'+Math.random().toString(36).slice(2,8);
       try{sessionStorage.setItem('cw_free_lead_eid',eid);}catch(e){}
       try{if(window.fbq)fbq('track','Lead',{content_name:'ic_free_seat_0730',content_category:'ic_workshop_0730'},{eventID:eid});}catch(e){}
-      var sent=false,go=function(){if(sent)return;sent=true;window.location.href=dest;};
-      setTimeout(go,220);
+      var t0=Date.now(),sent=false;
+      var go=function(){if(sent)return;sent=true;window.location.href=dest;};
+      var timer=setTimeout(go,CAPTURE_TIMEOUT_MS);
+      capture(email,medium).then(function(){
+        clearTimeout(timer);
+        setTimeout(go,Math.max(0,PIXEL_BEAT_MS-(Date.now()-t0)));
+      });
     });
   });
   /* Mobile menu: in-page actions only, no exit links, so the nav never leaks a
