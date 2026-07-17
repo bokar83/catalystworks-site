@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en" style="color-scheme: dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0A0E14">
+  <title>Privacy Policy | Catalyst Works</title>
+  <meta name="description" content="How Catalyst Works collects, uses, and protects your data. We collect the email you give us, process payments through Stripe, and do not sell your personal data.">
+  <link rel="icon" type="image/jpeg" href="../CatalystWorks_logo.jpg">
+  <link rel="canonical" href="https://catalystworks.consulting/privacy">
+  <meta name="robots" content="index, follow">
+
+  <meta property="og:title" content="Privacy Policy | Catalyst Works">
+  <meta property="og:description" content="How Catalyst Works collects, uses, and protects your data.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://catalystworks.consulting/privacy">
+  <meta property="og:image" content="https://catalystworks.consulting/og-image.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;0,700;1,600;1,700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --ink:        #0A0E14;
+      --ink-2:      #0F141C;
+      --ink-3:      #161D27;
+      --paper:      #F5EFE2;
+      --amber:      #E8A66B;
+      --cyan:       #5BC0BE;
+      --line:       rgba(245,239,226,0.12);
+      --line-2:     rgba(245,239,226,0.06);
+      --t-mid:      rgba(245,239,226,0.78);
+      --t-muted:    rgba(245,239,226,0.55);
+      --t-dim:      rgba(245,239,226,0.35);
+      --serif:      'Spectral', Georgia, serif;
+      --sans:       'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      --mono:       'JetBrains Mono', ui-monospace, monospace;
+      --ease:       cubic-bezier(0.22, 1, 0.36, 1);
+      --shadow:     0 24px 64px rgba(0,0,0,0.5);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--sans);
+      background: var(--ink);
+      color: var(--paper);
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+    ::selection { background: rgba(232,166,107,0.28); color: var(--paper); }
+
+    /* NAV */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+      padding: 16px 32px;
+      background: rgba(10,14,20,0.78);
+      backdrop-filter: blur(16px) saturate(1.4);
+      -webkit-backdrop-filter: blur(16px) saturate(1.4);
+      border-bottom: 1px solid var(--line-2);
+    }
+    .nav-inner { max-width: 1320px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { display: inline-flex; align-items: center; gap: 12px; font-weight: 700; letter-spacing: -0.01em; font-size: 16px; color: var(--paper); }
+    .brand img { width: 32px; height: 32px; border-radius: 50%; }
+    .brand .accent { color: var(--amber); }
+    .nav-links { display: flex; gap: 28px; align-items: center; }
+    .nav-links a { font-size: 13px; color: var(--t-muted); transition: color 180ms; font-weight: 500; }
+    .nav-links a:hover { color: var(--paper); }
+    .nav-cta {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 9px 18px; border-radius: 999px;
+      background: var(--paper); color: var(--ink);
+      font-weight: 600; font-size: 13px;
+      transition: transform 180ms var(--ease), box-shadow 220ms;
+    }
+    .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 12px 32px rgba(245,239,226,0.16); }
+    .nav-cta::after { content: '\2192'; font-weight: 400; }
+
+    /* Mobile hamburger + slide-in drawer */
+    .nav-toggle {
+      display: none; background: transparent; border: 1px solid var(--line);
+      width: 40px; height: 40px; border-radius: 8px; padding: 0;
+      align-items: center; justify-content: center; cursor: pointer;
+      transition: border-color 180ms, background 180ms;
+    }
+    .nav-toggle:hover { border-color: rgba(232,166,107,0.4); background: rgba(232,166,107,0.05); }
+    .nav-toggle span { display: block; width: 18px; height: 1.5px; background: var(--paper); position: relative; transition: transform 220ms, opacity 220ms; }
+    .nav-toggle span::before, .nav-toggle span::after { content: ''; position: absolute; left: 0; width: 18px; height: 1.5px; background: var(--paper); transition: transform 220ms, top 220ms; }
+    .nav-toggle span::before { top: -6px; }
+    .nav-toggle span::after  { top: 6px; }
+    .nav-toggle[aria-expanded="true"] span { background: transparent; }
+    .nav-toggle[aria-expanded="true"] span::before { top: 0; transform: rotate(45deg); }
+    .nav-toggle[aria-expanded="true"] span::after  { top: 0; transform: rotate(-45deg); }
+    .nav-drawer {
+      position: fixed; top: 0; left: 0; right: 0; padding: 72px 24px 28px;
+      background: rgba(10,14,20,0.98); backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--line);
+      transform: translateY(-100%); transition: transform 320ms var(--ease);
+      z-index: 49; display: flex; flex-direction: column; gap: 4px;
+    }
+    .nav-drawer.is-open { transform: translateY(0); }
+    .nav-drawer a { display: block; padding: 16px 8px; font-size: 17px; color: var(--paper); border-bottom: 1px solid var(--line-2); font-family: var(--serif); font-weight: 500; text-decoration: none; }
+    .nav-drawer a:last-child { border-bottom: none; }
+    .nav-drawer .nav-drawer-cta { margin-top: 14px; text-align: center; background: var(--paper); color: var(--ink); border-radius: 10px; font-family: var(--sans); font-weight: 600; font-size: 15px; padding: 14px 18px; }
+    @media (min-width: 761px) { .nav-drawer { display: none; } }
+    @media (max-width: 760px) {
+      .nav-links { display: none; }
+      .nav { padding: 12px 18px; }
+      .nav-toggle { display: inline-flex; }
+      .nav .nav-cta { display: none; }
+    }
+
+    /* PAGE */
+    main { position: relative; z-index: 1; }
+    .page {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 148px 24px 96px;
+    }
+    @media (max-width: 600px) { .page { padding: 120px 20px 72px; } }
+
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: var(--mono); font-size: 11.5px;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--amber); margin-bottom: 24px;
+    }
+    .eyebrow::before { content: ''; width: 24px; height: 1px; background: var(--amber); }
+
+    .page h1 {
+      font-family: var(--serif);
+      font-size: clamp(34px, 6vw, 56px);
+      line-height: 1.04;
+      letter-spacing: -0.03em;
+      font-weight: 700;
+      color: var(--paper);
+      margin-bottom: 14px;
+      text-wrap: balance;
+    }
+    .effective {
+      font-family: var(--mono); font-size: 12px;
+      color: var(--t-muted); letter-spacing: 0.04em;
+      margin-bottom: 40px;
+    }
+    .intro {
+      font-size: clamp(16px, 1.7vw, 19px);
+      color: var(--t-mid);
+      line-height: 1.65;
+      max-width: 62ch;
+      margin-bottom: 44px;
+    }
+
+    section.policy { margin-bottom: 36px; }
+    section.policy h2 {
+      font-family: var(--serif); font-size: 24px;
+      font-weight: 700; letter-spacing: -0.015em;
+      color: var(--paper); margin-bottom: 14px;
+    }
+    section.policy p {
+      font-size: 16px; color: var(--t-mid);
+      line-height: 1.7; margin-bottom: 14px;
+    }
+    section.policy p:last-child { margin-bottom: 0; }
+    section.policy p strong { color: var(--paper); font-weight: 600; }
+    section.policy a { color: var(--amber); font-weight: 500; }
+    section.policy a:hover { text-decoration: underline; }
+
+    ul.policy-list { list-style: none; margin: 0 0 14px; padding: 0; }
+    ul.policy-list li {
+      font-size: 16px; color: var(--t-mid);
+      line-height: 1.65; padding: 8px 0 8px 22px;
+      position: relative; border-bottom: 1px dashed var(--line-2);
+    }
+    ul.policy-list li:last-child { border-bottom: none; }
+    ul.policy-list li::before {
+      content: '\2192'; position: absolute; left: 0; color: var(--amber);
+    }
+    ul.policy-list li strong { color: var(--paper); font-weight: 600; }
+
+    .divider { height: 1px; background: var(--line-2); margin: 8px 0 36px; }
+
+    .contact-box {
+      margin-top: 8px;
+      padding: 22px 24px;
+      background: linear-gradient(180deg, rgba(22,29,39,0.6) 0%, rgba(15,20,28,0.85) 100%);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+    }
+    .contact-box p { margin-bottom: 0; }
+
+    /* FOOTER */
+    footer {
+      padding: 56px 32px 36px;
+      background: var(--ink);
+      border-top: 1px solid var(--line);
+      position: relative; z-index: 1;
+    }
+    .foot-inner {
+      max-width: 1320px; margin: 0 auto;
+      display: flex; flex-wrap: wrap; gap: 24px;
+      align-items: center; justify-content: space-between;
+    }
+    .foot-links { display: flex; gap: 22px; flex-wrap: wrap; }
+    .foot-links a { font-size: 13px; color: var(--t-muted); transition: color 200ms; }
+    .foot-links a:hover { color: var(--amber); }
+    .foot-copy {
+      width: 100%; padding-top: 16px;
+      font-size: 11px; color: var(--t-dim);
+      letter-spacing: 0.04em;
+    }
+    @media (max-width: 480px) {
+      .foot-links { gap: 12px 18px; row-gap: 6px; }
+      .foot-links a, footer .brand {
+        min-height: 44px; min-width: 44px;
+        display: inline-flex; align-items: center; padding: 10px 6px;
+      }
+      footer .brand { padding-left: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="/" class="brand">
+      <img src="../CatalystWorks_logo.jpg" alt="Catalyst Works" width="32" height="32" decoding="async">
+      <span>Catalyst<span class="accent">Works</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="/#method">The method</a>
+      <a href="/#deliverable">The deliverable</a>
+      <a href="/#about">About</a>
+      <a href="/signal">The Weekly Signal</a>
+      <a href="/#offer">Pricing</a>
+    </div>
+    <a href="/#offer" class="nav-cta">Book a Signal Session</a>
+    <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-drawer"><span></span></button>
+  </div>
+</nav>
+
+<div class="nav-drawer" id="nav-drawer" hidden>
+  <a href="/#method">The method</a>
+  <a href="/#deliverable">The deliverable</a>
+  <a href="/#about">About</a>
+  <a href="/signal">The Weekly Signal</a>
+  <a href="/governance">AI Governance</a>
+  <a href="/ai-data-audit">AI Data Audit</a>
+  <a href="/#offer" class="nav-drawer-cta">Book the Signal Session &#8594;</a>
+</div>
+
+<script>
+(function(){
+  var btn = document.querySelector('.nav-toggle');
+  var drawer = document.getElementById('nav-drawer');
+  if (!btn || !drawer) return;
+  drawer.hidden = false;
+  btn.addEventListener('click', function(){
+    var open = drawer.classList.toggle('is-open');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  });
+  drawer.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      drawer.classList.remove('is-open');
+      btn.setAttribute('aria-expanded', 'false');
+      btn.setAttribute('aria-label', 'Open menu');
+    });
+  });
+})();
+</script>
+
+<main>
+  <div class="page">
+    <div class="eyebrow">Privacy</div>
+    <h1>Privacy Policy</h1>
+    <div class="effective">Effective date: July 17, 2026</div>
+
+    <p class="intro">This policy explains what Catalyst Works collects, why, and who helps us process it. It covers this website, catalystworks.consulting. We keep it short and plain on purpose, and we only describe what we actually do.</p>
+
+    <section class="policy">
+      <h2>What we collect</h2>
+      <ul class="policy-list">
+        <li><strong>Your email address</strong>, when you give it to us through a signup form, a workshop registration, or a message.</li>
+        <li><strong>Payment information</strong>, when you buy something. This is handled by our payment processor. We never see or store your full card details.</li>
+        <li><strong>Anything you type into the on-site diagnostic tool</strong>, along with an anonymized (hashed) version of your IP address, so the tool can run and so we can keep it working.</li>
+        <li><strong>Basic usage data</strong>, such as pages visited and general location, collected through standard website analytics and advertising pixels.</li>
+      </ul>
+    </section>
+
+    <section class="policy">
+      <h2>Why we collect it</h2>
+      <p>To send you what you asked for, such as a newsletter, a workshop confirmation, or a reply. To process a payment you chose to make. To run the diagnostic tool on the site. And to understand, in aggregate, how people find and use the site so we can improve it.</p>
+    </section>
+
+    <section class="policy">
+      <h2>Who processes your data</h2>
+      <p>We use a small set of trusted third parties to run this site. Each one only receives what it needs for its job.</p>
+      <ul class="policy-list">
+        <li><strong>Stripe</strong> processes payments. Your card details go to Stripe, not to us.</li>
+        <li><strong>Beehiiv</strong> stores our email list and sends our newsletter and updates.</li>
+        <li><strong>Meta (Facebook)</strong> provides the advertising pixel we use to measure and improve our ads.</li>
+        <li><strong>Google Analytics</strong> gives us aggregate website traffic data.</li>
+        <li><strong>Supabase</strong> stores submissions from the on-site diagnostic tool.</li>
+      </ul>
+      <p>Each of these companies has its own privacy policy that governs how it handles data.</p>
+    </section>
+
+    <section class="policy">
+      <h2>Cookies and pixels</h2>
+      <p>This site uses cookies and pixels for analytics and advertising, including the Meta advertising pixel and Google Analytics. You can block or delete cookies in your browser settings. Some parts of the site may work differently if you do.</p>
+    </section>
+
+    <section class="policy">
+      <h2>What we do not do</h2>
+      <p><strong>We do not sell your personal data.</strong> We do not trade it or rent it to anyone. We share it only with the processors listed above, and only so they can do the job we hired them for.</p>
+    </section>
+
+    <section class="policy">
+      <h2>How to see or remove your data</h2>
+      <p>You can ask us what we hold about you, or ask us to delete it, at any time. Email <a href="mailto:hello@catalystworks.consulting">hello@catalystworks.consulting</a> and we will take care of it. You can also unsubscribe from any email using the link at the bottom of that email.</p>
+    </section>
+
+    <section class="policy">
+      <h2>Changes to this policy</h2>
+      <p>If we change how we handle data, we will update this page and change the effective date at the top. Material changes will be reflected here.</p>
+    </section>
+
+    <div class="divider"></div>
+
+    <section class="policy">
+      <h2>Contact</h2>
+      <div class="contact-box">
+        <p>Questions about your privacy or this policy? Email <a href="mailto:hello@catalystworks.consulting">hello@catalystworks.consulting</a> and a real person will get back to you.</p>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="foot-inner">
+    <a href="/" class="brand">
+      <img src="../CatalystWorks_logo.jpg" alt="Catalyst Works" width="32" height="32" loading="lazy" decoding="async">
+      <span>Catalyst<span class="accent">Works</span></span>
+    </a>
+    <div class="foot-links">
+      <a href="mailto:hello@catalystworks.consulting">hello@catalystworks.consulting</a>
+      <a href="/support">Support</a>
+      <a href="/privacy">Privacy</a>
+      <a href="https://www.linkedin.com/company/catalyst-works-ai/" rel="noopener" target="_blank">LinkedIn</a>
+    </div>
+    <div class="foot-copy">&copy; 2026 Catalyst Works . Diagnostic consulting for SMB owner-operators . The work is the pitch.</div>
+  </div>
+</footer>
+
+</body>
+</html>
