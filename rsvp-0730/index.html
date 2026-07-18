@@ -310,9 +310,11 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"
 
   /* ---- comp-seat capture: validate -> POST lead -> in-page success state.
      Same proven capture path as /free-workshop-july16/: POST to
-     beehiiv-subscribe. Its own magnet id (ic_workshop_0730_comp) keeps
+     /workshop-register (internal source-of-truth store; subscribes to Beehiiv
+     first, then records the seat, same response envelope as beehiiv-subscribe
+     so this UX is unchanged). Its own magnet id (ic_workshop_0730_comp) keeps
      invited guests separable from paid seats and free-track leads. ---- */
-  var LEAD_ENDPOINT='https://agentshq.boubacarbarry.com/api/orc/beehiiv-subscribe';
+  var LEAD_ENDPOINT='https://agentshq.boubacarbarry.com/api/orc/workshop-register';
 
   regForm.addEventListener('submit',function(e){
     e.preventDefault();

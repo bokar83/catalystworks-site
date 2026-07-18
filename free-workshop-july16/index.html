@@ -318,13 +318,14 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"
   emailI.addEventListener('input',function(){if(emailRe.test(emailI.value.trim()))setErr('f-email',false);});
 
   /* ---- registration capture: validate -> POST lead -> in-page success state.
-     Same proven capture path as /workshop/ and /ai-checklist/: POST to
-     beehiiv-subscribe. New magnet id keeps this cohort separable from the
-     paid-workshop and checklist lists. Channel attribution: ?src= (partner
-     short-hand: sbdc / svc / chamber) takes priority over ?utm_source=
-     (baked into any /w/ 301 redirect), so a partner can hand-tag a link
-     without a new short-link entry per channel. ---- */
-  var LEAD_ENDPOINT='https://agentshq.boubacarbarry.com/api/orc/beehiiv-subscribe';
+     POST to /workshop-register (internal source-of-truth store; it subscribes
+     to Beehiiv first, then records the seat, and returns the same envelope as
+     beehiiv-subscribe so this UX is unchanged). New magnet id keeps this cohort
+     separable from the paid-workshop and checklist lists. Channel attribution:
+     ?src= (partner short-hand: sbdc / svc / chamber) takes priority over
+     ?utm_source= (baked into any /w/ 301 redirect), so a partner can hand-tag a
+     link without a new short-link entry per channel. ---- */
+  var LEAD_ENDPOINT='https://agentshq.boubacarbarry.com/api/orc/workshop-register';
 
   regForm.addEventListener('submit',function(e){
     e.preventDefault();
