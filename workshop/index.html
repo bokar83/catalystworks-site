@@ -235,7 +235,7 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"/></
    tags) is preserved exactly. */
 (function(){
   var STRIPE_URL='https://buy.stripe.com/8x24gBeu3b7Y9bqfjngEg0a';
-  var CAPTURE_URL='https://agentshq.boubacarbarry.com/api/orc/beehiiv-subscribe';
+  var CAPTURE_URL='https://agentshq.boubacarbarry.com/api/orc/workshop-register';
   var COHORT='2026_07_30';
   /* Hard ceiling on how long a visitor waits for the capture before we send them
      to checkout anyway. A slow phone must never be stranded on a dead button. */
@@ -263,7 +263,7 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"/></
   function postLead(email,medium){
     return fetch(CAPTURE_URL,{method:'POST',keepalive:true,
       headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({email:email,utm_source:(qs.get('utm_source')||'workshop'),
+      body:JSON.stringify({email:email,seat_kind:'paid',utm_source:(qs.get('utm_source')||'workshop'),
         form_location:'ic_workshop_paid_'+medium,magnet:'ic_workshop_0730'})
     }).then(function(r){return !!r.ok;});
   }
