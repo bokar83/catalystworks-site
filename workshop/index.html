@@ -305,6 +305,17 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"/></
         submitBtn.disabled=!agree.checked;
         if(agree.checked){var rr=agree.closest('.agree-row');if(rr)rr.classList.remove('flash');}
       });
+      /* Back-navigation from Stripe leaves a DEAD pay button: the line above ran
+         at script time, BEFORE the browser restored this checkbox, so the box
+         comes back ticked while the button stays disabled -- and since nothing
+         changed, no change event ever fires to correct it. The submit handler's
+         own disabled=true is never cleared either. A buyer returning from an
+         abandoned checkout is the most valuable click on the page and it did
+         nothing. pageshow runs after restore, so re-syncing here fixes both. */
+      window.addEventListener('pageshow',function(){
+        submitBtn.disabled=!agree.checked;
+        submitBtn.removeAttribute('aria-busy');
+      });
     }
     f.addEventListener('submit',function(ev){
       ev.preventDefault();
