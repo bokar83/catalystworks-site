@@ -108,7 +108,46 @@ async function scenario(browser, base, opts) {
   check('LeadCaptureFailed pixel fired', r.pixels.some(p => p[1] === 'LeadCaptureFailed'), JSON.stringify(r.pixels));
   check('retried once (2 capture attempts)', r.events.filter(e => e === 'capture:start').length === 2, JSON.stringify(r.events));
 
-  console.log('\n[4] Guards still hold');
+  console.log('\n[4] Back-navigation must not leave a dead pay button');
+  {
+    const ctx = await browser.newContext(); const page = await ctx.newPage();
+    await page.route(CAPTURE, async r2 => { await new Promise(r => setTimeout(r, 200)); r2.fulfill({ status: 200, contentType: 'application/json', body: '{"ok":true}' }); });
+    await page.route('https://buy.stripe.com/**', r2 => r2.fulfill({ status: 200, contentType: 'text/html', body: '<html><body>stripe stub</body></html>' }));
+    await page.goto(base, { waitUntil: 'domcontentloaded' });
+    await page.fill('#seatEmail', 'buyer@example.com');
+    await page.check('#agreeRefund');
+    await page.click('#buyCta');
+    await page.waitForURL(/buy\.stripe\.com/, { timeout: 8000 });
+    await page.goBack({ waitUntil: 'domcontentloaded' });
+    await page.waitForTimeout(300);
+    const busyAfterBack = await page.locator('#buyCta').getAttribute('aria-busy');
+    check('button not left aria-busy after back-navigation', busyAfterBack !== 'true', String(busyAfterBack));
+    await page.fill('#seatEmail', 'buyer2@example.com');
+    if (!(await page.locator('#agreeRefund').isChecked())) await page.check('#agreeRefund');
+    await page.click('#buyCta', { timeout: 5000 }).catch(() => {});
+    await page.waitForURL(/buy\.stripe\.com/, { timeout: 8000 }).catch(() => {});
+    check('retry after back-navigation reaches Stripe', /buy\.stripe\.com/.test(page.url()), page.url());
+    await ctx.close();
+  }
+
+  console.log('\n[5] fetch throwing synchronously must not strand the buyer');
+  {
+    const ctx = await browser.newContext(); const page = await ctx.newPage();
+    await page.route('https://buy.stripe.com/**', r2 => r2.fulfill({ status: 200, contentType: 'text/html', body: 'stub' }));
+    await page.route('https://connect.facebook.net/**', r2 => r2.abort());
+    await page.goto(base, { waitUntil: 'domcontentloaded' });
+    await page.evaluate(() => { window.fetch = function () { throw new TypeError('fetch blocked by webview'); }; });
+    await page.fill('#seatEmail', 'buyer@example.com');
+    await page.check('#agreeRefund');
+    const t = Date.now();
+    await page.click('#buyCta');
+    await page.waitForURL(/buy\.stripe\.com/, { timeout: 8000 }).catch(() => {});
+    check('still reached Stripe when fetch throws', /buy\.stripe\.com/.test(page.url()), page.url());
+    check('did not wait the full 3s backstop', Date.now() - t < 2000, (Date.now() - t) + 'ms');
+    await ctx.close();
+  }
+
+  console.log('\n[6] Guards still hold');
   {
     const ctx = await browser.newContext(); const page = await ctx.newPage();
     let posted = false;

@@ -363,6 +363,9 @@ var CONFIG = {
        clicks. Awaiting the response is the only version that cannot lose the
        lead to that race. Retries once, then reports through the pixel. */
     function capture(email,medium){
+      /* fetch itself can throw synchronously in a hostile in-app webview; the
+         seat must not depend on that never happening. */
+      try{
       return postLead(email,medium).catch(function(){return false;})
         .then(function(ok){return ok?true:postLead(email,medium).catch(function(){return false;});})
         .then(function(ok){
@@ -375,6 +378,10 @@ var CONFIG = {
           }
           return ok;
         });
+      }catch(e){
+        try{if(window.fbq)fbq('trackCustom','LeadCaptureFailed',{content_name:'ic_workshop_paid_seat_0730'});}catch(e2){}
+        return Promise.resolve(false);
+      }
     }
     /* Required refund-policy consent: the pay button reads disabled until the box
        is ticked, and the click handler re-checks it as a backstop. */
@@ -393,6 +400,17 @@ var CONFIG = {
          it with prefilled_email once the visitor has typed one. */
       b.setAttribute('href',buyHref(b.getAttribute('data-medium')||'event'));
       var inFlight=false;
+      /* Back-button / bfcache restore leaves a dead pay button two ways, and a
+         buyer who bounced off Stripe and came back is the most valuable click on
+         the page -- neither is acceptable:
+         1. still flagged busy, which pointer-events:none makes unclickable;
+         2. syncAgree() ran at script time, BEFORE the browser restored the
+            refund checkbox, so the box reads ticked while the button stays
+            aria-disabled forever and no change event ever fires to correct it.
+         pageshow runs after restore, so re-syncing here fixes both. */
+      window.addEventListener('pageshow',function(){
+        inFlight=false;b.removeAttribute('aria-busy');syncAgree();
+      });
       b.addEventListener('click',function(ev){
         ev.preventDefault();
         if(inFlight)return;
