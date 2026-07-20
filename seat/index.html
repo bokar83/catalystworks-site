@@ -141,6 +141,13 @@ h1 em::after{content:"";position:absolute;left:-2%;right:-2%;bottom:-.05em;heigh
 .agree-row a{color:var(--action);font-weight:600;text-decoration:underline}
 .agree-row.flash input{outline:2px solid var(--action);outline-offset:2px;border-radius:3px}
 .cta.is-disabled{opacity:.45;cursor:not-allowed}
+/* Visible busy state while the capture POST is in flight. Without it the awaited
+   capture leaves an up-to-3s window where the button looks completely inert, and
+   a visitor on a slow phone taps, sees nothing move, and leaves -- trading a
+   lead-loss bug for an abandonment bug. Mirrors /ai-checklist and /workshop. */
+.cta[aria-busy="true"]{opacity:.72;pointer-events:none;animation:ctapulse 1s ease-in-out infinite}
+@keyframes ctapulse{0%,100%{opacity:.55}50%{opacity:.9}}
+@media(prefers-reduced-motion:reduce){.cta[aria-busy="true"]{animation:none;opacity:.6}}
 
 /* whisper: intimate aside under the CTA, removes the "not ready yet" objection at the point of action */
 .whisper{text-align:center;margin-top:13px;font-family:var(--font-display);font-style:italic;
@@ -302,7 +309,7 @@ var CONFIG = {
   function fmtDate(iso,opts){var p=isoParts(iso);if(!p)return '';try{return new Date(p.y,p.m-1,p.d).toLocaleDateString('en-US',opts);}catch(e){return '';}}
   CONFIG.cohort=(W&&W.date)?cohortKey(W.date):'';   // e.g. 2026-07-30 -> 2026_07_30
   function setCfg(key,val){d.querySelectorAll('[data-cfg="'+key+'"]').forEach(function(el){el.textContent=val;});}
-  function buyHref(medium){
+  function buyHref(medium,email){
     if(!W||!W.stripeUrl)return '';
     var qs=new URLSearchParams(window.location.search||'');
     var src=(qs.get('utm_source')||'silicon_slopes');   // QR lands via /w/ss (silicon_slopes); fall back to it
@@ -310,7 +317,13 @@ var CONFIG = {
     var sep=W.stripeUrl.indexOf('?')>-1?'&':'?';
     /* Flat client_reference_id ('ic_workshop_0730') for one unified free+paid
        seat count; cohort preserved in utm_content for run-level attribution. */
-    return W.stripeUrl+sep+'utm_source='+encodeURIComponent(src)+'&utm_medium='+encodeURIComponent(med)+'&utm_campaign=ic_workshop_0730&utm_content='+encodeURIComponent(CONFIG.cohort||'')+'&client_reference_id=ic_workshop_0730';
+    var href=W.stripeUrl+sep+'utm_source='+encodeURIComponent(src)+'&utm_medium='+encodeURIComponent(med)+'&utm_campaign=ic_workshop_0730&utm_content='+encodeURIComponent(CONFIG.cohort||'')+'&client_reference_id=ic_workshop_0730';
+    /* prefilled_email: they already typed it in the gate field above, so Stripe
+       must not ask a second time. It also gives the abandoned-checkout alert a
+       real customer_details.email to read instead of null. Only appended at
+       click time -- the resting href has no email to leak. */
+    if(email)href+='&prefilled_email='+encodeURIComponent(email);
+    return href;
   }
   function checklistHref(){
     var base=(W&&W.checklistUrl)?W.checklistUrl:'https://catalystworks.consulting/ai-checklist/';
@@ -324,19 +337,44 @@ var CONFIG = {
     var human=fmtDate(W.date,{weekday:'long',month:'long',day:'numeric'});  // "Thursday, July 30"
     setCfg('dateShort',human);setCfg('dateLong',human);setCfg('city',W.city);
     if(W.price)setCfg('price',W.price);
-    /* Email-gate checkout: capture the email on our side (background, non-blocking)
-       BEFORE Stripe, so an abandoned checkout is still a recoverable lead. The
-       redirect to Stripe is never blocked by the capture. Attribution preserved. */
+    /* Email-gate checkout: capture the email on our side BEFORE Stripe, so an
+       abandoned checkout is still a recoverable lead. Attribution preserved. */
     var CAPTURE_URL='https://agentshq.boubacarbarry.com/api/orc/workshop-register';
+    /* Hard ceiling on how long a visitor waits for the capture before we send
+       them to checkout anyway. A slow phone must never be stranded on a dead
+       button, and a capture failure must NEVER block a paid seat. */
+    var CAPTURE_TIMEOUT_MS=3000;
+    /* Minimum beat before navigating, so the Meta InitiateCheckout beacon lands. */
+    var PIXEL_BEAT_MS=250;
     var emailRe=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     var emailEl=d.getElementById('seatEmail');
     var pageQs=new URLSearchParams(window.location.search||'');
+    function postLead(email,medium){
+      return fetch(CAPTURE_URL,{method:'POST',keepalive:true,headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({email:email,seat_kind:'paid',utm_source:(pageQs.get('utm_source')||'silicon_slopes'),
+          form_location:'ic_workshop_paid_seat_'+medium,magnet:'ic_workshop_0730'})
+      }).then(function(r){return !!r.ok;});
+    }
+    /* Capture the lead and WAIT for it to land before navigating. The previous
+       version fired fetch(keepalive) and navigated 220ms later. keepalive is
+       meant to outlive an unload; in the Facebook/Instagram in-app browser --
+       where this page's QR traffic actually lands -- it is not reliable, and the
+       same pattern on /ai-checklist and /workshop captured zero of 16 real
+       clicks. Awaiting the response is the only version that cannot lose the
+       lead to that race. Retries once, then reports through the pixel. */
     function capture(email,medium){
-      try{
-        fetch(CAPTURE_URL,{method:'POST',keepalive:true,headers:{'Content-Type':'application/json'},
-          body:JSON.stringify({email:email,seat_kind:'paid',utm_source:(pageQs.get('utm_source')||'silicon_slopes'),
-            form_location:'ic_workshop_paid_seat_'+medium,magnet:'ic_workshop_0730'})}).catch(function(){});
-      }catch(e){}
+      return postLead(email,medium).catch(function(){return false;})
+        .then(function(ok){return ok?true:postLead(email,medium).catch(function(){return false;});})
+        .then(function(ok){
+          if(!ok){
+            /* Never silent again. The empty catch that used to live here is why
+               this could run for days losing every lead with nobody able to see
+               it. LeadCaptureFailed makes the failure rate visible in the pixel. */
+            try{console.error('[cw] lead capture FAILED');}catch(e){}
+            try{if(window.fbq)fbq('trackCustom','LeadCaptureFailed',{content_name:'ic_workshop_paid_seat_0730'});}catch(e){}
+          }
+          return ok;
+        });
     }
     /* Required refund-policy consent: the pay button reads disabled until the box
        is ticked, and the click handler re-checks it as a backstop. */
@@ -351,19 +389,34 @@ var CONFIG = {
     if(agreeEl){agreeEl.addEventListener('change',function(){var ar=agreeEl.closest('.agree-row');if(ar&&agreeEl.checked)ar.classList.remove('flash');syncAgree();});}
     syncAgree();
     d.querySelectorAll('.cta-buy').forEach(function(b){
+      /* Resting href carries attribution but no email; the click handler rebuilds
+         it with prefilled_email once the visitor has typed one. */
       b.setAttribute('href',buyHref(b.getAttribute('data-medium')||'event'));
+      var inFlight=false;
       b.addEventListener('click',function(ev){
         ev.preventDefault();
-        var dest=b.getAttribute('href'); if(!dest||dest==='#')return;
+        if(inFlight)return;
+        if(!W||!W.stripeUrl)return;
         if(agreeEl&&!agreeEl.checked){var ar=agreeEl.closest('.agree-row');if(ar)ar.classList.add('flash');agreeEl.focus();return;}
         var email=emailEl?(emailEl.value||'').trim():'';
         if(!emailRe.test(email)){if(emailEl){emailEl.focus();emailEl.setAttribute('aria-invalid','true');}return;}
         if(emailEl)emailEl.removeAttribute('aria-invalid');
-        capture(email,b.getAttribute('data-medium')||'seat');
+        var medium=b.getAttribute('data-medium')||'event';
+        var dest=buyHref(medium,email); if(!dest)return;
+        b.setAttribute('href',dest);
+        inFlight=true;
+        b.setAttribute('aria-busy','true');
         var eid='ic-'+Date.now()+'-'+Math.random().toString(36).slice(2,8);
         try{if(window.fbq)fbq('track','InitiateCheckout',{content_name:'ic_workshop_0730',value:47,currency:'USD'},{eventID:eid});}catch(e){}
-        var sent=false,go=function(){if(sent)return;sent=true;window.location.href=dest;};
-        setTimeout(go,220);
+        var t0=Date.now(),sent=false;
+        var go=function(){if(sent)return;sent=true;window.location.href=dest;};
+        /* Timeout is the seat-safety backstop: whatever the capture does, the
+           visitor reaches Stripe within CAPTURE_TIMEOUT_MS. */
+        var timer=setTimeout(go,CAPTURE_TIMEOUT_MS);
+        capture(email,medium).then(function(){
+          clearTimeout(timer);
+          setTimeout(go,Math.max(0,PIXEL_BEAT_MS-(Date.now()-t0)));
+        });
       });
     });
     var cl=d.getElementById('checklistLink'); if(cl)cl.setAttribute('href',checklistHref());
