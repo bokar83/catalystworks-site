@@ -55,8 +55,15 @@ RewriteRule ^w/start/?$ /ai-checklist/?utm_source=meta&utm_medium=paid&utm_campa
 # Never reuse a slug across campaigns.
 RewriteRule ^w/svc/?$ /workshop/?utm_source=chamber&utm_medium=email&utm_campaign=ic_workshop_0730&utm_content=south_valley [R=301,L,QSA]
 RewriteRule ^w/sjc/?$ /workshop/?utm_source=chamber&utm_medium=email&utm_campaign=ic_workshop_0730&utm_content=south_jordan [R=301,L,QSA]
-RewriteRule ^w/li/?$ /workshop/?utm_source=linkedin&utm_medium=post&utm_campaign=ic_workshop_0730 [R=301,L,QSA]
-RewriteRule ^w/x/?$ /workshop/?utm_source=x&utm_medium=post&utm_campaign=ic_workshop_0730 [R=301,L,QSA]
+# 2026-07-21 (Boubacar, explicit): the organic LinkedIn + X push for July 30 goes
+# to the FREE seat capture, not the $47 page. Both were pointed at /workshop/,
+# which is the paid flow. Repointed to /ai-checklist/, the live free-seat page.
+# utm_medium=organic because these are hand-posted, not an ad buy (same reason
+# w/fb-organic exists). utm_content MUST NOT contain "track_free" -- /workshop/
+# and /workshop-b/ attribute the paid split test with /track_free/.test(utm_content),
+# so "organic_li" / "organic_x" keep organic clicks out of the paid free-first arm.
+RewriteRule ^w/li/?$ /ai-checklist/?utm_source=linkedin&utm_medium=organic&utm_campaign=ic_workshop_0730&utm_content=organic_li [R=301,L,QSA]
+RewriteRule ^w/x/?$ /ai-checklist/?utm_source=x&utm_medium=organic&utm_campaign=ic_workshop_0730&utm_content=organic_x [R=301,L,QSA]
 RewriteRule ^w/nl/?$ /workshop/?utm_source=newsletter&utm_medium=email&utm_campaign=ic_workshop_0730 [R=301,L,QSA]
 # SPLIT TEST (July 30 workshop) -- two paid Meta tracks under one campaign,
 # distinguished by utm_content so seats are attributable per track.
