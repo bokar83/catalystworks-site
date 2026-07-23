@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1200">
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,600;0,700;1,600&family=JetBrains+Mono:wght@400;500&family=Public+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      width: 1200px; height: 630px; overflow: hidden; position: relative;
+      background: #0A0E14; font-family: 'Public Sans', sans-serif;
+      display: flex; align-items: center;
+    }
+    .glow-a { position: absolute; width: 720px; height: 720px; border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(232,166,107,0.16) 0%, transparent 65%);
+      top: -180px; left: -140px; }
+    .glow-b { position: absolute; width: 480px; height: 480px; border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(91,192,190,0.07) 0%, transparent 70%);
+      bottom: -160px; right: -60px; }
+    .content { padding: 72px 80px; position: relative; z-index: 1; max-width: 900px; }
+    .eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 500;
+      letter-spacing: 0.18em; text-transform: uppercase; color: #E8A66B; margin-bottom: 26px;
+      display: flex; align-items: center; gap: 12px; }
+    .eyebrow::before { content: ''; display: block; width: 26px; height: 1px; background: #E8A66B; }
+    h1 { font-family: 'Spectral', serif; font-size: 62px; font-weight: 700; letter-spacing: -0.03em;
+      color: #F5EFE2; line-height: 1.04; margin-bottom: 26px; }
+    h1 em { font-style: italic; font-weight: 600; color: #E8A66B; }
+    .sub { font-size: 20px; color: rgba(245,239,226,0.62); line-height: 1.55; max-width: 640px; }
+    .foot { position: absolute; bottom: 64px; left: 80px; right: 80px; display: flex;
+      align-items: center; justify-content: space-between; }
+    .brand { font-family: 'Spectral', serif; font-size: 20px; font-weight: 700; color: rgba(245,239,226,0.85);
+      display: flex; align-items: center; gap: 12px; }
+    .brand img { width: 34px; height: 34px; border-radius: 50%; }
+    .brand span { color: #E8A66B; }
+    .pill { font-family: 'JetBrains Mono', monospace; font-size: 14px; color: #E8A66B;
+      border: 1px solid rgba(232,166,107,0.32); border-radius: 100px; padding: 9px 18px;
+      display: inline-flex; align-items: center; gap: 9px; }
+    .dot { width: 7px; height: 7px; border-radius: 50%; background: #E8A66B; }
+  </style>
+</head>
+<body>
+  <div class="glow-a"></div>
+  <div class="glow-b"></div>
+  <div class="content">
+    <div class="eyebrow">Catalyst Works . How I work</div>
+    <h1>You run the business.<br><em>I run the systems with you.</em></h1>
+    <p class="sub">Find the one bottleneck slowing you down, fix what matters first, and stay long enough your people can run it. The audit, the fix, the partnership.</p>
+  </div>
+  <div class="foot">
+    <div class="brand"><img src="CatalystWorks_logo.jpg" alt="">Catalyst<span>Works</span></div>
+    <div class="pill"><span class="dot"></span>catalystworks.consulting/services</div>
+  </div>
+</body>
+</html>

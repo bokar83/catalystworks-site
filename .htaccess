@@ -47,6 +47,10 @@ RewriteRule ^free-workshop-july16/?$ /ai-checklist/?utm_source=sbdc&utm_medium=o
 # capture that actually reserves the $0 seat. Organic medium keeps attribution
 # honest. NOTE: /w/vip below still resolves here via a second 301 hop.
 RewriteRule ^rsvp-0730/?$ /ai-checklist/?utm_source=direct_invite&utm_medium=organic&utm_campaign=ic_workshop_0730&utm_content=stale_rsvp0730_redirect [R=301,L]
+# Services offer-ladder page lives at /services/ (unlinked preview, awaiting nav sign-off).
+RewriteRule ^services/?$ services/index.html [NC,L]
+# 5-Day Bottleneck Audit landing page lives at /bottleneck-audit/ (unlinked preview, awaiting nav sign-off).
+RewriteRule ^bottleneck-audit/?$ bottleneck-audit/index.html [NC,L]
 # Short link for the lead-magnet (Meta ads + any channel): /w/start -> opt-in page.
 # Campaign = stable magnet base; utm_content carries the current cohort for per-run segmentation.
 RewriteRule ^w/start/?$ /ai-checklist/?utm_source=meta&utm_medium=paid&utm_campaign=ic_workshop_leadmagnet&utm_content=cohort:2026_06_25 [R=301,L,QSA]

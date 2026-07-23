@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en" style="color-scheme: dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0A0E14">
+  <title>Services . How I work with you . Catalyst Works</title>
+  <meta name="description" content="You run the business. I run the systems with you. Find the one bottleneck slowing you down, fix what matters most first with the right tools, and stay long enough that your people can run it. The 5-Day Bottleneck Audit, the Fix Sprint, and a stay-on partnership.">
+  <link rel="icon" type="image/jpeg" href="../CatalystWorks_logo.jpg">
+  <link rel="canonical" href="https://catalystworks.consulting/services/">
+
+  <meta property="og:title" content="You run the business. I run the systems with you.">
+  <meta property="og:description" content="Find the one bottleneck slowing you down, fix what matters first with the right tools, and stay long enough your people can run it. The audit, the fix, the partnership.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://catalystworks.consulting/services/">
+  <meta property="og:image" content="https://catalystworks.consulting/services/og-services.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="You run the business. I run the systems with you.">
+  <meta name="twitter:description" content="Find the one bottleneck slowing you down, fix what matters first, stay long enough your people can run it. The audit, the fix, the partnership.">
+  <meta name="twitter:image" content="https://catalystworks.consulting/services/og-services.jpg">
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TBW90RVMM1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-TBW90RVMM1');
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Catalyst Works consulting services",
+    "description": "Find the one bottleneck slowing a business down, fix what matters most first with the right tools, and stay long enough that the owner's people can run it. Services: the 5-Day Bottleneck Audit, the Fix Sprint, and a stay-on partnership.",
+    "provider": { "@type": "Organization", "name": "Catalyst Works", "url": "https://catalystworks.consulting" },
+    "areaServed": [
+      { "@type": "State", "name": "Utah" },
+      { "@type": "Country", "name": "United States" },
+      { "@type": "Place", "name": "Remote, North America" }
+    ],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "How I work",
+      "itemListElement": [
+        { "@type": "Offer", "name": "5-Day Bottleneck Audit", "price": "2997", "priceCurrency": "USD", "description": "A written map of what is slowing the business down, ranked by what it costs, with the first fix named. Fixed scope, five days." },
+        { "@type": "Offer", "name": "Fix Sprint", "price": "8500", "priceCurrency": "USD", "description": "Fix the one bottleneck that matters most: the right tools, AI only when it fits, the owner's people trained on what ships. Six to eight weeks." },
+        { "@type": "Offer", "name": "Stay-On Partnership", "description": "I stay, train the owner's people, and keep the systems current as the business changes. Contact for scoping." }
+      ]
+    }
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;0,700&family=Public+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/lens-pages.css">
+
+  <style>
+    /* Services-page-scoped components. Built on lens-pages.css tokens for exact brand match. */
+    .moves { list-style: none; max-width: 820px; margin: 8px 0 0; counter-reset: move; }
+    .moves li {
+      counter-increment: move;
+      position: relative;
+      padding: 22px 0 22px 64px;
+      border-top: 1px solid var(--line);
+    }
+    .moves li:first-child { border-top: none; }
+    .moves li::before {
+      content: counter(move, decimal-leading-zero);
+      position: absolute; left: 0; top: 22px;
+      font-family: var(--mono); font-size: 13px;
+      color: var(--amber); letter-spacing: 0.06em;
+    }
+    .moves li strong {
+      display: block; font-family: var(--serif); font-size: 20px;
+      font-weight: 600; color: var(--paper); margin-bottom: 6px; letter-spacing: -0.01em;
+    }
+    .moves li span { color: var(--t-mid); font-size: 15.5px; line-height: 1.55; }
+
+    /* THE LADDER - stacked rungs, editorial weight, not a 3-up card grid */
+    .ladder { max-width: 960px; margin: 12px auto 0; display: flex; flex-direction: column; gap: 20px; }
+    .rung {
+      position: relative; overflow: hidden;
+      display: grid; grid-template-columns: 56px 1fr auto; gap: 28px;
+      align-items: start;
+      padding: 30px 30px 30px 28px;
+      background: rgba(22,29,39,0.5);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      transition: border-color 280ms var(--ease), transform 280ms var(--ease);
+    }
+    .rung:hover { border-color: rgba(232,166,107,0.30); transform: translateY(-2px); }
+    .rung.is-primary {
+      background: linear-gradient(180deg, rgba(232,166,107,0.07) 0%, rgba(15,20,28,0.6) 100%);
+      border-color: rgba(232,166,107,0.34);
+    }
+    .rung.is-primary::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--amber), transparent);
+    }
+    .rung-index { font-family: var(--mono); font-size: 13px; color: var(--amber); letter-spacing: 0.08em; padding-top: 4px; }
+    .rung-body { min-width: 0; }
+    .rung-name { font-family: var(--serif); font-size: clamp(21px, 2.6vw, 27px); font-weight: 600; color: var(--paper); letter-spacing: -0.015em; margin-bottom: 4px; }
+    .rung-tag { display: inline-block; font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--amber); margin-bottom: 12px; }
+    .rung-desc { color: var(--t-mid); font-size: 15.5px; line-height: 1.55; margin-bottom: 16px; max-width: 52ch; }
+    .rung-includes { list-style: none; margin: 0 0 18px; }
+    .rung-includes li { position: relative; padding: 5px 0 5px 24px; color: var(--t-mid); font-size: 14.5px; line-height: 1.5; }
+    .rung-includes li::before { content: ''; position: absolute; left: 2px; top: 11px; width: 9px; height: 9px; border-right: 1.5px solid var(--amber); border-bottom: 1.5px solid var(--amber); transform: rotate(45deg); }
+    .rung-guarantee { font-size: 14.5px; color: var(--paper); background: rgba(232,166,107,0.08); border: 1px solid rgba(232,166,107,0.20); border-radius: 10px; padding: 14px 16px; line-height: 1.5; }
+    .rung-guarantee b { color: var(--amber); font-weight: 600; }
+    .rung-aside { text-align: right; min-width: 150px; }
+    .rung-price { font-family: var(--serif); font-size: 34px; font-weight: 700; color: var(--paper); letter-spacing: -0.03em; line-height: 1; }
+    .rung-price small { display: block; font-family: var(--mono); font-size: 11px; color: var(--t-muted); letter-spacing: 0.04em; margin-top: 8px; font-weight: 400; line-height: 1.5; }
+    .rung-price .founding { color: var(--amber); }
+    .rung-cta {
+      display: inline-flex; align-items: center; gap: 8px;
+      margin-top: 16px; padding: 11px 18px; border-radius: 9px;
+      background: var(--amber); color: var(--ink);
+      font-weight: 700; font-size: 13.5px; white-space: nowrap;
+      transition: transform 180ms var(--ease), box-shadow 220ms;
+    }
+    .rung-cta:hover { transform: translateY(-1px); box-shadow: 0 10px 26px rgba(232,166,107,0.30); }
+    .rung-cta.ghost { background: transparent; color: var(--paper); border: 1px solid var(--line); }
+    .rung-cta.ghost:hover { border-color: rgba(232,166,107,0.4); box-shadow: none; }
+
+    @media (max-width: 720px) {
+      .rung { grid-template-columns: 1fr; gap: 14px; padding: 26px 22px; }
+      .rung-index { padding-top: 0; }
+      .rung-aside { text-align: left; }
+      .rung-desc { max-width: none; }
+      .moves li { padding-left: 40px; }
+    }
+
+    .who-line { font-family: var(--mono); font-size: 12.5px; color: var(--t-muted); letter-spacing: 0.03em; margin-top: 16px; line-height: 1.6; }
+    .who-line b { color: var(--paper); font-weight: 600; }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="../index" class="brand">
+      <img src="../CatalystWorks_logo.jpg" alt="Catalyst Works" width="32" height="32" decoding="async">
+      <span>Catalyst<span class="accent">Works</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="../index#method">Method</a>
+      <a href="../bottleneck-audit">The Audit</a>
+      <a href="../signal">The Weekly Signal</a>
+      <a href="../governance">AI Governance</a>
+    </div>
+    <a href="mailto:diagnose@catalystworks.consulting?subject=What%20is%20slowing%20us%20down" class="nav-cta">Send a short message →</a>
+    <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-drawer"><span></span></button>
+  </div>
+</nav>
+
+<div class="nav-drawer" id="nav-drawer" hidden>
+  <a href="../index">Home</a>
+  <a href="../index#method">The method</a>
+  <a href="../bottleneck-audit">The 5-Day Bottleneck Audit</a>
+  <a href="../signal">The Weekly Signal</a>
+  <a href="../governance">AI Governance</a>
+  <a href="mailto:diagnose@catalystworks.consulting?subject=What%20is%20slowing%20us%20down" class="nav-drawer-cta">Send a short message →</a>
+</div>
+
+<script>
+(function(){
+  var btn = document.querySelector('.nav-toggle');
+  var drawer = document.getElementById('nav-drawer');
+  if (!btn || !drawer) return;
+  drawer.hidden = false;
+  btn.addEventListener('click', function(){
+    var open = drawer.classList.toggle('is-open');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  });
+  drawer.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      drawer.classList.remove('is-open');
+      btn.setAttribute('aria-expanded', 'false');
+      btn.setAttribute('aria-label', 'Open menu');
+    });
+  });
+})();
+</script>
+
+<header class="hero">
+  <div class="eyebrow">How I work</div>
+  <h1>You run the business.<br><em>I run the systems with you.</em></h1>
+  <p class="lede">Most consultants hand you a deck and a bill. I find the one thing slowing you down, fix it with the right tools, and stay long enough that your people can run it without me.</p>
+</header>
+
+<section class="section">
+  <h2>The order matters</h2>
+  <p>Every business has more than one problem. Almost none of them are the one worth fixing first. The job is to find the constraint, fix that, and leave your team able to keep it fixed. In that order.</p>
+  <ul class="moves">
+    <li><strong>Find the constraint.</strong><span>Not a list of everything wrong. The single thing that, once fixed, moves the number. Most of what looks urgent is noise sitting on top of it.</span></li>
+    <li><strong>Fix what matters most first.</strong><span>The right tools for your business, wired and working. AI when it earns its place on the problem, not because it is the thing everyone is talking about this quarter.</span></li>
+    <li><strong>Stay and run it with you.</strong><span>I train your people on what ships, hands on the keyboard, so the fix holds after I am gone. Not a handshake and a PDF. A system your team owns.</span></li>
+  </ul>
+</section>
+
+<section class="section" id="ladder-section">
+  <h2>Three ways in</h2>
+  <p>Start with the audit. Most people do. If you already know the fix and just need it built, we skip to the sprint. If you want an operator who stays, we do that too.</p>
+
+  <div class="ladder">
+    <article class="rung is-primary">
+      <div class="rung-index">01</div>
+      <div class="rung-body">
+        <div class="rung-tag">Start here</div>
+        <div class="rung-name">The 5-Day Bottleneck Audit</div>
+        <p class="rung-desc">A written map of what is slowing your business down, ranked by what it costs you, with the first fix named. Fixed scope. Five days.</p>
+        <ul class="rung-includes">
+          <li>A written map of your business, bottleneck by bottleneck, in plain language</li>
+          <li>Every bottleneck ranked by what it costs you, in dollars and hours a month</li>
+          <li>The one fix to make first, named and scoped so you can start Monday</li>
+          <li>A 30-minute walkthrough of the map, live, so nothing gets lost</li>
+        </ul>
+        <div class="rung-guarantee">If the written map does not show you a bottleneck worth more than my fee, <b>you decide, and you do not pay.</b> You grade it, not me.</div>
+      </div>
+      <div class="rung-aside">
+        <div class="rung-price">$2,997<small><span class="founding">Founding $1,997</span><br>first three clients</small></div>
+        <a href="../bottleneck-audit" class="rung-cta">See the audit →</a>
+      </div>
+    </article>
+
+    <article class="rung">
+      <div class="rung-index">02</div>
+      <div class="rung-body">
+        <div class="rung-tag">The fix</div>
+        <div class="rung-name">Fix Sprint</div>
+        <p class="rung-desc">We fix the one bottleneck that matters most. The right tools, AI only when it fits, your people trained on what ships so the fix stays fixed.</p>
+        <ul class="rung-includes">
+          <li>The top bottleneck from your audit, fixed end to end</li>
+          <li>The right tools chosen for your business, wired and working</li>
+          <li>Your team trained on the new system, hands on, not watching a demo</li>
+          <li>A handover doc so it holds after the sprint ends</li>
+        </ul>
+      </div>
+      <div class="rung-aside">
+        <div class="rung-price">$8,500<small>6 to 8 weeks<br>same price for everyone</small></div>
+        <a href="mailto:diagnose@catalystworks.consulting?subject=Fix%20Sprint" class="rung-cta ghost">Ask about a sprint →</a>
+      </div>
+    </article>
+
+    <article class="rung">
+      <div class="rung-index">03</div>
+      <div class="rung-body">
+        <div class="rung-tag">The long game</div>
+        <div class="rung-name">Stay-On Partnership</div>
+        <p class="rung-desc">I stay. I train your people, and I keep the systems current as the business changes. You get an operator who already knows your business, on call, instead of starting cold every time something breaks.</p>
+      </div>
+      <div class="rung-aside">
+        <div class="rung-price" style="font-size:22px;">Let's scope it<small>ongoing, priced to the work</small></div>
+        <a href="mailto:diagnose@catalystworks.consulting?subject=Stay-On%20Partnership" class="rung-cta ghost">Start a conversation →</a>
+      </div>
+    </article>
+  </div>
+
+  <p class="who-line">Built for <b>businesses with a team the work runs through</b>, five to a couple hundred people. Not for a one-person shop with nobody to delegate to.</p>
+</section>
+
+<section class="section">
+  <h2>Founding clients</h2>
+  <p>I am taking on my first three founding clients at a founding rate, in exchange for the right to write up what we fix. You get my full attention. I get the case study. The founding rate applies to the audit. The Fix Sprint is the same price for everyone, founding client or not.</p>
+
+  <div class="callout">
+    <div class="callout-label">Where AI fits</div>
+    <p>AI is a tool, not the point. I reach for it when it is the right fix for your bottleneck, and I leave it out when a simpler system does the job. You will never pay me to bolt AI onto a problem that did not need it.</p>
+  </div>
+</section>
+
+<section class="cta-strip">
+  <h3>Not sure which one you need?</h3>
+  <p>Send me a short message about what is slowing you down. If the audit is not the right first step for you, I will tell you. No hard pitch, no booking wall.</p>
+  <a href="mailto:diagnose@catalystworks.consulting?subject=What%20is%20slowing%20us%20down" class="btn">Send a short message →</a>
+  <div class="price-tag">Reply-first . the work is the pitch . start with the audit at $2,997 ($1,997 founding)</div>
+</section>
+
+<section class="section">
+  <div class="cross-links">
+    <div class="cross-links-label">Keep reading</div>
+    <div class="cross-links-grid">
+      <a href="../bottleneck-audit">
+        <strong>The 5-Day Bottleneck Audit</strong>
+        The deliverable, the five days, the guarantee, in full.
+      </a>
+      <a href="../index#method">
+        <strong>How I read a business</strong>
+        The method behind the map.
+      </a>
+      <a href="../signal">
+        <strong>The Weekly Signal</strong>
+        One constraint pattern a week, in your inbox.
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-inner">
+    <a href="../index" class="brand">
+      <img src="../CatalystWorks_logo.jpg" alt="Catalyst Works" width="32" height="32" loading="lazy" decoding="async">
+      <span>Catalyst<span class="accent">Works</span></span>
+    </a>
+    <div class="foot-links">
+      <a href="mailto:diagnose@catalystworks.consulting">diagnose@catalystworks.consulting</a>
+      <a href="../bottleneck-audit">The Audit</a>
+      <a href="../governance">AI Governance</a>
+      <a href="https://www.linkedin.com/company/catalyst-works-ai/" rel="noopener" target="_blank">LinkedIn</a>
+    </div>
+    <div class="foot-copy">© 2026 Catalyst Works . You run the business. I run the systems with you.</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var nav = document.querySelector('.nav');
+  if (!nav) return;
+  var update = function(){
+    if (window.scrollY > 8) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  };
+  update();
+  window.addEventListener('scroll', update, { passive: true });
+})();
+</script>
+</body>
+</html>
