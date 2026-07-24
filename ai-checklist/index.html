@@ -224,22 +224,29 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"/></
   var PIXEL_BEAT_MS=250;
   var qs=new URLSearchParams(window.location.search||'');
   var emailRe=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  function freeHref(medium,email){
+  function freeHref(medium,email,reg_ref){
     var src=(qs.get('utm_source')||'ai_checklist');
     var sep=FREE_STRIPE.indexOf('?')>-1?'&':'?';
     /* prefilled_email: the visitor already typed it here, so Stripe must not ask
        a second time. On a free offer the second ask reads as evidence the thing
        was never free. It also gives the abandonment alert a real
        customer_details.email to read instead of null. */
-    return FREE_STRIPE+sep+'client_reference_id=ic_workshop_0730'
+    /* client_reference_id carries the cohort PLUS a per-registration ref
+       ('ic_workshop_0730__<ref>'). The cohort prefix keeps the existing single
+       filterable count working (every consumer substring-matches 'ic_workshop_0730');
+       the suffix lets a completed Stripe session reconcile back to the exact
+       workshop_registrations row, so the abandon alert never fires on a seat that
+       actually converted. */
+    var cref='ic_workshop_0730'+(reg_ref?('__'+encodeURIComponent(reg_ref)):'');
+    return FREE_STRIPE+sep+'client_reference_id='+cref
       +'&utm_source='+encodeURIComponent(src)+'&utm_medium='+encodeURIComponent(medium)
       +'&utm_campaign=ic_workshop_0730_free&utm_content='+encodeURIComponent(COHORT)+'&utm_term=track_free'
       +'&prefilled_email='+encodeURIComponent(email);
   }
-  function postLead(email,medium){
+  function postLead(email,medium,reg_ref){
     return fetch(CAPTURE_URL,{method:'POST',keepalive:true,
       headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({email:email,utm_source:(qs.get('utm_source')||'ai_checklist'),
+      body:JSON.stringify({email:email,reg_ref:reg_ref||'',utm_source:(qs.get('utm_source')||'ai_checklist'),
         form_location:'ic_workshop_free_'+medium,magnet:'ic_workshop_free_0730'})
     }).then(function(r){return !!r.ok;});
   }
@@ -252,9 +259,9 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"/></
      Facebook/Instagram in-app browser, where keepalive is unreliable. Awaiting
      the response is the only version that cannot lose the lead to that race.
      Retries once, then reports. A capture failure must NEVER block the seat. */
-  function capture(email,medium){
-    return postLead(email,medium).catch(function(){return false;})
-      .then(function(ok){return ok?true:postLead(email,medium).catch(function(){return false;});})
+  function capture(email,medium,reg_ref){
+    return postLead(email,medium,reg_ref).catch(function(){return false;})
+      .then(function(ok){return ok?true:postLead(email,medium,reg_ref).catch(function(){return false;});})
       .then(function(ok){
         if(!ok){
           /* Never silent again. The empty catch that used to live here is why
@@ -278,14 +285,18 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"/></
       input.removeAttribute('aria-invalid');
       var btn=f.querySelector('button[type=submit]');
       if(btn){btn.setAttribute('aria-busy','true');btn.disabled=true;}
-      var dest=freeHref(medium,email);
+      /* Mint the per-registration ref BEFORE building the checkout URL so the
+         same ref lands on (a) the capture POST -> workshop_registrations.reg_ref
+         and (b) the Stripe client_reference_id. That shared ref is what lets a
+         completed checkout reconcile back to this exact registration. */
       var eid='lead-'+Date.now()+'-'+Math.random().toString(36).slice(2,8);
       try{sessionStorage.setItem('cw_free_lead_eid',eid);}catch(e){}
+      var dest=freeHref(medium,email,eid);
       try{if(window.fbq)fbq('track','Lead',{content_name:'ic_free_seat_0730',content_category:'ic_workshop_0730'},{eventID:eid});}catch(e){}
       var t0=Date.now(),sent=false;
       var go=function(){if(sent)return;sent=true;window.location.href=dest;};
       var timer=setTimeout(go,CAPTURE_TIMEOUT_MS);
-      capture(email,medium).then(function(){
+      capture(email,medium,eid).then(function(){
         clearTimeout(timer);
         setTimeout(go,Math.max(0,PIXEL_BEAT_MS-(Date.now()-t0)));
       });

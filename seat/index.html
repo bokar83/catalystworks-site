@@ -309,15 +309,20 @@ var CONFIG = {
   function fmtDate(iso,opts){var p=isoParts(iso);if(!p)return '';try{return new Date(p.y,p.m-1,p.d).toLocaleDateString('en-US',opts);}catch(e){return '';}}
   CONFIG.cohort=(W&&W.date)?cohortKey(W.date):'';   // e.g. 2026-07-30 -> 2026_07_30
   function setCfg(key,val){d.querySelectorAll('[data-cfg="'+key+'"]').forEach(function(el){el.textContent=val;});}
-  function buyHref(medium,email){
+  function buyHref(medium,email,reg_ref){
     if(!W||!W.stripeUrl)return '';
     var qs=new URLSearchParams(window.location.search||'');
     var src=(qs.get('utm_source')||'silicon_slopes');   // QR lands via /w/ss (silicon_slopes); fall back to it
     var med=(qs.get('utm_medium')||medium||'event');
     var sep=W.stripeUrl.indexOf('?')>-1?'&':'?';
-    /* Flat client_reference_id ('ic_workshop_0730') for one unified free+paid
-       seat count; cohort preserved in utm_content for run-level attribution. */
-    var href=W.stripeUrl+sep+'utm_source='+encodeURIComponent(src)+'&utm_medium='+encodeURIComponent(med)+'&utm_campaign=ic_workshop_0730&utm_content='+encodeURIComponent(CONFIG.cohort||'')+'&client_reference_id=ic_workshop_0730';
+    /* client_reference_id carries the cohort PLUS a per-registration ref
+       ('ic_workshop_0730__<ref>'). The 'ic_workshop_0730' prefix keeps the single
+       unified free+paid count filterable (every consumer substring-matches it);
+       the suffix reconciles a completed session back to the exact
+       workshop_registrations row so a paid seat never triggers an abandon alert.
+       Cohort also preserved in utm_content for run-level attribution. */
+    var cref='ic_workshop_0730'+(reg_ref?('__'+encodeURIComponent(reg_ref)):'');
+    var href=W.stripeUrl+sep+'utm_source='+encodeURIComponent(src)+'&utm_medium='+encodeURIComponent(med)+'&utm_campaign=ic_workshop_0730&utm_content='+encodeURIComponent(CONFIG.cohort||'')+'&client_reference_id='+cref;
     /* prefilled_email: they already typed it in the gate field above, so Stripe
        must not ask a second time. It also gives the abandoned-checkout alert a
        real customer_details.email to read instead of null. Only appended at
@@ -349,9 +354,9 @@ var CONFIG = {
     var emailRe=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     var emailEl=d.getElementById('seatEmail');
     var pageQs=new URLSearchParams(window.location.search||'');
-    function postLead(email,medium){
+    function postLead(email,medium,reg_ref){
       return fetch(CAPTURE_URL,{method:'POST',keepalive:true,headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({email:email,seat_kind:'paid',utm_source:(pageQs.get('utm_source')||'silicon_slopes'),
+        body:JSON.stringify({email:email,reg_ref:reg_ref||'',seat_kind:'paid',utm_source:(pageQs.get('utm_source')||'silicon_slopes'),
           form_location:'ic_workshop_paid_seat_'+medium,magnet:'ic_workshop_0730'})
       }).then(function(r){return !!r.ok;});
     }
@@ -362,12 +367,12 @@ var CONFIG = {
        same pattern on /ai-checklist and /workshop captured zero of 16 real
        clicks. Awaiting the response is the only version that cannot lose the
        lead to that race. Retries once, then reports through the pixel. */
-    function capture(email,medium){
+    function capture(email,medium,reg_ref){
       /* fetch itself can throw synchronously in a hostile in-app webview; the
          seat must not depend on that never happening. */
       try{
-      return postLead(email,medium).catch(function(){return false;})
-        .then(function(ok){return ok?true:postLead(email,medium).catch(function(){return false;});})
+      return postLead(email,medium,reg_ref).catch(function(){return false;})
+        .then(function(ok){return ok?true:postLead(email,medium,reg_ref).catch(function(){return false;});})
         .then(function(ok){
           if(!ok){
             /* Never silent again. The empty catch that used to live here is why
@@ -420,18 +425,22 @@ var CONFIG = {
         if(!emailRe.test(email)){if(emailEl){emailEl.focus();emailEl.setAttribute('aria-invalid','true');}return;}
         if(emailEl)emailEl.removeAttribute('aria-invalid');
         var medium=b.getAttribute('data-medium')||'event';
-        var dest=buyHref(medium,email); if(!dest)return;
+        /* Mint the per-registration ref BEFORE building the checkout URL so the
+           same ref lands on both the capture POST (workshop_registrations.reg_ref)
+           and the Stripe client_reference_id -- the shared key that reconciles a
+           completed checkout back to this exact registration. */
+        var eid='ic-'+Date.now()+'-'+Math.random().toString(36).slice(2,8);
+        var dest=buyHref(medium,email,eid); if(!dest)return;
         b.setAttribute('href',dest);
         inFlight=true;
         b.setAttribute('aria-busy','true');
-        var eid='ic-'+Date.now()+'-'+Math.random().toString(36).slice(2,8);
         try{if(window.fbq)fbq('track','InitiateCheckout',{content_name:'ic_workshop_0730',value:47,currency:'USD'},{eventID:eid});}catch(e){}
         var t0=Date.now(),sent=false;
         var go=function(){if(sent)return;sent=true;window.location.href=dest;};
         /* Timeout is the seat-safety backstop: whatever the capture does, the
            visitor reaches Stripe within CAPTURE_TIMEOUT_MS. */
         var timer=setTimeout(go,CAPTURE_TIMEOUT_MS);
-        capture(email,medium).then(function(){
+        capture(email,medium,eid).then(function(){
           clearTimeout(timer);
           setTimeout(go,Math.max(0,PIXEL_BEAT_MS-(Date.now()-t0)));
         });

@@ -244,26 +244,28 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"/></
   var PIXEL_BEAT_MS=250;
   var qs=new URLSearchParams(window.location.search||'');
   var emailRe=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  function buyHref(medium,email){
+  function buyHref(medium,email,reg_ref){
     var src=(qs.get('utm_source')||'workshop');
     var utmC=(qs.get('utm_content')||'');
-    /* Unified seat count: ONE flat client_reference_id across free + paid so
-       cref === 'ic_workshop_0730' counts every seat. Cohort rides in utm_content
-       and the free-track tag in utm_term, so attribution survives the flat cref.
-       track_free reads utm_content and is the live paid split test -- do not
-       change the shape of this without checking /w/free in .htaccess. */
+    /* Unified seat count: the cohort prefix 'ic_workshop_0730' still counts every
+       seat (all consumers substring-match it). A per-registration ref is appended
+       as 'ic_workshop_0730__<ref>' so a completed Stripe session reconciles back
+       to the exact workshop_registrations row -- a paid seat never trips the
+       abandon alert. Cohort rides in utm_content and the free-track tag in
+       utm_term, so attribution survives. track_free reads utm_content and is the
+       live paid split test -- do not change the shape of this without checking
+       /w/free in .htaccess. */
     var track=/track_free/.test(utmC)?'track_free':'';
     var sep=STRIPE_URL.indexOf('?')>-1?'&':'?';
+    var cref='ic_workshop_0730'+(reg_ref?('__'+encodeURIComponent(reg_ref)):'');
     /* prefilled_email: they already typed it here, so Stripe must not ask again.
-       Also gives the abandonment alert a real customer_details.email to read --
-       today it is null by construction, which is why every alert says
-       "no contact captured" whether or not we captured one. */
-    return STRIPE_URL+sep+'utm_source='+encodeURIComponent(src)+'&utm_medium='+encodeURIComponent(medium)+'&utm_campaign=ic_workshop_0730&utm_content='+encodeURIComponent(COHORT)+(track?'&utm_term='+track:'')+'&client_reference_id=ic_workshop_0730'+'&prefilled_email='+encodeURIComponent(email);
+       Also gives the abandonment alert a real customer_details.email to read. */
+    return STRIPE_URL+sep+'utm_source='+encodeURIComponent(src)+'&utm_medium='+encodeURIComponent(medium)+'&utm_campaign=ic_workshop_0730&utm_content='+encodeURIComponent(COHORT)+(track?'&utm_term='+track:'')+'&client_reference_id='+cref+'&prefilled_email='+encodeURIComponent(email);
   }
-  function postLead(email,medium){
+  function postLead(email,medium,reg_ref){
     return fetch(CAPTURE_URL,{method:'POST',keepalive:true,
       headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({email:email,seat_kind:'paid',utm_source:(qs.get('utm_source')||'workshop'),
+      body:JSON.stringify({email:email,reg_ref:reg_ref||'',seat_kind:'paid',utm_source:(qs.get('utm_source')||'workshop'),
         form_location:'ic_workshop_paid_'+medium,magnet:'ic_workshop_0730'})
     }).then(function(r){return !!r.ok;});
   }
@@ -276,9 +278,9 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"/></
      Facebook/Instagram in-app browser, where keepalive is unreliable. Awaiting
      the response is the only version that cannot lose the lead to that race.
      Retries once, then reports. A capture failure must NEVER block the sale. */
-  function capture(email,medium){
-    return postLead(email,medium).catch(function(){return false;})
-      .then(function(ok){return ok?true:postLead(email,medium).catch(function(){return false;});})
+  function capture(email,medium,reg_ref){
+    return postLead(email,medium,reg_ref).catch(function(){return false;})
+      .then(function(ok){return ok?true:postLead(email,medium,reg_ref).catch(function(){return false;});})
       .then(function(ok){
         if(!ok){
           /* Never silent again. The empty catch that used to live here is why
@@ -325,13 +327,16 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"/></
       input.removeAttribute('aria-invalid');
       var btn=f.querySelector('button[type=submit]');
       if(btn){btn.setAttribute('aria-busy','true');btn.disabled=true;}
-      var dest=buyHref(medium,email);
+      /* Mint the per-registration ref BEFORE the checkout URL so the same ref
+         lands on both the capture POST (workshop_registrations.reg_ref) and the
+         Stripe client_reference_id -- the shared key for reconciliation. */
       var eid='ic-'+Date.now()+'-'+Math.random().toString(36).slice(2,8);
+      var dest=buyHref(medium,email,eid);
       try{if(window.fbq)fbq('track','InitiateCheckout',{content_name:'ic_workshop_0730',value:47,currency:'USD'},{eventID:eid});}catch(e){}
       var t0=Date.now(),sent=false;
       var go=function(){if(sent)return;sent=true;window.location.href=dest;};
       var timer=setTimeout(go,CAPTURE_TIMEOUT_MS);
-      capture(email,medium).then(function(){
+      capture(email,medium,eid).then(function(){
         clearTimeout(timer);
         setTimeout(go,Math.max(0,PIXEL_BEAT_MS-(Date.now()-t0)));
       });
