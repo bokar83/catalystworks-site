@@ -32,32 +32,35 @@
     .brand img { width: 34px; height: 34px; border-radius: 50%; }
     .brand span { color: #E8A66B; }
 
-    /* 3D document mockup on the right */
-    .stage { position: absolute; right: 96px; top: 50%; transform: translateY(-50%); perspective: 1400px; z-index: 1; }
-    .doc { position: relative; width: 264px; height: 352px;
-      transform: rotateY(-24deg) rotateX(5deg) rotate(-1.5deg); }
-    .doc::after { content: ''; position: absolute; inset: 0; border-radius: 4px 8px 8px 4px;
-      background: #E8DFCB; box-shadow: 3px 3px 0 -1px #d8ccb0, 6px 6px 0 -2px #e8dfcb, 9px 9px 0 -3px #d8ccb0, 12px 12px 0 -4px #e8dfcb; z-index: -1; }
-    .doc-face { position: absolute; inset: 0; border-radius: 4px 8px 8px 4px;
-      background: linear-gradient(160deg, #12212F 0%, #0C1620 100%);
-      border: 1px solid rgba(232,166,107,0.24); box-shadow: -20px 26px 54px rgba(0,0,0,0.6);
-      padding: 24px 22px; overflow: hidden; }
-    .doc-face::before { content: ''; position: absolute; top: 0; bottom: 0; left: 0; width: 7px;
-      background: linear-gradient(180deg, #E8A66B, #D08A50); opacity: 0.85; }
-    .doc-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 8px; letter-spacing: 0.16em; text-transform: uppercase; color: #E8A66B; margin-bottom: 12px; }
-    .doc-title { font-family: 'Spectral', serif; font-size: 24px; font-weight: 700; color: #F5EFE2; line-height: 1.05; margin-bottom: 3px; }
-    .doc-sub { font-family: 'JetBrains Mono', monospace; font-size: 8px; color: rgba(245,239,226,0.5); margin-bottom: 18px; }
-    .rows { display: flex; flex-direction: column; gap: 8px; }
-    .row { display: flex; align-items: center; gap: 7px; }
-    .rk { font-family: 'JetBrains Mono', monospace; font-size: 8px; color: #E8A66B; width: 12px; }
-    .bar { height: 7px; border-radius: 2px; }
-    .b1 { width: 88%; background: linear-gradient(90deg, #E8A66B, rgba(232,166,107,0.14)); }
-    .b2 { width: 62%; background: linear-gradient(90deg, #B47C57, rgba(180,124,87,0.12)); }
-    .b3 { width: 45%; background: linear-gradient(90deg, rgba(245,239,226,0.4), rgba(245,239,226,0.05)); }
-    .b4 { width: 30%; background: linear-gradient(90deg, rgba(245,239,226,0.26), rgba(245,239,226,0.04)); }
-    .fix { margin-top: 16px; padding: 9px 11px; border-radius: 6px; background: rgba(232,166,107,0.12); border: 1px solid rgba(232,166,107,0.28); }
-    .fix .l { font-family: 'JetBrains Mono', monospace; font-size: 7px; letter-spacing: 0.14em; text-transform: uppercase; color: #E8A66B; }
-    .fix .t { font-family: 'Spectral', serif; font-size: 11px; color: #F5EFE2; margin-top: 2px; }
+    /* The deliverable as a real report cover: cream paper, ink type, ranked table */
+    .stage { position: absolute; right: 92px; top: 50%; transform: translateY(-50%) rotate(-1.6deg); z-index: 1; }
+    .report { position: relative; width: 320px; }
+    .report::before { content: ''; position: absolute; inset: 0; background: #E4DBC7; border-radius: 3px;
+      transform: translate(11px, 13px) rotate(1.3deg); box-shadow: 0 14px 34px rgba(0,0,0,0.34); z-index: -1; }
+    .report-cover { position: relative; background: linear-gradient(157deg, #F8F3E9 0%, #F0E8D8 100%);
+      border-radius: 3px; padding: 28px 28px 20px; color: #17222E;
+      box-shadow: 0 44px 84px rgba(0,0,0,0.55), 0 10px 22px rgba(0,0,0,0.32); }
+    .report-cover::after { content: ''; position: absolute; inset: 11px; border: 1px solid rgba(23,34,46,0.14); border-radius: 2px; }
+    .rc-masthead { display: flex; justify-content: space-between; align-items: baseline; font-family: 'JetBrains Mono', monospace; font-size: 8px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(23,34,46,0.5); }
+    .rc-masthead b { font-weight: 500; color: rgba(23,34,46,0.72); }
+    .rc-hr { height: 1px; background: rgba(23,34,46,0.16); margin: 11px 0 15px; }
+    .rc-title { font-family: 'Spectral', serif; font-size: 30px; font-weight: 700; letter-spacing: -0.025em; color: #14202B; line-height: 1; }
+    .rc-sub { font-family: 'JetBrains Mono', monospace; font-size: 8px; letter-spacing: 0.05em; color: rgba(23,34,46,0.52); margin-top: 7px; text-transform: uppercase; }
+    .rc-colhead { display: grid; grid-template-columns: 18px 1fr 56px; gap: 9px; font-family: 'JetBrains Mono', monospace; font-size: 7px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(23,34,46,0.4); margin: 18px 0 5px; }
+    .rc-colhead span:last-child { text-align: right; }
+    .rc-row { display: grid; grid-template-columns: 18px 1fr 56px; gap: 9px; align-items: center; padding: 8px 0; border-top: 1px solid rgba(23,34,46,0.10); }
+    .rc-rank { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: rgba(23,34,46,0.45); }
+    .rc-name { font-family: 'Public Sans', sans-serif; font-size: 12px; color: #26333F; }
+    .rc-track { position: relative; height: 4px; border-radius: 2px; background: rgba(23,34,46,0.09); }
+    .rc-track i { position: absolute; inset: 0 auto 0 0; height: 100%; border-radius: 2px; background: rgba(23,34,46,0.32); }
+    .rc-row.is-first .rc-rank { color: #B0722C; }
+    .rc-row.is-first .rc-name { font-weight: 600; color: #14202B; }
+    .rc-row.is-first .rc-track i { background: linear-gradient(90deg, #C98A3F, #B0722C); }
+    .rc-tag { display: inline-block; margin-left: 7px; font-family: 'JetBrains Mono', monospace; font-size: 6.5px; letter-spacing: 0.12em; text-transform: uppercase; color: #A5691F; border: 1px solid rgba(176,114,44,0.45); border-radius: 3px; padding: 1px 4px; vertical-align: 1px; }
+    .rc-foot { display: flex; justify-content: space-between; align-items: center; gap: 14px; margin-top: 15px; padding-top: 12px; border-top: 1px solid rgba(23,34,46,0.16); font-family: 'JetBrains Mono', monospace; font-size: 7.5px; letter-spacing: 0.05em; color: rgba(23,34,46,0.55); }
+    .rc-seal { display: inline-flex; align-items: center; gap: 5px; }
+    .rc-seal img { width: 17px; height: 17px; border-radius: 50%; }
+    .rc-seal b { font-family: 'Spectral', serif; font-size: 10.5px; font-weight: 700; color: #14202B; }
   </style>
 </head>
 <body>
@@ -69,18 +72,18 @@
     <div class="price"><span class="amt">$2,997</span><span class="founding">founding $1,997 . first three</span></div>
   </div>
   <div class="stage">
-    <div class="doc">
-      <div class="doc-face">
-        <div class="doc-eyebrow">Catalyst Works . Prepared for you</div>
-        <div class="doc-title">Bottleneck Map</div>
-        <div class="doc-sub">Ranked by what it costs / month</div>
-        <div class="rows">
-          <div class="row"><span class="rk">01</span><span class="bar b1"></span></div>
-          <div class="row"><span class="rk">02</span><span class="bar b2"></span></div>
-          <div class="row"><span class="rk">03</span><span class="bar b3"></span></div>
-          <div class="row"><span class="rk">04</span><span class="bar b4"></span></div>
-        </div>
-        <div class="fix"><div class="l">Fix this first</div><div class="t">The approval loop between ops and finance</div></div>
+    <div class="report">
+      <div class="report-cover">
+        <div class="rc-masthead"><b>Catalyst Works</b><span>Prepared for you</span></div>
+        <div class="rc-hr"></div>
+        <div class="rc-title">Bottleneck Map</div>
+        <div class="rc-sub">Every constraint, ranked by monthly cost</div>
+        <div class="rc-colhead"><span>#</span><span>Where the business is losing</span><span>Cost</span></div>
+        <div class="rc-row is-first"><span class="rc-rank">01</span><span class="rc-name">Approval loop, ops to finance<span class="rc-tag">Fix first</span></span><span class="rc-track"><i style="width:100%"></i></span></div>
+        <div class="rc-row"><span class="rc-rank">02</span><span class="rc-name">Quote turnaround time</span><span class="rc-track"><i style="width:68%"></i></span></div>
+        <div class="rc-row"><span class="rc-rank">03</span><span class="rc-name">Handoffs at client onboarding</span><span class="rc-track"><i style="width:49%"></i></span></div>
+        <div class="rc-row"><span class="rc-rank">04</span><span class="rc-name">Rework in fulfillment</span><span class="rc-track"><i style="width:34%"></i></span></div>
+        <div class="rc-foot"><span class="rc-seal"><img src="CatalystWorks_logo.jpg" alt=""><b>Catalyst Works</b></span><span>1 page . 24 hours</span></div>
       </div>
     </div>
   </div>
