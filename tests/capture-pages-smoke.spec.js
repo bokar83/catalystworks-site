@@ -31,6 +31,8 @@ const check = (n, c, e) => { c ? (console.log('  PASS  ' + n), pass++) : (consol
     await page.route('https://connect.facebook.net/**', r => r.abort());
     await page.goto(base, { waitUntil: 'domcontentloaded' });
     const form = page.locator('.cta-form').first();
+    const nameField = form.locator('.cta-name');
+    if (await nameField.count()) await nameField.fill('Test Buyer'); // ai-checklist now gates on name too
     await form.locator('.cta-email').fill('buyer@example.com');
     const agree = form.locator('.agree-refund');
     if (await agree.count()) await agree.check();          // paid pages gate on refund consent

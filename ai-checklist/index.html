@@ -82,12 +82,12 @@ h1 em{font-style:normal;color:var(--free-deep)}
 .cta:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
 .cta svg{width:19px;height:19px}
 .cta-note{font-family:var(--mono);font-size:.8rem;color:var(--ink-faint);margin-top:12px}
-.cta-form{display:flex;flex-wrap:wrap;gap:10px;align-items:stretch;max-width:460px}
-.cta-email{flex:1 1 210px;min-width:0;font-family:var(--body);font-size:1rem;color:var(--ink);
+.cta-form{display:flex;flex-wrap:wrap;gap:10px;align-items:stretch;max-width:620px}
+.cta-email,.cta-name{flex:1 1 180px;min-width:0;font-family:var(--body);font-size:1rem;color:var(--ink);
   background:var(--card);border:1.5px solid var(--line-2);border-radius:12px;padding:15px 16px}
-.cta-email::placeholder{color:var(--ink-faint)}
-.cta-email:focus{outline:none;border-color:var(--free);box-shadow:0 0 0 3px rgba(27,122,75,.18)}
-.cta-email[aria-invalid="true"]{border-color:var(--amber-deep);box-shadow:0 0 0 3px rgba(194,74,24,.2)}
+.cta-email::placeholder,.cta-name::placeholder{color:var(--ink-faint)}
+.cta-email:focus,.cta-name:focus{outline:none;border-color:var(--free);box-shadow:0 0 0 3px rgba(27,122,75,.18)}
+.cta-email[aria-invalid="true"],.cta-name[aria-invalid="true"]{border-color:var(--amber-deep);box-shadow:0 0 0 3px rgba(194,74,24,.2)}
 .cta-form .cta{flex:0 0 auto;border:none;cursor:pointer;font-family:var(--body)}
 
 .ticket{margin:28px 0 4px;background:var(--card);border:1px solid var(--line);border-radius:16px;
@@ -172,13 +172,14 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"/></
     <p class="sub">A 90-minute, hands-on evening in Sandy where you set up AI tools you actually use, on your own laptop. No card needed, and there are only so many free seats. When they are gone, they are gone.</p>
     <div class="cta-row">
       <form class="cta-form" id="reserve" data-medium="hero" novalidate>
+        <input type="text" class="cta-name" name="name" required autocomplete="name" placeholder="Your name" aria-label="Your name">
         <input type="email" class="cta-email" name="email" required autocomplete="email" inputmode="email" placeholder="you@yourbusiness.com" aria-label="Your email">
         <button type="submit" class="cta cta-free" data-medium="hero">
           Claim my free seat <span class="price">$0</span>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </button>
       </form>
-      <p class="cta-note">One step, just your email. Your confirmation lands in your inbox.</p>
+      <p class="cta-note">Just your name and email. Your confirmation lands in your inbox.</p>
     </div>
 
     <div class="ticket" role="group" aria-label="Workshop details">
@@ -243,10 +244,19 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"/></
       +'&utm_campaign=ic_workshop_0730_free&utm_content='+encodeURIComponent(COHORT)+'&utm_term=track_free'
       +'&prefilled_email='+encodeURIComponent(email);
   }
-  function postLead(email,medium,reg_ref){
+  function postLead(name,email,medium,reg_ref){
+    /* Real incoming ad attribution (utm_source/medium/campaign/content as the
+       ad platform set them on the click-through), captured here for the
+       leads CRM row. Kept separate from freeHref()'s hardcoded cohort labels
+       below, which exist for a different reason (one filterable Stripe
+       count across free+paid) and must not change. */
     return fetch(CAPTURE_URL,{method:'POST',keepalive:true,
       headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({email:email,reg_ref:reg_ref||'',utm_source:(qs.get('utm_source')||'ai_checklist'),
+      body:JSON.stringify({name:name,email:email,reg_ref:reg_ref||'',
+        utm_source:(qs.get('utm_source')||'ai_checklist'),
+        utm_medium:(qs.get('utm_medium')||''),
+        utm_campaign:(qs.get('utm_campaign')||''),
+        utm_content:(qs.get('utm_content')||''),
         form_location:'ic_workshop_free_'+medium,magnet:'ic_workshop_free_0730'})
     }).then(function(r){return !!r.ok;});
   }
@@ -259,9 +269,9 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"/></
      Facebook/Instagram in-app browser, where keepalive is unreliable. Awaiting
      the response is the only version that cannot lose the lead to that race.
      Retries once, then reports. A capture failure must NEVER block the seat. */
-  function capture(email,medium,reg_ref){
-    return postLead(email,medium,reg_ref).catch(function(){return false;})
-      .then(function(ok){return ok?true:postLead(email,medium,reg_ref).catch(function(){return false;});})
+  function capture(name,email,medium,reg_ref){
+    return postLead(name,email,medium,reg_ref).catch(function(){return false;})
+      .then(function(ok){return ok?true:postLead(name,email,medium,reg_ref).catch(function(){return false;});})
       .then(function(ok){
         if(!ok){
           /* Never silent again. The empty catch that used to live here is why
@@ -277,10 +287,17 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"/></
      Stripe checkout with the email prefilled. */
   document.querySelectorAll('.cta-form').forEach(function(f){
     var medium=f.getAttribute('data-medium')||'page';
+    var nameInput=f.querySelector('.cta-name');
     var input=f.querySelector('.cta-email');
     f.addEventListener('submit',function(ev){
       ev.preventDefault();
+      var name=nameInput?(nameInput.value||'').trim():'';
       var email=(input.value||'').trim();
+      /* Hard rule: no email = no proceed. Name is required too (mirrors
+         /rsvp-0730) -- an empty name blocks the submit exactly like an
+         invalid email does, before any capture POST or Stripe redirect. */
+      if(nameInput&&!name){nameInput.focus();nameInput.setAttribute('aria-invalid','true');return;}
+      if(nameInput)nameInput.removeAttribute('aria-invalid');
       if(!emailRe.test(email)){input.focus();input.setAttribute('aria-invalid','true');return;}
       input.removeAttribute('aria-invalid');
       var btn=f.querySelector('button[type=submit]');
@@ -296,7 +313,7 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"/></
       var t0=Date.now(),sent=false;
       var go=function(){if(sent)return;sent=true;window.location.href=dest;};
       var timer=setTimeout(go,CAPTURE_TIMEOUT_MS);
-      capture(email,medium,eid).then(function(){
+      capture(name,email,medium,eid).then(function(){
         clearTimeout(timer);
         setTimeout(go,Math.max(0,PIXEL_BEAT_MS-(Date.now()-t0)));
       });
