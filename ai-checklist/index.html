@@ -247,6 +247,7 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"/></
     return fetch(CAPTURE_URL,{method:'POST',keepalive:true,
       headers:{'Content-Type':'application/json'},
       body:JSON.stringify({email:email,reg_ref:reg_ref||'',utm_source:(qs.get('utm_source')||'ai_checklist'),
+        utm_medium:medium,utm_campaign:'ic_workshop_0730_free',utm_content:COHORT,
         form_location:'ic_workshop_free_'+medium,magnet:'ic_workshop_free_0730'})
     }).then(function(r){return !!r.ok;});
   }
