@@ -57,8 +57,17 @@ RewriteRule ^w/start/?$ /ai-checklist/?utm_source=meta&utm_medium=paid&utm_campa
 
 # Workshop short links: one per channel, UTM baked behind the 301.
 # Never reuse a slug across campaigns.
-RewriteRule ^w/svc/?$ /workshop/?utm_source=chamber&utm_medium=email&utm_campaign=ic_workshop_0730&utm_content=south_valley [R=301,L,QSA]
-RewriteRule ^w/sjc/?$ /workshop/?utm_source=chamber&utm_medium=email&utm_campaign=ic_workshop_0730&utm_content=south_jordan [R=301,L,QSA]
+# 2026-07-27: the July 30 workshop stays FREE through the event (2026-07-25
+# decision), so every partner slug below that still pointed at /workshop/ (the
+# $47 flow) was sending a partner's audience to a paid page for a free event.
+# Repointed to /ai-checklist/, the live free-seat capture, matching w/li's shape.
+# Each slug keeps its own utm_source + utm_content so per-partner attribution
+# survives; slugs that carried no utm_content got a meaningful one rather than
+# collapsing into an unattributable blob. Same "track_free" prohibition applies:
+# /workshop/ and /workshop-b/ attribute the paid split test with
+# /track_free/.test(utm_content), so no value here may contain that substring.
+RewriteRule ^w/svc/?$ /ai-checklist/?utm_source=chamber&utm_medium=email&utm_campaign=ic_workshop_0730&utm_content=south_valley [R=301,L,QSA]
+RewriteRule ^w/sjc/?$ /ai-checklist/?utm_source=chamber&utm_medium=email&utm_campaign=ic_workshop_0730&utm_content=south_jordan [R=301,L,QSA]
 # 2026-07-21 (Boubacar, explicit): the organic LinkedIn + X push for July 30 goes
 # to the FREE seat capture, not the $47 page. Both were pointed at /workshop/,
 # which is the paid flow. Repointed to /ai-checklist/, the live free-seat page.
@@ -68,7 +77,7 @@ RewriteRule ^w/sjc/?$ /workshop/?utm_source=chamber&utm_medium=email&utm_campaig
 # so "organic_li" / "organic_x" keep organic clicks out of the paid free-first arm.
 RewriteRule ^w/li/?$ /ai-checklist/?utm_source=linkedin&utm_medium=organic&utm_campaign=ic_workshop_0730&utm_content=organic_li [R=301,L,QSA]
 RewriteRule ^w/x/?$ /ai-checklist/?utm_source=x&utm_medium=organic&utm_campaign=ic_workshop_0730&utm_content=organic_x [R=301,L,QSA]
-RewriteRule ^w/nl/?$ /workshop/?utm_source=newsletter&utm_medium=email&utm_campaign=ic_workshop_0730 [R=301,L,QSA]
+RewriteRule ^w/nl/?$ /ai-checklist/?utm_source=newsletter&utm_medium=email&utm_campaign=ic_workshop_0730&utm_content=newsletter [R=301,L,QSA]
 # SPLIT TEST (July 30 workshop) -- two paid Meta tracks under one campaign,
 # distinguished by utm_content so seats are attributable per track.
 # Track 1 DIRECT: cold ad -> $47 seat page (variant B). utm_content=track_direct.
@@ -95,9 +104,12 @@ RewriteRule ^w/fb-organic/?$ /ai-checklist/?utm_source=facebook&utm_medium=organ
 # attribute a specific campaign.
 RewriteRule ^w/paid/?$ /workshop/?utm_source=direct&utm_medium=link&utm_campaign=ic_workshop_0730&utm_content=direct_paid [R=301,L,QSA]
 
-RewriteRule ^w/sbdc/?$ /workshop/?utm_source=sbdc&utm_medium=partner&utm_campaign=ic_workshop_0730 [R=301,L,QSA]
-RewriteRule ^w/beccy/?$ /workshop/?utm_source=beccy&utm_medium=email&utm_campaign=ic_workshop_0730 [R=301,L,QSA]
-RewriteRule ^w/ss/?$ /seat/?utm_source=silicon_slopes&utm_medium=event&utm_campaign=ic_workshop_0730 [R=301,L,QSA]
+# Same 2026-07-27 free-event repoint as the chamber slugs above. w/ss pointed at
+# /seat/, which renders a $47 "Reserve my seat" CTA wired to the paid Stripe
+# link, so it was a paid destination too despite not being /workshop/.
+RewriteRule ^w/sbdc/?$ /ai-checklist/?utm_source=sbdc&utm_medium=partner&utm_campaign=ic_workshop_0730&utm_content=sbdc_partner [R=301,L,QSA]
+RewriteRule ^w/beccy/?$ /ai-checklist/?utm_source=beccy&utm_medium=email&utm_campaign=ic_workshop_0730&utm_content=beccy [R=301,L,QSA]
+RewriteRule ^w/ss/?$ /ai-checklist/?utm_source=silicon_slopes&utm_medium=event&utm_campaign=ic_workshop_0730&utm_content=silicon_slopes [R=301,L,QSA]
 
 # Old SBDC-newsletter short link for the CANCELLED July 16 free session. Its old
 # target (/free-workshop-july16/) now 301s to the live July 30 free-seat capture;
