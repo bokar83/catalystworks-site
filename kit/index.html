@@ -499,6 +499,7 @@ a{color:var(--amber-deep);text-decoration-thickness:1px;text-underline-offset:3p
       <li><a href="#brain">Business brain</a></li>
       <li><a href="#council">Decision council</a></li>
       <li><a href="#simplicity">Simplicity check</a></li>
+      <li><a href="#keepit">Keep it forever</a></li>
       <li><a href="#recipes">Recipes</a></li>
       <li><a href="#next">What next</a></li>
     </ul>
@@ -698,7 +699,7 @@ My decision is: [paste your decision here]</pre>
           <span class="lbl">Copy</span>
         </button>
       </div>
-      <p class="stamp-note" style="margin-top:14px">New project, name it Decision Council, paste this into the instructions, save. That is the whole setup.</p>
+      <p class="stamp-note" style="margin-top:14px">Same project you already made. Open a new chat inside it, paste this, then give it a real decision. That is the whole setup.</p>
     </div>
 
     <div class="step">
@@ -783,7 +784,7 @@ Here it is: [paste what you are building here]</pre>
           <span class="lbl">Copy</span>
         </button>
       </div>
-      <p class="stamp-note" style="margin-top:14px;color:#A2988A">New project, name it Simplicity Check, paste, save. Reuse it any time a plan feels heavier than the job.</p>
+      <p class="stamp-note" style="margin-top:14px;color:#A2988A">Same project again. New chat, paste, go. Reuse it any time a plan feels heavier than the job.</p>
     </div>
 
     <div class="step">
@@ -849,11 +850,120 @@ Here it is: [paste what you are building here]</pre>
 
 <div class="seam tight" aria-hidden="true"><svg viewBox="0 0 1200 40" preserveAspectRatio="none"><path d="M0 40V23c56 4 84-8 141-11 68-4 103 9 172 7 60-2 90-11 151-13 75-3 113 10 188 8 55-2 83-10 136-11 47-1 74 5 112 4h300v16z" fill="#1A1410"/></svg></div>
 
-<!-- ============ STATION 04: THE SEVEN RECIPES ============ -->
-<section class="band warm station" id="recipes" aria-labelledby="recipes-h">
+<!-- ============ STATION 04: KEEP IT FOREVER ============ -->
+<section class="band station" id="keepit" aria-labelledby="keepit-h">
   <div class="wrap">
     <div class="station-head">
       <span class="station-no" aria-hidden="true">04</span>
+      <div class="station-title">
+        <p class="eyebrow">Three steps, once, and it stops living in one place</p>
+        <h2 id="keepit-h">Make it follow you everywhere</h2>
+        <p class="lede">The council you just built lives inside one project, which means you have to go find it. A tool you have to go find is a tool you stop using by Tuesday. Three steps and it comes with you instead, into every conversation, on every device, whether you ever open that project again or not.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <p class="step-label"><b>Step 1</b> Ask Claude to package it</p>
+      <p class="kt-say">Open a new chat inside the project you built tonight. Paste this. Claude writes the file and hands you back a zip. Download it.</p>
+      <div class="promptbox">
+<pre id="out-skill-pack"><span class="k">Take the Decision Council instructions we used in this project and package them as a skill I can use outside this project.</span>
+
+Make a folder called decision-council with one file in it called SKILL.md.
+
+At the top of SKILL.md put exactly this:
+---
+name: decision-council
+description: Runs a decision through five advisors who argue it from five directions, then delivers one verdict of proceed, change or kill. Use when the user asks for a decision council or brings a business decision they are weighing.
+---
+
+Under that, put the full Decision Council instructions, unchanged.
+
+Then zip the decision-council folder and give me the zip to download.</pre>
+        <button class="copy dup" type="button" data-copy="out-skill-pack" data-label="Copy packaging prompt">
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><rect x="9" y="9" width="12" height="12"/><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"/></svg>
+          <span class="lbl">Copy</span>
+        </button>
+      </div>
+      <button class="copybar" type="button" data-copy="out-skill-pack" data-label="Copy packaging prompt">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><rect x="9" y="9" width="12" height="12"/><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"/></svg>
+        <span class="lbl">Copy the packaging prompt</span>
+      </button>
+
+      <div class="callout kt-fall">
+        <p class="kt-say kt-fall-t">If the zip did not come through, take mine. Same file, same steps, nobody left behind.</p>
+        <a class="copybar kt-dl" href="decision-council.zip" download>
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M12 3v12"/><path d="m7 11 5 5 5-5"/><path d="M4 20h16"/></svg>
+          <span class="lbl">Download the ready made one</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="step">
+      <p class="step-label"><b>Step 2</b> Upload it to your account</p>
+      <p class="kt-say">This is the part that makes it yours for good. Four clicks and a file picker.</p>
+      <ol class="kt-steps">
+        <li><b>Settings, then Capabilities.</b> Check that <em>Code execution and file creation</em> is switched on. If your zip arrived in step 1, it already is.</li>
+        <li><b>Customize, then Skills.</b> This is a different menu from Settings. It is the only place people get lost, so look for the word Customize.</li>
+        <li><b>The plus button, then Create skill, then Upload a skill.</b> Pick the zip you just downloaded.</li>
+        <li><b>Switch it on</b> with the toggle next to it in the list.</li>
+      </ol>
+      <p class="kt-note">On a phone right now? Watch this one and do it on a laptop at home. The upload lives on the desktop site.</p>
+    </div>
+
+    <div class="step">
+      <p class="step-label"><b>Step 3</b> Prove it followed you</p>
+      <p class="kt-say">Open a brand new chat, not the project, with nothing in it. Type the line below and watch.</p>
+      <div class="promptbox">
+<pre id="out-skill-test"><span class="k">Run my decision council on this:</span> whether to take on the customer who always pays thirty days late.</pre>
+        <button class="copy" type="button" data-copy="out-skill-test" data-label="Copy test line">
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><rect x="9" y="9" width="12" height="12"/><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"/></svg>
+          <span class="lbl">Copy</span>
+        </button>
+      </div>
+      <p class="stamp-note" style="margin-top:14px">Nothing pasted. No project open. Five advisors and a verdict, because the tool is part of your account now and not part of one conversation.</p>
+    </div>
+
+    <div class="callout">
+      <p class="lede">Then do the other two. Same three steps for the Business Brain and the Simplicity Check, with their own name and description in place of the council's. Do them this weekend, before Monday buries it.</p>
+    </div>
+  </div>
+</section>
+
+<style>
+/* Scoped to the keep-it station. The three original tools are fill-in-the-blank
+   builders, so they lean on .fields and .field. This one is a procedure, so it
+   needs a numbered list and a download button, neither of which existed on the
+   page before. Everything here reuses the station's own type scale. */
+#keepit .kt-say{color:var(--ink-soft);font-size:15.5px;line-height:1.6;margin:2px 0 14px;max-width:66ch}
+#keepit .kt-note{color:var(--ink-soft);font-size:14px;line-height:1.55;margin-top:13px;opacity:.85}
+#keepit .kt-steps{counter-reset:kt;list-style:none;margin:6px 0 0;padding:0}
+#keepit .kt-steps li{position:relative;padding-left:40px;margin-bottom:14px;line-height:1.6;font-size:15.5px}
+#keepit .kt-steps li::before{counter-increment:kt;content:counter(kt);position:absolute;left:0;top:1px;
+  width:27px;height:27px;display:flex;align-items:center;justify-content:center;
+  font-family:var(--mono);font-size:13px;font-weight:700;
+  color:#1A1410;background:var(--molten);border-radius:8px}
+#keepit .kt-steps li b{font-weight:700}
+#keepit .kt-fall{margin-top:18px}
+/* The fallback has to be findable in about two seconds by someone whose build
+   just failed, but it must not read louder than the path everyone else is on.
+   So: full width and same height as the primary bar (findable), outlined
+   rather than filled (clearly the second choice). */
+#keepit .kt-fall-t{margin:0 0 4px;font-weight:600;color:var(--ink)}
+#keepit a.kt-dl{text-decoration:none;margin-top:12px;
+  background:transparent;color:var(--ink);box-shadow:inset 0 0 0 2px var(--ink)}
+#keepit a.kt-dl:hover{background:var(--ink);color:var(--paper)}
+@media (min-width:641px){
+  #keepit .promptbox pre::before{content:"";float:right;width:124px;height:46px}
+}
+</style>
+
+<div class="seam tight" aria-hidden="true"><svg viewBox="0 0 1200 40" preserveAspectRatio="none"><path d="M0 40V23c56 4 84-8 141-11 68-4 103 9 172 7 60-2 90-11 151-13 75-3 113 10 188 8 55-2 83-10 136-11 47-1 74 5 112 4h300v16z" fill="#1A1410"/></svg></div>
+
+<!-- ============ STATION 05: THE SEVEN RECIPES ============ -->
+<section class="band warm station" id="recipes" aria-labelledby="recipes-h">
+  <div class="wrap">
+    <div class="station-head">
+      <span class="station-no" aria-hidden="true">05</span>
       <div class="station-title">
         <p class="eyebrow">For the jobs that come back around</p>
         <h2 id="recipes-h">Your seven recipes</h2>

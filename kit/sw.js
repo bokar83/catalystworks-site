@@ -31,7 +31,7 @@
       the page, on its next load, without anyone clearing anything. Bump
       CACHE on every deploy so the activate handler drops the old one. */
 
-var CACHE = 'kit0730-cw-v1';
+var CACHE = 'kit0730-cw-v2';
 
 /* The page itself only. Small, and the thing every attendee needs first. */
 var ASSETS = ['./', './index.html'];
