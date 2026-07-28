@@ -427,11 +427,11 @@ a{color:var(--amber-deep);text-decoration-thickness:1px;text-underline-offset:3p
       <a class="stamp" href="deck.html">
         Read the deck <span class="arw" aria-hidden="true">&#8594;</span>
       </a>
-      <p class="stamp-note">In this tab &middot; arrow keys to move</p>
+      <p class="stamp-note">Opens in this tab &middot; arrow keys to move</p>
     </div>
     <div>
       <a class="stamp" href="handout.html">
-        The one page tool sheet <span class="arw" aria-hidden="true">&#8594;</span>
+        The one page cheat sheet <span class="arw" aria-hidden="true">&#8594;</span>
       </a>
       <p class="stamp-note">Built to print</p>
     </div>
@@ -750,27 +750,27 @@ Here it is: [paste what you are building here]</pre>
       <div class="station-title">
         <p class="eyebrow">For the jobs that come back around</p>
         <h2 id="recipes-h">Your seven recipes</h2>
-        <p class="lede">Same idea as the three tools, pointed at the jobs that come back around whether you like it or not. Fill in the boxes, copy what it writes, paste it where you work. Your answers stay on this laptop like everything else here.</p>
+        <p class="lede">Seven jobs you already do every week, each one already written for you. Fill in the boxes, copy what it writes, paste it where you work. Take the two you need, the others will be here. Your answers stay on this laptop like everything else here, and what you paste into the AI tool afterward is between you and that tool.</p>
       </div>
     </div>
 
     <div class="step" id="recipe-followup">
       <p class="step-label"><b>One</b> The follow-up email</p>
-      <p class="lede">For when you have been staring at the words just following up for ten minutes.</p>
+      <p class="lede">For when you have been staring at the words &ldquo;just following up&rdquo; for ten minutes.</p>
       <div class="fields">
         <div class="field">
           <label for="r_followup_who">Who they are</label>
-          <p class="hint">e.g. a roofing supplier rep</p>
+          <p class="eg"><b>Example</b>A roofing supplier rep</p>
           <input type="text" id="r_followup_who" data-k="r_followup_who">
         </div>
         <div class="field">
-          <label for="r_followup_last">Our last contact, and when</label>
-          <p class="hint">e.g. met at the home show two weeks ago</p>
+          <label for="r_followup_last">Your last contact, and when</label>
+          <p class="eg"><b>Example</b>Met at the home show two weeks ago</p>
           <input type="text" id="r_followup_last" data-k="r_followup_last">
         </div>
         <div class="field">
-          <label for="r_followup_want">What I want to happen next</label>
-          <p class="hint">e.g. a 15 minute call</p>
+          <label for="r_followup_want">What you want to happen next</label>
+          <p class="eg"><b>Example</b>A 15 minute call</p>
           <input type="text" id="r_followup_want" data-k="r_followup_want">
         </div>
       </div>
@@ -793,7 +793,7 @@ Here it is: [paste what you are building here]</pre>
       <div class="fields">
         <div class="field">
           <label for="r_review_channel">Text or email</label>
-          <p class="hint">text</p>
+          <p class="eg"><b>Example</b>Text</p>
           <input type="text" id="r_review_channel" data-k="r_review_channel">
         </div>
         <div class="field">
@@ -801,8 +801,8 @@ Here it is: [paste what you are building here]</pre>
           <input type="text" id="r_review_name" data-k="r_review_name">
         </div>
         <div class="field">
-          <label for="r_review_job">What we did</label>
-          <p class="hint">e.g. repaired her AC same-day</p>
+          <label for="r_review_job">What you did</label>
+          <p class="eg"><b>Example</b>Repaired her AC same-day</p>
           <input type="text" id="r_review_job" data-k="r_review_job">
         </div>
         <div class="field">
@@ -826,7 +826,7 @@ Here it is: [paste what you are building here]</pre>
 
     <div class="step" id="recipe-schedule">
       <p class="step-label"><b>Three</b> The weekly schedule</p>
-      <p class="lede">For the Sunday night scheduling puzzle.</p>
+      <p class="lede">Sunday night, and you are still moving names around.</p>
       <div class="fields">
         <div class="field wide">
           <label for="r_schedule_people">People and availability</label>
@@ -835,11 +835,12 @@ Here it is: [paste what you are building here]</pre>
         </div>
         <div class="field wide">
           <label for="r_schedule_shifts">Shifts to cover</label>
+          <p class="eg"><b>Example</b>Mon to Fri, two techs on days, one on call weekends</p>
           <textarea id="r_schedule_shifts" data-k="r_schedule_shifts"></textarea>
         </div>
         <div class="field wide">
           <label for="r_schedule_rules">Rules</label>
-          <p class="hint">e.g. max hours, who cannot work together, who holds which cert</p>
+          <p class="eg"><b>Example</b>Max hours, who cannot work together, who holds which cert</p>
           <textarea id="r_schedule_rules" data-k="r_schedule_rules"></textarea>
         </div>
       </div>
@@ -858,7 +859,7 @@ Here it is: [paste what you are building here]</pre>
 
     <div class="step" id="recipe-invoice">
       <p class="step-label"><b>Four</b> The invoice chase</p>
-      <p class="lede">For when chasing money feels awkward, so it slips another week.</p>
+      <p class="lede">For when chasing money feels awkward, so you put it off another week.</p>
       <div class="fields">
         <div class="field">
           <label for="r_invoice_name">Customer</label>
@@ -866,7 +867,7 @@ Here it is: [paste what you are building here]</pre>
         </div>
         <div class="field">
           <label for="r_invoice_amount">Amount</label>
-          <p class="hint">e.g. $1,840</p>
+          <p class="eg"><b>Example</b>$1,840</p>
           <input type="text" id="r_invoice_amount" data-k="r_invoice_amount">
         </div>
         <div class="field">
@@ -875,11 +876,12 @@ Here it is: [paste what you are building here]</pre>
         </div>
         <div class="field">
           <label for="r_invoice_days">Days overdue</label>
-          <p class="hint">e.g. 21</p>
+          <p class="eg"><b>Example</b>21</p>
           <input type="text" id="r_invoice_days" data-k="r_invoice_days">
         </div>
         <div class="field">
           <label for="r_invoice_pay">Pay link or method</label>
+          <p class="eg"><b>Example</b>Your Stripe link, or check to the office</p>
           <input type="text" id="r_invoice_pay" data-k="r_invoice_pay">
         </div>
       </div>
@@ -906,8 +908,8 @@ Here it is: [paste what you are building here]</pre>
           <textarea id="r_proposal_notes" data-k="r_proposal_notes"></textarea>
         </div>
         <div class="field wide">
-          <label for="r_proposal_pricing">My pricing logic</label>
-          <p class="hint">Or leave this blank and it will hold the price as a placeholder.</p>
+          <label for="r_proposal_pricing">Your pricing logic</label>
+          <p class="hint">Leave it blank and it will hold the price as a placeholder.</p>
           <textarea id="r_proposal_pricing" data-k="r_proposal_pricing"></textarea>
         </div>
       </div>
@@ -926,11 +928,11 @@ Here it is: [paste what you are building here]</pre>
 
     <div class="step" id="recipe-recap">
       <p class="step-label"><b>Six</b> The client recap</p>
-      <p class="lede">For the notes that sit in a notebook while the client never hears back.</p>
+      <p class="lede">The notes are in your notebook. You still have not sent them.</p>
       <div class="fields">
         <div class="field wide">
           <label for="r_recap_notes">Your raw notes</label>
-          <p class="hint">Internal asides are fine. They get kept out of the client version.</p>
+          <p class="hint">Internal asides are fine. It keeps them out of the client version.</p>
           <textarea id="r_recap_notes" data-k="r_recap_notes"></textarea>
         </div>
       </div>
@@ -949,10 +951,10 @@ Here it is: [paste what you are building here]</pre>
 
     <div class="step" id="recipe-inbox">
       <p class="step-label"><b>Seven</b> The inbox triage</p>
-      <p class="lede">For thirty unread and no idea where to start.</p>
+      <p class="lede">For thirty unread emails and no idea where to start.</p>
       <div class="fields">
         <div class="field wide">
-          <label for="r_inbox_batch">Paste four or five messages</label>
+          <label for="r_inbox_batch">Four or five messages</label>
           <p class="hint">Start small. Four or five is the right size to see what it does.</p>
           <textarea id="r_inbox_batch" data-k="r_inbox_batch"></textarea>
         </div>
@@ -1453,9 +1455,9 @@ Here it is: [paste what you are building here]</pre>
       id:"followup", title:"The follow-up email",
       blurb:"For when you have been staring at the words just following up for ten minutes.",
       fields:[
-        {k:"who",  l:"Who they are", h:"e.g. a roofing supplier rep", t:"input"},
-        {k:"last", l:"Our last contact, and when", h:"e.g. met at the home show two weeks ago", t:"input"},
-        {k:"want", l:"What I want to happen next", h:"e.g. a 15 minute call", t:"input"}
+        {k:"who",  l:"Who they are", h:"A roofing supplier rep", t:"input"},
+        {k:"last", l:"Your last contact, and when", h:"Met at the home show two weeks ago", t:"input"},
+        {k:"want", l:"What you want to happen next", h:"A 15 minute call", t:"input"}
       ],
       template:
 "You write my follow-up emails in my voice: plain, warm, specific, one ask, under 120 words, no em-dashes, never \"just circling back.\"\n" +
@@ -1466,9 +1468,9 @@ Here it is: [paste what you are building here]</pre>
       id:"review", title:"The review request",
       blurb:"For when you never remember to ask, and it comes out robotic when you do.",
       fields:[
-        {k:"channel", l:"Text or email", h:"text", t:"input"},
+        {k:"channel", l:"Text or email", h:"Text", t:"input"},
         {k:"name",    l:"Customer first name", h:"", t:"input"},
-        {k:"job",     l:"What we did", h:"e.g. repaired her AC same-day", t:"input"},
+        {k:"job",     l:"What you did", h:"Repaired her AC same-day", t:"input"},
         {k:"link",    l:"Review link", h:"Paste your Google review link", t:"input"}
       ],
       template:
@@ -1481,8 +1483,8 @@ Here it is: [paste what you are building here]</pre>
       blurb:"For the Sunday night scheduling puzzle.",
       fields:[
         {k:"people", l:"People and availability", h:"Paste it however you have it. Messy is fine.", t:"textarea"},
-        {k:"shifts", l:"Shifts to cover", h:"", t:"textarea"},
-        {k:"rules",  l:"Rules", h:"e.g. max hours, who cannot work together, who holds which cert", t:"textarea"}
+        {k:"shifts", l:"Shifts to cover", h:"Mon to Fri, two techs on days, one on call weekends", t:"textarea"},
+        {k:"rules",  l:"Rules", h:"Max hours, who cannot work together, who holds which cert", t:"textarea"}
       ],
       template:
 "Build a draft weekly schedule I will adjust. Respect every rule. Start the response with a CONFLICTS & GAPS section (write 'None found' if empty), then the schedule below it. Do not silently break a rule.\n" +
@@ -1493,10 +1495,10 @@ Here it is: [paste what you are building here]</pre>
       blurb:"For when chasing money feels awkward, so it slips another week.",
       fields:[
         {k:"name",    l:"Customer", h:"", t:"input"},
-        {k:"amount",  l:"Amount", h:"e.g. $1,840", t:"input"},
+        {k:"amount",  l:"Amount", h:"$1,840", t:"input"},
         {k:"invoice", l:"Invoice number", h:"", t:"input"},
-        {k:"days",    l:"Days overdue", h:"e.g. 21", t:"input"},
-        {k:"pay",     l:"Pay link or method", h:"", t:"input"}
+        {k:"days",    l:"Days overdue", h:"21", t:"input"},
+        {k:"pay",     l:"Pay link or method", h:"Your Stripe link, or check to the office", t:"input"}
       ],
       template:
 "Write a 3-step invoice-chase sequence (gentle, direct, final), factual not threatening, each with an easy pay path.\n" +
@@ -1508,7 +1510,7 @@ Here it is: [paste what you are building here]</pre>
       blurb:"For turning messy intake scribbles into something you can send.",
       fields:[
         {k:"notes",   l:"Your rough intake notes", h:"Paste them exactly as you wrote them.", t:"textarea"},
-        {k:"pricing", l:"My pricing logic", h:"Or leave this blank and it will hold the price as a placeholder.", t:"textarea"}
+        {k:"pricing", l:"Your pricing logic", h:"Leave it blank and it will hold the price as a placeholder.", t:"textarea"}
       ],
       template:
 "Turn these rough intake notes into a clean first-draft proposal: scope, included, not included, price [placeholder], next step. Flag anything unclear as [CONFIRM] inline, then collect every [CONFIRM] at the very end under a numbered list titled 'Before I finalize, I need from you:'. Do not invent scope or numbers.\n" +
@@ -1518,7 +1520,7 @@ Here it is: [paste what you are building here]</pre>
       id:"recap", title:"The client recap",
       blurb:"For the notes that sit in a notebook while the client never hears back.",
       fields:[
-        {k:"notes", l:"Your raw notes", h:"Internal asides are fine. They get kept out of the client version.", t:"textarea"}
+        {k:"notes", l:"Your raw notes", h:"Internal asides are fine. It keeps them out of the client version.", t:"textarea"}
       ],
       template:
 "From my raw notes, produce two things: (1) a short client-ready recap email, (2) an internal action list with owners and due dates where stated. Keep anything internal OUT of the client recap. Do not invent commitments.\n" +
@@ -1528,7 +1530,7 @@ Here it is: [paste what you are building here]</pre>
       id:"inbox", title:"The inbox triage",
       blurb:"For thirty unread and no idea where to start.",
       fields:[
-        {k:"batch", l:"Paste four or five messages", h:"Start small. Four or five is the right size to see what it does.", t:"textarea"}
+        {k:"batch", l:"Four or five messages", h:"Start small. Four or five is the right size to see what it does.", t:"textarea"}
       ],
       template:
 "Triage these messages. Tag each: REPLY-NOW / NEEDS-ME / FYI / IGNORE. For REPLY-NOW only, draft a short reply in my voice. Any message containing 'refund', 'charge', 'dispute', 'lawyer', 'legal', 'sue', or 'owe' = tag NEEDS-ME and write nothing else for it. Cap the demo batch at 4-5 messages. Draft only, never send.\n" +
