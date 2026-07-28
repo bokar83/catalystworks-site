@@ -394,7 +394,7 @@ a{color:var(--amber-deep);text-decoration-thickness:1px;text-underline-offset:3p
 <div class="nosave" id="nosave" role="alert" hidden>
   <div class="nosave-in">
     <b>Heads up</b>
-    <p id="nosave-msg">This laptop will not let the page save anything. Everything still works. But close this tab and what you typed is gone, so paste anything you want to keep into an email to yourself before you leave.</p>
+    <p id="nosave-msg">This laptop will not let the page save anything. Everything still works, but once you close this tab, what you typed is gone. Paste anything you want to keep into an email to yourself before you leave.</p>
   </div>
 </div>
 
@@ -425,9 +425,9 @@ a{color:var(--amber-deep);text-decoration-thickness:1px;text-underline-offset:3p
     </div>
     <div>
       <a class="stamp" href="deck.html">
-        Read the deck here <span class="arw" aria-hidden="true">&#8594;</span>
+        Read the deck <span class="arw" aria-hidden="true">&#8594;</span>
       </a>
-      <p class="stamp-note">Opens in this tab &middot; arrow keys to move</p>
+      <p class="stamp-note">In this tab &middot; arrow keys to move</p>
     </div>
     <div>
       <a class="stamp" href="handout.html">
@@ -714,6 +714,32 @@ Here it is: [paste what you are building here]</pre>
     </div>
   </div>
 </section>
+<style>
+/* The corner copy button is absolutely positioned at the top right of every
+   prompt box. The three original tools compose short lines and clear it. The
+   recipe templates are long single sentences, and at desktop width the first
+   two lines ran underneath the button, so "no em-dashes, never" and "start
+   with a CONFLICTS & GAPS section" were sitting behind solid orange.
+
+   A floated shim reserves the corner so the text wraps around it instead of
+   under it. Float rather than padding because padding would indent every line
+   in the block to buy clearance the first two lines need. Below 640px the
+   button goes static and full width, so the shim is not wanted there. */
+@media (min-width:641px){
+  #recipes .promptbox pre::before{
+    content:"";float:right;width:124px;height:46px;
+  }
+}
+
+/* Every field in the three original tools carries a hint line, so their boxes
+   line up down a row. Some recipe fields have a hint and some do not, which
+   left the inputs in one row sitting at three different heights. .field is
+   already a flex column, so pushing the control to the bottom of its cell
+   puts every box in a row back on the same line. */
+#recipes .field input,
+#recipes .field textarea{ margin-top:auto }
+</style>
+
 <div class="seam tight" aria-hidden="true"><svg viewBox="0 0 1200 40" preserveAspectRatio="none"><path d="M0 40V23c56 4 84-8 141-11 68-4 103 9 172 7 60-2 90-11 151-13 75-3 113 10 188 8 55-2 83-10 136-11 47-1 74 5 112 4h300v16z" fill="#1A1410"/></svg></div>
 
 <!-- ============ STATION 04: THE SEVEN RECIPES ============ -->
@@ -722,9 +748,9 @@ Here it is: [paste what you are building here]</pre>
     <div class="station-head">
       <span class="station-no" aria-hidden="true">04</span>
       <div class="station-title">
-        <p class="eyebrow">The seven we tested in the room</p>
-        <h2 id="recipes-h">Seven recipes for the jobs that keep coming back</h2>
-        <p class="lede">Same idea as the three tools, pointed at the small jobs that eat a week. Fill in the boxes, copy what it writes, paste it where you work. Your answers save here the same way the rest of the page does.</p>
+        <p class="eyebrow">For the jobs that come back around</p>
+        <h2 id="recipes-h">Your seven recipes</h2>
+        <p class="lede">Same idea as the three tools, pointed at the jobs that come back around whether you like it or not. Fill in the boxes, copy what it writes, paste it where you work. Your answers stay on this laptop like everything else here.</p>
       </div>
     </div>
 
@@ -1043,8 +1069,8 @@ Here it is: [paste what you are building here]</pre>
   var mem = {};
   var warned = false;
 
-  var MSG_BLOCKED = 'This laptop will not let the page save anything. Everything still works. But close this tab and what you typed is gone, so paste anything you want to keep into an email to yourself before you leave.';
-  var MSG_FULL    = 'This laptop just ran out of room to save. It kept everything up to here. It is not keeping anything new, so paste what is on your screen into an email to yourself now.';
+  var MSG_BLOCKED = 'This laptop will not let the page save anything. Everything still works, but once you close this tab, what you typed is gone. Paste anything you want to keep into an email to yourself before you leave.';
+  var MSG_FULL    = 'This laptop just ran out of room to save. Everything you typed so far is safe. Nothing new is being saved, so paste what is on your screen into an email to yourself now.';
 
   function warn(msg){
     if(warned) return;
@@ -1398,7 +1424,15 @@ Here it is: [paste what you are building here]</pre>
      above still works without it, this only covers the reload case. */
   if('serviceWorker' in navigator && window.isSecureContext){
     window.addEventListener('load', function(){
-      navigator.serviceWorker.register('sw.js').catch(function(){});
+      /* updateViaCache none because the host serves .js with a seven day
+         max-age. Browsers already bypass the HTTP cache when they check a
+         worker for updates, so this is belt and braces, but a fix pushed
+         on the day of must never be held back by a stale copy of this one
+         file. Then ask once on load, so a laptop left open through the
+         session still picks up a change without a hard reload. */
+      navigator.serviceWorker.register('sw.js', { updateViaCache: 'none' })
+        .then(function(reg){ if(reg && reg.update){ try{ reg.update(); }catch(e){} } })
+        .catch(function(){});
     });
   }
 })();
