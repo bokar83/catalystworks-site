@@ -208,6 +208,14 @@ pre b{color:var(--molten);font-weight:500}
   .s:last-of-type{page-break-after:auto;break-after:auto}
   #bar,#help{display:none!important}
   .s,.s.dark,.s.act,pre,.mono-quote{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+
+  /* The film grain stays on screen and comes off in print. It is a procedural
+     SVG feTurbulence noise, and Chromium has no vector way to express that, so
+     printing flattens every slide into a full-page RGBA bitmap plus an alpha
+     mask. Measured: 82 of the 90 images in the PDF and 15.2MB of its 15.5MB
+     came from this one line. Attendees pull this file down on venue wifi,
+     eighteen at once, so a 2%-opacity texture is not worth the download. */
+  .s::after{display:none!important}
 }
 @page{size:1600px 900px;margin:0}
 
@@ -353,7 +361,7 @@ pre b{color:var(--molten);font-weight:500}
   @keyframes ptRowIn{from{opacity:0;transform:translateX(-14px)}to{opacity:1;transform:none}}
   #ptlist .r.gone{display:none}
   #ptlist .r span{font-family:var(--mono);font-weight:600;font-size:15px;letter-spacing:.14em;
-    color:var(--amber);min-width:62px;flex:none;text-align:right}
+    text-transform:uppercase;color:var(--amber);min-width:62px;flex:none;text-align:right}
   #ptlist .r em{font-style:normal;font-family:var(--body);font-size:20px;line-height:1.3;
     color:#B6AC9C;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   #ptlist .r.here span{color:var(--molten)}
@@ -1027,16 +1035,30 @@ My decision is: [paste your decision here]</pre>
 
   /* Several slides legitimately share a headline: two say AI WITHOUT GETTING
      BURNED, three say DO THIS NOW. A list where four rows read the same is a
-     list he cannot navigate, so repeats pick up their kicker to tell apart. */
-  var freq = {};
-  meta.forEach(function(m){ freq[m.title] = (freq[m.title] || 0) + 1; });
+     list he cannot navigate under pressure, so repeats pick up their kicker.
+     Three of them share the kicker "Your turn" too, so anything still tied
+     after that takes a bite of its own body copy. */
+  function tally(){
+    var f = {};
+    meta.forEach(function(m){ f[m.title] = (f[m.title] || 0) + 1; });
+    return f;
+  }
+  var freq = tally();
   meta.forEach(function(m, n){
     if(freq[m.title] > 1){
-      var kb = slides[n].querySelector('.kick b');
-      var k = kb ? flatten(kb) : '';
-      if(k) m.title = m.title + '  \u00b7  ' + k;
+      var k = flatten(slides[n].querySelector('.kick b'));
+      if(k) m.title += '  \u00b7  ' + k;
     }
-    if(m.title.length > 74) m.title = m.title.slice(0, 73) + '\u2026';
+  });
+  freq = tally();
+  meta.forEach(function(m, n){
+    if(freq[m.title] > 1){
+      var d = flatten(slides[n].querySelector('.lead, .body, ol.stack li, ul.plain li, .mono-quote'));
+      if(d) m.title += '  \u00b7  ' + d.slice(0, 44);
+    }
+  });
+  meta.forEach(function(m){
+    if(m.title.length > 90) m.title = m.title.slice(0, 89) + '\u2026';
   });
 
   /* ---- probe history once, file:// can refuse replaceState ------------- */
@@ -1206,7 +1228,9 @@ My decision is: [paste your decision here]</pre>
   }
   function drawSel(){
     rows.forEach(function(r, k){ r.classList.toggle('sel', k === sel); });
-    if(rows[sel] && rows[sel].scrollIntoView) rows[sel].scrollIntoView({ block: 'nearest' });
+    /* centre, not nearest: nearest parked the current slide flush against the
+       bottom edge where the footer clipped it */
+    if(rows[sel] && rows[sel].scrollIntoView) rows[sel].scrollIntoView({ block: 'center' });
   }
   function filterJump(){
     var q = buf.toLowerCase();
@@ -1349,7 +1373,7 @@ My decision is: [paste your decision here]</pre>
   help.innerHTML =
     '<div class="hh">Keys</div>' +
     '<table>' +
-    '<tr><td>&rarr; &nbsp; space &nbsp; page down</td><td>next slide &mdash; what the clicker sends</td></tr>' +
+    '<tr><td>&rarr; &nbsp; space &nbsp; page down</td><td>next slide, and what the clicker sends</td></tr>' +
     '<tr><td>&larr; &nbsp; page up &nbsp; backspace</td><td>previous slide</td></tr>' +
     '<tr><td>home &nbsp; end</td><td>first slide &nbsp; last slide</td></tr>' +
     '<tr><td>O &nbsp; or &nbsp; G</td><td>jump list, type to filter</td></tr>' +
