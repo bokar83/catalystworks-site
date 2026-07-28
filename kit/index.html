@@ -1447,13 +1447,25 @@ Here it is: [paste what you are building here]</pre>
    off changes nothing about how it behaves.
 
    The prompt text below is the tested wording. It is not paraphrased and it
-   is not to be edited casually. Nobody rewrites a prompt. */
+   is not to be edited casually. Nobody rewrites a prompt.
+
+   TWO FIELDS IN HERE ARE READ BY ATTENDEES, not just by this script:
+   `template` is the prompt they copy and paste, and `l` is rendered as the
+   grey placeholder inside the live preview, so "Invoice number" shows up to
+   them as [invoice number] until they fill it in. Both must stay in step
+   with the labels in the markup above. Edit them the way you would edit
+   anything else on the page, not the way you would edit a variable name.
+
+   There used to be a `blurb` on each entry as well, holding a second copy of
+   the sentence rendered under each recipe title. Nothing ever read it. It
+   silently fell out of step with the visible copy during the first edit pass
+   after launch, which is exactly what a second copy of a string does. The
+   markup is now the only place that sentence lives. Do not reintroduce it. */
 (function(){
   "use strict";
   var RECIPES = [
     {
       id:"followup", title:"The follow-up email",
-      blurb:"For when you have been staring at the words “just following up” for ten minutes.",
       fields:[
         {k:"who",  l:"Who they are", h:"A roofing supplier rep", t:"input"},
         {k:"last", l:"Your last contact, and when", h:"Met at the home show two weeks ago", t:"input"},
@@ -1466,7 +1478,6 @@ Here it is: [paste what you are building here]</pre>
     },
     {
       id:"review", title:"The review request",
-      blurb:"For when you never remember to ask, and it comes out robotic when you do.",
       fields:[
         {k:"channel", l:"Text or email", h:"Text", t:"input"},
         {k:"name",    l:"Customer first name", h:"", t:"input"},
@@ -1480,7 +1491,6 @@ Here it is: [paste what you are building here]</pre>
     },
     {
       id:"schedule", title:"The weekly schedule",
-      blurb:"Sunday night, and you are still moving names around.",
       fields:[
         {k:"people", l:"People and availability", h:"Paste it however you have it. Messy is fine.", t:"textarea"},
         {k:"shifts", l:"Shifts to cover", h:"Mon to Fri, two techs on days, one on call weekends", t:"textarea"},
@@ -1492,7 +1502,6 @@ Here it is: [paste what you are building here]</pre>
     },
     {
       id:"invoice", title:"The invoice chase",
-      blurb:"For when chasing money feels awkward, so you put it off another week.",
       fields:[
         {k:"name",    l:"Customer", h:"", t:"input"},
         {k:"amount",  l:"Amount", h:"$1,840", t:"input"},
@@ -1507,7 +1516,6 @@ Here it is: [paste what you are building here]</pre>
     },
     {
       id:"proposal", title:"The proposal first draft",
-      blurb:"For turning messy intake scribbles into something you can send.",
       fields:[
         {k:"notes",   l:"Your rough intake notes", h:"Paste them exactly as you wrote them.", t:"textarea"},
         {k:"pricing", l:"Your pricing logic", h:"Leave it blank and it will hold the price as a placeholder.", t:"textarea"}
@@ -1518,7 +1526,6 @@ Here it is: [paste what you are building here]</pre>
     },
     {
       id:"recap", title:"The client recap",
-      blurb:"The notes are in your notebook. You still have not sent them.",
       fields:[
         {k:"notes", l:"Your raw notes", h:"Internal asides are fine. It keeps them out of the client version.", t:"textarea"}
       ],
@@ -1528,7 +1535,6 @@ Here it is: [paste what you are building here]</pre>
     },
     {
       id:"inbox", title:"The inbox triage",
-      blurb:"For thirty unread emails and no idea where to start.",
       fields:[
         {k:"batch", l:"Four or five messages", h:"Start small. Four or five is the right size to see what it does.", t:"textarea"}
       ],
