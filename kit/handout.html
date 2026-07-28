@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your Three Thinking Tools - Workshop Take-Home Pack</title>
+<style>
+  :root{
+    --ink:#11161f; --muted:#5b6675; --line:#e3e7ee; --bg:#ffffff;
+    --navy:#15233b; --gold:#b8842b; --soft:#f6f8fb;
+    --mono:'SFMono-Regular',ui-monospace,Menlo,Consolas,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;background:var(--soft);color:var(--ink);font-family:var(--sans);line-height:1.5;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:760px;margin:0 auto;padding:40px 28px 80px;}
+  .card{background:var(--bg);border-radius:14px;padding:38px 40px;margin:0 0 28px;box-shadow:0 1px 2px rgba(16,22,31,.04),0 6px 24px rgba(16,22,31,.05);}
+  .cover{background:var(--navy);color:#fff;text-align:center;padding:54px 40px;}
+  .cover h1{font-size:30px;line-height:1.15;margin:0 0 12px;letter-spacing:-.02em;}
+  .cover .spine{color:#f1d9a8;font-size:16px;margin:0 0 22px;font-weight:600;}
+  .cover p{color:#cdd6e4;max-width:520px;margin:0 auto;font-size:15px;}
+  .eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);font-weight:700;margin:0 0 6px;}
+  h2{font-size:23px;letter-spacing:-.01em;margin:0 0 4px;}
+  .sub{color:var(--muted);font-size:15px;margin:0 0 22px;}
+  h3{font-size:15px;margin:24px 0 8px;}
+  p{margin:0 0 12px;}
+  ul{margin:0 0 14px;padding-left:20px;} li{margin:0 0 6px;}
+  .voices{display:grid;gap:10px;margin:0 0 18px;}
+  .voice{display:flex;gap:12px;align-items:baseline;}
+  .voice b{min-width:130px;color:var(--navy);}
+  pre{background:#0f1623;color:#e8edf6;border-radius:10px;padding:18px 20px;font-family:var(--mono);font-size:12.5px;line-height:1.6;white-space:pre-wrap;overflow-wrap:break-word;margin:0 0 16px;}
+  .install{background:var(--soft);border-left:3px solid var(--gold);border-radius:0 8px 8px 0;padding:14px 18px;margin:0 0 14px;font-size:14px;}
+  .install b{color:var(--navy);}
+  .credit{font-size:13px;color:var(--muted);font-style:italic;}
+  .blank{border-bottom:1.5px solid var(--line);min-height:1.7em;display:block;margin:2px 0 4px;}
+  .hint{color:#9aa5b4;font-size:13px;}
+  .fill p{margin:0 0 16px;}
+  .foot{text-align:center;color:var(--muted);font-size:13px;padding:8px 0 0;}
+  .foot b{color:var(--ink);}
+  .toolbar{position:sticky;top:0;background:rgba(246,248,251,.92);backdrop-filter:blur(6px);padding:12px 0;text-align:center;z-index:10;}
+  .toolbar button{font:inherit;font-size:13px;font-weight:600;color:#fff;background:var(--navy);border:0;border-radius:8px;padding:9px 18px;cursor:pointer;}
+  @media print{
+    html,body{background:#fff;} .toolbar{display:none;}
+    .wrap{max-width:none;padding:0;}
+    .card{box-shadow:none;border:0;border-radius:0;padding:0 0 8px;page-break-after:always;margin:0;}
+    .card:last-child{page-break-after:auto;}
+    pre{background:#0f1623 !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    .cover{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  }
+</style>
+</head>
+<body>
+<div class="toolbar"><button onclick="window.print()">Print this pack</button></div>
+<div class="wrap">
+
+  <section class="card cover">
+    <h1>Your Three Thinking Tools</h1>
+    <p class="spine">Tools change. Principles don't.</p>
+    <p>You built these tonight, and they are yours to keep. They work in any AI you pick up, today's or next year's. Make a new project in Claude (or any tool), paste the instructions, and you have the tool forever. Nobody can lock you in.</p>
+  </section>
+
+  <!-- HANDOUT 1 -->
+  <section class="card">
+    <p class="eyebrow">Tool 1 : the hero</p>
+    <h2>The Decision Council</h2>
+    <p class="sub">Paste any real decision. Five advisors argue it from five angles, then force a verdict. Five real arguments in ten seconds, on your actual call.</p>
+
+    <h3>The five voices</h3>
+    <div class="voices">
+      <div class="voice"><b>The Contrarian</b><span>argues hard against the decision.</span></div>
+      <div class="voice"><b>First Principles</b><span>names the assumptions you're making and which ones are shaky.</span></div>
+      <div class="voice"><b>The Expansionist</b><span>describes a bolder, bigger version.</span></div>
+      <div class="voice"><b>The Outsider</b><span>reacts with zero context, like a smart stranger hearing it cold.</span></div>
+      <div class="voice"><b>The Executor</b><span>gives the first concrete step and the one thing most likely to kill it.</span></div>
+    </div>
+
+    <h3>Paste this to install it</h3>
+<pre>You are my Decision Council. When I give you a decision, respond as five
+separate advisors, each in one short paragraph:
+
+1. THE CONTRARIAN: argue hard against the decision.
+2. FIRST PRINCIPLES: list the assumptions I am making and which ones are shaky.
+3. THE EXPANSIONIST: describe a bolder, bigger version of this.
+4. THE OUTSIDER: react with zero context, like a smart stranger hearing it cold.
+5. THE EXECUTOR: give the first concrete step and the single thing most likely to kill it.
+
+Then finish with VERDICT: proceed, change, or kill, in one sentence, and why.
+Be direct. No flattery. Do not agree with me by default.
+
+My decision is: [paste your decision here]</pre>
+
+    <h3>Bonus mode : the premortem</h3>
+    <p>Add one line: <i>"Assume this failed badly six months from now. Walk it back and tell me why."</i> Catch the failure before it costs you.</p>
+
+    <div class="install"><b>Install for keeps:</b> make a new Claude Project named "Decision Council," paste the instructions into its custom instructions, then open it and drop in a decision whenever you face one.</div>
+    <p class="credit">Built on Gary Klein's premortem, Charlie Munger's inversion and mental models, and decision-science red-teaming.</p>
+  </section>
+
+  <!-- HANDOUT 2 -->
+  <section class="card">
+    <p class="eyebrow">Tool 2 : the simplifier</p>
+    <h2>The Simplicity Check</h2>
+    <p class="sub">Paste anything you're building, planning, or overthinking. It finds the simplest version that still works, and tells you what to cut.</p>
+
+    <h3>The four questions it answers</h3>
+    <ul>
+      <li>Where is this overcomplicated?</li>
+      <li>What's the simplest version that works?</li>
+      <li>Am I skipping the basics?</li>
+      <li>What can I cut right now?</li>
+    </ul>
+
+    <h3>Paste this to install it</h3>
+<pre>You are my Simplicity Check. When I give you a plan, a process, or something
+I am building, answer in four short parts:
+
+1. WHERE IT IS OVERCOMPLICATED: name the parts adding weight, not value.
+2. THE SIMPLEST VERSION THAT WORKS: describe the stripped-down core.
+3. AM I SKIPPING THE BASICS: call out any boring fundamental I am missing.
+4. CUT LIST: the specific things I can remove right now.
+
+Bias hard toward simple. Favor the plain version over the clever one.
+Be direct, no flattery.
+
+Here it is: [paste what you are building here]</pre>
+
+    <div class="install"><b>Install for keeps:</b> make a new Claude Project named "Simplicity Check," paste the instructions in, and reuse it any time a plan feels heavier than it should.</div>
+    <p class="credit">Built on Andrej Karpathy (simple, correct, readable over clever), Saint-Exupery ("perfection is when there is nothing left to take away"), and Occam's razor.</p>
+  </section>
+
+  <!-- HANDOUT 3 -->
+  <section class="card">
+    <p class="eyebrow">Tool 3 : the foundation both sit on</p>
+    <h2>The Business Brain</h2>
+    <p class="sub">Fill this in once. Paste it before any ask, and every answer comes back about YOUR business, in YOUR voice. Context once, reused forever, and it moves to any tool, so you're never locked in.</p>
+
+    <div class="fill">
+      <p>My business is <span class="blank"></span><br><span class="hint">e.g. a two-truck HVAC company in the south valley.</span></p>
+      <p>I sell <span class="blank"></span> to <span class="blank"></span><br><span class="hint">e.g. repairs and tune-ups, to homeowners and a few property managers.</span></p>
+      <p>The problem I solve is <span class="blank"></span></p>
+      <p>My prices and packages are <span class="blank"></span></p>
+      <p>My tone is <span class="blank"></span><br><span class="hint">e.g. straight-talking, warm, no jargon.</span></p>
+      <p>Things I say a lot, and things I never say: <span class="blank"></span></p>
+      <p>My weekly repeating tasks are <span class="blank"></span></p>
+      <p>My biggest goal right now is <span class="blank"></span></p>
+    </div>
+
+    <div class="install"><b>Install for keeps:</b> fill every blank (one page), make a new Claude Project named after your business, paste this into its custom instructions, and do your work inside that project. Now the tool already knows your shop.</div>
+  </section>
+
+  <p class="foot"><b>The one rule that keeps you safe:</b> a human approves, the AI drafts. Nothing important goes out without you. That's the brakes.<br><br>Boubacar · Catalyst Works · catalystworks.consulting</p>
+
+</div>
+</body>
+</html>
