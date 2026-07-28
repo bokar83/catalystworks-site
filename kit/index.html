@@ -56,7 +56,21 @@ body::after{
 .kick i{height:2px;flex:1;max-width:190px;background:var(--amber-deep);opacity:.4}
 
 /* ---------- hero ---------- */
-.hero{position:relative;background:var(--ink);color:var(--paper);padding:74px 0 96px;overflow:hidden}
+.hero{position:relative;background:var(--ink);color:var(--paper);padding:70px 0 56px;overflow:hidden}
+.herogrid{display:grid;gap:38px;align-items:end}
+@media(min-width:900px){
+  .herogrid{grid-template-columns:minmax(0,1.1fr) minmax(250px,.9fr);gap:56px}
+}
+.index{list-style:none;margin:0}
+.index li{position:relative;padding:11px 0 11px 30px}
+.index li::before{content:"";position:absolute;left:0;top:22px;width:16px;height:2px;
+  background:var(--amber);transform:rotate(-2.5deg)}
+.index a{color:var(--paper);text-decoration:none;font-size:16px;line-height:1.35;
+  display:block;cursor:pointer;transition:color .2s var(--ease)}
+.index a:hover,.index a:focus-visible{color:var(--molten)}
+.index a b{display:block;font-family:var(--body);font-weight:600}
+.index a span{display:block;font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink-faint);margin-top:2px}
 .hero .kick{color:var(--molten)}
 .hero .kick i{background:var(--molten);opacity:.5}
 .hero h1{
@@ -71,8 +85,8 @@ body::after{
 
 /* ---------- sticky jump nav ---------- */
 .jump{
-  position:sticky;top:0;z-index:50;background:rgba(239,231,214,.96);
-  border:0;box-shadow:0 1px 0 var(--line);
+  position:sticky;top:0;z-index:70;background:var(--paper);
+  border:0;box-shadow:0 1px 0 var(--line),0 6px 18px rgba(26,20,16,.06);
 }
 .jump ul{display:flex;gap:4px;list-style:none;overflow-x:auto;padding:9px 22px;
   max-width:940px;margin:0 auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
@@ -120,7 +134,8 @@ h2 .hot{color:var(--amber-deep)}
   transition:color .18s var(--ease);
 }
 .row summary::-webkit-details-marker{display:none}
-.row summary:hover{color:var(--amber-deep)}
+@media(hover:hover){.row summary:hover{color:var(--amber-deep)}}
+.row[open] summary .rowtext b{color:var(--amber-deep)}
 .row summary:focus-visible{outline:2px solid var(--amber-deep);outline-offset:3px}
 .num{font-family:var(--mono);font-size:12px;letter-spacing:.16em;color:var(--ink-faint);flex:none;
   padding-top:5px;min-width:2.4em}
@@ -222,8 +237,18 @@ footer a{color:var(--paper-2)}
 <header class="hero">
   <div class="wrap">
     <p class="kick"><b>Thursday, July 30</b><i></i><b>Salt Lake City</b></p>
-    <h1>Everything from<br>tonight, in <span class="hot">one place</span></h1>
-    <p class="lead">The deck, the tools you built, and seven more you did not have time for. Fill in your own details and copy. No notes needed.</p>
+    <div class="herogrid">
+      <div>
+        <h1>Everything from<br>tonight, in <span class="hot">one place</span></h1>
+        <p class="lead">The deck, the tools you built, and seven more you did not have time for. Fill in your own details and copy. No notes needed.</p>
+      </div>
+      <ul class="index">
+        <li><a href="#take"><b>The whole deck and the handout</b><span>Yours to download</span></a></li>
+        <li><a href="#tools"><b>The three tools you built</b><span>Business Brain, Council, Simplicity</span></a></li>
+        <li><a href="#recipes"><b>Seven more, already written</b><span>Follow-ups, invoices, inbox, more</span></a></li>
+        <li><a href="#next"><b>What happens next</b><span>If you want this pointed at your business</span></a></li>
+      </ul>
+    </div>
   </div>
 </header>
 <svg class="seam" viewBox="0 0 1200 44" preserveAspectRatio="none" aria-hidden="true" focusable="false">
@@ -309,12 +334,12 @@ footer a{color:var(--paper-2)}
   <section id="recipes">
     <p class="kick"><b>The ones we did not get to</b><i></i></p>
     <h2>Seven <span class="hot">recipes</span></h2>
-    <p class="intro">Every one of these is a task somebody in this room does every week and quietly hates. They are already written and already tested. Pick the one that annoys you most, fill in the blanks, and you are done in about four minutes.</p>
+    <p class="intro">Every one of these is a task somebody in this room does every week and dreads. They are already written and already tested. Pick the one that annoys you most, fill in the blanks, and you are done in about four minutes.</p>
     <div id="recipelist"></div>
   </section>
 
   <div class="privacy">
-    <p><b>Everything you type on this page stays on your device.</b> There is no account, no database, and no send button. Your answers are saved in this browser so you can close the tab and come back to them, and that is the only place they exist. I never see them.</p>
+    <p><b>Everything you type on this page stays on your device.</b> There is nothing on this page that sends your answers anywhere, because there is nowhere for them to go. They save in this browser so you can close the tab and come back to them, and that browser is the only place they exist. I never see them.</p>
     <div class="acts">
       <button type="button" class="btn ghost" id="clearall">Clear everything I typed</button>
       <span class="saved" id="clearmsg"></span>
@@ -456,7 +481,7 @@ footer a{color:var(--paper-2)}
     },
     {
       id:"invoice", title:"The invoice chase",
-      blurb:"For when chasing money feels awkward, so it quietly slips.",
+      blurb:"For when chasing money feels awkward, so it slips another week.",
       fields:[
         {k:"name",    l:"Customer", h:"", t:"input"},
         {k:"amount",  l:"Amount", h:"e.g. $1,840", t:"input"},
