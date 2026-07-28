@@ -1232,18 +1232,27 @@ My decision is: [paste your decision here]</pre>
        bottom edge where the footer clipped it */
     if(rows[sel] && rows[sel].scrollIntoView) rows[sel].scrollIntoView({ block: 'center' });
   }
+  /* Stamp matches beat title matches, and if any stamp matches the title pass
+     is dropped entirely. Without that split, typing a single letter to reach
+     a lettered closing slide matched nearly every row, because almost every
+     headline contains an "a". The letter never selected the slide it named.
+     Typing more characters degrades naturally: once no stamp can match the
+     query, the title pass takes over, so "council" still finds the module. */
   function filterJump(){
-    var q = buf.toLowerCase();
-    rows.forEach(function(r, k){
-      var hit = !q ||
-        meta[k].label.toLowerCase() === q ||
-        meta[k].label.toLowerCase().indexOf(q) === 0 ||
-        meta[k].title.toLowerCase().indexOf(q) > -1 ||
-        String(k + 1) === q;
-      r.classList.toggle('gone', !hit);
+    var q = buf.toLowerCase().trim();
+    if(!q){
+      rows.forEach(function(r){ r.classList.remove('gone'); });
+      sel = i; drawSel(); return;
+    }
+    var byStamp = [], byTitle = [];
+    meta.forEach(function(m, k){
+      var lab = (m.label || '').toLowerCase();
+      if((lab && lab.indexOf(q) === 0) || String(k + 1) === q) byStamp.push(k);
+      else if(m.title.toLowerCase().indexOf(q) > -1) byTitle.push(k);
     });
-    var vis = visibleRows();
-    if(vis.indexOf(sel) === -1 && vis.length) sel = vis[0];
+    var keep = byStamp.length ? byStamp : byTitle;
+    rows.forEach(function(r, k){ r.classList.toggle('gone', keep.indexOf(k) === -1); });
+    if(keep.indexOf(sel) === -1 && keep.length) sel = keep[0];
     drawSel();
   }
   function openJump(){
@@ -1342,10 +1351,12 @@ My decision is: [paste your decision here]</pre>
       e.preventDefault(); buf += k; showBuf();
       clearTimeout(bufT); bufT = setTimeout(function(){ buf = ''; showBuf(); }, 2400);
     }
-    else if(k.length === 1 && /[a-dA-D]/.test(k)){
-      /* the closing slides are stamped A B C D, not numbers */
-      e.preventDefault(); buf = k.toUpperCase(); commitBuf();
-    }
+    /* No bare-letter jump to the A B C D closing slides. B is the blank-screen
+       key, a reflex borrowed from every other presenter tool, so it shadowed
+       the jump and pressing B for slide B blacked the room instead. Leaving
+       A, C and D working while B did something dramatic is a worse trap than
+       no shortcut at all, so all four go through the jump list: O, type the
+       letter, enter. The filter already matches the printed stamp exactly. */
   });
 
   /* ---- pointer and touch ------------------------------------------------ */
@@ -1378,7 +1389,7 @@ My decision is: [paste your decision here]</pre>
     '<tr><td>home &nbsp; end</td><td>first slide &nbsp; last slide</td></tr>' +
     '<tr><td>O &nbsp; or &nbsp; G</td><td>jump list, type to filter</td></tr>' +
     '<tr><td>digits then enter</td><td>go to that stamped slide number</td></tr>' +
-    '<tr><td>A &nbsp; B &nbsp; C &nbsp; D</td><td>go to the lettered closing slides</td></tr>' +
+    '<tr><td>O then a letter then enter</td><td>go to a lettered slide, A B C D</td></tr>' +
     '<tr><td>B &nbsp; or &nbsp; .</td><td>black the screen, any key brings it back</td></tr>' +
     '<tr><td>W &nbsp; or &nbsp; ,</td><td>white the screen</td></tr>' +
     '<tr><td>F</td><td>full screen</td></tr>' +
