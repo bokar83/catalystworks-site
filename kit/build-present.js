@@ -474,7 +474,11 @@ const JS = `
   function bump(hold){
     chrome.classList.add('show');
     clearTimeout(idleT);
-    if(t0 || hold === true) return;              /* timer on, or held open */
+    if(hold === true) return;                    /* held open on purpose */
+    /* The running timer must NOT pin the chip open. This is a single-screen
+       deck: whatever sits in the corner is burned onto the wall the room is
+       looking at. The clock keeps ticking behind the fade (tick is an interval
+       independent of visibility) and a mouse nudge calls bump() to read it. */
     idleT = setTimeout(function(){ chrome.classList.remove('show'); }, 2200);
   }
 
