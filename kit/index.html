@@ -1682,11 +1682,12 @@ Then zip the decision-council folder and give me the zip to download.</pre>
       var name = btn.dataset.label || 'Text';
       var blanks = (btn.dataset.copy === 'out-brain') ? brainBlanks() : 0;
 
+      /* Deliberately no scroll and no focus move. Somebody who just pressed a
+         button should get the answer under the button, not a page that jumps
+         somewhere else on them. The form is directly above it. */
       if(blanks === BRAIN_ROWS.length){
         flash(btn,'fail','Fill in a box first');
         say('Nothing to copy yet. Fill in at least one box above, otherwise you would be pasting a blank form into Claude.');
-        var first = document.getElementById(BRAIN_ROWS[0][0]);
-        if(first){ first.scrollIntoView({block:'center'}); first.focus({preventScroll:true}); }
         return;
       }
 
