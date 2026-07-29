@@ -31,7 +31,13 @@
       the page, on its next load, without anyone clearing anything. Bump
       CACHE on every deploy so the activate handler drops the old one. */
 
-var CACHE = 'kit0730-cw-v2';
+/* Bumped v2 -> v3 on 2026-07-28 after the deck copy was corrected. deck.html
+   is not in ASSETS, but any attendee who opened it before the fix has the old
+   one sitting in this runtime cache, and on venue wifi the NET_TIMEOUT branch
+   below would serve exactly that. Renaming the cache makes the activate
+   handler drop the whole thing, so no laptop can still be holding a deck that
+   tells people to make a new project for every tool. */
+var CACHE = 'kit0730-cw-v3';
 
 /* The page itself only. Small, and the thing every attendee needs first. */
 var ASSETS = ['./', './index.html'];
