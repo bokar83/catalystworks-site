@@ -44,7 +44,7 @@
    file came back from the presenter branch still reading v2, which would have
    silently undone yesterday's bump; v4 is deliberately past v3 so the merge
    moves the cache forward rather than backwards. */
-var CACHE = 'kit0730-cw-v4';
+var CACHE = 'kit0730-cw-v5';
 
 /* The page itself only. Small, and the thing every attendee needs first. */
 var ASSETS = ['./', './index.html'];
