@@ -19,6 +19,17 @@ RewriteRule ^workshop-b/?$ workshop-b/index.html [NC,L]
 
 # IC lead-magnet opt-in (free AI checklist) lives at /ai-checklist/.
 # Same directory-index pattern as /workshop. Captures cold Meta-ad traffic.
+#
+# 2026-07-30: found while fixing the same defect on /kit. This page carries one
+# relative reference, assets/cw-logo.png, which only resolves when the document
+# base ends in a slash. Served in place at /ai-checklist the logo 404s and the
+# page renders without its mark. Every /w/ short link already sends traffic to
+# the slash form, so this only ever hit someone typing the URL, and the opt-in
+# form and its Stripe target are absolute so nothing on the money path was
+# affected. The 301 must stay ahead of the serve rule. It cannot loop:
+# /ai-checklist/ has a trailing slash and never matches ^ai-checklist$. QSA
+# keeps the UTMs on a typed link carrying them.
+RewriteRule ^ai-checklist$ /ai-checklist/ [R=301,L,QSA]
 RewriteRule ^ai-checklist/?$ ai-checklist/index.html [NC,L]
 # IC simple one-screen QR conversion page (StartFEST + /w/ss) lives at /seat/.
 RewriteRule ^seat/?$ seat/index.html [NC,L]
