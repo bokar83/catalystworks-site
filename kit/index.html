@@ -194,6 +194,16 @@ strong{font-weight:600}
 .station.ink .step-label{color:#B9AE9C}
 .station.ink .step-label b{background:var(--molten);color:var(--ink)}
 
+/* Body copy for a step that explains rather than hands over something to copy.
+   The council and the simplicity check each used to carry the same prompt twice,
+   once at step 1 and again at step 3 with the owner's own answer folded in. Two
+   near identical orange boxes in one station read as a duplicate, not a
+   sequence, so step 1 keeps the instruction and step 3 keeps the only copy
+   button. Same type scale as the keep-it station's .kt-say, which is already
+   carrying prose of this length on the page. */
+.step-say{font-size:15.5px;line-height:1.6;margin:2px 0 0;max-width:66ch;color:var(--ink-soft)}
+.station.ink .step-say{color:#DCD3C2}
+
 /* ---------- form ---------- */
 .fields{display:grid;gap:clamp(16px,1.9vw,24px);grid-template-columns:repeat(auto-fit,minmax(275px,1fr));margin:0;padding:0;border:0}
 .field{display:flex;flex-direction:column;min-width:0}
@@ -723,37 +733,8 @@ a{color:var(--amber-deep);text-decoration-thickness:1px;text-underline-offset:3p
     </div>
 
     <div class="step">
-      <p class="step-label"><b>Step 1</b> The instructions. This is what you paste once to build the tool.</p>
-      <div class="promptbox">
-<pre id="out-council-install"><span class="k">You are my Decision Council.</span> When I give you a decision, work it in three passes.
-
-<span class="k">PASS 1. Five advisors.</span> One short paragraph each.
-1. <span class="k">THE CONTRARIAN:</span> argue hard against the decision.
-2. <span class="k">FIRST PRINCIPLES:</span> list the assumptions I am making and which ones are shaky.
-3. <span class="k">THE EXPANSIONIST:</span> describe a bolder, bigger version of this.
-4. <span class="k">THE OUTSIDER:</span> react with zero context, like a smart stranger hearing it cold.
-5. <span class="k">THE EXECUTOR:</span> give the first concrete step and the single thing most likely to kill it.
-
-<span class="k">PASS 2. Peer review.</span> Each advisor reads the other four and answers in one line:
-which one is strongest, and what did all five of us miss?
-
-<span class="k">PASS 3. The Chairman.</span> Step out of the five and close it out.
-- Where do all five agree? That is the solid ground.
-- Where do they split? Name the split. Do not smooth it over.
-- What did the peer review catch that no single advisor saw?
-- <span class="k">VERDICT:</span> proceed, change, or kill. One sentence, and why.
-- The first move, this week.
-- The one question only I can answer.
-
-Be direct. No flattery. Do not agree with me by default.
-
-My decision is: [paste your decision here]</pre>
-        <button class="copy" type="button" data-copy="out-council-install" data-label="Copy council instructions">
-          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><rect x="9" y="9" width="12" height="12"/><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"/></svg>
-          <span class="lbl">Copy</span>
-        </button>
-      </div>
-      <p class="stamp-note" style="margin-top:14px">Same project you already made. Open a new chat inside it, paste this, then give it a real decision. That is the whole setup.</p>
+      <p class="step-label"><b>Step 1</b> Start in the project you already built</p>
+      <p class="step-say">Open a new chat inside it. Nothing to copy up here. Step 3 puts the council's instructions and your own decision into one block, and that is the only thing you paste.</p>
     </div>
 
     <div class="step">
@@ -819,26 +800,8 @@ My decision is: [paste your decision here]</pre>
     </div>
 
     <div class="step">
-      <p class="step-label"><b>Step 1</b> The instructions. Paste once to build the tool.</p>
-      <div class="promptbox">
-<pre id="out-simp-install"><span class="k">You are my Simplicity Check.</span> When I give you a plan, a process, or something
-I am building, answer in four short parts:
-
-1. <span class="k">WHERE IT IS OVERCOMPLICATED:</span> name the parts adding weight, not value.
-2. <span class="k">THE SIMPLEST VERSION THAT WORKS:</span> describe the stripped-down core.
-3. <span class="k">AM I SKIPPING THE BASICS:</span> call out any boring fundamental I am missing.
-4. <span class="k">CUT LIST:</span> the specific things I can remove right now.
-
-Bias hard toward simple. Favor the plain version over the clever one.
-Be direct, no flattery.
-
-Here it is: [paste what you are building here]</pre>
-        <button class="copy" type="button" data-copy="out-simp-install" data-label="Copy simplicity instructions">
-          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><rect x="9" y="9" width="12" height="12"/><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"/></svg>
-          <span class="lbl">Copy</span>
-        </button>
-      </div>
-      <p class="stamp-note" style="margin-top:14px;color:#A2988A">Same project again. New chat, paste, go. Reuse it any time a plan feels heavier than the job.</p>
+      <p class="step-label"><b>Step 1</b> Same project, new chat</p>
+      <p class="step-say">Nothing to copy up here either. Step 3 puts the instructions and the thing you are overbuilding into one block, and that is the only thing you paste. Reuse it any time a plan feels heavier than the job.</p>
     </div>
 
     <div class="step">

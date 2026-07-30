@@ -52,7 +52,7 @@
    and the NET_TIMEOUT branch below will hand it straight back on venue wifi
    even though the redirect is now live. Renaming the cache makes the activate
    handler drop the whole thing, so nobody in the room can still be holding it. */
-var CACHE = 'kit0730-cw-v7';
+var CACHE = 'kit0730-cw-v8';
 
 /* The page itself only. Small, and the thing every attendee needs first. */
 var ASSETS = ['./', './index.html'];
