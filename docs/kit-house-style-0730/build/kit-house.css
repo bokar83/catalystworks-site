@@ -1,0 +1,693 @@
+
+/* ============================================================================
+   YOUR KIT - AI Without Getting Burned - Thu 2026-07-30
+   THE HOUSE VISUAL LANGUAGE: Fouta Djallon strip-weave fused with technical
+   drawing. Same system as the room deck (kit/deck.html) and the direction
+   locked at boubacarbarry-site review/20260728-house-style-hybrid.
+
+   Two problems a long interactive page has that a slide never does.
+
+   1. A scroll has no sheet edge. A drawing border promises you can see all
+      four sides at once and a scroll can never keep that promise, so there is
+      no border. The ZONE RAIL carries the discipline instead: the letters
+      running down the edge of a drawing sheet become a ruler down the side of
+      the page, the letter for the zone you are in follows you and stops at its
+      own boundaries, and it costs 26px on a phone.
+
+   2. Sixty inputs. At sixty, cream blocks on indigo are just cream blocks. So
+      the reserve is confined to the places it is literally true. On the woven
+      ground the only cream is THE INSIDE OF A CONTROL, because the control is
+      the part of the cloth you write on. Three sheets are cream all the way
+      through, and they are the three that interrupt rather than continue:
+      the step-zero sheet, the principles sheet, and the report-back sheet.
+
+   THREE ROLES, THREE COLOURS, NO OVERLAP.
+     cotton / ink   the lettering. Light on the cloth, dark inside a control.
+     weave          the material being drawn. Never a letter.
+     brass          the annotation a draughtsman adds on top. Never body copy.
+
+   HARD CONSTRAINT, unchanged: fully self-contained. No CDN, no external font,
+   no remote image, no analytics, no network call of any kind. Once loaded it
+   keeps working with the wifi off. Nothing an attendee types is transmitted.
+   ============================================================================ */
+
+:root{
+  /* the cloth */
+  --vat:#16305E;
+  --flat:#12274F;        /* inside the held field: the dye never reached it */
+  --vat-deep:#0E2148;
+  /* the three roles */
+  --cotton:#E9EEE3;
+  --cream:#E7E3D6;       /* the reserve. A control, or a reserve sheet. */
+  --ink:#101A31;
+  --weave:#8FA5CE;
+  --brass:#D2A94E;
+  --brass-deep:#B8913C;    /* brass as a FILL or a rule. Ink reads on it at 5.9:1. */
+  --brass-ink:#7A5C15;     /* brass as LETTERING on a reserve sheet. Aged, because
+                              #B8913C on cream is 2.3:1 and annotation still has to
+                              be read. 4.7:1, which clears AA at caption size. */
+  /* ISO 128-2 line weights, translated to screen */
+  --thick:3px;           /* continuous thick: outlines, section rules */
+  --thin:1px;            /* continuous thin: dimension, hatch, leader */
+  --rule:rgba(233,238,227,.50);
+  --faint:rgba(233,238,227,.20);
+  --rule-ink:rgba(16,26,49,.42);
+  --faint-ink:rgba(16,26,49,.16);
+  --ok:#5FB37E;
+  --bad:#D9694C;
+  /* type */
+  --draft:'Anybody',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --body:'Spline Sans','Segoe UI',-apple-system,system-ui,sans-serif;
+  --mono:'Spline Sans Mono',Consolas,ui-monospace,monospace;
+  --ease:cubic-bezier(.22,1,.36,1);
+  --pad:clamp(18px,4.4vw,64px);
+  --rail:34px;
+
+  /* Legacy aliases. The three scoped blocks further down this document were
+     written against the previous palette's names. Remapping them here rather
+     than renaming keeps those blocks readable and keeps this a restyle. */
+  --paper:var(--cotton);
+  --paper-2:var(--cream);
+  --paper-3:var(--cream);
+  --amber:var(--brass);
+  --amber-deep:var(--brass-deep);
+  --molten:var(--brass);
+  --ink-soft:rgba(233,238,227,.80);
+  --ink-faint:rgba(233,238,227,.62);
+  --line:var(--faint);
+  --display:var(--draft);
+  --serif:var(--body);
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{
+  margin:0;background:var(--vat);color:var(--cotton);
+  font-family:var(--body);font-size:clamp(16px,.5vw + 15px,18px);
+  line-height:1.58;font-weight:400;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.001ms !important;transition-duration:.001ms !important}
+}
+:focus-visible{outline:2px solid var(--brass);outline-offset:3px}
+
+/* ---------------------------------------------------------------- the cloth
+   Six warped indigo strips at full bleed. Fixed, so the cloth does not scroll
+   away from under the drawing. Each strip carries its own warp pitch, which is
+   what makes it read as six strips sewn together rather than one printed
+   texture. Strips drop out in pairs as the viewport narrows. */
+.cloth{position:fixed;inset:0;z-index:0;display:grid;grid-template-columns:repeat(6,1fr);
+  pointer-events:none;contain:strict}
+.cloth i{border-right:1px solid rgba(6,12,28,.55)}
+.cloth i:last-child{border-right:0}
+.cloth i:nth-child(1){background-image:repeating-linear-gradient(to right,rgba(233,238,227,.085) 0 1px,transparent 1px 7px)}
+.cloth i:nth-child(2){background-image:repeating-linear-gradient(to right,rgba(233,238,227,.062) 0 1px,transparent 1px 9px)}
+.cloth i:nth-child(3){background-image:repeating-linear-gradient(to right,rgba(233,238,227,.100) 0 1px,transparent 1px 6px)}
+.cloth i:nth-child(4){background-image:repeating-linear-gradient(to right,rgba(233,238,227,.048) 0 1px,transparent 1px 11px)}
+.cloth i:nth-child(5){background-image:repeating-linear-gradient(to right,rgba(233,238,227,.090) 0 1px,transparent 1px 8px)}
+.cloth i:nth-child(6){background-image:repeating-linear-gradient(to right,rgba(233,238,227,.070) 0 1px,transparent 1px 10px)}
+@media(max-width:900px){.cloth{grid-template-columns:repeat(3,1fr)}.cloth i:nth-child(n+4){display:none}}
+@media(max-width:620px){.cloth{grid-template-columns:repeat(2,1fr)}.cloth i:nth-child(n+3){display:none}}
+
+/* the selvedge: the woven edge the cloth is finished with, top and foot */
+.edge{height:5px;background:var(--cotton);position:relative;z-index:3}
+
+/* ----------------------------------------------------------- the zone rail */
+.sheet{position:relative;z-index:2;padding-left:var(--rail)}
+.zonerail{position:absolute;left:0;top:0;bottom:0;width:var(--rail);
+  border-right:var(--thin) solid var(--rule);z-index:5;pointer-events:none}
+.zonerail span{position:absolute;left:0;width:var(--rail);text-align:center;
+  font-family:var(--mono);font-size:12px;font-weight:600;color:var(--brass);opacity:.55;
+  transition:opacity .18s var(--ease)}
+.zonerail i{position:absolute;left:0;width:var(--rail);height:1px;background:var(--faint)}
+.zonerail span.on{opacity:1}
+.zonerail span.on::before{content:"";position:absolute;left:5px;right:5px;top:-6px;bottom:-6px;
+  border:1.5px solid var(--brass);border-radius:50%}
+
+/* -------------------------------------------------------------- held field
+   Flat ground, corner registration ticks, and nothing in it but the thing you
+   are meant to be reading or filling in. The drawing does not enter here: no
+   warp lines, no chains, no brass rules across it. Eight background bars give
+   four L-shaped corner ticks with no extra markup. */
+.held,
+.station > .wrap,
+#start,
+.vault,
+#next > .wrap,
+.principles-sheet > .wrap,
+.close-sheet > .wrap{
+  position:relative;
+  background-color:var(--flat);
+  background-image:
+    linear-gradient(var(--cotton),var(--cotton)),linear-gradient(var(--cotton),var(--cotton)),
+    linear-gradient(var(--cotton),var(--cotton)),linear-gradient(var(--cotton),var(--cotton)),
+    linear-gradient(var(--cotton),var(--cotton)),linear-gradient(var(--cotton),var(--cotton)),
+    linear-gradient(var(--cotton),var(--cotton)),linear-gradient(var(--cotton),var(--cotton));
+  background-repeat:no-repeat;
+  background-size:26px 2px,2px 26px,26px 2px,2px 26px,26px 2px,2px 26px,26px 2px,2px 26px;
+  background-position:left top,left top,right top,right top,left bottom,left bottom,right bottom,right bottom;
+}
+
+/* ------------------------------------------------------------------ layout */
+.wrap{max-width:1180px;margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
+/* The quick nav is sticky, so an anchor jump used to land the heading it was
+   sent to underneath the bar. Every jump target reserves the bar's own height
+   plus a little air, which is what makes "04 Keep it forever" in the nav agree
+   with what a reader actually sees when they press it. */
+#start,#brain,#council,#simplicity,#keepit,#recipes,#next,
+#recipe-followup,#recipe-review,#recipe-schedule,#recipe-invoice,
+#recipe-proposal,#recipe-recap,#recipe-inbox{scroll-margin-top:74px}
+@media (max-width:820px){
+  #start,#brain,#council,#simplicity,#keepit,#recipes,#next{scroll-margin-top:66px}
+}
+.band{padding:clamp(30px,4vw,58px) 0;position:relative;z-index:2;background:none}
+.station > .wrap,
+#next > .wrap,
+.principles-sheet > .wrap,
+.close-sheet > .wrap{padding-top:clamp(30px,3.6vw,48px);padding-bottom:clamp(32px,3.8vw,52px)}
+/* .ink and .warm were the previous system's two grounds. There is one ground
+   now, the cloth, and the interruption is carried by the reserve sheets. */
+.band.ink,.band.warm{background:none;color:inherit}
+
+/* ------------------------------------------------------- the reserve sheets
+   Three sheets are cream all the way through. They are the three that
+   interrupt: where all of this goes, the principles, and the report back.
+   On a reserve sheet everything inverts, including the controls: the cloth is
+   the thing you write on when the sheet is cream. */
+#start,
+.principles-sheet > .wrap,
+#next > .wrap{
+  background-color:var(--cream);color:var(--ink);
+  background-image:
+    linear-gradient(var(--ink),var(--ink)),linear-gradient(var(--ink),var(--ink)),
+    linear-gradient(var(--ink),var(--ink)),linear-gradient(var(--ink),var(--ink)),
+    linear-gradient(var(--ink),var(--ink)),linear-gradient(var(--ink),var(--ink)),
+    linear-gradient(var(--ink),var(--ink)),linear-gradient(var(--ink),var(--ink));
+}
+#start h1,#start h2,#start h3,
+.principles-sheet h2,.principles-sheet h3,
+#next h2,#next h3{color:var(--ink)}
+#start .eyebrow,.principles-sheet .eyebrow,#next .eyebrow{color:var(--brass-ink)}
+#start a,#next a,.principles-sheet a{color:var(--ink)}
+
+/* -------------------------------------------------------------- shared type
+   The eyebrow is the note head a draughtsman writes above an annotation: mono,
+   tracked out, brass, with a leader line running off it to the sheet edge. */
+.eyebrow{
+  font-family:var(--mono);font-size:clamp(10px,.26vw + 9.4px,12px);
+  font-weight:500;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--brass);display:flex;align-items:center;gap:14px;margin:0 0 13px;
+}
+.eyebrow::after{content:"";flex:1;height:var(--thin);background:currentColor;opacity:.45;max-width:230px}
+.eyebrow.on-ink{color:var(--brass)}
+
+h1,h2,h3{font-family:var(--draft);font-variation-settings:'wdth' 88,'wght' 750;
+  font-weight:750;text-transform:uppercase;letter-spacing:-.008em;line-height:.95;margin:0;color:var(--cotton)}
+h1{font-size:clamp(2.35rem,6.6vw,5.2rem);line-height:.94}
+h2{font-size:clamp(1.78rem,4.2vw,3.1rem)}
+h3{font-size:clamp(1.16rem,2.2vw,1.66rem);line-height:1.02}
+@media (max-width:640px){ h1,h2{line-height:1.02} }
+.lede{font-family:var(--body);font-size:clamp(1.02rem,.72vw + .88rem,1.32rem);
+  line-height:1.46;margin:0;color:var(--cotton)}
+#start .lede,.principles-sheet .lede,#next .lede,#start p,#next p{color:var(--ink)}
+p{margin:0 0 1em}
+p:last-child{margin-bottom:0}
+strong,b{font-weight:600}
+
+/* the annotation sweep under a word: a draughtsman's brass underline, not a
+   marker. Same mark the deck uses, drawn at drawing weight. */
+.marked{position:relative;display:inline-block}
+.marked>svg{position:absolute;left:-1%;bottom:-.16em;width:102%;height:.22em;overflow:visible;pointer-events:none}
+.marked>svg path{fill:none;stroke:var(--brass);stroke-width:4;stroke-linecap:square}
+.on-ink .marked>svg path{stroke:var(--brass)}
+.principles-sheet .marked>svg path{stroke:var(--brass-deep)}
+
+/* ------------------------------------------------------- the dimension chain
+   What used to be a torn paper seam is now the chain that dimensions the
+   module the ground is built from: continuous thin brass line, 45 degree
+   ticks at the stations. It is annotation, so it never crosses a held field. */
+.seam{display:block;width:100%;height:clamp(30px,3vw,42px);position:relative;z-index:2;margin:0}
+.seam svg{display:none}
+.seam::before{content:"";position:absolute;left:var(--pad);right:var(--pad);top:50%;
+  height:var(--thin);background:var(--brass);opacity:.55}
+.seam::after{content:"";position:absolute;left:var(--pad);right:var(--pad);top:calc(50% - 8px);height:17px;opacity:.6;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='118' height='17'%3E%3Cline x1='52' y1='2' x2='66' y2='15' stroke='%23D2A94E' stroke-width='2'/%3E%3C/svg%3E");
+  background-repeat:repeat-x;background-position:left center}
+
+/* ---------------------------------------------------------------- masthead */
+.masthead{padding-top:clamp(26px,3.4vw,44px);padding-bottom:clamp(26px,3vw,42px);
+  position:relative;z-index:2}
+.mast-meta{
+  font-family:var(--mono);font-size:clamp(10px,.24vw + 9.2px,11.5px);
+  letter-spacing:.18em;text-transform:uppercase;color:var(--cotton);
+  display:flex;flex-wrap:wrap;gap:8px 20px;margin:0 0 24px;opacity:.72;
+}
+.mast-meta b{color:var(--brass);font-weight:600;opacity:1}
+.mast-sub{max-width:44ch;margin-top:clamp(18px,2vw,26px)}
+/* One labelled chain, in its own reserved space under the masthead,
+   dimensioning the module the whole ground is built from. It needs the room:
+   set against the stamp notes it reads as a caption on the last stamp, which
+   is exactly what it is not. */
+.masthead{padding-bottom:clamp(72px,6vw,92px)}
+.masthead::before{
+  content:"";position:absolute;left:var(--pad);right:var(--pad);bottom:44px;height:17px;opacity:.6;
+  background-image:linear-gradient(var(--brass),var(--brass)),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='118' height='17'%3E%3Cline x1='52' y1='2' x2='66' y2='15' stroke='%23D2A94E' stroke-width='2'/%3E%3C/svg%3E");
+  background-size:100% 1px,auto;
+  background-position:left center,left center;
+  background-repeat:no-repeat,repeat-x;
+}
+.masthead::after{content:"STRIP MODULE 266";position:absolute;left:var(--pad);
+  bottom:20px;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;
+  color:var(--brass);opacity:.9}
+
+/* -------------------------------------------------- the issue stamp (CTA)
+   The box a drawing gets when it is released. Cotton fill, ink lettering,
+   brass when you are on it. The roughen filter belonged to the pressed-ink
+   idiom and is dropped: a released drawing has a clean edge. */
+.stamp{
+  display:inline-flex;align-items:center;gap:12px;
+  font-family:var(--mono);text-transform:uppercase;font-weight:600;
+  font-size:clamp(11.5px,.7vw,13px);letter-spacing:.14em;
+  background:var(--cotton);color:var(--ink);
+  padding:14px 22px;border:var(--thick) solid var(--cotton);cursor:pointer;
+  text-decoration:none;position:relative;filter:none;min-height:48px;
+  transition:background .16s var(--ease),color .16s var(--ease),border-color .16s var(--ease);
+}
+.stamp:hover,.stamp:focus-visible{background:var(--brass);border-color:var(--brass);color:var(--ink)}
+.stamp:focus-visible{outline:2px solid var(--brass);outline-offset:4px}
+/* the deck download is the first thing asked for in the room. It is the one
+   stamp drawn in brass, so there is exactly one primary on the sheet. */
+.stamp.primary{background:var(--brass);border-color:var(--brass);color:var(--ink)}
+.stamp.primary:hover,.stamp.primary:focus-visible{background:var(--cotton);border-color:var(--cotton)}
+.band.ink .stamp{background:var(--cotton);border-color:var(--cotton);color:var(--ink)}
+.band.ink .stamp:hover,.band.ink .stamp:focus-visible{background:var(--brass);border-color:var(--brass);color:var(--ink)}
+#next .stamp{background:var(--ink);border-color:var(--ink);color:var(--cream)}
+#next .stamp:hover,#next .stamp:focus-visible{background:var(--brass-deep);border-color:var(--brass-deep);color:var(--ink)}
+.stamp .arw{font-family:var(--mono);font-size:.86em;transform:translateY(-.04em)}
+.stamp-note{font-family:var(--mono);font-size:11px;letter-spacing:.1em;
+  color:var(--brass);margin-top:11px;text-transform:uppercase;opacity:.85}
+#next .stamp-note,#start .stamp-note{color:var(--brass-ink);opacity:1}
+.stamp-row{display:flex;flex-wrap:wrap;align-items:flex-start;gap:16px 26px;margin-top:clamp(22px,2.6vw,32px)}
+
+/* ------------------------------------------------------- the privacy proof
+   Its own held field, drawn tighter than a station, because it is the note a
+   reader is meant to stop on before typing anything. */
+.vault{padding:clamp(26px,3.4vw,44px) clamp(20px,3vw,42px);margin:clamp(6px,1.2vw,16px) 0;
+  transform:none;color:var(--cotton)}
+.vault-in{transform:none}
+.vault h2{font-size:clamp(1.44rem,3.1vw,2.35rem);margin-bottom:15px}
+.vault p{color:var(--cotton);opacity:.9;max-width:58ch}
+.vault-grid{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px;padding:0;list-style:none}
+.vault-grid li{
+  font-family:var(--mono);font-size:clamp(10px,.22vw + 9.6px,11.5px);
+  letter-spacing:.1em;text-transform:uppercase;
+  border:var(--thin) solid var(--rule);color:var(--brass);
+  padding:8px 13px;display:flex;align-items:center;gap:9px;
+}
+.vault-grid li::before{content:"";width:6px;height:6px;background:var(--brass);flex:none}
+.vault-live{
+  display:inline-flex;align-items:center;gap:11px;margin-top:24px;
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--cotton);border-bottom:var(--thin) solid var(--brass);padding-bottom:6px;
+}
+.pulse{width:8px;height:8px;border-radius:50%;background:var(--ok);flex:none;
+  box-shadow:0 0 0 0 rgba(95,179,126,.7);animation:pl 2.6s infinite}
+@keyframes pl{
+  0%{box-shadow:0 0 0 0 rgba(95,179,126,.6)}
+  70%{box-shadow:0 0 0 11px rgba(95,179,126,0)}
+  100%{box-shadow:0 0 0 0 rgba(95,179,126,0)}
+}
+
+/* ------------------------------------------------------------- the stations
+   The station number is the figure number: item number, tab order, and what
+   somebody says out loud at table four. Mono and brass, because it is
+   annotation, with FIG. set above it the way a plate is called out. */
+.station{padding:0;position:relative}
+.station-head{display:flex;gap:clamp(14px,2.4vw,32px);align-items:flex-start;
+  margin-bottom:clamp(22px,3vw,38px);
+  border-bottom:var(--thick) solid var(--cotton);padding-bottom:clamp(18px,2.2vw,28px)}
+.station-no{
+  font-family:var(--mono);font-weight:600;font-size:clamp(1.5rem,3vw,2.2rem);
+  line-height:1;color:var(--brass);flex:none;letter-spacing:.02em;padding-top:20px;position:relative;
+}
+.station-no::before{content:"FIG.";position:absolute;top:0;left:0;
+  font-size:11px;letter-spacing:.18em;opacity:.8}
+.station.ink .station-no{color:var(--brass)}
+.station-title{flex:1;min-width:0}
+.station-title .lede{margin-top:15px;max-width:48ch}
+.station.ink .lede{color:var(--cotton)}
+
+/* ------------------------------------------------------------------- step */
+.step{margin-top:clamp(24px,3vw,38px)}
+.step-label{
+  font-family:var(--mono);font-size:clamp(10.5px,.22vw + 10px,12px);
+  letter-spacing:.17em;text-transform:uppercase;color:var(--brass);
+  display:flex;align-items:center;gap:12px;margin-bottom:13px;
+}
+.step-label b{background:var(--brass);color:var(--ink);padding:4px 9px 3px;
+  font-weight:600;letter-spacing:.13em}
+.station.ink .step-label{color:var(--brass)}
+.station.ink .step-label b{background:var(--brass);color:var(--ink)}
+
+/* A step that explains rather than hands over something to copy. */
+.step-say{font-size:15px;line-height:1.6;margin:2px 0 0;max-width:66ch;color:var(--cotton);opacity:.86}
+.station.ink .step-say{color:var(--cotton);opacity:.86}
+
+/* ------------------------------------------------------ the schedule of parts
+   Numeral, label, hint, worked example, control. The controls are the reserve:
+   the part of the cloth that was bound off before the vat, and the only place
+   on the woven ground where cream appears. */
+.fields{display:grid;gap:clamp(15px,1.8vw,22px);grid-template-columns:repeat(auto-fit,minmax(272px,1fr));
+  margin:0;padding:0;border:0;border-top:var(--thin) solid var(--faint);padding-top:clamp(16px,2vw,22px)}
+.field{display:flex;flex-direction:column;min-width:0}
+.field.wide{grid-column:1/-1}
+.field label{
+  font-family:var(--body);font-weight:600;font-size:clamp(14.5px,.18vw + 14px,16px);
+  margin-bottom:6px;cursor:pointer;line-height:1.32;color:var(--cotton);
+}
+.field .hint{font-size:13px;color:var(--cotton);opacity:.7;margin-bottom:8px;line-height:1.42}
+.station.ink .field .hint{color:var(--cotton);opacity:.7}
+/* The examples ARE the teaching, so they cannot live in a placeholder: a
+   single-line input clips them mid-word on a phone, and they vanish the moment
+   an owner starts typing, which is exactly when he wants to re-read one. */
+.field .eg{font-family:var(--mono);font-size:12px;color:var(--cotton);opacity:.62;
+  margin:-2px 0 10px;line-height:1.45}
+.field .eg b{
+  font-family:var(--mono);font-weight:600;font-size:10px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--brass);margin-right:8px;white-space:nowrap;opacity:1;
+}
+.station.ink .field .eg{color:var(--cotton);opacity:.62}
+.station.ink .field .eg b{color:var(--brass)}
+.field input,.field textarea{
+  font-family:var(--body);font-size:16.5px;line-height:1.5;color:var(--ink);
+  background:var(--cream);border:0;border-radius:0;
+  box-shadow:0 0 0 var(--thin) rgba(233,238,227,.3);
+  padding:13px 14px;width:100%;resize:vertical;
+  transition:box-shadow .16s var(--ease);
+}
+.field textarea{min-height:100px}
+.field input::placeholder,.field textarea::placeholder{color:#7C7768}
+.field input:focus,.field textarea:focus{outline:none;box-shadow:0 0 0 2px var(--brass)}
+.field input:focus-visible,.field textarea:focus-visible{outline:none}
+/* on a reserve sheet the inversion holds: the cloth is what you write on */
+#start .field input,#next .field input,
+#start .field textarea,#next .field textarea{background:var(--flat);color:var(--cotton);
+  box-shadow:0 0 0 var(--thin) var(--rule-ink)}
+
+/* ------------------------------------------------------------ the paste panel
+   The block you hand to the tool. Darkest ground on the sheet, because it is
+   the one thing on the page that is machine copy rather than drawing. */
+.promptbox{position:relative;background:var(--ink);margin-top:6px;
+  box-shadow:0 0 0 var(--thin) var(--faint)}
+.station.ink .promptbox{background:var(--ink);border:0;box-shadow:0 0 0 var(--thin) var(--faint)}
+.promptbox pre{
+  margin:0;padding:clamp(17px,2vw,28px);padding-bottom:clamp(54px,5vw,28px);
+  font-family:var(--mono);font-size:clamp(12.2px,.24vw + 11.8px,14px);
+  line-height:1.68;color:var(--cotton);white-space:pre-wrap;word-break:break-word;
+  max-height:none;overflow-x:auto;
+}
+.promptbox pre .k{color:var(--brass)}
+.promptbox pre .fill{color:#9AD8AE}
+.promptbox pre .empty{color:#8A93A8;font-style:italic}
+
+/* copy: the issue stamp again, in the corner of the panel it releases */
+.copy{
+  position:absolute;top:0;right:0;
+  display:inline-flex;align-items:center;gap:9px;
+  font-family:var(--mono);font-weight:600;font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+  background:var(--cotton);color:var(--ink);border:0;cursor:pointer;
+  padding:12px 17px;min-height:44px;
+  transition:background .16s var(--ease),color .16s var(--ease);
+}
+.copy:hover{background:var(--brass);color:var(--ink)}
+.copy:focus-visible{outline:2px solid var(--brass);outline-offset:3px}
+.copy.done{background:var(--ok);color:var(--ink)}
+.copy.fail{background:var(--bad);color:var(--ink)}
+.copy .ic{width:15px;height:15px;flex:none;display:block}
+@media (max-width:640px){
+  .copy{position:static;width:100%;justify-content:center;padding:15px;min-height:52px}
+  .promptbox pre{padding-bottom:clamp(17px,2vw,28px)}
+  /* On a phone the corner copy button goes full width, which put two near
+     identical bars back to back under the composed prompts. Keep only the big
+     one so there is a single obvious thing to press. */
+  .copy.dup{display:none}
+}
+
+/* the big release bar for a composed prompt */
+.copybar{
+  display:flex;align-items:center;justify-content:center;gap:13px;width:100%;
+  font-family:var(--draft);font-variation-settings:'wdth' 90,'wght' 700;
+  text-transform:uppercase;font-size:clamp(1rem,1.5vw,1.22rem);
+  letter-spacing:.03em;background:var(--cotton);color:var(--ink);
+  border:var(--thick) solid var(--cotton);cursor:pointer;
+  padding:.7em 1em .62em;min-height:58px;margin-top:2px;
+  transition:background .16s var(--ease),color .16s var(--ease),border-color .16s var(--ease);
+}
+.copybar:hover{background:var(--brass);border-color:var(--brass)}
+.copybar:focus-visible{outline:2px solid var(--brass);outline-offset:3px}
+.copybar.done{background:var(--ok);border-color:var(--ok);color:var(--ink)}
+.copybar.fail{background:var(--bad);border-color:var(--bad);color:var(--ink)}
+.station.ink .copybar:focus-visible{outline-color:var(--brass)}
+.copybar .ic{width:19px;height:19px;flex:none}
+
+/* live region for copy confirmations */
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+  clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+/* saved indicator */
+.saved{
+  display:inline-flex;align-items:center;gap:9px;margin-top:17px;
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.11em;text-transform:uppercase;
+  color:var(--brass);opacity:0;transition:opacity .28s var(--ease);
+}
+.saved.on{opacity:1}
+.saved .dot{width:7px;height:7px;background:var(--ok);flex:none;border-radius:50%}
+.station.ink .saved{color:var(--brass)}
+
+/* ---------------------------------------------------------------- callout
+   A note bounded top and bottom by continuous thick, the way a drawing marks
+   a general note that governs everything above it. */
+.callout{border-top:var(--thick) solid var(--cotton);border-bottom:var(--thick) solid var(--cotton);
+  padding:clamp(18px,2.4vw,28px) 0;margin-top:clamp(26px,3.2vw,40px)}
+.station.ink .callout{border-color:var(--cotton)}
+.principles-sheet .callout{border-color:var(--ink)}
+.callout .lede{max-width:54ch}
+
+/* ------------------------------------------------------------- principles */
+.principles{list-style:none;margin:clamp(22px,2.8vw,34px) 0 0;padding:0;display:grid;gap:0;counter-reset:pr}
+.principles li{
+  counter-increment:pr;display:flex;gap:clamp(14px,2vw,24px);align-items:baseline;
+  padding:clamp(12px,1.4vw,17px) 0;border-bottom:var(--thin) solid var(--faint-ink);
+  font-size:clamp(1rem,.42vw + .9rem,1.2rem);line-height:1.4;color:var(--ink);
+}
+.principles li::before{
+  content:counter(pr,decimal-leading-zero);
+  font-family:var(--mono);font-size:.72em;letter-spacing:.1em;color:var(--brass-ink);flex:none;font-weight:600;
+}
+.principles li:first-child{border-top:var(--thick) solid var(--ink)}
+.principles li:last-child{border-bottom:0}
+
+/* ------------------------------------------------------------------ close */
+.close-grid{display:grid;gap:clamp(26px,3.6vw,52px);grid-template-columns:1fr;align-items:start}
+@media (min-width:900px){.close-grid{grid-template-columns:1.25fr .95fr}}
+
+/* ---------------------------------------------------- next steps + contact
+   The ask is OPEN, never behind a click. This is the one thing every person
+   has to see before they close the laptop, and anything collapsed gets seen by
+   maybe a third of a room. The soaring mark is the section mark, not the door. */
+.soar{width:clamp(78px,8vw,112px);height:auto;display:block;color:var(--brass-deep);
+  margin-bottom:clamp(14px,1.8vw,22px)}
+#next > .wrap > .lede{margin-top:clamp(13px,1.5vw,19px);max-width:56ch}
+
+/* The title block: one per sheet, at the foot of the ask, never one per station.
+   It is drawn as a title block is drawn, outlined in continuous thick, and NOT
+   as a filled dark panel. A dark island on a reserve sheet fights the whole
+   point of the sheet, and it is also how the address went ink-on-indigo the
+   first time this was built. Every rule below is id-scoped for that reason:
+   `#next p` is (1,1,0) and would otherwise win over `.report .addr`. */
+#next .report{margin-top:clamp(24px,3vw,36px);padding:clamp(20px,2.6vw,30px);
+  background:none;color:var(--ink);border:var(--thick) solid var(--ink);box-shadow:none}
+#next .report .line{font-family:var(--mono);font-size:clamp(11px,.4vw + 9.6px,13px);
+  letter-spacing:.14em;text-transform:uppercase;color:var(--brass-ink);margin:0 0 6px}
+/* the min has to keep boubacar@catalystworks.consulting on ONE line inside
+   this box at 375px, or it breaks mid-word and reads as a typo */
+#next .report .addr{font-family:var(--mono);font-weight:600;
+  font-size:clamp(12.5px,1.05vw + 8px,20px);letter-spacing:.01em;
+  color:var(--ink);margin:0 0 14px;overflow-wrap:break-word}
+#next .report .when{font-family:var(--body);font-size:clamp(1rem,.6vw + .84rem,1.2rem);
+  line-height:1.42;margin:16px 0 0;color:var(--ink);opacity:.78}
+
+.find{margin-top:clamp(30px,3.8vw,48px)}
+.find h3{font-size:clamp(1.1rem,.9vw + .9rem,1.5rem);margin-bottom:17px;color:var(--ink)}
+.chan{list-style:none;display:grid;gap:12px 28px;padding:0;margin:0;
+  grid-template-columns:repeat(auto-fit,minmax(252px,1fr))}
+.chan li{border-top:var(--thin) solid var(--rule-ink);padding-top:12px}
+.chan b{display:block;font-family:var(--mono);font-size:11px;font-weight:600;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--brass-ink);margin-bottom:5px}
+.chan a{color:var(--ink);text-decoration:none;border-bottom:2px solid var(--brass-deep);
+  font-size:clamp(.94rem,.5vw + .82rem,1.08rem);display:inline-block;
+  padding:3px 0;word-break:break-word}
+.chan a:hover,.chan a:focus-visible{color:var(--brass-ink)}
+.chan a:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+
+/* genuinely optional detail, and the only thing on this page that hides */
+.more{margin-top:clamp(26px,3.2vw,40px);border-top:var(--thin) solid var(--rule-ink);padding-top:8px}
+.more summary{font-family:var(--mono);font-size:12px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--brass-ink);cursor:pointer;
+  padding:14px 0;list-style:none;display:flex;align-items:center;gap:12px}
+.more summary::-webkit-details-marker{display:none}
+.more summary::after{content:"+";font-size:17px;line-height:1}
+.more[open] summary::after{content:"\2212"}
+.more summary:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.more .in{padding-bottom:18px;max-width:64ch}
+.more .in p{margin-top:10px;color:var(--ink)}
+
+/* --------------------------------------------------- quick nav + back to top
+   Long page, and people come back to it next week looking for one station.
+   The numbers 01 to 04 are in the markup, so the bar and the room agree. */
+#qn{position:sticky;top:0;z-index:30;background:var(--ink);
+  color:var(--cotton);border-bottom:var(--thin) solid var(--rule)}
+#qn .wrap{display:flex;align-items:center;gap:18px;padding-top:9px;padding-bottom:9px}
+#qn .brand{font-family:var(--mono);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--brass);flex:none;font-weight:600}
+#qn ul{list-style:none;display:flex;flex-wrap:wrap;gap:4px 15px;margin:0;padding:0;flex:1}
+#qn a{font-family:var(--mono);font-size:11px;letter-spacing:.11em;
+  text-transform:uppercase;color:var(--cotton);text-decoration:none;
+  display:inline-block;padding:8px 0;opacity:.78}
+#qn a:hover,#qn a:focus-visible{color:var(--brass);opacity:1}
+#qn a:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
+#qnb{display:none;background:none;border:var(--thin) solid var(--rule);
+  color:var(--cotton);font-family:var(--mono);font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;padding:9px 12px;cursor:pointer;flex:none;min-height:40px}
+@media (max-width:820px){
+  #qn .wrap{flex-wrap:wrap}
+  #qnb{display:block;margin-left:auto}
+  #qn ul{display:none;flex-basis:100%;flex-direction:column;gap:0}
+  /* the open panel covers the masthead, so it has to be fully opaque */
+  #qn.open{background:var(--ink)}
+  #qn.open ul{display:flex}
+  #qn.open ul li{border-top:var(--thin) solid var(--faint)}
+  #qn.open ul a{padding:12px 0;width:100%}
+}
+
+/* BACK TO TOP, and the one thing on this page that is positioned rather than
+   laid out. The blind run found it sitting on body copy on a phone. Measured
+   before touching it: bottom right at 375px puts it over real text at 50 of 57
+   sampled scroll positions, and the same is true of the build this restyles, so
+   this is an inherited defect and not a new one.
+   Reserving footer clearance only fixes the end of the page, which was the half
+   that got noticed. The fix that holds everywhere is to move it OFF the text
+   column entirely: below 820px it docks into the drawing margin, the rail
+   gutter plus the sheet's own padding, which is the one column on this page
+   that never carries a word of body copy. Nothing has to shrink to make room. */
+#top{position:fixed;right:clamp(12px,2vw,24px);bottom:clamp(12px,2vw,24px);
+  z-index:40;width:48px;height:48px;display:flex;align-items:center;
+  justify-content:center;background:var(--cotton);color:var(--ink);
+  border:var(--thick) solid var(--cotton);
+  cursor:pointer;font-size:19px;line-height:1;opacity:0;pointer-events:none;
+  transition:opacity .22s var(--ease),transform .22s var(--ease);transform:translateY(9px)}
+#top.on{opacity:1;pointer-events:auto;transform:none}
+#top:hover{background:var(--brass);border-color:var(--brass);color:var(--ink)}
+#top:focus-visible{outline:2px solid var(--brass);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){ #top{transition:none} }
+@media (max-width:820px){
+  /* the drawing margin: rail gutter (26px) + the sheet's own padding, which
+     together is exactly where the text column starts. 44px wide keeps a full
+     touch target and stops precisely at the first character. */
+  #top{left:0;right:auto;bottom:14px;width:44px;height:44px;border-width:2px}
+  /* and the rail gets out of its way rather than being sat on */
+  .zonerail{bottom:70px}
+}
+
+/* ----------------------------------------------------------------- footer */
+.foot{padding:clamp(28px,3.4vw,48px) 0 clamp(72px,6vw,84px);background:none;
+  color:var(--cotton);position:relative;z-index:2}
+.foot .wrap{display:flex;flex-wrap:wrap;gap:18px 30px;align-items:center;justify-content:space-between;
+  border-top:var(--thick) solid var(--cotton);padding-top:clamp(20px,2.4vw,30px)}
+.foot p{font-family:var(--mono);font-size:11.5px;letter-spacing:.11em;text-transform:uppercase;margin:0;opacity:.8}
+.foot a{color:var(--brass);display:inline-block;padding:8px 2px}
+.wipe{
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.13em;text-transform:uppercase;
+  background:none;border:var(--thin) solid var(--rule);color:var(--cotton);
+  padding:12px 16px;cursor:pointer;min-height:44px;
+  transition:border-color .16s var(--ease),color .16s var(--ease);
+}
+.wipe:hover{border-color:var(--brass);color:var(--brass)}
+.wipe:focus-visible{outline:2px solid var(--brass);outline-offset:3px}
+/* the floating control must never land on the last line of body copy */
+@media (max-width:640px){ .foot{padding-bottom:104px} }
+
+a{color:var(--brass);text-decoration-thickness:1px;text-underline-offset:3px}
+.band.ink a,.vault a{color:var(--brass)}
+
+/* --------------------------------------------------------- storage warning
+   Hidden by default and only ever revealed by script. If this laptop refuses
+   to save, an attendee must find that out in the first five seconds, not after
+   typing for ten minutes. Brass, top of page, above everything. */
+.nosave{
+  display:none;background:var(--brass);color:var(--ink);
+  border-bottom:var(--thick) solid var(--ink);position:relative;z-index:31;
+}
+.nosave.on{display:block}
+.nosave-in{
+  max-width:1180px;margin:0 auto;padding:16px var(--pad);
+  display:flex;gap:14px 20px;align-items:flex-start;flex-wrap:wrap;
+}
+.nosave b{
+  font-family:var(--mono);font-size:11px;font-weight:700;
+  letter-spacing:.2em;text-transform:uppercase;flex:0 0 auto;padding-top:3px;
+}
+.nosave p{margin:0;flex:1 1 320px;font-size:15.5px;line-height:1.5;font-weight:500}
+
+/* ==========================================================================
+   PRINT. People print this, and a laser printer turns a dark indigo flood
+   into a grey smear that eats toner and hides the text. So printing drops the
+   cloth entirely and returns the page to what a drawing actually is: black
+   line on white paper. Every ground goes white, every letter goes black, the
+   apparatus that only makes sense on screen is removed, and the paste panels
+   keep a rule around them so a reader can still see where a block starts.
+   ========================================================================== */
+@media print{
+  @page{margin:14mm}
+  html,body{background:#fff !important;color:#000 !important}
+  body{font-size:11.5pt;line-height:1.42}
+  /* the drawing apparatus is screen only */
+  .cloth,.edge,.zonerail,.seam,.soar,.pulse,.marked>svg,.masthead::after{display:none !important}
+  .sheet{padding-left:0 !important}
+  /* controls, floating chrome and anything that cannot be pressed on paper */
+  .copy,.copybar,.stamp,.wipe,.vault-live,.saved,#top,#qn,.nosave{display:none !important}
+  /* every ground becomes paper, every letter becomes ink */
+  .band,.band.ink,.band.warm,.station,.station>.wrap,.vault,.held,.foot,
+  #start,#next>.wrap,.principles-sheet>.wrap,.close-sheet>.wrap,.report{
+    background:#fff !important;background-image:none !important;color:#000 !important;
+    box-shadow:none !important;
+  }
+  h1,h2,h3,.lede,p,li,label,.field .hint,.field .eg,.step-say,.vault p,
+  .principles li,.more .in p,.report .when,.report .addr,.chan a,.find h3{color:#000 !important}
+  /* brass is annotation, and annotation on paper is still black, just lighter */
+  .eyebrow,.station-no,.step-label,.stamp-note,.report .line,.chan b,
+  .field .eg b,.principles li::before,.mast-meta,.mast-meta b{color:#000 !important;opacity:1}
+  .step-label b{background:none !important;color:#000 !important;border:1px solid #000;padding:2px 6px}
+  /* a control is an empty box you can write in with a pen */
+  .field input,.field textarea{background:#fff !important;color:#000 !important;
+    border:1px solid #000 !important;box-shadow:none !important}
+  /* the paste panel keeps its edge so a block is still findable on paper */
+  .promptbox{background:#fff !important;border:1px solid #000;box-shadow:none !important}
+  .promptbox pre{color:#000 !important;background:#fff !important;padding-bottom:14px;
+    font-size:9.5pt;line-height:1.5}
+  .promptbox pre .k{color:#000 !important;font-weight:700}
+  .promptbox pre .fill{color:#000 !important;font-weight:600}
+  .promptbox pre .empty{color:#000 !important;font-style:italic}
+  /* rules survive, at printable weight */
+  .station-head,.callout,.foot .wrap,.principles li:first-child{border-color:#000 !important}
+  .callout{border-top-width:2px;border-bottom-width:2px}
+  .principles li,.chan li,.more,.fields{border-color:#666 !important}
+  .vault-grid li{border:1px solid #000 !important;color:#000 !important}
+  .vault-grid li::before{background:#000 !important}
+  a{color:#000 !important;text-decoration:underline}
+  .station,.step,.field{page-break-inside:avoid}
+  h1,h2,h3{page-break-after:avoid}
+}

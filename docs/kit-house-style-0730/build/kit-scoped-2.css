@@ -1,0 +1,24 @@
+
+/* The corner release stamp is absolutely positioned at the top right of every
+   paste panel. The three original tools compose short lines and clear it. The
+   recipe templates are long single sentences, and at desktop width the first
+   two lines ran underneath the stamp, so "no em-dashes, never" and "start with
+   a CONFLICTS & GAPS section" were sitting behind a solid block.
+
+   A floated shim reserves the corner so the text wraps around it instead of
+   under it. Float rather than padding, because padding would indent every line
+   in the block to buy clearance the first two lines need. Below 640px the
+   stamp goes static and full width, so the shim is not wanted there. */
+@media (min-width:641px){
+  #recipes .promptbox pre::before{
+    content:"";float:right;width:124px;height:46px;
+  }
+}
+
+/* Every field in the three original tools carries a hint line, so their boxes
+   line up down a row. Some recipe fields have a hint and some do not, which
+   left the controls in one row sitting at three different heights. .field is
+   already a flex column, so pushing the control to the bottom of its cell puts
+   every box in a row back on the same line. */
+#recipes .field input,
+#recipes .field textarea{ margin-top:auto }

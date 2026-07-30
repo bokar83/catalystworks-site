@@ -1,0 +1,63 @@
+{
+  "desktop_hscroll": {
+    "doc": 1440,
+    "win": 1440
+  },
+  "desktop_requests": [],
+  "desktop_errors": [],
+  "mobile_hscroll": {
+    "doc": 375,
+    "win": 375
+  },
+  "mobile_requests": [],
+  "mobile_errors": [],
+  "mobile_backtotop": {
+    "onClass": "on",
+    "rect": {
+      "t": 722,
+      "l": 0,
+      "w": 44,
+      "h": 44
+    },
+    "stack": [
+      "BUTTON.on",
+      "DIV.sheet",
+      "BODY.",
+      "HTML."
+    ],
+    "behind": [
+      null,
+      null,
+      "DIV|ABCDEFGHJKL\n\n\n\n\n  \n    Heads up\n    This laptop will not let"
+    ]
+  },
+  "guard_blank_label": "FILL IN A BOX FIRST",
+  "guard_blank_class": "copybar fail",
+  "guard_blank_announce": "Nothing to copy yet. Fill in at least one box above, otherwise you would be pasting a blank form into Claude.",
+  "guard_partial_label": "COPIED, 8 BLANK",
+  "guard_partial_class": "copybar done",
+  "clipboard_after_partial": "Here is my business, so every answer you give me is about my business and not a generic one. Use my prices, my customers, and my tone. Ask me if something here is missing.\r\n\r\nMy bu",
+  "premortem_button_present": true,
+  "premortem_clipboard": "Assume this failed badly six months from now. Walk it back and tell me why.",
+  "premortem_label": "COPIED",
+  "nav_items": [
+    "Start here",
+    "01 Business brain",
+    "02 Decision council",
+    "03 Simplicity check",
+    "04 Keep it forever",
+    "Recipes",
+    "What next"
+  ],
+  "promptboxes": {
+    "brain": 1,
+    "council": 2,
+    "simplicity": 1,
+    "keepit": 2
+  },
+  "wifi_line": "Try it at home. Turn the wifi off, open this page, and keep working. That is the test, and it is the whole lesson in one page. Safe is something you can check, not something you get told.",
+  "step_zero_link": "https://claude.ai",
+  "sw_registered": 1,
+  "persist_check": "A two truck heating and air company in the south valley",
+  "contrast_fails": []
+}

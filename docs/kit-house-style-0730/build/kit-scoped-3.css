@@ -1,0 +1,32 @@
+
+/* Scoped to the keep-it station. The three original tools are fill-in-the-blank
+   builders, so they lean on .fields and .field. This one is a procedure, so it
+   needs a numbered list and a download control, neither of which the schedule
+   of parts covers. Everything here reuses the station's own type scale, on the
+   woven ground rather than on a reserve sheet. */
+#keepit .kt-say{color:var(--cotton);opacity:.86;font-size:15px;line-height:1.6;
+  margin:2px 0 14px;max-width:66ch}
+#keepit .kt-note{color:var(--cotton);opacity:.7;font-size:13.5px;line-height:1.55;margin-top:13px}
+#keepit .kt-steps{counter-reset:kt;list-style:none;margin:6px 0 0;padding:0}
+#keepit .kt-steps li{position:relative;padding-left:42px;margin-bottom:14px;line-height:1.58;
+  font-size:15px;color:var(--cotton)}
+#keepit .kt-steps li::before{counter-increment:kt;content:counter(kt,decimal-leading-zero);
+  position:absolute;left:0;top:2px;width:28px;height:24px;
+  display:flex;align-items:center;justify-content:flex-start;
+  font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.1em;
+  color:var(--brass);background:none;
+  border-top:2px solid var(--brass);padding-top:3px}
+#keepit .kt-steps li b{font-weight:600}
+#keepit .kt-fall{margin-top:18px}
+/* The fallback has to be findable in about two seconds by somebody whose build
+   just failed, but it must not read louder than the path everyone else is on.
+   So: full width and the same height as the release bar (findable), drawn as an
+   outline rather than a fill (clearly the second choice). Same distinction the
+   drawing makes between a released stamp and a pencilled alternative. */
+#keepit .kt-fall-t{margin:0 0 4px;font-weight:600;color:var(--cotton);opacity:1}
+#keepit a.kt-dl{text-decoration:none;margin-top:12px;
+  background:transparent;color:var(--cotton);border-color:var(--cotton)}
+#keepit a.kt-dl:hover{background:var(--cotton);color:var(--ink);border-color:var(--cotton)}
+@media (min-width:641px){
+  #keepit .promptbox pre::before{content:"";float:right;width:124px;height:46px}
+}
