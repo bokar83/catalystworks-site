@@ -329,7 +329,7 @@ var SLIDES = [
         body:['It is picking one tool, wiring your business around it, and then the tool changes, the price moves, or it stops being the one everybody recommends. Now you start over. Again.']},
 
 /* 06 */ {t:'res', sub:'THE WAY OUT',
-        title:'TOOLS CHANGE.<br>PRINCIPLES DON’T.', ts:106,
+        title:'TOOLS CHANGE.<br>PRINCIPLES DON’T.', ts:106, ground:'reserve',
         lead:'I went from ChatGPT to Gemini to Claude, and a few others since, and I never lost a step. Not because I picked right. Because what I own is the way I work with these things, and that moves.',
         tb:{Scale:'NONE', Rev:'1', Zone:'A2'}},
 
@@ -354,11 +354,10 @@ var SLIDES = [
         body:['Ask a question, get an answer. That is a chat.',
               'Give it a job, and it goes and does the steps. That is agentic. Same machine, different assignment.']},
 
-/* 10 */ {t:'res', sub:'BEFORE WE BUILD',
+/* 10 */ {t:'notes', sub:'BEFORE WE BUILD',
         title:'NOBODY IS BACKSTAGE', ts:104,
         lead:'The page you registered on and the reminder emails that got you here tonight both run on tools I built and I run myself. I am one person. There is nobody behind the curtain.',
-        body:['That is the part you want. Not the chatbot.'],
-        tb:{Scale:'NONE', Rev:'1', Zone:'B2'}},
+        body:['That is the part you want. Not the chatbot.']},
 
 /* 11 CHANGE 2 - nobody else is in the room. The someone is me. */
         {t:'work', sub:'WORK INSTRUCTION',
@@ -381,7 +380,7 @@ var SLIDES = [
                'My weekly repeating tasks are','My biggest goal right now is']},
 
 /* 14 */ {t:'res', fig:'SECTION 02', sub:'THE MAIN EVENT',
-        title:'THE DECISION COUNCIL', ts:88, draw:'band',
+        title:'THE DECISION COUNCIL', ts:88, draw:'band', ground:'reserve',
         lead:'The thing I actually use on my own calls. You are about to have it too.',
         tb:{Scale:'1:2', Rev:'1', Zone:'B2'}},
 
@@ -398,7 +397,7 @@ var SLIDES = [
         close:'Then they read each other. A chairman steps out of the five and calls it. Proceed, change, or kill.'},
 
 /* 16 */ {t:'spec', sub:'SPECIFICATION &nbsp;&middot;&nbsp; COPY IT FROM YOUR KIT PAGE',
-        title:'PASTE THIS IN', ts:46,
+        title:'PASTE THIS IN', ts:46, ground:'reserve',
         spec:['You are my Decision Council. When I give you a decision, work it in three passes.',
               '',
               '<b>PASS 1. Five advisors.</b> One short paragraph each.',
@@ -444,24 +443,23 @@ var SLIDES = [
         lead:'If all five agree with you, your decision was probably not a decision.',
         body:['One of those five usually says the thing you have been avoiding. That is the whole point. It has no reason to be nice to you, no job to protect, and no interest in your feelings about it.']},
 
-/* 20 */ {t:'res', sub:'REVISION A',
-        title:'ADD ONE LINE', ts:118,
+/* 20 */ {t:'notes', sub:'REVISION A',
+        title:'ADD ONE LINE', ts:96,
         lead:'“Assume this failed badly six months from now. Walk it back and tell me why.”',
         body:['Same council. Different job. It tells you how this goes wrong before it costs you anything.',
-              'Cheapest insurance in business.'],
-        tb:{Scale:'NONE', Rev:'A', Zone:'A1'}},
+              'Cheapest insurance in business.']},
 
 /* 21 CHANGE 5 - headline only. He speaks to this one live, with his own
       examples, working the room. Nothing on the sheet narrates it for him. */
         {t:'res', fig:'SECTION 03', sub:'WATCH THIS PART',
-        title:'WHAT IT LOOKS LIKE<br>FOR A REAL BUSINESS', ts:92, draw:'band',
+        title:'WHAT IT LOOKS LIKE<br>FOR A REAL BUSINESS', ts:92, draw:'band', ground:'reserve',
         tb:{Scale:'1:2', Rev:'1', Zone:'B2'}},
 
 /* CHANGE 6 - ME VERSUS THE MACHINE and THAT GAP IS THE OPPORTUNITY are gone
    outright, with no replacement. He demos live from his own laptop. */
 
 /* 22 */ {t:'res', fig:'SECTION 04', sub:'TOOL TWO',
-        title:'THE SIMPLICITY CHECK', ts:88, draw:'band',
+        title:'THE SIMPLICITY CHECK', ts:88, draw:'band', ground:'reserve',
         lead:'For every time you are about to build something twice as complicated as the job requires.',
         tb:{Scale:'1:2', Rev:'1', Zone:'B2'}},
 
@@ -492,7 +490,7 @@ var SLIDES = [
         body:['Not a quote, not a contract, not an email to a customer. That is the brake pedal, and it is the whole safety plan.']},
 
 /* 27 */ {t:'res', sub:'THE PART THAT OUTLIVES THE TOOLS',
-        title:'TOOLS CHANGE. PRINCIPLES DON’T.', ts:64,
+        title:'TOOLS CHANGE. PRINCIPLES DON’T.', ts:64, ground:'reserve',
         parts:['It predicts from what you give it.','Context once, reused forever.',
                'Anything you repeat becomes a recipe you own.','Agentic means you delegate, not just ask.',
                'Pressure-test, then simplify.','Own it. Move it. Never get locked in.'],
@@ -536,7 +534,7 @@ var SLIDES = [
 /* 33 CHANGE 10 - the write-it-down sheet, approved copy. Deliberately generic:
       it never says decision, problem or task, so everybody picks their own. */
         {t:'writedown', sub:'FOUR MINUTES',
-        title:'WRITE IT DOWN', ts:112,
+        title:'WRITE IT DOWN', ts:112, ground:'reserve',
         stanzas:[{s:1, t:'Pick one thing you have to decide by Saturday.'},
                  {s:1, t:'Not someday. Saturday.'},
                  {s:0, t:'Run it through what you built tonight.'},
@@ -554,7 +552,7 @@ var SLIDES = [
         contact:'calendly.com/boubacarbarry/free-ai-audit-owner-operators'},
 
 /* 35 */ {t:'res', fig:'SHEET 36 OF 36', sub:'ISSUED',
-        title:'ASK ME ANYTHING', ts:118,
+        title:'ASK ME ANYTHING', ts:118, ground:'reserve',
         lead:'I am here until they make me leave.',
         body:['Book the free session. calendly.com/boubacarbarry/free-ai-audit-owner-operators',
               'Boubacar &middot; Catalyst Works &middot; catalystworks.consulting'],
@@ -562,6 +560,20 @@ var SLIDES = [
 ];
 
 /* ---------------------------------------------------------------- helpers */
+/* RESERVE is the cloth the dye never reached. It is the interruption, so it is
+   spent deliberately: a real turn in the session, or a sheet too dense to sit
+   on indigo. Eight of thirty six. Declared per sheet with ground:'reserve',
+   never inferred from the layout, because a section plate is not automatically
+   a turn and a turn is not automatically a section plate. */
+function isReserve(s){ return s.ground === 'reserve'; }
+
+/* The full plate, meaning heavy border, zone letters and the seven cell title
+   block. This follows the LAYOUT, not the ground, so flipping a colour never
+   changes the furniture on the sheet. */
+function isFullPlate(s){
+  return s.t === 'res' || s.t === 'writedown' || s.t === 'contact' || s.t === 'cover';
+}
+
 function d(cls, style, html){ return '<div class="'+cls+'" style="'+style+'">'+(html||'')+'</div>'; }
 
 /* Everything a draughtsman drew goes inside this wrapper. It carries no layout
@@ -689,7 +701,7 @@ function drawScan(x, y, s, src, label){
 
 /* ---------------------------------------------------------------- ground */
 function ground(s){
-  if (s.t === 'res' || s.t === 'writedown') return '';   /* the dye never reached this sheet */
+  if (isReserve(s)) return '';          /* the dye never reached this sheet */
   var o = '<div class="ground" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>';
   [188, 362, 548, 706].forEach(function(y){ o += d('vatline','top:'+y+'px'); });
   return o;
@@ -985,10 +997,8 @@ function bodyRes(s){
 /* ------------------------------------------------------------------ render */
 function renderSlide(s, i, total){
   s.fig = s.fig || ('FIG. ' + pad(i+1));
-  var reserve = (s.t === 'res' || s.t === 'writedown' || s.t === 'contact');
-  var cls = 'stage H' + (reserve ? ' res' : '');
-  var full = (reserve || s.t === 'cover');
-  var apparatus = full ? apparatusFull(s, i, total) : apparatusQuiet(s, i, total);
+  var cls = 'stage H' + (isReserve(s) ? ' res' : '');
+  var apparatus = isFullPlate(s) ? apparatusFull(s, i, total) : apparatusQuiet(s, i, total);
   var body = '';
   if (s.t === 'cover')          body = bodyCover(s);
   else if (s.t === 'res')       body = bodyRes(s);
@@ -1028,10 +1038,10 @@ function relayout(){
     });
     var old = st.querySelector('.chain'); if (old) old.remove();
     var bottom = f.y + f.h;
-    var reserve = (sl.t === 'res' || sl.t === 'writedown' || sl.t === 'contact');
     /* the specification sheet is given the whole plate down to the foot rule,
-       because the document is the message and nothing else is on the sheet. */
-    var maxBottom = sl.t === 'spec' ? 758 : ((reserve || sl.t === 'cover') ? 664 : 726);
+       because the document is the message and nothing else is on the sheet.
+       The 664 stop is where the title block starts, so it follows the plate. */
+    var maxBottom = sl.t === 'spec' ? 758 : (isFullPlate(sl) ? 664 : 726);
     if (fl && heldEl){
       var sr = st.getBoundingClientRect();
       var k = sr.width / 1600 || 1;
@@ -1070,7 +1080,7 @@ function relayout(){
         t.style.top = (t.style.width === '24px' ? bottom : bottom - 24) + 'px';
       });
     }
-    if (reserve || sl.t === 'cover' || sl.t === 'spec' || sl.draw) continue;
+    if (isReserve(sl) || isFullPlate(sl) || sl.t === 'spec' || sl.draw) continue;
     var y = bottom + 30;
     if (y > 776) continue;
     var wrapEl = document.createElement('div');
