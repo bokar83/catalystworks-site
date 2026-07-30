@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light only">
+<title>Your Kit - AI Without Getting Burned</title>
+<meta name="description" content="Everything from the workshop in one place. The deck, the three tools you built, and seven ready-made recipes. Fill in your details, copy, paste. Nothing you type here leaves your browser.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="canonical" href="https://catalystworks.consulting/kit/">
+<meta property="og:title" content="Your Kit - AI Without Getting Burned">
+<meta property="og:description" content="Everything from the workshop in one place.">
+<meta property="og:image" content="https://catalystworks.consulting/og-image.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Gloock&family=Spline+Sans:wght@400;500;600&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1A1410;
+  --ink-2:#2A2018;
+  --paper:#EFE7D6;
+  --paper-2:#E3D7BF;
+  --amber:#E8632A;
+  --amber-deep:#C24A18;
+  --molten:#FFB347;
+  --ink-soft:#5A4F42;
+  --ink-faint:#857A6A;
+  --line:rgba(26,20,16,.18);
+  --display:'Anton',Impact,'Arial Narrow Bold','Arial Black',sans-serif;
+  --serif:'Gloock',Georgia,'Times New Roman',serif;
+  --body:'Spline Sans','Segoe UI',-apple-system,system-ui,sans-serif;
+  --mono:'Spline Sans Mono',Consolas,ui-monospace,monospace;
+  --ease:cubic-bezier(0.22,1,0.36,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{
+  background:var(--paper);color:var(--ink);font-family:var(--body);
+  font-size:17px;line-height:1.62;-webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+/* the same film grain the deck and the registration page carry */
+body::after{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:60;opacity:.5;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E");
+}
+.wrap{max-width:940px;margin:0 auto;padding:0 22px}
+
+/* ---------- ink furniture, no CSS bars anywhere ---------- */
+.ribbon{display:block;width:100%;height:14px;overflow:visible}
+.kick{
+  font-family:var(--mono);font-weight:500;font-size:12.5px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--amber-deep);display:flex;align-items:center;
+  gap:14px;margin-bottom:18px;
+}
+.kick i{height:2px;flex:1;max-width:190px;background:var(--amber-deep);opacity:.4}
+
+/* ---------- hero ---------- */
+.hero{position:relative;background:var(--ink);color:var(--paper);padding:70px 0 56px;overflow:hidden}
+.herogrid{display:grid;gap:38px;align-items:end}
+@media(min-width:900px){
+  .herogrid{grid-template-columns:minmax(0,1.1fr) minmax(250px,.9fr);gap:56px}
+}
+.index{list-style:none;margin:0}
+.index li{position:relative;padding:11px 0 11px 30px}
+.index li::before{content:"";position:absolute;left:0;top:22px;width:16px;height:2px;
+  background:var(--amber);transform:rotate(-2.5deg)}
+.index a{color:var(--paper);text-decoration:none;font-size:16px;line-height:1.35;
+  display:block;cursor:pointer;transition:color .2s var(--ease)}
+.index a:hover,.index a:focus-visible{color:var(--molten)}
+.index a b{display:block;font-family:var(--body);font-weight:600}
+.index a span{display:block;font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink-faint);margin-top:2px}
+.hero .kick{color:var(--molten)}
+.hero .kick i{background:var(--molten);opacity:.5}
+.hero h1{
+  font-family:var(--display);text-transform:uppercase;font-weight:400;
+  font-size:clamp(2.7rem,1.6rem+5.2vw,5.4rem);line-height:.94;letter-spacing:.005em;
+  margin-bottom:24px;max-width:16ch;
+}
+.hero h1 .hot{color:var(--amber)}
+.hero .lead{font-family:var(--serif);font-size:clamp(1.15rem,1rem+.7vw,1.6rem);
+  line-height:1.4;color:var(--paper-2);max-width:34ch}
+.seam{display:block;width:100%;height:44px;margin-top:-1px}
+
+/* ---------- sticky jump nav ---------- */
+.jump{
+  position:sticky;top:0;z-index:70;background:var(--paper);
+  border:0;box-shadow:0 1px 0 var(--line),0 6px 18px rgba(26,20,16,.06);
+}
+.jump ul{display:flex;gap:4px;list-style:none;overflow-x:auto;padding:9px 22px;
+  max-width:940px;margin:0 auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.jump ul::-webkit-scrollbar{display:none}
+.jump a{
+  font-family:var(--mono);font-size:12px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--ink-soft);text-decoration:none;white-space:nowrap;padding:7px 13px;
+  border-radius:2px;cursor:pointer;transition:color .18s var(--ease),background .18s var(--ease);
+}
+.jump a:hover,.jump a:focus-visible{color:var(--ink);background:rgba(232,99,42,.14)}
+
+/* ---------- sections ---------- */
+section{padding:64px 0 8px}
+h2{font-family:var(--display);text-transform:uppercase;font-weight:400;
+  font-size:clamp(1.9rem,1.4rem+2.1vw,3.1rem);line-height:1.02;margin-bottom:14px}
+h2 .hot{color:var(--amber-deep)}
+.intro{font-family:var(--serif);font-size:1.14rem;line-height:1.5;max-width:52ch;
+  color:var(--ink-2);margin-bottom:30px}
+
+/* ---------- the one rule, stamped ---------- */
+.rule{position:relative;margin:34px 0 6px;padding:26px 30px;background:rgba(232,99,42,.1)}
+.rule p{font-family:var(--serif);font-size:1.2rem;line-height:1.45;max-width:44ch}
+.rule b{color:var(--amber-deep)}
+
+/* ---------- take-home slabs, deliberately unequal ---------- */
+.grabs{display:flex;flex-wrap:wrap;gap:18px;margin-bottom:12px}
+.grab{
+  flex:1 1 320px;background:var(--ink);color:var(--paper);padding:26px 26px 22px;
+  text-decoration:none;display:block;transform:rotate(-.5deg);
+  transition:transform .3s var(--ease),background .3s var(--ease);cursor:pointer;
+}
+.grab:nth-child(2){flex:1 1 240px;transform:rotate(.6deg);background:var(--ink-2)}
+.grab:hover,.grab:focus-visible{transform:rotate(0deg) translateY(-3px);background:var(--amber-deep)}
+.grab b{display:block;font-family:var(--display);text-transform:uppercase;font-weight:400;
+  font-size:1.55rem;line-height:1.04;margin-bottom:8px}
+.grab span{display:block;color:var(--paper-2);font-size:14.5px;line-height:1.45}
+.grab .go{font-family:var(--mono);font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--molten);margin-top:14px;display:block}
+
+/* ---------- tool + recipe rows ---------- */
+.row{border:0;box-shadow:inset 0 -1px 0 var(--line);padding:0}
+.row[open]{box-shadow:none;background:rgba(255,255,255,.42);margin-bottom:14px}
+.row summary{
+  list-style:none;cursor:pointer;padding:22px 4px;display:flex;align-items:baseline;gap:16px;
+  transition:color .18s var(--ease);
+}
+.row summary::-webkit-details-marker{display:none}
+@media(hover:hover){.row summary:hover{color:var(--amber-deep)}}
+.row[open] summary .rowtext b{color:var(--amber-deep)}
+.row summary:focus-visible{outline:2px solid var(--amber-deep);outline-offset:3px}
+.num{font-family:var(--mono);font-size:12px;letter-spacing:.16em;color:var(--ink-faint);flex:none;
+  padding-top:5px;min-width:2.4em}
+.rowtext{flex:1}
+.rowtext b{display:block;font-family:var(--serif);font-size:1.42rem;line-height:1.2;font-weight:400}
+.rowtext em{display:block;font-style:normal;color:var(--ink-soft);font-size:15px;margin-top:4px}
+.chev{flex:none;font-family:var(--mono);font-size:12px;color:var(--amber-deep);padding-top:7px;
+  transition:transform .3s var(--ease)}
+.row[open] .chev{transform:rotate(90deg)}
+.panel{padding:2px 4px 30px}
+@media(min-width:760px){.panel{padding-left:calc(2.4em + 16px)}}
+
+/* ---------- the builder ---------- */
+.field{margin-bottom:15px}
+.field label{display:block;font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink-soft);margin-bottom:6px}
+.field .hint{text-transform:none;letter-spacing:0;font-family:var(--body);font-size:13.5px;
+  color:var(--ink-faint);display:block;margin-top:3px}
+.field input,.field textarea{
+  width:100%;font-family:var(--body);font-size:16px;line-height:1.5;color:var(--ink);
+  background:#fff;border:0;box-shadow:inset 0 0 0 1.5px var(--line);border-radius:3px;
+  padding:11px 13px;transition:box-shadow .2s var(--ease);
+}
+.field textarea{min-height:96px;resize:vertical}
+.field input:focus,.field textarea:focus{outline:none;box-shadow:inset 0 0 0 2px var(--amber-deep)}
+.field input::placeholder,.field textarea::placeholder{color:#b3a998}
+
+.out{margin-top:20px}
+.out .outlabel{display:flex;align-items:baseline;justify-content:space-between;gap:12px;
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-soft);margin-bottom:7px}
+.out textarea{
+  width:100%;min-height:210px;font-family:var(--mono);font-size:13.5px;line-height:1.62;
+  color:var(--paper);background:var(--ink);border:0;border-radius:3px;padding:16px 17px;
+  resize:vertical;
+}
+.out textarea:focus{outline:2px solid var(--amber);outline-offset:2px}
+
+.acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px;align-items:center}
+.btn{
+  font-family:var(--mono);font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;
+  font-weight:500;color:var(--paper);background:var(--amber-deep);border:0;border-radius:2px;
+  padding:13px 22px;cursor:pointer;min-height:44px;
+  transition:background .2s var(--ease),transform .2s var(--ease);
+}
+.btn:hover{background:var(--ink)}
+.btn:active{transform:translateY(1px)}
+.btn:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.btn.done{background:#2E6B3E}
+.btn.ghost{background:transparent;color:var(--ink-soft);box-shadow:inset 0 0 0 1.5px var(--line)}
+.btn.ghost:hover{background:rgba(26,20,16,.06);color:var(--ink)}
+.saved{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--ink-faint)}
+
+/* ---------- privacy note ---------- */
+.privacy{margin:34px 0 10px;padding:22px 24px;background:rgba(26,20,16,.05);border-radius:3px}
+.privacy p{font-size:15.5px;line-height:1.55;color:var(--ink-2);max-width:60ch}
+.privacy b{color:var(--ink)}
+.privacy .acts{margin-top:14px}
+
+/* ---------- close ---------- */
+.close{background:var(--ink);color:var(--paper);padding:70px 0 78px;margin-top:64px;position:relative}
+.close .kick{color:var(--molten)}
+.close .kick i{background:var(--molten);opacity:.5}
+.close h2{color:var(--paper)}
+.close h2 .hot{color:var(--amber)}
+.close p{color:var(--paper-2);font-family:var(--serif);font-size:1.2rem;line-height:1.45;
+  max-width:46ch;margin-bottom:14px}
+.close ul{list-style:none;margin:0 0 26px;max-width:50ch}
+.close ul li{padding:9px 0 9px 26px;position:relative;color:var(--paper-2);font-size:16px}
+.close ul li::before{content:"";position:absolute;left:2px;top:19px;width:11px;height:2px;
+  background:var(--amber);transform:rotate(-2deg)}
+.cta{
+  display:inline-block;font-family:var(--mono);font-size:14px;letter-spacing:.16em;
+  text-transform:uppercase;font-weight:500;color:var(--ink);background:var(--molten);
+  text-decoration:none;padding:19px 34px;border-radius:2px;cursor:pointer;min-height:44px;
+  transition:background .22s var(--ease),transform .22s var(--ease);
+}
+.cta:hover,.cta:focus-visible{background:var(--amber);transform:translateY(-2px)}
+footer{background:var(--ink-2);color:var(--ink-faint);padding:26px 0 34px;font-size:14px}
+footer a{color:var(--paper-2)}
+
+@media(max-width:600px){
+  body{font-size:16px}
+  section{padding:48px 0 8px}
+  .row summary{padding:19px 2px;gap:12px}
+  .num{min-width:2em;font-size:11px}
+  .rowtext b{font-size:1.24rem}
+  .grab{transform:none}
+  .grab:nth-child(2){transform:none}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{transition-duration:.01ms !important}
+}
+</style>
+</head>
+<body>
+
+<!-- Archive marker. This page exists for one reason: to stand next to the live
+     kit page and show what changed between the first draft and the version that
+     shipped. It must never be mistaken for the live kit, so the marker is the
+     first thing on the page, is not part of the design being demonstrated, and
+     is styled inline so it cannot be lost if the CSS below is edited. -->
+<div style="background:#1A1410;color:#EFE7D6;font-family:'Spline Sans',system-ui,sans-serif;font-size:14px;line-height:1.5;padding:12px 20px;text-align:center">
+  <b style="color:#FFB347;letter-spacing:.08em;text-transform:uppercase;font-size:12px">Archived first draft</b>
+  <span style="opacity:.55;padding:0 10px">&middot;</span>
+  This is version one of the kit page, kept for comparison. The live kit is at
+  <a href="/kit/" style="color:#FFB347;text-decoration:underline">catalystworks.consulting/kit/</a>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="kick"><b>Thursday, July 30</b><i></i><b>Salt Lake City</b></p>
+    <div class="herogrid">
+      <div>
+        <h1>Everything from<br>tonight, in <span class="hot">one place</span></h1>
+        <p class="lead">The deck, the tools you built, and seven more you did not have time for. Fill in your own details and copy. No notes needed.</p>
+      </div>
+      <ul class="index">
+        <li><a href="#take"><b>The whole deck and the handout</b><span>Yours to download</span></a></li>
+        <li><a href="#tools"><b>The three tools you built</b><span>Business Brain, Council, Simplicity</span></a></li>
+        <li><a href="#recipes"><b>Seven more, already written</b><span>Follow-ups, invoices, inbox, more</span></a></li>
+        <li><a href="#next"><b>What happens next</b><span>If you want this pointed at your business</span></a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<svg class="seam" viewBox="0 0 1200 44" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+  <path d="M0,0 L1200,0 L1200,17 C1128,25 1094,12 1031,20 C963,29 928,15 858,23 C801,30 767,17 702,26 C641,34 604,20 540,28 C476,36 441,22 379,30 C316,38 279,24 214,31 C152,38 106,26 41,33 C27,35 13,34 0,32 Z" fill="#1A1410"/>
+</svg>
+
+<nav class="jump" aria-label="Jump to a section">
+  <ul>
+    <li><a href="#take">Take it with you</a></li>
+    <li><a href="#tools">The three tools</a></li>
+    <li><a href="#recipes">Seven recipes</a></li>
+    <li><a href="#next">What happens next</a></li>
+  </ul>
+</nav>
+
+<main class="wrap">
+
+  <section id="take">
+    <p class="kick"><b>Start here</b><i></i></p>
+    <h2>Take it <span class="hot">with you</span></h2>
+    <p class="intro">Both of these are yours. Download them now while you are on the wifi, then stop writing things down and watch the screen instead.</p>
+
+    <div class="grabs">
+      <!-- Absolute, and deliberately so. This archived page keeps NO copy of the
+           deck or the handout: a second deck sitting on the server is exactly how
+           a stale one ends up on a screen. Both links point at the one live copy
+           under /kit/, so there is only ever one deck to keep correct. -->
+      <a class="grab" href="/kit/deck.html" target="_blank" rel="noopener">
+        <b>The whole deck</b>
+        <span>Every slide from tonight. Opens in your browser, works offline afterwards. Print it to PDF if you want it on your phone.</span>
+        <span class="go">Open the deck</span>
+      </a>
+      <a class="grab" href="/kit/handout.html" target="_blank" rel="noopener">
+        <b>The handout</b>
+        <span>The three tools written out, with the fill-in page.</span>
+        <span class="go">Open the handout</span>
+      </a>
+    </div>
+
+    <div class="rule">
+      <p><b>One rule keeps you safe:</b> a human approves, the AI drafts. Nothing important goes out without you reading it first. That is the brakes, and it is the whole safety story.</p>
+    </div>
+  </section>
+
+  <section id="tools">
+    <p class="kick"><b>What you built tonight</b><i></i><b>Yours to keep</b></p>
+    <h2>The three <span class="hot">tools</span></h2>
+    <p class="intro">Tools change. Principles do not. These work in whatever AI you pick up, this year or next. Type your own details in, hit copy, paste it into Claude. Open one and start.</p>
+
+    <details class="row" id="brain">
+      <summary>
+        <span class="num">01</span>
+        <span class="rowtext">
+          <b>The Business Brain</b>
+          <em>Fill this in once. Now every answer comes back about your business, in your words.</em>
+        </span>
+        <span class="chev" aria-hidden="true">&#9656;</span>
+      </summary>
+      <div class="panel" data-tool="brain"></div>
+    </details>
+
+    <details class="row" id="council">
+      <summary>
+        <span class="num">02</span>
+        <span class="rowtext">
+          <b>The Decision Council</b>
+          <em>Five advisors argue your decision from five angles, then have to call it.</em>
+        </span>
+        <span class="chev" aria-hidden="true">&#9656;</span>
+      </summary>
+      <div class="panel" data-tool="council"></div>
+    </details>
+
+    <details class="row" id="simplicity">
+      <summary>
+        <span class="num">03</span>
+        <span class="rowtext">
+          <b>The Simplicity Check</b>
+          <em>Paste anything you are overthinking. It finds the version that still works with less.</em>
+        </span>
+        <span class="chev" aria-hidden="true">&#9656;</span>
+      </summary>
+      <div class="panel" data-tool="simplicity"></div>
+    </details>
+  </section>
+
+  <section id="recipes">
+    <p class="kick"><b>The ones we did not get to</b><i></i></p>
+    <h2>Seven <span class="hot">recipes</span></h2>
+    <p class="intro">Every one of these is a task somebody in this room does every week and dreads. They are already written and already tested. Pick the one that annoys you most, fill in the blanks, and you are done in about four minutes.</p>
+    <div id="recipelist"></div>
+  </section>
+
+  <div class="privacy">
+    <p><b>Everything you type on this page stays on your device.</b> There is nothing on this page that sends your answers anywhere, because there is nowhere for them to go. They save in this browser so you can close the tab and come back to them, and that browser is the only place they exist. I never see them.</p>
+    <div class="acts">
+      <button type="button" class="btn ghost" id="clearall">Clear everything I typed</button>
+      <span class="saved" id="clearmsg"></span>
+    </div>
+  </div>
+
+</main>
+
+<section class="close" id="next">
+  <div class="wrap">
+    <p class="kick"><b>What happens next</b><i></i></p>
+    <h2>I will do this <span class="hot">with you</span></h2>
+    <p>You saw a version of this pointed at somebody else's business tonight. If you want it pointed at yours:</p>
+    <ul>
+      <li>One working session, 45 minutes, just you and me.</li>
+      <li>I look at how your business actually runs right now.</li>
+      <li>You leave with a written shortlist: the one place AI pays you back first, and where it is a waste of your money this year.</li>
+    </ul>
+    <p>No deck, no pitch. If the answer is not yet, I will tell you that.</p>
+    <a class="cta" href="https://calendly.com/boubacarbarry/free-ai-audit-owner-operators" target="_blank" rel="noopener">Book your session</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    Boubacar, Catalyst Works. <a href="https://catalystworks.consulting">catalystworks.consulting</a>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  /* One engine, ten configs. Each entry declares its fields and the prompt
+     they compose into. Placeholders are {{name}} and are replaced live. */
+  var TOOLS = {
+    brain: {
+      note: "Fill every blank, then make a new Project in Claude named after your business and paste this into its custom instructions. Now the tool already knows your shop.",
+      fields: [
+        {k:"business", l:"My business is", h:"e.g. a two-truck HVAC company in the south valley", t:"input"},
+        {k:"sell",     l:"I sell",         h:"e.g. repairs and tune-ups", t:"input"},
+        {k:"to",       l:"To",             h:"e.g. homeowners and a few property managers", t:"input"},
+        {k:"problem",  l:"The problem I solve is", h:"", t:"input"},
+        {k:"prices",   l:"My prices and packages are", h:"", t:"textarea"},
+        {k:"tone",     l:"My tone is",     h:"e.g. straight-talking, warm, no jargon", t:"input"},
+        {k:"says",     l:"Things I say a lot, and things I never say", h:"", t:"textarea"},
+        {k:"weekly",   l:"My weekly repeating tasks are", h:"", t:"textarea"},
+        {k:"goal",     l:"My biggest goal right now is", h:"", t:"input"}
+      ],
+      template:
+"Here is my business. Use this context for everything I ask you from now on.\n\n" +
+"My business is {{business}}.\n" +
+"I sell {{sell}} to {{to}}.\n" +
+"The problem I solve is {{problem}}.\n" +
+"My prices and packages are {{prices}}.\n" +
+"My tone is {{tone}}.\n" +
+"Things I say a lot, and things I never say: {{says}}.\n" +
+"My weekly repeating tasks are {{weekly}}.\n" +
+"My biggest goal right now is {{goal}}.\n\n" +
+"Answer as if you work here. Use my words, not corporate language. If you need\n" +
+"something I have not told you, ask me instead of guessing."
+    },
+
+    council: {
+      note: "Make a new Project called Decision Council, paste this into its custom instructions, and drop a decision in any time. To run the bonus mode, add one line at the end: assume this failed badly six months from now, walk it back and tell me why.",
+      fields: [
+        {k:"decision", l:"My decision is", h:"A real one you are sitting on right now. The messier the better.", t:"textarea"}
+      ],
+      template:
+"You are my Decision Council. When I give you a decision, respond as five\n" +
+"separate advisors, each in one short paragraph:\n\n" +
+"1. THE CONTRARIAN: argue hard against the decision.\n" +
+"2. FIRST PRINCIPLES: list the assumptions I am making and which ones are shaky.\n" +
+"3. THE EXPANSIONIST: describe a bolder, bigger version of this.\n" +
+"4. THE OUTSIDER: react with zero context, like a smart stranger hearing it cold.\n" +
+"5. THE EXECUTOR: give the first concrete step and the single thing most likely to kill it.\n\n" +
+"Then finish with VERDICT: proceed, change, or kill, in one sentence, and why.\n" +
+"Be direct. No flattery. Do not agree with me by default.\n\n" +
+"My decision is: {{decision}}"
+    },
+
+    simplicity: {
+      note: "Make a new Project called Simplicity Check, paste this in, and reuse it on anything you are about to overbuild.",
+      fields: [
+        {k:"thing", l:"Here it is", h:"The plan, the process, or the thing you are building.", t:"textarea"}
+      ],
+      template:
+"You are my Simplicity Check. When I give you a plan, a process, or something\n" +
+"I am building, answer in four short parts:\n\n" +
+"1. WHERE IT IS OVERCOMPLICATED: name the parts adding weight, not value.\n" +
+"2. THE SIMPLEST VERSION THAT WORKS: describe the stripped-down core.\n" +
+"3. AM I SKIPPING THE BASICS: call out any boring fundamental I am missing.\n" +
+"4. CUT LIST: the specific things I can remove right now.\n\n" +
+"Bias hard toward simple. Favor the plain version over the clever one.\n" +
+"Be direct, no flattery.\n\n" +
+"Here it is: {{thing}}"
+    }
+  };
+
+  var RECIPES = [
+    {
+      id:"followup", title:"The follow-up email",
+      blurb:"For when you have been staring at the words just following up for ten minutes.",
+      fields:[
+        {k:"who",  l:"Who they are", h:"e.g. a roofing supplier rep", t:"input"},
+        {k:"last", l:"Our last contact, and when", h:"e.g. met at the home show two weeks ago", t:"input"},
+        {k:"want", l:"What I want to happen next", h:"e.g. a 15 minute call", t:"input"}
+      ],
+      template:
+"You write my follow-up emails in my voice: plain, warm, specific, one ask, under 120 words, no em-dashes, never \"just circling back.\"\n" +
+"Here is the situation: {{who}} / {{last}} / {{want}}.\n" +
+"Draft the email. Then give me one shorter alternative."
+    },
+    {
+      id:"review", title:"The review request",
+      blurb:"For when you never remember to ask, and it comes out robotic when you do.",
+      fields:[
+        {k:"channel", l:"Text or email", h:"text", t:"input"},
+        {k:"name",    l:"Customer first name", h:"", t:"input"},
+        {k:"job",     l:"What we did", h:"e.g. repaired her AC same-day", t:"input"},
+        {k:"link",    l:"Review link", h:"Paste your Google review link", t:"input"}
+      ],
+      template:
+"Write a short {{channel}} asking a customer for a Google review. Specific, warm, one tiny ask, includes the link. No begging, no \"5 stars,\" 2-3 sentences max.\n" +
+"Customer: {{name}}. What we did: {{job}}. Review link: {{link}}.\n" +
+"Give me 3 variations."
+    },
+    {
+      id:"schedule", title:"The weekly schedule",
+      blurb:"For the Sunday night scheduling puzzle.",
+      fields:[
+        {k:"people", l:"People and availability", h:"Paste it however you have it. Messy is fine.", t:"textarea"},
+        {k:"shifts", l:"Shifts to cover", h:"", t:"textarea"},
+        {k:"rules",  l:"Rules", h:"e.g. max hours, who cannot work together, who holds which cert", t:"textarea"}
+      ],
+      template:
+"Build a draft weekly schedule I will adjust. Respect every rule. Start the response with a CONFLICTS & GAPS section (write 'None found' if empty), then the schedule below it. Do not silently break a rule.\n" +
+"People + availability: {{people}}. Shifts to cover: {{shifts}}. Rules: {{rules}}."
+    },
+    {
+      id:"invoice", title:"The invoice chase",
+      blurb:"For when chasing money feels awkward, so it slips another week.",
+      fields:[
+        {k:"name",    l:"Customer", h:"", t:"input"},
+        {k:"amount",  l:"Amount", h:"e.g. $1,840", t:"input"},
+        {k:"invoice", l:"Invoice number", h:"", t:"input"},
+        {k:"days",    l:"Days overdue", h:"e.g. 21", t:"input"},
+        {k:"pay",     l:"Pay link or method", h:"", t:"input"}
+      ],
+      template:
+"Write a 3-step invoice-chase sequence (gentle, direct, final), factual not threatening, each with an easy pay path.\n" +
+"Customer: {{name}}. Amount: {{amount}}. Invoice #: {{invoice}}. Days overdue: {{days}}. Pay link/method: {{pay}}.\n" +
+"Tell me which step to send today given the days overdue."
+    },
+    {
+      id:"proposal", title:"The proposal first draft",
+      blurb:"For turning messy intake scribbles into something you can send.",
+      fields:[
+        {k:"notes",   l:"Your rough intake notes", h:"Paste them exactly as you wrote them.", t:"textarea"},
+        {k:"pricing", l:"My pricing logic", h:"Or leave this blank and it will hold the price as a placeholder.", t:"textarea"}
+      ],
+      template:
+"Turn these rough intake notes into a clean first-draft proposal: scope, included, not included, price [placeholder], next step. Flag anything unclear as [CONFIRM] inline, then collect every [CONFIRM] at the very end under a numbered list titled 'Before I finalize, I need from you:'. Do not invent scope or numbers.\n" +
+"Notes: {{notes}}. My pricing logic: {{pricing}}."
+    },
+    {
+      id:"recap", title:"The client recap",
+      blurb:"For the notes that sit in a notebook while the client never hears back.",
+      fields:[
+        {k:"notes", l:"Your raw notes", h:"Internal asides are fine. They get kept out of the client version.", t:"textarea"}
+      ],
+      template:
+"From my raw notes, produce two things: (1) a short client-ready recap email, (2) an internal action list with owners and due dates where stated. Keep anything internal OUT of the client recap. Do not invent commitments.\n" +
+"Notes: {{notes}}."
+    },
+    {
+      id:"inbox", title:"The inbox triage",
+      blurb:"For thirty unread and no idea where to start.",
+      fields:[
+        {k:"batch", l:"Paste four or five messages", h:"Start small. Four or five is the right size to see what it does.", t:"textarea"}
+      ],
+      template:
+"Triage these messages. Tag each: REPLY-NOW / NEEDS-ME / FYI / IGNORE. For REPLY-NOW only, draft a short reply in my voice. Any message containing 'refund', 'charge', 'dispute', 'lawyer', 'legal', 'sue', or 'owe' = tag NEEDS-ME and write nothing else for it. Cap the demo batch at 4-5 messages. Draft only, never send.\n" +
+"Messages: {{batch}}."
+    }
+  ];
+
+  var STORE = "cw_kit_0730";
+
+  function load(){
+    try { return JSON.parse(localStorage.getItem(STORE) || "{}"); }
+    catch(e){ return {}; }
+  }
+  function save(data){
+    try { localStorage.setItem(STORE, JSON.stringify(data)); return true; }
+    catch(e){ return false; }
+  }
+  var state = load();
+
+  function compose(cfg, values){
+    return cfg.template.replace(/\{\{(\w+)\}\}/g, function(m, key){
+      var v = (values[key] || "").trim();
+      if (v) return v;
+      var f = cfg.fields.filter(function(x){ return x.k === key; })[0];
+      return "[" + (f ? f.l.toLowerCase() : key) + "]";
+    });
+  }
+
+  /* Builds one form + live output. Works for tools and recipes alike. */
+  function build(host, id, cfg){
+    var values = state[id] || {};
+    var frag = document.createDocumentFragment();
+
+    cfg.fields.forEach(function(f){
+      var wrap = document.createElement("div");
+      wrap.className = "field";
+
+      var inputId = id + "-" + f.k;
+      var label = document.createElement("label");
+      label.setAttribute("for", inputId);
+      label.textContent = f.l;
+      if (f.h){
+        var hint = document.createElement("span");
+        hint.className = "hint";
+        hint.textContent = f.h;
+        label.appendChild(hint);
+      }
+      wrap.appendChild(label);
+
+      var el = document.createElement(f.t === "textarea" ? "textarea" : "input");
+      if (f.t !== "textarea") el.type = "text";
+      el.id = inputId;
+      el.name = inputId;
+      el.value = values[f.k] || "";
+      el.setAttribute("autocomplete", "off");
+      el.addEventListener("input", function(){
+        values[f.k] = el.value;
+        state[id] = values;
+        save(state);
+        render();
+        markSaved();
+      });
+      wrap.appendChild(el);
+      frag.appendChild(wrap);
+    });
+
+    var out = document.createElement("div");
+    out.className = "out";
+
+    var ol = document.createElement("div");
+    ol.className = "outlabel";
+    var olText = document.createElement("span");
+    olText.textContent = "Your prompt, ready to paste";
+    var olSaved = document.createElement("span");
+    olSaved.className = "saved";
+    ol.appendChild(olText);
+    ol.appendChild(olSaved);
+    out.appendChild(ol);
+
+    var outId = id + "-out";
+    var srLabel = document.createElement("label");
+    srLabel.setAttribute("for", outId);
+    srLabel.textContent = "Your prompt, ready to paste";
+    srLabel.style.cssText = "position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap";
+    out.appendChild(srLabel);
+
+    var ta = document.createElement("textarea");
+    ta.id = outId;
+    ta.name = outId;
+    ta.readOnly = false;
+    ta.spellcheck = false;
+    out.appendChild(ta);
+
+    var acts = document.createElement("div");
+    acts.className = "acts";
+    var copy = document.createElement("button");
+    copy.type = "button";
+    copy.className = "btn";
+    copy.textContent = "Copy this prompt";
+    acts.appendChild(copy);
+
+    if (cfg.note){
+      var note = document.createElement("p");
+      note.className = "saved";
+      note.style.cssText = "text-transform:none;letter-spacing:0;font-family:var(--body);font-size:14px;line-height:1.5;color:var(--ink-soft);max-width:56ch;margin-top:12px";
+      note.textContent = cfg.note;
+      out.appendChild(acts);
+      out.appendChild(note);
+    } else {
+      out.appendChild(acts);
+    }
+
+    frag.appendChild(out);
+    host.appendChild(frag);
+
+    function render(){ ta.value = compose(cfg, values); }
+    var savedTimer;
+    function markSaved(){
+      olSaved.textContent = "Saved on this device";
+      clearTimeout(savedTimer);
+      savedTimer = setTimeout(function(){ olSaved.textContent = ""; }, 2200);
+    }
+
+    copy.addEventListener("click", function(){
+      var text = ta.value;
+      function ok(){
+        copy.textContent = "Copied. Now paste it into Claude";
+        copy.className = "btn done";
+        setTimeout(function(){
+          copy.textContent = "Copy this prompt";
+          copy.className = "btn";
+        }, 2600);
+      }
+      function fallback(){
+        ta.focus();
+        ta.select();
+        try {
+          if (document.execCommand("copy")) { ok(); return; }
+        } catch(e){}
+        copy.textContent = "Press copy on your keyboard";
+        setTimeout(function(){ copy.textContent = "Copy this prompt"; }, 2600);
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text).then(ok, fallback);
+      } else {
+        fallback();
+      }
+    });
+
+    render();
+  }
+
+  /* three tools */
+  Object.keys(TOOLS).forEach(function(id){
+    var host = document.querySelector('[data-tool="' + id + '"]');
+    if (host) build(host, id, TOOLS[id]);
+  });
+
+  /* seven recipes */
+  var list = document.getElementById("recipelist");
+  if (list){
+    RECIPES.forEach(function(r, i){
+      var d = document.createElement("details");
+      d.className = "row";
+      d.id = r.id;
+
+      var s = document.createElement("summary");
+      var n = document.createElement("span");
+      n.className = "num";
+      n.textContent = (i + 1 < 10 ? "0" : "") + (i + 1);
+      var t = document.createElement("span");
+      t.className = "rowtext";
+      var b = document.createElement("b");
+      b.textContent = r.title;
+      var em = document.createElement("em");
+      em.textContent = r.blurb;
+      t.appendChild(b); t.appendChild(em);
+      var c = document.createElement("span");
+      c.className = "chev";
+      c.setAttribute("aria-hidden", "true");
+      c.innerHTML = "&#9656;";
+      s.appendChild(n); s.appendChild(t); s.appendChild(c);
+      d.appendChild(s);
+
+      var p = document.createElement("div");
+      p.className = "panel";
+      d.appendChild(p);
+      list.appendChild(d);
+
+      build(p, r.id, r);
+    });
+  }
+
+  /* clear everything */
+  var clear = document.getElementById("clearall");
+  var msg = document.getElementById("clearmsg");
+  if (clear){
+    clear.addEventListener("click", function(){
+      try { localStorage.removeItem(STORE); } catch(e){}
+      state = {};
+      msg.textContent = "Cleared. Reloading.";
+      setTimeout(function(){ location.reload(); }, 600);
+    });
+  }
+})();
+</script>
+</body>
+</html>

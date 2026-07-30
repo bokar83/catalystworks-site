@@ -40,6 +40,13 @@ RewriteRule ^seat/?$ seat/index.html [NC,L]
 # trailing slash and so never matches ^kit$.
 RewriteRule ^kit$ /kit/ [R=301,L]
 RewriteRule ^kit/?$ kit/index.html [NC,L]
+# The first draft of the kit page, kept at /kit-v1/ so the difference between
+# what came out first and what shipped can be put on a screen side by side. It
+# is linked from nowhere and carries noindex; it is opened by URL only. Same
+# 301-then-serve shape as /kit above, for the same reason: served in place, the
+# no-slash form would leave the base at /kit-v1 and break the page's own links.
+RewriteRule ^kit-v1$ /kit-v1/ [R=301,L]
+RewriteRule ^kit-v1/?$ kit-v1/index.html [NC,L]
 # Customer-facing support + privacy pages (Stripe links point here). Same
 # directory-index pattern as /workshop: DirectorySlash Off would otherwise send
 # /support and /privacy into the clean-URL rule and 404 on support.html.
