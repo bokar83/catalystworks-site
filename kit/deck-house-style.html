@@ -199,18 +199,21 @@ body.grid .hud,body.grid .hint{display:none}
 .H .flow .op span{font-size:36px;line-height:1.28;color:rgba(228,233,222,.92)}
 .H.res .flow .op span{color:var(--ink)}
 
-.H .flow .specbox{border:var(--lw07) solid var(--ink);padding:18px 22px;
+/* The specification block. Set as individual lines rather than one wrapping
+   paragraph: a prompt is a document with a line structure, and a line that
+   wraps on its own reads as a line the author did not write. Nothing wraps,
+   and the blank lines between passes are a 14 px rule of space instead of a
+   whole empty line, which is what buys the type its size back. */
+.H .flow .specbox{border:var(--lw07) solid var(--ink);padding:14px 13px 16px;
   background:rgba(19,31,62,.55)}
 .H.res .flow .specbox{background:rgba(231,227,214,.72)}
-.H .flow .specbox pre{margin:0;font-family:'Azeret Mono',monospace;font-size:19px;line-height:1.42;
-  white-space:pre-wrap;color:var(--ink)}
-.H .flow .specbox pre b{color:var(--oxide);font-weight:600}
-.H .flow .specbox.tight pre{font-size:17.5px;line-height:1.36}
-.H .flow .notefoot{font-family:'Azeret Mono',monospace;font-size:18px;letter-spacing:.1em;
-  text-transform:uppercase;opacity:.58;margin:16px 0 0}
+.H .flow .specbox .ln{font-family:'Azeret Mono',monospace;font-size:22px;line-height:1.30;
+  white-space:nowrap;color:var(--ink)}
+.H .flow .specbox .ln b{color:var(--oxide);font-weight:600}
+.H .flow .specbox .gap{height:12px}
 
 /* the address line. A URL is a dimension: it is exact or it is wrong. */
-.H .flow .url{font-family:'Azeret Mono',monospace;font-size:44px;font-weight:600;letter-spacing:.01em;
+.H .flow .url{font-family:'Azeret Mono',monospace;font-size:42px;font-weight:600;letter-spacing:.01em;
   color:var(--oxide);margin:0 0 26px;white-space:nowrap}
 .H .flow .stanza{font-size:34px;line-height:1.34;color:rgba(228,233,222,.92);margin:0 0 26px}
 .H.res .flow .stanza{color:var(--ink)}
@@ -264,7 +267,7 @@ body.grid .hud,body.grid .hint{display:none}
 <div class="banner">Review build &middot; house style &middot; the live deck was not touched</div>
 <div id="deck"></div>
 <div class="hint">&larr; &rarr; move &middot; F fullscreen &middot; G contact sheet</div>
-<div class="hud" id="hud">00 / 36</div>
+<div class="hud" id="hud">01 / 36</div>
 
 <script>
 /* ==========================================================================
@@ -275,7 +278,7 @@ var QR_KIT = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAewAAAHsCAIAAACfSAk3
 var QR_CAL = "data:image/png;base64,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";
 
 var SLIDES = [
-/* 00 */ {t:'cover', fig:'SHEET 00 OF 36', sub:'HOLDING',
+/* 00 */ {t:'cover', fig:'SHEET 01 OF 36', sub:'HOLDING',
         title:'AI WITHOUT<br>GETTING BURNED', ts:104,
         opsIntro:'Grab a seat. Open your laptop. Three things before we start.',
         ops:['Get on the wifi.',
@@ -286,12 +289,12 @@ var SLIDES = [
                ['Catalyst Works','Room 105']],
         tb:{Scale:'1:20', Rev:'A', Zone:'ROOM 105'}},
 
-/* 01 */ {t:'cover', fig:'SHEET 01 OF 36', sub:'GENERAL ARRANGEMENT',
+/* 01 */ {t:'cover', fig:'SHEET 02 OF 36', sub:'GENERAL ARRANGEMENT',
         title:'AI WITHOUT<br>GETTING BURNED', ts:98, draw:'ga6',
         lead:'In ninety minutes you build three tools, on your own laptop, that work in any AI you pick up. Tonight’s, next year’s, whatever comes after that.',
         tb:{Scale:'1:20', Rev:'A', Zone:'B1'}},
 
-/* 02 */ {t:'schedule', fig:'FIG. 02', sub:'SCOPE',
+/* 02 */ {t:'schedule', sub:'SCOPE',
         title:'WHAT TONIGHT IS', ts:88,
         twin:[{h:'THIS IS', rows:['Hands-on. Your laptop stays open the whole time.',
                                   'You build. I am not demoing at you.',
@@ -301,7 +304,7 @@ var SLIDES = [
                                       'A list of 40 apps you will never open again.'], no:true}],
         close:'If you leave with nothing installed, I did this wrong.'},
 
-/* 03 */ {t:'schedule', fig:'FIG. 03', sub:'DRAWING REGISTER',
+/* 03 */ {t:'schedule', sub:'DRAWING REGISTER',
         title:'HERE IS THE PLAN', ts:88,
         reg:[['7:00','What AI is, in plain English'],
              ['7:16','Set up your base, so the tool knows your business'],
@@ -314,24 +317,24 @@ var SLIDES = [
 /* 04 CHANGE 3 - the kit sheet. Early, before the first thing anyone would
       photograph, and before the first build. The address carries its trailing
       slash: without it every relative link on that page breaks. */
-        {t:'kit', fig:'FIG. 04', sub:'ISSUE SHEET',
+        {t:'kit', sub:'ISSUE SHEET',
         title:'IT IS ALL ON<br>ONE PAGE', ts:96, draw:'qrkit',
         url:'catalystworks.consulting/kit/',
         ops:['Every slide from tonight is already on it. Put the phone down, you do not need one photo.',
              'Every prompt you are about to build is on it too, with a copy button. You work out of this page all night.'],
         close:'Open it now and leave the tab open.'},
 
-/* 05 */ {t:'notes', fig:'FIG. 05', sub:'GENERAL NOTE',
+/* 05 */ {t:'notes', sub:'GENERAL NOTE',
         title:'HERE IS HOW OWNERS<br>ACTUALLY GET BURNED', ts:82,
         lead:'The burn is lock-in. It is not the robots.',
         body:['It is picking one tool, wiring your business around it, and then the tool changes, the price moves, or it stops being the one everybody recommends. Now you start over. Again.']},
 
-/* 06 */ {t:'res', fig:'FIG. 06', sub:'THE WAY OUT',
+/* 06 */ {t:'res', sub:'THE WAY OUT',
         title:'TOOLS CHANGE.<br>PRINCIPLES DON’T.', ts:106,
         lead:'I went from ChatGPT to Gemini to Claude, and a few others since, and I never lost a step. Not because I picked right. Because what I own is the way I work with these things, and that moves.',
         tb:{Scale:'—', Rev:'1', Zone:'A2'}},
 
-/* 07 */ {t:'detail', fig:'FIG. 07', sub:'SIX STRIPS, KEYED',
+/* 07 */ {t:'detail', sub:'SIX STRIPS, KEYED',
         title:'THE SIX THAT TRANSFER', ts:76, draw:'stack6',
         keys:['It predicts from what you give it. <b>What you hand it is the whole job.</b>',
               'Give it your context once. <b>Reuse it forever.</b>',
@@ -340,38 +343,38 @@ var SLIDES = [
               '<b>Pressure-test your thinking</b>, then simplify it.',
               '<b>Own it. Move it.</b> Never get locked in.']},
 
-/* 08 */ {t:'notes', fig:'FIG. 08', sub:'GENERAL NOTE',
+/* 08 */ {t:'notes', sub:'GENERAL NOTE',
         title:'IT IS A PREDICTION MACHINE,<br>NOT A BRAIN', ts:74,
         lead:'Garbage in is not an insult. It is a spec.',
         body:['It reads what you gave it and predicts what should come next, one piece at a time. That is the whole trick.',
               'So a vague ask gets a vague answer. Every time. The fix is on your side of the keyboard.']},
 
-/* 09 */ {t:'notes', fig:'FIG. 09', sub:'GENERAL NOTE',
+/* 09 */ {t:'notes', sub:'GENERAL NOTE',
         title:'“AGENTIC” JUST MEANS<br>IT DOES THE WORK', ts:78,
         lead:'You stop asking. You start delegating.',
         body:['Ask a question, get an answer. That is a chat.',
               'Give it a job, and it goes and does the steps. That is agentic. Same machine, different assignment.']},
 
-/* 10 */ {t:'res', fig:'FIG. 10', sub:'BEFORE WE BUILD',
+/* 10 */ {t:'res', sub:'BEFORE WE BUILD',
         title:'NOBODY IS BACKSTAGE', ts:104,
         lead:'The page you registered on and the reminder emails that got you here tonight both run on tools I built and I run myself. I am one person. There is nobody behind the curtain.',
         body:['That is the part you want. Not the chatbot.'],
         tb:{Scale:'—', Rev:'1', Zone:'B2'}},
 
 /* 11 CHANGE 2 - nobody else is in the room. The someone is me. */
-        {t:'work', fig:'FIG. 11', sub:'WORK INSTRUCTION',
+        {t:'work', sub:'WORK INSTRUCTION',
         title:'DO THIS NOW', ts:104,
         ops:['Open claude.ai.',
              'Make a new Project. Name it after your business.',
              'That is it. Wave if you are stuck and I will come to you.'],
         close:'Everything else tonight lives inside that project.'},
 
-/* 12 */ {t:'notes', fig:'FIG. 12', sub:'HANDOUT PAGE 3',
+/* 12 */ {t:'notes', sub:'HANDOUT PAGE 3',
         title:'THE BUSINESS BRAIN', ts:96,
         lead:'Context once. Reused forever. And it moves to any tool you ever switch to.',
         body:['Fill it in once. Paste it in once. From then on every answer comes back about your business, in your voice, with your prices, instead of generic advice for a business that does not exist.']},
 
-/* 13 */ {t:'schedule', fig:'FIG. 13', sub:'SCHEDULE OF PARTS',
+/* 13 */ {t:'schedule', sub:'SCHEDULE OF PARTS',
         title:'FILL IN YOUR BRAIN FILE', ts:78,
         lead:'Short answers. Nobody is grading this. Then paste the whole thing into your project instructions.',
         parts:['My business is','My prices are','I sell','My tone is','I sell it to',
@@ -385,7 +388,7 @@ var SLIDES = [
 
 /* 15 CHANGE 4 - the council gains a peer-review round and a chairman, so the
       verdict belongs to somebody instead of hanging off the end unassigned. */
-        {t:'schedule', fig:'FIG. 15', sub:'SCHEDULE OF PARTS',
+        {t:'schedule', sub:'SCHEDULE OF PARTS',
         title:'FIVE ADVISORS.<br>THEN A CHAIRMAN.', ts:70,
         reg:[['THE CONTRARIAN','argues hard against you.'],
              ['FIRST PRINCIPLES','names what you are assuming, and which assumption is shaky.'],
@@ -395,8 +398,8 @@ var SLIDES = [
         regw:420,
         close:'Then they read each other. Then a chairman steps out of the five and calls it. Proceed, change, or kill.'},
 
-/* 16 */ {t:'spec', fig:'FIG. 16', sub:'SPECIFICATION',
-        title:'PASTE THIS IN', ts:74,
+/* 16 */ {t:'spec', sub:'SPECIFICATION &nbsp;&middot;&nbsp; COPY IT FROM YOUR KIT PAGE',
+        title:'PASTE THIS IN', ts:46,
         spec:['You are my Decision Council. When I give you a decision, work it in three passes.',
               '',
               '<b>PASS 1. Five advisors.</b> One short paragraph each.',
@@ -419,17 +422,16 @@ var SLIDES = [
               '',
               'Be direct. No flattery. Do not agree with me by default.',
               '',
-              'My decision is: [paste your decision here]'],
-        close:'Printed on page 1 of your handout. Copy it from your kit page.'},
+              'My decision is: [paste your decision here]']},
 
-/* 17 */ {t:'work', fig:'FIG. 17', sub:'WORK INSTRUCTION',
+/* 17 */ {t:'work', sub:'WORK INSTRUCTION',
         title:'DO THIS NOW', ts:104,
         ops:['New chat, inside the project you already made.',
              'Paste the instructions.',
              'Save.'],
         close:'That is the whole install. You now own it.'},
 
-/* 18 */ {t:'work', fig:'FIG. 18', sub:'WORK INSTRUCTION',
+/* 18 */ {t:'work', sub:'WORK INSTRUCTION',
         title:'NOW GIVE IT A REAL ONE', ts:82,
         lead:'Not a test. Not “should I get a dog.” An actual decision sitting on you right now.',
         ops:['Do I hire the second tech or wait.',
@@ -438,12 +440,12 @@ var SLIDES = [
              'Do I sign the lease.'],
         close:'Type it in. Read what comes back. Then tell the person next to you which one stung.'},
 
-/* 19 */ {t:'notes', fig:'FIG. 19', sub:'GENERAL NOTE',
+/* 19 */ {t:'notes', sub:'GENERAL NOTE',
         title:'THE ONE YOU DIDN’T<br>WANT TO READ', ts:88,
         lead:'If all five agree with you, your decision was probably not a decision.',
         body:['One of those five usually says the thing you have been avoiding. That is the whole point. It has no reason to be nice to you, no job to protect, and no interest in your feelings about it.']},
 
-/* 20 */ {t:'res', fig:'FIG. 20', sub:'REVISION A',
+/* 20 */ {t:'res', sub:'REVISION A',
         title:'ADD ONE LINE', ts:118,
         lead:'“Assume this failed badly six months from now. Walk it back and tell me why.”',
         body:['Same council. Different job. It tells you how this goes wrong before it costs you anything.',
@@ -464,20 +466,20 @@ var SLIDES = [
         lead:'For every time you are about to build something twice as complicated as the job requires.',
         tb:{Scale:'1:2', Rev:'1', Zone:'B2'}},
 
-/* 23 */ {t:'schedule', fig:'FIG. 23', sub:'SCHEDULE OF PARTS',
+/* 23 */ {t:'schedule', sub:'SCHEDULE OF PARTS',
         title:'FOUR QUESTIONS', ts:104,
         parts:['Where is this overcomplicated?','What is the simplest version that still works?',
                'Am I skipping the basics?','What can I cut right now?'],
         close:'I run this on myself constantly. It is rude to me weekly.'},
 
-/* 24 */ {t:'work', fig:'FIG. 24', sub:'WORK INSTRUCTION',
+/* 24 */ {t:'work', sub:'WORK INSTRUCTION',
         title:'DO THIS NOW', ts:104,
         ops:['Same project. New chat.',
              'Paste the instructions from page 2.',
              'Give it something you are currently overbuilding.'],
         close:'Brace yourself for question three.'},
 
-/* 25 */ {t:'schedule', fig:'FIG. 25', sub:'AS BUILT',
+/* 25 */ {t:'schedule', sub:'AS BUILT',
         title:'LOOK WHAT YOU JUST DID', ts:82,
         reg:[['BUSINESS BRAIN','makes every answer about your business.'],
              ['DECISION COUNCIL','pressure-tests your real calls.'],
@@ -485,12 +487,12 @@ var SLIDES = [
         regw:420,
         close:'Three things you built yourself, sitting on your own laptop. They work in any tool you switch to, and nobody can take them or price you out of them.'},
 
-/* 26 */ {t:'notes', fig:'FIG. 26', sub:'SAFETY NOTE',
+/* 26 */ {t:'notes', sub:'SAFETY NOTE',
         title:'A HUMAN APPROVES.<br>THE AI DRAFTS.', ts:96,
         lead:'Nothing that carries your name goes out without you reading it.',
         body:['Not a quote, not a contract, not an email to a customer. That is the brake pedal, and it is the whole safety plan.']},
 
-/* 27 */ {t:'res', fig:'FIG. 27', sub:'THE PART THAT OUTLIVES THE TOOLS',
+/* 27 */ {t:'res', sub:'THE PART THAT OUTLIVES THE TOOLS',
         title:'TOOLS CHANGE. PRINCIPLES DON’T.', ts:64,
         parts:['It predicts from what you give it.','Context once, reused forever.',
                'Anything you repeat becomes a recipe you own.','Agentic means you delegate, not just ask.',
@@ -498,7 +500,7 @@ var SLIDES = [
         close:'The tools on this screen will look dated. This list will not.',
         tb:{Scale:'—', Rev:'1', Zone:'C1'}},
 
-/* 28 */ {t:'work', fig:'FIG. 28', sub:'WORK INSTRUCTION',
+/* 28 */ {t:'work', sub:'WORK INSTRUCTION',
         title:'KEEP IT FOREVER', ts:104,
         lead:'A skill is the tool you just built, saved to your account instead of to one project.',
         ops:['New chat, inside your project.',
@@ -506,7 +508,7 @@ var SLIDES = [
              'A file comes back. Take it. No file, take the ready made one.'],
         close:'It is all on your kit page, catalystworks.consulting/kit/, with a copy button.'},
 
-/* 29 */ {t:'work', fig:'FIG. 29', sub:'WORK INSTRUCTION',
+/* 29 */ {t:'work', sub:'WORK INSTRUCTION',
         title:'SWITCH IT ON', ts:104,
         ops:['Settings, then Capabilities. Code execution on.',
              'Customize, then Skills. Different menu.',
@@ -514,26 +516,26 @@ var SLIDES = [
         close:'Switch it on, then open a brand new chat and ask for your council.'},
 
 /* 30 CHANGE 9 - the banned phrase is out. */
-        {t:'schedule', fig:'FIG. 30', sub:'WHAT HAPPENS NEXT',
+        {t:'schedule', sub:'WHAT HAPPENS NEXT',
         title:'I WILL DO THIS<br>WITH YOU. FREE.', ts:82,
         parts:['One working session, 45 minutes, just you and me.',
                'I look at how your business actually runs right now.',
                'You leave with a written shortlist: the one place AI pays you back first, and where it is a waste of your money this year.'],
         close:'No deck. Nothing to sign. If the answer is “not yet,” I will say that.'},
 
-/* 31 */ {t:'work', fig:'FIG. 31', sub:'DETAIL, SCAN TARGET',
+/* 31 */ {t:'work', sub:'DETAIL, SCAN TARGET',
         title:'SCAN. PICK A TIME.', ts:96, draw:'qrcal',
         body:['Point your phone camera at it. Pick a slot before you stand up.',
               'You will not do it in the parking lot and we both know it.']},
 
-/* 32 */ {t:'detail', fig:'FIG. 32', sub:'ONE MORE THING',
+/* 32 */ {t:'detail', sub:'ONE MORE THING',
         title:'THINK OF ONE OWNER', ts:96, draw:'bandkey',
         keys:['One person who should have been in this room tonight. Not a list. One.',
               'Send them the next date. I would rather fill the next room because you told someone than because I bought an ad.']},
 
 /* 33 CHANGE 10 - the write-it-down sheet, approved copy. Deliberately generic:
       it never says decision, problem or task, so everybody picks their own. */
-        {t:'writedown', fig:'FIG. 33', sub:'FOUR MINUTES',
+        {t:'writedown', sub:'FOUR MINUTES',
         title:'WRITE IT DOWN', ts:112,
         stanzas:[{s:1, t:'Pick one thing you have to decide by Saturday.'},
                  {s:1, t:'Not someday. Saturday.'},
@@ -542,7 +544,7 @@ var SLIDES = [
                  {s:1, t:'Friday morning I am going to ask you what happened.'}],
         tb:{Scale:'—', Rev:'1', Zone:'A1'}},
 
-/* 34 */ {t:'contact', fig:'FIG. 34', sub:'ONE LAST ASK',
+/* 34 */ {t:'contact', sub:'ONE LAST ASK',
         title:'SEND ME WHAT YOU WROTE', ts:74, draw:'qrcal',
         lead:'One paragraph is plenty. I read every one and I answer.',
         rows:[['EMAIL','boubacar@catalystworks.consulting'],
@@ -551,7 +553,7 @@ var SLIDES = [
         close:'If you want it pointed at your business, book the free session.',
         contact:'calendly.com/boubacarbarry/free-ai-audit-owner-operators'},
 
-/* 35 */ {t:'res', fig:'SHEET 35 OF 36', sub:'ISSUED',
+/* 35 */ {t:'res', fig:'SHEET 36 OF 36', sub:'ISSUED',
         title:'ASK ME ANYTHING', ts:118,
         lead:'I am here until they make me leave.',
         body:['Book the free session. calendly.com/boubacarbarry/free-ai-audit-owner-operators',
@@ -700,7 +702,7 @@ var FIELDS = {
   notes:     {x:58,  y:70,  w:1140, h:610},
   schedule:  {x:58,  y:70,  w:1330, h:660},
   work:      {x:58,  y:70,  w:1330, h:660},
-  spec:      {x:58,  y:70,  w:1330, h:700},
+  spec:      {x:58,  y:70,  w:1352, h:700},
   detail:    {x:58,  y:70,  w:860,  h:706},
   kit:       {x:58,  y:70,  w:930,  h:660},
   writedown: {x:58,  y:70,  w:1424, h:600},
@@ -763,7 +765,7 @@ function apparatusFull(s, i, total){
   var tb = s.tb || {};
   o += '<div class="titleblock">'
     + '<div class="tbwide"><span>Title</span><b>' + s.title.replace(/<br>/g,' ') + '</b></div>'
-    + '<div><span>Sheet</span><b>' + pad(i) + ' OF ' + total + '</b></div>'
+    + '<div><span>Sheet</span><b>' + pad(i+1) + ' OF ' + total + '</b></div>'
     + '<div><span>Rev</span><b>' + (tb.Rev||'1') + '</b></div>'
     + '<div><span>Scale</span><b>' + (tb.Scale||'—') + '</b></div>'
     + '<div><span>Zone</span><b>' + (tb.Zone||'B2') + '</b></div>'
@@ -778,7 +780,7 @@ function apparatusQuiet(s, i, total){
      title block collapses to one line along the foot. Same sheet, less furniture. */
   var o = d('sheetborder thin','');
   o += d('spec-h','left:88px;top:796px;width:1300px;height:var(--lw018);opacity:.5');
-  o += d('note','left:88px;top:810px','SHEET ' + pad(i) + ' OF ' + total);
+  o += d('note','left:88px;top:810px','SHEET ' + pad(i+1) + ' OF ' + total);
   o += d('note','left:756px;top:810px', s.sub || '');
   o += d('note','left:1400px;top:810px;width:112px;text-align:right','DRAWN BOUBACAR');
   return o;
@@ -857,10 +859,14 @@ function bodyWork(s){
 }
 
 function bodySpec(s){
-  var o = head(s, 96, 138);
-  return o + flow(s, 1330,
-    '<div class="specbox tight"><pre>' + s.spec.join('\n') + '</pre></div>' +
-    '<p class="notefoot">' + s.close.toUpperCase() + '</p>');
+  /* The one sheet where the message IS a document, so the sheet gives it the
+     whole plate: a small heading and then nothing but the specification. */
+  var o = head(s, 92, 116);
+  var lines = s.spec.map(function(l){
+    return l === '' ? '<div class="gap"></div>' : '<div class="ln">' + l + '</div>';
+  }).join('');
+  return o + d('flow','left:88px;top:178px;width:1322px',
+    '<div class="specbox">' + lines + '</div>');
 }
 
 function bodyKit(s){
@@ -967,6 +973,7 @@ function bodyRes(s){
 
 /* ------------------------------------------------------------------ render */
 function renderSlide(s, i, total){
+  s.fig = s.fig || ('FIG. ' + pad(i+1));
   var reserve = (s.t === 'res' || s.t === 'writedown' || s.t === 'contact');
   var cls = 'stage H' + (reserve ? ' res' : '');
   var full = (reserve || s.t === 'cover');
@@ -982,7 +989,7 @@ function renderSlide(s, i, total){
   else if (s.t === 'kit')       body = bodyKit(s);
   else if (s.t === 'writedown') body = bodyWriteDown(s);
   else if (s.t === 'contact')   body = bodyContact(s);
-  return '<div class="sheetwrap" id="s' + pad(i) + '"><div class="' + cls + '">' +
+  return '<div class="sheetwrap" id="s' + pad(i+1) + '"><div class="' + cls + '">' +
          ground(s) + apparatus + held(s) + body + '</div></div>';
 }
 
@@ -998,7 +1005,9 @@ function relayout(){
     var old = st.querySelector('.chain'); if (old) old.remove();
     var bottom = f.y + f.h;
     var reserve = (sl.t === 'res' || sl.t === 'writedown' || sl.t === 'contact');
-    var maxBottom = (reserve || sl.t === 'cover') ? 664 : 726;
+    /* the specification sheet is given the whole plate down to the foot rule,
+       because the document is the message and nothing else is on the sheet. */
+    var maxBottom = sl.t === 'spec' ? 790 : ((reserve || sl.t === 'cover') ? 664 : 726);
     if (fl && heldEl){
       var sr = st.getBoundingClientRect();
       var k = sr.width / 1600 || 1;
@@ -1019,7 +1028,7 @@ function relayout(){
         t.style.top = (t.style.width === '24px' ? bottom : bottom - 24) + 'px';
       });
     }
-    if (reserve || sl.t === 'cover' || sl.draw) continue;
+    if (reserve || sl.t === 'cover' || sl.t === 'spec' || sl.draw) continue;
     var y = bottom + 30;
     if (y > 776) continue;
     var wrapEl = document.createElement('div');
@@ -1055,19 +1064,19 @@ function show(i){
   idx = Math.max(0, Math.min(TOTAL - 1, i));
   var wraps = document.querySelectorAll('#deck .sheetwrap');
   for (var j = 0; j < wraps.length; j++) wraps[j].classList.toggle('on', j === idx);
-  document.getElementById('hud').textContent = pad(idx) + ' / ' + pad(TOTAL - 1);
-  if (history.replaceState) history.replaceState(null, '', '#s' + pad(idx));
+  document.getElementById('hud').textContent = pad(idx+1) + ' / ' + pad(TOTAL);
+  if (history.replaceState) history.replaceState(null, '', '#s' + pad(idx+1));
 }
 
 function build(){
   var html = '';
-  SLIDES.forEach(function(s, i){ html += renderSlide(s, i, TOTAL - 1); });
+  SLIDES.forEach(function(s, i){ html += renderSlide(s, i, TOTAL); });
   document.getElementById('deck').innerHTML = html;
   fit();
   relayout();
   var start = 0;
   var m = (location.hash || '').match(/^#s(\d+)$/);
-  if (m) start = parseInt(m[1], 10);
+  if (m) start = parseInt(m[1], 10) - 1;
   show(start);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(function(){ fit(); relayout(); });
 }
