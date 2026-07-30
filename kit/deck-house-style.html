@@ -210,7 +210,7 @@ body.grid .hud,body.grid .hint{display:none}
 .H .flow .specbox .ln{font-family:'Azeret Mono',monospace;font-size:22px;line-height:1.30;
   white-space:nowrap;color:var(--ink)}
 .H .flow .specbox .ln b{color:var(--oxide);font-weight:600}
-.H .flow .specbox .gap{height:12px}
+.H .flow .specbox .gap{height:10px}
 
 /* the address line. A URL is a dimension: it is exact or it is wrong. */
 .H .flow .url{font-family:'Azeret Mono',monospace;font-size:42px;font-weight:600;letter-spacing:.01em;
@@ -311,8 +311,7 @@ var SLIDES = [
              ['7:22','Build the Decision Council, the one I use on my own calls'],
              ['7:50','A live look at what this does on a real business'],
              ['8:10','Build the Simplicity Check'],
-             ['8:20','What I do next, what you do next, then your questions']],
-        close:'Hold your questions. There is a real Q and A at the end and I will stay for it.'},
+             ['8:20','What I do next, and what you do next']]},
 
 /* 04 CHANGE 3 - the kit sheet. Early, before the first thing anyone would
       photograph, and before the first build. The address carries its trailing
@@ -565,6 +564,11 @@ var SLIDES = [
 /* ---------------------------------------------------------------- helpers */
 function d(cls, style, html){ return '<div class="'+cls+'" style="'+style+'">'+(html||'')+'</div>'; }
 
+/* Everything a draughtsman drew goes inside this wrapper. It carries no layout
+   of its own, it exists so "the drawing must stay out of the held field" is a
+   checkable statement rather than a list of class names that drifts. */
+function DWG(html){ return '<div class="dwg">' + html + '</div>'; }
+
 /* NO ONE-WORD LINES. Standing design principle: a line never ends up carrying
    a single word on its own. Two words minimum, three where the three are short
    enough that binding them cannot push the line out of its box. Binding with
@@ -696,23 +700,29 @@ function ground(s){
    reaches it: inside, the ground goes flat and every stripe and vat line
    stops. Registration ticks at the corners declare the boundary the way a
    drawing declares a detail. Nothing but the message is allowed in here. */
-var FIELDS = {
-  cover:     {x:58,  y:70,  w:1484, h:440},
-  res:       {x:58,  y:70,  w:1000, h:566},
-  resWide:   {x:58,  y:70,  w:1424, h:566},
-  notes:     {x:58,  y:70,  w:1140, h:610},
-  schedule:  {x:58,  y:70,  w:1330, h:660},
-  work:      {x:58,  y:70,  w:1330, h:660},
-  spec:      {x:58,  y:70,  w:1352, h:700},
-  detail:    {x:58,  y:70,  w:860,  h:706},
-  kit:       {x:58,  y:70,  w:930,  h:660},
-  writedown: {x:58,  y:70,  w:1424, h:600},
-  contact:   {x:58,  y:70,  w:1000, h:600}
+/* ONE MEASURE PER SHEET TYPE, AND THE PANEL FOLLOWS FROM IT.
+   The message is set to MEASURE. The held field is that measure plus a 30 px
+   inset on each side. Deriving the panel from the measure is the whole fix:
+   the two used to be set independently, so copy could be laid out 110 px wider
+   than the panel that was supposed to contain it and nothing complained. */
+var MEASURE = {
+  cover:1424, res:900,  resWide:1364, notes:1060, schedule:1300,
+  work:1300,  workDraw:840, spec:1322, stack6:940, bandkey:800,
+  kit:930,    writedown:1200, contact:940
 };
+var HEIGHTS = {
+  cover:440, res:566, resWide:566, notes:610, schedule:660,
+  work:660,  spec:700, detail:706, kit:660, writedown:600, contact:600
+};
+function MEASURE_OF(s){
+  if (s.t === 'res')    return s.draw ? MEASURE.res : MEASURE.resWide;
+  if (s.t === 'work')   return s.draw ? MEASURE.workDraw : MEASURE.work;
+  if (s.t === 'detail') return s.draw === 'stack6' ? MEASURE.stack6 : MEASURE.bandkey;
+  return MEASURE[s.t] || MEASURE.notes;
+}
 function FIELD(s){
-  if (s.t === 'res') return s.draw ? FIELDS.res : FIELDS.resWide;
-  if (s.t === 'work' && s.draw) return {x:58, y:70, w:900, h:660};
-  return FIELDS[s.t] || FIELDS.notes;
+  var h = (s.t === 'res') ? HEIGHTS.res : (HEIGHTS[s.t] || HEIGHTS.notes);
+  return {x:58, y:70, w: MEASURE_OF(s) + 60, h: h};
 }
 /* The held field is drawn on EVERY sheet, including the reserve, where its
    fill is the same colour as the stock and it reads as nothing. That is what
@@ -810,7 +820,7 @@ function bodyNotes(s){
   var o = head(s, 96, 138), h = '<div class="r07"></div>';
   if (s.lead) h += '<p class="lead">' + nw(s.lead) + '</p>';
   (s.body||[]).forEach(function(p){ h += '<p class="para">' + nw(p) + '</p>'; });
-  return o + flow(s, 1060, h);
+  return o + flow(s, MEASURE_OF(s), h);
 }
 
 function bodySchedule(s){
@@ -842,7 +852,7 @@ function bodySchedule(s){
     }).join('') + '</div>';
   }
   if (s.close) h += '<p class="close">' + nw(s.close) + '</p>';
-  return o + flow(s, 1300, h);
+  return o + flow(s, MEASURE_OF(s), h);
 }
 
 function bodyWork(s){
@@ -855,8 +865,8 @@ function bodyWork(s){
   (s.body||[]).forEach(function(p){ h += '<p class="para">' + nw(p) + '</p>'; });
   if (s.close) h += '<div class="r07"></div><p class="close">' + nw(s.close) + '</p>';
   var draw = '';
-  if (s.draw === 'qrcal') draw = drawScan(1090, 300, 300, QR_CAL, 'SCAN TARGET');
-  return o + flow(s, s.draw ? 900 : 1300, h) + draw;
+  if (s.draw === 'qrcal') draw = DWG(drawScan(1090, 300, 300, QR_CAL, 'SCAN TARGET'));
+  return o + flow(s, MEASURE_OF(s), h) + draw;
 }
 
 function bodySpec(s){
@@ -866,7 +876,7 @@ function bodySpec(s){
   var lines = s.spec.map(function(l){
     return l === '' ? '<div class="gap"></div>' : '<div class="ln">' + l + '</div>';
   }).join('');
-  return o + d('flow','left:88px;top:178px;width:1322px',
+  return o + d('flow','left:88px;top:168px;width:'+MEASURE_OF(s)+'px',
     '<div class="specbox">' + lines + '</div>');
 }
 
@@ -880,7 +890,7 @@ function bodyKit(s){
     h += '<div class="op"><i>' + (i+1) + '</i><span>' + nw(op) + '</span></div>';
   });
   if (s.close) h += '<div class="r07"></div><p class="close">' + nw(s.close) + '</p>';
-  return o + flow(s, 900, h) + drawScan(1120, 300, 300, QR_KIT, 'SCAN TARGET');
+  return o + flow(s, MEASURE_OF(s), h) + DWG(drawScan(1120, 300, 300, QR_KIT, 'SCAN TARGET'));
 }
 
 function bodyWriteDown(s){
@@ -888,7 +898,7 @@ function bodyWriteDown(s){
   s.stanzas.forEach(function(z){
     h += '<p class="stanza' + (z.s ? ' strong' : '') + '">' + nw(z.t) + '</p>';
   });
-  return o + flow(s, 1200, h);
+  return o + flow(s, MEASURE_OF(s), h);
 }
 
 function bodyContact(s){
@@ -899,7 +909,7 @@ function bodyContact(s){
   }).join('') + '</div>';
   if (s.close) h += '<p class="close">' + nw(s.close) + '</p>';
   if (s.contact) h += '<p class="contact">' + s.contact + '</p>';
-  return o + flow(s, 940, h) + drawScan(1120, 300, 280, QR_CAL, 'SCAN TARGET');
+  return o + flow(s, MEASURE_OF(s), h) + DWG(drawScan(1120, 300, 280, QR_CAL, 'SCAN TARGET'));
 }
 
 function bodyDetail(s){
@@ -908,24 +918,24 @@ function bodyDetail(s){
      not allowed to exist. */
   var o = head(s, 96, 138);
   if (s.draw === 'stack6'){
-    o += drawStack6(1200, 268, true);
+    o += DWG(drawStack6(1240, 268, true));
     var ky = 250;
     s.keys.forEach(function(k){
-      o += d('keytxt','left:88px;top:'+(ky+2)+'px;width:940px;font-size:31px', nw(k));
+      o += d('keytxt','left:88px;top:'+(ky+2)+'px;width:'+MEASURE_OF(s)+'px;font-size:31px', nw(k));
       ky += 84;
     });
   } else if (s.draw === 'bandkey'){
-    o += drawBand(1012, 316, 500, true);
-    o += d('dot','left:1039px;top:'+(316+59)+'px');
-    o += d('lead-h','left:952px;top:378px;width:90px');
-    o += d('lead-v','left:952px;top:302px;height:78px');
-    o += d('ref','left:934px;top:266px','1');
-    o += d('dot','left:1470px;top:'+(316+59)+'px');
-    o += d('lead-v','left:1473px;top:378px;height:314px');
-    o += d('lead-h','left:952px;top:690px;width:523px');
-    o += d('ref','left:934px;top:672px','2');
-    o += d('keytxt','left:88px;top:248px;width:800px;font-size:38px', nw(s.keys[0]));
-    o += d('keytxt big','left:88px;top:490px;width:800px;font-size:40px', nw(s.keys[1]));
+    o += DWG(drawBand(1012, 316, 500, true)
+      + d('dot','left:1039px;top:'+(316+59)+'px')
+      + d('lead-h','left:952px;top:378px;width:90px')
+      + d('lead-v','left:952px;top:302px;height:78px')
+      + d('ref','left:934px;top:266px','1')
+      + d('dot','left:1470px;top:'+(316+59)+'px')
+      + d('lead-v','left:1473px;top:378px;height:314px')
+      + d('lead-h','left:952px;top:690px;width:523px')
+      + d('ref','left:934px;top:672px','2'));
+    o += d('keytxt','left:88px;top:248px;width:'+MEASURE_OF(s)+'px;font-size:38px', nw(s.keys[0]));
+    o += d('keytxt big','left:88px;top:490px;width:'+MEASURE_OF(s)+'px;font-size:40px', nw(s.keys[1]));
   }
   return o;
 }
@@ -933,7 +943,7 @@ function bodyDetail(s){
 function bodyCover(s){
   var o = d('figno','left:88px;top:96px', s.fig + ' &nbsp;&middot;&nbsp; ' + s.sub);
   o += d('figtitle','left:84px;top:136px;font-size:'+s.ts+'px', s.title);
-  if (s.draw === 'ga6') o += drawGA6(88, 520);
+  if (s.draw === 'ga6') o += DWG(drawGA6(88, 520));
   if (s.lead) o += d('keytxt big','left:920px;top:276px;width:600px;font-size:33px', nw(s.lead));
   if (s.opsIntro) o += d('keytxt','left:900px;top:146px;width:620px;font-size:31px', nw(s.opsIntro));
   if (s.ops){
@@ -965,10 +975,10 @@ function bodyRes(s){
   }
   (s.body||[]).forEach(function(p){ h += '<p class="para">' + nw(p) + '</p>'; });
   if (s.close) h += '<p class="close">' + nw(s.close) + '</p>';
-  var w = s.draw ? 900 : 1240;
+  var w = MEASURE_OF(s);
   var draw = '';
-  if (s.draw === 'band') draw = drawBand(1092, 240, 420, true);
-  if (s.draw === 'ga6')  draw = drawGA6(560, 430);
+  if (s.draw === 'band') draw = DWG(drawBand(1092, 240, 420, true));
+  if (s.draw === 'ga6')  draw = DWG(drawGA6(560, 430));
   return o + flow(s, w, h) + draw;
 }
 
@@ -1003,12 +1013,25 @@ function relayout(){
     var st = stages[i], sl = SLIDES[i];
     var heldEl = st.querySelector('.held'), fl = st.querySelector('.flow');
     var f = FIELD(sl);
+    /* A headline never wraps, so it cannot be trusted to stay inside anything.
+       Measure it and step the size down until it sits within the measure. This
+       is what let THINK OF ONE OWNER run 76 px out of its panel. */
+    var kk = st.getBoundingClientRect().width / 1600 || 1;
+    ['figtitle','figno'].forEach(function(cls){
+      var el = st.querySelector('.' + cls);
+      if (!el) return;
+      var base = cls === 'figtitle' ? sl.ts : 17;
+      el.style.fontSize = base + 'px';
+      var avail = MEASURE_OF(sl);
+      var wNow = el.getBoundingClientRect().width / kk;
+      if (wNow > avail) el.style.fontSize = (base * Math.max(0.62, avail / wNow)).toFixed(2) + 'px';
+    });
     var old = st.querySelector('.chain'); if (old) old.remove();
     var bottom = f.y + f.h;
     var reserve = (sl.t === 'res' || sl.t === 'writedown' || sl.t === 'contact');
     /* the specification sheet is given the whole plate down to the foot rule,
        because the document is the message and nothing else is on the sheet. */
-    var maxBottom = sl.t === 'spec' ? 790 : ((reserve || sl.t === 'cover') ? 664 : 726);
+    var maxBottom = sl.t === 'spec' ? 758 : ((reserve || sl.t === 'cover') ? 664 : 726);
     if (fl && heldEl){
       var sr = st.getBoundingClientRect();
       var k = sr.width / 1600 || 1;
@@ -1018,12 +1041,30 @@ function relayout(){
       var h = fr.height / k;
       var room = maxBottom - topPx;
       /* auto fit. If a sheet's copy genuinely will not sit in the field at full
-         size it is scaled down, never allowed to run past the field edge, and
-         never below 0.9 so the smallest line stays readable from the back. */
-      var fit = h > room ? Math.max(0.90, room / h) : 1;
+         size it is scaled down, never allowed to run past the field edge. The
+         floor is 0.82 rather than 0.90 because the old floor could not always
+         reach and the panel was then clamped OVER the copy, which hid the
+         overflow instead of preventing it. */
+      var fit = h > room ? Math.max(0.82, room / h) : 1;
       fl.style.transformOrigin = 'top left';
       fl.style.transform = fit < 1 ? 'scale(' + fit.toFixed(4) + ')' : 'none';
-      bottom = Math.min(maxBottom, Math.round(topPx + h * fit) + 26);
+      /* no clamp here. The panel covers whatever was actually laid out, so a
+         miss shows up as a tall panel and gets caught, never as loose text. */
+      bottom = Math.round(topPx + h * fit) + 26;
+      heldEl.style.height = (bottom - f.y) + 'px';
+      st.querySelectorAll('.tick.b').forEach(function(t){
+        t.style.top = (t.style.width === '24px' ? bottom : bottom - 24) + 'px';
+      });
+    } else if (heldEl){
+      /* Detail sheets place their keys against the drawing instead of running
+         a flow, so there is nothing to measure a height from and the panel used
+         to sit at its declared depth with a hole under the last line. Take the
+         lowest thing actually in the panel and stop there. */
+      var srD = st.getBoundingClientRect(), kD = srD.width / 1600 || 1, low = 0;
+      st.querySelectorAll('.keytxt').forEach(function(el){
+        low = Math.max(low, (el.getBoundingClientRect().bottom - srD.top) / kD);
+      });
+      if (low > 0) bottom = Math.round(low) + 30;
       heldEl.style.height = (bottom - f.y) + 'px';
       st.querySelectorAll('.tick.b').forEach(function(t){
         t.style.top = (t.style.width === '24px' ? bottom : bottom - 24) + 'px';
@@ -1093,8 +1134,12 @@ document.addEventListener('keydown', function(e){
     else document.documentElement.requestFullscreen();
   }
   else if (k === 'g' || k === 'G'){
+    /* Only the transform changes. relayout() must NOT run here: in the contact
+       sheet every stage is scaled to about a quarter, and re-measuring panels
+       at that scale collapsed them, so sheets past the fourth row came out
+       empty. The layout is already correct from the full size pass. */
     document.body.classList.toggle('grid');
-    fit(); relayout();
+    fit();
   }
   else if (k === 'c' || k === 'C'){ document.body.classList.toggle('hidechrome'); }
 });
