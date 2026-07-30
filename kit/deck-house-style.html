@@ -320,8 +320,8 @@ var SLIDES = [
         {t:'kit', sub:'ISSUE SHEET',
         title:'IT IS ALL ON<br>ONE PAGE', ts:96, draw:'qrkit',
         url:'catalystworks.consulting/kit/',
-        ops:['Every slide from tonight is already on it. Put the phone down, you do not need one photo.',
-             'Every prompt you are about to build is on it too, with a copy button. You work out of this page all night.'],
+        ops:['Every slide from tonight is already on it. Put the phone down, nobody needs a photo of a slide.',
+             'Every prompt you are about to build is on it too, with a copy button. You will be in this page all night.'],
         close:'Open it now and leave the tab open.'},
 
 /* 05 */ {t:'notes', sub:'GENERAL NOTE',
@@ -332,7 +332,7 @@ var SLIDES = [
 /* 06 */ {t:'res', sub:'THE WAY OUT',
         title:'TOOLS CHANGE.<br>PRINCIPLES DON’T.', ts:106,
         lead:'I went from ChatGPT to Gemini to Claude, and a few others since, and I never lost a step. Not because I picked right. Because what I own is the way I work with these things, and that moves.',
-        tb:{Scale:'—', Rev:'1', Zone:'A2'}},
+        tb:{Scale:'NONE', Rev:'1', Zone:'A2'}},
 
 /* 07 */ {t:'detail', sub:'SIX STRIPS, KEYED',
         title:'THE SIX THAT TRANSFER', ts:76, draw:'stack6',
@@ -359,7 +359,7 @@ var SLIDES = [
         title:'NOBODY IS BACKSTAGE', ts:104,
         lead:'The page you registered on and the reminder emails that got you here tonight both run on tools I built and I run myself. I am one person. There is nobody behind the curtain.',
         body:['That is the part you want. Not the chatbot.'],
-        tb:{Scale:'—', Rev:'1', Zone:'B2'}},
+        tb:{Scale:'NONE', Rev:'1', Zone:'B2'}},
 
 /* 11 CHANGE 2 - nobody else is in the room. The someone is me. */
         {t:'work', sub:'WORK INSTRUCTION',
@@ -396,7 +396,7 @@ var SLIDES = [
              ['THE OUTSIDER','hears it cold, with zero context, like a smart stranger.'],
              ['THE EXECUTOR','gives you the first move and the thing most likely to kill it.']],
         regw:420,
-        close:'Then they read each other. Then a chairman steps out of the five and calls it. Proceed, change, or kill.'},
+        close:'Then they read each other. A chairman steps out of the five and calls it. Proceed, change, or kill.'},
 
 /* 16 */ {t:'spec', sub:'SPECIFICATION &nbsp;&middot;&nbsp; COPY IT FROM YOUR KIT PAGE',
         title:'PASTE THIS IN', ts:46,
@@ -450,7 +450,7 @@ var SLIDES = [
         lead:'“Assume this failed badly six months from now. Walk it back and tell me why.”',
         body:['Same council. Different job. It tells you how this goes wrong before it costs you anything.',
               'Cheapest insurance in business.'],
-        tb:{Scale:'—', Rev:'A', Zone:'A1'}},
+        tb:{Scale:'NONE', Rev:'A', Zone:'A1'}},
 
 /* 21 CHANGE 5 - headline only. He speaks to this one live, with his own
       examples, working the room. Nothing on the sheet narrates it for him. */
@@ -498,22 +498,23 @@ var SLIDES = [
                'Anything you repeat becomes a recipe you own.','Agentic means you delegate, not just ask.',
                'Pressure-test, then simplify.','Own it. Move it. Never get locked in.'],
         close:'The tools on this screen will look dated. This list will not.',
-        tb:{Scale:'—', Rev:'1', Zone:'C1'}},
+        tb:{Scale:'NONE', Rev:'1', Zone:'C1'}},
 
 /* 28 */ {t:'work', sub:'WORK INSTRUCTION',
-        title:'KEEP IT FOREVER', ts:104,
+        title:'DO THIS NOW', ts:104,
         lead:'A skill is the tool you just built, saved to your account instead of to one project.',
         ops:['New chat, inside your project.',
              'Paste the packaging prompt from your kit page, under 04 Keep it forever.',
              'A file comes back. Take it. No file, take the ready made one.'],
-        close:'It is all on your kit page, catalystworks.consulting/kit/, with a copy button.'},
+        close:'Your kit page has all of this with a copy button, under 04 Keep it forever.'},
 
 /* 29 */ {t:'work', sub:'WORK INSTRUCTION',
         title:'SWITCH IT ON', ts:104,
         ops:['Settings, then Capabilities. Code execution on.',
              'Customize, then Skills. Different menu.',
-             'Plus, Create skill, Upload a skill. Pick your file.'],
-        close:'Switch it on, then open a brand new chat and ask for your council.'},
+             'Plus, Create skill, Upload a skill. Pick your file.',
+             'Switch it on.'],
+        close:'Then open a brand new chat and ask for your council.'},
 
 /* 30 CHANGE 9 - the banned phrase is out. */
         {t:'schedule', sub:'WHAT HAPPENS NEXT',
@@ -542,7 +543,7 @@ var SLIDES = [
                  {s:0, t:'Run it through what you built tonight.'},
                  {s:0, t:'If there is one you would not say out loud in this room, start with that one. It will not flatter you, and it cannot repeat it.'},
                  {s:1, t:'Friday morning I am going to ask you what happened.'}],
-        tb:{Scale:'—', Rev:'1', Zone:'A1'}},
+        tb:{Scale:'NONE', Rev:'1', Zone:'A1'}},
 
 /* 34 */ {t:'contact', sub:'ONE LAST ASK',
         title:'SEND ME WHAT YOU WROTE', ts:74, draw:'qrcal',
@@ -767,7 +768,7 @@ function apparatusFull(s, i, total){
     + '<div class="tbwide"><span>Title</span><b>' + s.title.replace(/<br>/g,' ') + '</b></div>'
     + '<div><span>Sheet</span><b>' + pad(i+1) + ' OF ' + total + '</b></div>'
     + '<div><span>Rev</span><b>' + (tb.Rev||'1') + '</b></div>'
-    + '<div><span>Scale</span><b>' + (tb.Scale||'—') + '</b></div>'
+    + '<div><span>Scale</span><b>' + (tb.Scale||'NONE') + '</b></div>'
     + '<div><span>Zone</span><b>' + (tb.Zone||'B2') + '</b></div>'
     + '<div><span>Sheets</span><b>' + total + '</b></div>'
     + '<div><span>Drawn</span><b>BOUBACAR</b></div>'

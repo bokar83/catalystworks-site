@@ -716,25 +716,35 @@ a{color:var(--amber-deep);text-decoration-thickness:1px;text-underline-offset:3p
     <div class="station-head">
       <span class="station-no" aria-hidden="true">02</span>
       <div class="station-title">
-        <p class="eyebrow">Five advisors, one verdict</p>
+        <p class="eyebrow">Five advisors, then a chairman</p>
         <h2 id="council-h">Your decision council</h2>
-        <p class="lede">They argue your call from five directions, then one of them has to say proceed, change, or kill. One of them says the thing you have been avoiding.</p>
+        <p class="lede">They argue your call from five directions. Then they read each other. Then a chairman steps out and says proceed, change, or kill. One of them says the thing you have been avoiding.</p>
       </div>
     </div>
 
     <div class="step">
       <p class="step-label"><b>Step 1</b> The instructions. This is what you paste once to build the tool.</p>
       <div class="promptbox">
-<pre id="out-council-install"><span class="k">You are my Decision Council.</span> When I give you a decision, respond as five
-separate advisors, each in one short paragraph:
+<pre id="out-council-install"><span class="k">You are my Decision Council.</span> When I give you a decision, work it in three passes.
 
+<span class="k">PASS 1. Five advisors.</span> One short paragraph each.
 1. <span class="k">THE CONTRARIAN:</span> argue hard against the decision.
 2. <span class="k">FIRST PRINCIPLES:</span> list the assumptions I am making and which ones are shaky.
 3. <span class="k">THE EXPANSIONIST:</span> describe a bolder, bigger version of this.
 4. <span class="k">THE OUTSIDER:</span> react with zero context, like a smart stranger hearing it cold.
 5. <span class="k">THE EXECUTOR:</span> give the first concrete step and the single thing most likely to kill it.
 
-Then finish with <span class="k">VERDICT:</span> proceed, change, or kill, in one sentence, and why.
+<span class="k">PASS 2. Peer review.</span> Each advisor reads the other four and answers in one line:
+which one is strongest, and what did all five of us miss?
+
+<span class="k">PASS 3. The Chairman.</span> Step out of the five and close it out.
+- Where do all five agree? That is the solid ground.
+- Where do they split? Name the split. Do not smooth it over.
+- What did the peer review catch that no single advisor saw?
+- <span class="k">VERDICT:</span> proceed, change, or kill. One sentence, and why.
+- The first move, this week.
+- The one question only I can answer.
+
 Be direct. No flattery. Do not agree with me by default.
 
 My decision is: [paste your decision here]</pre>
@@ -917,7 +927,7 @@ Make a folder called decision-council with one file in it called SKILL.md.
 At the top of SKILL.md put exactly this:
 ---
 name: decision-council
-description: Runs a decision through five advisors who argue it from five directions, then delivers one verdict of proceed, change or kill. Use when the user asks for a decision council or brings a business decision they are weighing.
+description: Runs a decision through three passes. Five advisors argue it from five directions, then they peer review each other, then a chairman finds where they agree, names where they split, and delivers one verdict of proceed, change or kill. Use when the user asks for a decision council or brings a business decision they are weighing.
 ---
 
 Under that, put the full Decision Council instructions, unchanged.
@@ -1271,7 +1281,7 @@ Then zip the decision-council folder and give me the zip to download.</pre>
         <p class="eyebrow on-ink">If you want this pointed at your business</p>
         <h2 id="close-h">One working<br>session. Free.</h2>
         <p class="lede" style="margin-top:22px;color:#DCD3C2">Forty-five minutes, just you and me, looking at how your business actually runs. You leave with a written shortlist: the one place this pays you back first, and where it is a waste of your money this year.</p>
-        <p style="color:#B9AE9C;margin-top:20px">No deck and no pitch. This is worth your time when there is something in your week worth handing off. If there is not, I will tell you, and you will have saved yourself an afternoon.</p>
+        <p style="color:#B9AE9C;margin-top:20px">No deck, and nothing to sign. This is worth your time when there is something in your week worth handing off. If there is not, I will tell you, and you will have saved yourself an afternoon.</p>
         <p style="margin-top:28px">
           <a class="stamp" href="https://calendly.com/boubacarbarry/free-ai-audit-owner-operators">
             Pick a time <span class="arw" aria-hidden="true">&#8594;</span>
@@ -1535,16 +1545,26 @@ Then zip the decision-council folder and give me the zip to download.</pre>
   }
 
   var COUNCIL_HEAD =
-'You are my Decision Council. When I give you a decision, respond as five\n'+
-'separate advisors, each in one short paragraph:\n'+
+'You are my Decision Council. When I give you a decision, work it in three passes.\n'+
 '\n'+
+'PASS 1. Five advisors. One short paragraph each.\n'+
 '1. THE CONTRARIAN: argue hard against the decision.\n'+
 '2. FIRST PRINCIPLES: list the assumptions I am making and which ones are shaky.\n'+
 '3. THE EXPANSIONIST: describe a bolder, bigger version of this.\n'+
 '4. THE OUTSIDER: react with zero context, like a smart stranger hearing it cold.\n'+
 '5. THE EXECUTOR: give the first concrete step and the single thing most likely to kill it.\n'+
 '\n'+
-'Then finish with VERDICT: proceed, change, or kill, in one sentence, and why.\n'+
+'PASS 2. Peer review. Each advisor reads the other four and answers in one line:\n'+
+'which one is strongest, and what did all five of us miss?\n'+
+'\n'+
+'PASS 3. The Chairman. Step out of the five and close it out.\n'+
+'- Where do all five agree? That is the solid ground.\n'+
+'- Where do they split? Name the split. Do not smooth it over.\n'+
+'- What did the peer review catch that no single advisor saw?\n'+
+'- VERDICT: proceed, change, or kill. One sentence, and why.\n'+
+'- The first move, this week.\n'+
+'- The one question only I can answer.\n'+
+'\n'+
 'Be direct. No flattery. Do not agree with me by default.\n';
 
   function councilParts(){
@@ -1562,6 +1582,9 @@ Then zip the decision-council folder and give me the zip to download.</pre>
     var p = councilParts();
     var head = esc(COUNCIL_HEAD)
       .replace('You are my Decision Council.','<span class="k">You are my Decision Council.</span>')
+      .replace('PASS 1. Five advisors.','<span class="k">PASS 1. Five advisors.</span>')
+      .replace('PASS 2. Peer review.','<span class="k">PASS 2. Peer review.</span>')
+      .replace('PASS 3. The Chairman.','<span class="k">PASS 3. The Chairman.</span>')
       .replace('THE CONTRARIAN:','<span class="k">THE CONTRARIAN:</span>')
       .replace('FIRST PRINCIPLES:','<span class="k">FIRST PRINCIPLES:</span>')
       .replace('THE EXPANSIONIST:','<span class="k">THE EXPANSIONIST:</span>')
