@@ -26,6 +26,19 @@ RewriteRule ^seat/?$ seat/index.html [NC,L]
 # printed on the cards and shown on the closing slide, so both the with-slash
 # and without-slash forms have to resolve: DirectorySlash Off would otherwise
 # send /kit into the clean-URL rule and 404 on kit.html.
+#
+# 2026-07-30: /kit and /kit/ both resolved, but only one of them WORKED.
+# Serving the no-slash form in place left the document base at /kit, so every
+# relative href on the page resolved against the site root instead of the kit
+# directory: "Read the deck" went to /deck.html and "The one page cheat sheet"
+# to /handout.html, both 404, and the slides PDF, the skill zip and the
+# service worker registration went the same way, which silently killed the
+# offline support this page depends on at the venue. The 301 below sends the
+# no-slash form to the canonical directory URL BEFORE the page renders, so the
+# base is right and the relative links land where they were always meant to.
+# It must stay ahead of the serve rule, and it cannot loop: /kit/ has a
+# trailing slash and so never matches ^kit$.
+RewriteRule ^kit$ /kit/ [R=301,L]
 RewriteRule ^kit/?$ kit/index.html [NC,L]
 # Customer-facing support + privacy pages (Stripe links point here). Same
 # directory-index pattern as /workshop: DirectorySlash Off would otherwise send

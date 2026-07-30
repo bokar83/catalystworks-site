@@ -43,8 +43,16 @@
    deck would show the room a blank line where Bruin-WIFI should be. NOTE this
    file came back from the presenter branch still reading v2, which would have
    silently undone yesterday's bump; v4 is deliberately past v3 so the merge
-   moves the cache forward rather than backwards. */
-var CACHE = 'kit0730-cw-v5';
+   moves the cache forward rather than backwards.
+
+   v5 -> v6 on 2026-07-30, the morning of. /kit without a trailing slash used to
+   be served in place, which left the document base at /kit and sent every
+   relative link on the page to the site root. A laptop that opened that form
+   has the broken-base page sitting in this runtime cache under the /kit key,
+   and the NET_TIMEOUT branch below will hand it straight back on venue wifi
+   even though the redirect is now live. Renaming the cache makes the activate
+   handler drop the whole thing, so nobody in the room can still be holding it. */
+var CACHE = 'kit0730-cw-v6';
 
 /* The page itself only. Small, and the thing every attendee needs first. */
 var ASSETS = ['./', './index.html'];
