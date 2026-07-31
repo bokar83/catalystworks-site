@@ -1,0 +1,44 @@
+{
+  "externalRequests": [],
+  "clipboardLength": 1248,
+  "promptLength": 1229,
+  "clipboardMatchesPrompt": false,
+  "clipboardHead": "You are three advisors. I am going to give you a decision I have been ",
+  "clipboardTail": " about my business first: [what you do, how many people, anything that changes the answer]",
+  "buttonLabelAfterClick": "Copied. Now paste it in.",
+  "buttonClassAfterClick": "copy noprint done",
+  "ariaAnnounce": "Copied. The whole prompt is on your clipboard.",
+  "mobile": {
+    "scrollWidth": 375,
+    "innerWidth": 375,
+    "bodyScrollWidth": 375,
+    "offenders": []
+  },
+  "tapTargets": [
+    {
+      "t": "Copy the prompt",
+      "w": 338,
+      "h": 60
+    },
+    {
+      "t": "Book thirty minutes →",
+      "w": 206,
+      "h": 55
+    },
+    {
+      "t": "boubacar@catalystworks.consu",
+      "w": 236,
+      "h": 44
+    },
+    {
+      "t": "linkedin.com/in/boubacarbarr",
+      "w": 207,
+      "h": 44
+    },
+    {
+      "t": "catalystworks.consulting",
+      "w": 172,
+      "h": 44
+    }
+  ]
+}
