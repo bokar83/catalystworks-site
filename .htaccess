@@ -12,9 +12,17 @@ RewriteRule ^signal/?$ signal.html [NC,L]
 # IC workshop June 25 (2026-06-12): registration page lives at /workshop/.
 # Serve the directory index explicitly (DirectorySlash Off would otherwise
 # send /workshop into the clean-URL rule and 404 on workshop.html).
+#
+# 2026-07-31: same latent bug as /kit (see reference_trailing_slash_breaks_
+# relative_links_2026_07_30.md) -- DirectorySlash Off served the no-slash
+# form in place with no redirect, leaving document.baseURI at /workshop and
+# breaking every relative href on the page. 301 to the slashed form first.
+RewriteRule ^workshop$ /workshop/ [R=301,L,QSA]
 RewriteRule ^workshop/?$ workshop/index.html [NC,L]
 # A/B variant B of the workshop page (paid/ad traffic lands here via /w/ads).
 # Same directory-index pattern as /workshop so /workshop-b and /workshop-b/ both serve.
+# Same 301-first fix as /workshop above, same reason.
+RewriteRule ^workshop-b$ /workshop-b/ [R=301,L,QSA]
 RewriteRule ^workshop-b/?$ workshop-b/index.html [NC,L]
 
 # IC lead-magnet opt-in (free AI checklist) lives at /ai-checklist/.
@@ -32,6 +40,9 @@ RewriteRule ^workshop-b/?$ workshop-b/index.html [NC,L]
 RewriteRule ^ai-checklist$ /ai-checklist/ [R=301,L,QSA]
 RewriteRule ^ai-checklist/?$ ai-checklist/index.html [NC,L]
 # IC simple one-screen QR conversion page (StartFEST + /w/ss) lives at /seat/.
+# 2026-07-31: same trailing-slash defect as /kit -- 301 to the slashed form
+# first so document.baseURI is correct before the page's relative links resolve.
+RewriteRule ^seat$ /seat/ [R=301,L,QSA]
 RewriteRule ^seat/?$ seat/index.html [NC,L]
 # The July 30 attendee take-home kit lives at /kit/. This is the QR target
 # printed on the cards and shown on the closing slide, so both the with-slash
@@ -61,8 +72,13 @@ RewriteRule ^kit-v1/?$ kit-v1/index.html [NC,L]
 # Customer-facing support + privacy pages (Stripe links point here). Same
 # directory-index pattern as /workshop: DirectorySlash Off would otherwise send
 # /support and /privacy into the clean-URL rule and 404 on support.html.
+# 2026-07-31: same trailing-slash defect as /kit on all three -- 301 to the
+# slashed form first so document.baseURI is correct before relative links resolve.
+RewriteRule ^support$ /support/ [R=301,L,QSA]
 RewriteRule ^support/?$ support/index.html [NC,L]
+RewriteRule ^privacy$ /privacy/ [R=301,L,QSA]
 RewriteRule ^privacy/?$ privacy/index.html [NC,L]
+RewriteRule ^terms$ /terms/ [R=301,L,QSA]
 RewriteRule ^terms/?$ terms/index.html [NC,L]
 # SW cold-email link consistency (2026-07-15): signature shows
 # catalystworks.consulting/geolisted so recipients see one CW domain.
@@ -70,6 +86,8 @@ RewriteRule ^terms/?$ terms/index.html [NC,L]
 RewriteRule ^geolisted/?$ https://geolisted.co/ [R=301,L]
 # Free ($0) Stripe checkout success page (after_completion redirect target for the
 # $0 free-seat payment link). Confirms the free July 30 reservation.
+# 2026-07-31: same trailing-slash defect as /kit -- 301 to the slashed form first.
+RewriteRule ^free-thank-you$ /free-thank-you/ [R=301,L,QSA]
 RewriteRule ^free-thank-you/?$ free-thank-you/index.html [NC,L]
 # The July 16 free session was CANCELLED and its page only hit Beehiiv while
 # advertising a dead date. Repoint any straggler still holding an old
@@ -84,8 +102,12 @@ RewriteRule ^free-workshop-july16/?$ /ai-checklist/?utm_source=sbdc&utm_medium=o
 # honest. NOTE: /w/vip below still resolves here via a second 301 hop.
 RewriteRule ^rsvp-0730/?$ /ai-checklist/?utm_source=direct_invite&utm_medium=organic&utm_campaign=ic_workshop_0730&utm_content=stale_rsvp0730_redirect [R=301,L]
 # Services offer-ladder page lives at /services/ (unlinked preview, awaiting nav sign-off).
+# 2026-07-31: same trailing-slash defect as /kit -- 301 to the slashed form first.
+RewriteRule ^services$ /services/ [R=301,L,QSA]
 RewriteRule ^services/?$ services/index.html [NC,L]
 # 5-Day Bottleneck Audit landing page lives at /bottleneck-audit/ (unlinked preview, awaiting nav sign-off).
+# Same trailing-slash defect + fix as /services above.
+RewriteRule ^bottleneck-audit$ /bottleneck-audit/ [R=301,L,QSA]
 RewriteRule ^bottleneck-audit/?$ bottleneck-audit/index.html [NC,L]
 # Short link for the lead-magnet (Meta ads + any channel): /w/start -> opt-in page.
 # Campaign = stable magnet base; utm_content carries the current cohort for per-run segmentation.
