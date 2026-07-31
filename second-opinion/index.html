@@ -79,7 +79,7 @@ h1{font-size:clamp(2.55rem,11.5vw,4.4rem)}
 /* ---------- sections ---------- */
 section{padding:clamp(26px,5vw,44px) 0;border-top:1px solid var(--line)}
 .num{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--ink-faint);margin:0 0 10px}
+  color:var(--ink-soft);margin:0 0 10px}
 .num b{color:var(--ink);font-weight:600}
 h2{font-size:clamp(1.55rem,6vw,2.15rem);margin-bottom:.5em}
 
@@ -95,7 +95,7 @@ h2{font-size:clamp(1.55rem,6vw,2.15rem);margin-bottom:.5em}
 }
 .copy:hover{background:var(--ink)}
 .copy:active{transform:translateY(1px)}
-.copy .ic{font-family:var(--mono);font-size:.72em;font-weight:700}
+.copy .ic{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-width:1.7}
 .copy.done{background:#1F6B41}
 .copy.fail{background:var(--ink)}
 .hint{font-family:var(--mono);font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;
@@ -152,47 +152,58 @@ h2{font-size:clamp(1.55rem,6vw,2.15rem);margin-bottom:.5em}
 .book:hover{background:var(--paper);color:var(--ink)}
 .chan{list-style:none;margin:24px 0 0;padding:0;
   font-family:var(--mono);font-size:13px;line-height:1.5}
-.chan li{display:flex;flex-wrap:wrap;gap:4px 12px;padding:9px 0;border-top:1px solid rgba(239,231,214,.2)}
+.chan li{display:flex;flex-wrap:wrap;align-items:center;gap:2px 12px;
+  border-top:1px solid rgba(239,231,214,.2)}
 .chan b{color:#9A8E7C;font-weight:400;letter-spacing:.14em;text-transform:uppercase;
-  font-size:11px;flex:0 0 82px;padding-top:2px}
-.chan a{color:#FFB347;word-break:break-word}
+  font-size:11px;flex:0 0 82px}
+/* 44px of tappable height per row, so a thumb in a truck cab hits the link
+   and not the gap between two links. */
+.chan a{color:#FFB347;word-break:break-word;display:inline-block;padding:12px 0}
 .stamp{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;
   color:#867A68;margin:26px 0 0}
 
-/* ---------- print: one clean page, so this doubles as his one-pager ---------- */
+/* ---------- print ----------------------------------------------------
+   He asked for a one-pager originally, so print-to-PDF has to land on a
+   single US Letter side. Everything below is sized to that budget: the
+   prompt keeps the most room because it is the only part that has to be
+   readable enough to retype, and the two worked examples run side by side
+   instead of stacking.
+   -------------------------------------------------------------------- */
 @media print{
-  @page{size:letter portrait;margin:11mm 12mm}
-  html,body{background:#fff;color:#000;font-size:9.1pt;line-height:1.34}
+  @page{size:letter portrait;margin:10mm 11mm}
+  html,body{background:#fff;color:#000;font-size:8.5pt;line-height:1.27}
   .weave,.copy,.hint,.noprint{display:none !important}
   .wrap{max-width:none;padding:0}
-  section{padding:8pt 0;border-top:.6pt solid #999;break-inside:avoid}
-  .top{padding:0 0 7pt}
-  .meta{margin-bottom:7pt;font-size:7pt;letter-spacing:.14em;color:#444}
+  section{padding:5pt 0;border-top:.5pt solid #999;break-inside:avoid}
+  .top{padding:0 0 4pt}
+  .meta{margin-bottom:4pt;font-size:6.4pt;letter-spacing:.14em;color:#444}
   .meta b{color:#000}
-  h1{font-size:27pt}
-  .lede{margin-top:7pt;font-size:9.4pt;max-width:none;color:#222}
-  h2{font-size:13pt;margin-bottom:4pt}
-  .num{font-size:7pt;margin-bottom:4pt;color:#444}
-  p{margin-bottom:.5em}
-  .prompt{background:#fff;border:.8pt solid #000;padding:7pt 8pt}
+  h1{font-size:21pt}
+  .lede{margin-top:5pt;margin-bottom:3pt;font-size:8.6pt;max-width:none;color:#1a1a1a}
+  h2{font-size:11pt;margin-bottom:2.5pt}
+  .num{font-size:6.4pt;margin-bottom:2.5pt;color:#444}
+  p{margin-bottom:.42em}
+  .prompt{background:#fff;border:.7pt solid #000;padding:5pt 6pt}
   .prompt::after{display:none}
-  .prompt pre{font-size:7.5pt;line-height:1.36;color:#000}
+  .prompt pre{font-size:6.9pt;line-height:1.31;color:#000}
   .prompt .fill{color:#000}
-  .steps li{margin-bottom:4pt;padding-left:22pt}
-  .steps li::before{width:15pt;height:15pt;font-size:8pt;background:#000;color:#fff}
-  .eg{margin-bottom:7pt;border-left-width:2.5pt;border-left-color:#000;padding-left:8pt}
-  .eg p{font-size:9pt}
-  .eg .tag{font-size:7pt;margin-bottom:2pt}
-  .foot{background:#fff;color:#000;margin-top:8pt;padding:8pt 0 0;border-top:.6pt solid #999}
+  .steps li{margin-bottom:2.5pt;padding-left:18pt}
+  .steps li::before{width:12pt;height:12pt;font-size:7pt;background:#000;color:#fff}
+  .egs{display:flex;gap:14pt}
+  .egs .eg{flex:1 1 0;margin-bottom:0}
+  .eg{border-left-width:2pt;border-left-color:#000;padding:0 0 0 6pt}
+  .eg p{font-size:7.9pt}
+  .eg .tag{font-size:6.4pt;margin-bottom:1.5pt;color:#444}
+  .foot{background:#fff;color:#000;margin-top:0;padding:5pt 0 0;border-top:.5pt solid #999}
   .foot h2,.foot p,.foot .num b{color:#000}
   .foot .num{color:#444}
-  .book{background:#fff;color:#000;padding:0;min-height:0;font-size:10pt;
-        border-bottom:1pt solid #000}
-  .chan{margin-top:7pt;font-size:8pt}
-  .chan li{border-top:.5pt solid #bbb;padding:2.5pt 0}
-  .chan b{color:#444;flex-basis:64pt;font-size:7pt}
-  .chan a{color:#000}
-  .stamp{margin-top:7pt;font-size:7pt;color:#444}
+  .book{background:#fff;color:#000;padding:0;min-height:0;font-size:9pt;
+        border-bottom:.9pt solid #000}
+  .chan{margin-top:5pt;font-size:7.4pt}
+  .chan li{border-top:.4pt solid #bbb}
+  .chan b{color:#444;flex-basis:52pt;font-size:6.4pt}
+  .chan a{color:#000;padding:2pt 0}
+  .stamp{margin-top:5pt;font-size:6.4pt;color:#444}
   a{text-decoration:none}
 }
 
@@ -210,7 +221,7 @@ h2{font-size:clamp(1.55rem,6vw,2.15rem);margin-bottom:.5em}
   <div class="wrap">
     <p class="meta"><span><b>Catalyst Works</b></span><span>One prompt</span><span>About five minutes</span></p>
     <h1>The Five-Minute<br>Second Opinion</h1>
-    <p class="lede">There is a decision you have been carrying around for about three weeks. Second truck or second dispatcher. Drop the account that is twenty percent of revenue and most of your headaches. Hire the guy or keep doing it yourself at ten at night.</p>
+    <p class="lede">There is a decision that has been sitting on you for a few weeks now. Second truck or second dispatcher. Drop the account that is twenty percent of revenue and most of your headaches. Hire the guy or keep doing it yourself at ten at night.</p>
     <p class="lede"><strong>This is one prompt.</strong> Paste it into whatever AI you already have open, hand it your decision, and three advisors argue about it in front of you. Then one of them calls it.</p>
   </div>
 </header>
@@ -223,7 +234,10 @@ h2{font-size:clamp(1.55rem,6vw,2.15rem);margin-bottom:.5em}
     <h2 id="h-prompt">Take it with you</h2>
 
     <button class="copy noprint" id="btn" type="button" data-target="p">
-      <span class="ic" aria-hidden="true">&#9633;&#9633;</span>
+      <svg class="ic" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
+        <rect x="6.2" y="1.2" width="12.6" height="14.6" rx="1.4"/>
+        <path d="M13.4 18.8H2.6a1.4 1.4 0 0 1-1.4-1.4V5.6"/>
+      </svg>
       <span class="lbl">Copy the prompt</span>
     </button>
     <p class="hint noprint" id="hint">One tap. The whole thing goes to your clipboard.</p>
@@ -235,7 +249,7 @@ One short paragraph from each of the three. Use my words, not consultant words.
 
 <span class="k">1. THE ONE WHO WANTS IT TO WORK.</span> Make the honest best case. Not a pep talk. What actually goes right, and what has to be true for that to happen.
 
-<span class="k">2. THE ONE WHO HAS SEEN IT FAIL.</span> Name the specific way this goes wrong for a business my size. Not "there are risks." The actual failure, and the first sign I would see it coming.
+<span class="k">2. THE ONE WHO HAS SEEN IT FAIL.</span> Name the specific way this goes wrong for a business my size. "There are risks" is not an answer. Give me the actual failure, and the first sign I would see it coming.
 
 <span class="k">3. THE ONE WHO ASKS WHAT I AM AVOIDING.</span> Assume there is a reason this has been sitting on me for weeks. Say what you think that reason is, out loud, even if it is uncomfortable to read.
 
@@ -270,13 +284,15 @@ Be direct. No flattery. Do not agree with me just because I asked.
     <h2 id="h-eg">Give it a real one</h2>
     <p>It is wasted on a decision you have already made. Give it the one that keeps sliding to next week.</p>
 
+    <div class="egs">
     <div class="eg">
-      <span class="tag">Looks like this</span>
+      <span class="tag">You would type in</span>
       <p>Second truck or second dispatcher. Six guys, we turn down work most Fridays, and I am still the one answering the phone at seven in the morning.</p>
     </div>
     <div class="eg">
-      <span class="tag">Or this</span>
+      <span class="tag">Or you would type in</span>
       <p>Whether to drop the account that is twenty percent of revenue and about eighty percent of the headaches. They pay at sixty days, and my best installer has started asking to be taken off that job.</p>
+    </div>
     </div>
 
     <p>Yours will be more specific than either of those, and it should be. The more you put in the first time, the less generic what comes back.</p>
@@ -289,7 +305,8 @@ Be direct. No flattery. Do not agree with me just because I asked.
   <div class="wrap">
     <p class="num"><b>04</b> &middot; Who sent you this</p>
     <h2>Boubacar Barry</h2>
-    <p>I run Catalyst Works. I sit with owner operators around the Salt Lake valley, most of them under twenty people, and we work out where the week is actually getting stuck and what is worth pointing at it first.</p>
+    <p>I run Catalyst Works. I sit with owner operators around the Salt Lake valley, most of them under twenty people, and we work out where the week is getting stuck and what is worth pointing at it first.</p>
+    <p>I run a longer version of this on my own calls. The third voice is in there because I am the one who needed it.</p>
     <p>If you run this and the verdict lands somewhere you did not expect, that is usually worth half an hour out loud. I keep some open.</p>
 
     <p style="margin:22px 0 0">
