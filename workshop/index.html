@@ -479,6 +479,23 @@ h2{font-size:clamp(1.45rem,5.4vw,2.05rem);margin-bottom:.5em}
    ==================================================================== */
 var NEXT_SESSION = {
   confirmed: true,
+  /* Two different questions, deliberately two different flags. Do not merge them.
+
+     confirmed = is the date public. It is what switches this page out of the
+       being-scheduled state, so turning it off ALSO removes the date, the whole
+       ticket and the checkout button. It is not a venue flag and must never be
+       used as one.
+     roomHeld  = has the venue actually reserved the room.
+
+     On 2026-08-04 the page rendered "Next session confirmed" while the SLCC room
+     was still unbooked. Boubacar had emailed Alex Dotter that day asking to lock
+     Thursday the 27th and had no reply. The date is Boubacar's to set and it is
+     set. The room is the venue's to give and it has not given it. One flag could
+     not say both, which is why the page said the confident one and was wrong.
+
+     Flip roomHeld to true the moment Alex confirms in writing. Nothing else on
+     this page needs to change when he does. */
+  roomHeld: false,
   date:  'Thursday, August 27',
   /* The \u00a0 escapes are non-breaking spaces and they are load-bearing, not
      decoration. Without them these two values wrap so that "6:30" and "105"
@@ -548,6 +565,17 @@ var NEXT_SESSION = {
   var dated = !!(S.confirmed && S.date);
   var live  = dated && !!S.registerUrl;
 
+  /* The status line above the date. It reports the ROOM, because the date is
+     already stated twice underneath it (the h3 and the Date cell) and does not
+     need a third telling. The only thing a reader cannot see for themselves is
+     how settled this is, so that is the one thing this line says.
+     The non-breaking space is load-bearing, same as the ones in NEXT_SESSION.
+     Without it "confirmed." wraps alone onto a second line at phone widths,
+     which the house no-orphan rule forbids. Keep it. */
+  var STATE_LABEL = S.roomHeld
+    ? 'Room confirmed'
+    : 'Date set. Room being\u00a0confirmed.';
+
   function esc(s){
     return String(s == null ? '' : s)
       .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
@@ -561,7 +589,7 @@ var NEXT_SESSION = {
   /* ---- render exactly one state ---- */
   if (live) {
     box.innerHTML =
-      '<p class="state"><span class="pip" aria-hidden="true"></span>Next session confirmed</p>' +
+      '<p class="state"><span class="pip" aria-hidden="true"></span>' + STATE_LABEL + '</p>' +
       '<h3>' + esc(S.date) + '</h3>' +
       '<div class="ticket">' +
         cell('Date',  S.date)  + cell('Time',  S.time) +
@@ -572,7 +600,7 @@ var NEXT_SESSION = {
     fine.textContent = 'Your email is saved here before checkout opens. You will also get the short letter I send out, and one click takes you off it.';
   } else if (dated) {
     box.innerHTML =
-      '<p class="state"><span class="pip" aria-hidden="true"></span>Next session confirmed</p>' +
+      '<p class="state"><span class="pip" aria-hidden="true"></span>' + STATE_LABEL + '</p>' +
       '<h3>' + esc(S.date) + '</h3>' +
       '<div class="ticket">' +
         cell('Date',  S.date)  + cell('Time',  S.time) +
