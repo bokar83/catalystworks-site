@@ -488,14 +488,15 @@ var NEXT_SESSION = {
      and stay visible to whoever reads this next. Keep them. */
   time:  '7:00 to 8:30 pm,\u00a0room\u00a0opens\u00a0at\u00a06:30',
   place: 'Salt Lake Community College, Miller Conference Center, Room\u00a0105',
-  /* price and registerUrl are deliberately empty. The seat is PAID and the
-     price is not set. Leaving both blank is what holds the page in the
-     date-announced state below: the date, room and time show, the Seat cell
-     reads "Not set yet", and the form captures an email instead of opening a
-     checkout that does not exist. Fill BOTH together when the price is set,
-     never one without the other. */
-  price: '',
-  registerUrl: ''
+  /* Set together, on purpose. A price without a registerUrl renders a
+     "Reserve my seat" button over a checkout that does not exist, and a
+     registerUrl without a price sends people to pay an amount the page never
+     showed them. The page only enters its live checkout state when BOTH are
+     filled, so keep them in sync if either ever changes.
+     registerUrl is the $47.97 payment link, created 2026-08-04 against the
+     existing dateless product prod_UfXH0rdp6HHbTy. */
+  price: '$47.97',
+  registerUrl: 'https://buy.stripe.com/00waEZfy70tkafu6MRgEg0l'
 };
 
 (function(){
