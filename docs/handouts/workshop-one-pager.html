@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>AI Without Getting Burned &middot; One-Page Handout</title>
+<!-- ------------------------------------------------------------------
+     THE WORKSHOP HANDOUT. One US Letter side, printed and handed over.
+
+     NO DATE APPEARS ANYWHERE ON THIS SHEET, on purpose. It gets printed
+     in a stack and handed out over months, so a date on it would mean
+     reprinting the stack every time one lands, and a stale one sitting
+     in somebody's truck is worse than none at all. Every dated thing
+     lives behind the QR code, on the permanent page, which is the one
+     surface that updates itself.
+
+     It also has to survive being handed to a stranger by somebody who
+     is not going to stand there and explain him. That is why who-runs-it
+     is a whole panel and not a footer line.
+
+     Source of truth for the PDF. Regenerate with:
+       python scripts/build-workshop-handout.py
+     which renders this file at Letter with 14mm margins.
+
+     HOUSE STYLE: Fouta Djallon strip-weave crossed with technical
+     drawing, same palette and same three faces as the workshop page and
+     the deck. Print is a light-ground medium, so the cream reserve is
+     the ground and the indigo vat arrives once, as the panel at the
+     bottom where the ask is.
+     ------------------------------------------------------------------ -->
+<style>
+/*FONTFACE*/
+
+:root{
+  /* Fouta Mark provenance: (c) Boubacar - Fouta Djallon.
+     Origin: workshop one-page handout 2026-08-04.
+     Registry: docs/ip/provenance-registry.md */
+  --fouta-mark:"FDJ-BB-20260804-WORKSHOP-HANDOUT";
+
+  --stock:#E7E3D6;
+  --reserve:#F2EFE6;
+  --ink:#101A31;
+  --ink-soft:#2F3C58;
+  --ink-faint:#6B7791;
+  --indigo:#22407C;
+  --oxide:#A9552B;
+
+  --vat:#16305E;
+  --vat-ink:#E9EEE3;
+  --vat-soft:rgba(233,238,227,.82);
+  --vat-dim:#8FA5CE;
+  --brass:#D2A94E;
+
+  --thin:rgba(19,31,62,.52);
+  --faint:rgba(19,31,62,.26);
+
+  /* ISO 128-2 line weight ladder, in points because this sheet is print */
+  --lw025:.25pt; --lw035:.35pt; --lw05:.5pt;
+  --lw07:.7pt;   --lw10:1pt;    --lw14:1.4pt; --lw20:2pt;
+
+  --display:'Anybody','Arial Narrow',Impact,sans-serif;
+  --body:'Archivo',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --mono:'Azeret Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+
+/* 14mm all round. Below about 12mm a home inkjet starts clipping, and the
+   weave strip is the first thing that would go.
+
+   The type sizes below are tuned to fill exactly one Letter side inside
+   those margins, with about 19pt of air at the foot. If you change any of
+   them, run the build script: it measures the sheet at the real printable
+   WIDTH (532.6pt, not the browser's default viewport) and fails if the
+   content spills. Measuring at a wide viewport is how this went to two
+   pages the first time, because narrower columns make the sheet taller. */
+@page{ size: letter portrait; margin: 14mm; }
+
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family:var(--body);
+  color:var(--ink);
+  background:#fff;
+  font-size:9.19pt;
+  line-height:1.44;
+  -webkit-font-smoothing:antialiased;
+}
+p{margin:0}
+/* Never one word alone on a last line. */
+p,li,h1,h2,h3,td{text-wrap:pretty}
+
+.sheet{width:100%}
+
+/* ---------- the woven selvedge, run as the top edge of the sheet ---------- */
+.weave{
+  height:7pt;width:100%;
+  background:
+    repeating-linear-gradient(90deg,rgba(231,227,214,.55) 0 .6pt,transparent .6pt 4.4pt),
+    repeating-linear-gradient(90deg,
+      var(--vat) 0 14pt,
+      var(--brass) 14pt 16.4pt,
+      var(--indigo) 16.4pt 30pt,
+      var(--stock) 30pt 33pt);
+  border-bottom:var(--lw14) solid var(--ink);
+}
+
+/* ---------- title block, the way a drawing names itself ---------- */
+.title{padding:11pt 0 0}
+.tb{
+  font-family:var(--mono);font-size:6.6pt;letter-spacing:.19em;text-transform:uppercase;
+  color:var(--ink-faint);display:flex;gap:16pt;margin:0 0 7pt;
+}
+.tb b{color:var(--indigo);font-weight:500}
+h1{
+  font-family:var(--display);font-weight:400;text-transform:uppercase;
+  font-variation-settings:'wdth' 84,'wght' 780;
+  font-size:30.03pt;line-height:.9;letter-spacing:-.008em;margin:0;color:var(--ink);
+}
+.rule{height:0;border-top:var(--lw20) solid var(--indigo);margin:8pt 0 0}
+.lede{
+  margin-top:9pt;font-size:10.83pt;line-height:1.36;color:var(--ink-soft);max-width:62ch;
+}
+.lede b{color:var(--ink);font-weight:700}
+
+/* ---------- figure headers ---------- */
+.num{
+  font-family:var(--mono);font-size:6.6pt;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--ink-soft);margin:0 0 5pt;display:flex;align-items:center;gap:7pt;
+}
+.num b{font-weight:400;color:var(--ink);border:var(--lw05) solid var(--ink);padding:1.4pt 3.6pt;line-height:1}
+h2{
+  font-family:var(--display);font-weight:400;text-transform:uppercase;
+  font-variation-settings:'wdth' 86,'wght' 760;
+  font-size:13.2pt;line-height:.95;margin:0 0 7pt;color:var(--ink);
+}
+.fig{padding:12.74pt 0 0;border-top:var(--lw035) solid var(--faint);margin-top:12.74pt}
+
+/* ---------- what you build: three columns, because a stranger scans ---------- */
+.builds{display:flex;gap:12pt}
+.build{flex:1 1 0;min-width:0}
+.build .n{
+  font-family:var(--mono);font-size:7pt;letter-spacing:.06em;
+  background:var(--indigo);color:var(--reserve);
+  display:inline-block;padding:1.6pt 4.4pt;margin:0 0 4pt;line-height:1;
+}
+.build h3{
+  font-family:var(--body);font-size:9.46pt;font-weight:700;margin:0 0 3pt;color:var(--ink);line-height:1.2;
+}
+.build p{font-size:8.37pt;line-height:1.4;color:var(--ink-soft)}
+
+/* ---------- how the room runs: a ruled table, drawing-schedule style ---------- */
+.runs{width:100%;border-collapse:collapse}
+.runs td{padding:6.01pt 0;border-top:var(--lw025) solid var(--faint);vertical-align:top;
+  font-size:8.55pt;line-height:1.4;color:var(--ink-soft)}
+.runs tr:first-child td{border-top:0;padding-top:0}
+.runs td.k{width:31%;padding-right:12pt;color:var(--ink);font-weight:700}
+
+/* ---------- the vat panel: who runs it, and where the dates live ---------- */
+.panel{
+  margin-top:15pt;background:var(--vat);color:var(--vat-ink);
+  padding:14pt 16pt;display:flex;gap:16pt;align-items:stretch;
+}
+.who{flex:1 1 auto;min-width:0}
+.who .num{color:var(--vat-dim);margin-bottom:5pt}
+.who .num b{color:var(--vat-ink);border-color:var(--vat-dim)}
+.who h2{color:var(--vat-ink);font-size:14.56pt;margin-bottom:5pt}
+.who p{font-size:8.55pt;line-height:1.42;color:var(--vat-soft)}
+.who p + p{margin-top:4.5pt}
+.who .mail{
+  display:inline-block;margin-top:7pt;font-family:var(--mono);font-size:8.4pt;
+  letter-spacing:.02em;color:var(--brass);text-decoration:none;
+  border-bottom:var(--lw07) solid var(--brass);padding-bottom:1.6pt;
+}
+
+/* the QR block, cornered with registration marks like a plate */
+.qr{
+  flex:0 0 140pt;background:var(--reserve);padding:9pt 8pt 7pt;
+  display:flex;flex-direction:column;align-items:center;text-align:center;position:relative;
+}
+.qr::before,.qr::after{content:"";position:absolute;width:9pt;height:9pt}
+.qr::before{left:0;top:0;border-left:var(--lw20) solid var(--oxide);border-top:var(--lw20) solid var(--oxide)}
+.qr::after{right:0;bottom:0;border-right:var(--lw20) solid var(--oxide);border-bottom:var(--lw20) solid var(--oxide)}
+.qr img{width:94pt;height:94pt;display:block;image-rendering:pixelated}
+.qr .cap{
+  font-family:var(--mono);font-size:6.4pt;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--ink-faint);margin:6pt 0 3pt;line-height:1.3;
+}
+.qr .url{
+  font-family:var(--mono);font-size:7.4pt;letter-spacing:-.015em;color:var(--vat);
+  font-weight:600;line-height:1.3;
+  /* overflow-wrap:anywhere used to live here and it beat the <wbr>, so the
+     address broke as "catalystworks.consulti / ng/workshop". The column is
+     now wide enough to hold the host on one line, and the <wbr> after the
+     slash is the ONLY place this is allowed to break. */
+  overflow-wrap:normal;word-break:keep-all;
+}
+
+/* ---------- foot stamp ---------- */
+.stamp{
+  margin-top:10pt;padding-top:5pt;border-top:var(--lw035) solid var(--faint);
+  font-family:var(--mono);font-size:6.4pt;letter-spacing:.17em;text-transform:uppercase;
+  color:var(--ink-faint);display:flex;gap:14pt;flex-wrap:wrap;
+}
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="weave"></div>
+
+  <header class="title">
+    <p class="tb"><span><b>Catalyst Works</b></span><span>In person</span><span>About ninety minutes</span><span>Sheet 1 of 1</span></p>
+    <h1>AI without getting burned</h1>
+    <div class="rule"></div>
+    <p class="lede">I build AI tools for a living and my own business runs on the ones I build. In ninety minutes, in a small room with your laptop open, <b>you build three of them for yourself and take them home running</b>. They keep working after you walk out, and they keep working with the wifi off.</p>
+  </header>
+
+  <section class="fig">
+    <p class="num"><b>Fig. 01</b> <span>What you walk out with</span></p>
+    <h2>What you build</h2>
+    <div class="builds">
+      <div class="build">
+        <span class="n">01</span>
+        <h3>A business brain</h3>
+        <p>One file that holds what you sell, who buys it, and what you charge. Paste it in once and every answer after that comes back about your business instead of a business that does not exist.</p>
+      </div>
+      <div class="build">
+        <span class="n">02</span>
+        <h3>A decision council</h3>
+        <p>You hand it a decision. Three advisors argue it out in front of you, and then one of them calls it.</p>
+      </div>
+      <div class="build">
+        <span class="n">03</span>
+        <h3>A simplicity check</h3>
+        <p>Point it at a plan you are about to run and it strips out the parts that only look clever.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="fig">
+    <p class="num"><b>Fig. 02</b> <span>How the room runs</span></p>
+    <h2>What the session is like</h2>
+    <table class="runs">
+      <tr><td class="k">Bring a laptop</td><td>Everything gets built on it, by you, while I am standing there. You leave with the three tools running on your own machine.</td></tr>
+      <tr><td class="k">It stays with you</td><td>Nothing you type leaves your laptop. You can prove that yourself by pulling the wifi down in the middle of the session and carrying straight on.</td></tr>
+      <tr><td class="k">Small group</td><td>Kept small on purpose, so your own questions get answered out loud instead of saved for the end.</td></tr>
+      <tr><td class="k">A working session</td><td>This is not a talk. If what you want is somebody to build it for you and hand it over finished, that is a different conversation and I am glad to have it.</td></tr>
+    </table>
+  </section>
+
+  <section class="panel">
+    <div class="who">
+      <p class="num"><b>Fig. 03</b> <span>Who runs it</span></p>
+      <h2>Boubacar</h2>
+      <p>I run Catalyst Works. I sit with owner operators who still answer their own phone, most of them under twenty people. We work out where the week is getting stuck and what is worth pointing at it first.</p>
+      <p>The tools in this session are the ones I built for myself first. I teach them because they earned their place in my own week, not because they demo well in a room.</p>
+      <a class="mail" href="mailto:boubacar@catalystworks.consulting">boubacar@catalystworks.consulting</a>
+    </div>
+    <div class="qr">
+      <img src="/*QRDATAURI*/" alt="QR code linking to catalystworks.consulting/workshop">
+      <p class="cap">Dates and seats</p>
+      <!-- The only break point is AFTER the slash. Breaking before the dot
+           puts a leading full stop at the head of the second line, which
+           reads as a typo on a printed sheet. -->
+      <p class="url">catalystworks.consulting/<wbr>workshop</p>
+    </div>
+  </section>
+
+  <p class="stamp"><span>Catalyst Works</span><span>The Workshop</span><span>Handout</span><span>Sheet 1 of 1</span><span>&#8203;&#8204;&#8205;&#8203;&#8204;&#8205;&#8204;&#8203;</span></p>
+
+</div>
+</body>
+</html>
