@@ -1,357 +1,600 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="light only">
-<title>AI Without Getting Burned | In-Person Workshop for Small Business Owners, Sandy UT</title>
-<meta name="description" content="AI Without Getting Burned: a 90-minute, hands-on, in-person workshop for small business owners in Sandy, Utah. Leave with the AI tools worth your time, set up on your own laptop and yours to keep. $47 a seat, Thursday July 30.">
-<meta name="robots" content="index, follow">
-<link rel="canonical" href="https://catalystworks.consulting/workshop/">
+<title>AI Without Getting Burned &middot; The Workshop &middot; Catalyst Works</title>
+<meta name="description" content="A ninety-minute, in-person workshop for owners. You build three AI tools on your own laptop and take them home running. The next session posts here.">
 
-<meta property="og:title" content="AI Without Getting Burned | In-Person Workshop for Small Business Owners">
-<meta property="og:description" content="Hands-on, 90 minutes, Sandy. You build the tools worth your time on your own laptop and keep them. Small group on purpose. $47 a seat, Thursday July 30.">
+<meta property="og:title" content="AI Without Getting Burned &middot; The Workshop">
+<meta property="og:description" content="Ninety minutes, in person, small group, laptops open. You build three tools on your own machine and take them home running.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://catalystworks.consulting/workshop/">
-<meta property="og:image" content="https://catalystworks.consulting/workshop/ic-workshop-registration-FINAL-assets/hero.jpg">
-<meta property="og:image:width" content="1536">
-<meta property="og:image:height" content="1024">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://catalystworks.consulting/workshop/ic-workshop-registration-FINAL-assets/hero.jpg">
 
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%231A1410'/%3E%3Ctext x='16' y='23' font-family='Arial Black,sans-serif' font-size='22' font-weight='900' fill='%23E8632A' text-anchor='middle'%3EC%3C/text%3E%3C/svg%3E">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Spline+Sans:wght@400;500;600;700&family=Spline+Sans+Mono:wght@500;600&display=swap" media="print" onload="this.media='all'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Spline+Sans:wght@400;500;600;700&family=Spline+Sans+Mono:wght@500;600&display=swap"></noscript>
-
+<link rel="canonical" href="https://catalystworks.consulting/workshop/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2316305E'/%3E%3Crect x='6' y='7' width='20' height='4' fill='%23E9EEE3'/%3E%3Crect x='6' y='14' width='20' height='4' fill='%23D2A94E'/%3E%3Crect x='6' y='21' width='13' height='4' fill='%23E9EEE3'/%3E%3C/svg%3E">
 <style>
+/* The house faces, subset and inlined so the page makes zero network calls
+   after this document. Anybody carries the display, Archivo the reading,
+   Azeret Mono every drawn annotation. Same three faces as the deck and the
+   second-opinion sheet. */
+/*FONTFACE*/
+
+/* ------------------------------------------------------------------
+   AI Without Getting Burned. The permanent workshop page.
+
+   PERMANENT means this URL never moves and never goes stale. It is the
+   QR target on the printed one-pager, the address a partner hands to
+   somebody in a hallway, and the end-card on every recording. It has to
+   read correctly on a day when the next date is not yet confirmed,
+   which is the day it usually gets opened.
+
+   That is why the session block is DATA, not markup. Edit the
+   NEXT_SESSION object at the bottom of this file and nothing else. With
+   confirmed:false it renders the being-scheduled state and takes an
+   email. Flip confirmed:true and fill the fields and it renders the
+   full session card with a register button. Neither state can break the
+   other, because neither state is hand-written twice.
+
+   HOUSE STYLE: Fouta Djallon strip-weave fused with technical-drawing
+   mark-making, off the same palette and the same three faces as the
+   deck and the second-opinion sheet. Cream reserve is the ground; the
+   indigo vat arrives twice, as the selvedge at the top and the whole
+   footer where the ask sits. Rules are drawn on the ISO 128-2 weight
+   ladder, sections are numbered as figures.
+   ------------------------------------------------------------------ */
 :root{
-  --ink:#1A1410; --ink-soft:#4E4438; --ink-faint:#8A7E6C;
-  --paper:#EFE7D6; --paper-2:#E7DCC6; --card:#F6F0E4;
-  --amber:#E8632A; --amber-deep:#C24A18; --molten:#FFB347;
-  --line:rgba(26,20,16,.14); --line-2:rgba(26,20,16,.28);
-  --disp:'Anton',system-ui,sans-serif;
-  --body:'Spline Sans',system-ui,sans-serif;
-  --mono:'Spline Sans Mono',ui-monospace,monospace;
+  /* Fouta Mark provenance: (c) Boubacar - Fouta Djallon.
+     Origin: permanent workshop page 2026-08-04.
+     Registry: docs/ip/provenance-registry.md */
+  --fouta-mark:"FDJ-BB-20260804-WORKSHOP-PERMANENT";
+
+  /* cream reserve sheet, the ground */
+  --stock:#E7E3D6;
+  --reserve:#F2EFE6;
+  --ink:#101A31;
+  --ink-soft:#2F3C58;
+  --ink-faint:#6B7791;
+  --indigo:#22407C;
+  --oxide:#A9552B;
+
+  /* indigo vat plate, the interruption */
+  --vat:#16305E;
+  --vat-ink:#E9EEE3;
+  --vat-soft:rgba(233,238,227,.80);
+  --vat-dim:#8FA5CE;
+  --brass:#D2A94E;
+
+  --thin:rgba(19,31,62,.52);
+  --faint:rgba(19,31,62,.24);
+
+  /* ISO 128-2 line weight ladder */
+  --lw018:0.5px; --lw025:0.7px; --lw035:0.98px; --lw05:1.4px;
+  --lw07:1.96px; --lw10:2.8px;  --lw14:3.92px;  --lw20:5.6px;
+
+  --display:'Anybody','Arial Narrow',Impact,sans-serif;
+  --body:'Archivo',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --mono:'Azeret Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --pad:clamp(18px,5vw,64px);
 }
-*{margin:0;padding:0;box-sizing:border-box}
+
+*,*::before,*::after{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
-body{font-family:var(--body);background:var(--paper);color:var(--ink);line-height:1.6;
-  -webkit-font-smoothing:antialiased;overflow-x:hidden}
-.wrap{width:100%;max-width:720px;margin:0 auto;padding:0 22px}
-a{color:inherit}
-
-.mast{padding:20px 0 6px}
-.mast .wrap{display:flex;align-items:center;justify-content:space-between;gap:14px}
-.mk{display:flex;align-items:center;gap:9px;text-decoration:none;font-weight:700;letter-spacing:.01em}
-.mk i{color:var(--amber);font-style:normal}
-.mk-logo{height:26px;width:auto;display:block;border-radius:5px}
-.pill{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.72rem;
-  text-transform:uppercase;letter-spacing:.08em;color:var(--ink-soft);white-space:nowrap}
-.pip{width:7px;height:7px;border-radius:50%;background:var(--amber);box-shadow:0 0 0 4px rgba(232,99,42,.18)}
-
-.hero{padding:34px 0 8px}
-.eyebrow{font-family:var(--mono);font-size:.76rem;text-transform:uppercase;letter-spacing:.14em;
-  color:var(--amber-deep);font-weight:600;margin-bottom:16px}
-h1.poster{font-family:var(--disp);font-weight:400;line-height:.95;letter-spacing:.005em;
-  text-transform:uppercase;font-size:clamp(3rem,12vw,5.6rem);color:var(--ink)}
-h1.poster em{font-style:normal;color:var(--amber);display:block}
-.lead{font-size:clamp(1.06rem,3.6vw,1.28rem);color:var(--ink-soft);margin-top:20px;max-width:36ch}
-.lead b{color:var(--ink);font-weight:600}
-
-.cta-row{margin-top:26px}
-.cta{display:inline-flex;align-items:center;gap:12px;background:var(--amber);color:#fff;
-  text-decoration:none;font-weight:700;font-size:1.08rem;padding:16px 26px;border-radius:13px;
-  box-shadow:0 10px 26px -10px rgba(194,74,24,.6);transition:transform .15s ease,box-shadow .15s ease}
-.cta .price{font-family:var(--mono);background:rgba(255,255,255,.2);padding:3px 9px;border-radius:7px;font-size:.92rem}
-.cta:hover{transform:translateY(-2px);box-shadow:0 16px 32px -10px rgba(194,74,24,.7)}
-.cta:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
-.cta svg{width:19px;height:19px}
-.cta-note{font-family:var(--mono);font-size:.8rem;color:var(--ink-faint);margin-top:12px}
-.cta-form{display:flex;flex-wrap:wrap;gap:10px;align-items:stretch;max-width:460px}
-.cta-email{flex:1 1 210px;min-width:0;font-family:var(--body);font-size:1rem;color:var(--ink);
-  background:var(--card);border:1.5px solid var(--line-2);border-radius:12px;padding:15px 16px}
-.cta-email::placeholder{color:var(--ink-faint)}
-.cta-email:focus{outline:none;border-color:var(--amber);box-shadow:0 0 0 3px rgba(232,99,42,.18)}
-.cta-email[aria-invalid="true"]{border-color:var(--amber-deep);box-shadow:0 0 0 3px rgba(194,74,24,.2)}
-.cta-form .cta{flex:0 0 auto;border:none;cursor:pointer;font-family:var(--body)}
-.close .cta-form{margin-left:auto;margin-right:auto}
-
-.ticket{margin:30px 0 4px;background:var(--card);border:1px solid var(--line);border-radius:16px;
-  display:grid;grid-template-columns:repeat(4,1fr);overflow:hidden}
-.ticket .cell{padding:16px 14px;border-right:1px dashed var(--line-2)}
-.ticket .cell:last-child{border-right:0}
-.ticket .k{font-family:var(--mono);font-size:.64rem;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-faint);margin-bottom:5px}
-.ticket .v{font-weight:600;font-size:.98rem;line-height:1.25}
-.ticket .v small{display:block;font-weight:400;font-size:.72rem;color:var(--ink-faint);margin-top:2px}
-.ticket .v.hot{color:var(--amber-deep)}
-
-.detail{padding:26px 0 8px}
-.detail p{font-size:1.05rem;color:var(--ink-soft);margin-bottom:16px}
-.detail p:last-child{margin-bottom:0}
-.detail b{color:var(--ink);font-weight:600}
-
-.close{padding:30px 0 40px;text-align:center}
-.close h2{font-family:var(--disp);font-weight:400;text-transform:uppercase;font-size:clamp(1.7rem,6vw,2.4rem);line-height:1;margin-bottom:6px}
-.close h2 em{font-style:normal;color:var(--amber)}
-.close .sub{font-family:var(--mono);font-size:.82rem;color:var(--ink-faint);margin:10px 0 20px}
-
-footer{border-top:1px solid var(--line);padding:22px 0 96px}
-footer .wrap{display:flex;flex-wrap:wrap;gap:6px 14px;justify-content:space-between;font-size:.82rem;color:var(--ink-faint)}
-footer a{color:var(--amber-deep)}
-
-.sticky{position:fixed;left:0;right:0;bottom:0;z-index:40;background:rgba(239,231,214,.94);
-  backdrop-filter:blur(8px);border-top:1px solid var(--line);padding:10px 16px calc(10px + env(safe-area-inset-bottom));
-  display:none;align-items:center;justify-content:space-between;gap:12px}
-.sticky .sm{font-family:var(--mono);font-size:.74rem;color:var(--ink-soft);line-height:1.2}
-.sticky .cta{padding:12px 18px;font-size:.96rem;border-radius:11px}
-@media(max-width:640px){
-  .sticky{display:flex}
-  .pill{font-size:.62rem;letter-spacing:.04em}
-  .ticket{grid-template-columns:1fr 1fr}
-  .ticket .cell:nth-child(2){border-right:0}
-  .ticket .cell:nth-child(1),.ticket .cell:nth-child(2){border-bottom:1px dashed var(--line-2)}
+body{
+  margin:0;background:var(--stock);color:var(--ink);
+  font-family:var(--body);font-size:17px;line-height:1.58;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
 }
-/* Busy state while the lead capture is in flight. The button now waits for the
-   POST to land (up to 3s on a bad connection) instead of firing and forgetting,
-   so the visitor MUST see that the tap registered. Without this they tap, see
-   nothing move, and leave -- which would trade a lead-loss bug for an
-   abandonment bug. Mirrors the pattern already proven on /free-workshop-july16. */
-.cta[aria-busy="true"]{opacity:.72;pointer-events:none;animation:ctapulse 1s ease-in-out infinite}
-@keyframes ctapulse{0%,100%{opacity:.55}50%{opacity:.9}}
-@media(prefers-reduced-motion:reduce){*{transition:none!important}.cta[aria-busy="true"]{animation:none;opacity:.6}}
-/* Required refund-policy consent on the PAID checkout. Sits on its own full-width
-   row before the pay button; the button stays disabled until it is ticked. Paid
-   path only -- the free flow (/ai-checklist) has no such gate. */
-.agree-row{flex:1 1 100%;display:flex;align-items:flex-start;gap:9px;text-align:left;
-  font-family:var(--body);font-size:.85rem;line-height:1.45;color:var(--ink-soft);cursor:pointer}
-.agree-row input{flex:0 0 auto;width:18px;height:18px;margin-top:2px;accent-color:var(--amber-deep);cursor:pointer}
-.agree-row a{color:var(--amber-deep);font-weight:600;text-decoration:underline}
-.agree-row.flash input{outline:2px solid var(--amber-deep);outline-offset:2px;border-radius:3px}
-.cta-buy:disabled{opacity:.5;cursor:not-allowed;box-shadow:none;transform:none;pointer-events:none}
-</style>
+h1,h2{font-family:var(--display);font-weight:400;text-transform:uppercase;
+  font-variation-settings:'wdth' 88,'wght' 760;
+  line-height:.94;letter-spacing:-.006em;margin:0}
+p{margin:0 0 1.05em}
+a{color:var(--indigo)}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:var(--lw10) solid var(--ink);outline-offset:3px}
 
-<!-- Meta Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1826865671807664');
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"/></noscript>
-<!-- End Meta Pixel Code -->
+.wrap{max-width:720px;margin:0 auto;padding:0 var(--pad)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ---------- Fouta selvedge ------------------------------------------
+   The cloth is woven in narrow strips and sewn edge to edge, so the
+   rhythm that reads as Fouta is a bold alternation of whole strips with
+   the fine warp inside them. Pure CSS, so it costs nothing on a slow
+   connection.
+   -------------------------------------------------------------------- */
+.weave{height:22px;width:100%;
+  background:
+    repeating-linear-gradient(90deg,rgba(231,227,214,.50) 0 1.5px,transparent 1.5px 11px),
+    repeating-linear-gradient(90deg,
+      var(--vat) 0 36px,
+      var(--brass) 36px 42px,
+      var(--indigo) 42px 78px,
+      var(--stock) 78px 86px);
+  border-bottom:var(--lw10) solid var(--ink);
+}
+
+/* The bound edge of the cloth, run down the left margin. It only appears
+   once there is margin to spare, because on a phone that width belongs
+   to the reader. */
+.selvedge{display:none}
+@media (min-width:1040px){
+  .selvedge{display:block;position:fixed;left:0;top:0;bottom:0;width:15px;z-index:3;
+    background:
+      repeating-linear-gradient(0deg,rgba(231,227,214,.50) 0 1.5px,transparent 1.5px 11px),
+      repeating-linear-gradient(0deg,
+        var(--vat) 0 36px,
+        var(--brass) 36px 42px,
+        var(--indigo) 42px 78px,
+        var(--stock) 78px 86px);
+    border-right:var(--lw07) solid var(--ink);
+  }
+}
+
+/* ---------- masthead ---------- */
+.top{padding:clamp(26px,6vw,52px) 0 clamp(20px,4vw,32px)}
+.meta{
+  font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--ink-faint);display:flex;flex-wrap:wrap;gap:6px 18px;margin:0 0 20px;
+}
+.meta b{color:var(--indigo);font-weight:500}
+h1{font-size:clamp(2.3rem,10vw,4.1rem)}
+.rule{height:0;border-top:var(--lw14) solid var(--indigo);margin:clamp(16px,3.4vw,24px) 0 0}
+.lede{margin-top:clamp(18px,3.6vw,26px);font-size:clamp(1.02rem,.9vw + .92rem,1.2rem);
+  color:var(--ink-soft);max-width:46ch}
+.lede strong{color:var(--ink);font-weight:600}
+
+/* ---------- sections ---------- */
+section{padding:clamp(26px,5vw,44px) 0;border-top:var(--lw025) solid var(--faint)}
+
+/* The figure number is boxed like a drawing callout, not set as running
+   text. Cheapest way to say technical plate. */
+.num{font-family:var(--mono);font-size:11px;letter-spacing:.17em;text-transform:uppercase;
+  color:var(--ink-soft);margin:0 0 12px;display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+.num b{font-weight:400;color:var(--ink);
+  border:var(--lw035) solid var(--ink);padding:3px 7px;line-height:1}
+h2{font-size:clamp(1.45rem,5.4vw,2.05rem);margin-bottom:.5em}
+
+/* ---------- the session card, drawn as a plate on the sheet ---------- */
+.plate{
+  background:var(--reserve);border:var(--lw07) solid var(--indigo);
+  padding:clamp(16px,4vw,26px);position:relative;margin-top:4px;
+}
+/* registration marks, the way a plate is cornered before it is trimmed */
+.plate::before,.plate::after{content:"";position:absolute;width:15px;height:15px}
+.plate::before{left:calc(var(--lw07) * -1);top:calc(var(--lw07) * -1);
+  border-left:var(--lw14) solid var(--oxide);border-top:var(--lw14) solid var(--oxide)}
+.plate::after{right:calc(var(--lw07) * -1);bottom:calc(var(--lw07) * -1);
+  border-right:var(--lw14) solid var(--oxide);border-bottom:var(--lw14) solid var(--oxide)}
+
+.state{font-family:var(--mono);font-size:11px;letter-spacing:.17em;text-transform:uppercase;
+  color:var(--oxide);margin:0 0 10px;display:flex;align-items:center;gap:9px}
+.state .pip{width:8px;height:8px;flex:none;background:var(--oxide);
+  box-shadow:0 0 0 4px rgba(169,85,43,.16)}
+.plate h3{font-family:var(--display);font-weight:400;text-transform:uppercase;
+  font-variation-settings:'wdth' 90,'wght' 720;
+  font-size:clamp(1.3rem,4.8vw,1.75rem);line-height:1.02;margin:0 0 12px;color:var(--ink)}
+.plate p{color:var(--ink-soft);margin-bottom:0}
+.plate p + p{margin-top:.75em}
+
+/* The confirmed-session ticket. Rendered only when a date is set. */
+.ticket{display:grid;grid-template-columns:repeat(4,1fr);margin:0 0 18px;
+  border:var(--lw035) solid var(--thin)}
+.ticket .cell{padding:12px 12px;border-right:var(--lw025) dashed var(--thin);min-width:0}
+.ticket .cell:last-child{border-right:0}
+.ticket .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--ink-faint);margin-bottom:5px}
+.ticket .v{font-weight:600;font-size:.95rem;line-height:1.3;overflow-wrap:anywhere}
+@media(max-width:560px){
+  .ticket{grid-template-columns:1fr 1fr}
+  .ticket .cell:nth-child(2n){border-right:0}
+  .ticket .cell:nth-child(1),.ticket .cell:nth-child(2){border-bottom:var(--lw025) dashed var(--thin)}
+}
+
+/* ---------- the capture form: the whole reason this is a page --------
+   Email is captured HERE, on our own page, and written to our own store
+   before anything else happens. When a session is confirmed and the
+   register button sends somebody to checkout, that redirect is fired by
+   the same handler AFTER the write lands, so there is no shape of this
+   page where a payment redirect can run ahead of the capture.
+   -------------------------------------------------------------------- */
+.form{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 0}
+.email{
+  flex:1 1 220px;min-width:0;font-family:var(--body);font-size:1rem;color:var(--ink);
+  background:#fff;border:var(--lw05) solid var(--thin);border-radius:0;
+  padding:15px 15px;
+}
+.email::placeholder{color:var(--ink-faint)}
+.email:focus{outline:none;border-color:var(--indigo);box-shadow:0 0 0 3px rgba(34,64,124,.18)}
+.email[aria-invalid="true"]{border-color:var(--oxide);box-shadow:0 0 0 3px rgba(169,85,43,.2)}
+.go{
+  flex:1 1 100%;display:flex;align-items:center;justify-content:center;gap:11px;
+  min-height:58px;padding:15px 22px;border:0;cursor:pointer;
+  background:var(--indigo);color:var(--stock);
+  font-family:var(--display);text-transform:uppercase;
+  font-variation-settings:'wdth' 92,'wght' 700;
+  font-size:clamp(1rem,4vw,1.2rem);letter-spacing:.02em;
+  transition:background .15s ease,transform .12s ease;
+  -webkit-tap-highlight-color:transparent;
+}
+@media(min-width:560px){.go{flex:0 0 auto}}
+.go:hover{background:var(--vat)}
+.go:active{transform:translateY(1px)}
+.go[aria-busy="true"]{opacity:.72;pointer-events:none}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.fine{font-family:var(--mono);font-size:11px;letter-spacing:.05em;line-height:1.55;
+  color:var(--ink-faint);margin:12px 0 0}
+
+/* the confirmation that replaces the form once the write lands */
+.done{display:none;border-left:var(--lw10) solid var(--oxide);padding:2px 0 2px 16px;margin:18px 0 0}
+.done.on{display:block}
+.done:focus{outline:none}
+.done h4{font-family:var(--display);font-weight:400;text-transform:uppercase;
+  font-variation-settings:'wdth' 90,'wght' 720;font-size:1.15rem;margin:0 0 8px;line-height:1.06}
+.done p{margin:0 0 .7em;color:var(--ink-soft)}
+.done p:last-child{margin-bottom:0}
+.done a{font-weight:700}
+
+/* ---------- what you build ---------- */
+.builds{list-style:none;margin:0;padding:0;counter-reset:b}
+.builds li{counter-increment:b;position:relative;padding-left:40px;margin-bottom:18px}
+.builds li::before{
+  content:counter(b,decimal-leading-zero);position:absolute;left:0;top:3px;
+  width:28px;height:24px;background:var(--indigo);color:var(--stock);
+  font-family:var(--mono);font-size:12px;letter-spacing:.04em;
+  display:flex;align-items:center;justify-content:center;
+}
+.builds b{display:block;font-weight:700;color:var(--ink)}
+.builds span{color:var(--ink-soft)}
+.plus{border-left:var(--lw10) solid var(--brass);padding:2px 0 2px 16px;margin:22px 0 0;
+  color:var(--ink-soft)}
+.plus p{margin:0}
+
+/* ---------- how the room runs ---------- */
+.runs{list-style:none;margin:0;padding:0}
+.runs li{padding:14px 0;border-top:var(--lw025) solid var(--faint);color:var(--ink-soft)}
+.runs li:first-child{border-top:0;padding-top:0}
+.runs b{color:var(--ink);font-weight:600}
+
+/* the disqualifier, drawn as a marked-up note rather than a warning box */
+.note{margin:24px 0 0;padding:14px 18px;background:var(--reserve);
+  border-left:var(--lw14) solid var(--ink);color:var(--ink-soft)}
+.note p{margin:0}
+.note p + p{margin-top:.7em}
+
+/* ---------- the vat plate ------------------------------------------
+   The one dark surface on the page, arriving once, at the end, where
+   the ask is.
+   -------------------------------------------------------------------- */
+.foot{background:var(--vat);color:var(--vat-ink);
+  padding:clamp(30px,6vw,52px) 0 clamp(24px,4vw,40px);margin-top:clamp(26px,5vw,44px)}
+.foot .weave{border-bottom:0;border-top:var(--lw07) solid var(--vat-ink);
+  margin-top:calc(clamp(30px,6vw,52px) * -1);margin-bottom:clamp(26px,5vw,44px)}
+.foot h2{color:var(--vat-ink)}
+.foot p{color:var(--vat-soft)}
+.foot .num{color:var(--vat-dim)}
+.foot .num b{color:var(--vat-ink);border-color:var(--vat-dim)}
+.book{
+  display:inline-flex;align-items:center;gap:10px;
+  color:var(--brass);text-decoration:none;
+  font-family:var(--mono);font-size:13px;letter-spacing:.09em;text-transform:uppercase;
+  border-bottom:var(--lw05) solid var(--brass);padding:10px 0;
+}
+.book:hover{color:var(--vat-ink);border-bottom-color:var(--vat-ink)}
+.chan{list-style:none;margin:24px 0 0;padding:0;
+  font-family:var(--mono);font-size:13px;line-height:1.5}
+.chan li{display:flex;flex-wrap:wrap;align-items:center;gap:2px 12px;
+  border-top:var(--lw025) solid rgba(233,238,227,.22)}
+.chan b{color:var(--vat-dim);font-weight:400;letter-spacing:.14em;text-transform:uppercase;
+  font-size:11px;flex:0 0 82px}
+/* 44px of tappable height per row, so a thumb hits the link and not the
+   gap between two links. */
+.chan a{color:var(--brass);word-break:break-word;display:inline-block;padding:12px 0}
+
+/* title block, the way a drawing signs itself */
+.stamp{font-family:var(--mono);font-size:10.5px;letter-spacing:.17em;text-transform:uppercase;
+  color:var(--vat-dim);margin:26px 0 0;padding-top:12px;
+  border-top:var(--lw035) solid rgba(233,238,227,.28);
+  display:flex;flex-wrap:wrap;gap:4px 16px}
+
+/* ---------- print ---------- */
+@media print{
+  @page{size:letter portrait;margin:12mm}
+  html,body{background:#fff;color:#000;font-size:9pt;line-height:1.32}
+  .weave,.selvedge,.form,.fine,.noprint{display:none !important}
+  .wrap{max-width:none;padding:0}
+  section{padding:6pt 0;border-top:.5pt solid #999;break-inside:avoid}
+  .top{padding:0 0 5pt}
+  .rule{display:none}
+  h1{font-size:22pt}
+  h2{font-size:12pt}
+  .plate{border:.7pt solid #000;background:#fff}
+  .plate::before,.plate::after{display:none}
+  .foot{background:#fff;color:#000;margin-top:0;padding:6pt 0 0;border-top:.5pt solid #999}
+  .foot h2,.foot p{color:#000}
+  .chan a,.book{color:#000}
+  a{text-decoration:none}
+}
+
+@media (prefers-reduced-motion:reduce){*{transition:none !important;animation:none !important}}
+</style>
 </head>
 <body>
 
-<header class="mast">
+<div class="selvedge" aria-hidden="true"></div>
+<div class="weave" aria-hidden="true"></div>
+<div class="sr" role="status" aria-live="polite" id="say"></div>
+
+<header class="top">
   <div class="wrap">
-    <a class="mk" href="https://catalystworks.consulting/" aria-label="Catalyst Works home">
-      <img src="../CatalystWorks_logo.jpg" alt="" class="mk-logo">Catalyst <i>Works</i></a>
-    <span class="pill"><span class="pip" aria-hidden="true"></span>Live workshop &middot; Sandy, UT</span>
+    <p class="meta"><span><b>Catalyst Works</b></span><span>In person</span><span>About ninety minutes</span></p>
+    <h1>AI without<br>getting burned</h1>
+    <div class="rule" aria-hidden="true"></div>
+    <p class="lede">I build AI tools for a living and my own business runs on the ones I build. Everything I put in front of the room is already doing work in my week. That is why I can tell you what to skip.</p>
+    <p class="lede">Ninety minutes, in person, small group, laptops open. The room is owners and the people who actually run the place. <strong>You leave with three tools set up on your own machine, in your own words, about your own business</strong>, and they keep working after you walk out. Turn the wifi off and they still run.</p>
   </div>
 </header>
 
 <main>
-<section class="hero">
+
+<section aria-labelledby="h-next">
   <div class="wrap">
-    <div class="eyebrow">A live, in-person workshop &middot; Thursday, July 30</div>
-    <h1 class="poster">AI Without<em>Getting Burned</em></h1>
-    <p class="lead">A 90-minute, hands-on workshop in Sandy. You leave with the AI tools worth your time, set up on <b>your own laptop</b> and yours to keep.</p>
-    <div class="cta-row">
-      <form class="cta-form" id="reserve" data-medium="hero" novalidate>
-        <input type="email" class="cta-email" name="email" required autocomplete="email" inputmode="email" placeholder="you@yourbusiness.com" aria-label="Your email">
-        <label class="agree-row">
-          <input type="checkbox" class="agree-refund" aria-label="I have read and agree to the Refund Policy">
-          <span>I have read and agree to the <a href="/terms#refunds" target="_blank" rel="noopener">Refund Policy</a></span>
-        </label>
-        <button type="submit" class="cta cta-buy" data-medium="hero">
-          Reserve my seat <span class="price">$47</span>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </button>
+    <p class="num"><b>Fig. 01</b> <span>The next session</span></p>
+    <h2 id="h-next">When it runs</h2>
+
+    <div class="plate">
+      <!-- Both states are rendered from NEXT_SESSION by the script at the
+           bottom of this file. Nothing about a date is hand-written into
+           markup, so a stale date cannot survive here. -->
+      <div id="session"></div>
+
+      <form class="form" id="cap" novalidate>
+        <label class="sr" for="em">Your email</label>
+        <input class="email" id="em" type="email" name="email" inputmode="email"
+               autocomplete="email" placeholder="you@yourbusiness.com" required>
+        <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <button class="go" type="submit" id="go"><span class="lbl">Send me the date</span></button>
       </form>
-      <p class="cta-note">Enter your email, then straight to secure checkout. Your seat confirmation lands in your inbox.</p>
+
+      <p class="fine" id="fine">Seats are paid. The price posts here with the date. You will also get the short letter I send out, and one click takes you off it.</p>
+
+      <div class="done" id="ok">
+        <h4>You are on the list</h4>
+        <p>The date lands in your inbox the day the room is confirmed.</p>
+        <p>In the meantime, here is one of the three. It is the decision tool from the workshop cut down to a single prompt, and it runs in about five minutes: <a href="/second-opinion/">the five-minute second opinion</a>.</p>
+      </div>
     </div>
+  </div>
+</section>
 
-    <div class="ticket" role="group" aria-label="Workshop details">
-      <div class="cell"><div class="k">Date</div><div class="v">Thu, July 30</div></div>
-      <div class="cell"><div class="k">Time</div><div class="v">7:00 pm<small>doors 6:30, ends 8:30</small></div></div>
-      <div class="cell"><div class="k">Place</div><div class="v">Sandy, UT<small>Address sent when you register</small></div></div>
-      <div class="cell"><div class="k">Seat</div><div class="v hot">$47<small>small group</small></div></div>
+<section aria-labelledby="h-build">
+  <div class="wrap">
+    <p class="num"><b>Fig. 02</b> <span>What you walk out with</span></p>
+    <h2 id="h-build">What you build</h2>
+    <ol class="builds">
+      <li>
+        <b>A business brain</b>
+        <span>One file that holds what you sell, who buys it, and what you charge. Paste it in once and every answer after that comes back about your business instead of a business that does not exist.</span>
+      </li>
+      <li>
+        <b>A decision council</b>
+        <span>You hand it a decision. Three advisors argue it out in front of you, and then one of them calls it.</span>
+      </li>
+      <li>
+        <b>A simplicity check</b>
+        <span>Point it at a plan you are about to run and it strips out the parts that only look clever.</span>
+      </li>
+    </ol>
+    <div class="plus">
+      <p>Then a set of recipes to take home, and a cheat sheet built to print.</p>
     </div>
   </div>
 </section>
 
-<section class="detail">
+<section aria-labelledby="h-runs">
   <div class="wrap">
-    <p>You keep hearing AI matters. Nobody has shown you where to start, what to skip, or where it quietly costs you later. In one evening, in the room with me, you build the tools you actually use, on the laptop you work on, and walk out with them running.</p>
-    <p><b>Kept to a small group on purpose,</b> so you get real answers to your own questions. Bring your laptop and you will build something you keep.</p>
+    <p class="num"><b>Fig. 03</b> <span>How the room runs</span></p>
+    <h2 id="h-runs">What the evening is like</h2>
+    <ul class="runs">
+      <li><b>Bring a laptop.</b> Everything gets built on it, by you, while I am standing there.</li>
+      <li><b>Nothing you type leaves your machine.</b> You can prove that yourself by pulling the wifi down in the middle of the session and carrying straight on, which is the demonstration I would rather give you than a promise.</li>
+      <li><b>Small group on purpose.</b> Your own questions get answered out loud.</li>
+      <li><b>Sessions run in person.</b> If you are too far out to sit in the room, email me and I will tell you what I can do from here.</li>
+    </ul>
+
+    <div class="note">
+      <p>This is a working session and not a talk. Come with a laptop and ninety minutes, and you leave with the three tools running.</p>
+      <p>If what you want is somebody to build it for you and hand it over finished, that is a different conversation and I am glad to have it. Email me and we will start there instead.</p>
+    </div>
   </div>
 </section>
 
-<section class="close">
-  <div class="wrap">
-    <h2>Save your seat for <em>July 30</em></h2>
-    <div class="sub">Thu July 30 &middot; 7:00 to 8:30 pm &middot; Sandy, UT</div>
-    <form class="cta-form" data-medium="close" novalidate>
-      <input type="email" class="cta-email" name="email" required autocomplete="email" inputmode="email" placeholder="you@yourbusiness.com" aria-label="Your email">
-      <label class="agree-row">
-        <input type="checkbox" class="agree-refund" aria-label="I have read and agree to the Refund Policy">
-        <span>I have read and agree to the <a href="/terms#refunds" target="_blank" rel="noopener">Refund Policy</a></span>
-      </label>
-      <button type="submit" class="cta cta-buy" data-medium="close">
-        Reserve my seat <span class="price">$47</span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-      </button>
-    </form>
-  </div>
-</section>
 </main>
 
-<footer>
+<footer class="foot">
+  <div class="weave" aria-hidden="true"></div>
   <div class="wrap">
-    <span>Catalyst Works &middot; Sandy, Utah</span>
-    <span>Questions? <a href="mailto:boubacar@catalystworks.consulting">boubacar@catalystworks.consulting</a></span>
+    <p class="num"><b>Fig. 04</b> <span>Who runs it</span></p>
+    <h2>Boubacar</h2>
+    <p>I run Catalyst Works. I sit with owner operators who still answer their own phone, most of them under twenty people. We work out where the week is getting stuck and what is worth pointing at it first.</p>
+    <p>The tools in this workshop are the ones I built for myself first. I teach them because they earned their place in my own week, not because they demo well in a room.</p>
+    <p>If you would rather talk before the next date lands, I keep some time open.</p>
+
+    <p style="margin:18px 0 0">
+      <a class="book" href="https://calendly.com/boubacarbarry/free-ai-payback-review-owner-operators" rel="noopener">
+        Book thirty minutes <span aria-hidden="true">&#8594;</span>
+      </a>
+    </p>
+
+    <ul class="chan">
+      <li><b>Email</b><a href="mailto:boubacar@catalystworks.consulting">boubacar@catalystworks.consulting</a></li>
+      <li><b>Site</b><a href="https://catalystworks.consulting/" rel="noopener">catalystworks.consulting</a></li>
+    </ul>
+
+    <p class="stamp"><span>Catalyst Works</span><span>The Workshop</span><span>Sheet 1 of 1</span><span aria-hidden="true">&#8203;&#8204;&#8205;&#8203;&#8204;&#8205;&#8204;&#8203;</span></p>
   </div>
 </footer>
 
-<div class="sticky" aria-hidden="false">
-  <div class="sm">Thu July 30 &middot; 7:00 pm<br>Sandy, UT</div>
-  <a href="#reserve" class="cta cta-jump">Reserve my seat <span class="price">$47</span></a>
-</div>
-
 <script>
-/* Email-gate checkout: capture the email on our side (background, non-blocking)
-   BEFORE sending the visitor to Stripe, so an abandoned checkout is still a
-   recoverable lead. The redirect to Stripe NEVER waits on and is NEVER blocked
-   by the capture. Stripe attribution (flat client_reference_id + cohort/free-track
-   tags) is preserved exactly. */
+/* ====================================================================
+   THE ONLY THING TO EDIT WHEN A DATE IS CONFIRMED.
+
+   confirmed:false  -> being-scheduled state, email capture only.
+   confirmed:true   -> full session card plus a register button.
+
+   Fill every field when you flip it. A confirmed session with an empty
+   field renders that cell as a dash rather than an empty box, so a
+   half-filled object degrades visibly instead of silently.
+
+   registerUrl is the checkout the register button sends people to. It
+   is NEVER linked directly. The form below captures and persists the
+   email first, then navigates, so email-before-checkout holds by
+   construction on every path including a free one.
+   ==================================================================== */
+var NEXT_SESSION = {
+  confirmed: false,
+  date:  '',   // 'Thursday, August 27'
+  time:  '',   // '7:00 to 8:30 pm, doors at 6:30'
+  place: '',   // 'Sandy, Utah'
+  price: '',   // '$47'
+  registerUrl: ''
+};
+
 (function(){
-  var STRIPE_URL='https://buy.stripe.com/8x24gBeu3b7Y9bqfjngEg0a';
-  var CAPTURE_URL='https://agentshq.boubacarbarry.com/api/orc/workshop-register';
-  var COHORT='2026_07_30';
-  /* Hard ceiling on how long a visitor waits for the capture before we send them
-     to checkout anyway. A slow phone must never be stranded on a dead button. */
-  var CAPTURE_TIMEOUT_MS=3000;
-  /* Minimum beat before navigating, so the InitiateCheckout beacon lands. */
-  var PIXEL_BEAT_MS=250;
-  var qs=new URLSearchParams(window.location.search||'');
-  var emailRe=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  function buyHref(medium,email,reg_ref){
-    var src=(qs.get('utm_source')||'workshop');
-    var utmC=(qs.get('utm_content')||'');
-    /* Unified seat count: the cohort prefix 'ic_workshop_0730' still counts every
-       seat (all consumers substring-match it). A per-registration ref is appended
-       as 'ic_workshop_0730__<ref>' so a completed Stripe session reconciles back
-       to the exact workshop_registrations row -- a paid seat never trips the
-       abandon alert. Cohort rides in utm_content and the free-track tag in
-       utm_term, so attribution survives. track_free reads utm_content and is the
-       live paid split test -- do not change the shape of this without checking
-       /w/free in .htaccess. */
-    var track=/track_free/.test(utmC)?'track_free':'';
-    var sep=STRIPE_URL.indexOf('?')>-1?'&':'?';
-    var cref='ic_workshop_0730'+(reg_ref?('__'+encodeURIComponent(reg_ref)):'');
-    /* prefilled_email: they already typed it here, so Stripe must not ask again.
-       Also gives the abandonment alert a real customer_details.email to read. */
-    return STRIPE_URL+sep+'utm_source='+encodeURIComponent(src)+'&utm_medium='+encodeURIComponent(medium)+'&utm_campaign=ic_workshop_0730&utm_content='+encodeURIComponent(COHORT)+(track?'&utm_term='+track:'')+'&client_reference_id='+cref+'&prefilled_email='+encodeURIComponent(email);
+  var CAPTURE_URL = 'https://agentshq.boubacarbarry.com/api/orc/workshop-register';
+  var COHORT = 'ic_workshop_next';
+  /* Hard ceiling on how long somebody waits before we move them on. A slow
+     phone must never be stranded on a dead button. */
+  var CAPTURE_TIMEOUT_MS = 3000;
+  var qs = new URLSearchParams(window.location.search || '');
+  var emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  var box   = document.getElementById('session');
+  var form  = document.getElementById('cap');
+  var input = document.getElementById('em');
+  var btn   = document.getElementById('go');
+  var lbl   = btn.querySelector('.lbl');
+  var okBox = document.getElementById('ok');
+  var fine  = document.getElementById('fine');
+  var say   = document.getElementById('say');
+
+  var S = NEXT_SESSION || {};
+  var live = !!(S.confirmed && S.date);
+
+  function esc(s){
+    return String(s == null ? '' : s)
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+      .replace(/"/g,'&quot;');
   }
-  function postLead(email,medium,reg_ref){
-    return fetch(CAPTURE_URL,{method:'POST',keepalive:true,
+  function cell(k,v){
+    return '<div class="cell"><div class="k">' + esc(k) + '</div>' +
+           '<div class="v">' + (v ? esc(v) : '&#8212;') + '</div></div>';
+  }
+
+  /* ---- render exactly one state ---- */
+  if (live) {
+    box.innerHTML =
+      '<p class="state"><span class="pip" aria-hidden="true"></span>Next session confirmed</p>' +
+      '<h3>' + esc(S.date) + '</h3>' +
+      '<div class="ticket">' +
+        cell('Date',  S.date)  + cell('Time',  S.time) +
+        cell('Place', S.place) + cell('Seat',  S.price) +
+      '</div>' +
+      '<p>Enter your email and you go straight to checkout. Your confirmation and the address land in your inbox.</p>';
+    lbl.textContent = 'Reserve my seat';
+    fine.textContent = 'Your email is saved here before checkout opens. You will also get the short letter I send out, and one click takes you off it.';
+  } else {
+    box.innerHTML =
+      '<p class="state"><span class="pip" aria-hidden="true"></span>Next session being scheduled</p>' +
+      '<h3>The date is not set yet</h3>' +
+      '<p>The date, the room and the price go up on this page the moment they are confirmed. Leave your email and I will send it to you the day it is set.</p>';
+  }
+
+  /* ---- capture ---- */
+  function post(email, ref){
+    return fetch(CAPTURE_URL, {
+      method:'POST', keepalive:true,
       headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({email:email,reg_ref:reg_ref||'',seat_kind:'paid',utm_source:(qs.get('utm_source')||'workshop'),
-        form_location:'ic_workshop_paid_'+medium,magnet:'ic_workshop_0730'})
-    }).then(function(r){return !!r.ok;});
+      body: JSON.stringify({
+        email: email,
+        cohort: COHORT,
+        seat_kind: live ? 'paid' : 'free',
+        reg_ref: ref || '',
+        utm_source:   qs.get('utm_source')   || 'workshop_page',
+        utm_medium:   qs.get('utm_medium')   || 'organic',
+        utm_campaign: qs.get('utm_campaign') || 'ic_workshop_permanent',
+        utm_content:  qs.get('utm_content')  || (live ? 'session_live' : 'date_waitlist'),
+        form_location: 'workshop_permanent',
+        magnet: 'ic_workshop_next'
+      })
+    }).then(function(r){ return !!r.ok; });
   }
-  /* Capture the lead and WAIT for it to land before navigating.
-     The previous version fired fetch(keepalive) and navigated 220ms later.
-     keepalive is meant to outlive an unload; here it did not. 16 real CTA clicks
-     across this page and /ai-checklist produced ZERO subscribers, while
-     /free-workshop-july16 -- same endpoint, same handler shape, but NO redirect
-     after the POST -- captured every lead it took. All real traffic is the
-     Facebook/Instagram in-app browser, where keepalive is unreliable. Awaiting
-     the response is the only version that cannot lose the lead to that race.
-     Retries once, then reports. A capture failure must NEVER block the sale. */
-  function capture(email,medium,reg_ref){
-    return postLead(email,medium,reg_ref).catch(function(){return false;})
-      .then(function(ok){return ok?true:postLead(email,medium,reg_ref).catch(function(){return false;});})
+
+  /* Wait for the write to land before doing anything else. keepalive is
+     unreliable in the in-app browsers a lot of this traffic arrives from,
+     and a fire-and-forget POST on this exact endpoint is what silently
+     lost every lead on the paid pages in July. Retry once, then report.
+     A capture failure must never strand the visitor. */
+  function capture(email, ref){
+    return post(email, ref).catch(function(){ return false; })
+      .then(function(ok){ return ok ? true : post(email, ref).catch(function(){ return false; }); })
       .then(function(ok){
-        if(!ok){
-          /* Never silent again. The empty catch that used to live here is why
-             this ran for days losing every lead with nobody able to see it. */
-          try{console.error('[cw] lead capture FAILED');}catch(e){}
-          try{if(window.fbq)fbq('trackCustom','LeadCaptureFailed',{content_name:'ic_workshop_0730'});}catch(e){}
-        }
+        if (!ok) { try { console.error('[cw] workshop capture FAILED'); } catch(e){} }
         return ok;
       });
   }
-  /* One click: validate -> fire InitiateCheckout -> AWAIT capture -> redirect to
-     Stripe with the email prefilled. */
-  document.querySelectorAll('.cta-form').forEach(function(f){
-    var medium=f.getAttribute('data-medium')||'page';
-    var input=f.querySelector('.cta-email');
-    /* Required refund-policy consent: the pay button stays disabled until the box
-       is ticked, and the submit handler re-checks it as a backstop so a stale or
-       programmatic submit can never slip past the gate. */
-    var agree=f.querySelector('.agree-refund');
-    var submitBtn=f.querySelector('button[type=submit]');
-    if(agree&&submitBtn){
-      submitBtn.disabled=!agree.checked;
-      agree.addEventListener('change',function(){
-        submitBtn.disabled=!agree.checked;
-        if(agree.checked){var rr=agree.closest('.agree-row');if(rr)rr.classList.remove('flash');}
-      });
-      /* Back-navigation from Stripe leaves a DEAD pay button: the line above ran
-         at script time, BEFORE the browser restored this checkbox, so the box
-         comes back ticked while the button stays disabled -- and since nothing
-         changed, no change event ever fires to correct it. The submit handler's
-         own disabled=true is never cleared either. A buyer returning from an
-         abandoned checkout is the most valuable click on the page and it did
-         nothing. pageshow runs after restore, so re-syncing here fixes both. */
-      window.addEventListener('pageshow',function(){
-        submitBtn.disabled=!agree.checked;
-        submitBtn.removeAttribute('aria-busy');
-      });
+
+  function checkoutHref(email, ref){
+    var base = S.registerUrl || '';
+    if (!base) return '';
+    var sep = base.indexOf('?') > -1 ? '&' : '?';
+    return base + sep +
+      'client_reference_id=' + encodeURIComponent(COHORT + (ref ? ('__' + ref) : '')) +
+      '&prefilled_email=' + encodeURIComponent(email) +
+      '&utm_source=' + encodeURIComponent(qs.get('utm_source') || 'workshop_page') +
+      '&utm_campaign=ic_workshop_permanent';
+  }
+
+  form.addEventListener('submit', function(ev){
+    ev.preventDefault();
+    var email = (input.value || '').trim();
+    if (!emailRe.test(email)) {
+      input.setAttribute('aria-invalid','true');
+      input.focus();
+      say.textContent = 'That email does not look right. Have another look at it.';
+      return;
     }
-    f.addEventListener('submit',function(ev){
-      ev.preventDefault();
-      if(agree&&!agree.checked){var r=agree.closest('.agree-row');if(r)r.classList.add('flash');agree.focus();return;}
-      var email=(input.value||'').trim();
-      if(!emailRe.test(email)){input.focus();input.setAttribute('aria-invalid','true');return;}
-      input.removeAttribute('aria-invalid');
-      var btn=f.querySelector('button[type=submit]');
-      if(btn){btn.setAttribute('aria-busy','true');btn.disabled=true;}
-      /* Mint the per-registration ref BEFORE the checkout URL so the same ref
-         lands on both the capture POST (workshop_registrations.reg_ref) and the
-         Stripe client_reference_id -- the shared key for reconciliation. */
-      var eid='ic-'+Date.now()+'-'+Math.random().toString(36).slice(2,8);
-      var dest=buyHref(medium,email,eid);
-      try{if(window.fbq)fbq('track','InitiateCheckout',{content_name:'ic_workshop_0730',value:47,currency:'USD'},{eventID:eid});}catch(e){}
-      var t0=Date.now(),sent=false;
-      var go=function(){if(sent)return;sent=true;window.location.href=dest;};
-      var timer=setTimeout(go,CAPTURE_TIMEOUT_MS);
-      capture(email,medium,eid).then(function(){
-        clearTimeout(timer);
-        setTimeout(go,Math.max(0,PIXEL_BEAT_MS-(Date.now()-t0)));
-      });
-    });
+    input.removeAttribute('aria-invalid');
+    btn.setAttribute('aria-busy','true');
+    btn.disabled = true;
+    lbl.textContent = 'One moment';
+
+    /* Mint the ref BEFORE the checkout URL is built so the same token lands
+       on the stored registration and on the Stripe client_reference_id, which
+       is what lets a completed checkout reconcile back to this exact row. */
+    var ref = 'ws-' + Date.now() + '-' + Math.random().toString(36).slice(2,8);
+    var sent = false;
+
+    function finish(){
+      if (sent) return;
+      sent = true;
+      var dest = live ? checkoutHref(email, ref) : '';
+      if (dest) { window.location.href = dest; return; }
+      form.style.display = 'none';
+      fine.style.display = 'none';
+      okBox.classList.add('on');
+      say.textContent = 'You are on the list. The date will be emailed to you.';
+      okBox.setAttribute('tabindex','-1');
+      okBox.focus();
+    }
+
+    setTimeout(finish, CAPTURE_TIMEOUT_MS);
+    capture(email, ref).then(finish);
   });
-  /* Sticky bar jump: send the visitor to the hero email field and focus it,
-     so every checkout path still passes through the email gate. */
-  document.querySelectorAll('.cta-jump').forEach(function(b){
-    b.addEventListener('click',function(ev){
-      ev.preventDefault();
-      var f=document.getElementById('reserve');
-      if(f){f.scrollIntoView({behavior:'smooth',block:'center'});var i=f.querySelector('.cta-email');if(i)setTimeout(function(){i.focus();},400);}
-    });
-  });
+
+  input.addEventListener('input', function(){ input.removeAttribute('aria-invalid'); });
 })();
 </script>
+
 </body>
 </html>
