@@ -487,7 +487,21 @@ var NEXT_SESSION = {
      written as escapes rather than pasted characters so they survive an edit
      and stay visible to whoever reads this next. Keep them. */
   time:  '7:00 to 8:30 pm,\u00a0room\u00a0opens\u00a0at\u00a06:30',
-  place: 'Salt Lake Community College, Miller Conference Center, Room\u00a0105',
+  /* Campus only, on purpose. Do NOT put a building name or a room number back
+     in this string without a booking in hand.
+     Two separate reasons, both learned the hard way.
+     1. On 2026-07-28 Alex Dotter at SLCC said the room is Building 1, Miller
+        Professional Development Center, and explicitly NOT Building 2 / the
+        Karen Gail Miller Conference Center. The contract agrees with him: it
+        reads "MPDC 105". Boubacar walked it and read it as Building 2. Nobody
+        reconciled those, so the standing house rule from that day is to name
+        no building at all and describe the route instead. The July 30 emails
+        and the printed signs already follow it.
+     2. As of 2026-08-04 the August room is AVAILABLE but NOT RESERVED. Alex
+        offered the 20th or the 27th and asked which to book; that question is
+        unanswered. This page takes money, so it must not assert a room that
+        nobody has held yet. */
+  place: 'Salt Lake Community College, Miller Campus, Sandy',
   /* Set together, on purpose. A price without a registerUrl renders a
      "Reserve my seat" button over a checkout that does not exist, and a
      registerUrl without a price sends people to pay an amount the page never
