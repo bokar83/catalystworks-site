@@ -192,17 +192,29 @@ h2{font-size:clamp(1.45rem,5.4vw,2.05rem);margin-bottom:.5em}
 .plate p + p{margin-top:.75em}
 
 /* The confirmed-session ticket. Rendered only when a date is set. */
-.ticket{display:grid;grid-template-columns:repeat(4,1fr);margin:0 0 18px;
+/* Two columns at every width, not four. A venue is the one value here that
+   is a full postal-style name rather than a token, and a quarter column is
+   about 133px, which broke "…Miller Conference Center, Room 105" across six
+   lines and left "105" orphaned on the last one. Two columns give each cell
+   roughly 290px, which holds the venue in two lines and every other value in
+   one. This was already the layout below 560px, so the phone view is
+   unchanged and the media query it used to live in is gone. */
+.ticket{display:grid;grid-template-columns:1fr 1fr;margin:0 0 18px;
   border:var(--lw035) solid var(--thin)}
 .ticket .cell{padding:12px 12px;border-right:var(--lw025) dashed var(--thin);min-width:0}
-.ticket .cell:last-child{border-right:0}
+.ticket .cell:nth-child(2n),.ticket .cell:last-child{border-right:0}
+.ticket .cell:nth-child(1),.ticket .cell:nth-child(2){border-bottom:var(--lw025) dashed var(--thin)}
 .ticket .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.15em;text-transform:uppercase;
   color:var(--ink-faint);margin-bottom:5px}
 .ticket .v{font-weight:600;font-size:.95rem;line-height:1.3;overflow-wrap:anywhere}
-@media(max-width:560px){
-  .ticket{grid-template-columns:1fr 1fr}
-  .ticket .cell:nth-child(2n){border-right:0}
-  .ticket .cell:nth-child(1),.ticket .cell:nth-child(2){border-bottom:var(--lw025) dashed var(--thin)}
+/* One column on a narrow phone. Two columns at 375px leaves each cell about
+   150px, which strands single words ("Center,") on their own line inside the
+   venue. Full width gives roughly 300px and the venue sets in three clean
+   lines. The non-breaking spaces in NEXT_SESSION still do the last-line work. */
+@media(max-width:430px){
+  .ticket{grid-template-columns:1fr}
+  .ticket .cell{border-right:0;border-bottom:var(--lw025) dashed var(--thin)}
+  .ticket .cell:last-child{border-bottom:0}
 }
 
 /* ---------- the capture form: the whole reason this is a page --------
@@ -374,7 +386,7 @@ h2{font-size:clamp(1.45rem,5.4vw,2.05rem);margin-bottom:.5em}
 
       <div class="done" id="ok">
         <h4>You are on the list</h4>
-        <p>The date lands in your inbox the day the room is confirmed.</p>
+        <p id="okline">The date lands in your inbox the day the room is confirmed.</p>
         <p>In the meantime, here is one of the three. It is the decision tool from the workshop cut down to a single prompt, and it runs in about five minutes: <a href="/second-opinion/">the five-minute second opinion</a>.</p>
       </div>
     </div>
@@ -466,11 +478,23 @@ h2{font-size:clamp(1.45rem,5.4vw,2.05rem);margin-bottom:.5em}
    construction on every path including a free one.
    ==================================================================== */
 var NEXT_SESSION = {
-  confirmed: false,
-  date:  '',   // 'Thursday, August 27'
-  time:  '',   // '7:00 to 8:30 pm, doors at 6:30'
-  place: '',   // 'Sandy, Utah'
-  price: '',   // '$47'
+  confirmed: true,
+  date:  'Thursday, August 27',
+  /* The \u00a0 escapes are non-breaking spaces and they are load-bearing, not
+     decoration. Without them these two values wrap so that "6:30" and "105"
+     each end up alone on a line, which the house rule forbids. Binding the
+     trailing words keeps at least two on every line at every width. They are
+     written as escapes rather than pasted characters so they survive an edit
+     and stay visible to whoever reads this next. Keep them. */
+  time:  '7:00 to 8:30 pm,\u00a0room\u00a0opens\u00a0at\u00a06:30',
+  place: 'Salt Lake Community College, Miller Conference Center, Room\u00a0105',
+  /* price and registerUrl are deliberately empty. The seat is PAID and the
+     price is not set. Leaving both blank is what holds the page in the
+     date-announced state below: the date, room and time show, the Seat cell
+     reads "Not set yet", and the form captures an email instead of opening a
+     checkout that does not exist. Fill BOTH together when the price is set,
+     never one without the other. */
+  price: '',
   registerUrl: ''
 };
 
@@ -489,11 +513,25 @@ var NEXT_SESSION = {
   var btn   = document.getElementById('go');
   var lbl   = btn.querySelector('.lbl');
   var okBox = document.getElementById('ok');
+  var okLine= document.getElementById('okline');
   var fine  = document.getElementById('fine');
   var say   = document.getElementById('say');
 
+  /* What the aria-live region announces once the write lands. The
+     date-announced branch overwrites it, because "the date will be emailed
+     to you" is false the moment the date is on the page. */
+  var LISTED_MSG = 'You are on the list. The date will be emailed to you.';
+
   var S = NEXT_SESSION || {};
-  var live = !!(S.confirmed && S.date);
+  /* Two independent facts, deliberately not collapsed into one flag.
+     dated = the date is public. live = checkout is actually open.
+     A session sits in dated-but-not-live for the whole stretch between the
+     room being confirmed and the price being set. Treating those as one
+     flag is what would put a "Reserve my seat" button in front of a
+     checkout URL that is still an empty string, which sends somebody
+     through the form and then quietly dead-ends them. */
+  var dated = !!(S.confirmed && S.date);
+  var live  = dated && !!S.registerUrl;
 
   function esc(s){
     return String(s == null ? '' : s)
@@ -517,6 +555,19 @@ var NEXT_SESSION = {
       '<p>Enter your email and you go straight to checkout. Your confirmation and the address land in your inbox.</p>';
     lbl.textContent = 'Reserve my seat';
     fine.textContent = 'Your email is saved here before checkout opens. You will also get the short letter I send out, and one click takes you off it.';
+  } else if (dated) {
+    box.innerHTML =
+      '<p class="state"><span class="pip" aria-hidden="true"></span>Next session confirmed</p>' +
+      '<h3>' + esc(S.date) + '</h3>' +
+      '<div class="ticket">' +
+        cell('Date',  S.date)  + cell('Time',  S.time) +
+        cell('Place', S.place) + cell('Seat',  S.price || 'Not set yet') +
+      '</div>' +
+      '<p>Seats are paid and the price is not set yet. Leave your email and I send you the price and the seat link the day I set them.</p>';
+    lbl.textContent = 'Send me the seat link';
+    fine.textContent = 'The price posts on this page the moment it is set. You will also get the short letter I send out, and one click takes you off it.';
+    okLine.textContent = 'You get the price and the seat link in your inbox the moment I set them.';
+    LISTED_MSG = 'You are on the list. I will email you the price and the seat link.';
   } else {
     box.innerHTML =
       '<p class="state"><span class="pip" aria-hidden="true"></span>Next session being scheduled</p>' +
@@ -537,7 +588,7 @@ var NEXT_SESSION = {
         utm_source:   qs.get('utm_source')   || 'workshop_page',
         utm_medium:   qs.get('utm_medium')   || 'organic',
         utm_campaign: qs.get('utm_campaign') || 'ic_workshop_permanent',
-        utm_content:  qs.get('utm_content')  || (live ? 'session_live' : 'date_waitlist'),
+        utm_content:  qs.get('utm_content')  || (live ? 'session_live' : (dated ? 'price_waitlist' : 'date_waitlist')),
         form_location: 'workshop_permanent',
         magnet: 'ic_workshop_next'
       })
@@ -597,7 +648,7 @@ var NEXT_SESSION = {
       form.style.display = 'none';
       fine.style.display = 'none';
       okBox.classList.add('on');
-      say.textContent = 'You are on the list. The date will be emailed to you.';
+      say.textContent = LISTED_MSG;
       okBox.setAttribute('tabindex','-1');
       okBox.focus();
     }
