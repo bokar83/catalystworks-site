@@ -382,11 +382,18 @@ h2{font-size:clamp(1.45rem,5.4vw,2.05rem);margin-bottom:.5em}
         <button class="go" type="submit" id="go"><span class="lbl">Send me the date</span></button>
       </form>
 
-      <p class="fine" id="fine">Seats are paid. The price posts here with the date. You will also get the short letter I send out, and one click takes you off it.</p>
+      <!-- These two strings are the BEING-SCHEDULED state's copy, and that is the
+           only state that renders them as written. The script at the bottom
+           overwrites both in the other two states. Read them as the fallback,
+           not as what the page says today, and keep them true for a page with
+           no date rather than for the session currently on it. Both were left
+           describing a date that had not been set yet, which read as stale for
+           anyone viewing source while a date was live. -->
+      <p class="fine" id="fine">Seats are paid. The price posts here with the next date. You will also get the short letter I send out, and one click takes you off it.</p>
 
       <div class="done" id="ok">
         <h4>You are on the list</h4>
-        <p id="okline">The date lands in your inbox the day the room is confirmed.</p>
+        <p id="okline">The next date lands in your inbox the day it is set.</p>
         <p>In the meantime, here is one of the three. It is the decision tool from the workshop cut down to a single prompt, and it runs in about five minutes: <a href="/second-opinion/">the five-minute second opinion</a>.</p>
       </div>
     </div>
@@ -444,7 +451,7 @@ h2{font-size:clamp(1.45rem,5.4vw,2.05rem);margin-bottom:.5em}
     <h2>Boubacar</h2>
     <p>I run Catalyst Works. I sit with owner operators who still answer their own phone, most of them under twenty people. We work out where the week is getting stuck and what is worth pointing at it first.</p>
     <p>The tools in this workshop are the ones I built for myself first. I teach them because they earned their place in my own week, not because they demo well in a room.</p>
-    <p>If you would rather talk before the next date lands, I keep some time open.</p>
+    <p>If you would rather talk before the session, I keep some time open.</p>
 
     <p style="margin:18px 0 0">
       <a class="book" href="https://calendly.com/boubacarbarry/free-ai-payback-review-owner-operators" rel="noopener">
@@ -598,6 +605,11 @@ var NEXT_SESSION = {
       '<p>Enter your email and you go straight to checkout. Your confirmation and the address land in your inbox.</p>';
     lbl.textContent = 'Reserve my seat';
     fine.textContent = 'Your email is saved here before checkout opens. You will also get the short letter I send out, and one click takes you off it.';
+    /* Unreachable in practice, since this state always navigates to checkout
+       and never opens the box. Set anyway so the box can never surface another
+       state's promise if that ever stops being true. */
+    okLine.textContent = 'Your seat is saved once checkout finishes.';
+    LISTED_MSG = 'Taking you to checkout.';
   } else if (dated) {
     box.innerHTML =
       '<p class="state"><span class="pip" aria-hidden="true"></span>' + STATE_LABEL + '</p>' +
@@ -616,6 +628,11 @@ var NEXT_SESSION = {
       '<p class="state"><span class="pip" aria-hidden="true"></span>Next session being scheduled</p>' +
       '<h3>The date is not set yet</h3>' +
       '<p>The date, the room and the price go up on this page the moment they are confirmed. Leave your email and I will send it to you the day it is set.</p>';
+    /* Restated rather than inherited from the markup. Every branch now sets
+       these two explicitly, so no state can quietly ship another state's copy
+       just because it happened to be the HTML default. */
+    fine.textContent = 'Seats are paid. The price posts here with the next date. You will also get the short letter I send out, and one click takes you off it.';
+    okLine.textContent = 'The next date lands in your inbox the day it is set.';
   }
 
   /* ---- capture ---- */
