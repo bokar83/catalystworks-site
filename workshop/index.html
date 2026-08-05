@@ -533,10 +533,21 @@ var NEXT_SESSION = {
      registerUrl without a price sends people to pay an amount the page never
      showed them. The page only enters its live checkout state when BOTH are
      filled, so keep them in sync if either ever changes.
-     registerUrl is the $47.97 payment link, created 2026-08-04 against the
-     existing dateless product prod_UfXH0rdp6HHbTy. */
-  price: '$47.97',
-  registerUrl: 'https://buy.stripe.com/00waEZfy70tkafu6MRgEg0l'
+     PRICE SHAPE, 2026-08-04. The seat moved from $47.97 to $50 and the reason
+     is the SHAPE of the number, not the amount. A blind panel of three Utah
+     owner-operators read this page that day and two of them, unprompted, said
+     the .97 ending cost them trust: "course guy price", "like it came out of a
+     template". One said "$50 I'd trust more". So the round number is the point.
+     This is a PRICE RISE, not a discount, and nothing on any surface may frame
+     it as one. Write it "$50". Never "$50.00", never "fifty dollars".
+
+     registerUrl is the $50 payment link plink_1U0tVOQWqcWWuBB0JrKaQw0E,
+     created 2026-08-04 against the same dateless product prod_UfXH0rdp6HHbTy
+     (price_1U0tV6QWqcWWuBB0HMx9JnWe, 5000 usd). A payment link's amount cannot
+     be edited in place, so the $47.97 link was replaced rather than changed;
+     the old one is deactivated in Stripe, not deleted. */
+  price: '$50',
+  registerUrl: 'https://buy.stripe.com/9B63cxclV6RIcnC7QVgEg0m'
 };
 
 (function(){
