@@ -20,7 +20,7 @@ RewriteRule ^signal/?$ signal.html [NC,L]
 RewriteRule ^workshop$ /workshop/ [R=301,L,QSA]
 RewriteRule ^workshop/?$ workshop/index.html [NC,L]
 
-# The ONLINE session page (Thursday 2026-08-13, 11:00 am Mountain, $25) lives at
+# The ONLINE session page (Wednesday 2026-08-19, 11:00 am Mountain, $25) lives at
 # /online/. Deliberately a second page and not a second state on /workshop/: the
 # two run at the same time on purpose, the online session feeding the in-person
 # one on August 27.
@@ -181,16 +181,16 @@ RewriteRule ^w/li/?$ /workshop/?utm_source=linkedin&utm_medium=organic&utm_campa
 RewriteRule ^w/x/?$ /workshop/?utm_source=x&utm_medium=organic&utm_campaign=ic_workshop_permanent&utm_content=organic_x [R=301,L,QSA]
 RewriteRule ^w/nl/?$ /workshop/?utm_source=newsletter&utm_medium=email&utm_campaign=ic_workshop_permanent&utm_content=newsletter [R=301,L,QSA]
 
-# ---- ONLINE SESSION (2026-08-13) short links, minted 2026-08-05 ----
+# ---- ONLINE SESSION (2026-08-19) short links, minted 2026-08-05 ----
 # FRESH slugs on a FRESH campaign key. Every w/* slug above carries
 # utm_campaign=ic_workshop_permanent after the 2026-08-04 sweep moved all
 # sixteen of them onto it, so reusing any of them would fold this session's
 # numbers into the in-person page's. These four are the only ones tagged
-# ic_workshop_online_0813 and they are the only ones that point at /online/.
-RewriteRule ^w/online/?$ /online/?utm_source=direct&utm_medium=link&utm_campaign=ic_workshop_online_0813&utm_content=direct_online [R=301,L,QSA]
-RewriteRule ^w/online-li/?$ /online/?utm_source=linkedin&utm_medium=organic&utm_campaign=ic_workshop_online_0813&utm_content=organic_li [R=301,L,QSA]
-RewriteRule ^w/online-x/?$ /online/?utm_source=x&utm_medium=organic&utm_campaign=ic_workshop_online_0813&utm_content=organic_x [R=301,L,QSA]
-RewriteRule ^w/online-nl/?$ /online/?utm_source=newsletter&utm_medium=email&utm_campaign=ic_workshop_online_0813&utm_content=newsletter [R=301,L,QSA]
+# ic_workshop_online_0819 and they are the only ones that point at /online/.
+RewriteRule ^w/online/?$ /online/?utm_source=direct&utm_medium=link&utm_campaign=ic_workshop_online_0819&utm_content=direct_online [R=301,L,QSA]
+RewriteRule ^w/online-li/?$ /online/?utm_source=linkedin&utm_medium=organic&utm_campaign=ic_workshop_online_0819&utm_content=organic_li [R=301,L,QSA]
+RewriteRule ^w/online-x/?$ /online/?utm_source=x&utm_medium=organic&utm_campaign=ic_workshop_online_0819&utm_content=organic_x [R=301,L,QSA]
+RewriteRule ^w/online-nl/?$ /online/?utm_source=newsletter&utm_medium=email&utm_campaign=ic_workshop_online_0819&utm_content=newsletter [R=301,L,QSA]
 # SPLIT TEST (July 30 workshop) -- two paid Meta tracks under one campaign,
 # distinguished by utm_content so seats are attributable per track.
 # Track 1 DIRECT: was cold ad -> $47 seat page (variant B). 2026-07-27: repointed

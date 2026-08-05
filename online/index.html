@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="light only">
 <title>AI Without Getting Burned &middot; The Online Session &middot; Catalyst Works</title>
-<meta name="description" content="A sixty-minute online working session for owners. You build one AI tool on your own laptop and take it home running. Thursday August 13, 11am Mountain.">
+<meta name="description" content="A sixty-minute online working session for owners. You build one AI tool on your own laptop and take it home running. Wednesday August 19, 11am Mountain.">
 
 <meta property="og:title" content="AI Without Getting Burned &middot; The Online Session">
 <meta property="og:description" content="Sixty minutes, online, small group, laptops open. You build one tool on your own machine and take it home running.">
@@ -38,10 +38,15 @@
    the canonical address for the room. This one is the ONLINE session and
    it is deliberately a second page rather than a second state on the
    first, because the two run at the same time on purpose: the online
-   session on Thursday August 13 feeds the in-person session on Thursday
+   session on Wednesday August 19 feeds the in-person session on Thursday
    August 27, and whoever sits in the online one gets their seat price
    credited against the room. One page cannot say both without one of
    them reading as the afterthought.
+
+   THE ONLINE SESSION IS THE ON-RAMP, not a rival. One campaign with two
+   asks, eight days apart. That is why this page never argues against the
+   room: it sells the hour, then hands the reader the credit that makes
+   the room the obvious next step.
 
    Same shape as /workshop/ in every other respect. The session block is
    DATA, not markup: edit NEXT_SESSION at the bottom of this file and
@@ -75,7 +80,7 @@
   /* Fouta Mark provenance: (c) Boubacar - Fouta Djallon.
      Origin: permanent workshop page 2026-08-04.
      Registry: docs/ip/provenance-registry.md */
-  --fouta-mark:"FDJ-BB-20260805-WORKSHOP-ONLINE-0813";
+  --fouta-mark:"FDJ-BB-20260805-WORKSHOP-ONLINE-0819";
 
   /* cream reserve sheet, the ground */
   --stock:#E7E3D6;
@@ -512,7 +517,7 @@ var NEXT_SESSION = {
      linkReady is true. Set it back to false the moment a future online date is
      announced before its room exists. */
   linkReady: true,
-  date:  'Thursday, August 13',
+  date:  'Wednesday, August 19',
   /* The \u00a0 escapes are non-breaking spaces and they are load-bearing, not
      decoration. Without them these values wrap so that 'Mountain' and 'Meet'
      each end up alone on a line, which the house no-orphan rule forbids. */
@@ -520,10 +525,21 @@ var NEXT_SESSION = {
   /* MIDDAY IS LOAD-BEARING, not a preference. All three blind ICP panel readers
      independently named a Thursday EVENING as their blocker on the in-person
      session, so an evening slot would rebuild the exact obstacle this session
-     exists to remove. Thursday itself keeps the standing workshop day; only the
-     time of day changes, and time of day is the variable the evidence named.
+     exists to remove. Time of day is the variable the evidence named, and it
+     has not moved: still 11:00 am Mountain.
      '1100 UT' in his own note means UTAH time, confirmed with him directly. It
-     is 11:00 Mountain, not 17:00 UTC and not 5am. */
+     is 11:00 Mountain, not 17:00 UTC and not 5am.
+
+     THE DAY MOVED, on Boubacar's decision 2026-08-05: Thursday August 13 became
+     WEDNESDAY August 19. Two reasons, both deliberate.
+     (1) Eight days was too thin with no announcement out. Aug 19 buys fourteen
+         days to fill the room.
+     (2) WEDNESDAY, not Thursday, on purpose. Thursday belongs to the Aug 27
+         in-person session. A competing Thursday event seven days earlier invites
+         exactly the head-to-head comparison we do not want, and Aug 20 would have
+         landed inside the Aug 27 peak week. Wednesday sidesteps both.
+     Accepted trade, recorded so nobody rediscovers it as a surprise: the $25
+     credit runway shrinks from fourteen days to eight. */
   place: 'Online, on Google\u00a0Meet',
   /* Set together, on purpose. A price without a registerUrl renders a
      'Reserve my seat' button over a checkout that does not exist, and a
@@ -545,7 +561,7 @@ var NEXT_SESSION = {
 
 (function(){
   var CAPTURE_URL = 'https://agentshq.boubacarbarry.com/api/orc/workshop-register';
-  var COHORT = 'ic_workshop_online_0813';
+  var COHORT = 'ic_workshop_online_0819';
   /* Hard ceiling on how long somebody waits before we move them on. A slow
      phone must never be stranded on a dead button. */
   var CAPTURE_TIMEOUT_MS = 3000;
@@ -670,10 +686,10 @@ var NEXT_SESSION = {
       reg_ref: ref || '',
       utm_source:   qs.get('utm_source')   || 'online_page',
       utm_medium:   qs.get('utm_medium')   || 'organic',
-      utm_campaign: qs.get('utm_campaign') || 'ic_workshop_online_0813',
+      utm_campaign: qs.get('utm_campaign') || 'ic_workshop_online_0819',
       utm_content:  qs.get('utm_content')  || (live ? 'session_live' : (dated ? 'price_waitlist' : 'date_waitlist')),
-      form_location: 'workshop_online_0813',
-      magnet: 'ic_workshop_online_0813'
+      form_location: 'workshop_online_0819',
+      magnet: 'ic_workshop_online_0819'
     });
   }
 
@@ -741,7 +757,7 @@ var NEXT_SESSION = {
       'client_reference_id=' + encodeURIComponent(COHORT + (ref ? ('__' + ref) : '')) +
       '&prefilled_email=' + encodeURIComponent(email) +
       '&utm_source=' + encodeURIComponent(qs.get('utm_source') || 'online_page') +
-      '&utm_campaign=ic_workshop_online_0813';
+      '&utm_campaign=ic_workshop_online_0819';
   }
 
   form.addEventListener('submit', function(ev){
