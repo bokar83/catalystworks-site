@@ -393,7 +393,7 @@ h2{font-size:clamp(1.45rem,5.4vw,2.05rem);margin-bottom:.5em}
 
       <div class="done" id="ok">
         <h4>You are on the list</h4>
-        <p id="okline">The next date lands in your inbox the day it is set.</p>
+        <p id="okline">The next date lands in your inbox the day I set it.</p>
         <p>In the meantime, here is one of the three. It is the decision tool from the workshop cut down to a single prompt, and it runs in about five minutes: <a href="/second-opinion/">the five-minute second opinion</a>.</p>
       </div>
     </div>
@@ -500,9 +500,11 @@ var NEXT_SESSION = {
      set. The room is the venue's to give and it has not given it. One flag could
      not say both, which is why the page said the confident one and was wrong.
 
-     Flip roomHeld to true the moment Alex confirms in writing. Nothing else on
-     this page needs to change when he does. */
-  roomHeld: false,
+     2026-08-04, later the same day: the venue confirmed. Thursday August 27 is
+     booked, so roomHeld is true and the page says "Room confirmed". Set this
+     back to false the moment a future date is announced without a booking; it
+     is the one flag that is allowed to be pessimistic while confirmed is true. */
+  roomHeld: true,
   date:  'Thursday, August 27',
   /* The \u00a0 escapes are non-breaking spaces and they are load-bearing, not
      decoration. Without them these two values wrap so that "6:30" and "105"
@@ -604,7 +606,23 @@ var NEXT_SESSION = {
       '</div>' +
       '<p>Enter your email and you go straight to checkout. Your confirmation and the address land in your inbox.</p>';
     lbl.textContent = 'Reserve my seat';
-    fine.textContent = 'Your email is saved here before checkout opens. You will also get the short letter I send out, and one click takes you off it.';
+    /* This sentence is a promise about the plumbing, so it only stays here as
+       long as the plumbing keeps it. It used to overstate: the write was fired
+       before the redirect but the redirect did not wait for it, so a slow or
+       failed write meant a paid seat with no saved email and this line was
+       simply untrue for that person. Three things now make it hold. The write
+       retries with backoff, a beacon goes out if the redirect wins the race,
+       and the completed checkout is reconciled against Stripe server-side,
+       which rebuilds the record from the payment itself. The second clause is
+       the honest half: it says "and again when your payment lands", because
+       that reconciliation is what actually catches the case the first clause
+       misses. It is phrased as a second save rather than as a rescue on
+       purpose. An earlier draft read "if anything drops in between", which is
+       equally true and much worse: fine print sitting directly above a payment
+       button should not be the place a reader first learns the thing can fail.
+       If the Stripe reconciliation is ever removed, this sentence has to
+       change back. */
+    fine.textContent = 'Your email is saved here before checkout opens, and again when your payment lands. You will also get the short letter I send out, and one click takes you off it.';
     /* Unreachable in practice, since this state always navigates to checkout
        and never opens the box. Set anyway so the box can never surface another
        state's promise if that ever stops being true. */
@@ -632,41 +650,83 @@ var NEXT_SESSION = {
        these two explicitly, so no state can quietly ship another state's copy
        just because it happened to be the HTML default. */
     fine.textContent = 'Seats are paid. The price posts here with the next date. You will also get the short letter I send out, and one click takes you off it.';
-    okLine.textContent = 'The next date lands in your inbox the day it is set.';
+    okLine.textContent = 'The next date lands in your inbox the day I set it.';
   }
 
   /* ---- capture ---- */
+  /* One payload builder, two senders. The fetch below and the sendBeacon
+     fallback further down MUST post byte-identical bodies: if they drifted,
+     the fallback would write a differently-shaped row and the difference would
+     only ever show up on the failure path, which is the path nobody watches. */
+  function body(email, ref){
+    return JSON.stringify({
+      email: email,
+      cohort: COHORT,
+      seat_kind: live ? 'paid' : 'free',
+      reg_ref: ref || '',
+      utm_source:   qs.get('utm_source')   || 'workshop_page',
+      utm_medium:   qs.get('utm_medium')   || 'organic',
+      utm_campaign: qs.get('utm_campaign') || 'ic_workshop_permanent',
+      utm_content:  qs.get('utm_content')  || (live ? 'session_live' : (dated ? 'price_waitlist' : 'date_waitlist')),
+      form_location: 'workshop_permanent',
+      magnet: 'ic_workshop_next'
+    });
+  }
+
   function post(email, ref){
     return fetch(CAPTURE_URL, {
       method:'POST', keepalive:true,
       headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({
-        email: email,
-        cohort: COHORT,
-        seat_kind: live ? 'paid' : 'free',
-        reg_ref: ref || '',
-        utm_source:   qs.get('utm_source')   || 'workshop_page',
-        utm_medium:   qs.get('utm_medium')   || 'organic',
-        utm_campaign: qs.get('utm_campaign') || 'ic_workshop_permanent',
-        utm_content:  qs.get('utm_content')  || (live ? 'session_live' : (dated ? 'price_waitlist' : 'date_waitlist')),
-        form_location: 'workshop_permanent',
-        magnet: 'ic_workshop_next'
-      })
+      body: body(email, ref)
     }).then(function(r){ return !!r.ok; });
   }
 
   /* Wait for the write to land before doing anything else. keepalive is
      unreliable in the in-app browsers a lot of this traffic arrives from,
      and a fire-and-forget POST on this exact endpoint is what silently
-     lost every lead on the paid pages in July. Retry once, then report.
-     A capture failure must never strand the visitor. */
+     lost every lead on the paid pages in July.
+     A capture failure must never strand the visitor.
+
+     Three attempts, backing off 250ms then 750ms. The backoff is the point:
+     an immediate retry into a server that is briefly busy just fails a second
+     time at the same instant, which is what the old retry-once did. A short
+     pause is what makes the second and third attempts different from the
+     first. The whole ladder is sized to finish inside the timeout below on a
+     healthy connection, so a transient blip never reaches the fallback. */
+  var RETRY_BACKOFF_MS = [250, 750];
+
   function capture(email, ref){
-    return post(email, ref).catch(function(){ return false; })
-      .then(function(ok){ return ok ? true : post(email, ref).catch(function(){ return false; }); })
-      .then(function(ok){
-        if (!ok) { try { console.error('[cw] workshop capture FAILED'); } catch(e){} }
-        return ok;
-      });
+    var attempt = 0;
+    function tryOnce(){
+      return post(email, ref).catch(function(){ return false; })
+        .then(function(ok){
+          if (ok) return true;
+          var wait = RETRY_BACKOFF_MS[attempt];
+          attempt++;
+          if (wait == null) return false;
+          return new Promise(function(res){ setTimeout(res, wait); }).then(tryOnce);
+        });
+    }
+    return tryOnce().then(function(ok){
+      if (!ok) { try { console.error('[cw] workshop capture FAILED'); } catch(e){} }
+      return ok;
+    });
+  }
+
+  /* Last-ditch, fired only when the visitor is about to be navigated away with
+     the write still unfinished. sendBeacon hands the request to the browser to
+     deliver AFTER the page is gone, which is the one thing a pending fetch
+     cannot promise in the in-app browsers this traffic arrives from.
+     Duplicates are free: the endpoint upserts on (cohort, lower(email)), so a
+     beacon that lands alongside a fetch that also landed writes nothing twice.
+     This is a third line of defence, not the plan. The plan is the retry
+     ladder above, and behind both sits the Stripe reconciliation, which
+     rebuilds the row from the completed checkout if every attempt here fails. */
+  function beacon(email, ref){
+    try {
+      if (!navigator.sendBeacon) return;
+      navigator.sendBeacon(CAPTURE_URL, new Blob([body(email, ref)], {type:'application/json'}));
+    } catch(e){}
   }
 
   function checkoutHref(email, ref){
@@ -699,6 +759,7 @@ var NEXT_SESSION = {
        is what lets a completed checkout reconcile back to this exact row. */
     var ref = 'ws-' + Date.now() + '-' + Math.random().toString(36).slice(2,8);
     var sent = false;
+    var landed = false;
 
     function finish(){
       if (sent) return;
@@ -713,8 +774,25 @@ var NEXT_SESSION = {
       okBox.focus();
     }
 
-    setTimeout(finish, CAPTURE_TIMEOUT_MS);
-    capture(email, ref).then(finish);
+    /* The visitor's clock, not the server's. Whatever the write is doing at
+       three seconds, they stop waiting and go to checkout. This timer used to
+       be the hole: it could fire mid-write and the row would die with the page.
+       It is no longer, for two reasons. A beacon goes out here, which the
+       browser delivers after navigation. And the completed checkout is
+       reconciled against Stripe server-side, which rebuilds the row from the
+       payment even if nothing at all got through from this page. */
+    setTimeout(function(){
+      if (!landed) beacon(email, ref);
+      finish();
+    }, CAPTURE_TIMEOUT_MS);
+
+    capture(email, ref).then(function(ok){
+      landed = ok;
+      /* Every attempt failed but we are still on the page, so there is time
+         for one more shot by a different mechanism before the redirect. */
+      if (!ok) beacon(email, ref);
+      finish();
+    });
   });
 
   input.addEventListener('input', function(){ input.removeAttribute('aria-invalid'); });
