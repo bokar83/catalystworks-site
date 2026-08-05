@@ -42,7 +42,15 @@ body{
   font-family:var(--font-body);color:var(--paper);background:var(--navy);
   line-height:1.5;-webkit-font-smoothing:antialiased;
   min-height:100dvh;position:relative;
-  display:flex;align-items:center;justify-content:center;
+  /* align-items:flex-start, NOT center, and this is a bug fix rather than a
+     preference. A flex child taller than its container gets its overflow split
+     evenly when the container centres it, which puts the top of the child at a
+     NEGATIVE offset that nothing can scroll back to. On a 375px phone that put
+     the Catalyst Works mark 46px above the top of the document: unreachable,
+     for the first screen a paying buyer sees. The child already carries
+     min-height:100dvh and margin:auto below, so a short page still centres and
+     a tall one simply scrolls. */
+  display:flex;align-items:flex-start;justify-content:center;
 }
 body::after{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.5;mix-blend-mode:soft-light;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.84' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E")}
