@@ -69,6 +69,28 @@ RewriteRule ^ai-checklist/?$ /workshop/?utm_source=legacy&utm_medium=redirect&ut
 #   RewriteRule ^seat$ /seat/ [R=301,L,QSA]
 #   RewriteRule ^seat/?$ seat/index.html [NC,L]
 RewriteRule ^seat/?$ /workshop/?utm_source=legacy&utm_medium=redirect&utm_campaign=ic_workshop_permanent&utm_content=legacy_seat [R=301,L]
+
+# UNLISTED closed-list checkout for the August 19 online attendees: the same
+# August 27 seat at $25 instead of $50, because their online payment is credited
+# against it. It exists because promotion-code redemption is broken account-wide
+# in hosted Stripe Checkout (proven 2026-08-04), so coupon ONLINE25 cannot be
+# typed by a buyer and the code they would have typed had to become a link.
+#
+# Safe to sit after the ^seat/?$ redirect above: that pattern matches ^seat/?$
+# and nothing else, so it never sees this path. Same two-rule shape every other
+# directory page here needs -- DirectorySlash Off (line 2) would otherwise serve
+# the no-slash form IN PLACE with no redirect, leaving document.baseURI at
+# /seat/aug19-credit and breaking the page's relative references (see
+# reference_trailing_slash_breaks_relative_links_2026_07_30.md). The 301 MUST
+# stay ahead of the serve rule and cannot loop: /seat/aug19-credit/ already ends
+# in a slash and never matches the no-slash pattern.
+#
+# Deliberately NOT in robots.txt and NOT in sitemap.xml. Both files are public,
+# so naming this path in either would advertise the URL we are keeping quiet.
+# The page carries noindex,nofollow and is linked from nowhere.
+RewriteRule ^seat/aug19-credit$ /seat/aug19-credit/ [R=301,L,QSA]
+RewriteRule ^seat/aug19-credit/?$ seat/aug19-credit/index.html [NC,L]
+
 # The July 30 attendee take-home kit lives at /kit/. This is the QR target
 # printed on the cards and shown on the closing slide, so both the with-slash
 # and without-slash forms have to resolve: DirectorySlash Off would otherwise
