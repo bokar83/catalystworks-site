@@ -55,7 +55,7 @@ if (sheets < 30) {
 
 let out = src.replace('<html lang="en">', '<html lang="en" data-present="1">');
 out = out.replace(/<title>[^<]*<\/title>/,
-                  '<title>AI Without Getting Burned - PRESENTER - 2026-07-30</title>');
+                  '<title>AI Without Getting Burned - PRESENTER</title>');
 if (out === src) {
   console.error('ABORT: nothing was substituted, the <html> tag did not match.');
   process.exit(1);
