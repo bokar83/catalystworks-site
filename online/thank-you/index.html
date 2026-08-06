@@ -6,12 +6,12 @@
 <meta name="color-scheme" content="light only">
 <meta name="robots" content="noindex,nofollow">
 <title>You're in | Catalyst Works</title>
-<meta name="description" content="Your seat is saved for the August 27 AI working session in Sandy. Add it to your calendar and watch your inbox for details.">
+<meta name="description" content="Your seat is saved for the August 19 online AI working session. Add it to your calendar and watch your inbox for the join link.">
 
-<meta property="og:title" content="You're in, seat saved for August 27">
-<meta property="og:description" content="Your seat is saved for the live Utah AI working session. Add it to your calendar.">
+<meta property="og:title" content="You're in, seat saved for August 19">
+<meta property="og:description" content="Your seat is saved for the online AI working session. Add it to your calendar.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://catalystworks.consulting/seat/thank-you/">
+<meta property="og:url" content="https://catalystworks.consulting/online/thank-you/">
 
 <link rel="icon" type="image/jpeg" href="/CatalystWorks_logo.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -139,49 +139,32 @@ fbq('init', '1826865671807664');
 fbq('track', 'PageView');
 </script>
 <script>
-/* PURCHASE IS SERVER-SIDE ONLY. THE BROWSER DOES NOT REPORT REVENUE HERE.
-
-   This page used to fire fbq('track','Purchase',{value:47.00}) with 47.00
-   written into the source as a literal. That number was wrong for every seat
-   sold through this page: the standard seat is $50 and the online-attendee
-   credit seat is $25. Meta was being handed a fabricated revenue figure, and
-   ad optimisation keyed on it.
-
-   The true amount cannot be resolved in the browser, and that is worth stating
-   plainly rather than working around:
-
-     1. Stripe exposes no way to read a Checkout Session from the browser. The
-        publishable key cannot fetch a session, and only the secret key can,
-        which can never ship to a page. session_id alone buys us an identifier,
-        not an amount.
-     2. Both the $50 payment link (plink_1U0tVOQWqcWWuBB0JrKaQw0E) and the $25
-        credit link (plink_1U1DRSQWqcWWuBB0s36nUw4E) redirect to this exact
-        success_url with no distinguishing parameter, so the page cannot even
-        infer which price was paid.
-     3. This site is static. There is no server route here that could look the
-        amount up on our behalf.
-
-   So the browser Purchase is gone rather than guessed. The Purchase event is
-   sent server-side by the Stripe webhook handler
-   (orchestrator/stripe_alerts.py::_send_capi_purchase), which reads
-   amount_total off the real checkout session and sends the actual figure to the
-   Conversions API. It already keyed its event_id on the same Stripe session id
-   the browser event used, which means the two were always a de-duplicating
-   pair: Meta keeps one of them, and the browser one usually arrives first, so
-   the fabricated 47.00 was very likely the value that survived. Removing it
-   leaves the correct server-side number as the only Purchase Meta ever sees.
-
-   Webhook endpoint we_1TtB86QWqcWWuBB0dkdV0Ysg is enabled on
-   checkout.session.completed and the route answers at
-   agentshq.boubacarbarry.com/api/orc/stripe-webhook, verified 2026-08-05.
-
-   Known limit, stated rather than hidden: _send_capi_purchase skips when the
-   session carries no email, because the Conversions API needs one identifier to
-   match on. Stripe payment links always collect an email, so this is a corner
-   rather than a gap, but if Purchase events ever stop appearing entirely that
-   is the first place to look.
-
-   PageView above still fires on every visit and is untouched. */
+/* Purchase fires ONCE per real purchase only.
+   Gate: arrival from Stripe (session_id query param appended by the payment link,
+   or checkout.stripe.com referrer as fallback). Plain reloads / direct visits do
+   NOT fire. eventID = Stripe Checkout Session id so Meta de-duplicates. */
+(function(){
+  var qs = new URLSearchParams(window.location.search);
+  var sid = qs.get('session_id');
+  var refHost = '';
+  try { refHost = document.referrer ? new URL(document.referrer).hostname : ''; } catch(e){}
+  var fromStripe = /(^|\.)stripe\.com$/.test(refHost);
+  if (!sid && !fromStripe) return; /* direct visit or reload: no Purchase */
+  var KEY = 'cw_seat47_purchase_eid';
+  /* eventID = Stripe Checkout Session id so the browser Purchase de-dupes
+     against the server-side CAPI Purchase (which keys on the same session id).
+     No random fallback: a random id would never match the server event and
+     would double-count every sale. Requires success_url to carry
+     ?session_id={CHECKOUT_SESSION_ID}. */
+  var eid = sid || '';
+  try {
+    var prev = localStorage.getItem(KEY);
+    if (prev && (prev === eid || !sid)) return; /* this purchase already tracked in this browser */
+  } catch(e){}
+  try { localStorage.setItem(KEY, eid || ('nosid-' + Date.now())); } catch(e){}
+  fbq('track', 'Purchase', {value: 47.00, currency: 'USD'}, eid ? {eventID: eid} : undefined);
+  if (sid) { try { history.replaceState(null, '', window.location.pathname); } catch(e){} }
+})();
 </script>
 <noscript><img height="1" width="1" style="display:none"
 src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"
@@ -213,52 +196,49 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"
 
   <h1>You're in. Your seat is <em>saved</em>.</h1>
 
-  <p class="lead">Thanks for grabbing your seat for the August 27 working session. I will see you in the room. Add it to your calendar right now so it does not slip.</p>
+  <!-- The &nbsp; between the month and the day is load-bearing, not decoration.
+       Without it this line wraps after "August" at both 375px and desktop, and
+       the date reads broken across two lines. Same reason the NEXT_SESSION
+       values on /online/ carry them. Keep it on every date written in prose. -->
+  <p class="lead">Thanks for grabbing your seat for the August&nbsp;19 online session. Add it to your calendar right now so it does not slip.</p>
 
   <div class="card">
     <div class="k">The essentials</div>
     <ul class="rows">
       <li>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-        <span><b>Thursday, August 27</b><span class="sub">Room opens 6:30 pm, session 7:00 to 8:30 pm</span></span>
+        <span><b>Wednesday, August 19</b><span class="sub">11:00 am to 12:00 pm Mountain</span></span>
       </li>
       <li>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-        <span><b>Salt Lake Community College</b><span class="sub">Miller Campus, Sandy. The room and the door to use are in your email.</span></span>
+        <span><b>Online, on Google Meet</b><span class="sub">The join link is in your email. It is yours, so please keep it to yourself.</span></span>
       </li>
       <li>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="14" rx="2"/><line x1="2" y1="20" x2="22" y2="20"/></svg>
-        <span><b>Bring a laptop</b><span class="sub">You will set up real tools during the session and walk out using them.</span></span>
+        <span><b>Bring a laptop</b><span class="sub">You build the thing on your own machine during the hour and finish using it.</span></span>
       </li>
     </ul>
   </div>
 
   <div class="act">
-    <a class="cta" href="/workshop/ic-workshop-2026-08-27.ics" download>
+    <a class="cta" href="/online/ic-workshop-online-2026-08-19.ics" download>
       Add to my calendar
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
     </a>
-    <!-- The two buttons above and below MUST describe the same event. Until
-         2026-08-04 they did not: the .ics said "Miller Campus" while this
-         Google link said "Miller Conference Center, Room 105" -- two buildings,
-         two calendar entries, one session, and whichever one an attendee tapped
-         decided where they drove.
-
-         The Google link was the wrong one twice over. It named a building at
-         all, which the standing house rule forbids because our sources disagree
-         on which building holds Room 105 (see workshop/index.html), and it put
-         a room number on a PUBLIC page when this very page tells the reader the
-         room comes by email. Its title was also drifting ("AI at Work Without
-         Getting Burned" against the .ics SUMMARY "AI Without Getting Burned").
-
-         Both now mirror workshop/ic-workshop-2026-08-27.ics exactly. Change the
-         two together or not at all. -->
-    <span class="alt">Using Google Calendar? <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=AI+Without+Getting+Burned&dates=20260828T010000Z/20260828T023000Z&location=SLCC+Miller+Campus,+9750+S+300+W,+Sandy,+UT+84070&details=90-minute+hands-on+AI+workshop+for+owner-operators.+The+exact+room+and+the+door+to+use+are+in+your+confirmation+email.+https://catalystworks.consulting/workshop/" target="_blank" rel="noopener">Add it here</a></span>
+    <!-- The two buttons above and below MUST describe the same event. On the
+         in-person page they once did not, and whichever one an attendee
+         tapped decided where they drove. Both here mirror
+         online/ic-workshop-online-2026-08-19.ics exactly: same title, same
+         start and end, same location string. Change the two together or
+         not at all.
+         Neither carries the Meet link on purpose. This page is public and
+         the seat is paid; the join link goes by email only. -->
+    <span class="alt">Using Google Calendar? <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=AI+Without+Getting+Burned,+online+session&dates=20260819T170000Z/20260819T180000Z&location=Online,+on+Google+Meet&details=Sixty-minute+hands-on+AI+working+session+for+owner-operators.+The+join+link+is+in+your+confirmation+email.+https://catalystworks.consulting/online/" target="_blank" rel="noopener">Add it here</a></span>
   </div>
 
-  <p class="next"><b>A confirmation email is on its way</b> with everything you need before the session. If anything comes up, just reply to it and it reaches me directly.</p>
+  <p class="next"><b>A confirmation email is on its way</b> with the join link and everything you need before the session. If anything comes up, just reply to it and it reaches me directly.</p>
 
-  <p class="sign">See you August 27. Come ready to build, and you will leave using AI the same night.</p>
+  <p class="sign">See you August&nbsp;19. Come ready to build, and you will finish the hour using AI on your own business.</p>
 
   <span class="home"><a href="https://catalystworks.consulting/">Back to Catalyst Works</a></span>
 
