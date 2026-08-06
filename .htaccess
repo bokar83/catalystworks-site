@@ -89,26 +89,44 @@ RewriteRule ^ai-checklist/?$ /workshop/?utm_source=legacy&utm_medium=redirect&ut
 #   RewriteRule ^seat/?$ seat/index.html [NC,L]
 RewriteRule ^seat/?$ /workshop/?utm_source=legacy&utm_medium=redirect&utm_campaign=ic_workshop_permanent&utm_content=legacy_seat [R=301,L]
 
-# UNLISTED closed-list checkout for the August 19 online attendees: the same
-# August 27 seat at $25 instead of $50, because their online payment is credited
-# against it. It exists because promotion-code redemption is broken account-wide
-# in hosted Stripe Checkout (proven 2026-08-04), so coupon ONLINE25 cannot be
-# typed by a buyer and the code they would have typed had to become a link.
+# /seat/aug19-credit/ was the unlisted closed-list checkout for the August 19
+# online attendees: the same August 27 seat at $25 instead of $50, because their
+# online payment came off it.
+#
+# 2026-08-06: RETIRED, on Boubacar's explicit instruction, the same instruction
+# that took the promise off /online/ earlier today ("remove the public promise of
+# the $25 off so we can work that out one by one"). He is deciding the offer
+# separately. This page is not a page that CARRIED the promise, it IS the
+# promise: the headline, the lead, the ticket cell, the button and the closing
+# line are all the credit and nothing else. Strip it and what is left is an
+# unexplained $25 seat for August 27, publicly reachable by URL, undercutting the
+# live $50 page it sits beside, with no reason on it for the difference. That is
+# worse than no page, so the route comes out rather than the copy.
+#
+# Redirect and not a 404 because someone may hold the link. /online/ is the right
+# landing: it is the page for the very session these people are in.
+#
+# The page file itself is DELETED in this same commit, not left on disk. Every
+# other retirement in this file leaves its HTML in place and only unhooks the
+# canonical URL, which is fine for a stale date but not for a live promise that
+# checkout is not currently set up to keep. Nothing carrying it stays on the
+# server. The rule below covers the slashed, unslashed and explicit index.html
+# forms for the same reason.
+#
+# RESTORING (do not, without his say-so AND the offer settled):
+#   git checkout f10eed1 -- seat/aug19-credit/index.html
+# then delete the redirect and put these two back:
+#   RewriteRule ^seat/aug19-credit$ /seat/aug19-credit/ [R=301,L,QSA]
+#   RewriteRule ^seat/aug19-credit/?$ seat/aug19-credit/index.html [NC,L]
+# The 301-before-serve shape in those two lines is load-bearing, not decoration:
+# DirectorySlash Off (line 2) serves the no-slash form IN PLACE, which leaves
+# document.baseURI at /seat/aug19-credit and breaks the page's relative
+# references (reference_trailing_slash_breaks_relative_links_2026_07_30.md).
 #
 # Safe to sit after the ^seat/?$ redirect above: that pattern matches ^seat/?$
-# and nothing else, so it never sees this path. Same two-rule shape every other
-# directory page here needs -- DirectorySlash Off (line 2) would otherwise serve
-# the no-slash form IN PLACE with no redirect, leaving document.baseURI at
-# /seat/aug19-credit and breaking the page's relative references (see
-# reference_trailing_slash_breaks_relative_links_2026_07_30.md). The 301 MUST
-# stay ahead of the serve rule and cannot loop: /seat/aug19-credit/ already ends
-# in a slash and never matches the no-slash pattern.
-#
-# Deliberately NOT in robots.txt and NOT in sitemap.xml. Both files are public,
-# so naming this path in either would advertise the URL we are keeping quiet.
-# The page carries noindex,nofollow and is linked from nowhere.
-RewriteRule ^seat/aug19-credit$ /seat/aug19-credit/ [R=301,L,QSA]
-RewriteRule ^seat/aug19-credit/?$ seat/aug19-credit/index.html [NC,L]
+# and nothing else, so it never sees this path. It cannot loop either, because
+# the target is /online/ and matches nothing here.
+RewriteRule ^seat/aug19-credit(/index\.html)?/?$ /online/?utm_source=legacy&utm_medium=redirect&utm_campaign=ic_workshop_online_0819&utm_content=retired_credit_seat [NC,R=301,L]
 
 # The July 30 attendee take-home kit lives at /kit/. This is the QR target
 # printed on the cards and shown on the closing slide, so both the with-slash
