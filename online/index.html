@@ -461,16 +461,18 @@ h2{font-size:clamp(1.45rem,5.4vw,2.05rem);margin-bottom:.5em}
       <p>This is a working session and not a talk. Come with a laptop and an hour, and you leave with your business brain running.</p>
       <!-- REMOVED 2026-08-06, on Boubacar's explicit instruction: the paragraph
            here promised that the $25 paid for this session comes off the August 27
-           in-person seat, and read the coupon out at the end of the hour. Stripe
-           promotion codes are broken account-wide right now (every code on the
-           account resolves with a null coupon object, ONLINE25 included), so
-           checkout cannot honour it. A public promise in his name that the
-           checkout cannot keep is worse than no offer, so it comes out rather
-           than gets reworded. NOTHING replaces it. He is deciding the offer
-           separately; do not reinstate this, or any substitute discount line,
-           without his say-so AND a promotion code proven to apply at checkout.
-           The credit checkout page at /seat/aug19-credit/ still carries the same
-           promise and is a SEPARATE surface, flagged to him, not touched here. -->
+           in-person seat, and read a promotion code out at the end of the hour.
+           Stripe promotion codes are broken account-wide right now (every code on
+           the account resolves with a null coupon object), so checkout cannot
+           honour it. A public promise in his name that the checkout cannot keep
+           is worse than no offer, so it comes out rather than gets reworded.
+           NOTHING replaces it. He is deciding the offer separately; do not
+           reinstate this, or any substitute discount line, without his say-so
+           AND a promotion code proven to apply at checkout.
+           The credit checkout page that used to carry the same promise,
+           /seat/aug19-credit/, was retired the same day -- that promise was its
+           whole reason to exist -- and now 301-redirects here to /online/. No
+           other surface still makes this claim. -->
       <p>If what you want is somebody to build it for you and hand it over finished, that is a different conversation and I am glad to have it. Email me and we will start there instead.</p>
     </div>
   </div>
@@ -569,10 +571,9 @@ var NEXT_SESSION = {
      unprompted, said a .97 ending cost them trust. Write it '$25'. Never
      '$25.00', never 'twenty-five dollars'.
 
-     registerUrl is payment link plink_1U1CWwQWqcWWuBB0jgP2KmJT, created
-     2026-08-05 against product prod_V1F0GT6RfTOswY
-     (price_1U1CWvQWqcWWuBB0mSFt2tJW, 2500 usd). A payment link's amount cannot
-     be edited in place, so a price change means a new link, not an edit. */
+     registerUrl is a Stripe payment link created 2026-08-05 for this $25
+     seat. A payment link's amount cannot be edited in place, so a price
+     change means a new link, not an edit. */
   price: '$25',
   registerUrl: 'https://buy.stripe.com/dRmfZjadN7VM73i1sxgEg0n'
 };
