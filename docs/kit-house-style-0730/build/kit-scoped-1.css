@@ -1,0 +1,25 @@
+
+/* Scoped to the step zero block. This is the first of the three CREAM RESERVE
+   sheets: the parts that were bound off before the cloth went in the vat. It
+   earns the interruption because it is the one instruction on the page that is
+   not a station, and a reader who is starting cold has to see it break the
+   rhythm. Numbered list treatment matches the keep-it station, inverted. */
+#start{padding:clamp(28px,3.6vw,46px) var(--pad) clamp(28px,3.4vw,44px);
+  max-width:1180px;margin:0 auto}
+#start .lede{max-width:54ch;margin-top:15px}
+#start .start-steps{counter-reset:st;list-style:none;margin:clamp(18px,2.2vw,28px) 0 0;padding:0;max-width:66ch}
+#start .start-steps li{position:relative;padding-left:42px;margin-bottom:14px;line-height:1.58;
+  font-size:15.5px;color:var(--ink)}
+#start .start-steps li::before{counter-increment:st;content:counter(st,decimal-leading-zero);
+  position:absolute;left:0;top:2px;width:28px;height:24px;
+  display:flex;align-items:center;justify-content:flex-start;
+  font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.1em;
+  color:var(--brass-ink);background:none;
+  border-top:2px solid var(--ink);padding-top:3px}
+#start .start-steps b{font-weight:600}
+#start .start-steps a{color:var(--ink);font-weight:600;
+  text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:2px;
+  text-decoration-color:var(--brass-ink)}
+#start .start-steps a:hover,#start .start-steps a:focus-visible{color:var(--brass-ink)}
+#start .start-note{color:var(--ink);opacity:.72;font-size:13.5px;line-height:1.55;
+  margin-top:16px;max-width:60ch}
