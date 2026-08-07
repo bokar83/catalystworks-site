@@ -173,13 +173,31 @@ RewriteRule ^geolisted/?$ https://geolisted.co/ [R=301,L]
 # 2026-07-31: same trailing-slash defect as /kit -- 301 to the slashed form first.
 RewriteRule ^free-thank-you$ /free-thank-you/ [R=301,L,QSA]
 RewriteRule ^free-thank-you/?$ free-thank-you/index.html [NC,L]
-# The July 16 free session was CANCELLED and its page only hit Beehiiv while
-# advertising a dead date. Repoint any straggler still holding an old
-# SBDC-newsletter link straight to the live July 30 free-seat capture, which
-# actually reserves the $0 seat (email captured + prefilled into the Stripe
-# reservation). Organic medium keeps ad-spend attribution honest. The old
-# HTML stays on disk but is unreachable via its canonical URL.
-RewriteRule ^free-workshop-july16/?$ /workshop/?utm_source=sbdc&utm_medium=organic&utm_campaign=ic_workshop_permanent&utm_content=stale_july16_redirect [R=301,L]
+# /free-workshop-july16/ was the CANCELLED July 16 free session's live capture
+# page: a working form, still POSTing real leads to workshop-register, still
+# confirming a $0 seat for a date and event ("free session, July 16, 7:00 to
+# 8:30pm") over three weeks past.
+#
+# 2026-08-07: the file is DELETED in this same commit, not left on disk. The
+# old rule here only unhooked the canonical ^free-workshop-july16/?$ URL, which
+# left the explicit index.html form -- /free-workshop-july16/index.html --
+# reachable and serving the live page unredirected, same gap the aug19-credit
+# retirement below calls out. That gap is a bigger problem on this page than
+# most: it is not just a stale date, it is a still-collecting $0 offer, and
+# free-seat copy is now a standing defect on its own regardless of the date
+# (see the no-free-workshops rule). Same reasoning as aug19-credit: this page
+# does not carry the promise, it IS the promise, so the route comes out and the
+# file goes with it. Redirect and not a 404 because an old SBDC-newsletter link
+# may still be out there; /workshop/ is the live permanent page, same target
+# this rule already used before the file was deleted. The rule below covers
+# the slashed, unslashed and explicit index.html forms, same pattern as
+# aug19-credit.
+#
+# RESTORING (do not, without checking free-seat copy is allowed again):
+#   git checkout 3c909d4 -- free-workshop-july16/index.html
+# then delete the redirect below and put this back:
+#   RewriteRule ^free-workshop-july16/?$ /workshop/?utm_source=sbdc&utm_medium=organic&utm_campaign=ic_workshop_permanent&utm_content=stale_july16_redirect [R=301,L]
+RewriteRule ^free-workshop-july16(/index\.html)?/?$ /workshop/?utm_source=sbdc&utm_medium=organic&utm_campaign=ic_workshop_permanent&utm_content=stale_july16_redirect [NC,R=301,L]
 # The July 30 comp-seat RSVP page booked NOTHING (Beehiiv-only) yet told
 # visitors "your seat is held" -- a false claim. Repoint to the live free-seat
 # capture that actually reserves the $0 seat. Organic medium keeps attribution
@@ -307,8 +325,11 @@ RewriteRule ^([^\.]+)$ $1.html [NC,L]
 #
 # Everything below now resolves to /workshop/ in exactly one 301:
 #   all sixteen w/* slugs
-#   /ai-checklist/, /seat/, /workshop-b/   (retired, see rules above)
-#   /rsvp-0730/, /free-workshop-july16/
+#   /ai-checklist/, /seat/, /workshop-b/   (retired-by-redirect, file kept)
+#   /rsvp-0730/, /free-workshop-july16/    (rsvp-0730 retired-by-redirect;
+#                                            free-workshop-july16 retired
+#                                            AND deleted 2026-08-07, see its
+#                                            own rule above)
 #   boubacarbarry.com/workshop/            (separate repo, meta-refresh)
 #
 # Each slug keeps its own utm_source, utm_medium and utm_content, so the
@@ -320,10 +341,16 @@ RewriteRule ^([^\.]+)$ $1.html [NC,L]
 # other content change: w/start carried utm_content=cohort:2026_06_25, a
 # June label that is simply false on August traffic.
 #
-# The three retired pages are redirects, not deletions. Their files are
-# still in the repo and each rule above carries the two lines to uncomment
-# if one is ever wanted back. Not touched, because people still need them:
-# /seat/thank-you/ and /free-thank-you/ are Stripe return URLs.
+# Of the retired pages, /ai-checklist/, /seat/ and /workshop-b/ are redirects,
+# not deletions -- their files are still in the repo and each rule above
+# carries the two lines to uncomment if one is ever wanted back.
+# /free-workshop-july16/ is the exception: it was a live $0 lead-capture form,
+# not just a stale date, so 2026-08-07 deleted the file too (see its own rule
+# above for why and how to restore it). Not touched, because people still
+# need them: /seat/thank-you/ and /free-thank-you/ are Stripe return URLs.
+# NOTE: /free-thank-you/ is itself still a live $0-seat confirmation page for
+# the July 30 event and was not part of this pass -- flagged, not fixed, see
+# handoff.
 #
 # ---------------------------------------------------------------------
 # SUPERSEDED -- 2026-07-27 free-routing sweep (Boubacar, explicit)
