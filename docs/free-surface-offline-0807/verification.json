@@ -1,0 +1,164 @@
+[
+  {
+    "viewport": "desktop",
+    "name": "free-thank-you-slash",
+    "requested": "https://catalystworks.consulting/free-thank-you/",
+    "status": 404,
+    "finalUrl": "https://catalystworks.consulting/free-thank-you/",
+    "title": "This Page Does Not Exist",
+    "err": null
+  },
+  {
+    "viewport": "desktop",
+    "name": "free-thank-you-indexhtml",
+    "requested": "https://catalystworks.consulting/free-thank-you/index.html",
+    "status": 404,
+    "finalUrl": "https://catalystworks.consulting/free-thank-you/index.html",
+    "title": "This Page Does Not Exist",
+    "err": null
+  },
+  {
+    "viewport": "desktop",
+    "name": "ai-checklist-indexhtml",
+    "requested": "https://catalystworks.consulting/ai-checklist/index.html",
+    "status": 200,
+    "finalUrl": "https://catalystworks.consulting/workshop/?utm_source=legacy&utm_medium=redirect&utm_campaign=ic_workshop_permanent&utm_content=legacy_ai_checklist",
+    "title": "AI Without Getting Burned · The Workshop · Catalyst Works",
+    "err": null
+  },
+  {
+    "viewport": "desktop",
+    "name": "rsvp-0730-indexhtml",
+    "requested": "https://catalystworks.consulting/rsvp-0730/index.html",
+    "status": 200,
+    "finalUrl": "https://catalystworks.consulting/workshop/?utm_source=direct_invite&utm_medium=organic&utm_campaign=ic_workshop_permanent&utm_content=stale_rsvp0730_redirect",
+    "title": "AI Without Getting Burned · The Workshop · Catalyst Works",
+    "err": null
+  },
+  {
+    "viewport": "desktop",
+    "name": "paid-workshop-aug27",
+    "requested": "https://catalystworks.consulting/workshop/",
+    "status": 200,
+    "finalUrl": "https://catalystworks.consulting/workshop/",
+    "title": "AI Without Getting Burned · The Workshop · Catalyst Works",
+    "err": null
+  },
+  {
+    "viewport": "desktop",
+    "name": "paid-online-aug19",
+    "requested": "https://catalystworks.consulting/online/",
+    "status": 200,
+    "finalUrl": "https://catalystworks.consulting/online/",
+    "title": "AI Without Getting Burned · The Online Session · Catalyst Works",
+    "err": null
+  },
+  {
+    "viewport": "desktop",
+    "name": "stripe-aug27-50",
+    "requested": "https://buy.stripe.com/9B63cxclV6RIcnC7QVgEg0m",
+    "status": 200,
+    "finalUrl": "https://buy.stripe.com/9B63cxclV6RIcnC7QVgEg0m",
+    "title": "Catalyst Works",
+    "err": null
+  },
+  {
+    "viewport": "desktop",
+    "name": "stripe-aug19-25",
+    "requested": "https://buy.stripe.com/dRmfZjadN7VM73i1sxgEg0n",
+    "status": 200,
+    "finalUrl": "https://buy.stripe.com/dRmfZjadN7VM73i1sxgEg0n",
+    "title": "Catalyst Works",
+    "err": null
+  },
+  {
+    "viewport": "desktop",
+    "name": "stripe-free-0-inactive",
+    "requested": "https://buy.stripe.com/dRm4gB4Tt8ZQ1IY2wBgEg0k",
+    "status": 200,
+    "finalUrl": "https://buy.stripe.com/dRm4gB4Tt8ZQ1IY2wBgEg0k",
+    "title": "Stripe Checkout",
+    "err": null
+  },
+  {
+    "viewport": "mobile375",
+    "name": "free-thank-you-slash",
+    "requested": "https://catalystworks.consulting/free-thank-you/",
+    "status": 404,
+    "finalUrl": "https://catalystworks.consulting/free-thank-you/",
+    "title": "This Page Does Not Exist",
+    "err": null
+  },
+  {
+    "viewport": "mobile375",
+    "name": "free-thank-you-indexhtml",
+    "requested": "https://catalystworks.consulting/free-thank-you/index.html",
+    "status": 404,
+    "finalUrl": "https://catalystworks.consulting/free-thank-you/index.html",
+    "title": "This Page Does Not Exist",
+    "err": null
+  },
+  {
+    "viewport": "mobile375",
+    "name": "ai-checklist-indexhtml",
+    "requested": "https://catalystworks.consulting/ai-checklist/index.html",
+    "status": 200,
+    "finalUrl": "https://catalystworks.consulting/workshop/?utm_source=legacy&utm_medium=redirect&utm_campaign=ic_workshop_permanent&utm_content=legacy_ai_checklist",
+    "title": "AI Without Getting Burned · The Workshop · Catalyst Works",
+    "err": null
+  },
+  {
+    "viewport": "mobile375",
+    "name": "rsvp-0730-indexhtml",
+    "requested": "https://catalystworks.consulting/rsvp-0730/index.html",
+    "status": 200,
+    "finalUrl": "https://catalystworks.consulting/workshop/?utm_source=direct_invite&utm_medium=organic&utm_campaign=ic_workshop_permanent&utm_content=stale_rsvp0730_redirect",
+    "title": "AI Without Getting Burned · The Workshop · Catalyst Works",
+    "err": null
+  },
+  {
+    "viewport": "mobile375",
+    "name": "paid-workshop-aug27",
+    "requested": "https://catalystworks.consulting/workshop/",
+    "status": 200,
+    "finalUrl": "https://catalystworks.consulting/workshop/",
+    "title": "AI Without Getting Burned · The Workshop · Catalyst Works",
+    "err": null
+  },
+  {
+    "viewport": "mobile375",
+    "name": "paid-online-aug19",
+    "requested": "https://catalystworks.consulting/online/",
+    "status": 200,
+    "finalUrl": "https://catalystworks.consulting/online/",
+    "title": "AI Without Getting Burned · The Online Session · Catalyst Works",
+    "err": null
+  },
+  {
+    "viewport": "mobile375",
+    "name": "stripe-aug27-50",
+    "requested": "https://buy.stripe.com/9B63cxclV6RIcnC7QVgEg0m",
+    "status": 200,
+    "finalUrl": "https://buy.stripe.com/9B63cxclV6RIcnC7QVgEg0m",
+    "title": "Catalyst Works",
+    "err": null
+  },
+  {
+    "viewport": "mobile375",
+    "name": "stripe-aug19-25",
+    "requested": "https://buy.stripe.com/dRmfZjadN7VM73i1sxgEg0n",
+    "status": 200,
+    "finalUrl": "https://buy.stripe.com/dRmfZjadN7VM73i1sxgEg0n",
+    "title": "Catalyst Works",
+    "err": null
+  },
+  {
+    "viewport": "mobile375",
+    "name": "stripe-free-0-inactive",
+    "requested": "https://buy.stripe.com/dRm4gB4Tt8ZQ1IY2wBgEg0k",
+    "status": 200,
+    "finalUrl": "https://buy.stripe.com/dRm4gB4Tt8ZQ1IY2wBgEg0k",
+    "title": "Stripe Checkout",
+    "err": null
+  }
+]
