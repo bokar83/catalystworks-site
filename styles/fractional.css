@@ -17,6 +17,28 @@
    no CSS gradient bar standing in for an inked line.
 */
 
+/* ── No orphans (HARD RULE: minimum two words per line) ──────────────
+   The hero H1 on /fractional/ai/ broke as "...confusion and the" /
+   "overwhelm." at 1440, dropping one word onto its own line. `balance`
+   redistributes the headline across its lines instead, and `pretty` stops
+   the same thing happening at the end of any body paragraph or list item.
+   Scoped here rather than in lens-pages.css so it cannot alter a page that
+   was already signed off. */
+.hero h1,
+.section h2,
+.tier-name,
+.cta-strip h3,
+.cost h3 { text-wrap: balance; }
+
+.hero .lede,
+.section p,
+.section li,
+.tier p,
+.cost p,
+.plain p,
+.nots li,
+.step span { text-wrap: pretty; }
+
 /* ── Torn seam between major bands ───────────────────────────────── */
 .seam { display: block; width: 100%; height: 26px; line-height: 0; }
 .seam svg { display: block; width: 100%; height: 26px; }
