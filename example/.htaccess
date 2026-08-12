@@ -1,0 +1,20 @@
+# /example/ holds one-to-one artifacts.
+#
+# Each page under here is built for a single named person, handed to them by
+# URL in a message, and linked from nowhere else: not the nav, not index.html,
+# not sitemap.xml, not any listing page. It happens to live at a URL. It is not
+# part of the site.
+#
+# robots.txt at the root of this site deliberately allows everything, including
+# every AI crawler by name, because the rest of the site WANTS to be found. So
+# the noindex has to ride on the response itself. A Disallow line in robots.txt
+# would be worse than useless for this directory: it would stop a crawler from
+# ever fetching the page, and therefore from ever seeing that it is noindex, so
+# a URL discovered some other way could still be indexed. The header below
+# applies to every file here, now and later, without anyone remembering to put
+# a meta tag in the next one. The pages carry the meta tag as well.
+Options -Indexes
+
+<IfModule mod_headers.c>
+  Header set X-Robots-Tag "noindex, nofollow, noarchive, nosnippet"
+</IfModule>

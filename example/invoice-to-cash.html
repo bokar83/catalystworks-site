@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Invoice-to-cash read</title>
+<meta name="description" content="How long an invoice takes to turn into cash, per client, over time.">
+<meta name="author" content="Boubacar Barry / Catalyst Works">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<meta name="generator" content="invoice-to-cash-read; build 30dbee7acd7c38f7">
+<style>
+*,*::before,*::after{box-sizing:border-box}
+:root{
+  --paper:#E5E9E8; --panel:#F5F7F6; --panel-2:#EDF0EF;
+  --ink:#13181A; --ink-2:#4C575A; --ink-3:#6E797C;
+  --indigo:#1B3454; --indigo-2:#2D5589; --indigo-3:#8AACCB;
+  --ochre:#BE7330; --clay:#A03D2A;
+  --line:#BEC6C4; --line-2:#98A3A1; --line-3:#D5DBD9;
+  --sans:"Inter","Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+  --mono:ui-monospace,"SF Mono","Cascadia Mono",Consolas,"Liberation Mono",monospace;
+  --mod:min(1180px,100%);
+}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);
+  font-size:16px;line-height:1.6;text-wrap:pretty;
+  background-image:
+    linear-gradient(to right,rgba(27,52,84,.045) 1px,transparent 1px),
+    linear-gradient(to bottom,rgba(27,52,84,.045) 1px,transparent 1px);
+  background-size:28px 28px;
+}
+.wrap{width:var(--mod);margin:0 auto;padding:0 20px}
+p{max-width:66ch}
+
+/* ---- strip-weave band: modules of unequal width, seams left visible ---- */
+.weave{height:16px;width:100%;
+  background:
+    repeating-linear-gradient(90deg,
+      var(--indigo-2) 0 96px, var(--paper) 96px 99px,
+      var(--indigo) 99px 187px, var(--paper) 187px 190px,
+      var(--ochre) 190px 214px, var(--paper) 214px 217px,
+      var(--indigo) 217px 328px, var(--paper) 328px 331px,
+      var(--clay) 331px 349px, var(--paper) 349px 352px);
+}
+.weave.off{height:7px;background-position:113px 0;opacity:.5}
+
+/* ---- masthead ---- */
+header.mast{background:var(--indigo);color:#EAEFF3;padding:0 0 38px}
+header.mast .wrap{padding-top:34px}
+.mast-grid{display:grid;grid-template-columns:minmax(0,1fr) 290px;gap:16px 54px;align-items:end}
+/* technical-drawing key: corner ticks, mono annotation, no ornament */
+.spec{border:1px solid #33547C;padding:17px 18px;position:relative;background:#1F3B5F}
+.spec::before,.spec::after{content:"";position:absolute;width:9px;height:9px;border:1px solid var(--ochre)}
+.spec::before{top:-1px;left:-1px;border-right:0;border-bottom:0}
+.spec::after{bottom:-1px;right:-1px;border-left:0;border-top:0}
+.spec dl{margin:0}
+.spec dt{font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--indigo-3);margin-top:13px}
+.spec dt:first-child{margin-top:0}
+.spec dd{margin:4px 0 0;font-size:13.5px;line-height:1.45;color:#DCE6EE}
+.kicker{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--indigo-3);margin:0 0 14px}
+h1{font-size:clamp(28px,5.2vw,50px);line-height:1.08;margin:0 0 16px;font-weight:650;
+  letter-spacing:-.02em;max-width:19ch;text-wrap:balance}
+.sub{color:#B9CBDB;margin:0;max-width:56ch;font-size:clamp(15px,2.2vw,18px)}
+.mast-meta{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:22px;
+  font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--indigo-3)}
+
+/* ---- nav ---- */
+nav.qn{position:sticky;top:0;z-index:40;background:var(--panel);
+  border-bottom:1px solid var(--line-2);box-shadow:0 1px 0 var(--line-3)}
+nav.qn .wrap{display:flex;align-items:center;gap:10px;min-height:50px}
+nav.qn .brand{font-family:var(--mono);font-size:11px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--ink-2);margin-right:auto;white-space:nowrap}
+nav.qn ul{display:flex;gap:2px;list-style:none;margin:0;padding:0;flex-wrap:nowrap}
+nav.qn a{display:block;padding:7px 9px;font-family:var(--mono);font-size:10.5px;
+  letter-spacing:.07em;text-transform:uppercase;color:var(--ink-2);text-decoration:none;
+  border:1px solid transparent;border-radius:2px;white-space:nowrap}
+nav.qn a:hover,nav.qn a:focus-visible{color:var(--indigo);border-color:var(--line-2);background:#fff}
+#burger{display:none;background:var(--panel);border:1px solid var(--line-2);border-radius:2px;
+  padding:8px 12px;font-family:var(--mono);font-size:11px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--ink);cursor:pointer}
+
+/* ---- notice ---- */
+.notice{background:#F6EEE4;border-top:2px solid var(--ochre);border-bottom:1px solid var(--line)}
+.notice .wrap{padding-top:14px;padding-bottom:14px;display:flex;gap:14px;align-items:flex-start}
+.notice .tag{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  background:var(--ochre);color:#fff;padding:4px 8px;border-radius:2px;white-space:nowrap;margin-top:2px}
+.notice p{margin:0;font-size:14.5px;color:#5A4326;max-width:78ch}
+.notice .body{min-width:0}
+
+/* ---- the honest frame ----
+   The single most important thing on this page is that nobody here knows what
+   the actual problem is yet. It is stated twice on purpose: once inside the
+   masthead so it is on the first screen, and once as the first band under the
+   nav so it is unmissable on the way into the data. */
+.mast-honest{margin:20px 0 0;padding:14px 16px;background:#1F3B5F;
+  border:1px solid #33547C;border-left:3px solid var(--ochre);
+  max-width:56ch;font-size:14.5px;line-height:1.5;color:#DCE6EE}
+.mast-honest strong{color:#fff;font-weight:640}
+.notice.lead{background:#E9EEF3;border-top:2px solid var(--indigo-2)}
+.notice.lead .tag{background:var(--indigo)}
+.notice.lead p{color:#22303D;font-size:15px}
+.notice.lead p + p{margin-top:10px}
+.notice.lead strong{color:var(--indigo);font-weight:650}
+
+/* ---- sections ---- */
+section{margin:0;border-bottom:1px solid var(--line);scroll-margin-top:58px}
+section > .wrap{padding-top:34px;padding-bottom:40px}
+.s-head{display:flex;align-items:baseline;gap:14px;cursor:pointer;user-select:none;
+  border:0;background:none;padding:0;width:100%;text-align:left;font-family:inherit;color:inherit}
+.s-num{font-family:var(--mono);font-size:12px;letter-spacing:.14em;color:var(--indigo-2);
+  border:1px solid var(--line-2);padding:3px 7px;border-radius:2px;background:#fff;flex:none}
+h2{font-size:clamp(20px,3.2vw,27px);margin:0;font-weight:640;letter-spacing:-.01em;
+  flex:1;text-wrap:balance}
+.chev{font-family:var(--mono);font-size:12px;color:var(--ink-3);flex:none;
+  border:1px solid var(--line-2);border-radius:2px;padding:3px 8px;background:#fff}
+.s-body{margin-top:20px}
+.s-body[hidden]{display:none}
+.lede{font-size:17px;color:var(--ink-2);margin-top:0}
+
+/* ---- panels + strip grid ---- */
+.strips{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));
+  gap:1px;background:var(--line-2);border:1px solid var(--line-2);margin:22px 0}
+.strip{background:var(--panel);padding:18px 16px 16px;position:relative}
+.strip::before{content:"";position:absolute;top:0;left:0;width:26px;height:3px;background:var(--indigo)}
+.strip.warn::before{background:var(--clay)}
+.strip.mid::before{background:var(--ochre)}
+.strip .lb{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-3);margin:0 0 8px}
+.strip .v{font-size:clamp(22px,3.6vw,31px);font-weight:650;letter-spacing:-.02em;line-height:1.1;
+  font-variant-numeric:tabular-nums}
+.strip .n{font-size:13px;color:var(--ink-2);margin:6px 0 0;max-width:none}
+
+.finding{border:1px solid var(--indigo);background:var(--panel);padding:20px 22px;margin:22px 0;
+  position:relative}
+.finding::after{content:"";position:absolute;inset:5px;border:1px solid var(--line-3);pointer-events:none}
+.finding .lb{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--indigo-2);margin:0 0 10px}
+.finding p{margin:0;font-size:17px;line-height:1.55}
+.finding strong{color:var(--indigo);font-weight:650}
+
+/* ---- table ---- */
+.tw{overflow-x:auto;border:1px solid var(--line-2);background:var(--panel);margin:22px 0}
+table{border-collapse:collapse;width:100%;min-width:660px;font-variant-numeric:tabular-nums}
+th,td{padding:11px 13px;text-align:right;border-bottom:1px solid var(--line-3);font-size:14px;
+  white-space:nowrap}
+th{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink-2);background:var(--panel-2);border-bottom:1px solid var(--line-2);
+  position:sticky;top:0}
+th:first-child,td:first-child{text-align:left;white-space:normal;min-width:150px}
+tbody tr:hover{background:#fff}
+td.name{font-weight:600}
+.pill{font-family:var(--mono);font-size:10.5px;padding:2px 7px;border-radius:2px;
+  border:1px solid var(--line-2);color:var(--ink-2);background:#fff}
+.pill.up{color:var(--clay);border-color:var(--clay)}
+.pill.flat{color:var(--ink-3)}
+.bad{color:var(--clay);font-weight:640}
+.good{color:var(--indigo-2)}
+
+/* ---- aging bars ---- */
+.age{margin:22px 0;border:1px solid var(--line-2);background:var(--panel)}
+.age-row{display:grid;grid-template-columns:130px 1fr 108px;gap:14px;align-items:center;
+  padding:13px 16px;border-bottom:1px solid var(--line-3)}
+.age-row:last-child{border-bottom:0}
+.age-lb{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+.age-track{height:16px;background:var(--panel-2);border:1px solid var(--line-3);position:relative}
+.age-fill{position:absolute;inset:0 auto 0 0;background:var(--indigo-2)}
+.age-fill.w1{background:var(--ochre)}
+.age-fill.w2{background:var(--clay)}
+.age-zero{position:absolute;inset:0;display:flex;align-items:center;padding-left:9px;
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.age-v{text-align:right;font-variant-numeric:tabular-nums;font-weight:620;font-size:14px}
+
+/* ---- client blocks ---- */
+.client{border:1px solid var(--line-2);background:var(--panel);margin:20px 0}
+.client-h{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 18px;padding:15px 18px;
+  border-bottom:1px solid var(--line-2);background:var(--panel-2)}
+.client-h h3{margin:0;font-size:18px;font-weight:640;flex:1 1 190px}
+.client-h .m{font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--ink-2);
+  text-transform:uppercase}
+.client-b{padding:10px 14px 6px;overflow-x:auto}
+svg.tl{display:block;width:100%;min-width:620px;height:auto}
+svg.tl .grid{stroke:var(--line-3);stroke-width:1}
+svg.tl .base{stroke:var(--line-3);stroke-width:1;stroke-dasharray:2 4}
+svg.tl .terms{stroke:var(--indigo);stroke-width:1.4;stroke-dasharray:5 3}
+svg.tl .bar{stroke:var(--indigo-2);stroke-width:8;stroke-linecap:butt}
+svg.tl .bar-over{stroke:var(--clay);stroke-width:8}
+svg.tl .bar-open{stroke:var(--ochre);stroke-width:8;stroke-dasharray:7 3}
+svg.tl .head{fill:var(--ochre)}
+svg.tl .cap{stroke:var(--indigo);stroke-width:1.6}
+svg.tl .dim,svg.tl .dim-t{stroke:var(--clay);stroke-width:1}
+svg.tl text{font-family:var(--mono);font-size:11px;fill:var(--ink-2)}
+svg.tl .ax{font-size:10px;fill:var(--ink-3)}
+svg.tl .ax-unit,svg.tl .terms-lb{font-size:9.5px;letter-spacing:.14em;fill:var(--indigo-2)}
+svg.tl .id{font-size:10.5px;fill:var(--ink-3)}
+svg.tl .n{font-size:11px;fill:var(--ink);font-weight:600}
+svg.tl .n.late{fill:var(--clay)}
+svg.tl .n.open{fill:var(--ochre)}
+svg.tl .dim-lb{font-size:9px;letter-spacing:.1em;fill:var(--clay)}
+
+.legend{display:flex;flex-wrap:wrap;gap:8px 20px;margin:14px 0 0;padding:0;list-style:none;
+  font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--ink-2);text-transform:uppercase}
+.legend li{display:flex;align-items:center;gap:8px}
+.sw{width:22px;height:7px;flex:none}
+.sw.a{background:var(--indigo-2)} .sw.b{background:var(--clay)}
+.sw.c{background:var(--ochre)}
+.sw.d{border-top:1.4px dashed var(--indigo);height:0}
+
+pre{background:var(--panel);border:1px solid var(--line-2);padding:15px;overflow-x:auto;
+  font-family:var(--mono);font-size:12.5px;line-height:1.7;margin:16px 0}
+code{font-family:var(--mono);font-size:.92em}
+ul.plain{padding-left:20px;max-width:68ch}
+ul.plain li{margin:8px 0}
+
+footer{background:var(--indigo);color:#A9C0D4;padding:0 0 34px;border:0}
+footer .wrap{padding-top:26px}
+footer p{font-size:13.5px;max-width:70ch;margin:0 0 10px;color:#A9C0D4}
+footer .sig{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;
+  color:#6E8CAA;margin-top:16px}
+
+#top{position:fixed;right:16px;bottom:16px;z-index:60;display:none;
+  background:var(--indigo);color:#fff;border:1px solid var(--indigo);border-radius:2px;
+  padding:12px 14px;font-family:var(--mono);font-size:11px;letter-spacing:.1em;
+  text-transform:uppercase;cursor:pointer;box-shadow:0 3px 12px rgba(19,24,26,.28)}
+#top:hover{background:var(--indigo-2)}
+#top.on{display:block}
+
+@media (max-width:980px){
+  .mast-grid{grid-template-columns:minmax(0,1fr);gap:26px}
+  .spec{max-width:520px}
+  nav.qn ul{flex-wrap:wrap}
+}
+@media (max-width:760px){
+  .wrap{padding:0 15px}
+  #burger{display:block}
+  nav.qn ul{display:none;position:absolute;top:100%;left:0;right:0;background:var(--panel);
+    border-bottom:1px solid var(--line-2);flex-direction:column;gap:0;padding:6px;
+    box-shadow:0 8px 18px rgba(19,24,26,.14)}
+  nav.qn ul.open{display:flex}
+  nav.qn a{padding:11px 12px;border-bottom:1px solid var(--line-3)}
+  .age-row{grid-template-columns:1fr;gap:7px}
+  .age-v{text-align:left}
+  .notice .wrap{flex-direction:column;gap:9px}
+  section > .wrap{padding-top:26px;padding-bottom:30px}
+}
+@media print{nav.qn,#top{display:none}.s-body{display:block!important}}
+</style></head>
+<body>
+<a id="pagetop"></a>
+<header class="mast"><div class="weave"></div><div class="weave off"></div><div class="wrap mast-grid">
+<div>
+<p class="kicker">One example &middot; not a diagnosis</p>
+<h1>How long an invoice takes to turn into cash</h1>
+<p class="sub">One page, one question, asked of every invoice and every client. Point it at a CSV and
+it draws you the answer.</p>
+<p class="mast-honest"><strong>I do not know what your invoicing problem is.</strong> This is one way of
+looking at it, built on numbers I made up, so there is something on a screen instead of another
+question. Read the note below before you read the data.</p>
+<div class="mast-meta"><span>72 invoices</span><span>6 clients</span>
+<span>12 months</span><span>Net 30 terms</span></div>
+</div>
+<aside class="spec"><dl>
+<dt>It reads</dt><dd>One CSV. Invoice, client, amount, and the three dates.</dd>
+<dt>It answers</dt><dd>Days from sent to paid, per client, and whether that number is moving.</dd>
+<dt>It needs</dt><dd>No install, no account, and nothing uploaded anywhere.</dd>
+</dl></aside>
+</div></header>
+
+<nav class="qn"><div class="wrap">
+<span class="brand">Invoice-to-cash read</span>
+<button id="burger" aria-expanded="false" aria-controls="qnav">Menu</button>
+<ul id="qnav"><li><a href="#read">01 The read</a></li><li><a href="#open">02 Open now</a></li><li><a href="#clients">03 Clients</a></li><li><a href="#timelines">04 Timelines</a></li><li><a href="#drift">05 Drift</a></li><li><a href="#runs">06 What it runs on</a></li></ul>
+</div></nav>
+
+<div class="notice lead"><div class="wrap"><span class="tag">Read this first</span>
+<div class="body">
+<p><strong>I do not know what your invoicing problem actually is.</strong> You told me it is ongoing and
+that it is with your best clients. That is everything I have. I have not seen one of your numbers, and I
+have not decided what is causing it.</p>
+<p>So take this as one example of a way to look at the problem, not a fix for it. I am shooting in the
+dark here, on purpose, because I would rather put something concrete in front of you than send you
+another question.</p>
+<p>Once I know the specific problem, I would build to that exact thing instead. It probably would not
+look much like this page.</p>
+</div></div></div>
+
+<div class="notice"><div class="wrap"><span class="tag">Invented data</span>
+<p>Every client name, amount and date on this page was made up to build the example. No real invoice,
+client or account was used, and none is needed to run it.</p></div></div>
+
+<section id="read"><div class="wrap">
+<button class="s-head" data-target="read-b" aria-expanded="true" aria-controls="read-b">
+<span class="s-num">01</span><h2>What the numbers say</h2><span class="chev">&minus; HIDE</span></button>
+<div class="s-body" id="read-b"><p class="lede">One question, asked of every invoice: how many days between sending it and
+having the money. Nothing here judges why a given invoice took as long as it took. Approvals, disputes,
+rework and plain slow payment all land in the same column, as days on the clock.</p>
+<div class="strips"><div class="strip "><p class="lb">Average wait for cash</p><div class="v">37 days</div><p class="n">Across all 61 paid invoices, on terms of 30 days.</p></div><div class="strip mid"><p class="lb">Paid after terms</p><div class="v">62%</div><p class="n">38 of 61 invoices landed late.</p></div><div class="strip warn"><p class="lb">Open right now</p><div class="v">$67,719</div><p class="n">11 invoices, oldest at 64 days.</p></div><div class="strip warn"><p class="lb">Slowest client drift</p><div class="v">+18 days</div><p class="n">Copper Ridge Partners, newer half against older half.</p></div></div>
+<div class="finding"><p class="lb">The pattern this ledger has</p>
+<p>The two clients who bring in the most money are also the two who take the longest to pay.
+<strong>Copper Ridge Partners</strong> and <strong>Halyard Group</strong> are
+60% of everything billed, and they average <strong>52 days</strong> to cash
+against <strong>31 days</strong> for everybody else. That gap is the whole problem in one
+number, and it is the reason a problem like this stays open. The accounts you would chase hardest are
+the accounts you least want to chase.</p></div></div>
+</div></section><section id="open"><div class="wrap">
+<button class="s-head" data-target="open-b" aria-expanded="true" aria-controls="open-b">
+<span class="s-num">02</span><h2>Money sitting out there right now</h2><span class="chev">&minus; HIDE</span></button>
+<div class="s-body" id="open-b"><p class="lede">The same open invoices, sorted by how long they have been sitting.
+Of $67,719 outstanding, <strong>$36,695</strong> is already past terms.</p>
+<div class="age"><div class="age-row"><div class="age-lb">Not yet due</div><div class="age-track"><div class="age-fill " style="width:100.0%"></div></div><div class="age-v">$31,024<br><span class="pill">6 inv</span></div></div><div class="age-row"><div class="age-lb">1 to 30 over</div><div class="age-track"><div class="age-fill " style="width:86.9%"></div></div><div class="age-v">$26,967<br><span class="pill">4 inv</span></div></div><div class="age-row"><div class="age-lb">31 to 60 over</div><div class="age-track"><div class="age-fill w1" style="width:31.4%"></div></div><div class="age-v">$9,728<br><span class="pill">1 inv</span></div></div><div class="age-row"><div class="age-lb">Over 60</div><div class="age-track"><div class="age-fill w2" style="width:0.0%"></div></div><div class="age-v">$0<br><span class="pill">0 inv</span></div></div></div></div>
+</div></section><section id="clients"><div class="wrap">
+<button class="s-head" data-target="clients-b" aria-expanded="true" aria-controls="clients-b">
+<span class="s-num">03</span><h2>Every client on one line</h2><span class="chev">&minus; HIDE</span></button>
+<div class="s-body" id="clients-b"><p class="lede">Sorted by money billed, biggest first. The column that matters is
+average days to cash, and next to it the drift, which is the newer half of their invoices measured
+against the older half.</p>
+<div class="tw"><table><thead><tr>
+<th>Client</th><th>Billed</th><th>Inv</th><th>Avg days</th><th>Median</th><th>Worst</th>
+<th>Late</th><th>Drift</th><th>Open now</th></tr></thead>
+<tbody><tr><td class="name">Copper Ridge Partners</td><td>$119,008</td><td>12</td><td class="bad">56</td><td>54</td><td>79</td><td>9</td><td><span class="pill up">+18</span></td><td>$30,581</td></tr><tr><td class="name">Halyard Group</td><td>$95,079</td><td>12</td><td class="">47</td><td>46</td><td>58</td><td>10</td><td><span class="pill up">+15</span></td><td>$15,604</td></tr><tr><td class="name">Birchwood Civic</td><td>$48,637</td><td>12</td><td class="">48</td><td>50</td><td>62</td><td>9</td><td><span class="pill flat">-11</span></td><td>$9,748</td></tr><tr><td class="name">Wasatch Fabrication</td><td>$44,777</td><td>12</td><td class="">42</td><td>41</td><td>51</td><td>10</td><td><span class="pill flat">+5</span></td><td>$7,685</td></tr><tr><td class="name">Alder &amp; Kemp</td><td>$30,946</td><td>12</td><td class="good">21</td><td>21</td><td>25</td><td>0</td><td><span class="pill flat">-3</span></td><td>$2,660</td></tr><tr><td class="name">Nine Mile Supply</td><td>$15,920</td><td>12</td><td class="good">12</td><td>12</td><td>15</td><td>0</td><td><span class="pill flat">-1</span></td><td>$1,441</td></tr></tbody></table></div>
+<p style="font-size:14px;color:var(--ink-2)">Drift is measured in days. A plus number means their
+recent invoices are taking longer than their older ones did.</p></div>
+</div></section><section id="timelines"><div class="wrap">
+<button class="s-head" data-target="timelines-b" aria-expanded="true" aria-controls="timelines-b">
+<span class="s-num">04</span><h2>Every invoice, drawn to scale</h2><span class="chev">&minus; HIDE</span></button>
+<div class="s-body" id="timelines-b"><p class="lede">Every invoice as a measured line. The line starts the day it went out
+and stops the day the money arrived. The dashed vertical is the terms date, so anything crossing it was
+paid late, and the red section is exactly how far past.</p>
+<ul class="legend">
+<li><span class="sw a"></span>Inside terms</li>
+<li><span class="sw b"></span>Past terms</li>
+<li><span class="sw c"></span>Still open</li>
+<li><span class="sw d"></span>Terms date</li>
+</ul>
+<div class="client"><div class="client-h">
+<h3>Copper Ridge Partners</h3>
+<span class="m">$119,008 billed</span>
+<span class="m">56 day average</span>
+<span class="m">9 of 9 late</span>
+</div><div class="client-b"><svg class="tl" viewBox="0 0 1000 410" role="img" aria-label="Invoice timelines for Copper Ridge Partners"><line class="grid" x1="138.0" y1="38" x2="138.0" y2="388"/><text class="ax" x="138.0" y="32" text-anchor="middle">0</text><line class="grid" x1="392.7" y1="38" x2="392.7" y2="388"/><text class="ax" x="392.7" y="32" text-anchor="middle">30</text><line class="grid" x1="647.3" y1="38" x2="647.3" y2="388"/><text class="ax" x="647.3" y="32" text-anchor="middle">60</text><line class="grid" x1="902.0" y1="38" x2="902.0" y2="388"/><text class="ax" x="902.0" y="32" text-anchor="middle">90</text><text class="ax-unit" x="138" y="404">DAYS FROM INVOICE SENT</text><line class="terms" x1="392.7" y1="38" x2="392.7" y2="388"/><text class="terms-lb" x="392.7" y="17" text-anchor="middle">TERMS &#8595;</text><line class="base" x1="138" y1="60.0" x2="902" y2="60.0"/><text class="id" x="118" y="64.0" text-anchor="end">INV-1041</text><line class="bar" x1="138" y1="60.0" x2="392.7" y2="60.0"/><line class="bar-over" x1="392.7" y1="60.0" x2="460.6" y2="60.0"/><line class="cap" x1="460.6" y1="55.0" x2="460.6" y2="65.0"/><text class="n late" x="916" y="64.0">38</text><line class="base" x1="138" y1="88.0" x2="902" y2="88.0"/><text class="id" x="118" y="92.0" text-anchor="end">INV-1042</text><line class="bar" x1="138" y1="88.0" x2="392.7" y2="88.0"/><line class="bar-over" x1="392.7" y1="88.0" x2="511.5" y2="88.0"/><line class="cap" x1="511.5" y1="83.0" x2="511.5" y2="93.0"/><text class="n late" x="916" y="92.0">44</text><line class="base" x1="138" y1="116.0" x2="902" y2="116.0"/><text class="id" x="118" y="120.0" text-anchor="end">INV-1043</text><line class="bar" x1="138" y1="116.0" x2="392.7" y2="116.0"/><line class="bar-over" x1="392.7" y1="116.0" x2="579.4" y2="116.0"/><line class="cap" x1="579.4" y1="111.0" x2="579.4" y2="121.0"/><text class="n late" x="916" y="120.0">52</text><line class="base" x1="138" y1="144.0" x2="902" y2="144.0"/><text class="id" x="118" y="148.0" text-anchor="end">INV-1044</text><line class="bar" x1="138" y1="144.0" x2="392.7" y2="144.0"/><line class="bar-over" x1="392.7" y1="144.0" x2="570.9" y2="144.0"/><line class="cap" x1="570.9" y1="139.0" x2="570.9" y2="149.0"/><text class="n late" x="916" y="148.0">51</text><line class="base" x1="138" y1="172.0" x2="902" y2="172.0"/><text class="id" x="118" y="176.0" text-anchor="end">INV-1045</text><line class="bar" x1="138" y1="172.0" x2="392.7" y2="172.0"/><line class="bar-over" x1="392.7" y1="172.0" x2="613.4" y2="172.0"/><line class="cap" x1="613.4" y1="167.0" x2="613.4" y2="177.0"/><text class="n late" x="916" y="176.0">56</text><line class="base" x1="138" y1="200.0" x2="902" y2="200.0"/><text class="id" x="118" y="204.0" text-anchor="end">INV-1046</text><line class="bar" x1="138" y1="200.0" x2="392.7" y2="200.0"/><line class="bar-over" x1="392.7" y1="200.0" x2="596.4" y2="200.0"/><line class="cap" x1="596.4" y1="195.0" x2="596.4" y2="205.0"/><text class="n late" x="916" y="204.0">54</text><line class="base" x1="138" y1="228.0" x2="902" y2="228.0"/><text class="id" x="118" y="232.0" text-anchor="end">INV-1047</text><line class="bar" x1="138" y1="228.0" x2="392.7" y2="228.0"/><line class="bar-over" x1="392.7" y1="228.0" x2="689.8" y2="228.0"/><line class="cap" x1="689.8" y1="223.0" x2="689.8" y2="233.0"/><text class="n late" x="916" y="232.0">65</text><line class="base" x1="138" y1="256.0" x2="902" y2="256.0"/><text class="id" x="118" y="260.0" text-anchor="end">INV-1048</text><line class="bar" x1="138" y1="256.0" x2="392.7" y2="256.0"/><line class="bar-over" x1="392.7" y1="256.0" x2="698.3" y2="256.0"/><line class="cap" x1="698.3" y1="251.0" x2="698.3" y2="261.0"/><text class="n late" x="916" y="260.0">66</text><line class="base" x1="138" y1="284.0" x2="902" y2="284.0"/><text class="id" x="118" y="288.0" text-anchor="end">INV-1049</text><line class="bar" x1="138" y1="284.0" x2="392.7" y2="284.0"/><line class="bar-over" x1="392.7" y1="284.0" x2="808.6" y2="284.0"/><line class="cap" x1="808.6" y1="279.0" x2="808.6" y2="289.0"/><text class="n late" x="916" y="288.0">79</text><line class="dim" x1="392.7" y1="295.0" x2="808.6" y2="295.0"/><line class="dim-t" x1="392.7" y1="292.0" x2="392.7" y2="298.0"/><line class="dim-t" x1="808.6" y1="292.0" x2="808.6" y2="298.0"/><text class="dim-lb" x="600.6" y="306.0" text-anchor="middle">+49 DAYS PAST TERMS</text><line class="base" x1="138" y1="312.0" x2="902" y2="312.0"/><text class="id" x="118" y="316.0" text-anchor="end">INV-1050</text><line class="bar" x1="138" y1="312.0" x2="392.7" y2="312.0"/><line class="bar-open" x1="392.7" y1="312.0" x2="681.3" y2="312.0"/><polygon class="head" points="681.3,307.5 690.3,312.0 681.3,316.5"/><text class="n open" x="916" y="316.0">64d open</text><line class="base" x1="138" y1="340.0" x2="902" y2="340.0"/><text class="id" x="118" y="344.0" text-anchor="end">INV-1051</text><line class="bar" x1="138" y1="340.0" x2="392.7" y2="340.0"/><line class="bar-open" x1="392.7" y1="340.0" x2="426.6" y2="340.0"/><polygon class="head" points="426.6,335.5 435.6,340.0 426.6,344.5"/><text class="n open" x="916" y="344.0">34d open</text><line class="base" x1="138" y1="368.0" x2="902" y2="368.0"/><text class="id" x="118" y="372.0" text-anchor="end">INV-1052</text><line class="bar" x1="138" y1="368.0" x2="188.9" y2="368.0"/><polygon class="head" points="188.9,363.5 197.9,368.0 188.9,372.5"/><text class="n open" x="916" y="372.0">6d open</text></svg></div></div><div class="client"><div class="client-h">
+<h3>Halyard Group</h3>
+<span class="m">$95,079 billed</span>
+<span class="m">47 day average</span>
+<span class="m">10 of 10 late</span>
+</div><div class="client-b"><svg class="tl" viewBox="0 0 1000 410" role="img" aria-label="Invoice timelines for Halyard Group"><line class="grid" x1="138.0" y1="38" x2="138.0" y2="388"/><text class="ax" x="138.0" y="32" text-anchor="middle">0</text><line class="grid" x1="392.7" y1="38" x2="392.7" y2="388"/><text class="ax" x="392.7" y="32" text-anchor="middle">30</text><line class="grid" x1="647.3" y1="38" x2="647.3" y2="388"/><text class="ax" x="647.3" y="32" text-anchor="middle">60</text><line class="grid" x1="902.0" y1="38" x2="902.0" y2="388"/><text class="ax" x="902.0" y="32" text-anchor="middle">90</text><text class="ax-unit" x="138" y="404">DAYS FROM INVOICE SENT</text><line class="terms" x1="392.7" y1="38" x2="392.7" y2="388"/><text class="terms-lb" x="392.7" y="17" text-anchor="middle">TERMS &#8595;</text><line class="base" x1="138" y1="60.0" x2="902" y2="60.0"/><text class="id" x="118" y="64.0" text-anchor="end">INV-1053</text><line class="bar" x1="138" y1="60.0" x2="392.7" y2="60.0"/><line class="bar-over" x1="392.7" y1="60.0" x2="452.1" y2="60.0"/><line class="cap" x1="452.1" y1="55.0" x2="452.1" y2="65.0"/><text class="n late" x="916" y="64.0">37</text><line class="base" x1="138" y1="88.0" x2="902" y2="88.0"/><text class="id" x="118" y="92.0" text-anchor="end">INV-1054</text><line class="bar" x1="138" y1="88.0" x2="392.7" y2="88.0"/><line class="bar-over" x1="392.7" y1="88.0" x2="460.6" y2="88.0"/><line class="cap" x1="460.6" y1="83.0" x2="460.6" y2="93.0"/><text class="n late" x="916" y="92.0">38</text><line class="base" x1="138" y1="116.0" x2="902" y2="116.0"/><text class="id" x="118" y="120.0" text-anchor="end">INV-1055</text><line class="bar" x1="138" y1="116.0" x2="392.7" y2="116.0"/><line class="bar-over" x1="392.7" y1="116.0" x2="477.6" y2="116.0"/><line class="cap" x1="477.6" y1="111.0" x2="477.6" y2="121.0"/><text class="n late" x="916" y="120.0">40</text><line class="base" x1="138" y1="144.0" x2="902" y2="144.0"/><text class="id" x="118" y="148.0" text-anchor="end">INV-1056</text><line class="bar" x1="138" y1="144.0" x2="392.7" y2="144.0"/><line class="bar-over" x1="392.7" y1="144.0" x2="486.0" y2="144.0"/><line class="cap" x1="486.0" y1="139.0" x2="486.0" y2="149.0"/><text class="n late" x="916" y="148.0">41</text><line class="base" x1="138" y1="172.0" x2="902" y2="172.0"/><text class="id" x="118" y="176.0" text-anchor="end">INV-1057</text><line class="bar" x1="138" y1="172.0" x2="392.7" y2="172.0"/><line class="bar-over" x1="392.7" y1="172.0" x2="503.0" y2="172.0"/><line class="cap" x1="503.0" y1="167.0" x2="503.0" y2="177.0"/><text class="n late" x="916" y="176.0">43</text><line class="base" x1="138" y1="200.0" x2="902" y2="200.0"/><text class="id" x="118" y="204.0" text-anchor="end">INV-1058</text><line class="bar" x1="138" y1="200.0" x2="392.7" y2="200.0"/><line class="bar-over" x1="392.7" y1="200.0" x2="596.4" y2="200.0"/><line class="cap" x1="596.4" y1="195.0" x2="596.4" y2="205.0"/><text class="n late" x="916" y="204.0">54</text><line class="base" x1="138" y1="228.0" x2="902" y2="228.0"/><text class="id" x="118" y="232.0" text-anchor="end">INV-1059</text><line class="bar" x1="138" y1="228.0" x2="392.7" y2="228.0"/><line class="bar-over" x1="392.7" y1="228.0" x2="630.4" y2="228.0"/><line class="cap" x1="630.4" y1="223.0" x2="630.4" y2="233.0"/><text class="n late" x="916" y="232.0">58</text><line class="dim" x1="392.7" y1="239.0" x2="630.4" y2="239.0"/><line class="dim-t" x1="392.7" y1="236.0" x2="392.7" y2="242.0"/><line class="dim-t" x1="630.4" y1="236.0" x2="630.4" y2="242.0"/><text class="dim-lb" x="511.5" y="250.0" text-anchor="middle">+28 DAYS PAST TERMS</text><line class="base" x1="138" y1="256.0" x2="902" y2="256.0"/><text class="id" x="118" y="260.0" text-anchor="end">INV-1060</text><line class="bar" x1="138" y1="256.0" x2="392.7" y2="256.0"/><line class="bar-over" x1="392.7" y1="256.0" x2="562.4" y2="256.0"/><line class="cap" x1="562.4" y1="251.0" x2="562.4" y2="261.0"/><text class="n late" x="916" y="260.0">50</text><line class="base" x1="138" y1="284.0" x2="902" y2="284.0"/><text class="id" x="118" y="288.0" text-anchor="end">INV-1061</text><line class="bar" x1="138" y1="284.0" x2="392.7" y2="284.0"/><line class="bar-over" x1="392.7" y1="284.0" x2="621.9" y2="284.0"/><line class="cap" x1="621.9" y1="279.0" x2="621.9" y2="289.0"/><text class="n late" x="916" y="288.0">57</text><line class="base" x1="138" y1="312.0" x2="902" y2="312.0"/><text class="id" x="118" y="316.0" text-anchor="end">INV-1062</text><line class="bar" x1="138" y1="312.0" x2="392.7" y2="312.0"/><line class="bar-over" x1="392.7" y1="312.0" x2="596.4" y2="312.0"/><line class="cap" x1="596.4" y1="307.0" x2="596.4" y2="317.0"/><text class="n late" x="916" y="316.0">54</text><line class="base" x1="138" y1="340.0" x2="902" y2="340.0"/><text class="id" x="118" y="344.0" text-anchor="end">INV-1063</text><line class="bar" x1="138" y1="340.0" x2="392.7" y2="340.0"/><line class="bar-open" x1="392.7" y1="340.0" x2="418.1" y2="340.0"/><polygon class="head" points="418.1,335.5 427.1,340.0 418.1,344.5"/><text class="n open" x="916" y="344.0">33d open</text><line class="base" x1="138" y1="368.0" x2="902" y2="368.0"/><text class="id" x="118" y="372.0" text-anchor="end">INV-1064</text><line class="bar" x1="138" y1="368.0" x2="138.0" y2="368.0"/><polygon class="head" points="138.0,363.5 147.0,368.0 138.0,372.5"/><text class="n open" x="916" y="372.0">0d open</text></svg></div></div><div class="client"><div class="client-h">
+<h3>Birchwood Civic</h3>
+<span class="m">$48,637 billed</span>
+<span class="m">48 day average</span>
+<span class="m">9 of 10 late</span>
+</div><div class="client-b"><svg class="tl" viewBox="0 0 1000 410" role="img" aria-label="Invoice timelines for Birchwood Civic"><line class="grid" x1="138.0" y1="38" x2="138.0" y2="388"/><text class="ax" x="138.0" y="32" text-anchor="middle">0</text><line class="grid" x1="392.7" y1="38" x2="392.7" y2="388"/><text class="ax" x="392.7" y="32" text-anchor="middle">30</text><line class="grid" x1="647.3" y1="38" x2="647.3" y2="388"/><text class="ax" x="647.3" y="32" text-anchor="middle">60</text><line class="grid" x1="902.0" y1="38" x2="902.0" y2="388"/><text class="ax" x="902.0" y="32" text-anchor="middle">90</text><text class="ax-unit" x="138" y="404">DAYS FROM INVOICE SENT</text><line class="terms" x1="392.7" y1="38" x2="392.7" y2="388"/><text class="terms-lb" x="392.7" y="17" text-anchor="middle">TERMS &#8595;</text><line class="base" x1="138" y1="60.0" x2="902" y2="60.0"/><text class="id" x="118" y="64.0" text-anchor="end">INV-1101</text><line class="bar" x1="138" y1="60.0" x2="392.7" y2="60.0"/><line class="bar-over" x1="392.7" y1="60.0" x2="604.9" y2="60.0"/><line class="cap" x1="604.9" y1="55.0" x2="604.9" y2="65.0"/><text class="n late" x="916" y="64.0">55</text><line class="base" x1="138" y1="88.0" x2="902" y2="88.0"/><text class="id" x="118" y="92.0" text-anchor="end">INV-1102</text><line class="bar" x1="138" y1="88.0" x2="392.7" y2="88.0"/><line class="bar-over" x1="392.7" y1="88.0" x2="503.0" y2="88.0"/><line class="cap" x1="503.0" y1="83.0" x2="503.0" y2="93.0"/><text class="n late" x="916" y="92.0">43</text><line class="base" x1="138" y1="116.0" x2="902" y2="116.0"/><text class="id" x="118" y="120.0" text-anchor="end">INV-1103</text><line class="bar" x1="138" y1="116.0" x2="392.7" y2="116.0"/><line class="bar-over" x1="392.7" y1="116.0" x2="604.9" y2="116.0"/><line class="cap" x1="604.9" y1="111.0" x2="604.9" y2="121.0"/><text class="n late" x="916" y="120.0">55</text><line class="base" x1="138" y1="144.0" x2="902" y2="144.0"/><text class="id" x="118" y="148.0" text-anchor="end">INV-1104</text><line class="bar" x1="138" y1="144.0" x2="392.7" y2="144.0"/><line class="bar-over" x1="392.7" y1="144.0" x2="579.4" y2="144.0"/><line class="cap" x1="579.4" y1="139.0" x2="579.4" y2="149.0"/><text class="n late" x="916" y="148.0">52</text><line class="base" x1="138" y1="172.0" x2="902" y2="172.0"/><text class="id" x="118" y="176.0" text-anchor="end">INV-1105</text><line class="bar" x1="138" y1="172.0" x2="392.7" y2="172.0"/><line class="bar-over" x1="392.7" y1="172.0" x2="664.3" y2="172.0"/><line class="cap" x1="664.3" y1="167.0" x2="664.3" y2="177.0"/><text class="n late" x="916" y="176.0">62</text><line class="dim" x1="392.7" y1="183.0" x2="664.3" y2="183.0"/><line class="dim-t" x1="392.7" y1="180.0" x2="392.7" y2="186.0"/><line class="dim-t" x1="664.3" y1="180.0" x2="664.3" y2="186.0"/><text class="dim-lb" x="528.5" y="194.0" text-anchor="middle">+32 DAYS PAST TERMS</text><line class="base" x1="138" y1="200.0" x2="902" y2="200.0"/><text class="id" x="118" y="204.0" text-anchor="end">INV-1106</text><line class="bar" x1="138" y1="200.0" x2="392.7" y2="200.0"/><line class="bar-over" x1="392.7" y1="200.0" x2="469.1" y2="200.0"/><line class="cap" x1="469.1" y1="195.0" x2="469.1" y2="205.0"/><text class="n late" x="916" y="204.0">39</text><line class="base" x1="138" y1="228.0" x2="902" y2="228.0"/><text class="id" x="118" y="232.0" text-anchor="end">INV-1107</text><line class="bar" x1="138" y1="228.0" x2="392.7" y2="228.0"/><line class="bar-over" x1="392.7" y1="228.0" x2="503.0" y2="228.0"/><line class="cap" x1="503.0" y1="223.0" x2="503.0" y2="233.0"/><text class="n late" x="916" y="232.0">43</text><line class="base" x1="138" y1="256.0" x2="902" y2="256.0"/><text class="id" x="118" y="260.0" text-anchor="end">INV-1108</text><line class="bar" x1="138" y1="256.0" x2="392.7" y2="256.0"/><line class="bar-over" x1="392.7" y1="256.0" x2="562.4" y2="256.0"/><line class="cap" x1="562.4" y1="251.0" x2="562.4" y2="261.0"/><text class="n late" x="916" y="260.0">50</text><line class="base" x1="138" y1="284.0" x2="902" y2="284.0"/><text class="id" x="118" y="288.0" text-anchor="end">INV-1109</text><line class="bar" x1="138" y1="284.0" x2="392.7" y2="284.0"/><line class="bar-over" x1="392.7" y1="284.0" x2="570.9" y2="284.0"/><line class="cap" x1="570.9" y1="279.0" x2="570.9" y2="289.0"/><text class="n late" x="916" y="288.0">51</text><line class="base" x1="138" y1="312.0" x2="902" y2="312.0"/><text class="id" x="118" y="316.0" text-anchor="end">INV-1110</text><line class="bar" x1="138" y1="312.0" x2="375.7" y2="312.0"/><line class="cap" x1="375.7" y1="307.0" x2="375.7" y2="317.0"/><text class="n" x="916" y="316.0">28</text><line class="base" x1="138" y1="340.0" x2="902" y2="340.0"/><text class="id" x="118" y="344.0" text-anchor="end">INV-1111</text><line class="bar" x1="138" y1="340.0" x2="392.7" y2="340.0"/><line class="bar-open" x1="392.7" y1="340.0" x2="409.6" y2="340.0"/><polygon class="head" points="409.6,335.5 418.6,340.0 409.6,344.5"/><text class="n open" x="916" y="344.0">32d open</text><line class="base" x1="138" y1="368.0" x2="902" y2="368.0"/><text class="id" x="118" y="372.0" text-anchor="end">INV-1112</text><line class="bar" x1="138" y1="368.0" x2="138.0" y2="368.0"/><polygon class="head" points="138.0,363.5 147.0,368.0 138.0,372.5"/><text class="n open" x="916" y="372.0">0d open</text></svg></div></div><div class="client"><div class="client-h">
+<h3>Wasatch Fabrication</h3>
+<span class="m">$44,777 billed</span>
+<span class="m">42 day average</span>
+<span class="m">10 of 10 late</span>
+</div><div class="client-b"><svg class="tl" viewBox="0 0 1000 410" role="img" aria-label="Invoice timelines for Wasatch Fabrication"><line class="grid" x1="138.0" y1="38" x2="138.0" y2="388"/><text class="ax" x="138.0" y="32" text-anchor="middle">0</text><line class="grid" x1="392.7" y1="38" x2="392.7" y2="388"/><text class="ax" x="392.7" y="32" text-anchor="middle">30</text><line class="grid" x1="647.3" y1="38" x2="647.3" y2="388"/><text class="ax" x="647.3" y="32" text-anchor="middle">60</text><line class="grid" x1="902.0" y1="38" x2="902.0" y2="388"/><text class="ax" x="902.0" y="32" text-anchor="middle">90</text><text class="ax-unit" x="138" y="404">DAYS FROM INVOICE SENT</text><line class="terms" x1="392.7" y1="38" x2="392.7" y2="388"/><text class="terms-lb" x="392.7" y="17" text-anchor="middle">TERMS &#8595;</text><line class="base" x1="138" y1="60.0" x2="902" y2="60.0"/><text class="id" x="118" y="64.0" text-anchor="end">INV-1065</text><line class="bar" x1="138" y1="60.0" x2="392.7" y2="60.0"/><line class="bar-over" x1="392.7" y1="60.0" x2="469.1" y2="60.0"/><line class="cap" x1="469.1" y1="55.0" x2="469.1" y2="65.0"/><text class="n late" x="916" y="64.0">39</text><line class="base" x1="138" y1="88.0" x2="902" y2="88.0"/><text class="id" x="118" y="92.0" text-anchor="end">INV-1066</text><line class="bar" x1="138" y1="88.0" x2="392.7" y2="88.0"/><line class="bar-over" x1="392.7" y1="88.0" x2="494.5" y2="88.0"/><line class="cap" x1="494.5" y1="83.0" x2="494.5" y2="93.0"/><text class="n late" x="916" y="92.0">42</text><line class="base" x1="138" y1="116.0" x2="902" y2="116.0"/><text class="id" x="118" y="120.0" text-anchor="end">INV-1067</text><line class="bar" x1="138" y1="116.0" x2="392.7" y2="116.0"/><line class="bar-over" x1="392.7" y1="116.0" x2="460.6" y2="116.0"/><line class="cap" x1="460.6" y1="111.0" x2="460.6" y2="121.0"/><text class="n late" x="916" y="120.0">38</text><line class="base" x1="138" y1="144.0" x2="902" y2="144.0"/><text class="id" x="118" y="148.0" text-anchor="end">INV-1068</text><line class="bar" x1="138" y1="144.0" x2="392.7" y2="144.0"/><line class="bar-over" x1="392.7" y1="144.0" x2="477.6" y2="144.0"/><line class="cap" x1="477.6" y1="139.0" x2="477.6" y2="149.0"/><text class="n late" x="916" y="148.0">40</text><line class="base" x1="138" y1="172.0" x2="902" y2="172.0"/><text class="id" x="118" y="176.0" text-anchor="end">INV-1069</text><line class="bar" x1="138" y1="172.0" x2="392.7" y2="172.0"/><line class="bar-over" x1="392.7" y1="172.0" x2="486.0" y2="172.0"/><line class="cap" x1="486.0" y1="167.0" x2="486.0" y2="177.0"/><text class="n late" x="916" y="176.0">41</text><line class="base" x1="138" y1="200.0" x2="902" y2="200.0"/><text class="id" x="118" y="204.0" text-anchor="end">INV-1070</text><line class="bar" x1="138" y1="200.0" x2="392.7" y2="200.0"/><line class="bar-over" x1="392.7" y1="200.0" x2="443.6" y2="200.0"/><line class="cap" x1="443.6" y1="195.0" x2="443.6" y2="205.0"/><text class="n late" x="916" y="204.0">36</text><line class="base" x1="138" y1="228.0" x2="902" y2="228.0"/><text class="id" x="118" y="232.0" text-anchor="end">INV-1071</text><line class="bar" x1="138" y1="228.0" x2="392.7" y2="228.0"/><line class="bar-over" x1="392.7" y1="228.0" x2="545.5" y2="228.0"/><line class="cap" x1="545.5" y1="223.0" x2="545.5" y2="233.0"/><text class="n late" x="916" y="232.0">48</text><line class="base" x1="138" y1="256.0" x2="902" y2="256.0"/><text class="id" x="118" y="260.0" text-anchor="end">INV-1072</text><line class="bar" x1="138" y1="256.0" x2="392.7" y2="256.0"/><line class="bar-over" x1="392.7" y1="256.0" x2="486.0" y2="256.0"/><line class="cap" x1="486.0" y1="251.0" x2="486.0" y2="261.0"/><text class="n late" x="916" y="260.0">41</text><line class="base" x1="138" y1="284.0" x2="902" y2="284.0"/><text class="id" x="118" y="288.0" text-anchor="end">INV-1073</text><line class="bar" x1="138" y1="284.0" x2="392.7" y2="284.0"/><line class="bar-over" x1="392.7" y1="284.0" x2="537.0" y2="284.0"/><line class="cap" x1="537.0" y1="279.0" x2="537.0" y2="289.0"/><text class="n late" x="916" y="288.0">47</text><line class="base" x1="138" y1="312.0" x2="902" y2="312.0"/><text class="id" x="118" y="316.0" text-anchor="end">INV-1074</text><line class="bar" x1="138" y1="312.0" x2="392.7" y2="312.0"/><line class="bar-over" x1="392.7" y1="312.0" x2="570.9" y2="312.0"/><line class="cap" x1="570.9" y1="307.0" x2="570.9" y2="317.0"/><text class="n late" x="916" y="316.0">51</text><line class="dim" x1="392.7" y1="323.0" x2="570.9" y2="323.0"/><line class="dim-t" x1="392.7" y1="320.0" x2="392.7" y2="326.0"/><line class="dim-t" x1="570.9" y1="320.0" x2="570.9" y2="326.0"/><text class="dim-lb" x="481.8" y="334.0" text-anchor="middle">+21 DAYS PAST TERMS</text><line class="base" x1="138" y1="340.0" x2="902" y2="340.0"/><text class="id" x="118" y="344.0" text-anchor="end">INV-1075</text><line class="bar" x1="138" y1="340.0" x2="392.7" y2="340.0"/><line class="bar-open" x1="392.7" y1="340.0" x2="409.6" y2="340.0"/><polygon class="head" points="409.6,335.5 418.6,340.0 409.6,344.5"/><text class="n open" x="916" y="344.0">32d open</text><line class="base" x1="138" y1="368.0" x2="902" y2="368.0"/><text class="id" x="118" y="372.0" text-anchor="end">INV-1076</text><line class="bar" x1="138" y1="368.0" x2="180.4" y2="368.0"/><polygon class="head" points="180.4,363.5 189.4,368.0 180.4,372.5"/><text class="n open" x="916" y="372.0">5d open</text></svg></div></div><div class="client"><div class="client-h">
+<h3>Alder &amp; Kemp</h3>
+<span class="m">$30,946 billed</span>
+<span class="m">21 day average</span>
+<span class="m">0 of 11 late</span>
+</div><div class="client-b"><svg class="tl" viewBox="0 0 1000 410" role="img" aria-label="Invoice timelines for Alder &amp; Kemp"><line class="grid" x1="138.0" y1="38" x2="138.0" y2="388"/><text class="ax" x="138.0" y="32" text-anchor="middle">0</text><line class="grid" x1="392.7" y1="38" x2="392.7" y2="388"/><text class="ax" x="392.7" y="32" text-anchor="middle">30</text><line class="grid" x1="647.3" y1="38" x2="647.3" y2="388"/><text class="ax" x="647.3" y="32" text-anchor="middle">60</text><line class="grid" x1="902.0" y1="38" x2="902.0" y2="388"/><text class="ax" x="902.0" y="32" text-anchor="middle">90</text><text class="ax-unit" x="138" y="404">DAYS FROM INVOICE SENT</text><line class="terms" x1="392.7" y1="38" x2="392.7" y2="388"/><text class="terms-lb" x="392.7" y="17" text-anchor="middle">TERMS &#8595;</text><line class="base" x1="138" y1="60.0" x2="902" y2="60.0"/><text class="id" x="118" y="64.0" text-anchor="end">INV-1077</text><line class="bar" x1="138" y1="60.0" x2="333.2" y2="60.0"/><line class="cap" x1="333.2" y1="55.0" x2="333.2" y2="65.0"/><text class="n" x="916" y="64.0">23</text><line class="base" x1="138" y1="88.0" x2="902" y2="88.0"/><text class="id" x="118" y="92.0" text-anchor="end">INV-1078</text><line class="bar" x1="138" y1="88.0" x2="299.3" y2="88.0"/><line class="cap" x1="299.3" y1="83.0" x2="299.3" y2="93.0"/><text class="n" x="916" y="92.0">19</text><line class="base" x1="138" y1="116.0" x2="902" y2="116.0"/><text class="id" x="118" y="120.0" text-anchor="end">INV-1079</text><line class="bar" x1="138" y1="116.0" x2="316.3" y2="116.0"/><line class="cap" x1="316.3" y1="111.0" x2="316.3" y2="121.0"/><text class="n" x="916" y="120.0">21</text><line class="base" x1="138" y1="144.0" x2="902" y2="144.0"/><text class="id" x="118" y="148.0" text-anchor="end">INV-1080</text><line class="bar" x1="138" y1="144.0" x2="324.8" y2="144.0"/><line class="cap" x1="324.8" y1="139.0" x2="324.8" y2="149.0"/><text class="n" x="916" y="148.0">22</text><line class="base" x1="138" y1="172.0" x2="902" y2="172.0"/><text class="id" x="118" y="176.0" text-anchor="end">INV-1081</text><line class="bar" x1="138" y1="172.0" x2="350.2" y2="172.0"/><line class="cap" x1="350.2" y1="167.0" x2="350.2" y2="177.0"/><text class="n" x="916" y="176.0">25</text><line class="base" x1="138" y1="200.0" x2="902" y2="200.0"/><text class="id" x="118" y="204.0" text-anchor="end">INV-1082</text><line class="bar" x1="138" y1="200.0" x2="316.3" y2="200.0"/><line class="cap" x1="316.3" y1="195.0" x2="316.3" y2="205.0"/><text class="n" x="916" y="204.0">21</text><line class="base" x1="138" y1="228.0" x2="902" y2="228.0"/><text class="id" x="118" y="232.0" text-anchor="end">INV-1083</text><line class="bar" x1="138" y1="228.0" x2="290.8" y2="228.0"/><line class="cap" x1="290.8" y1="223.0" x2="290.8" y2="233.0"/><text class="n" x="916" y="232.0">18</text><line class="base" x1="138" y1="256.0" x2="902" y2="256.0"/><text class="id" x="118" y="260.0" text-anchor="end">INV-1084</text><line class="bar" x1="138" y1="256.0" x2="316.3" y2="256.0"/><line class="cap" x1="316.3" y1="251.0" x2="316.3" y2="261.0"/><text class="n" x="916" y="260.0">21</text><line class="base" x1="138" y1="284.0" x2="902" y2="284.0"/><text class="id" x="118" y="288.0" text-anchor="end">INV-1085</text><line class="bar" x1="138" y1="284.0" x2="282.3" y2="284.0"/><line class="cap" x1="282.3" y1="279.0" x2="282.3" y2="289.0"/><text class="n" x="916" y="288.0">17</text><line class="base" x1="138" y1="312.0" x2="902" y2="312.0"/><text class="id" x="118" y="316.0" text-anchor="end">INV-1086</text><line class="bar" x1="138" y1="312.0" x2="324.8" y2="312.0"/><line class="cap" x1="324.8" y1="307.0" x2="324.8" y2="317.0"/><text class="n" x="916" y="316.0">22</text><line class="base" x1="138" y1="340.0" x2="902" y2="340.0"/><text class="id" x="118" y="344.0" text-anchor="end">INV-1087</text><line class="bar" x1="138" y1="340.0" x2="282.3" y2="340.0"/><line class="cap" x1="282.3" y1="335.0" x2="282.3" y2="345.0"/><text class="n" x="916" y="344.0">17</text><line class="base" x1="138" y1="368.0" x2="902" y2="368.0"/><text class="id" x="118" y="372.0" text-anchor="end">INV-1088</text><line class="bar" x1="138" y1="368.0" x2="172.0" y2="368.0"/><polygon class="head" points="172.0,363.5 181.0,368.0 172.0,372.5"/><text class="n open" x="916" y="372.0">4d open</text></svg></div></div><div class="client"><div class="client-h">
+<h3>Nine Mile Supply</h3>
+<span class="m">$15,920 billed</span>
+<span class="m">12 day average</span>
+<span class="m">0 of 11 late</span>
+</div><div class="client-b"><svg class="tl" viewBox="0 0 1000 410" role="img" aria-label="Invoice timelines for Nine Mile Supply"><line class="grid" x1="138.0" y1="38" x2="138.0" y2="388"/><text class="ax" x="138.0" y="32" text-anchor="middle">0</text><line class="grid" x1="392.7" y1="38" x2="392.7" y2="388"/><text class="ax" x="392.7" y="32" text-anchor="middle">30</text><line class="grid" x1="647.3" y1="38" x2="647.3" y2="388"/><text class="ax" x="647.3" y="32" text-anchor="middle">60</text><line class="grid" x1="902.0" y1="38" x2="902.0" y2="388"/><text class="ax" x="902.0" y="32" text-anchor="middle">90</text><text class="ax-unit" x="138" y="404">DAYS FROM INVOICE SENT</text><line class="terms" x1="392.7" y1="38" x2="392.7" y2="388"/><text class="terms-lb" x="392.7" y="17" text-anchor="middle">TERMS &#8595;</text><line class="base" x1="138" y1="60.0" x2="902" y2="60.0"/><text class="id" x="118" y="64.0" text-anchor="end">INV-1089</text><line class="bar" x1="138" y1="60.0" x2="248.4" y2="60.0"/><line class="cap" x1="248.4" y1="55.0" x2="248.4" y2="65.0"/><text class="n" x="916" y="64.0">13</text><line class="base" x1="138" y1="88.0" x2="902" y2="88.0"/><text class="id" x="118" y="92.0" text-anchor="end">INV-1090</text><line class="bar" x1="138" y1="88.0" x2="265.3" y2="88.0"/><line class="cap" x1="265.3" y1="83.0" x2="265.3" y2="93.0"/><text class="n" x="916" y="92.0">15</text><line class="base" x1="138" y1="116.0" x2="902" y2="116.0"/><text class="id" x="118" y="120.0" text-anchor="end">INV-1091</text><line class="bar" x1="138" y1="116.0" x2="222.9" y2="116.0"/><line class="cap" x1="222.9" y1="111.0" x2="222.9" y2="121.0"/><text class="n" x="916" y="120.0">10</text><line class="base" x1="138" y1="144.0" x2="902" y2="144.0"/><text class="id" x="118" y="148.0" text-anchor="end">INV-1092</text><line class="bar" x1="138" y1="144.0" x2="222.9" y2="144.0"/><line class="cap" x1="222.9" y1="139.0" x2="222.9" y2="149.0"/><text class="n" x="916" y="148.0">10</text><line class="base" x1="138" y1="172.0" x2="902" y2="172.0"/><text class="id" x="118" y="176.0" text-anchor="end">INV-1093</text><line class="bar" x1="138" y1="172.0" x2="248.4" y2="172.0"/><line class="cap" x1="248.4" y1="167.0" x2="248.4" y2="177.0"/><text class="n" x="916" y="176.0">13</text><line class="base" x1="138" y1="200.0" x2="902" y2="200.0"/><text class="id" x="118" y="204.0" text-anchor="end">INV-1094</text><line class="bar" x1="138" y1="200.0" x2="265.3" y2="200.0"/><line class="cap" x1="265.3" y1="195.0" x2="265.3" y2="205.0"/><text class="n" x="916" y="204.0">15</text><line class="base" x1="138" y1="228.0" x2="902" y2="228.0"/><text class="id" x="118" y="232.0" text-anchor="end">INV-1095</text><line class="bar" x1="138" y1="228.0" x2="239.9" y2="228.0"/><line class="cap" x1="239.9" y1="223.0" x2="239.9" y2="233.0"/><text class="n" x="916" y="232.0">12</text><line class="base" x1="138" y1="256.0" x2="902" y2="256.0"/><text class="id" x="118" y="260.0" text-anchor="end">INV-1096</text><line class="bar" x1="138" y1="256.0" x2="222.9" y2="256.0"/><line class="cap" x1="222.9" y1="251.0" x2="222.9" y2="261.0"/><text class="n" x="916" y="260.0">10</text><line class="base" x1="138" y1="284.0" x2="902" y2="284.0"/><text class="id" x="118" y="288.0" text-anchor="end">INV-1097</text><line class="bar" x1="138" y1="284.0" x2="214.4" y2="284.0"/><line class="cap" x1="214.4" y1="279.0" x2="214.4" y2="289.0"/><text class="n" x="916" y="288.0">9</text><line class="base" x1="138" y1="312.0" x2="902" y2="312.0"/><text class="id" x="118" y="316.0" text-anchor="end">INV-1098</text><line class="bar" x1="138" y1="312.0" x2="222.9" y2="312.0"/><line class="cap" x1="222.9" y1="307.0" x2="222.9" y2="317.0"/><text class="n" x="916" y="316.0">10</text><line class="base" x1="138" y1="340.0" x2="902" y2="340.0"/><text class="id" x="118" y="344.0" text-anchor="end">INV-1099</text><line class="bar" x1="138" y1="340.0" x2="248.4" y2="340.0"/><line class="cap" x1="248.4" y1="335.0" x2="248.4" y2="345.0"/><text class="n" x="916" y="344.0">13</text><line class="base" x1="138" y1="368.0" x2="902" y2="368.0"/><text class="id" x="118" y="372.0" text-anchor="end">INV-1100</text><line class="bar" x1="138" y1="368.0" x2="155.0" y2="368.0"/><polygon class="head" points="155.0,363.5 164.0,368.0 155.0,372.5"/><text class="n open" x="916" y="372.0">2d open</text></svg></div></div></div>
+</div></section><section id="drift"><div class="wrap">
+<button class="s-head" data-target="drift-b" aria-expanded="true" aria-controls="drift-b">
+<span class="s-num">05</span><h2>Who is getting slower</h2><span class="chev">&minus; HIDE</span></button>
+<div class="s-body" id="drift-b"><p class="lede">A snapshot cannot tell you whether something is getting worse. This can.
+For each client the older half of their invoices is averaged, then the newer half, and the difference is
+the drift. Only the clients who got slower carry a bar.</p>
+<div class="age"><div class="age-row"><div class="age-lb">Copper Ridge Partners</div><div class="age-track"><div class="age-fill w1" style="width:100.0%"></div></div><div class="age-v">46 &rarr; 64<br><span class="pill up">+18 days</span></div></div><div class="age-row"><div class="age-lb">Halyard Group</div><div class="age-track"><div class="age-fill w1" style="width:83.4%"></div></div><div class="age-v">40 &rarr; 55<br><span class="pill up">+15 days</span></div></div><div class="age-row"><div class="age-lb">Wasatch Fabrication</div><div class="age-track"><div class="age-fill w1" style="width:25.9%"></div></div><div class="age-v">40 &rarr; 45<br><span class="pill up">+5 days</span></div></div><div class="age-row"><div class="age-lb">Nine Mile Supply</div><div class="age-track"><div class="age-zero">no drift</div></div><div class="age-v">12 &rarr; 12<br><span class="pill flat">-1 days</span></div></div><div class="age-row"><div class="age-lb">Alder &amp; Kemp</div><div class="age-track"><div class="age-zero">no drift</div></div><div class="age-v">22 &rarr; 19<br><span class="pill flat">-3 days</span></div></div><div class="age-row"><div class="age-lb">Birchwood Civic</div><div class="age-track"><div class="age-zero">no drift</div></div><div class="age-v">53 &rarr; 42<br><span class="pill flat">-11 days</span></div></div></div>
+<div class="finding"><p class="lb">What moved</p>
+<p><strong>Copper Ridge Partners</strong> went from 46 days to
+64 days over this ledger, which is <strong>18 days
+slower</strong> on the largest account in the book. The smaller accounts barely moved. Nothing about a
+single invoice would have shown that.</p></div></div>
+</div></section><section id="runs"><div class="wrap">
+<button class="s-head" data-target="runs-b" aria-expanded="true" aria-controls="runs-b">
+<span class="s-num">06</span><h2>What it runs on</h2><span class="chev">&minus; HIDE</span></button>
+<div class="s-body" id="runs-b"><p class="lede">A CSV with six columns. Nothing else. It runs on a laptop with no
+install, no account, and nothing uploaded anywhere.</p>
+<pre>invoice_id,client,amount,issued_date,due_date,paid_date
+INV-1041,Copper Ridge Partners,12160.18,2025-09-08,2025-10-08,2025-10-16
+INV-1089,Nine Mile Supply,1712.15,2025-09-07,2025-10-07,2025-09-20
+INV-1108,Birchwood Civic,3902.40,2026-07-05,2026-08-04,</pre>
+<ul class="plain">
+<li>An empty <code>paid_date</code> means the invoice is still open, and it gets counted as open through today.</li>
+<li>Terms come from the gap between <code>issued_date</code> and <code>due_date</code>, per invoice, so mixed terms are fine.</li>
+<li>Most accounting tools export exactly these columns already, usually as an invoice list or an aging detail report.</li>
+<li>Rebuild the page with one command: <code>python build_report.py your_invoices.csv</code></li>
+</ul>
+<p style="font-size:14px;color:var(--ink-2)">Source read for this page:
+<code>sample_invoices.csv</code>, 72 invoices across 6 clients.</p></div>
+</div></section>
+
+<footer><div class="weave"></div><div class="wrap">
+<p>Built as a worked example. The whole thing is one Python file that reads a CSV and writes this page.
+Point it at a different CSV and it redraws.</p>
+<p class="sig">Boubacar Barry &middot; Catalyst Works &middot; catalystworks.consulting</p>
+</div></footer>
+
+<button id="top" aria-label="Back to top">&uarr; Top</button>
+<script>
+document.querySelectorAll('.s-head').forEach(function(h){
+  h.addEventListener('click',function(){
+    var b=document.getElementById(h.dataset.target);
+    var open=!b.hidden; b.hidden=open;
+    h.setAttribute('aria-expanded',String(!open));
+    h.querySelector('.chev').textContent=open?'+ OPEN':'\u2212 HIDE';
+  });
+});
+var bg=document.getElementById('burger'),mn=document.getElementById('qnav');
+bg.addEventListener('click',function(){
+  mn.classList.toggle('open');
+  bg.setAttribute('aria-expanded',String(mn.classList.contains('open')));
+});
+mn.addEventListener('click',function(e){if(e.target.tagName==='A')mn.classList.remove('open');});
+var tb=document.getElementById('top');
+addEventListener('scroll',function(){tb.classList.toggle('on',scrollY>420);},{passive:true});
+tb.addEventListener('click',function(){scrollTo({top:0,behavior:'smooth'});});
+</script>
+</body></html>
