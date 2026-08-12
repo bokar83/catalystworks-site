@@ -685,11 +685,30 @@ var NEXT_SESSION = {
   }
 
   function post(email, ref){
+    /* 2026-08-11 SYS-528. This used to be `return !!r.ok`, which reads the
+       HTTP status and nothing else. The register endpoint answers HTTP 200
+       with {"ok": false, "error": "invalid_email"} for an address the list
+       refused, and a switched-off capture endpoint answers 200 as well, so a
+       status-only check calls a dropped seat a success and the retry ladder
+       below never fires. Success is now the body saying so. A duplicate is a
+       real success -- the person is already registered. */
     return fetch(CAPTURE_URL, {
       method:'POST', keepalive:true,
       headers:{'Content-Type':'application/json'},
       body: body(email, ref)
-    }).then(function(r){ return !!r.ok; });
+    }).then(function(r){
+      if (!r.ok) return false;
+      return r.json().then(function(b){
+        if (b && b.ok === true) return true;
+        if (b && b.error === 'duplicate') return true;
+        try { console.error('[cw] capture endpoint returned 200 but not ok', b); } catch(e){}
+        return false;
+      }).catch(function(){
+        /* 200 with an unparseable body. Treat as a failure and let the retry
+           ladder decide; a silent pass is the exact bug this replaces. */
+        return false;
+      });
+    });
   }
 
   /* Wait for the write to land before doing anything else. keepalive is

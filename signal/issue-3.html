@@ -525,19 +525,48 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"
     async function handleSub(e) {
       e.preventDefault();
       const btn = e.target.querySelector('button');
-      const email = e.target.querySelector('input').value;
+      const email = (e.target.querySelector('input').value || '').trim();
       btn.textContent = 'Subscribing...';
       btn.disabled = true;
+      // 2026-08-11 SYS-526. This used to POST to the retired Listmonk
+      // instance on the old mail host, which has been returning 404 since
+      // Listmonk was shut down, and it printed "You are in." with no check of
+      // any kind -- not the status, not the body. Every subscriber this page
+      // ever took was told they were subscribed and then dropped. It now
+      // posts to Beehiiv, the live newsletter platform, and only claims
+      // success when the response body says ok.
       try {
-        const res = await fetch('https://mail.srv1040886.hstgr.cloud/subscription/form', {
+        const res = await fetch('https://agentshq.boubacarbarry.com/api/orc/beehiiv-subscribe', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: new URLSearchParams({ email, l: 'e78a3008-c023-4eb5-a03f-f4202bf7ce8c', name: '' })
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email: email,
+            utm_source: 'cw_signal',
+            form_location: 'cw_signal_issue_3',
+            magnet: 'the_signal'
+          })
         });
+        let body = null;
+        try { body = await res.json(); } catch (parseErr) { body = null; }
+        // A 200 is not proof. Beehiiv answers 200 with {"ok": false} for a
+        // rejected address, and a switched-off endpoint answers 200 too.
+        if (!res.ok || !body || body.ok !== true) {
+          const dupe = body && body.error === 'duplicate';
+          if (dupe) {
+            btn.textContent = 'Already subscribed.';
+            btn.style.background = '#5BC0BE';
+            e.target.querySelector('input').value = '';
+            return;
+          }
+          throw new Error('capture not confirmed: ' + JSON.stringify(body));
+        }
         btn.textContent = 'You are in.';
         btn.style.background = '#5BC0BE';
         e.target.querySelector('input').value = '';
-      } catch {
+        try { gtag('event', 'generate_lead', { location: 'cw_signal_issue_3' }); } catch (err) {}
+      } catch (err) {
+        try { console.error('[cw] signal subscribe FAILED', err); } catch (e2) {}
+        try { gtag('event', 'lead_capture_failed', { location: 'cw_signal_issue_3' }); } catch (e2) {}
         btn.textContent = 'Try again';
         btn.disabled = false;
       }

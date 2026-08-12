@@ -1814,14 +1814,32 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"
           email: document.getElementById('contact-email').value,
           message: document.getElementById('contact-msg').value
         };
+        /* 2026-08-11 SYS-528. This used to .catch(){} and then .finally()
+           show the confirmation, so a total outage and a captured lead were
+           indistinguishable to the person filling it in and to us. The
+           payload shape is correct and verified landing a real row on
+           2026-08-11; only the success test was wrong. */
         fetch('https://n8n.srv1040886.hstgr.cloud/webhook/ai-data-audit-contact', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload)
-        }).catch(function() {}).finally(function() {
+        }).then(function(r) {
+          if (!r.ok) throw new Error('status ' + r.status);
           gtag('event', 'contact_form_submit');
           formEl.style.display = 'none';
           document.getElementById('contact-confirm').style.display = 'block';
+        }).catch(function(err) {
+          try { console.error('[cw] data-audit contact FAILED', err); } catch(e) {}
+          try { gtag('event', 'lead_capture_failed', { location: 'ai_data_audit_contact' }); } catch(e) {}
+          var errEl = document.getElementById('contact-error');
+          if (!errEl) {
+            errEl = document.createElement('p');
+            errEl.id = 'contact-error';
+            errEl.setAttribute('role', 'alert');
+            errEl.style.cssText = 'margin-top:12px;font-size:.85rem;line-height:1.6;color:#C1440E;';
+            formEl.appendChild(errEl);
+          }
+          errEl.textContent = 'That did not send. Try again, or email boubacar@catalystworks.consulting directly.';
         });
       });
     }

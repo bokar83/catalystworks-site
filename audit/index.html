@@ -1924,8 +1924,14 @@ function isValidEmail(v) {
 // POST must never block the visitor from seeing their report.
 async function submitGateEmail(email) {
   const a = LAST_AUDIT || {};
+  /* 2026-08-11 SYS-528. Staying non-blocking here is deliberate: the visitor
+     must always get their report. What was wrong is that a failure was
+     swallowed at console.warn level and reached nobody, so this capture could
+     stop working for months with the page still looking perfect. The POST is
+     still non-blocking; the failure is now loud on our side. A 200 is not
+     enough either -- the body has to say ok. */
   try {
-    await fetch(GROUNDWORK_ENDPOINT, {
+    const res = await fetch(GROUNDWORK_ENDPOINT, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -1936,9 +1942,17 @@ async function submitGateEmail(email) {
         band: a.band || '',
       }),
     });
+    let body = null;
+    try { body = await res.json(); } catch (parseErr) { body = null; }
+    if (!res.ok || !body || body.ok !== true) {
+      console.error('[cw] groundwork audit capture FAILED', res.status, body);
+      try { gtag('event', 'lead_capture_failed', { location: 'groundwork_audit_gate' }); } catch (e) {}
+    } else {
+      try { gtag('event', 'generate_lead', { location: 'groundwork_audit_gate' }); } catch (e) {}
+    }
   } catch (err) {
-    // Swallow -- demo must not break. The user still gets their results.
-    console.warn('groundwork-audit POST failed (non-blocking):', err);
+    console.error('[cw] groundwork audit capture FAILED (network)', err);
+    try { gtag('event', 'lead_capture_failed', { location: 'groundwork_audit_gate' }); } catch (e) {}
   }
 }
 

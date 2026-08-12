@@ -2262,7 +2262,20 @@ function openSignalSessionBooking() {
       const idempotencyKey = (window.crypto && crypto.randomUUID)
         ? crypto.randomUUID()
         : (Date.now().toString(16) + '-' + Math.random().toString(16).slice(2));
+      /* 2026-08-11 SYS-523 / SYS-528. This block used to set captureLanded
+         from `resp.ok` alone, then show the thank-you no matter what. The
+         capture endpoint had been switched off since 2026-05-12 and answered
+         HTTP 200 with {"ok": false, "error": "capture temporarily disabled"},
+         so for 91 days this page told every visitor their email was captured
+         while storing nothing. Zero rows landed in that window, confirmed by
+         query, not inferred.
+
+         Two changes. Success is now the response BODY saying ok === true, so a
+         200 on a dead endpoint can never read as a capture. And a failure is
+         now VISIBLE to the person: they get a plain line and a real address to
+         write to instead of a thank-you for a lead nobody has. */
       let captureLanded = false;
+      let captureDetail = null;
       try {
         const resp = await fetch(CAPTURE_URL, {
           method: 'POST',
@@ -2275,21 +2288,35 @@ function openSignalSessionBooking() {
             source: 'site_demo_capture'
           })
         });
-        if (resp.ok) {
+        try { captureDetail = await resp.json(); } catch (parseErr) { captureDetail = null; }
+        if (resp.ok && captureDetail && captureDetail.ok === true) {
           captureLanded = true;
         } else {
-          console.warn('capture endpoint non-2xx:', resp.status);
+          console.error('[cw] demo capture FAILED', resp.status, captureDetail);
         }
       } catch (err) {
-        console.warn('capture failed:', err);
+        console.error('[cw] demo capture FAILED (network)', err);
       }
-      // Show success regardless so the user is not left in limbo. The
-      // captureLanded flag distinguishes real success from network failure
-      // for the GA event so traffic-quality telemetry stays honest.
-      captureBlock.hidden = true;
-      captureSuccess.hidden = false;
+
+      if (captureLanded) {
+        captureBlock.hidden = true;
+        captureSuccess.hidden = false;
+      } else {
+        captureBtn.disabled = false;
+        captureBtn.textContent = 'Try again';
+        let failEl = document.getElementById('capture-error');
+        if (!failEl) {
+          failEl = document.createElement('p');
+          failEl.id = 'capture-error';
+          failEl.setAttribute('role', 'alert');
+          failEl.style.cssText = 'margin-top:10px;font-size:.85rem;line-height:1.6;color:var(--rust);';
+          captureBlock.appendChild(failEl);
+        }
+        failEl.textContent = 'That did not save. Try once more, or email boubacar@catalystworks.consulting and I will pick it up from there.';
+      }
+
       if (window.gtag) {
-        gtag('event', 'capture_email', {
+        gtag('event', captureLanded ? 'capture_email' : 'lead_capture_failed', {
           engagement_time_msec: 1000,
           capture_landed: captureLanded ? 'yes' : 'no'
         });
