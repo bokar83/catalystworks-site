@@ -308,6 +308,23 @@ RewriteRule ^w/online/?$ /online/?utm_source=direct&utm_medium=link&utm_campaign
 RewriteRule ^w/online-li/?$ /online/?utm_source=linkedin&utm_medium=organic&utm_campaign=ic_workshop_online_0819&utm_content=organic_li [R=301,L,QSA]
 RewriteRule ^w/online-x/?$ /online/?utm_source=x&utm_medium=organic&utm_campaign=ic_workshop_online_0819&utm_content=organic_x [R=301,L,QSA]
 RewriteRule ^w/online-nl/?$ /online/?utm_source=newsletter&utm_medium=email&utm_campaign=ic_workshop_online_0819&utm_content=newsletter [R=301,L,QSA]
+
+# ---- FRACTIONAL RETAINER short links, minted 2026-08-12 ----
+# The retainer is a different offer from the workshops, so these carry their own
+# campaign key (fractional_retainer) rather than any ic_workshop_* key. Folding
+# them into a workshop campaign would make retainer clicks unreadable next to
+# seat sales. Own namespace (fx/) for the same reason: every w/* slug means
+# workshop. Default target is /fractional/ai/ because the AI side is the one the
+# newsletter and the organic posts lead with; the HR page has its own -hr slugs.
+# These are clean of internal names and safe to put in front of a subscriber,
+# which the tracked booking redirect on the api hostname is not.
+RewriteRule ^fx/?$ /fractional/ai/?utm_source=direct&utm_medium=link&utm_campaign=fractional_retainer&utm_content=direct [R=301,L,QSA]
+RewriteRule ^fx/nl/?$ /fractional/ai/?utm_source=newsletter&utm_medium=email&utm_campaign=fractional_retainer&utm_content=newsletter [R=301,L,QSA]
+RewriteRule ^fx/li/?$ /fractional/ai/?utm_source=linkedin&utm_medium=organic&utm_campaign=fractional_retainer&utm_content=organic_li [R=301,L,QSA]
+RewriteRule ^fx/x/?$ /fractional/ai/?utm_source=x&utm_medium=organic&utm_campaign=fractional_retainer&utm_content=organic_x [R=301,L,QSA]
+RewriteRule ^fx/hr/?$ /fractional/hr/?utm_source=direct&utm_medium=link&utm_campaign=fractional_retainer&utm_content=direct_hr [R=301,L,QSA]
+RewriteRule ^fx/hr-nl/?$ /fractional/hr/?utm_source=newsletter&utm_medium=email&utm_campaign=fractional_retainer&utm_content=newsletter_hr [R=301,L,QSA]
+RewriteRule ^fx/hr-li/?$ /fractional/hr/?utm_source=linkedin&utm_medium=organic&utm_campaign=fractional_retainer&utm_content=organic_li_hr [R=301,L,QSA]
 # SPLIT TEST (July 30 workshop) -- two paid Meta tracks under one campaign,
 # distinguished by utm_content so seats are attributable per track.
 # Track 1 DIRECT: was cold ad -> $47 seat page (variant B). 2026-07-27: repointed
