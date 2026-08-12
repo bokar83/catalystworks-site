@@ -6,6 +6,7 @@
 <meta name="author" content="Boubacar Barry / Catalyst Works">
 <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
 <meta name="generator" content="invoice-to-cash-read; build 30dbee7acd7c38f7">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%231B3454'/%3E%3Crect x='6' y='9' width='13' height='4' fill='%23EAEFF3'/%3E%3Crect x='6' y='18' width='20' height='4' fill='%23BE7330'/%3E%3C/svg%3E">
 <style>
 *,*::before,*::after{box-sizing:border-box}
 :root{
@@ -224,6 +225,48 @@ footer .sig{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-t
 #top:hover{background:var(--indigo-2)}
 #top.on{display:block}
 
+/* ---- TL;DR, collapsible ---- */
+.tldr{background:var(--panel);border-bottom:1px solid var(--line-2)}
+.tldr .wrap{padding-top:16px;padding-bottom:18px}
+.tldr-h{display:flex;align-items:center;gap:12px;cursor:pointer;user-select:none;border:0;
+  background:none;padding:0;width:100%;text-align:left;font-family:inherit;color:inherit}
+.tldr-h .tag{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  background:var(--indigo);color:#fff;padding:4px 9px;border-radius:2px;white-space:nowrap}
+.tldr-h .lb{font-size:15px;color:var(--ink-2);margin-right:auto}
+.tldr-b{margin:14px 0 0}
+.tldr-b[hidden]{display:none}
+.tldr-b ul{margin:0;padding-left:19px;max-width:74ch}
+.tldr-b li{margin:7px 0;font-size:15px;line-height:1.55}
+.tldr-b li strong{color:var(--indigo);font-weight:650}
+
+/* ---- the shapes list: the honest frame, made useful ---- */
+.shapes{display:grid;gap:1px;background:var(--line-2);border:1px solid var(--line-2);margin:22px 0}
+.shape{background:var(--panel);padding:16px 18px;display:grid;grid-template-columns:38px 1fr;gap:16px}
+.shape .k{font-family:var(--mono);font-size:12px;letter-spacing:.1em;color:var(--indigo-2);
+  border:1px solid var(--line-2);background:#fff;border-radius:2px;height:26px;
+  display:flex;align-items:center;justify-content:center}
+.shape h3{margin:0 0 5px;font-size:16.5px;font-weight:650;letter-spacing:-.005em}
+.shape p{margin:0;font-size:14.5px;color:var(--ink-2);max-width:70ch}
+.shape.here{background:#E9EEF3}
+.shape.here .k{border-color:var(--indigo);color:var(--indigo)}
+.shape .thisone{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--indigo);border:1px solid var(--indigo);border-radius:2px;padding:2px 6px;margin-left:8px;
+  white-space:nowrap;vertical-align:2px}
+
+/* ---- closing band: the way to reply ---- */
+.next{background:var(--indigo);color:#DCE6EE;border:0}
+.next .wrap{padding-top:34px;padding-bottom:36px}
+.next h2{color:#fff;font-size:clamp(21px,3.4vw,29px);margin:0 0 16px;max-width:22ch}
+.next p{color:#C4D5E4;font-size:16px;max-width:62ch;margin:0 0 12px}
+.next strong{color:#fff;font-weight:650}
+.next .cta{display:inline-block;margin-top:14px;background:var(--ochre);color:#fff;
+  text-decoration:none;font-family:var(--mono);font-size:12px;letter-spacing:.12em;
+  text-transform:uppercase;padding:14px 20px;border-radius:2px;border:1px solid var(--ochre)}
+.next .cta:hover,.next .cta:focus-visible{background:#A85F22;border-color:#A85F22}
+.next .alt{margin-top:14px;font-size:14px;color:#8AACCB}
+.next .alt a{color:#DCE6EE}
+footer a{color:#C4D5E4}
+
 @media (max-width:980px){
   .mast-grid{grid-template-columns:minmax(0,1fr);gap:26px}
   .spec{max-width:520px}
@@ -241,6 +284,9 @@ footer .sig{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-t
   .age-v{text-align:left}
   .notice .wrap{flex-direction:column;gap:9px}
   section > .wrap{padding-top:26px;padding-bottom:30px}
+  .shape{grid-template-columns:1fr;gap:9px}
+  .shape .k{width:38px}
+  .next .cta{display:block;text-align:center}
 }
 @media print{nav.qn,#top{display:none}.s-body{display:block!important}}
 </style></head>
@@ -252,47 +298,50 @@ footer .sig{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-t
 <h1>How long an invoice takes to turn into cash</h1>
 <p class="sub">One page, one question, asked of every invoice and every client. Point it at a CSV and
 it draws you the answer.</p>
-<p class="mast-honest"><strong>I do not know what your invoicing problem is.</strong> This is one way of
-looking at it, built on numbers I made up, so there is something on a screen instead of another
-question. Read the note below before you read the data.</p>
 <div class="mast-meta"><span>72 invoices</span><span>6 clients</span>
-<span>12 months</span><span>Net 30 terms</span></div>
+<span>12 months</span><span>Net 30 terms</span><span>Invented data</span></div>
 </div>
 <aside class="spec"><dl>
 <dt>It reads</dt><dd>One CSV. Invoice, client, amount, and the three dates.</dd>
 <dt>It answers</dt><dd>Days from sent to paid, per client, and whether that number is moving.</dd>
 <dt>It needs</dt><dd>No install, no account, and nothing uploaded anywhere.</dd>
+<dt>Who made it</dt><dd>Boubacar Barry, Catalyst Works, Salt Lake City. Building small working
+tools like this one is the work.</dd>
 </dl></aside>
 </div></header>
 
 <nav class="qn"><div class="wrap">
 <span class="brand">Invoice-to-cash read</span>
 <button id="burger" aria-expanded="false" aria-controls="qnav">Menu</button>
-<ul id="qnav"><li><a href="#read">01 The read</a></li><li><a href="#open">02 Open now</a></li><li><a href="#clients">03 Clients</a></li><li><a href="#timelines">04 Timelines</a></li><li><a href="#drift">05 Drift</a></li><li><a href="#runs">06 What it runs on</a></li></ul>
+<ul id="qnav"><li><a href="#read">01 The read</a></li><li><a href="#shapes">02 Which is yours</a></li><li><a href="#open">03 Open now</a></li><li><a href="#clients">04 Clients</a></li><li><a href="#timelines">05 Timelines</a></li><li><a href="#drift">06 Drift</a></li><li><a href="#runs">07 Runs on</a></li></ul>
 </div></nav>
 
-<div class="notice lead"><div class="wrap"><span class="tag">Read this first</span>
-<div class="body">
-<p><strong>I do not know what your invoicing problem actually is.</strong> You told me it is ongoing and
-that it is with your best clients. That is everything I have. I have not seen one of your numbers, and I
-have not decided what is causing it.</p>
-<p>So take this as one example of a way to look at the problem, not a fix for it. I am shooting in the
-dark here, on purpose, because I would rather put something concrete in front of you than send you
-another question.</p>
-<p>Once I know the specific problem, I would build to that exact thing instead. It probably would not
-look much like this page.</p>
-</div></div></div>
-
-<div class="notice"><div class="wrap"><span class="tag">Invented data</span>
-<p>Every client name, amount and date on this page was made up to build the example. No real invoice,
-client or account was used, and none is needed to run it.</p></div></div>
+<div class="tldr"><div class="wrap">
+<button class="tldr-h" id="tldr-h" aria-expanded="true" aria-controls="tldr-b">
+<span class="tag">TL;DR</span><span class="lb">The whole page in four lines</span>
+<span class="chev">&minus; HIDE</span></button>
+<div class="tldr-b" id="tldr-b">
+<ul>
+<li>Feed it a list of invoices and it draws every one to scale: the day it went out, the day the money
+landed, and how far past terms that was.</li>
+<li>In this ledger the two biggest clients pay <strong>21 days slower</strong> than
+everybody else, and the largest one got <strong>18 days slower</strong> across the
+year. No single invoice would have shown either of those.</li>
+<li>Every name, amount and date here is <strong>invented</strong>. No real invoice or account was used,
+and none is needed to run it.</li>
+<li>It is <strong>not a diagnosis</strong>. An invoicing problem comes in about five shapes and this page
+reads one of them. Section 02 is the other four.</li>
+</ul>
+</div>
+</div></div>
 
 <section id="read"><div class="wrap">
 <button class="s-head" data-target="read-b" aria-expanded="true" aria-controls="read-b">
 <span class="s-num">01</span><h2>What the numbers say</h2><span class="chev">&minus; HIDE</span></button>
 <div class="s-body" id="read-b"><p class="lede">One question, asked of every invoice: how many days between sending it and
 having the money. Nothing here judges why a given invoice took as long as it took. Approvals, disputes,
-rework and plain slow payment all land in the same column, as days on the clock.</p>
+rework and plain slow payment all land in the same column, as days on the clock. Every name, amount and
+date below was invented to build the example.</p>
 <div class="strips"><div class="strip "><p class="lb">Average wait for cash</p><div class="v">37 days</div><p class="n">Across all 61 paid invoices, on terms of 30 days.</p></div><div class="strip mid"><p class="lb">Paid after terms</p><div class="v">62%</div><p class="n">38 of 61 invoices landed late.</p></div><div class="strip warn"><p class="lb">Open right now</p><div class="v">$67,719</div><p class="n">11 invoices, oldest at 64 days.</p></div><div class="strip warn"><p class="lb">Slowest client drift</p><div class="v">+18 days</div><p class="n">Copper Ridge Partners, newer half against older half.</p></div></div>
 <div class="finding"><p class="lb">The pattern this ledger has</p>
 <p>The two clients who bring in the most money are also the two who take the longest to pay.
@@ -301,15 +350,28 @@ rework and plain slow payment all land in the same column, as days on the clock.
 against <strong>31 days</strong> for everybody else. That gap is the whole problem in one
 number, and it is the reason a problem like this stays open. The accounts you would chase hardest are
 the accounts you least want to chase.</p></div></div>
+</div></section><section id="shapes"><div class="wrap">
+<button class="s-head" data-target="shapes-b" aria-expanded="true" aria-controls="shapes-b">
+<span class="s-num">02</span><h2>Which one of these is yours</h2><span class="chev">&minus; HIDE</span></button>
+<div class="s-body" id="shapes-b"><p class="lede">An invoicing problem is never one thing. These are the shapes it
+takes. On a bank statement they look almost identical, and every one of them needs a different fix, which
+is why I did not guess at yours.</p>
+<div class="shapes"><div class="shape here"><div class="k">1</div><div><h3>The money is just slow<span class="thisone">This page reads this one</span></h3><p>They pay. They always pay. It simply lands well past the date on the invoice, every time, and nothing about it is ever disputed.</p></div></div><div class="shape"><div class="k">2</div><div><h3>The clock does not start when you send it</h3><p>The invoice goes out and then waits on an approval, a signature or a purchase order before anyone on their side considers it owed at all.</p></div></div><div class="shape"><div class="k">3</div><div><h3>The invoice is wrong by the time it lands</h3><p>Scope moved after the work was quoted, so the bill gets queried, re-cut and re-sent, and the wait restarts from zero each time.</p></div></div><div class="shape"><div class="k">4</div><div><h3>It arrives in pieces</h3><p>Part of it comes quickly, and a balance sits behind a hold, a retainage, a credit or a final sign-off that never quite closes out.</p></div></div><div class="shape"><div class="k">5</div><div><h3>You find out too late</h3><p>The number is knowable the whole time, but nobody looks at it until cash is already tight, and by then the conversation is a harder one.</p></div></div></div>
+<div class="finding"><p class="lb">Where this page sits</p>
+<p>This one reads <strong>the first shape</strong>, because it is the only one you can measure without
+knowing a single thing about the business. Three dates per invoice and it draws itself.
+<strong>I do not know which of the five is yours</strong>, or whether it is a sixth I have not listed. If
+it is one of the other four, the honest answer is that this page is the wrong page and I would build the
+right one instead.</p></div></div>
 </div></section><section id="open"><div class="wrap">
 <button class="s-head" data-target="open-b" aria-expanded="true" aria-controls="open-b">
-<span class="s-num">02</span><h2>Money sitting out there right now</h2><span class="chev">&minus; HIDE</span></button>
+<span class="s-num">03</span><h2>Money sitting out there right now</h2><span class="chev">&minus; HIDE</span></button>
 <div class="s-body" id="open-b"><p class="lede">The same open invoices, sorted by how long they have been sitting.
 Of $67,719 outstanding, <strong>$36,695</strong> is already past terms.</p>
 <div class="age"><div class="age-row"><div class="age-lb">Not yet due</div><div class="age-track"><div class="age-fill " style="width:100.0%"></div></div><div class="age-v">$31,024<br><span class="pill">6 inv</span></div></div><div class="age-row"><div class="age-lb">1 to 30 over</div><div class="age-track"><div class="age-fill " style="width:86.9%"></div></div><div class="age-v">$26,967<br><span class="pill">4 inv</span></div></div><div class="age-row"><div class="age-lb">31 to 60 over</div><div class="age-track"><div class="age-fill w1" style="width:31.4%"></div></div><div class="age-v">$9,728<br><span class="pill">1 inv</span></div></div><div class="age-row"><div class="age-lb">Over 60</div><div class="age-track"><div class="age-fill w2" style="width:0.0%"></div></div><div class="age-v">$0<br><span class="pill">0 inv</span></div></div></div></div>
 </div></section><section id="clients"><div class="wrap">
 <button class="s-head" data-target="clients-b" aria-expanded="true" aria-controls="clients-b">
-<span class="s-num">03</span><h2>Every client on one line</h2><span class="chev">&minus; HIDE</span></button>
+<span class="s-num">04</span><h2>Every client on one line</h2><span class="chev">&minus; HIDE</span></button>
 <div class="s-body" id="clients-b"><p class="lede">Sorted by money billed, biggest first. The column that matters is
 average days to cash, and next to it the drift, which is the newer half of their invoices measured
 against the older half.</p>
@@ -321,7 +383,7 @@ against the older half.</p>
 recent invoices are taking longer than their older ones did.</p></div>
 </div></section><section id="timelines"><div class="wrap">
 <button class="s-head" data-target="timelines-b" aria-expanded="true" aria-controls="timelines-b">
-<span class="s-num">04</span><h2>Every invoice, drawn to scale</h2><span class="chev">&minus; HIDE</span></button>
+<span class="s-num">05</span><h2>Every invoice, drawn to scale</h2><span class="chev">&minus; HIDE</span></button>
 <div class="s-body" id="timelines-b"><p class="lede">Every invoice as a measured line. The line starts the day it went out
 and stops the day the money arrived. The dashed vertical is the terms date, so anything crossing it was
 paid late, and the red section is exactly how far past.</p>
@@ -364,7 +426,7 @@ paid late, and the red section is exactly how far past.</p>
 </div><div class="client-b"><svg class="tl" viewBox="0 0 1000 410" role="img" aria-label="Invoice timelines for Nine Mile Supply"><line class="grid" x1="138.0" y1="38" x2="138.0" y2="388"/><text class="ax" x="138.0" y="32" text-anchor="middle">0</text><line class="grid" x1="392.7" y1="38" x2="392.7" y2="388"/><text class="ax" x="392.7" y="32" text-anchor="middle">30</text><line class="grid" x1="647.3" y1="38" x2="647.3" y2="388"/><text class="ax" x="647.3" y="32" text-anchor="middle">60</text><line class="grid" x1="902.0" y1="38" x2="902.0" y2="388"/><text class="ax" x="902.0" y="32" text-anchor="middle">90</text><text class="ax-unit" x="138" y="404">DAYS FROM INVOICE SENT</text><line class="terms" x1="392.7" y1="38" x2="392.7" y2="388"/><text class="terms-lb" x="392.7" y="17" text-anchor="middle">TERMS &#8595;</text><line class="base" x1="138" y1="60.0" x2="902" y2="60.0"/><text class="id" x="118" y="64.0" text-anchor="end">INV-1089</text><line class="bar" x1="138" y1="60.0" x2="248.4" y2="60.0"/><line class="cap" x1="248.4" y1="55.0" x2="248.4" y2="65.0"/><text class="n" x="916" y="64.0">13</text><line class="base" x1="138" y1="88.0" x2="902" y2="88.0"/><text class="id" x="118" y="92.0" text-anchor="end">INV-1090</text><line class="bar" x1="138" y1="88.0" x2="265.3" y2="88.0"/><line class="cap" x1="265.3" y1="83.0" x2="265.3" y2="93.0"/><text class="n" x="916" y="92.0">15</text><line class="base" x1="138" y1="116.0" x2="902" y2="116.0"/><text class="id" x="118" y="120.0" text-anchor="end">INV-1091</text><line class="bar" x1="138" y1="116.0" x2="222.9" y2="116.0"/><line class="cap" x1="222.9" y1="111.0" x2="222.9" y2="121.0"/><text class="n" x="916" y="120.0">10</text><line class="base" x1="138" y1="144.0" x2="902" y2="144.0"/><text class="id" x="118" y="148.0" text-anchor="end">INV-1092</text><line class="bar" x1="138" y1="144.0" x2="222.9" y2="144.0"/><line class="cap" x1="222.9" y1="139.0" x2="222.9" y2="149.0"/><text class="n" x="916" y="148.0">10</text><line class="base" x1="138" y1="172.0" x2="902" y2="172.0"/><text class="id" x="118" y="176.0" text-anchor="end">INV-1093</text><line class="bar" x1="138" y1="172.0" x2="248.4" y2="172.0"/><line class="cap" x1="248.4" y1="167.0" x2="248.4" y2="177.0"/><text class="n" x="916" y="176.0">13</text><line class="base" x1="138" y1="200.0" x2="902" y2="200.0"/><text class="id" x="118" y="204.0" text-anchor="end">INV-1094</text><line class="bar" x1="138" y1="200.0" x2="265.3" y2="200.0"/><line class="cap" x1="265.3" y1="195.0" x2="265.3" y2="205.0"/><text class="n" x="916" y="204.0">15</text><line class="base" x1="138" y1="228.0" x2="902" y2="228.0"/><text class="id" x="118" y="232.0" text-anchor="end">INV-1095</text><line class="bar" x1="138" y1="228.0" x2="239.9" y2="228.0"/><line class="cap" x1="239.9" y1="223.0" x2="239.9" y2="233.0"/><text class="n" x="916" y="232.0">12</text><line class="base" x1="138" y1="256.0" x2="902" y2="256.0"/><text class="id" x="118" y="260.0" text-anchor="end">INV-1096</text><line class="bar" x1="138" y1="256.0" x2="222.9" y2="256.0"/><line class="cap" x1="222.9" y1="251.0" x2="222.9" y2="261.0"/><text class="n" x="916" y="260.0">10</text><line class="base" x1="138" y1="284.0" x2="902" y2="284.0"/><text class="id" x="118" y="288.0" text-anchor="end">INV-1097</text><line class="bar" x1="138" y1="284.0" x2="214.4" y2="284.0"/><line class="cap" x1="214.4" y1="279.0" x2="214.4" y2="289.0"/><text class="n" x="916" y="288.0">9</text><line class="base" x1="138" y1="312.0" x2="902" y2="312.0"/><text class="id" x="118" y="316.0" text-anchor="end">INV-1098</text><line class="bar" x1="138" y1="312.0" x2="222.9" y2="312.0"/><line class="cap" x1="222.9" y1="307.0" x2="222.9" y2="317.0"/><text class="n" x="916" y="316.0">10</text><line class="base" x1="138" y1="340.0" x2="902" y2="340.0"/><text class="id" x="118" y="344.0" text-anchor="end">INV-1099</text><line class="bar" x1="138" y1="340.0" x2="248.4" y2="340.0"/><line class="cap" x1="248.4" y1="335.0" x2="248.4" y2="345.0"/><text class="n" x="916" y="344.0">13</text><line class="base" x1="138" y1="368.0" x2="902" y2="368.0"/><text class="id" x="118" y="372.0" text-anchor="end">INV-1100</text><line class="bar" x1="138" y1="368.0" x2="155.0" y2="368.0"/><polygon class="head" points="155.0,363.5 164.0,368.0 155.0,372.5"/><text class="n open" x="916" y="372.0">2d open</text></svg></div></div></div>
 </div></section><section id="drift"><div class="wrap">
 <button class="s-head" data-target="drift-b" aria-expanded="true" aria-controls="drift-b">
-<span class="s-num">05</span><h2>Who is getting slower</h2><span class="chev">&minus; HIDE</span></button>
+<span class="s-num">06</span><h2>Who is getting slower</h2><span class="chev">&minus; HIDE</span></button>
 <div class="s-body" id="drift-b"><p class="lede">A snapshot cannot tell you whether something is getting worse. This can.
 For each client the older half of their invoices is averaged, then the newer half, and the difference is
 the drift. Only the clients who got slower carry a bar.</p>
@@ -376,7 +438,7 @@ slower</strong> on the largest account in the book. The smaller accounts barely 
 single invoice would have shown that.</p></div></div>
 </div></section><section id="runs"><div class="wrap">
 <button class="s-head" data-target="runs-b" aria-expanded="true" aria-controls="runs-b">
-<span class="s-num">06</span><h2>What it runs on</h2><span class="chev">&minus; HIDE</span></button>
+<span class="s-num">07</span><h2>What it runs on</h2><span class="chev">&minus; HIDE</span></button>
 <div class="s-body" id="runs-b"><p class="lede">A CSV with six columns. Nothing else. It runs on a laptop with no
 install, no account, and nothing uploaded anywhere.</p>
 <pre>invoice_id,client,amount,issued_date,due_date,paid_date
@@ -393,10 +455,25 @@ INV-1108,Birchwood Civic,3902.40,2026-07-05,2026-08-04,</pre>
 <code>sample_invoices.csv</code>, 72 invoices across 6 clients.</p></div>
 </div></section>
 
+<div class="next"><div class="wrap">
+<h2>The shortest useful reply is one digit</h2>
+<p>If one of the five shapes in section 02 is the one you keep running into, <strong>send me the
+number</strong>. That is the entire reply. One digit tells me which page is worth building, and it costs
+you about four seconds.</p>
+<p>If none of the five fit, say it in your own words and I will work from that instead. If it is easier
+out loud, that works too.</p>
+<p>And if you want this exact page reading your real invoices rather than invented ones, that is a
+short conversation and it starts the same way.</p>
+<a class="cta" href="mailto:boubacar@catalystworks.consulting?subject=Invoice-to-cash">Reply to Boubacar</a>
+<p class="alt">Or straight to the inbox:
+<a href="mailto:boubacar@catalystworks.consulting">boubacar@catalystworks.consulting</a></p>
+</div></div>
+
 <footer><div class="weave"></div><div class="wrap">
 <p>Built as a worked example. The whole thing is one Python file that reads a CSV and writes this page.
 Point it at a different CSV and it redraws.</p>
-<p class="sig">Boubacar Barry &middot; Catalyst Works &middot; catalystworks.consulting</p>
+<p class="sig">Boubacar Barry &middot; Catalyst Works &middot;
+<a href="mailto:boubacar@catalystworks.consulting">boubacar@catalystworks.consulting</a></p>
 </div></footer>
 
 <button id="top" aria-label="Back to top">&uarr; Top</button>
@@ -408,6 +485,13 @@ document.querySelectorAll('.s-head').forEach(function(h){
     h.setAttribute('aria-expanded',String(!open));
     h.querySelector('.chev').textContent=open?'+ OPEN':'\u2212 HIDE';
   });
+});
+var th=document.getElementById('tldr-h');
+th.addEventListener('click',function(){
+  var b=document.getElementById('tldr-b');
+  var open=!b.hidden; b.hidden=open;
+  th.setAttribute('aria-expanded',String(!open));
+  th.querySelector('.chev').textContent=open?'+ OPEN':'\u2212 HIDE';
 });
 var bg=document.getElementById('burger'),mn=document.getElementById('qnav');
 bg.addEventListener('click',function(){
