@@ -560,22 +560,27 @@ var NEXT_SESSION = {
      linkReady is true. Set it back to false the moment a future online date is
      announced before its room exists.
 
-     2026-08-17: SET BACK TO FALSE, which is exactly the case that instruction
-     was written for. The Meet room that made this true belonged to the August 19
-     calendar event, and that event was marked CANCELLED today when Boubacar
-     moved the session to Thursday September 17. The date is public and the
-     checkout is live; the room is not built yet. So the status line reads "Date
-     set. Link being built.", which is true, instead of "Session confirmed",
-     which would not be.
+     2026-08-17: went false and then back to TRUE inside the same hour, and both
+     halves are worth recording because the sequence is the point.
+
+     It went FALSE because the Meet room that made it true belonged to the
+     August 19 calendar event, and that event was marked CANCELLED when Boubacar
+     moved the session to Thursday September 17. Claiming "Session confirmed"
+     while the room did not exist would have been a false statement on a page
+     taking money, which is exactly the case the instruction above was written
+     for.
+
+     It went back to TRUE because a NEW Meet room now exists on the September 17
+     calendar event, created the same day: meet.google.com/duq-cdqp-dip, on the
+     10:30-12:00 Mountain DNM block (30 minutes of setup ahead of the 11:00
+     start), marked BUSY so Calendly cannot book over it. The claim is true
+     again, so the label goes back to the true one.
 
      linkReady does NOT gate the checkout -- read STATE_LABEL below, it changes
      one label and nothing else. That is deliberate: the seat stays buyable
-     while the room is being made, because a reader who wants in should not be
-     turned away over a Meet link that takes a minute to create.
-
-     FLIP IT BACK TO TRUE the moment a Meet room exists on the September 17
-     event. That is the one open item on this page. */
-  linkReady: false,
+     while a room is being made, because a reader who wants in should not be
+     turned away over a Meet link that takes a minute to create. */
+  linkReady: true,
   date:  'Thursday, September 17',
   /* The \u00a0 escapes are non-breaking spaces and they are load-bearing, not
      decoration. Without them these values wrap so that 'Mountain' and 'Meet'
