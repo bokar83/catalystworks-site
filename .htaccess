@@ -86,7 +86,33 @@ RewriteRule ^workshop-b(/index\.html)?/?$ /workshop/?utm_source=legacy&utm_mediu
 # live host before this change. Free-seat copy is a standing defect on its own
 # now (no free workshops unless Boubacar names one; August 19 is $25 and
 # August 27 is $50), so the hole is closed the same way the July 16 page's was.
-RewriteRule ^ai-checklist(/index\.html)?/?$ /workshop/?utm_source=legacy&utm_medium=redirect&utm_campaign=ic_workshop_permanent&utm_content=legacy_ai_checklist [NC,R=301,L]
+# 2026-08-17: now a 404, not a redirect, on Boubacar's standing instruction to
+# take the free-seat pages offline and KEEP THE FILES ("404 the free seat pages
+# but do not delete the pages as we may re-use them for other things"). He gave
+# that instruction over a week ago; the 08-04/08-07 passes only redirected.
+#
+# RETIRED PAGE: "Claim your free seat | July 30 AI workshop, Sandy UT" -- H1 "A
+# limited number of free seats to the July 30 workshop", CTA "Claim my free seat
+# $0" wired to buy.stripe.com/dRm4gB4Tt8ZQ1IY2wBgEg0k (plink_1TtUuGQWqcWWuBB0
+# 5dFBgLDD, unit_amount 0, INACTIVE in Stripe -- rendered "The link is no longer
+# active." in a real browser 2026-08-17, screenshot in this commit's PR notes).
+# Retired 2026-08-17. File KEPT at ai-checklist/index.html.
+#
+# 404 and not a redirect, deliberately: a 301 to /workshop/ takes someone who
+# clicked for a free seat and lands them on a $50 checkout. That is a bait and
+# switch, and it is the defect this change closes, not just a stale date. Same
+# reasoning already applied to /free-thank-you/ on 08-07. A 404 is the honest
+# answer to a page that no longer exists as an offer.
+#
+# RESTORING (do not, without checking free-seat copy is allowed again -- both
+# current sessions are paid): delete the 404 rule below and put these back:
+#   RewriteRule ^ai-checklist$ /ai-checklist/ [R=301,L,QSA]
+#   RewriteRule ^ai-checklist/?$ ai-checklist/index.html [NC,L]
+# The 301-before-serve shape in those two lines is load-bearing: DirectorySlash
+# Off (line 2) serves the no-slash form IN PLACE, leaving document.baseURI at
+# /ai-checklist and breaking the page's relative assets/cw-logo.png reference.
+# The page's July 30 copy has to be rewritten before it can serve again anyway.
+RewriteRule ^ai-checklist(/index\.html)?/?$ - [NC,R=404,L]
 # IC simple one-screen QR conversion page (StartFEST + /w/ss) lived at /seat/.
 #
 # 2026-08-04: RETIRED to a redirect, same reason again. It renders a $47
@@ -250,7 +276,22 @@ RewriteRule ^free-thank-you(/index\.html)?/?$ - [NC,R=404,L]
 #   git checkout 3c909d4 -- free-workshop-july16/index.html
 # then delete the redirect below and put this back:
 #   RewriteRule ^free-workshop-july16/?$ /workshop/?utm_source=sbdc&utm_medium=organic&utm_campaign=ic_workshop_permanent&utm_content=stale_july16_redirect [R=301,L]
-RewriteRule ^free-workshop-july16(/index\.html)?/?$ /workshop/?utm_source=sbdc&utm_medium=organic&utm_campaign=ic_workshop_permanent&utm_content=stale_july16_redirect [NC,R=301,L]
+# 2026-08-17: now a 404, not a redirect, same standing instruction as
+# /ai-checklist/ above.
+#
+# RETIRED PAGE: the CANCELLED July 16 free session's $0 capture page. Its route
+# was retired and its FILE DELETED 2026-08-07 (restore with
+# `git checkout 3c909d4 -- free-workshop-july16/index.html`), so this rule now
+# only unhooks a path with nothing behind it. Retired-as-404 2026-08-17.
+#
+# 404 and not a 301 for the same bait-and-switch reason: an old SBDC-newsletter
+# link promising a free session should not land on a $50 checkout. /w/july16, the
+# short link that fed this page, is 404'd in the same commit.
+#
+# RESTORING (do not, without checking free-seat copy is allowed again): restore
+# the file per the git checkout above, then delete the 404 rule and put back:
+#   RewriteRule ^free-workshop-july16/?$ free-workshop-july16/index.html [NC,L]
+RewriteRule ^free-workshop-july16(/index\.html)?/?$ - [NC,R=404,L]
 # The July 30 comp-seat RSVP page booked NOTHING (Beehiiv-only) yet told
 # visitors "your seat is held" -- a false claim. Repoint to the live free-seat
 # capture that actually reserves the $0 seat. Organic medium keeps attribution
@@ -261,7 +302,23 @@ RewriteRule ^free-workshop-july16(/index\.html)?/?$ /workshop/?utm_source=sbdc&u
 # verified live before this change -- the same free-seat defect as
 # /ai-checklist/index.html, on a page that also fires a Purchase pixel event for
 # a $0 seat. Same fix, same shape as the July 16 retirement.
-RewriteRule ^rsvp-0730(/index\.html)?/?$ /workshop/?utm_source=direct_invite&utm_medium=organic&utm_campaign=ic_workshop_permanent&utm_content=stale_rsvp0730_redirect [NC,R=301,L]
+# 2026-08-17: now a 404, not a redirect, same standing instruction and same
+# reasoning as /ai-checklist/ above.
+#
+# RETIRED PAGE: the July 30 comp-seat RSVP page -- "$0, no card" free comp seat,
+# and it also fires a Purchase pixel event for that $0 seat. Retired 2026-08-17.
+# File KEPT at rsvp-0730/index.html.
+#
+# 404 and not a 301 for the bait-and-switch reason: this page's entire promise is
+# a free seat with no card, so sending its clicker to a $50 checkout is worse
+# than the page being gone. /w/vip, the 1:1 comp link that used to reach this
+# page's offer, is 404'd in the same commit for the same reason.
+#
+# RESTORING (do not, without checking free-seat copy is allowed again): delete
+# the 404 rule below and put these back:
+#   RewriteRule ^rsvp-0730$ /rsvp-0730/ [R=301,L,QSA]
+#   RewriteRule ^rsvp-0730/?$ rsvp-0730/index.html [NC,L]
+RewriteRule ^rsvp-0730(/index\.html)?/?$ - [NC,R=404,L]
 # Services offer-ladder page lives at /services/ (unlinked preview, awaiting nav sign-off).
 # 2026-07-31: same trailing-slash defect as /kit -- 301 to the slashed form first.
 RewriteRule ^services$ /services/ [R=301,L,QSA]
@@ -335,7 +392,20 @@ RewriteRule ^fx/hr-li/?$ /fractional/hr/?utm_source=linkedin&utm_medium=organic&
 RewriteRule ^w/ads/?$ /workshop/?utm_source=meta&utm_medium=paid&utm_campaign=ic_workshop_permanent&utm_content=track_direct [R=301,L,QSA]
 # Track 2 FREE-FIRST: cold ad -> free AI checklist (email capture + Meta Lead)
 # then its built-in CTA to the $47 July 30 seat. utm_content=track_free.
-RewriteRule ^w/free/?$ /workshop/?utm_source=meta&utm_medium=paid&utm_campaign=ic_workshop_permanent&utm_content=track_free [R=301,L,QSA]
+#
+# 2026-08-17: RETIRED SHORT LINK, now a 404. Same standing instruction as the
+# free-seat pages above. This slug's whole meaning is "free": it was the
+# free-first arm of the July 30 Meta split test, and its own utm_content says
+# track_free. Pointing a link a reader believes is free at the $50 page is the
+# bait and switch this pass closes, and it is a worse offence on a short link
+# than on a page, because the reader cannot see the destination before clicking.
+# Nothing on the site links to it; only an old ad or a saved link reaches it, and
+# the ad set behind it is paused at $0/day.
+#
+# RESTORING (do not, without a free offer Boubacar has named): delete the 404
+# rule and put this back:
+#   RewriteRule ^w/free/?$ /workshop/?utm_source=meta&utm_medium=paid&utm_campaign=ic_workshop_permanent&utm_content=track_free [R=301,L,QSA]
+RewriteRule ^w/free/?$ - [NC,R=404,L]
 RewriteRule ^w/fb/?$ /workshop/?utm_source=facebook&utm_medium=paid&utm_campaign=ic_workshop_permanent&utm_content=fb_ad [R=301,L,QSA]
 
 # ORGANIC free-seat link -- for a hand-posted FB/social post, NOT an ad buy.
@@ -367,7 +437,17 @@ RewriteRule ^w/ss/?$ /workshop/?utm_source=silicon_slopes&utm_medium=event&utm_c
 # target (/free-workshop-july16/) now 301s to the live July 30 free-seat capture;
 # point this straight there too so a straggler clicking the old newsletter link
 # lands on the working capture in a single hop, not a double 301.
-RewriteRule ^w/july16/?$ /workshop/?utm_source=sbdc&utm_medium=organic&utm_campaign=ic_workshop_permanent&utm_content=stale_july16_shortlink [R=301,L]
+#
+# 2026-08-17: RETIRED SHORT LINK, now a 404. Same standing instruction and same
+# bait-and-switch reasoning as /w/free above: this slug was minted for a
+# CANCELLED FREE session, so a straggler clicking it from the old SBDC
+# newsletter believes they are claiming a free seat. Its old destination
+# (/free-workshop-july16/) is itself a 404 as of this commit.
+#
+# RESTORING (do not, without a free offer Boubacar has named): delete the 404
+# rule and put this back:
+#   RewriteRule ^w/july16/?$ /workshop/?utm_source=sbdc&utm_medium=organic&utm_campaign=ic_workshop_permanent&utm_content=stale_july16_shortlink [R=301,L]
+RewriteRule ^w/july16/?$ - [NC,R=404,L]
 
 # DISCRETE comp-seat link for July 30 -- Boubacar shares this 1:1 only (never
 # posted publicly, never linked from the paid page). Confirms a free seat with
@@ -379,7 +459,20 @@ RewriteRule ^w/july16/?$ /workshop/?utm_source=sbdc&utm_medium=organic&utm_campa
 # same final page, which strictly preserves MORE attribution than before rather
 # than trading any away. Same single-hop treatment w/july16 already got.
 # "track_comp" cannot match /track_free/, so it stays out of the paid free-first arm.
-RewriteRule ^w/vip/?$ /workshop/?utm_source=direct_invite&utm_medium=comp&utm_campaign=ic_workshop_permanent&utm_content=track_comp [R=301,L,QSA]
+#
+# 2026-08-17: RETIRED SHORT LINK, now a 404. Same standing instruction and same
+# bait-and-switch reasoning as /w/free above. This is the comp-seat slug: its
+# utm_medium is literally "comp" and its promise is a seat with NO charge, so a
+# 1:1 recipient holding it believes they have a free seat. Sending them to the
+# $50 page is the worst version of the switch, because it arrived as a personal
+# invitation. Its old page (/rsvp-0730/) is a 404 as of this commit too. A comp
+# seat is still available -- Boubacar gives it directly, one by one, which is the
+# posture he already chose for the August 27 credit; it does not need a URL.
+#
+# RESTORING (do not, without a comp offer Boubacar has named): delete the 404
+# rule and put this back:
+#   RewriteRule ^w/vip/?$ /workshop/?utm_source=direct_invite&utm_medium=comp&utm_campaign=ic_workshop_permanent&utm_content=track_comp [R=301,L,QSA]
+RewriteRule ^w/vip/?$ - [NC,R=404,L]
 
 # Clean URLs: append .html for any path without an extension. Handles top-level
 # (/governance → /governance.html), nested (/lens/throughput → /lens/throughput.html,
@@ -389,6 +482,54 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^([^\.]+)$ $1.html [NC,L]
 
+# =====================================================================
+# CURRENT ROUTING -- 2026-08-17 free-seat 404 sweep (Boubacar, standing
+# instruction, given over a week before it was carried out)
+# ---------------------------------------------------------------------
+# His words: "I already told you over a week ago to 404 the free seat pages but
+# to not delete the pages as we may re-use them for other things."
+#
+# Every free-seat surface now returns 404 on the slashed, unslashed and explicit
+# index.html forms. Every page FILE stays in the repo. Each rule above carries
+# the exact lines to uncomment to bring its page back.
+#
+#   PAGES, now 404, files kept:
+#     /ai-checklist/          "Claim my free seat $0", July 30
+#     /rsvp-0730/             "$0, no card" comp-seat RSVP, July 30
+#     /free-thank-you/        $0 checkout confirmation (already 404 since 08-07)
+#     /free-workshop-july16/  cancelled July 16 free session (file deleted 08-07)
+#
+#   SHORT LINKS, now 404:
+#     /w/free      free-first Meta arm, utm_content=track_free
+#     /w/vip       1:1 comp seat, utm_medium=comp
+#     /w/july16    cancelled July 16 FREE session, SBDC newsletter
+#
+# WHY 404 AND NOT THE 301 THESE ALREADY HAD. The 08-04 and 08-07 passes pointed
+# all of them at /workshop/. That behaviour is itself the defect: a visitor who
+# clicked for a FREE seat landed on a $50 checkout. A 404 is the honest answer
+# and it is what he asked for. /free-thank-you/ was already reasoned this way on
+# 08-07 and the same reasoning now covers the other six.
+#
+# NOT TOUCHED, on purpose:
+#   /w/start   a lead-magnet slug, not a free-seat slug, and a separate lane is
+#              live on the lead magnet right now. Flagged for Boubacar rather
+#              than changed, because it still 301s to the $50 page and carries
+#              the same read-a-free-thing-get-a-paid-page shape.
+#   /seat/, /workshop-b/   PAID pages ($47), already retired-by-redirect. Not
+#              free-seat surfaces, so out of this instruction's scope.
+#   /w/svc /w/sjc /w/li /w/x /w/nl /w/ss /w/sbdc /w/beccy /w/ads /w/fb
+#   /w/fb-organic /w/paid  generic per-channel slugs. They pointed at the free
+#              capture only during the 07-27 free window; pointing at the live
+#              paid page is correct for them now.
+#
+# NO STRIPE OBJECT WAS CREATED, CHANGED OR DEACTIVATED. The $0 payment link
+# behind /ai-checklist/ (dRm4gB4Tt8ZQ1IY2wBgEg0k / plink_1TtUuGQWqcWWuBB05dFBgLDD,
+# unit_amount 0) was verified INACTIVE on 2026-08-17 by opening it in a real
+# browser: it renders "The link is no longer active." A 200 from buy.stripe.com
+# is NOT evidence a link is live -- Stripe's checkout shell returns 200 and then
+# renders that message, which is how this was mis-read as claimable earlier.
+# =====================================================================
+#
 # =====================================================================
 # CURRENT ROUTING -- 2026-08-04 post-event sweep
 # ---------------------------------------------------------------------
