@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="light only">
 <title>AI Without Getting Burned &middot; The Online Session &middot; Catalyst Works</title>
-<meta name="description" content="A sixty-minute online working session for owners. You build one AI tool on your own laptop and take it home running. Wednesday August 19, 11am Mountain.">
+<meta name="description" content="A sixty-minute online working session for owners. You build one AI tool on your own laptop and take it home running. Thursday September 17, 11am Mountain.">
 
 <meta property="og:title" content="AI Without Getting Burned &middot; The Online Session">
 <meta property="og:description" content="Sixty minutes, online, small group, laptops open. You build one tool on your own machine and take it home running.">
@@ -37,16 +37,24 @@
    Sibling of /workshop/, which is the PERMANENT in-person page and stays
    the canonical address for the room. This one is the ONLINE session and
    it is deliberately a second page rather than a second state on the
-   first, because the two run at the same time on purpose: the online
-   session on Wednesday August 19 feeds the in-person session on Thursday
-   August 27, and whoever sits in the online one gets their seat price
-   credited against the room. One page cannot say both without one of
-   them reading as the afterthought.
+   first, because the two are separate asks on purpose.
 
-   THE ONLINE SESSION IS THE ON-RAMP, not a rival. One campaign with two
-   asks, eight days apart. That is why this page never argues against the
-   room: it sells the hour, then hands the reader the credit that makes
-   the room the obvious next step.
+   2026-08-17: THE ORDER REVERSED, and it matters for how this page reads.
+   Boubacar cancelled the August 19 date and moved this session to
+   THURSDAY SEPTEMBER 17, three weeks and a day out, so it can get a full
+   three weeks of real promotion behind it. That puts the in-person
+   session on August 27 FIRST and this one three weeks AFTER it, where
+   before this page was the on-ramp eight days ahead of the room. So this
+   is no longer a feeder: it is the standalone remote version for the
+   people an in-person evening in Sandy was never going to reach, which is
+   the blocker every blind reader panel named. The credit language was
+   already off this page on 2026-08-06 (Boubacar: "remove the public
+   promise of the $25 off so we can work that out one by one"), so nothing
+   here promises a relationship between the two prices any more, which is
+   what makes the reorder safe to do as a date change.
+
+   THE ONLINE SESSION IS THE REMOTE DOOR, not a rival. That is why this
+   page never argues against the room.
 
    STALE AS OF 2026-08-06: the two paragraphs above still describe the
    campaign as designed, but the page NO LONGER STATES THE CREDIT. The
@@ -550,9 +558,25 @@ var NEXT_SESSION = {
      thing is the Meet link, which is ours. The Google Meet room for this
      session was created on 2026-08-05 against the Calendar API directly, so
      linkReady is true. Set it back to false the moment a future online date is
-     announced before its room exists. */
-  linkReady: true,
-  date:  'Wednesday, August 19',
+     announced before its room exists.
+
+     2026-08-17: SET BACK TO FALSE, which is exactly the case that instruction
+     was written for. The Meet room that made this true belonged to the August 19
+     calendar event, and that event was marked CANCELLED today when Boubacar
+     moved the session to Thursday September 17. The date is public and the
+     checkout is live; the room is not built yet. So the status line reads "Date
+     set. Link being built.", which is true, instead of "Session confirmed",
+     which would not be.
+
+     linkReady does NOT gate the checkout -- read STATE_LABEL below, it changes
+     one label and nothing else. That is deliberate: the seat stays buyable
+     while the room is being made, because a reader who wants in should not be
+     turned away over a Meet link that takes a minute to create.
+
+     FLIP IT BACK TO TRUE the moment a Meet room exists on the September 17
+     event. That is the one open item on this page. */
+  linkReady: false,
+  date:  'Thursday, September 17',
   /* The \u00a0 escapes are non-breaking spaces and they are load-bearing, not
      decoration. Without them these values wrap so that 'Mountain' and 'Meet'
      each end up alone on a line, which the house no-orphan rule forbids. */
@@ -565,16 +589,51 @@ var NEXT_SESSION = {
      '1100 UT' in his own note means UTAH time, confirmed with him directly. It
      is 11:00 Mountain, not 17:00 UTC and not 5am.
 
-     THE DAY MOVED, on Boubacar's decision 2026-08-05: Thursday August 13 became
-     WEDNESDAY August 19. Two reasons, both deliberate.
+     THE DAY MOVED TWICE. Read both, most recent first.
+
+     2026-08-17, on Boubacar's decision: Wednesday August 19 became THURSDAY
+     SEPTEMBER 17. He cancelled the August 19 date and pushed it out so the
+     session gets a full three weeks of real promotion behind it, in his words
+     "reschedule the virtual around Sep 17".
+     (1) THE REASON IS THE RUNWAY, not the day of week. The August 19 run had
+         its assets ready on 08-11 and its first promotion landed four days
+         out, because days one to four of a nine-day campaign were never
+         posted. Sep 17 is three weeks and one day from 08-17. An unposted
+         campaign is indistinguishable from no campaign, and that is the thing
+         this date buys the fix for.
+     (2) THURSDAY, and the old Wednesday reasoning below is now EXPIRED, not
+         overruled. It existed to avoid a head-to-head with the Aug 27 Thursday
+         in-person session and to stay out of Aug 27's peak week. By mid
+         September Aug 27 is three weeks past, so neither reason survives.
+         Thursday is also the weekday his sessions already run on.
+     (3) 11:00 am Mountain DID NOT MOVE, and must not. See the panel finding
+         above: midday is the variable the evidence named. 11:00 Mountain is
+         1:00 pm Eastern and 10:00 am Pacific, the widest US working window.
+     (4) Calendar checked before locking: Sep 17 holds no external commitment,
+         only a recurring birthday marker and his own routine template blocks,
+         all marked free. The Sep 9 3-5pm ET slot with a former colleague is
+         eight days earlier and does not touch it.
+     (5) PRICE UNCHANGED at $25 and the Stripe link is UNCHANGED, so anyone
+         who already paid for the August 19 seat holds a valid seat that simply
+         moved. A price change would need a NEW payment link (a link's amount
+         cannot be edited in place), and that is a Stripe object change, which
+         is Boubacar's call and not an agent's.
+     (6) The machine-readable campaign key still reads ic_workshop_online_0819
+         throughout this file, deliberately left alone. It is the same session
+         and the same offer on a new date, so its click history belongs
+         together; minting a fresh key would split one session's numbers in
+         two and would need the four w/online* short links repointed in the
+         same breath. Filed for Boubacar rather than changed quietly, because
+         "0819" reading as a September session is a real analytics wart.
+
+     SUPERSEDED, 2026-08-05, kept because it explains where 11:00 am came from:
+     Thursday August 13 became WEDNESDAY August 19. Two reasons, both deliberate.
      (1) Eight days was too thin with no announcement out. Aug 19 buys fourteen
          days to fill the room.
      (2) WEDNESDAY, not Thursday, on purpose. Thursday belongs to the Aug 27
          in-person session. A competing Thursday event seven days earlier invites
          exactly the head-to-head comparison we do not want, and Aug 20 would have
-         landed inside the Aug 27 peak week. Wednesday sidesteps both.
-     Accepted trade, recorded so nobody rediscovers it as a surprise: the $25
-     credit runway shrinks from fourteen days to eight. */
+         landed inside the Aug 27 peak week. Wednesday sidesteps both. */
   place: 'Online, on Google\u00a0Meet',
   /* Set together, on purpose. A price without a registerUrl renders a
      'Reserve my seat' button over a checkout that does not exist, and a
