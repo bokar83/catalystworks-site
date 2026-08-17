@@ -654,38 +654,36 @@ var NEXT_SESSION = {
      seat. A payment link's amount cannot be edited in place, so a price
      change means a new link, not an edit. */
   price: '$25',
-  /* registerUrl EMPTIED 2026-08-17, and this is a DEAD CHECKOUT fix, not a
-     decision about the offer. Read this before putting the URL back.
+  /* registerUrl RESTORED 2026-08-17, on Boubacar's explicit instruction that
+     same day, and the restore closes the dead-checkout hole rather than
+     reopening it. The whole history is kept here because the failure mode it
+     records is the one most likely to repeat.
 
-     The link that was here, buy.stripe.com/dRmfZjadN7VM73i1sxgEg0n
-     (plink_1U1CWwQWqcWWuBB0jgP2KmJT, $25), is INACTIVE. Confirmed two
-     independent ways on 2026-08-17: the Stripe API returns "active": false for
-     it, AND opening the URL in a real browser renders "The link is no longer
-     active." It was almost certainly deactivated earlier the same day when the
-     August 19 session was cancelled, which was the right call at that moment.
+     WHAT HAPPENED. This field was emptied earlier on 2026-08-17 because the
+     link, buy.stripe.com/dRmfZjadN7VM73i1sxgEg0n (plink_1U1CWwQWqcWWuBB0jgP2KmJT,
+     $25), had been deactivated when the August 19 session was cancelled.
+     Emptying it was correct at that moment: it dropped the page into the `dated`
+     state so no buyer was walked into a dead Stripe page.
 
-     Note for anyone re-testing it: a 200 from buy.stripe.com proves NOTHING.
-     Stripe's checkout shell returns 200 and then renders the dead-link message.
-     The same wrong inference was made about the $0 free-seat link earlier today.
+     WHAT CHANGED. The SAME link is now active again, and its metadata
+     session_date now reads 2026-09-17 instead of 2026-08-19. The amount was
+     never touched, because a payment link's amount cannot be edited in place and
+     $25 did not change, so no new link was needed. Read back off the Stripe API
+     after the write: "active": true, metadata.session_date 2026-09-17,
+     metadata.replaces_date 2026-08-19, line item 2500 usd.
 
-     Leaving the URL in place would have left a live, public, paid page whose
-     "Reserve my seat" button walked every buyer into a dead Stripe page. The
-     email is captured on our own page BEFORE the redirect, so no lead was being
-     lost, but the last step was broken. Emptying registerUrl drops the page into
-     the `dated` state below, which still shows the date, time, place and price
-     and still captures the email, and simply does not promise a checkout that
-     does not exist.
+     THE TESTING RULE THAT SURVIVES THIS, and it is the reason this note is long:
+     a 200 from buy.stripe.com proves NOTHING. Stripe's checkout shell returns
+     200 and THEN renders "The link is no longer active." That exact wrong
+     inference was made twice on 2026-08-17, once about this link and once about
+     the $0 free-seat link. Verify a checkout by opening it in a real browser and
+     reading the rendered page, never by reading a status code.
 
-     NO STRIPE OBJECT WAS TOUCHED. Reactivating a payment link is money, which is
-     Boubacar's call and not an agent's.
-
-     TO RESTORE, once he reactivates the link or issues a new one:
-       1. put the URL back here (a NEW link if the price ever changes -- a link's
-          amount cannot be edited in place),
-       2. revert the two `dated`-branch copy strings marked
-          "TEMPORARY 2026-08-17" further down to their generic wording,
-       3. re-verify by opening the checkout in a browser, not by reading a 200. */
-  registerUrl: ''
+     IF THIS EVER GOES DEAD AGAIN: empty this field, which drops the page back
+     into the `dated` state, and swap the five `dated`-branch copy strings to the
+     seat-link-being-reissued wording. Do not leave a live URL pointing at a dead
+     checkout. A price change, unlike a date change, needs a NEW link. */
+  registerUrl: 'https://buy.stripe.com/dRmfZjadN7VM73i1sxgEg0n'
 };
 
 (function(){
@@ -785,19 +783,19 @@ var NEXT_SESSION = {
         cell('Date',  S.date)  + cell('Time',  S.time) +
         cell('Place', S.place) + cell('Seat',  S.price || 'Not set yet') +
       '</div>' +
-      /* TEMPORARY 2026-08-17. The generic wording of this paragraph, the label
-         and the two confirmation lines assumed this state only ever meant "the
-         price is not set yet". That is now false: the date AND the price are
-         both set and the ticket cell directly above states $25, so the old
-         sentence would contradict the cell it sits under. The reason this state
-         is showing is that the seat link is being reissued (see the note on
-         registerUrl at the top of NEXT_SESSION). Revert all five strings below
-         to their generic wording when the checkout comes back. */
-      '<p>Seats are paid and the seat link is being reissued. Leave your email and I send it to you the moment it is back, and you keep your place in the order I get them.</p>';
+      /* Back to the generic wording on 2026-08-17, when the checkout came back.
+         These five strings were temporarily swapped to a seat-link-being-reissued
+         message for the few hours the $25 link sat inactive. That swap existed
+         because this branch's generic copy says the PRICE is not set yet, which
+         would have contradicted the $25 ticket cell directly above it. With
+         registerUrl restored this branch is unreachable anyway, so the generic
+         wording is the right thing to keep: it is the honest copy for the state
+         this branch actually models, which is a date announced before a price. */
+      '<p>Seats are paid and the price is not set yet. Leave your email and I send you the price and the seat link the day I set them.</p>';
     lbl.textContent = 'Send me the seat link';
-    fine.textContent = 'Your email is saved here, and the seat link comes to you the moment it is back up. You will also get the short letter I send out, and one click takes you off it.';
-    okLine.textContent = 'You get the seat link in your inbox the moment it is back up.';
-    LISTED_MSG = 'You are on the list. I will email you the seat link.';
+    fine.textContent = 'The price posts on this page the moment it is set. You will also get the short letter I send out, and one click takes you off it.';
+    okLine.textContent = 'You get the price and the seat link in your inbox the moment I set them.';
+    LISTED_MSG = 'You are on the list. I will email you the price and the seat link.';
   } else {
     box.innerHTML =
       '<p class="state"><span class="pip" aria-hidden="true"></span>Next session being scheduled</p>' +

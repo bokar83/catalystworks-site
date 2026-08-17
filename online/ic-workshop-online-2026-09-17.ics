@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Catalyst Works Consulting//IC Workshop Online//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:ic-workshop-online-2026-09-17@catalystworks.consulting
+DTSTAMP:20260817T190000Z
+DTSTART:20260917T170000Z
+DTEND:20260917T180000Z
+SUMMARY:AI Without Getting Burned, online session
+LOCATION:Online, on Google Meet
+DESCRIPTION:A 60-minute hands-on AI working session for owner-operators. Bring a laptop. 11:00 am to 12:00 pm Mountain. The join link comes in your confirmation email. Questions: boubacar@catalystworks.consulting. Details: https://catalystworks.consulting/online/
+URL:https://catalystworks.consulting/online/
+STATUS:CONFIRMED
+END:VEVENT
+END:VCALENDAR
