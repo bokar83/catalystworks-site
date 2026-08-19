@@ -344,6 +344,26 @@ h2{font-size:clamp(1.45rem,5.4vw,2.05rem);margin-bottom:.5em}
 
 @media (prefers-reduced-motion:reduce){*{transition:none !important;animation:none !important}}
 </style>
+<!-- Meta Pixel Code -->
+<!-- This page is the destination of paid Meta traffic. Without the pixel the
+     spend is unattributable: no PageView, no Lead, no InitiateCheckout, so the
+     ad account cannot tell a click that registered from a click that bounced.
+     Same pixel id as every other page on this site, on purpose. -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1826865671807664');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"/></noscript>
+<!-- End Meta Pixel Code -->
 </head>
 <body>
 
@@ -557,6 +577,9 @@ var NEXT_SESSION = {
      phone must never be stranded on a dead button. */
   var CAPTURE_TIMEOUT_MS = 3000;
   var qs = new URLSearchParams(window.location.search || '');
+  /* Derived, never hand-written, so the pixel value cannot drift from the
+     price printed on the ticket above it. */
+  var PRICE_NUM = parseFloat(String((NEXT_SESSION||{}).price || '').replace(/[^0-9.]/g,''));
   var emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   var box   = document.getElementById('session');
@@ -791,11 +814,55 @@ var NEXT_SESSION = {
     var sent = false;
     var landed = false;
 
-    function finish(){
+    function finish(failed){
       if (sent) return;
       sent = true;
+
+      /* Both standard events fire HERE, before the navigation two lines down,
+         because once window.location.href is set this page is gone and nothing
+         queued after it is guaranteed to leave. Lead is the capture itself.
+         InitiateCheckout is the hand-off to Stripe and only fires on the path
+         that actually opens a checkout. Wrapped because an ad blocker leaves
+         window.fbq undefined and a capture must never fail over a pixel. */
+      try {
+        if (window.fbq) {
+          fbq('track', 'Lead', {
+            content_name: COHORT,
+            content_category: 'workshop_permanent',
+            status: live ? 'paid_seat' : 'waitlist'
+          });
+          if (live) {
+            fbq('track', 'InitiateCheckout', {
+              content_name: COHORT,
+              currency: 'USD',
+              value: isNaN(PRICE_NUM) ? undefined : PRICE_NUM
+            });
+          }
+        }
+      } catch(e){}
+
       var dest = live ? checkoutHref(email, ref) : '';
       if (dest) { window.location.href = dest; return; }
+
+      /* Only reached on the waitlist paths, which navigate nowhere. That
+         matters: the checkout path has the Stripe reconciliation behind it and
+         this one has nothing, so a confirmed failure here means the address is
+         genuinely gone. Showing "You are on the list" over it would be a signal
+         that lies, and the person would never know to try again. Note this is
+         the CONFIRMED-failure path only -- the 3s timeout calls finish() with
+         no argument, because a write still in flight is not a write that
+         failed and a beacon has already gone out for it. */
+      if (failed) {
+        sent = false;
+        btn.removeAttribute('aria-busy');
+        btn.disabled = false;
+        lbl.textContent = 'Try again';
+        input.setAttribute('aria-invalid','true');
+        fine.textContent = 'That did not save, so you are not on the list yet. Have another go, or email boubacar@catalystworks.consulting and I will add you by hand.';
+        say.textContent = 'That did not save. Please try again.';
+        return;
+      }
+
       form.style.display = 'none';
       fine.style.display = 'none';
       okBox.classList.add('on');
@@ -821,7 +888,7 @@ var NEXT_SESSION = {
       /* Every attempt failed but we are still on the page, so there is time
          for one more shot by a different mechanism before the redirect. */
       if (!ok) beacon(email, ref);
-      finish();
+      finish(!ok);
     });
   });
 
