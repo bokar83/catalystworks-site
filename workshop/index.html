@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="light only">
 <title>AI Without Getting Burned &middot; The Workshop &middot; Catalyst Works</title>
-<meta name="description" content="A ninety-minute, in-person workshop for owners. You build three AI tools on your own laptop and take them home running. The next session posts here.">
+<meta name="description" content="An in-person evening for owners and operators. You walk out with three AI tools running on your own laptop, built about your own business. No code and nothing to install.">
 
 <meta property="og:title" content="AI Without Getting Burned &middot; The Workshop">
-<meta property="og:description" content="Ninety minutes, in person, small group, laptops open. You build three tools on your own machine and take them home running.">
+<meta property="og:description" content="Ninety minutes, in person, small group, laptops open. You walk out with three AI tools running on your own laptop, built about your own business.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://catalystworks.consulting/workshop/">
 
@@ -323,11 +323,73 @@ h2{font-size:clamp(1.45rem,5.4vw,2.05rem);margin-bottom:.5em}
   border-top:var(--lw035) solid rgba(233,238,227,.28);
   display:flex;flex-wrap:wrap;gap:4px 16px}
 
+/* ---------- the hero when-strip and the primary call to action ------
+   Added 2026-08-20. The page used to open with two paragraphs of prose and
+   nothing clickable, so a visitor arriving cold from an ad had to scroll
+   before they could see a date, a price, or a way in. Both of these are
+   rendered from NEXT_SESSION by the script at the bottom, same as the
+   ticket, so no date and no price is ever hand-written into markup here.
+   -------------------------------------------------------------------- */
+.when{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;
+  margin:22px 0 0;padding:12px 15px;
+  border:var(--lw035) solid var(--thin);background:var(--reserve);
+  font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--ink-soft)}
+.when b{color:var(--ink);font-weight:500;letter-spacing:.08em;text-transform:uppercase}
+.when:empty{display:none}
+/* At 375px the time value sets 298px wide against 291px of usable strip and
+   wraps, which strands "pm," alone on the second line. Seven pixels. Pulling
+   the mono tracking in on narrow screens buys about twelve and holds every
+   value on one line, which is what this strip is for: it is scanned, not
+   read. Measured, not guessed. */
+@media(max-width:430px){
+  .when{font-size:11.5px;letter-spacing:.03em;padding:11px 13px}
+  .when b{letter-spacing:.05em}
+}
+
+.ctarow{margin:18px 0 0}
+/* Shares the .go button's shape on purpose. There is one thing to do on this
+   page and it should look identical everywhere it is offered. */
+.cta{display:inline-flex;align-items:center;justify-content:center;gap:11px;
+  min-height:58px;padding:15px 26px;text-decoration:none;
+  background:var(--indigo);color:var(--stock);
+  font-family:var(--display);text-transform:uppercase;
+  font-variation-settings:'wdth' 92,'wght' 700;
+  font-size:clamp(1rem,4vw,1.2rem);letter-spacing:.02em;
+  transition:background .15s ease,transform .12s ease;
+  -webkit-tap-highlight-color:transparent}
+.cta:hover{background:var(--vat);color:var(--stock)}
+.cta:active{transform:translateY(1px)}
+/* The script leaves this empty in any state that has nothing to send anybody
+   to, and an empty button must not render as a bare indigo slab. */
+.cta:empty{display:none}
+@media(max-width:559px){.cta{display:flex;width:100%}}
+.cta.ghost{background:transparent;color:var(--indigo);border:var(--lw07) solid var(--indigo)}
+.cta.ghost:hover{background:var(--indigo);color:var(--stock)}
+.cta.vat{background:var(--brass);color:var(--vat)}
+.cta.vat:hover{background:var(--vat-ink);color:var(--vat)}
+
+.sub{color:var(--ink-soft)}
+.note b{color:var(--ink)}
+
+/* The section the two buttons jump to. Without the scroll margin the plate
+   lands flush against the top edge and the figure number above it is lost. */
+#reserve{scroll-margin-top:18px}
+html{scroll-behavior:smooth}
+
+/* ---------- who runs it ---------- */
+/* A face, because this is an in-person evening with a stranger and every
+   other trust signal on this page is a sentence. */
+.bio{display:flex;gap:20px;align-items:flex-start;flex-wrap:wrap}
+.mug{width:132px;height:auto;flex:none;display:block;
+  border:var(--lw05) solid var(--brass)}
+.bio>div{flex:1 1 260px;min-width:0}
+.alt{font-size:.95rem;margin:24px 0 0}
+
 /* ---------- print ---------- */
 @media print{
   @page{size:letter portrait;margin:12mm}
   html,body{background:#fff;color:#000;font-size:9pt;line-height:1.32}
-  .weave,.selvedge,.form,.fine,.noprint{display:none !important}
+  .weave,.selvedge,.form,.fine,.noprint,.cta,.mug{display:none !important}
   .wrap{max-width:none;padding:0}
   section{padding:6pt 0;border-top:.5pt solid #999;break-inside:avoid}
   .top{padding:0 0 5pt}
@@ -342,7 +404,8 @@ h2{font-size:clamp(1.45rem,5.4vw,2.05rem);margin-bottom:.5em}
   a{text-decoration:none}
 }
 
-@media (prefers-reduced-motion:reduce){*{transition:none !important;animation:none !important}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}
+  *{transition:none !important;animation:none !important}}
 </style>
 <!-- Meta Pixel Code -->
 <!-- This page is the destination of paid Meta traffic. Without the pixel the
@@ -373,19 +436,107 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"/></
 
 <header class="top">
   <div class="wrap">
-    <p class="meta"><span><b>Catalyst Works</b></span><span>In person</span><span>About ninety minutes</span></p>
+    <p class="meta"><span><b>Catalyst Works</b></span><span>In person, Sandy</span><span>Owners and operators</span></p>
     <h1>AI without<br>getting burned</h1>
     <div class="rule" aria-hidden="true"></div>
-    <p class="lede">I build AI tools for a living and my own business runs on the ones I build. Everything I put in front of the room is already doing work in my week. That is why I can tell you what to skip.</p>
-    <p class="lede">Ninety minutes, in person, small group, laptops open. The room is owners and the people who actually run the place. <strong>You leave with three tools set up on your own machine, in your own words, about your own business</strong>, and they keep working after you walk out. Turn the wifi off and they still run.</p>
+    <!-- 2026-08-20. These two paragraphs used to open with three sentences
+         about me before the reader was told a single thing they get. On a
+         phone that is the entire first screen, and this page takes cold
+         traffic off an ad, where the first screen is the only screen most
+         people see. The promise leads now and the credential moved to the
+         footer, where it belongs. -->
+    <p class="lede"><strong>You walk out with three AI tools running on your own laptop, built in your own words, about your own business.</strong> Not a talk about AI. Three things that still work on the drive home.</p>
+    <p class="lede">This evening is for owners and whoever actually runs the place. If the most you have done with AI is type a question into it and wonder what the fuss is about, you are the person I built it for. No code, and nothing to install or subscribe to afterwards.</p>
+
+    <!-- Filled from NEXT_SESSION by the script at the bottom. Never
+         hand-write a date or a price into this block. -->
+    <div id="when" class="when"></div>
+    <p class="ctarow"><a class="cta" id="herocta" href="#reserve"></a></p>
   </div>
 </header>
 
 <main>
 
-<section aria-labelledby="h-next">
+<section aria-labelledby="h-build">
   <div class="wrap">
-    <p class="num"><b>Fig. 01</b> <span>The next session</span></p>
+    <p class="num"><b>Fig. 01</b> <span>What you take home</span></p>
+    <h2 id="h-build">What you build</h2>
+    <p class="sub">You build all three yourself, on your own machine, while I am standing there. They are yours afterwards and they do not stop working when the evening does.</p>
+    <ol class="builds">
+      <li>
+        <b>A file that knows your business</b>
+        <span>You write down once what you sell, who buys it, and what you charge. Paste that in and every answer you get after that is about your business, instead of some business that does not exist.</span>
+      </li>
+      <li>
+        <b>A second opinion you can argue with</b>
+        <span>Hand it the thing you have been chewing on for a month. A price you are scared to raise. A hire. A job you are not sure you want. Three different points of view go at it in front of you, and then one of them calls it.</span>
+      </li>
+      <li>
+        <b>A check on your own plans</b>
+        <span>Point it at something you are about to spend money on and it strips out the parts that are only there because they look clever.</span>
+      </li>
+    </ol>
+    <div class="plus">
+      <p>You also take home the recipes and a cheat sheet built to print.</p>
+    </div>
+    <div class="note">
+      <p><b>All three run on your own machine and nothing you type leaves it.</b> Halfway through the evening I pull the wifi down and everything carries on working. I would rather show you that than promise it.</p>
+    </div>
+  </div>
+</section>
+
+<section aria-labelledby="h-try">
+  <div class="wrap">
+    <p class="num"><b>Fig. 02</b> <span>Before you pay me anything</span></p>
+    <h2 id="h-try">Try one first</h2>
+    <!-- The strongest asset this page owns, and it used to be hidden inside
+         the post-submit confirmation box, where only somebody who had already
+         converted could ever see it. A free working sample of one of the three
+         is the only proof on offer here: there are no testimonials, and
+         inventing one is out of the question. -->
+    <p>You should not have to take my word for any of this. One of the three is already on this site, cut down to a single prompt that runs in about five minutes. Nothing to enter and nothing to buy.</p>
+    <p class="ctarow"><a class="cta ghost" href="/second-opinion/" target="_blank" rel="noopener">Run the five minute second opinion <span aria-hidden="true">&#8594;</span></a></p>
+  </div>
+</section>
+
+<section aria-labelledby="h-who">
+  <div class="wrap">
+    <p class="num"><b>Fig. 03</b> <span>Who the evening is for</span></p>
+    <h2 id="h-who">Whether this is you</h2>
+    <ul class="runs">
+      <li><b>Owners and operators of small businesses.</b> Most of the room still answers its own phone.</li>
+      <li><b>No technical skill needed.</b> If you can use email you can do everything in this session. The group is kept small on purpose, so your own questions get answered out loud and nobody gets left behind.</li>
+      <li><b>Bring a laptop.</b> That is the whole list. Nothing to set up beforehand.</li>
+      <li><b>Sessions run in person.</b> If you are too far out to sit in the room, email me and I will tell you what I can do from here.</li>
+    </ul>
+
+    <!-- The disqualifier. It used to sit at the bottom of the page, directly
+         under the last thing a reader saw before deciding, which turned it
+         into an exit ramp at the exact moment of the decision. Here it does
+         the job it was actually written for and filters early instead. -->
+    <div class="note">
+      <p>Not this evening, if what you want is somebody to build it for you and hand it over finished. That is real work and I am glad to do it. It is a different conversation, so email me and we will start there instead.</p>
+    </div>
+  </div>
+</section>
+
+<section aria-labelledby="h-cost">
+  <div class="wrap">
+    <p class="num"><b>Fig. 04</b> <span>What it actually costs you</span></p>
+    <h2 id="h-cost">The real price</h2>
+    <!-- Naming the evening and the drive out loud, because the reader is
+         already thinking about both, and a page that behaves as though the
+         seat price is the whole cost reads as though it has never met them.
+         The seat price is deliberately not restated as words here: it lives
+         in NEXT_SESSION and is rendered on the ticket below. -->
+    <p>The price of the seat is the small part of this. The real cost is a Thursday evening and a drive to Sandy, and you should weigh that one honestly before you book.</p>
+    <p>So here is the trade. Each of these three takes about ten minutes to rebuild once you have watched it done. What you are paying for is the ninety minutes where somebody who already built them the wrong way first is standing next to you the first time you do it.</p>
+  </div>
+</section>
+
+<section id="reserve" aria-labelledby="h-next">
+  <div class="wrap">
+    <p class="num"><b>Fig. 05</b> <span>The next session</span></p>
     <h2 id="h-next">When it runs</h2>
 
     <div class="plate">
@@ -406,9 +557,7 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"/></
            only state that renders them as written. The script at the bottom
            overwrites both in the other two states. Read them as the fallback,
            not as what the page says today, and keep them true for a page with
-           no date rather than for the session currently on it. Both were left
-           describing a date that had not been set yet, which read as stale for
-           anyone viewing source while a date was live. -->
+           no date rather than for the session currently on it. -->
       <p class="fine" id="fine">Seats are paid. The price posts here with the next date. You will also get the short letter I send out, and one click takes you off it.</p>
 
       <div class="done" id="ok">
@@ -420,60 +569,41 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"/></
   </div>
 </section>
 
-<section aria-labelledby="h-build">
-  <div class="wrap">
-    <p class="num"><b>Fig. 02</b> <span>What you walk out with</span></p>
-    <h2 id="h-build">What you build</h2>
-    <ol class="builds">
-      <li>
-        <b>A business brain</b>
-        <span>One file that holds what you sell, who buys it, and what you charge. Paste it in once and every answer after that comes back about your business instead of a business that does not exist.</span>
-      </li>
-      <li>
-        <b>A decision council</b>
-        <span>You hand it a decision. Three advisors argue it out in front of you, and then one of them calls it.</span>
-      </li>
-      <li>
-        <b>A simplicity check</b>
-        <span>Point it at a plan you are about to run and it strips out the parts that only look clever.</span>
-      </li>
-    </ol>
-    <div class="plus">
-      <p>Then a set of recipes to take home, and a cheat sheet built to print.</p>
-    </div>
-  </div>
-</section>
-
-<section aria-labelledby="h-runs">
-  <div class="wrap">
-    <p class="num"><b>Fig. 03</b> <span>How the room runs</span></p>
-    <h2 id="h-runs">What the evening is like</h2>
-    <ul class="runs">
-      <li><b>Bring a laptop.</b> Everything gets built on it, by you, while I am standing there.</li>
-      <li><b>Nothing you type leaves your machine.</b> You can prove that yourself by pulling the wifi down in the middle of the session and carrying straight on, which is the demonstration I would rather give you than a promise.</li>
-      <li><b>Small group on purpose.</b> Your own questions get answered out loud.</li>
-      <li><b>Sessions run in person.</b> If you are too far out to sit in the room, email me and I will tell you what I can do from here.</li>
-    </ul>
-
-    <div class="note">
-      <p>This is a working session and not a talk. Come with a laptop and ninety minutes, and you leave with the three tools running.</p>
-      <p>If what you want is somebody to build it for you and hand it over finished, that is a different conversation and I am glad to have it. Email me and we will start there instead.</p>
-    </div>
-  </div>
-</section>
-
 </main>
 
 <footer class="foot">
   <div class="weave" aria-hidden="true"></div>
   <div class="wrap">
-    <p class="num"><b>Fig. 04</b> <span>Who runs it</span></p>
+    <p class="num"><b>Fig. 06</b> <span>Who runs it</span></p>
     <h2>Boubacar</h2>
-    <p>I run Catalyst Works. I sit with owner operators who still answer their own phone, most of them under twenty people. We work out where the week is getting stuck and what is worth pointing at it first.</p>
-    <p>The tools in this workshop are the ones I built for myself first. I teach them because they earned their place in my own week, not because they demo well in a room.</p>
-    <p>If you would rather talk before the session, I keep some time open.</p>
 
-    <p style="margin:18px 0 0">
+    <!-- A face. This is an in-person evening with somebody the reader has
+         never met, and every other trust signal on this page is a sentence.
+         Same portrait as the home page, served from the site root. -->
+    <div class="bio">
+      <img class="mug" src="/Boubacar.jpg" alt="Boubacar, who runs the workshop"
+           width="928" height="1120" loading="lazy" decoding="async">
+      <div>
+        <!-- Careful with the tense here. This describes the work, not a
+             roster. It must never assert current clients. -->
+        <p>I run Catalyst Works, where I build AI tools for small, owner operated businesses. The kind of place where the owner still answers the phone.</p>
+        <p>Every tool in this session is one I built for myself first, and it is still doing work in my own week. That is the only reason it is in the room. It is also why I can tell you what to skip, which is most of what you are being sold right now.</p>
+      </div>
+    </div>
+
+    <!-- The second entry to the one and only checkout. The page makes its
+         whole case between the first button and this one, and before this
+         existed a reader who was convinced by the end had nothing to click
+         and had to scroll back to the top to act. Filled by the script. -->
+    <p class="ctarow"><a class="cta vat" id="footcta" href="#reserve"></a></p>
+
+    <!-- Demoted on purpose, 2026-08-20. This used to be the single most
+         prominent button on the page and it sat below everything else, so the
+         last and loudest thing offered to a hesitating reader was the free
+         alternative to the paid seat. It stays, because some people genuinely
+         should talk first, but it no longer outranks the thing being sold. -->
+    <p class="alt">Would rather talk it through before you give up an evening? I keep some time open.</p>
+    <p style="margin:2px 0 0">
       <a class="book" href="https://calendly.com/boubacarbarry/free-ai-payback-review-owner-operators" rel="noopener">
         Book thirty minutes <span aria-hidden="true">&#8594;</span>
       </a>
@@ -583,6 +713,13 @@ var NEXT_SESSION = {
   var emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   var box   = document.getElementById('session');
+  /* Added 2026-08-20 with the hero call to action. Both are rendered from
+     NEXT_SESSION for the same reason the ticket is: a date or a price written
+     into markup goes stale silently, and this page is the QR target on printed
+     material that outlives any one session. */
+  var when  = document.getElementById('when');
+  var heroCta = document.getElementById('herocta');
+  var footCta = document.getElementById('footcta');
   var form  = document.getElementById('cap');
   var input = document.getElementById('em');
   var btn   = document.getElementById('go');
@@ -629,6 +766,18 @@ var NEXT_SESSION = {
            '<div class="v">' + (v ? esc(v) : '&#8212;') + '</div></div>';
   }
 
+  /* The hero strip and the two buttons. Kept in one place so a state can
+     never set the strip and forget a button, which is how a live page ends
+     up with a date at the top and a dead unlabelled slab under it. An empty
+     label collapses the button via .cta:empty rather than rendering blank. */
+  function head(bits, label){
+    when.innerHTML = (bits || []).map(function(x){
+      return x.bold ? ('<b>' + esc(x.t) + '</b>') : ('<span>' + esc(x.t) + '</span>');
+    }).join('');
+    heroCta.textContent = label || '';
+    footCta.textContent = label || '';
+  }
+
   /* ---- render exactly one state ---- */
   if (live) {
     box.innerHTML =
@@ -640,6 +789,7 @@ var NEXT_SESSION = {
       '</div>' +
       '<p>Enter your email and you go straight to checkout. Your confirmation and the address land in your inbox.</p>';
     lbl.textContent = 'Reserve my seat';
+    head([{t:S.date,bold:true},{t:S.time},{t:S.place},{t:S.price,bold:true}], 'Reserve a seat');
     /* This sentence is a promise about the plumbing, so it only stays here as
        long as the plumbing keeps it. It used to overstate: the write was fired
        before the redirect but the redirect did not wait for it, so a slow or
@@ -672,6 +822,7 @@ var NEXT_SESSION = {
       '</div>' +
       '<p>Seats are paid and the price is not set yet. Leave your email and I send you the price and the seat link the day I set them.</p>';
     lbl.textContent = 'Send me the seat link';
+    head([{t:S.date,bold:true},{t:S.time},{t:S.place},{t:'Price coming'}], 'Get the seat link');
     fine.textContent = 'The price posts on this page the moment it is set. You will also get the short letter I send out, and one click takes you off it.';
     okLine.textContent = 'You get the price and the seat link in your inbox the moment I set them.';
     LISTED_MSG = 'You are on the list. I will email you the price and the seat link.';
@@ -685,6 +836,9 @@ var NEXT_SESSION = {
        just because it happened to be the HTML default. */
     fine.textContent = 'Seats are paid. The price posts here with the next date. You will also get the short letter I send out, and one click takes you off it.';
     okLine.textContent = 'The next date lands in your inbox the day I set it.';
+    /* No date exists, so the strip renders nothing and collapses. The button
+       still has a job: it scrolls to the capture form. */
+    head([], 'Get the next date');
   }
 
   /* ---- capture ---- */
