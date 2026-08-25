@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portfolio | Boubacar Barry, Catalyst Works</title>
+<meta name="description" content="What I build with AI and what I did in HR, on one page. Seven pieces of work, and the place where both halves met inside a real company.">
+<link rel="canonical" href="https://catalystworks.consulting/portfolio">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://catalystworks.consulting/portfolio">
+<meta property="og:title" content="Portfolio | Boubacar Barry, Catalyst Works">
+<meta property="og:description" content="What I build with AI and what I did in HR, on one page. Seven pieces of work, and the place where both halves met inside a real company.">
+<meta property="og:image" content="https://catalystworks.consulting/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Portfolio | Boubacar Barry, Catalyst Works">
+<meta name="twitter:description" content="What I build with AI and what I did in HR, on one page. Seven pieces of work, and the place where both halves met inside a real company.">
+<meta name="twitter:image" content="https://catalystworks.consulting/og-image.jpg">
+
+<link rel="icon" href="/CatalystWorks_logo.jpg">
+
+<!-- GA4, same property as the rest of the site -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TBW90RVMM1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-TBW90RVMM1');
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;0,700;1,600;1,700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  /* Design tokens copied verbatim from catalystworks.consulting/index.html :root */
+  :root {
+    --ink:        #0A0E14;
+    --ink-2:      #0F141C;
+    --ink-3:      #161D27;
+    --paper:      #F5EFE2;
+    --paper-2:    #E8DFCB;
+    --amber:      #E8A66B;
+    --amber-2:    #D08A50;
+    --clay:       #B47C57;
+    --rust:       #C95F4D;
+    --cyan:       #5BC0BE;
+    --line:       rgba(245,239,226,0.12);
+    --line-2:     rgba(245,239,226,0.06);
+    --t-mid:      rgba(245,239,226,0.78);
+    --t-muted:    rgba(245,239,226,0.55);
+    --t-dim:      rgba(245,239,226,0.35);
+    --serif:      'Spectral', Georgia, serif;
+    --sans:       'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    --mono:       'JetBrains Mono', ui-monospace, monospace;
+    --ease:       cubic-bezier(0.22, 1, 0.36, 1);
+    --shadow:     0 24px 64px rgba(0,0,0,0.5);
+    --navh:       72px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--sans);
+    background: var(--ink);
+    color: var(--paper);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  a { color: inherit; text-decoration: none; }
+  button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+  img { max-width: 100%; display: block; }
+  ::selection { background: rgba(232,166,107,0.28); color: var(--paper); }
+
+  /* NAV, same component as the homepage */
+  .nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+    padding: 16px 32px;
+    background: rgba(10,14,20,0); backdrop-filter: blur(0);
+    transition: background 300ms var(--ease), backdrop-filter 300ms var(--ease), border-color 300ms;
+    border-bottom: 1px solid transparent;
+  }
+  .nav.scrolled {
+    background: rgba(10,14,20,0.78);
+    backdrop-filter: blur(16px) saturate(1.4);
+    -webkit-backdrop-filter: blur(16px) saturate(1.4);
+    border-bottom-color: var(--line-2);
+  }
+  .nav-inner { max-width: 1320px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+  .brand { display: inline-flex; align-items: center; gap: 12px; font-weight: 700; letter-spacing: -0.01em; font-size: 16px; color: var(--paper); }
+  .brand img { width: 32px; height: 32px; border-radius: 50%; }
+  .brand .accent { color: var(--amber); }
+  .nav-links { display: flex; gap: 28px; align-items: center; }
+  .nav-links a { font-size: 13px; color: var(--t-muted); transition: color 180ms; font-weight: 500; }
+  .nav-links a:hover { color: var(--paper); }
+  .nav-links a[aria-current="page"] { color: var(--paper); }
+  .nav-cta {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 9px 18px; border-radius: 999px;
+    background: var(--paper); color: var(--ink);
+    font-weight: 600; font-size: 13px;
+    transition: transform 180ms var(--ease), box-shadow 220ms;
+  }
+  .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 12px 32px rgba(245,239,226,0.16); }
+  .nav-cta::after { content: '\2192'; font-weight: 400; }
+
+  .nav-toggle {
+    display: none; background: transparent; border: 1px solid var(--line);
+    width: 40px; height: 40px; border-radius: 8px; padding: 0;
+    align-items: center; justify-content: center; cursor: pointer;
+    transition: border-color 180ms, background 180ms;
+  }
+  .nav-toggle:hover { border-color: rgba(232,166,107,0.4); background: rgba(232,166,107,0.05); }
+  .nav-toggle span { display: block; width: 18px; height: 1.5px; background: var(--paper); position: relative; transition: transform 220ms, opacity 220ms; }
+  .nav-toggle span::before, .nav-toggle span::after { content: ''; position: absolute; left: 0; width: 18px; height: 1.5px; background: var(--paper); transition: transform 220ms, top 220ms; }
+  .nav-toggle span::before { top: -6px; }
+  .nav-toggle span::after  { top: 6px; }
+  .nav-toggle[aria-expanded="true"] span { background: transparent; }
+  .nav-toggle[aria-expanded="true"] span::before { top: 0; transform: rotate(45deg); }
+  .nav-toggle[aria-expanded="true"] span::after  { top: 0; transform: rotate(-45deg); }
+  .nav-drawer {
+    position: fixed; top: 0; left: 0; right: 0; padding: 72px 24px 28px;
+    background: rgba(10,14,20,0.98); backdrop-filter: blur(18px);
+    border-bottom: 1px solid var(--line);
+    transform: translateY(-100%); transition: transform 320ms var(--ease);
+    z-index: 49; display: flex; flex-direction: column; gap: 4px;
+  }
+  .nav-drawer.is-open { transform: translateY(0); }
+  .nav-drawer a { display: block; padding: 16px 8px; font-size: 17px; color: var(--paper); border-bottom: 1px solid var(--line-2); font-family: var(--serif); font-weight: 500; text-decoration: none; }
+  .nav-drawer a:last-child { border-bottom: none; }
+  .nav-drawer .nav-drawer-cta { margin-top: 14px; text-align: center; background: var(--paper); color: var(--ink); border-radius: 10px; font-family: var(--sans); font-weight: 600; font-size: 15px; padding: 14px 18px; }
+  @media (min-width: 761px) { .nav-drawer { display: none; } }
+  @media (max-width: 760px) {
+    :root { --navh: 58px; }
+    .nav-links { display: none; }
+    .nav { padding: 12px 18px; }
+    .nav-toggle { display: inline-flex; }
+    .nav .nav-cta { display: none; }
+  }
+
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 32px; }
+  @media (max-width: 760px) { .wrap { padding: 0 20px; } }
+
+  /* MASTHEAD */
+  .masthead { padding: calc(var(--navh) + 72px) 0 44px; }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: var(--mono); font-size: 11.5px;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--amber); margin-bottom: 26px;
+  }
+  .eyebrow::before {
+    content: ''; display: inline-block; width: 6px; height: 6px;
+    border-radius: 50%; background: var(--amber);
+    box-shadow: 0 0 14px var(--amber);
+  }
+  .masthead p {
+    font-family: var(--serif);
+    font-size: clamp(23px, 3.3vw, 38px);
+    line-height: 1.24;
+    letter-spacing: -0.02em;
+    font-weight: 600;
+    max-width: 900px;
+    color: var(--paper);
+  }
+  .masthead p em { font-style: italic; color: var(--amber); font-weight: 600; }
+
+  /* JUMP NAV. A section index, deliberately not a second nav bar. */
+  .jump {
+    position: sticky; top: var(--navh); z-index: 40;
+    background: rgba(10,14,20,0.92);
+    -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+    border-top: 1px solid var(--line-2);
+    border-bottom: 1px solid var(--line);
+  }
+  .jump-inner {
+    max-width: 1080px; margin: 0 auto; padding: 0 32px;
+    display: flex; align-items: center; gap: 0; overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .jump-inner::-webkit-scrollbar { display: none; }
+  .jump a {
+    font-family: var(--mono); font-size: 11px;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--t-muted); padding: 15px 20px 13px;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    transition: color 180ms, border-color 180ms;
+  }
+  .jump a:first-child { padding-left: 0; }
+  .jump a:hover { color: var(--paper); }
+  .jump a.is-active { color: var(--amber); border-bottom-color: var(--amber); }
+  @media (max-width: 760px) {
+    .jump-inner { padding: 0 20px; }
+    .jump a { padding: 13px 14px 11px; font-size: 10px; letter-spacing: 0.1em; }
+  }
+
+  /* SECTIONS */
+  .section { padding: 72px 0 8px; scroll-margin-top: calc(var(--navh) + 56px); }
+  .section-label {
+    font-family: var(--mono); font-size: 11px;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--t-dim); margin-bottom: 12px;
+  }
+  .section h2 {
+    font-family: var(--serif);
+    font-size: clamp(28px, 4vw, 44px);
+    line-height: 1.08; letter-spacing: -0.028em;
+    font-weight: 700; margin-bottom: 36px;
+    color: var(--paper);
+  }
+
+  /* CARDS */
+  .cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  @media (max-width: 860px) { .cards { grid-template-columns: 1fr; } }
+
+  .card {
+    background: linear-gradient(180deg, rgba(22,29,39,0.72) 0%, rgba(15,20,28,0.9) 100%);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    overflow: hidden;
+    display: flex; flex-direction: column;
+    transition: border-color 240ms var(--ease), transform 240ms var(--ease);
+  }
+  .card:hover { border-color: rgba(232,166,107,0.32); transform: translateY(-2px); }
+
+  .card-media { aspect-ratio: 4 / 3; background: var(--ink-2); border-bottom: 1px solid var(--line-2); }
+  .card-media img { width: 100%; height: 100%; object-fit: cover; }
+
+  /* Text-card label block. Replaces the image slot so the HR cards carry the
+     same chrome as the AI cards instead of reading as a bare half. */
+  .card-plate {
+    aspect-ratio: 4 / 3;
+    border-bottom: 1px solid var(--line-2);
+    background:
+      radial-gradient(ellipse at 30% 20%, rgba(232,166,107,0.13), transparent 62%),
+      linear-gradient(180deg, var(--ink-3) 0%, var(--ink-2) 100%);
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 28px 26px;
+    position: relative;
+  }
+  .card-plate::after {
+    content: '';
+    position: absolute; inset: 18px;
+    border: 1px solid var(--line-2);
+    border-radius: 10px;
+    pointer-events: none;
+  }
+  .card-plate .plate-kicker {
+    font-family: var(--mono); font-size: 10.5px;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--amber); margin-bottom: 14px;
+  }
+  .card-plate .plate-line {
+    font-family: var(--mono); font-size: 13px;
+    line-height: 1.7; color: var(--t-mid);
+    letter-spacing: 0.01em;
+  }
+  .card-plate .plate-line span { color: var(--paper); }
+
+  .card-body { padding: 24px 26px 28px; display: flex; flex-direction: column; gap: 12px; flex: 1; }
+  .card h3 {
+    font-family: var(--serif); font-size: 21px; line-height: 1.24;
+    letter-spacing: -0.015em; font-weight: 600; color: var(--paper);
+  }
+  .card .role {
+    font-family: var(--mono); font-size: 10.5px;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--t-dim);
+  }
+  .card p { font-size: 15px; color: var(--t-mid); line-height: 1.62; }
+
+  /* CONVERGENCE */
+  .converge-block {
+    border-left: 2px solid var(--amber);
+    padding: 4px 0 4px 28px;
+    max-width: 760px;
+  }
+  .converge-block p {
+    font-family: var(--serif);
+    font-size: clamp(18px, 2.1vw, 22px);
+    line-height: 1.52; color: var(--paper);
+  }
+  @media (max-width: 760px) { .converge-block { padding-left: 20px; } }
+
+  /* CTA */
+  .cta { padding: 76px 0 96px; }
+  .cta p {
+    font-family: var(--serif);
+    font-size: clamp(20px, 2.6vw, 27px);
+    line-height: 1.36; letter-spacing: -0.015em;
+    color: var(--paper); max-width: 640px; margin-bottom: 28px;
+  }
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 15px 28px; border-radius: 999px;
+    background: var(--paper); color: var(--ink);
+    font-weight: 600; font-size: 15px;
+    transition: transform 180ms var(--ease), box-shadow 220ms;
+  }
+  .btn::after { content: '\2192'; font-weight: 400; }
+  .btn:hover { transform: translateY(-1px); box-shadow: 0 14px 36px rgba(245,239,226,0.18); }
+
+  /* FOOTER */
+  .foot {
+    border-top: 1px solid var(--line-2);
+    padding: 28px 0 40px;
+    display: flex; flex-wrap: wrap; gap: 16px 28px;
+    align-items: center; justify-content: space-between;
+    font-size: 13px; color: var(--t-dim);
+  }
+  .foot a { color: var(--t-muted); }
+  .foot a:hover { color: var(--paper); }
+  .foot-links { display: flex; gap: 22px; flex-wrap: wrap; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="/" class="brand">
+      <img src="/CatalystWorks_logo.jpg" alt="Catalyst Works" width="32" height="32" decoding="async" fetchpriority="high">
+      <span>Catalyst<span class="accent">Works</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="/services/">Services</a>
+      <a href="/fractional/ai/">Fractional AI</a>
+      <a href="/fractional/hr/">Fractional HR</a>
+      <a href="/bottleneck-audit/">The Audit</a>
+      <a href="/portfolio/" aria-current="page">Portfolio</a>
+    </div>
+    <a href="/services/" class="nav-cta">See how I work</a>
+    <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-drawer"><span></span></button>
+  </div>
+</nav>
+
+<div class="nav-drawer" id="nav-drawer" hidden>
+  <a href="/">Home</a>
+  <a href="/services/">Services</a>
+  <a href="/fractional/ai/">Fractional AI</a>
+  <a href="/fractional/hr/">Fractional HR</a>
+  <a href="/bottleneck-audit/">The 5-Day Bottleneck Audit</a>
+  <a href="/portfolio/" aria-current="page">Portfolio</a>
+  <a href="/services/" class="nav-drawer-cta">See how I work &rarr;</a>
+</div>
+
+<header class="masthead" id="top">
+  <div class="wrap">
+    <div class="eyebrow">Portfolio</div>
+    <p>I help companies put AI to work without the confusion and the overwhelm. I spent my career in HR, most of it inside a company that split itself into three, and I now build and run the AI systems I used to advise people about. <em>Same person, both halves.</em> Here is the work.</p>
+  </div>
+</header>
+
+<div class="jump" id="jump">
+  <div class="jump-inner">
+    <a href="#ai" data-jump="ai">AI</a>
+    <a href="#hr" data-jump="hr">HR</a>
+    <a href="#converge" data-jump="converge">How they meet</a>
+  </div>
+</div>
+
+<main>
+
+  <section class="section" id="ai">
+    <div class="wrap">
+      <div class="section-label">01 &middot; Built</div>
+      <h2>What I build with AI</h2>
+      <div class="cards">
+
+        <article class="card">
+          <div class="card-media"><img src="assets/01-system-map.png" alt="A map of the agents and integrations that make up the system" width="1200" height="900" loading="lazy" decoding="async"></div>
+          <div class="card-body">
+            <h3>A multi-agent operating system that runs my own business</h3>
+            <div class="role">AI systems builder and operator</div>
+            <p>I built and run a multi-agent system on Claude that handles my own business day to day: email triage and drafting in my voice, lead research and outreach, content, and the dashboards I check each morning. It runs on custom agents and integrations into my real tools. It replaced hours of manual work with a quick review and send. It is the clearest proof I build AI that runs in production and not in a demo, and it is the same way I would set it up inside a business.</p>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-media"><img src="assets/02-governance-playbook.png" alt="A chart showing how the governance playbook works" width="1200" height="900" loading="lazy" decoding="async"></div>
+          <div class="card-body">
+            <h3>AI Governance Playbook (2026)</h3>
+            <div class="role">Author</div>
+            <p>I wrote a practical governance playbook for owner-operator firms, drawn from about ten years inside a Fortune 100 watching teams adopt new tools in predictable ways. It turns the messy reality of informal AI use into a written diagnostic of where AI is being used and where the exposure lives, plus a one-page policy a founder can put in place the day they receive it. The goal is simple: make fast-moving AI use safe to keep without slowing the business down.</p>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-media"><img src="assets/03-workshop.png" alt="A card showing the structure of the live workshop" width="1200" height="900" loading="lazy" decoding="async"></div>
+          <div class="card-body">
+            <h3>Live workshop: AI without getting burned</h3>
+            <div class="role">Facilitator and instructor</div>
+            <p>I run a live workshop that gets non-technical business owners to build their first working AI assistant in the room, not just watch slides. Each person leaves with something running in their own account and the confidence to keep going. I have spent years getting people who only care that something works to actually change how they operate, so the teaching is plain, hands-on, and current.</p>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-media"><img src="assets/04-practice-app.png" alt="The live practice app running in a browser" width="1280" height="960" loading="lazy" decoding="async"></div>
+          <div class="card-body">
+            <h3>A practice app for high-stakes conversations</h3>
+            <div class="role">Designer and builder</div>
+            <p>I designed and shipped a live web app for rehearsing the conversations that actually decide things: a pitch, a job interview, a panel, a hard client call. You run the scenario out loud, and it reads back what most prep skips. Not just the content of what you said, but the delivery: your pace, your filler words, where you hedged. I took it from idea to a running product on the web, the same way I would build a working tool inside a business instead of just advising on one.</p>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="hr">
+    <div class="wrap">
+      <div class="section-label">02 &middot; Done</div>
+      <h2>What I did in HR</h2>
+      <div class="cards">
+
+        <article class="card">
+          <div class="card-plate">
+            <div class="plate-kicker">Inside the company</div>
+            <div class="plate-line">Reporting process<br><span>6 to 8 hours by hand</span><br>&darr;<br><span>a 10 minute workflow</span></div>
+          </div>
+          <div class="card-body">
+            <h3>An AI-enabled HR dashboard, built inside a Fortune 100 HR function</h3>
+            <div class="role">Role: designer</div>
+            <p>I designed and deployed a dashboard that took a reporting process running six to eight hours by hand down to a ten minute workflow. Leaders got their numbers when the decision was in front of them instead of a week later. This is the one I point at when someone asks whether I have actually put AI to work inside a large company, rather than for myself on the side.</p>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-plate">
+            <div class="plate-kicker">Inside the company</div>
+            <div class="plate-line">A global HR skills initiative<br>run inside an enterprise<br>HR transformation, while the<br>business <span>split into three</span></div>
+          </div>
+          <div class="card-body">
+            <h3>A global HR skills initiative inside an enterprise transformation</h3>
+            <div class="role">Role: led the initiative, as part of the HR transformation team</div>
+            <p>I led the global HR skills initiative that ran inside the enterprise HR transformation. The work was getting HR professionals ready for roles that were changing under them, inside a business that was splitting itself into three public companies while we did it. Senior HR leaders recognized it. It is the formal credential underneath everything I now do around AI adoption, because the hard part was never the tool. It was getting people to change how they work.</p>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-plate">
+            <div class="plate-kicker">Inside the company</div>
+            <div class="plate-line">Average time to fill<br><span>around 60 days</span><br>&darr;<br><span>under 30</span><br>on the part we finished</div>
+          </div>
+          <div class="card-body">
+            <h3>A hiring process rebuilt from the inside</h3>
+            <div class="role">Role: part of the Kaizen team</div>
+            <p>I was part of a Kaizen on a hiring process that thousands of hiring managers depended on. We went after the handoffs and the waiting, not the software. Average time to fill was running around sixty days and came down under thirty on the part we finished. I say it that way on purpose. We fixed what we started fixing, and I do not claim the rest.</p>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="converge">
+    <div class="wrap">
+      <div class="section-label">03 &middot; The overlap</div>
+      <h2>Where the two meet</h2>
+      <div class="converge-block">
+        <p>One artifact sits in both halves of this page. The HR dashboard was not an AI project I picked up on the side. It was a reporting problem I already owned, inside a real company, and the fix had to survive people who never asked for it. That is the part most AI work gets wrong. The tool was never the hard part. Getting people to change how they work is the hard part, and that is the job I had spent years doing before I ever automated anything.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="wrap">
+      <p>If you want this combination pointed at something in your business, that is the work I do.</p>
+      <a href="/services/" class="btn">See how I work</a>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <div class="foot">
+      <div>Catalyst Works</div>
+      <div class="foot-links">
+        <a href="/">Home</a>
+        <a href="/services/">Services</a>
+        <a href="/fractional/ai/">Fractional AI</a>
+        <a href="/fractional/hr/">Fractional HR</a>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<script>
+(function(){
+  // Hamburger drawer, same pattern as the homepage.
+  var btn = document.querySelector('.nav-toggle');
+  var drawer = document.getElementById('nav-drawer');
+  if (btn && drawer) {
+    drawer.hidden = false;
+    btn.addEventListener('click', function(){
+      var open = drawer.classList.toggle('is-open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    });
+    drawer.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', function(){
+        drawer.classList.remove('is-open');
+        btn.setAttribute('aria-expanded', 'false');
+        btn.setAttribute('aria-label', 'Open menu');
+      });
+    });
+  }
+
+  // Nav blur on scroll.
+  var nav = document.getElementById('nav');
+  function onScroll(){ if (nav) nav.classList.toggle('scrolled', window.scrollY > 12); }
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  // Jump-nav active state.
+  var links = Array.prototype.slice.call(document.querySelectorAll('.jump a'));
+  var targets = links.map(function(a){ return document.getElementById(a.getAttribute('data-jump')); });
+  if (window.IntersectionObserver) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (!e.isIntersecting) return;
+        links.forEach(function(a){ a.classList.remove('is-active'); });
+        var i = targets.indexOf(e.target);
+        if (i > -1) links[i].classList.add('is-active');
+      });
+    }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+    targets.forEach(function(t){ if (t) io.observe(t); });
+  }
+})();
+</script>
+
+</body>
+</html>
