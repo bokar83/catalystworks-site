@@ -327,6 +327,13 @@ RewriteRule ^services/?$ services/index.html [NC,L]
 # Same trailing-slash defect + fix as /services above.
 RewriteRule ^bottleneck-audit$ /bottleneck-audit/ [R=301,L,QSA]
 RewriteRule ^bottleneck-audit/?$ bottleneck-audit/index.html [NC,L]
+# Portfolio page lives at /portfolio/. The 301 to the slashed form is NOT optional
+# here: the page loads its four screenshots by RELATIVE path (assets/01-...png), and
+# DirectorySlash Off would serve the no-slash form in place, leaving document.baseURI
+# at /portfolio so every image resolves to /assets/... and breaks. Same defect and
+# same fix as /kit (07-30), /workshop and /services (07-31).
+RewriteRule ^portfolio$ /portfolio/ [R=301,L,QSA]
+RewriteRule ^portfolio/?$ portfolio/index.html [NC,L]
 # Short link for the lead-magnet (Meta ads + any channel): /w/start.
 #
 # 2026-08-17: NOW A 404. It was the one slug the free-seat sweep earlier the same
