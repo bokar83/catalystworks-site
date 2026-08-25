@@ -86,7 +86,9 @@
     -webkit-backdrop-filter: blur(16px) saturate(1.4);
     border-bottom-color: var(--line-2);
   }
-  .nav-inner { max-width: 1320px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+  /* 1080 rather than the homepage's 1320 so the nav lines up with this page's
+     content column. A nav that starts left of the masthead reads as a seam. */
+  .nav-inner { max-width: 1080px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
   .brand { display: inline-flex; align-items: center; gap: 12px; font-weight: 700; letter-spacing: -0.01em; font-size: 16px; color: var(--paper); }
   .brand img { width: 32px; height: 32px; border-radius: 50%; }
   .brand .accent { color: var(--amber); }
@@ -179,20 +181,26 @@
     scrollbar-width: none;
   }
   .jump-inner::-webkit-scrollbar { display: none; }
-  .jump a {
+  .jump-label {
     font-family: var(--mono); font-size: 11px;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--t-dim); padding-right: 22px; white-space: nowrap;
+  }
+  .jump a {
+    font-family: var(--mono); font-size: 12.5px;
     letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--t-muted); padding: 15px 20px 13px;
+    color: var(--t-muted); padding: 17px 22px 15px;
     border-bottom: 2px solid transparent;
     white-space: nowrap;
     transition: color 180ms, border-color 180ms;
   }
-  .jump a:first-child { padding-left: 0; }
   .jump a:hover { color: var(--paper); }
   .jump a.is-active { color: var(--amber); border-bottom-color: var(--amber); }
   @media (max-width: 760px) {
     .jump-inner { padding: 0 20px; }
-    .jump a { padding: 13px 14px 11px; font-size: 10px; letter-spacing: 0.1em; }
+    .jump-label { display: none; }
+    .jump a { padding: 14px 16px 12px; font-size: 11px; letter-spacing: 0.1em; }
+    .jump a:first-of-type { padding-left: 0; }
   }
 
   /* SECTIONS */
@@ -212,7 +220,11 @@
 
   /* CARDS */
   .cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
-  @media (max-width: 860px) { .cards { grid-template-columns: 1fr; } }
+  /* The HR half is three cards. In a 2-up grid the third sits alone and the
+     section reads as unfinished, so it gets its own 3-up track. */
+  .cards.cards-3 { grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  @media (max-width: 1000px) { .cards.cards-3 { grid-template-columns: repeat(2, 1fr); gap: 24px; } }
+  @media (max-width: 860px) { .cards, .cards.cards-3 { grid-template-columns: 1fr; } }
 
   .card {
     background: linear-gradient(180deg, rgba(22,29,39,0.72) 0%, rgba(15,20,28,0.9) 100%);
@@ -233,30 +245,35 @@
     aspect-ratio: 4 / 3;
     border-bottom: 1px solid var(--line-2);
     background:
-      radial-gradient(ellipse at 30% 20%, rgba(232,166,107,0.13), transparent 62%),
-      linear-gradient(180deg, var(--ink-3) 0%, var(--ink-2) 100%);
+      radial-gradient(ellipse at 28% 12%, rgba(232,166,107,0.22), transparent 66%),
+      linear-gradient(180deg, #1B2331 0%, var(--ink-2) 100%);
     display: flex; flex-direction: column; justify-content: center;
-    padding: 28px 26px;
+    padding: 26px 24px;
     position: relative;
   }
   .card-plate::after {
     content: '';
-    position: absolute; inset: 18px;
-    border: 1px solid var(--line-2);
+    position: absolute; inset: 14px;
+    border: 1px solid rgba(245,239,226,0.1);
     border-radius: 10px;
     pointer-events: none;
   }
   .card-plate .plate-kicker {
-    font-family: var(--mono); font-size: 10.5px;
+    font-family: var(--mono); font-size: 10px;
     letter-spacing: 0.2em; text-transform: uppercase;
-    color: var(--amber); margin-bottom: 14px;
+    color: var(--amber); margin-bottom: 16px;
   }
   .card-plate .plate-line {
-    font-family: var(--mono); font-size: 13px;
-    line-height: 1.7; color: var(--t-mid);
+    font-family: var(--mono); font-size: 13.5px;
+    line-height: 1.72; color: var(--t-muted);
     letter-spacing: 0.01em;
   }
-  .card-plate .plate-line span { color: var(--paper); }
+  /* The figure itself, the part the eye should land on. */
+  .card-plate .plate-line span {
+    color: var(--paper); font-size: 17px; font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+  .card-plate .plate-line .arrow { color: var(--amber); font-size: 15px; }
 
   .card-body { padding: 24px 26px 28px; display: flex; flex-direction: column; gap: 12px; flex: 1; }
   .card h3 {
@@ -285,6 +302,8 @@
 
   /* CTA */
   .cta { padding: 76px 0 96px; }
+  .cta .wrap { border-top: 1px solid var(--line-2); padding-top: 56px; }
+  @media (max-width: 760px) { .cta .wrap { padding-top: 44px; } }
   .cta p {
     font-family: var(--serif);
     font-size: clamp(20px, 2.6vw, 27px);
@@ -358,6 +377,7 @@
 
 <div class="jump" id="jump">
   <div class="jump-inner">
+    <span class="jump-label">Jump to</span>
     <a href="#ai" data-jump="ai">AI</a>
     <a href="#hr" data-jump="hr">HR</a>
     <a href="#converge" data-jump="converge">How they meet</a>
@@ -416,12 +436,12 @@
     <div class="wrap">
       <div class="section-label">02 &middot; Done</div>
       <h2>What I did in HR</h2>
-      <div class="cards">
+      <div class="cards cards-3">
 
         <article class="card">
           <div class="card-plate">
             <div class="plate-kicker">Inside the company</div>
-            <div class="plate-line">Reporting process<br><span>6 to 8 hours by hand</span><br>&darr;<br><span>a 10 minute workflow</span></div>
+            <div class="plate-line">Reporting process<br><span>6 to 8 hours by hand</span><br><span class="arrow">&darr;</span><br><span>a 10 minute workflow</span></div>
           </div>
           <div class="card-body">
             <h3>An AI-enabled HR dashboard, built inside a Fortune 100 HR function</h3>
@@ -433,7 +453,7 @@
         <article class="card">
           <div class="card-plate">
             <div class="plate-kicker">Inside the company</div>
-            <div class="plate-line">A global HR skills initiative<br>run inside an enterprise<br>HR transformation, while the<br>business <span>split into three</span></div>
+            <div class="plate-line">HR roles changing<br>underneath people<br><span class="arrow">&darr;</span><br><span>a global skills initiative</span><br>while the business split into three</div>
           </div>
           <div class="card-body">
             <h3>A global HR skills initiative inside an enterprise transformation</h3>
@@ -445,7 +465,7 @@
         <article class="card">
           <div class="card-plate">
             <div class="plate-kicker">Inside the company</div>
-            <div class="plate-line">Average time to fill<br><span>around 60 days</span><br>&darr;<br><span>under 30</span><br>on the part we finished</div>
+            <div class="plate-line">Average time to fill<br><span>around 60 days</span><br><span class="arrow">&darr;</span><br><span>under 30</span><br>on the part we finished</div>
           </div>
           <div class="card-body">
             <h3>A hiring process rebuilt from the inside</h3>
