@@ -17,6 +17,27 @@ RewriteRule ^signal/?$ signal.html [NC,L]
 # relative_links_2026_07_30.md) -- DirectorySlash Off served the no-slash
 # form in place with no redirect, leaving document.baseURI at /workshop and
 # breaking every relative href on the page. 301 to the slashed form first.
+# ------------------------------------------------------------------------- #
+# DATE MOVE, 2026-08-26. READ THIS BEFORE TRUSTING ANY "August 27" BELOW.
+#
+# The in-person session was CANCELLED for Thursday August 27 and moved to
+# THURSDAY SEPTEMBER 24, same venue, same 7:00-8:30 pm slot, same $50 seat.
+# Alex Dotter at SLCC agreed to the new date and Boubacar confirmed it.
+#
+# NO RULE IN THIS FILE CHANGED, and that is the point: every workshop route
+# already carries the date-free campaign key `ic_workshop_permanent` and every
+# w/* slug points at /workshop/, which renders whatever date the page's
+# NEXT_SESSION block holds. The routing was built date-agnostic on purpose, so
+# a date move costs zero rewrites here.
+#
+# What IS stale is the PROSE in the comments below. Wherever one of them says
+# "August 27" as a statement of what is currently being sold, read September 24.
+# The comments are kept unedited because they are the dated decision log for why
+# each rule exists, and rewriting history to match today's date is how the log
+# stops being trustworthy. The room number is a separate matter: Room 105 was
+# the AUGUST assignment, the September room is not assigned, and no room number
+# ships on any public surface until it is.
+# ------------------------------------------------------------------------- #
 RewriteRule ^workshop$ /workshop/ [R=301,L,QSA]
 RewriteRule ^workshop/?$ workshop/index.html [NC,L]
 
