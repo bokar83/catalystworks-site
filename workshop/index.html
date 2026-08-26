@@ -653,8 +653,22 @@ var NEXT_SESSION = {
      2026-08-04, later the same day: the venue confirmed. Thursday August 27 is
      booked, so roomHeld is true and the page says "Room confirmed". Set this
      back to false the moment a future date is announced without a booking; it
-     is the one flag that is allowed to be pessimistic while confirmed is true. */
-  roomHeld: true,
+     is the one flag that is allowed to be pessimistic while confirmed is true.
+
+     2026-08-26: BACK TO FALSE, which is the instruction directly above being
+     followed rather than a new decision. The August 27 session was cancelled
+     and moved to Thursday September 24. Boubacar emailed Alex Dotter at SLCC on
+     2026-08-25 asking for the new date and, checked against the Gmail thread on
+     2026-08-26, HAS HAD NO REPLY. The date is his and it is set; the room is the
+     venue's and it has not given it yet. That is exactly the 2026-08-04 state
+     this flag was invented for, and leaving it true would have put "Room
+     confirmed" on a page taking $50 for a room nobody has promised us.
+
+     Note what this does NOT do: roomHeld changes ONE label, further down in
+     STATE_LABEL. It does not touch the date, the ticket, the price or the
+     checkout, all of which stay live. Flip it back to true the moment Alex
+     confirms September 24 in writing. */
+  roomHeld: false,
   date:  'Thursday, September 24',
   /* The \u00a0 escapes are non-breaking spaces and they are load-bearing, not
      decoration. Without them these two values wrap so that "6:30" and "105"
