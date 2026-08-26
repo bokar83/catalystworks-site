@@ -4,10 +4,10 @@ PRODID:-//Catalyst Works Consulting//IC Workshop//EN
 CALSCALE:GREGORIAN
 METHOD:PUBLISH
 BEGIN:VEVENT
-UID:ic-workshop-2026-08-27@catalystworks.consulting
-DTSTAMP:20260804T230000Z
-DTSTART:20260828T010000Z
-DTEND:20260828T023000Z
+UID:ic-workshop-2026-09-24@catalystworks.consulting
+DTSTAMP:20260826T200000Z
+DTSTART:20260925T010000Z
+DTEND:20260925T023000Z
 SUMMARY:AI Without Getting Burned
 LOCATION:SLCC Miller Campus, 9750 S 300 W, Sandy, UT 84070
 DESCRIPTION:A 90-minute hands-on AI workshop for owner-operators. Bring a laptop. Room opens at 6:30 pm, session 7:00 to 8:30 pm. The room and the door to use come in your confirmation email. Questions: boubacar@catalystworks.consulting. Details: https://catalystworks.consulting/workshop/
