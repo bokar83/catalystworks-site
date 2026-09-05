@@ -184,11 +184,38 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:var(--lw10) sol
 
 /* ---------- masthead ---------- */
 .top{padding:clamp(26px,6vw,52px) 0 clamp(20px,4vw,32px)}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px}
 .meta{
   font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;
   color:var(--ink-faint);display:flex;flex-wrap:wrap;gap:6px 18px;margin:0 0 20px;
 }
 .meta b{color:var(--indigo);font-weight:500}
+
+/* Mobile hamburger + slide-down drawer (added 2026-09-05 -- real nav below
+   the breakpoint; the meta line above is a label, never a substitute nav). */
+.nav-toggle{
+  display:none;flex:none;background:var(--reserve);border:var(--lw035) solid var(--indigo);
+  width:36px;height:36px;padding:0;margin:0 0 20px;border-radius:4px;cursor:pointer;
+  align-items:center;justify-content:center;
+}
+.nav-toggle span{display:block;width:15px;height:1.4px;background:var(--ink);position:relative}
+.nav-toggle span::before,.nav-toggle span::after{content:"";position:absolute;left:0;width:15px;height:1.4px;background:var(--ink);transition:transform 200ms,top 200ms}
+.nav-toggle span::before{top:-5px}
+.nav-toggle span::after{top:5px}
+.nav-toggle[aria-expanded="true"] span{background:transparent}
+.nav-toggle[aria-expanded="true"] span::before{top:0;transform:rotate(45deg)}
+.nav-toggle[aria-expanded="true"] span::after{top:0;transform:rotate(-45deg)}
+.nav-drawer{
+  position:fixed;top:0;left:0;right:0;padding:20px var(--pad);
+  background:var(--reserve);border-bottom:var(--lw07) solid var(--indigo);
+  transform:translateY(-100%);transition:transform 280ms ease;
+  z-index:59;display:flex;flex-direction:column;
+}
+.nav-drawer.is-open{transform:translateY(0)}
+.nav-drawer a{display:block;padding:14px 4px;font-family:var(--body);font-weight:600;
+  font-size:16px;color:var(--ink);border-bottom:var(--lw025) solid var(--faint);text-decoration:none}
+.nav-drawer a:last-child{border-bottom:0}
+@media(max-width:760px){.nav-toggle{display:inline-flex}}
 h1{font-size:clamp(2.3rem,10vw,4.1rem)}
 .rule{height:0;border-top:var(--lw14) solid var(--indigo);margin:clamp(16px,3.4vw,24px) 0 0}
 .lede{margin-top:clamp(18px,3.6vw,26px);font-size:clamp(1.02rem,.9vw + .92rem,1.2rem);
@@ -390,7 +417,10 @@ h2{font-size:clamp(1.45rem,5.4vw,2.05rem);margin-bottom:.5em}
 
 <header class="top">
   <div class="wrap">
-    <p class="meta"><span><b>Catalyst Works</b></span><span>Online</span><span>About sixty minutes</span></p>
+    <div class="topbar">
+      <p class="meta"><span><b>Catalyst Works</b></span><span>Online</span><span>About sixty minutes</span></p>
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-drawer"><span></span></button>
+    </div>
     <h1>AI without<br>getting burned</h1>
     <div class="rule" aria-hidden="true"></div>
     <p class="lede">I build AI tools for a living and my own business runs on the ones I build. Everything I put in front of you is already doing work in my week. That is why I can tell you what to skip.</p>
@@ -398,6 +428,34 @@ h2{font-size:clamp(1.45rem,5.4vw,2.05rem);margin-bottom:.5em}
     <p class="lede">It runs at eleven in the morning Mountain. That costs you an hour of a working day and not an evening at home.</p>
   </div>
 </header>
+
+<div class="nav-drawer" id="nav-drawer" hidden>
+  <a href="https://catalystworks.consulting/">Home</a>
+  <a href="/workshop/">The in-person session, Sandy, Sept 24</a>
+  <a href="https://calendly.com/boubacarbarry/free-ai-payback-review-owner-operators" rel="noopener">Book thirty minutes</a>
+  <a href="mailto:boubacar@catalystworks.consulting">Email</a>
+</div>
+
+<script>
+(function(){
+  var btn = document.querySelector('.nav-toggle');
+  var drawer = document.getElementById('nav-drawer');
+  if (!btn || !drawer) return;
+  drawer.hidden = false;
+  btn.addEventListener('click', function(){
+    var open = drawer.classList.toggle('is-open');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  });
+  drawer.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      drawer.classList.remove('is-open');
+      btn.setAttribute('aria-expanded', 'false');
+      btn.setAttribute('aria-label', 'Open menu');
+    });
+  });
+})();
+</script>
 
 <main>
 
