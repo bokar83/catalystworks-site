@@ -725,8 +725,18 @@ var NEXT_SESSION = {
      Note what this does NOT do: roomHeld changes ONE label, further down in
      STATE_LABEL. It does not touch the date, the ticket, the price or the
      checkout, all of which stay live. Flip it back to true the moment Alex
-     confirms September 24 in writing. */
-  roomHeld: false,
+     confirms September 24 in writing.
+
+     2026-09-05: BACK TO TRUE. September 24 is confirmed and has been for a
+     while. Boubacar said so directly today, and the record already carried it:
+     on 2026-08-26 he stated "the next event is Thursday, September 24th. Alex
+     agreed to that." That line was written into docs/LIVE_STATE.md the same
+     day and then contradicted five days later by a row reasoning from the
+     absence of a WRITTEN SLCC reply in the Gmail thread. Absence of an email
+     is not absence of a confirmation, and he is first-party about his own
+     booking. The page has therefore been telling buyers "room being confirmed"
+     since August 26 about a room that was confirmed on August 26. Fixed. */
+  roomHeld: true,
   date:  'Thursday, September 24',
   /* The \u00a0 escapes are non-breaking spaces and they are load-bearing, not
      decoration. Without them these two values wrap so that "6:30" and "105"
