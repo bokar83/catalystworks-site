@@ -450,6 +450,14 @@ s.parentNode.insertBefore(t,s)}(window, document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
 fbq('init', '1826865671807664');
 fbq('track', 'PageView');
+/* ViewContent added 2026-09-06. PageView says somebody loaded a page on this
+   domain; ViewContent says which offer they read, which is what the ad account
+   needs to separate this funnel from the apex. Lead and InitiateCheckout below
+   already mark the two later steps. */
+fbq('track', 'ViewContent', {
+  content_name: 'ic_workshop_next',
+  content_category: 'workshop_permanent'
+});
 </script>
 <noscript><img height="1" width="1" style="display:none"
 src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"/></noscript>
