@@ -770,7 +770,17 @@ var NEXT_SESSION = {
      registerUrl is a Stripe payment link created 2026-08-05 for this $25
      seat. A payment link's amount cannot be edited in place, so a price
      change means a new link, not an edit. */
-  price: '$25',
+  /* FLIPPED TO FREE 2026-09-07, decision D-20260907-6347c9 (his words: "Let's
+     flip the September 16th session to free"). The Stripe product/price stays
+     LIVE and untouched (plink_1U1CWwQWqcWWuBB0jgP2KmJT, prod_V1F0GT6RfTOswY,
+     $25 price object) -- nothing was deactivated -- this page simply stops
+     sending the register button to it. free:true is what does that: it takes
+     the page out of the paid-checkout branch and into a free-registration
+     branch that captures the email and confirms on this page, no Stripe
+     redirect. Reverting to paid needs no new Stripe object: set free back to
+     false and this page returns to charging the existing $25 link. */
+  free: true,
+  price: 'Free',
   /* registerUrl RESTORED 2026-08-17, on Boubacar's explicit instruction that
      same day, and the restore closes the dead-checkout hole rather than
      reopening it. The whole history is kept here because the failure mode it
@@ -842,7 +852,11 @@ var NEXT_SESSION = {
      checkout URL that is still an empty string, which sends somebody
      through the form and then quietly dead-ends them. */
   var dated = !!(S.confirmed && S.date);
-  var live  = dated && !!S.registerUrl;
+  /* free short-circuits live: a free session never sends anyone to the Stripe
+     link even though registerUrl is still set on the object (the Stripe
+     product stays live and untouched, this page just stops pointing at it). */
+  var free  = dated && !!S.free;
+  var live  = dated && !!S.registerUrl && !free;
 
   /* The status line above the date. It reports the ROOM, because the date is
      already stated twice underneath it (the h3 and the Date cell) and does not
@@ -866,7 +880,20 @@ var NEXT_SESSION = {
   }
 
   /* ---- render exactly one state ---- */
-  if (live) {
+  if (free) {
+    box.innerHTML =
+      '<p class="state"><span class="pip" aria-hidden="true"></span>' + STATE_LABEL + '</p>' +
+      '<h3>' + esc(S.date) + '</h3>' +
+      '<div class="ticket">' +
+        cell('Date',  S.date)  + cell('Time',  S.time) +
+        cell('Place', S.place) + cell('Seat',  'Free') +
+      '</div>' +
+      '<p>Enter your email to reserve your free seat. Your confirmation and the join link land in your inbox.</p>';
+    lbl.textContent = 'Reserve my free seat';
+    fine.textContent = 'Your email is saved the moment you register. You will also get the short letter I send out, and one click takes you off it.';
+    okLine.textContent = 'You are registered. Check your inbox for the join link.';
+    LISTED_MSG = 'You are registered. Check your inbox for the join link.';
+  } else if (live) {
     box.innerHTML =
       '<p class="state"><span class="pip" aria-hidden="true"></span>' + STATE_LABEL + '</p>' +
       '<h3>' + esc(S.date) + '</h3>' +
@@ -941,11 +968,16 @@ var NEXT_SESSION = {
       email: email,
       cohort: COHORT,
       seat_kind: live ? 'paid' : 'free',
+      /* free/live/dated stay three distinct facts in this payload too --
+         seat_kind above already resolves to 'free' for both the free branch
+         and the waitlist branches, which is correct for Stripe reconciliation
+         purposes (no payment exists either way) but analytics still wants to
+         tell a genuine free registration apart from a plain waitlist row. */
       reg_ref: ref || '',
       utm_source:   qs.get('utm_source')   || 'online_page',
       utm_medium:   qs.get('utm_medium')   || 'organic',
       utm_campaign: qs.get('utm_campaign') || 'ic_workshop_online_0819',
-      utm_content:  qs.get('utm_content')  || (live ? 'session_live' : (dated ? 'price_waitlist' : 'date_waitlist')),
+      utm_content:  qs.get('utm_content')  || (free ? 'session_free' : (live ? 'session_live' : (dated ? 'price_waitlist' : 'date_waitlist'))),
       form_location: 'workshop_online_0819',
       magnet: 'ic_workshop_online_0819'
     });
@@ -1073,7 +1105,7 @@ var NEXT_SESSION = {
           fbq('track', 'Lead', {
             content_name: COHORT,
             content_category: 'workshop_online',
-            status: live ? 'paid_seat' : 'waitlist'
+            status: free ? 'free_registration' : (live ? 'paid_seat' : 'waitlist')
           });
           if (live) {
             fbq('track', 'InitiateCheckout', {
