@@ -206,13 +206,7 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"/></
 </footer>
 
 <script>
-/* Free SEAT flow: the CTA goes to a $0 Stripe checkout so Stripe captures the
-   email and the reservation lands in the SAME Stripe records as the $47 seats
-   (both carry client_reference_id=ic_workshop_0730 -> one filterable count). We fire
-   the Meta Lead event on click BEFORE navigating (preventDefault + eventID +
-   short beat + redirect) so the beacon lands on mobile. Purchase is reserved
-   for real $47 sales; the free reservation reports Lead here + CompleteRegistration
-   on the /free-thank-you page. */
+/*  Free-seat flow: fire the Lead event before navigating, then redirect to checkout with the email prefilled.  */
 (function(){
   var FREE_STRIPE='https://buy.stripe.com/dRm4gB4Tt8ZQ1IY2wBgEg0k';
   var CAPTURE_URL='https://agentshq.boubacarbarry.com/api/orc/workshop-register';
@@ -274,8 +268,7 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"/></
         return ok;
       });
   }
-  /* One click: validate -> fire Lead -> AWAIT capture -> redirect to the $0
-     Stripe checkout with the email prefilled. */
+  /*  One click: validate, fire Lead, await the capture, then redirect with the email prefilled.  */
   document.querySelectorAll('.cta-form').forEach(function(f){
     var medium=f.getAttribute('data-medium')||'page';
     var input=f.querySelector('.cta-email');

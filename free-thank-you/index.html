@@ -117,10 +117,7 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"/></
 </footer>
 
 <script>
-/* Free reservation completed. Fire ONE Meta CompleteRegistration (NOT Purchase,
-   so the free $0 seat never pollutes the paid Purchase metric), deduped per
-   Stripe checkout session so a refresh cannot double-count. Reuse the Lead
-   eventID from the free page when present so pixel + any future CAPI can stitch. */
+/*  Reservation completed. Fire one CompleteRegistration, deduped per checkout session so a refresh cannot double-count. Reuse the Lead eventID when present.  */
 (function(){
   try{
     var qs=new URLSearchParams(window.location.search||'');

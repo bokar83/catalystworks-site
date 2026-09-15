@@ -1,35 +1,7 @@
 
-/* ============================================================================
-   YOUR KIT - AI Without Getting Burned - Thu 2026-07-30
-   THE HOUSE VISUAL LANGUAGE: Fouta Djallon strip-weave fused with technical
-   drawing. Same system as the room deck (kit/deck.html) and the direction
-   locked at boubacarbarry-site review/20260728-house-style-hybrid.
-
-   Two problems a long interactive page has that a slide never does.
-
-   1. A scroll has no sheet edge. A drawing border promises you can see all
-      four sides at once and a scroll can never keep that promise, so there is
-      no border. The ZONE RAIL carries the discipline instead: the letters
-      running down the edge of a drawing sheet become a ruler down the side of
-      the page, the letter for the zone you are in follows you and stops at its
-      own boundaries, and it costs 26px on a phone.
-
-   2. Sixty inputs. At sixty, cream blocks on indigo are just cream blocks. So
-      the reserve is confined to the places it is literally true. On the woven
-      ground the only cream is THE INSIDE OF A CONTROL, because the control is
-      the part of the cloth you write on. Three sheets are cream all the way
-      through, and they are the three that interrupt rather than continue:
-      the step-zero sheet, the principles sheet, and the report-back sheet.
-
-   THREE ROLES, THREE COLOURS, NO OVERLAP.
-     cotton / ink   the lettering. Light on the cloth, dark inside a control.
-     weave          the material being drawn. Never a letter.
-     brass          the annotation a draughtsman adds on top. Never body copy.
-
-   HARD CONSTRAINT, unchanged: fully self-contained. No CDN, no external font,
-   no remote image, no analytics, no network call of any kind. Once loaded it
-   keeps working with the wifi off. Nothing an attendee types is transmitted.
-   ============================================================================ */
+/*  House visual language: strip-weave structure fused with technical drawing.
+   A scrolling page has no sheet edge, so the zone rail carries that discipline instead of a border.
+   The cream reserve is confined to the places it is literally true.  */
 
 :root{
   /* the cloth */
@@ -573,16 +545,7 @@ strong,b{font-weight:600}
   #qn.open ul a{padding:12px 0;width:100%}
 }
 
-/* BACK TO TOP, and the one thing on this page that is positioned rather than
-   laid out. The blind run found it sitting on body copy on a phone. Measured
-   before touching it: bottom right at 375px puts it over real text at 50 of 57
-   sampled scroll positions, and the same is true of the build this restyles, so
-   this is an inherited defect and not a new one.
-   Reserving footer clearance only fixes the end of the page, which was the half
-   that got noticed. The fix that holds everywhere is to move it OFF the text
-   column entirely: below 820px it docks into the drawing margin, the rail
-   gutter plus the sheet's own padding, which is the one column on this page
-   that never carries a word of body copy. Nothing has to shrink to make room. */
+/*  Back-to-top is positioned rather than laid out. Below 820px it docks into the drawing margin, the one column that never carries body copy, so it cannot sit over text.  */
 #top{position:fixed;right:clamp(12px,2vw,24px);bottom:clamp(12px,2vw,24px);
   z-index:40;width:48px;height:48px;display:flex;align-items:center;
   justify-content:center;background:var(--cotton);color:var(--ink);

@@ -139,36 +139,7 @@ fbq('init', '1826865671807664');
 fbq('track', 'PageView');
 </script>
 <script>
-/* PURCHASE IS SERVER-SIDE ONLY. THE BROWSER DOES NOT REPORT REVENUE HERE.
-
-   This page was copied from /seat/thank-you/ and inherited its
-   fbq('track','Purchase',{value:47.00}) with 47.00 written in as a literal. On
-   THIS page that was wrong by a factor of nearly two in the other direction:
-   the only route here is the September 16 online link
-   (plink_1U1CWwQWqcWWuBB0jgP2KmJT), and that seat costs $25. Every online sale
-   would have told Meta it was worth $47.
-
-   Hardcoding 25.00 here instead would only reset the same trap for the next
-   price change, which is exactly how the 47 survived past two price changes
-   already. The amount is read from the payment record or it is not reported.
-
-   The browser cannot read it: Stripe exposes no way to fetch a Checkout Session
-   with a publishable key, only the secret key can, and that can never ship to a
-   page. session_id buys an identifier, not an amount. This site is static, so
-   there is no server route here to look it up either.
-
-   So Purchase is sent server-side by the Stripe webhook handler
-   (orchestrator/stripe_alerts.py::_send_capi_purchase), which reads
-   amount_total off the real checkout session and already keys its event_id on
-   the same Stripe session id this page was using.
-
-   One known imprecision, named rather than hidden: that sender reports
-   event_source_url as the /seat/thank-you/ page for every purchase, including
-   these online ones. The VALUE is correct, which is what ad optimisation keys
-   on; the source URL attribution is not. Worth tightening when someone next
-   touches that function.
-
-   PageView above still fires on every visit and is untouched. */
+/*  The amount is reconciled server-side from the payment record. The browser cannot read a checkout amount and must never report one.  */
 </script>
 <noscript><img height="1" width="1" style="display:none"
 src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"

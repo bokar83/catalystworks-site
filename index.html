@@ -2262,18 +2262,7 @@ function openSignalSessionBooking() {
       const idempotencyKey = (window.crypto && crypto.randomUUID)
         ? crypto.randomUUID()
         : (Date.now().toString(16) + '-' + Math.random().toString(16).slice(2));
-      /* 2026-08-11 SYS-523 / SYS-528. This block used to set captureLanded
-         from `resp.ok` alone, then show the thank-you no matter what. The
-         capture endpoint had been switched off since 2026-05-12 and answered
-         HTTP 200 with {"ok": false, "error": "capture temporarily disabled"},
-         so for 91 days this page told every visitor their email was captured
-         while storing nothing. Zero rows landed in that window, confirmed by
-         query, not inferred.
-
-         Two changes. Success is now the response BODY saying ok === true, so a
-         200 on a dead endpoint can never read as a capture. And a failure is
-         now VISIBLE to the person: they get a plain line and a real address to
-         write to instead of a thank-you for a lead nobody has. */
+      /*  Success is the response body saying ok === true, so a 200 from a disabled endpoint can never read as a capture. A failure is visible to the visitor, with a real address to write to.  */
       let captureLanded = false;
       let captureDetail = null;
       try {

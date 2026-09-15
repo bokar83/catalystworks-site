@@ -272,20 +272,9 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"
 </main>
 
 <script>
-/* ============================================================
-   PAGE B CONFIG  ---  QR-CODE DESTINATION (/seat/, mapped from /w/ss)
-   ------------------------------------------------------------
-   Sibling of /ai-checklist/ (Page A). Same CONFIG shape so a single
-   run-update touches both pages the same way.
-
-   This page is the QR destination shown at StartFEST (6/23 to 6/25).
-   Price is set to the $47 StartFEST in-person rate (anchored vs the $97
-   week-of price, shown struck in .rate-note). QR-only discount by design.
+/*  PAGE CONFIG - QR-code destination. Sibling of /ai-checklist/, same CONFIG shape so one update touches both pages the same way.
    Change ONLY the values in this block to point at a new run.
-
-   nextWorkshop = null -> no date set. The page drops the date language,
-   hides the buy CTA, and points everyone to the free checklist instead.
-   ============================================================ */
+   nextWorkshop = null -> no date set: the page drops the date language, hides the buy CTA, and points to the free checklist instead.  */
 var CONFIG = {
   magnet: 'ic_workshop_leadmagnet',     // stable, matches Page A
   // cohort is DERIVED from nextWorkshop.date below (YYYY-MM-DD -> YYYY_MM_DD). Do NOT hand-edit a cohort literal here.

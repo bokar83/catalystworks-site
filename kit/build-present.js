@@ -161,12 +161,7 @@ const CSS = `
     box-shadow:0 0 16px rgba(232,99,42,.55);
     transition:width var(--pt-dur) var(--pt-ease)}
 
-  /* Corner chrome. One stack, hard into the bottom-right corner, deliberately
-     OUTSIDE the slide's 104px margin grid so it never reads as slide content.
-     It does not appear on a plain next or back: the progress bar and the
-     printed stamp already carry pacing, and a chip that lights up every time
-     he clicks is a chip competing with him. Mouse move, ?, a typed number,
-     Home, End or a jump summon it. */
+  /*  Corner chrome. One stack in the bottom-right, outside the slide margin grid so it never reads as slide content. Summoned by mouse move, ?, a typed number, Home, End or a jump.  */
   #ptchrome{position:fixed;right:11px;bottom:9px;z-index:41;display:flex;gap:7px;
     align-items:center;font-family:var(--mono);font-weight:500;font-size:12px;
     letter-spacing:.14em;text-transform:uppercase;
@@ -747,16 +742,10 @@ out = out.replace(scripts[0], MARKUP + JS);
 /* a generated-file banner so nobody hand edits this and loses it */
 out = out.replace('<head>',
 `<head>
-<!-- =========================================================================
-     GENERATED FILE. Do not hand edit.
+<!--  GENERATED FILE. Do not hand edit.
      Source: kit/deck.html    Generator: kit/build-present.js
      Run "node kit/build-present.js" to rebuild after any slide change.
-
-     This is the copy Boubacar presents from. Same ${slideCount} slides, same order,
-     same printed stamps, same film grain. Screen-only presentation layer added.
-     Fully self-contained: fonts are base64 woff2, the QR is inline SVG,
-     nothing is fetched at runtime. Opens by double click from file://.
-     ========================================================================= -->`);
+     Self-contained: fonts are base64 woff2, the QR is inline SVG, nothing is fetched at runtime.  -->`);
 
 fs.writeFileSync(OUT, out, 'utf8');
 

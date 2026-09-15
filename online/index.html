@@ -558,20 +558,6 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"/></
 
     <div class="note">
       <p>This is a working session and not a talk. Come with a laptop and an hour, and you leave with your business brain running.</p>
-      <!-- REMOVED 2026-08-06, on Boubacar's explicit instruction: the paragraph
-           here promised that the the old paid price paid for this session comes off the August 27
-           in-person seat, and read a promotion code out at the end of the hour.
-           Stripe promotion codes are broken account-wide right now (every code on
-           the account resolves with a null coupon object), so checkout cannot
-           honour it. A public promise in his name that the checkout cannot keep
-           is worse than no offer, so it comes out rather than gets reworded.
-           NOTHING replaces it. He is deciding the offer separately; do not
-           reinstate this, or any substitute discount line, without his say-so
-           AND a promotion code proven to apply at checkout.
-           The credit checkout page that used to carry the same promise,
-           /seat/aug19-credit/, was retired the same day -- that promise was its
-           whole reason to exist -- and now 301-redirects here to /online/. No
-           other surface still makes this claim. -->
       <p>If what you want is somebody to build it for you and hand it over finished, that is a different conversation and I am glad to have it. Email me and we will start there instead.</p>
     </div>
   </div>
@@ -584,21 +570,6 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"/></
   <div class="wrap">
     <p class="num"><b>Fig. 04</b> <span>Who runs it</span></p>
     <h2>Boubacar</h2>
-    <!-- The line here used to read "I sit with owner operators who still answer
-         their own phone, most of them under twenty people." Cut 2026-08-12 on
-         Boubacar's instruction, for two separate reasons, and do not reinstate
-         either half.
-         (1) Present tense claimed a roster. He has no retained clients, so
-             "I sit with" asserted a fact the page cannot cite. Any construction
-             like "the owners I sit with", "the clients I work with", or
-             "businesses I help" is banned on this page unless a citable fact
-             backs it. Describe who the session is FOR instead; that is the whole
-             distinction.
-         (2) The phone-answering beat was texture, not a reason to attend. In his
-             words: "We're not building them a phone-answering tool so that beat
-             is not necessary." The session is not about phones, so the detail
-             pointed at nothing it delivers.
-         Prior wording is preserved in this file's git history. -->
     <p>I run Catalyst Works. This session is built for the person who owns the business and still runs it day to day, usually under twenty people. We spend the hour working out where your week is getting stuck and what is worth pointing at it first.</p>
     <p>I ran the in-person version of this in Sandy on July 30. The next room is September 24. This is the online one, for the people who told me a weeknight in Sandy was the part they could not do.</p>
     <p>What I teach is what I built for myself first. It earned its place in my own week, which is the only reason it is in front of you.</p>
@@ -637,185 +608,20 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"/></
    ==================================================================== */
 var NEXT_SESSION = {
   confirmed: true,
-  /* Two different questions, deliberately two different flags. Do not merge them.
-
-     confirmed = is the date public. It is what switches this page out of the
-       being-scheduled state, so turning it off ALSO removes the date, the whole
-       ticket and the checkout button.
-     linkReady = does the join link actually exist yet.
-
-     The in-person page carries roomHeld for the same job, because there the
-     unsettled thing is a room somebody else has to give. Here the unsettled
-     thing is the Meet link, which is ours. The Google Meet room for this
-     session was created on 2026-08-05 against the Calendar API directly, so
-     linkReady is true. Set it back to false the moment a future online date is
-     announced before its room exists.
-
-     2026-08-17: went false and then back to TRUE inside the same hour, and both
-     halves are worth recording because the sequence is the point.
-
-     It went FALSE because the Meet room that made it true belonged to the
-     August 19 calendar event, and that event was marked CANCELLED when Boubacar
-     moved the session to Thursday September 17. Claiming "Session confirmed"
-     while the room did not exist would have been a false statement on a page
-     taking money, which is exactly the case the instruction above was written
-     for.
-
-     It went back to TRUE because a NEW Meet room now exists on the September 17
-     calendar event, created the same day: meet.google.com/duq-cdqp-dip, on the
-     10:30-12:00 Mountain DNM block (30 minutes of setup ahead of the 11:00
-     start), marked BUSY so Calendly cannot book over it. The claim is true
-     again, so the label goes back to the true one.
-
-     linkReady does NOT gate the checkout -- read STATE_LABEL below, it changes
-     one label and nothing else. That is deliberate: the seat stays buyable
-     while a room is being made, because a reader who wants in should not be
-     turned away over a Meet link that takes a minute to create. */
+  /*  Two separate questions, deliberately two flags. Do not merge them.
+     confirmed = is the date public. linkReady = does the join link exist yet.  */
   linkReady: true,
   date:  'Wednesday, September 16',
   /* The \u00a0 escapes are non-breaking spaces and they are load-bearing, not
      decoration. Without them these values wrap so that 'Mountain' and 'Meet'
      each end up alone on a line, which the house no-orphan rule forbids. */
   time:  '11:00 am to 12:00\u00a0pm\u00a0Mountain',
-  /* MIDDAY IS LOAD-BEARING, not a preference. All three blind ICP panel readers
-     independently named a Thursday EVENING as their blocker on the in-person
-     session, so an evening slot would rebuild the exact obstacle this session
-     exists to remove. Time of day is the variable the evidence named, and it
-     has not moved: still 11:00 am Mountain.
-     '1100 UT' in his own note means UTAH time, confirmed with him directly. It
-     is 11:00 Mountain, not 17:00 UTC and not 5am.
-
-     THE DAY MOVED THREE TIMES. Read all three, most recent first.
-
-     2026-08-26, on Boubacar's direct instruction: Thursday September 17 became
-     WEDNESDAY SEPTEMBER 16.
-     (1) THE WEDNESDAY RULE IS BACK IN FORCE, and the 08-17 note below calling it
-         EXPIRED is now WRONG. He restated it as a standing rule the same day:
-         online sessions run WEDNESDAY, in-person sessions run THURSDAY, always,
-         by design, so the two never meet head to head in one week. Do not read
-         the 08-17 paragraph as live guidance.
-     (2) WHAT CHANGED UNDER IT. The 08-17 note retired the rule on the reasoning
-         that Aug 27 would be three weeks past by mid September. Aug 27 was then
-         CANCELLED and rescheduled to THURSDAY SEPTEMBER 24, so the in-person
-         session is now eight days AFTER this one, not three weeks before it.
-         Every reason the rule existed came back, and Sep 17 would have put an
-         online Thursday in the week before an in-person Thursday.
-     (3) Sep 16 is the Wednesday immediately before Sep 24. Verified: 2026-09-16
-         is a Wednesday and 2026-09-24 is a Thursday.
-     (4) 11:00 am Mountain DID NOT MOVE, and must not. Same panel finding as
-         below. The hour has survived all three date moves.
-     (5) PRICE UNCHANGED at the old paid price and the Stripe link UNCHANGED. The link's
-         metadata session_date was moved to 2026-09-16 (replaces_date
-         2026-09-17), read back off the Stripe API after the write; the amount
-         was not touched. Anyone holding a seat holds a seat that moved.
-     (6) STILL OPEN, needs a human: the Google Calendar block that carries the
-         Meet room (id orhveiqqvur8ocm0o68qbe7nas, meet.google.com/duq-cdqp-dip)
-         is still on SEPTEMBER 17 and has to be moved to Sep 16, 10:30-12:00
-         Mountain. The Meet URL itself is not date-bound so this page is not
-         lying, but his own calendar is on the wrong day until somebody moves it.
-
-     SUPERSEDED BELOW. Read for history, not for instruction.
-
-     2026-08-17, on Boubacar's decision: Wednesday August 19 became THURSDAY
-     SEPTEMBER 17. He cancelled the August 19 date and pushed it out so the
-     session gets a full three weeks of real promotion behind it, in his words
-     "reschedule the virtual around Sep 17".
-     (1) THE REASON IS THE RUNWAY, not the day of week. The August 19 run had
-         its assets ready on 08-11 and its first promotion landed four days
-         out, because days one to four of a nine-day campaign were never
-         posted. Sep 17 is three weeks and one day from 08-17. An unposted
-         campaign is indistinguishable from no campaign, and that is the thing
-         this date buys the fix for.
-     (2) THURSDAY, and the old Wednesday reasoning below is now EXPIRED, not
-         overruled. It existed to avoid a head-to-head with the Aug 27 Thursday
-         in-person session and to stay out of Aug 27's peak week. By mid
-         September Aug 27 is three weeks past, so neither reason survives.
-         Thursday is also the weekday his sessions already run on.
-     (3) 11:00 am Mountain DID NOT MOVE, and must not. See the panel finding
-         above: midday is the variable the evidence named. 11:00 Mountain is
-         1:00 pm Eastern and 10:00 am Pacific, the widest US working window.
-     (4) Calendar checked before locking: Sep 17 holds no external commitment,
-         only a recurring birthday marker and his own routine template blocks,
-         all marked free. The Sep 9 3-5pm ET slot with a former colleague is
-         eight days earlier and does not touch it.
-     (5) PRICE UNCHANGED at the old paid price and the Stripe link is UNCHANGED, so anyone
-         who already paid for the August 19 seat holds a valid seat that simply
-         moved. A price change would need a NEW payment link (a link's amount
-         cannot be edited in place), and that is a Stripe object change, which
-         is Boubacar's call and not an agent's.
-     (6) The machine-readable campaign key still reads ic_workshop_online_0819
-         throughout this file, deliberately left alone. It is the same session
-         and the same offer on a new date, so its click history belongs
-         together; minting a fresh key would split one session's numbers in
-         two and would need the four w/online* short links repointed in the
-         same breath. Filed for Boubacar rather than changed quietly, because
-         "0819" reading as a September session is a real analytics wart.
-
-     SUPERSEDED, 2026-08-05, kept because it explains where 11:00 am came from:
-     Thursday August 13 became WEDNESDAY August 19. Two reasons, both deliberate.
-     (1) Eight days was too thin with no announcement out. Aug 19 buys fourteen
-         days to fill the room.
-     (2) WEDNESDAY, not Thursday, on purpose. Thursday belongs to the Aug 27
-         in-person session. A competing Thursday event seven days earlier invites
-         exactly the head-to-head comparison we do not want, and Aug 20 would have
-         landed inside the Aug 27 peak week. Wednesday sidesteps both. */
+  /*  Time is 11:00 am Mountain.  */
   place: 'Online, on Google\u00a0Meet',
-  /* Set together, on purpose. A price without a registerUrl renders a
-     'Reserve my seat' button over a checkout that does not exist, and a
-     registerUrl without a price sends people to pay an amount the page never
-     showed them.
-
-     the old paid price flat, confirmed. Round, not .97: a blind panel of three Utah
-     owner-operators read the in-person page on 2026-08-04 and two of them,
-     unprompted, said a .97 ending cost them trust. Write it 'the old paid price'. Never
-     'the old paid price', never 'twenty-five dollars'.
-
-     registerUrl is a Stripe payment link created 2026-08-05 for this the old paid price
-     seat. A payment link's amount cannot be edited in place, so a price
-     change means a new link, not an edit. */
-  /* FLIPPED TO FREE 2026-09-07, decision D-20260907-6347c9 (his words: "Let's
-     flip the September 16th session to free"). The Stripe product/price stays
-     LIVE and untouched (plink_1U1CWwQWqcWWuBB0jgP2KmJT, prod_V1F0GT6RfTOswY,
-     the old paid price price object) -- nothing was deactivated -- this page simply stops
-     sending the register button to it. free:true is what does that: it takes
-     the page out of the paid-checkout branch and into a free-registration
-     branch that captures the email and confirms on this page, no Stripe
-     redirect. Reverting to paid needs no new Stripe object: set free back to
-     false and this page returns to charging the existing the old paid price link. */
+  /*  Price and registerUrl are set together. Neither renders without the other.  */
+  /*  free:true routes registration through this page instead of a checkout redirect. Set it back to false to return to a paid checkout.  */
   free: true,
   price: 'Free',
-  /* registerUrl RESTORED 2026-08-17, on Boubacar's explicit instruction that
-     same day, and the restore closes the dead-checkout hole rather than
-     reopening it. The whole history is kept here because the failure mode it
-     records is the one most likely to repeat.
-
-     WHAT HAPPENED. This field was emptied earlier on 2026-08-17 because the
-     link, the retired Stripe checkout (see LIVE_STATE) (plink_1U1CWwQWqcWWuBB0jgP2KmJT,
-     the old paid price), had been deactivated when the August 19 session was cancelled.
-     Emptying it was correct at that moment: it dropped the page into the `dated`
-     state so no buyer was walked into a dead Stripe page.
-
-     WHAT CHANGED. The SAME link is now active again, and its metadata
-     session_date now reads 2026-09-17 instead of 2026-08-19. The amount was
-     never touched, because a payment link's amount cannot be edited in place and
-     the old paid price did not change, so no new link was needed. Read back off the Stripe API
-     after the write: "active": true, metadata.session_date 2026-09-17,
-     metadata.replaces_date 2026-08-19, line item at the old paid amount.
-
-     THE TESTING RULE THAT SURVIVES THIS, and it is the reason this note is long:
-     a 200 from the checkout host proves NOTHING. Stripe's checkout shell returns
-     200 and THEN renders "The link is no longer active." That exact wrong
-     inference was made twice on 2026-08-17, once about this link and once about
-     the $0 free-seat link. Verify a checkout by opening it in a real browser and
-     reading the rendered page, never by reading a status code.
-
-     IF THIS EVER GOES DEAD AGAIN: empty this field, which drops the page back
-     into the `dated` state, and swap the five `dated`-branch copy strings to the
-     seat-link-being-reissued wording. Do not leave a live URL pointing at a dead
-     checkout. A price change, unlike a date change, needs a NEW link. */
-  /* 2026-09-15: EMPTIED on Boubacar's instruction that the free session has
-     ZERO links to a paid page. The retired checkout is recorded in agentsHQ
-     docs/LIVE_STATE.md, not here. */
   registerUrl: ''
 };
 
@@ -911,22 +717,7 @@ var NEXT_SESSION = {
       '</div>' +
       '<p>Enter your email and you go straight to checkout. Your confirmation and the join link land in your inbox.</p>';
     lbl.textContent = 'Reserve my seat';
-    /* This sentence is a promise about the plumbing, so it only stays here as
-       long as the plumbing keeps it. It used to overstate: the write was fired
-       before the redirect but the redirect did not wait for it, so a slow or
-       failed write meant a paid seat with no saved email and this line was
-       simply untrue for that person. Three things now make it hold. The write
-       retries with backoff, a beacon goes out if the redirect wins the race,
-       and the completed checkout is reconciled against Stripe server-side,
-       which rebuilds the record from the payment itself. The second clause is
-       the honest half: it says "and again when your payment lands", because
-       that reconciliation is what actually catches the case the first clause
-       misses. It is phrased as a second save rather than as a rescue on
-       purpose. An earlier draft read "if anything drops in between", which is
-       equally true and much worse: fine print sitting directly above a payment
-       button should not be the place a reader first learns the thing can fail.
-       If the Stripe reconciliation is ever removed, this sentence has to
-       change back. */
+    /*  This sentence is a promise about the plumbing, so it only stays while the plumbing keeps it: the write retries with backoff, a beacon covers a redirect that wins the race, and the completed checkout is reconciled server-side. If that reconciliation is removed, this sentence has to change.  */
     fine.textContent = 'Your email is saved here before checkout opens, and again when your payment lands. You will also get the short letter I send out, and one click takes you off it.';
     /* Unreachable in practice, since this state always navigates to checkout
        and never opens the box. Set anyway so the box can never surface another
@@ -993,13 +784,7 @@ var NEXT_SESSION = {
   }
 
   function post(email, ref){
-    /* 2026-08-11 SYS-528. This used to be `return !!r.ok`, which reads the
-       HTTP status and nothing else. The register endpoint answers HTTP 200
-       with {"ok": false, "error": "invalid_email"} for an address the list
-       refused, and a switched-off capture endpoint answers 200 as well, so a
-       status-only check calls a dropped seat a success and the retry ladder
-       below never fires. Success is now the body saying so. A duplicate is a
-       real success -- the person is already registered. */
+    /*  Success is the response body saying ok, not the HTTP status. A duplicate is a real success.  */
     return fetch(CAPTURE_URL, {
       method:'POST', keepalive:true,
       headers:{'Content-Type':'application/json'},
@@ -1019,18 +804,7 @@ var NEXT_SESSION = {
     });
   }
 
-  /* Wait for the write to land before doing anything else. keepalive is
-     unreliable in the in-app browsers a lot of this traffic arrives from,
-     and a fire-and-forget POST on this exact endpoint is what silently
-     lost every lead on the paid pages in July.
-     A capture failure must never strand the visitor.
-
-     Three attempts, backing off 250ms then 750ms. The backoff is the point:
-     an immediate retry into a server that is briefly busy just fails a second
-     time at the same instant, which is what the old retry-once did. A short
-     pause is what makes the second and third attempts different from the
-     first. The whole ladder is sized to finish inside the timeout below on a
-     healthy connection, so a transient blip never reaches the fallback. */
+  /*  Wait for the write to land before navigating. Three attempts, backing off 250ms then 750ms, sized to finish inside the timeout below on a healthy connection. A capture failure must never strand the visitor.  */
   var RETRY_BACKOFF_MS = [250, 750];
 
   function capture(email, ref){

@@ -705,48 +705,9 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"/></
    ==================================================================== */
 var NEXT_SESSION = {
   confirmed: true,
-  /* Two different questions, deliberately two different flags. Do not merge them.
-
-     confirmed = is the date public. It is what switches this page out of the
-       being-scheduled state, so turning it off ALSO removes the date, the whole
-       ticket and the checkout button. It is not a venue flag and must never be
-       used as one.
-     roomHeld  = has the venue actually reserved the room.
-
-     On 2026-08-04 the page rendered "Next session confirmed" while the SLCC room
-     was still unbooked. Boubacar had emailed Alex Dotter that day asking to lock
-     Thursday the 27th and had no reply. The date is Boubacar's to set and it is
-     set. The room is the venue's to give and it has not given it. One flag could
-     not say both, which is why the page said the confident one and was wrong.
-
-     2026-08-04, later the same day: the venue confirmed. Thursday August 27 is
-     booked, so roomHeld is true and the page says "Room confirmed". Set this
-     back to false the moment a future date is announced without a booking; it
-     is the one flag that is allowed to be pessimistic while confirmed is true.
-
-     2026-08-26: BACK TO FALSE, which is the instruction directly above being
-     followed rather than a new decision. The August 27 session was cancelled
-     and moved to Thursday September 24. Boubacar emailed Alex Dotter at SLCC on
-     2026-08-25 asking for the new date and, checked against the Gmail thread on
-     2026-08-26, HAS HAD NO REPLY. The date is his and it is set; the room is the
-     venue's and it has not given it yet. That is exactly the 2026-08-04 state
-     this flag was invented for, and leaving it true would have put "Room
-     confirmed" on a page taking $50 for a room nobody has promised us.
-
-     Note what this does NOT do: roomHeld changes ONE label, further down in
-     STATE_LABEL. It does not touch the date, the ticket, the price or the
-     checkout, all of which stay live. Flip it back to true the moment Alex
-     confirms September 24 in writing.
-
-     2026-09-05: BACK TO TRUE. September 24 is confirmed and has been for a
-     while. Boubacar said so directly today, and the record already carried it:
-     on 2026-08-26 he stated "the next event is Thursday, September 24th. Alex
-     agreed to that." That line was written into docs/LIVE_STATE.md the same
-     day and then contradicted five days later by a row reasoning from the
-     absence of a WRITTEN SLCC reply in the Gmail thread. Absence of an email
-     is not absence of a confirmation, and he is first-party about his own
-     booking. The page has therefore been telling buyers "room being confirmed"
-     since August 26 about a room that was confirmed on August 26. Fixed. */
+  /*  Two separate questions, deliberately two flags. Do not merge them.
+     confirmed = is the date public. It switches the page out of the being-scheduled state, so turning it off also removes the date, the ticket and the checkout button. It is not a venue flag.
+     roomHeld  = has the venue reserved the room. It is allowed to be pessimistic while confirmed is true.  */
   roomHeld: true,
   date:  'Thursday, September 24',
   /* The \u00a0 escapes are non-breaking spaces and they are load-bearing, not
@@ -756,39 +717,9 @@ var NEXT_SESSION = {
      written as escapes rather than pasted characters so they survive an edit
      and stay visible to whoever reads this next. Keep them. */
   time:  '7:00 to 8:30 pm,\u00a0room\u00a0opens\u00a0at\u00a06:30',
-  /* Campus only, on purpose. Do NOT put a building name or a room number back
-     in this string without a booking in hand.
-     Two separate reasons, both learned the hard way.
-     1. On 2026-07-28 Alex Dotter at SLCC said the room is Building 1, Miller
-        Professional Development Center, and explicitly NOT Building 2 / the
-        Karen Gail Miller Conference Center. The contract agrees with him: it
-        reads "MPDC 105". Boubacar walked it and read it as Building 2. Nobody
-        reconciled those, so the standing house rule from that day is to name
-        no building at all and describe the route instead. The July 30 emails
-        and the printed signs already follow it.
-     2. As of 2026-08-04 the August room is AVAILABLE but NOT RESERVED. Alex
-        offered the 20th or the 27th and asked which to book; that question is
-        unanswered. This page takes money, so it must not assert a room that
-        nobody has held yet. */
+  /*  Campus only, on purpose. Do NOT put a building name or a room number back into this string without a confirmed booking in hand. Describe the route instead.  */
   place: 'Salt Lake Community College, Miller Campus, Sandy',
-  /* Set together, on purpose. A price without a registerUrl renders a
-     "Reserve my seat" button over a checkout that does not exist, and a
-     registerUrl without a price sends people to pay an amount the page never
-     showed them. The page only enters its live checkout state when BOTH are
-     filled, so keep them in sync if either ever changes.
-     PRICE SHAPE, 2026-08-04. The seat moved from $47.97 to $50 and the reason
-     is the SHAPE of the number, not the amount. A blind panel of three Utah
-     owner-operators read this page that day and two of them, unprompted, said
-     the .97 ending cost them trust: "course guy price", "like it came out of a
-     template". One said "$50 I'd trust more". So the round number is the point.
-     This is a PRICE RISE, not a discount, and nothing on any surface may frame
-     it as one. Write it "$50". Never "$50.00", never "fifty dollars".
-
-     registerUrl is the $50 payment link plink_1U0tVOQWqcWWuBB0JrKaQw0E,
-     created 2026-08-04 against the same dateless product prod_UfXH0rdp6HHbTy
-     (price_1U0tV6QWqcWWuBB0HMx9JnWe, 5000 usd). A payment link's amount cannot
-     be edited in place, so the $47.97 link was replaced rather than changed;
-     the old one is deactivated in Stripe, not deleted. */
+  /*  Price and registerUrl are set together. The page only enters its live checkout state when BOTH are filled, so keep them in sync if either changes.  */
   price: '$50',
   registerUrl: 'https://buy.stripe.com/9B63cxclV6RIcnC7QVgEg0m'
 };
@@ -883,22 +814,7 @@ var NEXT_SESSION = {
       '<p>Enter your email and you go straight to checkout. Your confirmation and the address land in your inbox.</p>';
     lbl.textContent = 'Reserve my seat';
     head([{t:S.date,bold:true},{t:S.time},{t:S.place},{t:S.price,bold:true}], 'Reserve a seat');
-    /* This sentence is a promise about the plumbing, so it only stays here as
-       long as the plumbing keeps it. It used to overstate: the write was fired
-       before the redirect but the redirect did not wait for it, so a slow or
-       failed write meant a paid seat with no saved email and this line was
-       simply untrue for that person. Three things now make it hold. The write
-       retries with backoff, a beacon goes out if the redirect wins the race,
-       and the completed checkout is reconciled against Stripe server-side,
-       which rebuilds the record from the payment itself. The second clause is
-       the honest half: it says "and again when your payment lands", because
-       that reconciliation is what actually catches the case the first clause
-       misses. It is phrased as a second save rather than as a rescue on
-       purpose. An earlier draft read "if anything drops in between", which is
-       equally true and much worse: fine print sitting directly above a payment
-       button should not be the place a reader first learns the thing can fail.
-       If the Stripe reconciliation is ever removed, this sentence has to
-       change back. */
+    /*  This sentence is a promise about the plumbing, so it only stays while the plumbing keeps it: the write retries with backoff, a beacon covers a redirect that wins the race, and the completed checkout is reconciled server-side. If that reconciliation is removed, this sentence has to change.  */
     fine.textContent = 'Your email is saved here before checkout opens, and again when your payment lands. You will also get the short letter I send out, and one click takes you off it.';
     /* Unreachable in practice, since this state always navigates to checkout
        and never opens the box. Set anyway so the box can never surface another
@@ -955,13 +871,7 @@ var NEXT_SESSION = {
   }
 
   function post(email, ref){
-    /* 2026-08-11 SYS-528. This used to be `return !!r.ok`, which reads the
-       HTTP status and nothing else. The register endpoint answers HTTP 200
-       with {"ok": false, "error": "invalid_email"} for an address the list
-       refused, and a switched-off capture endpoint answers 200 as well, so a
-       status-only check calls a dropped seat a success and the retry ladder
-       below never fires. Success is now the body saying so. A duplicate is a
-       real success -- the person is already registered. */
+    /*  Success is the response body saying ok, not the HTTP status. A duplicate is a real success.  */
     return fetch(CAPTURE_URL, {
       method:'POST', keepalive:true,
       headers:{'Content-Type':'application/json'},
@@ -981,18 +891,7 @@ var NEXT_SESSION = {
     });
   }
 
-  /* Wait for the write to land before doing anything else. keepalive is
-     unreliable in the in-app browsers a lot of this traffic arrives from,
-     and a fire-and-forget POST on this exact endpoint is what silently
-     lost every lead on the paid pages in July.
-     A capture failure must never strand the visitor.
-
-     Three attempts, backing off 250ms then 750ms. The backoff is the point:
-     an immediate retry into a server that is briefly busy just fails a second
-     time at the same instant, which is what the old retry-once did. A short
-     pause is what makes the second and third attempts different from the
-     first. The whole ladder is sized to finish inside the timeout below on a
-     healthy connection, so a transient blip never reaches the fallback. */
+  /*  Wait for the write to land before navigating. Three attempts, backing off 250ms then 750ms, sized to finish inside the timeout below on a healthy connection. A capture failure must never strand the visitor.  */
   var RETRY_BACKOFF_MS = [250, 750];
 
   function capture(email, ref){
