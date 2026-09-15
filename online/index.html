@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="light only">
 <title>AI Without Getting Burned &middot; The Online Session &middot; Catalyst Works</title>
-<meta name="description" content="A sixty-minute online working session for owners. You build one AI tool on your own laptop and take it home running. Wednesday September 16, 11am Mountain.">
+<meta name="description" content="A sixty-minute online working session for owners. You build one AI tool on your own laptop and take it home running. Wednesday September 16, 11am Mountain. Free.">
 
 <meta property="og:title" content="AI Without Getting Burned &middot; The Online Session">
 <meta property="og:description" content="Sixty minutes, online, small group, laptops open. You build one tool on your own machine and take it home running.">
@@ -49,7 +49,7 @@
    people an in-person evening in Sandy was never going to reach, which is
    the blocker every blind reader panel named. The credit language was
    already off this page on 2026-08-06 (Boubacar: "remove the public
-   promise of the $25 off so we can work that out one by one"), so nothing
+   promise of the the old paid price off so we can work that out one by one"), so nothing
    here promises a relationship between the two prices any more, which is
    what makes the reorder safe to do as a date change.
 
@@ -501,6 +501,9 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"/></
       <div id="session"></div>
 
       <form class="form" id="cap" novalidate>
+        <label class="sr" for="nm">Your name</label>
+        <input class="email" id="nm" type="text" name="name" autocomplete="name"
+               placeholder="Your name" required maxlength="200">
         <label class="sr" for="em">Your email</label>
         <input class="email" id="em" type="email" name="email" inputmode="email"
                autocomplete="email" placeholder="you@yourbusiness.com" required>
@@ -515,7 +518,7 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"/></
            no date rather than for the session currently on it. Both were left
            describing a date that had not been set yet, which read as stale for
            anyone viewing source while a date was live. -->
-      <p class="fine" id="fine">Seats are paid. The price posts here with the next date. You will also get the short letter I send out, and one click takes you off it.</p>
+      <p class="fine" id="fine">The session is free. You will also get the short letter I send out, and one click takes you off it.</p>
 
       <div class="done" id="ok">
         <h4>You are on the list</h4>
@@ -556,7 +559,7 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"/></
     <div class="note">
       <p>This is a working session and not a talk. Come with a laptop and an hour, and you leave with your business brain running.</p>
       <!-- REMOVED 2026-08-06, on Boubacar's explicit instruction: the paragraph
-           here promised that the $25 paid for this session comes off the August 27
+           here promised that the the old paid price paid for this session comes off the August 27
            in-person seat, and read a promotion code out at the end of the hour.
            Stripe promotion codes are broken account-wide right now (every code on
            the account resolves with a null coupon object), so checkout cannot
@@ -701,7 +704,7 @@ var NEXT_SESSION = {
          is a Wednesday and 2026-09-24 is a Thursday.
      (4) 11:00 am Mountain DID NOT MOVE, and must not. Same panel finding as
          below. The hour has survived all three date moves.
-     (5) PRICE UNCHANGED at $25 and the Stripe link UNCHANGED. The link's
+     (5) PRICE UNCHANGED at the old paid price and the Stripe link UNCHANGED. The link's
          metadata session_date was moved to 2026-09-16 (replaces_date
          2026-09-17), read back off the Stripe API after the write; the amount
          was not touched. Anyone holding a seat holds a seat that moved.
@@ -735,7 +738,7 @@ var NEXT_SESSION = {
          only a recurring birthday marker and his own routine template blocks,
          all marked free. The Sep 9 3-5pm ET slot with a former colleague is
          eight days earlier and does not touch it.
-     (5) PRICE UNCHANGED at $25 and the Stripe link is UNCHANGED, so anyone
+     (5) PRICE UNCHANGED at the old paid price and the Stripe link is UNCHANGED, so anyone
          who already paid for the August 19 seat holds a valid seat that simply
          moved. A price change would need a NEW payment link (a link's amount
          cannot be edited in place), and that is a Stripe object change, which
@@ -762,23 +765,23 @@ var NEXT_SESSION = {
      registerUrl without a price sends people to pay an amount the page never
      showed them.
 
-     $25 flat, confirmed. Round, not .97: a blind panel of three Utah
+     the old paid price flat, confirmed. Round, not .97: a blind panel of three Utah
      owner-operators read the in-person page on 2026-08-04 and two of them,
-     unprompted, said a .97 ending cost them trust. Write it '$25'. Never
-     '$25.00', never 'twenty-five dollars'.
+     unprompted, said a .97 ending cost them trust. Write it 'the old paid price'. Never
+     'the old paid price', never 'twenty-five dollars'.
 
-     registerUrl is a Stripe payment link created 2026-08-05 for this $25
+     registerUrl is a Stripe payment link created 2026-08-05 for this the old paid price
      seat. A payment link's amount cannot be edited in place, so a price
      change means a new link, not an edit. */
   /* FLIPPED TO FREE 2026-09-07, decision D-20260907-6347c9 (his words: "Let's
      flip the September 16th session to free"). The Stripe product/price stays
      LIVE and untouched (plink_1U1CWwQWqcWWuBB0jgP2KmJT, prod_V1F0GT6RfTOswY,
-     $25 price object) -- nothing was deactivated -- this page simply stops
+     the old paid price price object) -- nothing was deactivated -- this page simply stops
      sending the register button to it. free:true is what does that: it takes
      the page out of the paid-checkout branch and into a free-registration
      branch that captures the email and confirms on this page, no Stripe
      redirect. Reverting to paid needs no new Stripe object: set free back to
-     false and this page returns to charging the existing $25 link. */
+     false and this page returns to charging the existing the old paid price link. */
   free: true,
   price: 'Free',
   /* registerUrl RESTORED 2026-08-17, on Boubacar's explicit instruction that
@@ -787,15 +790,15 @@ var NEXT_SESSION = {
      records is the one most likely to repeat.
 
      WHAT HAPPENED. This field was emptied earlier on 2026-08-17 because the
-     link, buy.stripe.com/dRmfZjadN7VM73i1sxgEg0n (plink_1U1CWwQWqcWWuBB0jgP2KmJT,
-     $25), had been deactivated when the August 19 session was cancelled.
+     link, the retired Stripe checkout (see LIVE_STATE) (plink_1U1CWwQWqcWWuBB0jgP2KmJT,
+     the old paid price), had been deactivated when the August 19 session was cancelled.
      Emptying it was correct at that moment: it dropped the page into the `dated`
      state so no buyer was walked into a dead Stripe page.
 
      WHAT CHANGED. The SAME link is now active again, and its metadata
      session_date now reads 2026-09-17 instead of 2026-08-19. The amount was
      never touched, because a payment link's amount cannot be edited in place and
-     $25 did not change, so no new link was needed. Read back off the Stripe API
+     the old paid price did not change, so no new link was needed. Read back off the Stripe API
      after the write: "active": true, metadata.session_date 2026-09-17,
      metadata.replaces_date 2026-08-19, line item 2500 usd.
 
@@ -810,7 +813,10 @@ var NEXT_SESSION = {
      into the `dated` state, and swap the five `dated`-branch copy strings to the
      seat-link-being-reissued wording. Do not leave a live URL pointing at a dead
      checkout. A price change, unlike a date change, needs a NEW link. */
-  registerUrl: 'https://buy.stripe.com/dRmfZjadN7VM73i1sxgEg0n'
+  /* 2026-09-15: EMPTIED on Boubacar's instruction that the free session has
+     ZERO links to a paid page. The retired checkout is recorded in agentsHQ
+     docs/LIVE_STATE.md, not here. */
+  registerUrl: ''
 };
 
 (function(){
@@ -831,6 +837,7 @@ var NEXT_SESSION = {
   var box   = document.getElementById('session');
   var form  = document.getElementById('cap');
   var input = document.getElementById('em');
+  var nameInput = document.getElementById('nm');
   var btn   = document.getElementById('go');
   var lbl   = btn.querySelector('.lbl');
   var okBox = document.getElementById('ok');
@@ -888,11 +895,12 @@ var NEXT_SESSION = {
         cell('Date',  S.date)  + cell('Time',  S.time) +
         cell('Place', S.place) + cell('Seat',  'Free') +
       '</div>' +
-      '<p>Enter your email to reserve your free seat. Your confirmation and the join link land in your inbox.</p>';
-    lbl.textContent = 'Reserve my free seat';
-    fine.textContent = 'Your email is saved the moment you register. You will also get the short letter I send out, and one click takes you off it.';
-    okLine.textContent = 'You are registered. Check your inbox for the join link.';
-    LISTED_MSG = 'You are registered. Check your inbox for the join link.';
+      '<p>Put in your name and email and your seat is saved. The join link comes to your inbox.</p>';
+    lbl.textContent = 'Save my free seat';
+    fine.textContent = 'Your name and email are saved the moment you register. You will also get the short letter I send out, and one click takes you off it.';
+    okBox.querySelector('h4').textContent = 'You are registered';
+    okLine.textContent = 'You are in for Wednesday, September 16, 11:00 am to 12:00 pm Mountain time. The join link comes to you by email.';
+    LISTED_MSG = 'You are registered for Wednesday, September 16, 11:00 am to 12:00 pm Mountain time. The join link comes to you by email.';
   } else if (live) {
     box.innerHTML =
       '<p class="state"><span class="pip" aria-hidden="true"></span>' + STATE_LABEL + '</p>' +
@@ -935,17 +943,17 @@ var NEXT_SESSION = {
       '</div>' +
       /* Back to the generic wording on 2026-08-17, when the checkout came back.
          These five strings were temporarily swapped to a seat-link-being-reissued
-         message for the few hours the $25 link sat inactive. That swap existed
+         message for the few hours the the old paid price link sat inactive. That swap existed
          because this branch's generic copy says the PRICE is not set yet, which
-         would have contradicted the $25 ticket cell directly above it. With
+         would have contradicted the the old paid price ticket cell directly above it. With
          registerUrl restored this branch is unreachable anyway, so the generic
          wording is the right thing to keep: it is the honest copy for the state
          this branch actually models, which is a date announced before a price. */
-      '<p>Seats are paid and the price is not set yet. Leave your email and I send you the price and the seat link the day I set them.</p>';
+      '<p>The seat link is not ready yet. Leave your name and email and I send it to you the day it is.</p>';
     lbl.textContent = 'Send me the seat link';
-    fine.textContent = 'The price posts on this page the moment it is set. You will also get the short letter I send out, and one click takes you off it.';
-    okLine.textContent = 'You get the price and the seat link in your inbox the moment I set them.';
-    LISTED_MSG = 'You are on the list. I will email you the price and the seat link.';
+    fine.textContent = 'The seat link posts on this page the moment it is ready. You will also get the short letter I send out, and one click takes you off it.';
+    okLine.textContent = 'You get the seat link in your inbox the moment it is ready.';
+    LISTED_MSG = 'You are on the list. I will email you the seat link.';
   } else {
     box.innerHTML =
       '<p class="state"><span class="pip" aria-hidden="true"></span>Next session being scheduled</p>' +
@@ -954,7 +962,7 @@ var NEXT_SESSION = {
     /* Restated rather than inherited from the markup. Every branch now sets
        these two explicitly, so no state can quietly ship another state's copy
        just because it happened to be the HTML default. */
-    fine.textContent = 'Seats are paid. The price posts here with the next date. You will also get the short letter I send out, and one click takes you off it.';
+    fine.textContent = 'The next date posts here the moment it is set. You will also get the short letter I send out, and one click takes you off it.';
     okLine.textContent = 'The next date lands in your inbox the day I set it.';
   }
 
@@ -966,6 +974,7 @@ var NEXT_SESSION = {
   function body(email, ref){
     return JSON.stringify({
       email: email,
+      name: ((nameInput && nameInput.value) || '').trim().slice(0, 200),
       cohort: COHORT,
       seat_kind: live ? 'paid' : 'free',
       /* free/live/dated stay three distinct facts in this payload too --
@@ -1072,6 +1081,14 @@ var NEXT_SESSION = {
   form.addEventListener('submit', function(ev){
     ev.preventDefault();
     var email = (input.value || '').trim();
+    var nm = ((nameInput && nameInput.value) || '').trim();
+    if (!nm) {
+      nameInput.setAttribute('aria-invalid','true');
+      nameInput.focus();
+      say.textContent = 'Put your name in so I know who is coming.';
+      return;
+    }
+    nameInput.removeAttribute('aria-invalid');
     if (!emailRe.test(email)) {
       input.setAttribute('aria-invalid','true');
       input.focus();
@@ -1134,13 +1151,24 @@ var NEXT_SESSION = {
        browser delivers after navigation. And the completed checkout is
        reconciled against Stripe server-side, which rebuilds the row from the
        payment even if nothing at all got through from this page. */
-    setTimeout(function(){
+    /* 2026-09-15: on the FREE path there is no checkout to move anyone on to,
+       so the confirmation shows only once the write has actually landed. A
+       failed write is shown, loudly, and the button comes back for a retry. */
+    if (!free) setTimeout(function(){
       if (!landed) beacon(email, ref);
       finish();
     }, CAPTURE_TIMEOUT_MS);
-
     capture(email, ref).then(function(ok){
       landed = ok;
+      if (free && !ok) {
+        btn.disabled = false;
+        btn.removeAttribute('aria-busy');
+        lbl.textContent = 'Save my free seat';
+        say.textContent = 'That did not save. Check your connection and try again.';
+        fine.textContent = 'That did not save. Check your connection and press the button again.';
+        fine.style.color = 'var(--oxide)';
+        return;
+      }
       /* Every attempt failed but we are still on the page, so there is time
          for one more shot by a different mechanism before the redirect. */
       if (!ok) beacon(email, ref);
