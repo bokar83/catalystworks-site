@@ -1,41 +1,71 @@
 # Catalyst Works — catalystworks.consulting
-# AI assistants and search crawlers are explicitly welcome.
+# AI assistants and search crawlers are explicitly welcome on the public site.
+#
+# /internal/ and /docs/ are NOT public surfaces and are disallowed in every
+# group below. They are also denied at the server via their own .htaccess
+# files, which is the control that actually stops a fetch. robots.txt is
+# advisory only: it asks a well-behaved crawler not to fetch, it does not
+# enforce anything and it does not retract anything already crawled or cached.
 
 User-agent: *
 Allow: /
+Disallow: /internal/
+Disallow: /docs/
 
-# --- AI / LLM crawlers (explicit allow) ---
+# --- AI / LLM crawlers (explicit allow on the public site) ---
 User-agent: GPTBot
 Allow: /
+Disallow: /internal/
+Disallow: /docs/
 
 User-agent: OAI-SearchBot
 Allow: /
+Disallow: /internal/
+Disallow: /docs/
 
 User-agent: ChatGPT-User
 Allow: /
+Disallow: /internal/
+Disallow: /docs/
 
 User-agent: ClaudeBot
 Allow: /
+Disallow: /internal/
+Disallow: /docs/
 
 User-agent: Claude-Web
 Allow: /
+Disallow: /internal/
+Disallow: /docs/
 
 User-agent: anthropic-ai
 Allow: /
+Disallow: /internal/
+Disallow: /docs/
 
 User-agent: PerplexityBot
 Allow: /
+Disallow: /internal/
+Disallow: /docs/
 
 User-agent: Perplexity-User
 Allow: /
+Disallow: /internal/
+Disallow: /docs/
 
 User-agent: Google-Extended
 Allow: /
+Disallow: /internal/
+Disallow: /docs/
 
 User-agent: Applebot-Extended
 Allow: /
+Disallow: /internal/
+Disallow: /docs/
 
 User-agent: CCBot
 Allow: /
+Disallow: /internal/
+Disallow: /docs/
 
 Sitemap: https://catalystworks.consulting/sitemap.xml

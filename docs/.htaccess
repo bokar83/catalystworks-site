@@ -1,0 +1,28 @@
+# /docs/ is build and audit material, NOT a public surface. Deny it at the edge.
+#
+# What lives here: design-audit runs with their screenshots and probe scripts,
+# house-style build sources, and print handout sources. It is all working
+# material that happened to sit inside the deployed tree, so the host served
+# it. Directory listing was already off, but individual files resolved 200 to
+# anyone holding the path, and this site's robots.txt explicitly invites AI
+# crawlers, so "nobody links to it" was never protection.
+#
+# Verified before this file was added: no public page on this site references
+# any asset under /docs/, so denying it cannot break a rendered page.
+#
+# The source files stay in the repository. Only public SERVING stops.
+
+<IfModule mod_headers.c>
+  Header always set X-Robots-Tag "noindex, nofollow, noarchive, nosnippet"
+</IfModule>
+
+# Apache 2.4 / LiteSpeed
+<IfModule mod_authz_core.c>
+  Require all denied
+</IfModule>
+
+# Apache 2.2 fallback
+<IfModule !mod_authz_core.c>
+  Order allow,deny
+  Deny from all
+</IfModule>

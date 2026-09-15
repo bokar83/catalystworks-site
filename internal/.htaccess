@@ -1,0 +1,28 @@
+# /internal/ is NOT a public surface. Deny it at the edge.
+#
+# Everything under this directory is working material: positioning drafts,
+# bios, abstracts, checklists and engagement notes. None of it is written
+# for a visitor and none of it should be indexed or quoted.
+#
+# Why a flat deny rather than basic auth: a deny needs no credential to be
+# created, stored or rotated, and nothing under here is served to a browser
+# as part of any public page. Verified before this file was added: no public
+# page on this site references any asset under /internal/, so denying it
+# cannot break a rendered page.
+#
+# The source files stay in the repository. Only public SERVING stops.
+
+<IfModule mod_headers.c>
+  Header always set X-Robots-Tag "noindex, nofollow, noarchive, nosnippet"
+</IfModule>
+
+# Apache 2.4 / LiteSpeed
+<IfModule mod_authz_core.c>
+  Require all denied
+</IfModule>
+
+# Apache 2.2 fallback
+<IfModule !mod_authz_core.c>
+  Order allow,deny
+  Deny from all
+</IfModule>
