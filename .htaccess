@@ -331,10 +331,18 @@ RewriteRule ^rsvp-0730(/index\.html)?/?$ - [NC,R=404,L]
 # 2026-07-31: same trailing-slash defect as /kit -- 301 to the slashed form first.
 RewriteRule ^services$ /services/ [R=301,L,QSA]
 RewriteRule ^services/?$ services/index.html [NC,L]
-# 5-Day Bottleneck Audit landing page lives at /bottleneck-audit/ (unlinked preview, awaiting nav sign-off).
+# The 5-Day Bottleneck Assessment landing page lives at /bottleneck-assessment/.
+# RENAMED 2026-09-15 from /bottleneck-audit/ (D-20260915-41b9f3, Boubacar direct:
+# he does not want "audit" in an offer name, and "Assessment" is the first word of
+# his own Assess / Roadmap / Build method). The old path is LIVE OUT IN THE WORLD --
+# it is on his LinkedIn Featured card, in sent email, and in the sitemap Google has
+# already crawled -- so it 301s permanently rather than 404ing. This rule MUST stay
+# above the /bottleneck-assessment/ rules so the old path never falls through to the
+# catch-all. Do not remove it: a 301 costs nothing and a dead link costs a buyer.
+RewriteRule ^bottleneck-audit(/index\.html)?/?$ /bottleneck-assessment/ [NC,R=301,L,QSA]
 # Same trailing-slash defect + fix as /services above.
-RewriteRule ^bottleneck-audit$ /bottleneck-audit/ [R=301,L,QSA]
-RewriteRule ^bottleneck-audit/?$ bottleneck-audit/index.html [NC,L]
+RewriteRule ^bottleneck-assessment$ /bottleneck-assessment/ [R=301,L,QSA]
+RewriteRule ^bottleneck-assessment/?$ bottleneck-assessment/index.html [NC,L]
 # Portfolio page lives at /portfolio/. The 301 to the slashed form is NOT optional
 # here: the page loads its four screenshots by RELATIVE path (assets/01-...png), and
 # DirectorySlash Off would serve the no-slash form in place, leaving document.baseURI
