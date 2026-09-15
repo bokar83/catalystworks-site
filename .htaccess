@@ -200,6 +200,11 @@ RewriteRule ^kit/?$ kit/index.html [NC,L]
 # no-slash form would leave the base at /kit-v1 and break the page's own links.
 RewriteRule ^kit-v1$ /kit-v1/ [R=301,L]
 RewriteRule ^kit-v1/?$ kit-v1/index.html [NC,L]
+# The ONLINE session kit, separate from the in-person /kit/ on purpose (2026-09-15):
+# the two sessions build different things, so they get different pages. Same
+# 301-then-serve shape as /kit above, for the same trailing-slash reason.
+RewriteRule ^online-kit$ /online-kit/ [R=301,L,QSA]
+RewriteRule ^online-kit/?$ online-kit/index.html [NC,L]
 # Customer-facing support + privacy pages (Stripe links point here). Same
 # directory-index pattern as /workshop: DirectorySlash Off would otherwise send
 # /support and /privacy into the clean-URL rule and 404 on support.html.
