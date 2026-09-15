@@ -800,10 +800,10 @@ var NEXT_SESSION = {
      never touched, because a payment link's amount cannot be edited in place and
      the old paid price did not change, so no new link was needed. Read back off the Stripe API
      after the write: "active": true, metadata.session_date 2026-09-17,
-     metadata.replaces_date 2026-08-19, line item 2500 usd.
+     metadata.replaces_date 2026-08-19, line item at the old paid amount.
 
      THE TESTING RULE THAT SURVIVES THIS, and it is the reason this note is long:
-     a 200 from buy.stripe.com proves NOTHING. Stripe's checkout shell returns
+     a 200 from the checkout host proves NOTHING. Stripe's checkout shell returns
      200 and THEN renders "The link is no longer active." That exact wrong
      inference was made twice on 2026-08-17, once about this link and once about
      the $0 free-seat link. Verify a checkout by opening it in a real browser and
