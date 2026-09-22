@@ -83,16 +83,52 @@ a:active    { color: var(--rust); }
 Ship gate: `python scripts/check_no_blue_on_dark.py` must exit `0` on all nine. A hex grep is not
 sufficient — the most common real violation is a *missing* base `a{color}` rule.
 
-### Killed by name
+### The binding rule is the ALLOWLIST, not a kill-list
 
-These hexes must not survive on any v1 page. Each is a measured defect, not a taste call:
+**Any hex on a v1 page that is not one of the six above is deleted. No exceptions, no
+grandfathering, no "it was already there."** This is stated as an allowlist deliberately, and
+the reason is measured:
 
-`#E8632A` · `#101A31` · `#b8842b` · `#071A2E` · `#FF7A00` · `#f59e0b` · `#141210` · `#1A1410` ·
-`#EFE7D6` · `#F4EFE6` · `#E5E9E8` · `#13181A` · `#A03D2A` · `#5BC0BE` · `#0F141C` · `#161D27`
+> **Counted over the nine v1 pages on `origin/main`, 2026-09-22: 35 distinct hex values are
+> live. Six are the allowlist. 28 of the remaining 29 are named nowhere — not in PRD §8a's
+> "killed by name" list and not in ACCEPTANCE_CONTRACT line 12's explicit absent-list.**
 
-`#f59e0b` is the unchanged Tailwind `amber-500` default (`audit/index.html:29`) — an automatic
-deduction under the 2026-05-27 decision doc's E4 list. `#5BC0BE` (cyan) is dropped because six
-accents is not a system. `#0F141C` and `#161D27` are the two elevation steps collapsed above.
+PRD §8a's kill-list names 14 hexes. Checked against the actual tree, almost all of them live on
+the **other 56 pages**, which are out of scope. A generator that treated that list as the spec
+would delete nearly nothing and still believe it had complied. Contract line 12 gets this right
+— it asserts *"output contains **only** the six hexes"* — and this section now matches its shape
+rather than its examples.
+
+The full measured set of 29 to be removed, for the phase-2/3 engineer, so nobody re-derives it:
+
+```
+#0F141C #14202B #161D27 #17222E #1A2E4A #1B2331 #1e3560 #22c55e #26333F #2C4A7C
+#3d4466 #5BC0BE #7a8099 #A5691F #B0722C #c4c9d8 #c98010 #C98A3F #D08A50 #e05252
+#E4DBC7 #E8A020 #E8DFCB #eef0eb #f59e0b #F0E8D8 #F5D6B8 #F7F6F2 #F8F3E9 #ffffff
+```
+
+Four of these are worth naming individually, because each is a different class of defect:
+
+- **`#E8A020`** — 14 occurrences, the second-most-common hex on the revenue path, all in
+  `audit/index.html`, and declared as **`--teal: #E8A020`** (`audit/index.html:20`) — a token
+  named *teal* holding an *orange*. Migration must be driven by **value**, never by token name.
+- **`#f59e0b`** (`audit/index.html:29`, verified) — the unchanged Tailwind `amber-500` default.
+  Automatic deduction under the 2026-05-27 decision doc's E4 list. **`#22c55e`** is Tailwind
+  `green-500`, the same defect, and the PRD missed it.
+- **`#2C4A7C` / `#1e3560` / `#1A2E4A`** — navy. PRD §2 places navy only on out-of-scope client
+  and audit pages; it is in fact **live on the v1 revenue path**, which makes anti-reference 2
+  an active removal rather than a precaution.
+- **`#ffffff`** — pure white, 3 occurrences, against a lock that sets `--paper #F5EFE2`
+  "never `#FFFFFF`." The rule already existed; the violation was simply never counted.
+
+`#0F141C` and `#161D27` are the two elevation steps collapsed above. `#5BC0BE` (cyan) is dropped
+because six accents is not a system.
+
+*Verified this session, not recalled:* `grep -oh '#[0-9A-Fa-f]\{6\}' $NINE | sort -uf` over the
+nine files at `origin/main`. The homepage's Three.js hero was checked separately and carries
+**no hex literals inside `<script>`** — so ACCEPTANCE_CONTRACT line 12 (only six hexes) and line
+21 (Three.js byte-unchanged) do **not** collide. That risk was real enough to test and is
+disproven.
 
 ---
 
@@ -432,5 +468,57 @@ Stated per the non-code-work rule: a document with no failure condition has no f
 Recorded in full in `agentsHQ/docs/prds/catalystworks-design-refresh-2026-09/PRD.md` §23, which
 is the contract's checked location (ACCEPTANCE_CONTRACT line 5). Summary verdicts:
 
-- **Karpathy:** _(filled by phase 1 before commit)_
-- **Council:** _(filled by phase 1 before commit)_
+Both ran against this file on 2026-09-22, before any CSS existed, per the 2026-08-29 install gate.
+
+**Karpathy — FINAL CALL: SHIP.** Two non-blocking WARNs: P2 (472 lines against R1's "small
+artifact"; normative rules interleaved with justification — not fixed, because a compact token
+restatement would break ACCEPTANCE_CONTRACT line 3's exactly-9 assertion) and P10 (bounded,
+justified Kitchen Sink — the accessibility floor and LCP clause exceed PRD §8a's literal ask).
+**One real defect caught and fixed before the verdict:** §1's "Killed by name" list implied
+completeness while missing 28 of the 29 non-allowlisted colors actually live on the nine pages;
+it is now allowlist-shaped with the measured set enumerated. One hypothesis tested and
+disproven: contract line 12 (six hexes) does **not** collide with line 21 (Three.js unchanged) —
+the hero carries no hex literals inside `<script>`.
+
+**Council — RECOMMENDATION: KEEP, ship as-is, with one rename and one escalation.**
+
+*Convergence, four of five voices independently:* **this is a coherence lock, not a WOW lock.**
+The document is ~80% subtraction (29 colors, 8 durations, 1 curve, 1 face, 1 card removed)
+against three additive garnishes. The Contrarian's sharpest form: *a signature move that another
+site in your own reference corpus executes identically is a convention, not a signature* —
+`hqforwork.com` runs the same mono-index-plus-hairline device this lock nominates as the Catalyst
+Works signature. First Principles named the mis-specification: PRD §7 defines value as *"the
+absence of a jolt"* (coherence) while §13 demands Apple-caliber WOW (distinctiveness); the lock
+is graded on the second and built for the first. All four identify the same missing ingredient —
+a **proprietary visual asset**, which the corpus found (hqforwork's brand-letterform imagery
+texture), which §8 correctly named "genuinely the best craft in the corpus," and then parked.
+
+*Divergence, named not averaged:* the Executor dissents on priority and is right to. He judges
+the lock **buildable** — the allowlist, the enumerated hex set and the grep-checkable motion
+rules are directly executable — and his findings mean it is already at the edge of what phase 3
+can absorb. Enlarging the lock now makes his §2 worse. The two positions resolve by sequence,
+not compromise: ship, then let checkpoint 1 settle the WOW question with evidence.
+
+*Executor's four phase-3 breakages, recorded here because they are not elsewhere:*
+1. `audit/index.html` is a rebuild, not a migration — 14× `#E8A020` under a token named
+   `--teal`, plus two Tailwind defaults. Sequence it last; it is ~3× the other eight.
+2. **Escalation, blocking phase 3:** deleting the `.rung` card (§6) removes the mechanism that
+   groups price + includes + CTA, so it is a **layout change to the primary pricing surface**.
+   PRD §3.1 forbids copy changes and §4.7 forbids IA changes; neither authorizes this. Goes back
+   to `dev-product-manager` as a change-log line — never decided by an engineer mid-build.
+3. §3's "no arbitrary px" is unachievable as written — the live pages carry `15.5px`, `14.5px`,
+   `13.5px`, `10.5px`. Type scales are not grid-bound; phase 2 needs a stated type carve-out or
+   it violates its own lock on line one.
+4. No defined intermediate state for a page's inline `:root` between phase 2 (CSS exists, zero
+   pages wired) and the end of phase 3 (contract line 11: no `:root` survives). An engineer will
+   otherwise guess.
+
+*Correction Council makes to this file's own §11:* if checkpoint 1 reads as still-generic, **the
+body face is the wrong suspect.** The suspect is the absent proprietary asset. PRD §18 OQ-3's
+Public Sans alternative should not be the first lever pulled.
+
+*The one open question only Boubacar can answer, carried to checkpoint 1:* is this build "make
+the nine pages stop contradicting each other" — in which case this lock is correct as written and
+we proceed — or "make the front door undeniable," in which case we are one commissioned visual
+asset short and it should be scoped in before phase 3 rather than after. Different builds,
+different budgets. The lock is right for the first and insufficient for the second.
