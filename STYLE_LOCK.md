@@ -558,3 +558,36 @@ the nine pages stop contradicting each other" — in which case this lock is cor
 we proceed — or "make the front door undeniable," in which case we are one commissioned visual
 asset short and it should be scoped in before phase 3 rather than after. Different builds,
 different budgets. The lock is right for the first and insufficient for the second.
+
+### 2026-09-23 amendment: Karpathy + Council on the delta
+
+The delta was the five typography and accessibility fixes (§1 rust row and link states, §2, §7
+button labels, §10 row 3). The source was the agentsHQ memo
+`memory/project_cw_style_lock_typography_accessibility_verdict_2026_09_23.md`, and Boubacar gave
+the go ("proceed on all").
+
+**Karpathy: SHIP on content.** It first returned HOLD on process, and all of it was resolved before merge:
+- It found that bundling a root `.htaccess` deny into this branch would add a 12th path against
+  ACCEPTANCE_CONTRACT line 18. That deny now lands as its own commit on main, ahead of this branch.
+- It found that this header claimed a re-run record and a PRD change-log line before either
+  existed. Both exist now.
+
+Every contrast ratio was recomputed (rust 4.81 on `--ink`, 4.41 on `--ink-raised`), and every
+other token pair on `--ink-raised` passes. Contract lines 2-4 still pass, with line 3 at exactly
+9. None of the five fixes needed changing.
+
+Two non-blocking notes:
+- The subhead line-height band (1.2 to 1.3) goes beyond the memo. The built CSS already uses it.
+- Inside raised panels, active and hover links now share `--paper`.
+
+**Council: KEEP.** All five voices judged the delta correct and non-contradictory. They also
+agreed on what matters next: the lock is now stricter than the built homepage on the CSS branch.
+That branch has six multi-word heading `<em>`s, where the lock allows one word per page, plus
+sentence-length uppercase mono and paragraph spacing below 1.5×. Reconcile it before checkpoint 2.
+
+The open question for Boubacar comes from the Contrarian. Should paragraph spacing stay at the
+AAA reading (1.5× line-height), or relax to AA (survive the SC 1.4.12 overrides only)?
+
+The Expansionist proposes a follow-up contract amendment: make these rules machine-checkable
+(`font-style: italic` outside the display step, no more than one `<em>` per page, body
+line-height 1.5 or higher).
