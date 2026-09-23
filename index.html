@@ -346,6 +346,9 @@
       .nav { padding: 12px var(--s-2); }
       .nav-toggle { display: inline-flex; }
       .nav .nav-cta { display: none; }
+      /* 44px touch floor applies to the brand lockup too — it is a link home,
+         not decoration, and it was the one control still under the floor. */
+      .brand { min-height: 44px; }
     }
 
     /* --------------------------------------------------------------- HERO */
@@ -373,6 +376,11 @@
       content: ''; display: inline-block; width: 6px; height: 6px;
       background: var(--clay); border-radius: 0;
     }
+
+    /* The one permitted accented emphasis on this page (STYLE_LOCK 2, max one
+       per page): the word "writing" in the hero display headline. Every other
+       <em> on the page stays italic and takes its heading's own colour. */
+    .hero h1 em { color: var(--amber); }
 
     .hero h1 {
       font-family: var(--serif); font-size: var(--t-display);
@@ -815,7 +823,7 @@
       font-family: var(--serif); font-size: var(--t-subhead); font-weight: 700;
       color: var(--paper); letter-spacing: -0.015em; margin-top: var(--s-1);
     }
-    .offer-outcomes-title em { font-style: italic; font-weight: 600; color: var(--amber); }
+    .offer-outcomes-title em { font-style: italic; font-weight: 600; }
     .offer-outcomes-grid { display: block; margin-top: var(--s-4); }
 
     .outcome-card {
