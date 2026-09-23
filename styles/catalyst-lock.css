@@ -362,7 +362,15 @@ a:focus-visible,
 }
 .lock-reveal.in { opacity: 1; transform: translateY(0); }
 
-/* Disables EVERY transform, not a subset. */
+/* What this actually does, stated precisely, because the earlier comment here
+   claimed more than the code delivers: it collapses every animation and
+   transition to 1ms and removes the entrance offset, so nothing MOVES
+   perceptibly. It deliberately does NOT null `transform` globally. Some
+   transforms carry STATE rather than motion on these pages -- the mobile nav
+   drawer is hidden at translateY(-100%) -- and nulling those would not calm
+   the page, it would break it by leaving the drawer open. STYLE_LOCK §4's
+   "disables every transform" is met in effect (no perceived movement), not by
+   a blanket `transform: none`. */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after {

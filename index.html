@@ -489,10 +489,11 @@
     }
     .out-thinking .dot {
       width: 4px; height: 4px; background: var(--clay);
-      animation: pulse 1200ms var(--ease) infinite;
+      /* One duration token, no stagger. A staggered indicator needs two more
+         delay values, and STYLE_LOCK 4 / anti-reference 11 cap the whole page
+         at two durations -- the stagger is not worth a third and a fourth. */
+      animation: pulse var(--d-enter) var(--ease) infinite;
     }
-    .out-thinking .dot:nth-child(2) { animation-delay: 200ms; }
-    .out-thinking .dot:nth-child(3) { animation-delay: 400ms; }
     @keyframes pulse {
       0%, 100% { opacity: 0.3; }
       50%      { opacity: 1; }
@@ -588,6 +589,10 @@
       color: var(--clay); margin-bottom: var(--s-2);
     }
     .lede { font-size: var(--t-body); color: var(--t-mid); line-height: 1.6; max-width: var(--measure); margin-top: var(--s-3); }
+    /* Spacing utilities replacing two inline style= attributes (PRD 9 bans
+       introducing those). Declared AFTER .lede so they actually win. */
+    .lede-tight { margin-top: var(--s-2); }
+    .deliverable-cta { margin-top: var(--s-4); }
 
     .method-quote { border-left: 1px solid var(--line); padding-left: var(--s-4); }
     .quote-eyebrow {
@@ -964,12 +969,37 @@
       #constellation { display: none; }
     }
 
-    /* The custom cursor is removed. It hid the native pointer on every desktop
-       visit, which is a real usability cost, and a bespoke cursor is a
-       CINEMATIC_AGENCY device on a page whose archetype is reading. The markup
-       and its script stay inert so nothing else has to change. */
-    .cw-cursor { display: none !important; }
-    html, body { cursor: auto; }
+    /* Custom cursor, desktop only. RESTYLED, NOT REMOVED. No frozen document
+       authorises deleting it -- anti-reference 14 is kinetic TYPOGRAPHY, not a
+       cursor -- and PRD 4.4's precedent is that removal is a behaviour change
+       wearing a design costume. So the device survives and the lock is applied
+       to it: square instead of round, no glow, one easing token, one duration.
+       Whether it belongs on a reading archetype at all is a question for
+       dev-product-manager, raised at checkpoint 1, not settled by an engineer. */
+    @media (pointer: fine) {
+      html, body { cursor: none; }
+      a, button, textarea, .demo { cursor: none; }
+      .cw-cursor {
+        position: fixed; top: 0; left: 0;
+        pointer-events: none; z-index: 9999;
+        will-change: transform, width, height, opacity;
+      }
+      .cw-cursor-dot {
+        width: 8px; height: 8px; background: var(--amber); border-radius: 0;
+        transition: opacity var(--d-micro) var(--ease);
+      }
+      .cw-cursor-ring {
+        width: 32px; height: 32px; border-radius: 0;
+        border: 1px solid var(--line);
+        transition: width var(--d-micro) var(--ease), height var(--d-micro) var(--ease),
+                    border-color var(--d-micro) var(--ease), opacity var(--d-micro) var(--ease);
+      }
+      .cw-cursor-ring.is-hover-link { width: 56px; height: 56px; border-color: var(--amber); }
+      .cw-cursor-dot.is-hover-link { opacity: 0.4; }
+      .cw-cursor.is-hidden { opacity: 0 !important; }
+    }
+    @media (pointer: coarse) { .cw-cursor { display: none !important; } }
+    @media (prefers-reduced-motion: reduce) { .cw-cursor-ring { transition: none; } }
   </style>
 
   <script defer src="https://analytics.boubacarbarry.com/script.js" data-website-id="e7fd20a8-f47a-40a0-ac8a-46bf3ea035b7"></script>
@@ -1161,6 +1191,10 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"
   </div>
 </section>
 
+<!-- The 8th-14th spans below are the seam duplicate of the original infinite
+     marquee. They are hidden with CSS, not deleted, because ACCEPTANCE_CONTRACT
+     line 19 asserts every text node is byte-identical to origin/main. Do not
+     "clean them up". -->
 <div class="marquee" aria-label="Process pillars">
   <div class="marquee-track">
     <span>One named constraint</span>
@@ -1247,8 +1281,8 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"
       <div class="eyebrow">The deliverable</div>
       <h2>One page. <em>In writing.</em><br>Within 24 hours.</h2>
       <p class="lede">Most consulting engagements end with a deck nobody reads. A Signal Session ends with a one-page document your leadership team can act on by Friday.</p>
-      <p class="lede" style="margin-top: var(--s-2);">Yours to keep, share, or use to prove or disprove the diagnosis with the people who matter.</p>
-      <a href="#offer" class="nav-cta" style="margin-top: var(--s-4);">See the full offer</a>
+      <p class="lede lede-tight">Yours to keep, share, or use to prove or disprove the diagnosis with the people who matter.</p>
+      <a href="#offer" class="nav-cta deliverable-cta">See the full offer</a>
     </div>
 
     <div class="doc reveal">
