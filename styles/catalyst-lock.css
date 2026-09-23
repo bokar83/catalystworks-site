@@ -1,0 +1,372 @@
+/* ============================================================================
+   catalyst-lock.css — the Catalyst Works v1 style lock, executed.
+
+   Source of truth: STYLE_LOCK.md in this repo (frozen 2026-09-22).
+   Authority:      agentsHQ docs/prds/catalystworks-design-refresh-2026-09/PRD.md §8b.
+   Scope:          the nine v1 revenue-path pages ONLY. The other 56 pages never
+                   import this file and stay byte-unchanged.
+
+   ADDITIVE. This file carries the system. Each page keeps its own <style> block
+   for page-specific layout, and that block consumes these tokens instead of
+   declaring its own :root. No page may declare a :root of its own once wired
+   (ACCEPTANCE_CONTRACT line 11).
+
+   ---------------------------------------------------------------------------
+   TWO CARVE-OUTS, stated here because phase 1 Council flagged both as
+   unspecified and an engineer would otherwise guess (PRD §23, findings 3 + 4):
+
+   (1) TYPE IS EXEMPT FROM THE 8pt GRID. STYLE_LOCK §3's "no arbitrary px"
+       governs SPACING — margins, padding, gaps, section rhythm. It does not
+       govern the type scale, which is optically set and carries half-pixel
+       values by design (10.5px / 13px / 15px / 19px). Type scales are not
+       grid-bound. Every SPACING value in this file and in any page that
+       imports it resolves to a --s-* token or a multiple of 8.
+
+   (2) THE INTERMEDIATE :root STATE. Between the moment this file lands
+       (phase 2, zero pages wired) and the moment the last v1 page is wired
+       (end of phase 4), an UNWIRED page keeps its inline :root untouched and
+       does not link this file. A page is migrated atomically in one edit:
+       link this file AND delete that page's :root in the same commit. There
+       is never a page that links this file while keeping its own :root, and
+       never a page whose :root is deleted before it links this file.
+   ============================================================================ */
+
+/* ---------------------------------------------------------------------------
+   1. TOKENS — STYLE_LOCK §1. Nine declarations, declared once, nowhere else.
+   No color may appear on a v1 page that is not one of these six literals.
+   --------------------------------------------------------------------------- */
+
+:root {
+  /* Surface + text */
+  --ink:        #0A0E14;  /* base surface. Near-black, cold undertone. Never #000. */
+  --ink-raised: #121826;  /* the ONLY elevated-panel color. One step. No second. */
+  --paper:      #F5EFE2;  /* primary text. Bone, never pure white. */
+
+  /* Accents */
+  --clay:       #B47C57;  /* structure: rules, indices, the margin rail, borders */
+  --amber:      #E8A66B;  /* single highlight + CTA fill + base link. One per viewport. */
+  --rust:       #C95F4D;  /* emphasis / alert ONLY. Max one instance per page. */
+
+  /* Hairline + text weights (alpha over --paper, so no new literals) */
+  --line:       rgba(245, 239, 226, 0.12);  /* the separator of record */
+  --t-mid:      rgba(245, 239, 226, 0.78);  /* body at reading weight */
+  --t-muted:    rgba(245, 239, 226, 0.55);  /* captions, small print, mono labels */
+
+  /* --- Type stack — STYLE_LOCK §2. Three faces, no fourth. --- */
+  --serif: 'Spectral', Georgia, 'Times New Roman', serif;
+  --sans:  'Public Sans', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --mono:  'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+
+  /* --- Type scale — five steps, nothing between them (carve-out 1) --- */
+  --t-label:   13px;                      /* mono label */
+  --t-small:   15px;                      /* body-small */
+  --t-body:    19px;                      /* body */
+  --t-subhead: clamp(21px, 2.6vw, 27px);
+  --t-display: clamp(40px, 6vw, 72px);
+  --t-eyebrow: 11.5px;                    /* mono eyebrow, 10.5-13px band */
+
+  /* --- 8pt spacing scale — every spacing value resolves to one of these --- */
+  --s-1: 8px;
+  --s-2: 16px;
+  --s-3: 24px;
+  --s-4: 32px;
+  --s-5: 40px;
+  --s-6: 48px;
+  --s-8: 64px;
+  --s-11: 88px;
+  --s-12: 96px;
+  --s-14: 112px;
+  --s-18: 144px;
+  --s-24: 192px;
+
+  /* --- Section rhythm — three steps only. There is no fourth. --- */
+  --sec-1: var(--s-12);  /*  96px */
+  --sec-2: var(--s-18);  /* 144px */
+  --sec-3: var(--s-24);  /* 192px */
+
+  /* --- Motion — STYLE_LOCK §4, "settle, never bounce" --- */
+  --ease:   cubic-bezier(0.22, 1, 0.36, 1);  /* the ONLY easing token */
+  --d-micro: 240ms;                          /* micro-interaction */
+  --d-enter: 520ms;                          /* entrance */
+
+  /* --- Measure --- */
+  --measure: 68ch;  /* body measure, hard cap */
+}
+
+/* Mobile rhythm — the second and only other set of section steps. */
+@media (max-width: 768px) {
+  :root {
+    --sec-1: var(--s-8);   /*  64px */
+    --sec-2: var(--s-11);  /*  88px */
+    --sec-3: var(--s-14);  /* 112px */
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   2. RESET + BASE
+   --------------------------------------------------------------------------- */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+body {
+  font-family: var(--sans);
+  font-size: var(--t-body);
+  font-weight: 400;
+  line-height: 1.6;
+  background: var(--ink);
+  color: var(--t-mid);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+img, svg, video { max-width: 100%; display: block; }
+
+::selection { background: rgba(232, 166, 107, 0.28); color: var(--paper); }
+
+/* ---------------------------------------------------------------------------
+   3. LINK STATES — mandatory, explicit, four states.
+   HARD rule with five prior violations. An unstyled <a> falls back to the
+   browser default, which is the single most common real form of this defect —
+   a hex grep does not catch a MISSING rule. Gate: the repo's dark-link check
+   script, which is why this block is explicit rather than inherited.
+   --------------------------------------------------------------------------- */
+
+a           { color: var(--amber); text-decoration: none; }
+a:visited   { color: var(--clay); }
+a:hover     { color: var(--paper); }
+a:active    { color: var(--rust); }
+
+/* Links that are structurally part of a heading or a nav inherit their
+   container's color rather than reading as six separate accents in a row.
+   They still never fall back to a browser default, because body sets a color
+   and these rules set an explicit one. */
+.lock-inherit-link,
+.lock-inherit-link:visited { color: inherit; }
+.lock-inherit-link:hover   { color: var(--amber); }
+.lock-inherit-link:active  { color: var(--rust); }
+
+/* ---------------------------------------------------------------------------
+   4. TYPE — STYLE_LOCK §2. Spectral display, Public Sans body, mono as
+   instrumentation only. The mono never sets a heading and never sets running
+   text; that, not the face count, is the rule that matters.
+   --------------------------------------------------------------------------- */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--serif);
+  font-weight: 700;
+  color: var(--paper);
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+}
+
+h1 { font-size: var(--t-display); }
+h2 { font-size: var(--t-display); }
+h3 { font-size: var(--t-subhead); letter-spacing: -0.015em; line-height: 1.2; }
+h4 { font-size: var(--t-body); letter-spacing: -0.01em; line-height: 1.3; }
+
+/* The ONE permitted typographic emphasis device — STYLE_LOCK §2.
+   A single word inside a display headline in Spectral italic 600.
+   Maximum one per page, display step only. */
+h1 em, h2 em {
+  font-style: italic;
+  font-weight: 600;
+  color: var(--amber);
+}
+
+p { max-width: var(--measure); }
+
+strong { color: var(--paper); font-weight: 600; }
+
+/* Mono instrumentation: eyebrows, indices, labels, small print. */
+.lock-eyebrow {
+  font-family: var(--mono);
+  font-size: var(--t-eyebrow);
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--amber);
+}
+
+.lock-label {
+  font-family: var(--mono);
+  font-size: var(--t-label);
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--t-muted);
+}
+
+.lock-small { font-size: var(--t-small); color: var(--t-muted); }
+
+/* ---------------------------------------------------------------------------
+   5. RHYTHM + THE HAIRLINE
+   STYLE_LOCK §5: sections are separated by rules and rhythm, never by boxes.
+   --------------------------------------------------------------------------- */
+
+.lock-section   { padding-block: var(--sec-2); padding-inline: var(--s-4); }
+.lock-section-s { padding-block: var(--sec-1); padding-inline: var(--s-4); }
+.lock-section-l { padding-block: var(--sec-3); padding-inline: var(--s-4); }
+
+@media (max-width: 768px) {
+  .lock-section,
+  .lock-section-s,
+  .lock-section-l { padding-inline: var(--s-3); }
+}
+
+.lock-wrap   { max-width: 1240px; margin-inline: auto; }
+.lock-column { max-width: var(--measure); }
+
+/* The separator of record. Not a border box — a single rule. */
+.lock-rule { border: 0; border-top: 1px solid var(--line); margin: 0; }
+
+/* ---------------------------------------------------------------------------
+   6. THE SIGNATURE MOVE — the index rail. STYLE_LOCK §6.
+   The index sits in the LEFT MARGIN in mono at --clay; the content hangs off a
+   --line hairline; no card, no border box, no tinted panel, no drop shadow
+   groups it. There is exactly one signature move on this site.
+   --------------------------------------------------------------------------- */
+
+.lock-rail {
+  display: grid;
+  grid-template-columns: 96px minmax(0, 1fr);
+  column-gap: var(--s-5);
+  align-items: start;
+  padding-block: var(--s-5);
+  border-top: 1px solid var(--line);
+}
+
+/* The index glyph. The `//` prefix is generated, never typed into the markup,
+   so it can never read as copy. */
+.lock-rail-index {
+  font-family: var(--mono);
+  font-size: var(--t-label);
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--clay);
+  padding-top: var(--s-1);
+}
+
+.lock-rail-index::before { content: '// '; color: var(--clay); }
+
+.lock-rail-body > * + * { margin-top: var(--s-2); }
+
+/* At 375px the rail's left margin is the one element with real mobile risk.
+   STYLE_LOCK §11 names the degradation in advance: the index goes ABOVE the
+   content, same device, same hairline. It never becomes a card again. */
+@media (max-width: 768px) {
+  .lock-rail {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: var(--s-2);
+    padding-block: var(--s-4);
+  }
+  .lock-rail-index { padding-top: 0; }
+}
+
+/* ---------------------------------------------------------------------------
+   7. CONTROLS — STYLE_LOCK §7. Square. Hover is a COLOR change, never a lift
+   and never a glow. Depth on this site is carried by the hairline and by
+   --ink-raised, never by a drop shadow.
+   --------------------------------------------------------------------------- */
+
+.lock-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-1);
+  min-height: 44px;              /* touch target floor, every viewport */
+  padding: 14px var(--s-3);
+  border: 1px solid var(--amber);
+  border-radius: 0;              /* zero radius. Not a mix of 9px and 10px. */
+  background: var(--amber);
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: var(--t-label);
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background var(--d-micro) var(--ease),
+              border-color var(--d-micro) var(--ease),
+              color var(--d-micro) var(--ease);
+}
+
+.lock-btn:hover,
+.lock-btn:visited { color: var(--ink); }
+.lock-btn:hover { background: var(--paper); border-color: var(--paper); }
+.lock-btn:active { background: var(--rust); border-color: var(--rust); color: var(--paper); }
+
+.lock-btn-ghost {
+  background: transparent;
+  border-color: var(--line);
+  color: var(--paper);
+}
+.lock-btn-ghost:visited { color: var(--paper); }
+.lock-btn-ghost:hover { background: transparent; border-color: var(--amber); color: var(--amber); }
+.lock-btn-ghost:active { background: transparent; border-color: var(--rust); color: var(--rust); }
+
+.lock-btn:disabled { opacity: 0.5; cursor: wait; }
+
+/* Fields. Square, hairline, no inner glow. */
+.lock-field {
+  width: 100%;
+  min-height: 44px;
+  padding: 13px var(--s-2);
+  border: 1px solid var(--line);
+  border-radius: 0;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--sans);
+  font-size: var(--t-small);
+  transition: border-color var(--d-micro) var(--ease);
+}
+.lock-field::placeholder { color: var(--t-muted); }
+.lock-field:focus { border-color: var(--amber); }
+
+/* ---------------------------------------------------------------------------
+   8. ACCESSIBILITY FLOOR — STYLE_LOCK §7. Checkable, not aspirational.
+   outline:none without a visible replacement is anti-reference 19.
+   --------------------------------------------------------------------------- */
+
+*:focus { outline: none; }
+
+*:focus-visible {
+  outline: 2px solid var(--amber);
+  outline-offset: 3px;
+  border-radius: 0;
+}
+
+button:focus-visible,
+a:focus-visible,
+.lock-btn:focus-visible { outline-offset: 4px; }
+
+.lock-field:focus-visible { outline: 2px solid var(--amber); outline-offset: 0; }
+
+/* ---------------------------------------------------------------------------
+   9. MOTION — STYLE_LOCK §4. Two durations, one curve.
+   Entrance is opacity 0->1 plus translateY(12px). Nothing else.
+   No scale, no rotate, no blur, no overshoot.
+   --------------------------------------------------------------------------- */
+
+.lock-reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity var(--d-enter) var(--ease),
+              transform var(--d-enter) var(--ease);
+}
+.lock-reveal.in { opacity: 1; transform: translateY(0); }
+
+/* Disables EVERY transform, not a subset. */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+    scroll-behavior: auto !important;
+  }
+  .lock-reveal { opacity: 1; transform: none; }
+}
