@@ -12,6 +12,9 @@
 > (`memory/project_antislop_design_tooling_absorb_2026_09_22.md` §4).
 > **Phase:** 1 of 6 (`cw-design-style-lock`). No CSS and no HTML is written by this phase.
 > **Date:** 2026-09-22 · **Branch:** `feat/cw-design-style-lock-2026-09-22`
+> **Amended 2026-09-23:** five typography and accessibility fixes (§1 rust row, §2), approved by
+> Boubacar ("proceed on all"), Karpathy + Council re-run on the delta (§12). PRD change-log line
+> of the same date.
 
 ---
 
@@ -45,7 +48,7 @@ file is the positive half. Section 9 is the negative half, and it is deliberatel
 | `--paper` | `#F5EFE2` | primary text. Bone, never `#FFFFFF` | — |
 | `--clay` | `#B47C57` | structural accent: rules, indices, margin rail, borders | unlimited — it is structure, not emphasis |
 | `--amber` | `#E8A66B` | single highlight + CTA fill + base link color | **one per viewport, maximum** |
-| `--rust` | `#C95F4D` | emphasis / alert ONLY. Never decorative | **max one instance per page** |
+| `--rust` | `#C95F4D` | emphasis / alert ONLY. Never decorative | **max one instance per page.** As TEXT it sits on `--ink` only (4.81:1). On `--ink-raised` it measures 4.41:1 and fails 4.5:1, so there rust is a non-text mark only (a rule, a dot, a border) |
 | `--line` | `rgba(245,239,226,0.12)` | the hairline. The separator of record | — |
 | `--t-mid` | `rgba(245,239,226,0.78)` | body text at reading weight | — |
 | `--t-muted` | `rgba(245,239,226,0.55)` | captions, small print, mono labels | — |
@@ -79,6 +82,9 @@ a:visited   { color: var(--clay); }
 a:hover     { color: var(--paper); }
 a:active    { color: var(--rust); }
 ```
+
+Inside an `--ink-raised` panel, `a:active` uses `--paper`, not `--rust` (rust text fails 4.5:1
+on `--ink-raised`, §1).
 
 Ship gate: `python scripts/check_no_blue_on_dark.py` must exit `0` on all nine. A hex grep is not
 sufficient — the most common real violation is a *missing* base `a{color}` rule.
@@ -138,7 +144,7 @@ disproven.
 |---|---|---|
 | `Spectral` | 600 / 700, italic 600 | display, headings, pull-quotes, prices |
 | `Public Sans` | 400 / 500 / 600 | body and UI |
-| `JetBrains Mono` | 400 / 500 | eyebrows, indices, labels, small print |
+| `JetBrains Mono` | 400 / 500 | eyebrows, indices, labels (4 words or fewer) |
 
 **Removed site-wide from the v1 pages:** `Inter` (live right now at `index.html:233`,
 `--sans: 'Inter'`), `Fraunces`, `Anton`, `Spline Sans`, `Spline Sans Mono`, `Gloock`.
@@ -175,10 +181,37 @@ clamp(40px, 6vw, 72px)      display
 Mono eyebrow fixed at 10.5–13px, `letter-spacing: 0.14em`, uppercase.
 Display tracking: `-0.03em`. Subhead tracking: `-0.015em`.
 
+**Line-height (added 2026-09-23; the lock previously named none):**
+
+```
+body, body-small    1.5 minimum
+subhead             1.2 to 1.3
+display             1.05 to 1.1
+```
+
+Paragraph spacing is at least 1.5× the body line-height. Every v1 page must survive the WCAG 2.x
+SC 1.4.12 user overrides (line-height 1.5, paragraph spacing 2em, letter-spacing 0.12em, word
+spacing 0.16em) with no clipped or overlapping text. *Source:* British Dyslexia Association
+Dyslexia Style Guide 2023 (line spacing 1.5); WCAG SC 1.4.8 and 1.4.12.
+
+**Uppercase is for short labels only.** Uppercase mono is permitted on labels of **4 words or
+fewer**: eyebrows, button labels, indices. Anything longer (small print, disclaimers, any
+sentence-length line) is set in `Public Sans` at the 15px body-small step, sentence case, never
+uppercase mono. *Source:* BDA 2023, "avoid capitals for continuous text."
+
+**Emphasis inside body copy is bold, never italic.** `Public Sans` 600. Italic in running text
+is banned. The only italic on a v1 page is the one display-size word below. *Source:* BDA 2023
+("use bold for emphasis, avoid italics"); Rello & Baeza-Yates 2013, ACM ASSETS (italic read
+worse for dyslexic readers).
+
 ### The one permitted typographic emphasis device
 
 **A single word inside a display headline may be set in `Spectral` italic 600 while the rest of
-the line stays in `Public Sans`.** Maximum one such word per page, and only in the display step.
+the line stays in `Spectral` roman.** Headings are Spectral, per the table above. Maximum one
+such word per page, and only in the display step.
+
+*(Corrected 2026-09-23. This sentence previously ended "stays in `Public Sans`", which
+contradicted the table. The table governs.)*
 
 *Source:* `hqforwork.com`, rendered 2026-09-22 — its H1 reads "The company *brain* that AI runs
 on," where `brain` alone is a serif italic (`Fraunces`, computed `font-style: italic`) inside an
@@ -187,6 +220,8 @@ a distinctly authored headline without adding a face, a color, or a graphic. Our
 carries Spectral italic 600 (PRD §8a), so this costs nothing new — it only names a use for a
 weight that was otherwise going to sit unused. We borrow the *mechanic* and not the face:
 `Fraunces` is on our banned list (anti-reference 6) and Spectral italic does the same job.
+The source mixes two faces in one line; we do not. Our version is italic against roman
+inside one face.
 
 ---
 
@@ -332,7 +367,8 @@ existing bare `01` at `services/index.html:214`, not a new device.
   transparent. *Source:* `hqforwork.com` renders both its hero CTAs at zero radius with
   uppercase wide-tracked labels. **BORROW** — square corners are the single clearest signal of
   restraint available, and the current 9px/10px inconsistency is itself a defect.
-- Button labels: `JetBrains Mono`, uppercase, `letter-spacing: 0.14em`, 13px.
+- Button labels: `JetBrains Mono`, uppercase, `letter-spacing: 0.14em`, 13px, 4 words or
+  fewer (§2).
 - Hover on a button is a **color** change, never a lift and never a glow. The existing
   `translateY(-1px)` + `box-shadow: 0 10px 26px rgba(232,166,107,0.30)` is deleted — a glow is
   the "real glow" of his personal-brand palette leaking onto the business site (PRD §19 D-2).
@@ -419,7 +455,7 @@ a twelfth file here would fail it.
 |---|---|---|---|
 | 1 | BORROW: un-carded index rail, hairline separators | `hqforwork.com`, rendered 1440px 2026-09-22 | Its three-up uses `// 01` + vertical hairlines and zero boxes. Confirms `EDITORIAL_NARRATIVE` (§5) from a site he chose. |
 | 2 | BORROW: `//` prefix on the index glyph | same | Mono-native, reads as a code comment, on-method for a diagnostic firm. Refines the bare `01` at `services/index.html:214`. |
-| 3 | BORROW: one serif-italic word inside a sans display headline | same, H1 "The company *brain*…" | Cheapest authored-headline move available. Uses Spectral italic 600, already in the lock. Face itself refused (anti-ref 6). |
+| 3 | BORROW: one italic word inside a roman display headline (the source's serif-in-sans mix is not borrowed; ours is Spectral italic in a Spectral line, corrected 2026-09-23) | same, H1 "The company *brain*…" | Cheapest authored-headline move available. Uses Spectral italic 600, already in the lock. Face itself refused (anti-ref 6). |
 | 4 | BORROW: zero-radius buttons, uppercase wide-tracked labels | same, both hero CTAs | Clearest available signal of restraint; fixes the live 9px/10px inconsistency. |
 | 5 | AVOID: pure `#000000` background | same, computed `body` background | Warm accents read muddy on true black; `#0A0E14`'s cold undertone lifts them. Deliberate divergence from the exemplar. |
 | 6 | AVOID: `Geist Sans` / `Fraunces` / `Urbanist` | same, computed font stack | `Fraunces` is a named banned face (PRD §8a); Geist is the Vercel default reflex, same class of tell as Inter. |
