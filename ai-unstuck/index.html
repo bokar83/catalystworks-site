@@ -135,7 +135,7 @@
   .status.err{color:var(--paper);border-left:2px solid var(--rust);padding-left:16px}
   #booking[hidden]{display:none}
   #booking{margin-top:32px;border-top:1px solid var(--line);padding-top:32px}
-  .calendly-inline-widget{min-width:280px;height:1050px;margin-top:16px}
+  .cal-embed{min-width:280px;height:1050px;margin-top:16px}
 
   footer{max-width:760px;margin:0 auto;padding:48px 24px 64px;border-top:1px solid var(--line);font-size:15px;color:var(--t-muted)}
   footer p{font-size:15px;color:var(--t-muted);margin-top:8px}
@@ -149,7 +149,7 @@
     pre{padding:16px;font-size:14px}
     .btn{width:100%}
     .hero-actions .btn{width:auto;flex:1 1 200px}
-    .calendly-inline-widget{height:1150px}
+    .cal-embed{height:1150px}
   }
   @media (prefers-reduced-motion: reduce){*{transition:none!important;scroll-behavior:auto!important}}
 </style>
@@ -402,7 +402,7 @@ Walk me through doing it the first time, step by step, and tell me where people 
     <p class="status" id="cap-status" role="status" aria-live="polite" hidden></p>
     <div id="booking" hidden>
       <div class="eyebrow">Pick a time</div>
-      <div class="calendly-inline-widget" id="calendly-embed" aria-label="Booking calendar"></div>
+      <div class="cal-embed" id="calendly-embed" aria-label="Booking calendar"></div>
     </div>
   </section>
 </main>
@@ -495,11 +495,13 @@ document.querySelectorAll('.copybtn').forEach(function(btn){
   }
   function show(msg,isErr){statusEl.hidden=false;statusEl.textContent=msg;statusEl.classList.toggle('err',!!isErr);}
   function reset(){btn.disabled=false;btn.textContent='Show open times';}
+  function calFail(){statusEl.hidden=false;statusEl.classList.add('err');statusEl.textContent='Your email is saved, but the calendar did not load here. ';var a=document.createElement('a');a.href=CALENDLY_URL;a.target='_blank';a.rel='noopener';a.textContent='Open my calendar';statusEl.appendChild(a);}
   var calendlyLoaded=false;
   function openBooking(email){
     booking.hidden=false;
     var url=CALENDLY_URL+'?hide_gdpr_banner=1&background_color=121826&text_color=f5efe2&primary_color=e8a66b';
     function init(){
+      if(!window.Calendly){calFail();return;}
       window.Calendly.initInlineWidget({url:url,parentElement:document.getElementById('calendly-embed'),
         prefill:{email:email},
         utm:{utmSource:qs.get('utm_source')||'cw_ai_unstuck',utmMedium:qs.get('utm_medium')||'organic',utmCampaign:'lm_cw_ai_unstuck',utmContent:SOURCE}});
@@ -509,7 +511,7 @@ document.querySelectorAll('.copybtn').forEach(function(btn){
     if(calendlyLoaded) return;
     calendlyLoaded=true;
     var s=document.createElement('script');s.src='https://assets.calendly.com/assets/external/widget.js';s.async=true;s.onload=init;
-    s.onerror=function(){show('The calendar did not load. Your email is saved. Book here instead: '+CALENDLY_URL,true);};
+    s.onerror=function(){calFail();};
     document.head.appendChild(s);
   }
   form.addEventListener('submit',function(ev){
