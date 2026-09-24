@@ -9,6 +9,11 @@ RewriteEngine On
 # both with-slash and without-slash entry points.
 RewriteRule ^signal/?$ signal.html [NC,L]
 
+# Gated lead magnet "Prompts That Push Back" (2026-09-24). Same no-slash 301 as /workshop
+# below, for the same DirectorySlash Off reason. The prompt text is not in this repo: see
+# prompts-that-push-back/unlock.php.
+RewriteRule ^prompts-that-push-back$ /prompts-that-push-back/ [R=301,L,QSA]
+
 # IC workshop June 25 (2026-06-12): registration page lives at /workshop/.
 # Serve the directory index explicitly (DirectorySlash Off would otherwise
 # send /workshop into the clean-URL rule and 404 on workshop.html).
