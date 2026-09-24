@@ -134,8 +134,8 @@
   .status{margin-top:24px;font-size:17px;color:var(--paper)}
   .status[hidden]{display:none}
   .status.err{color:var(--paper);border-left:2px solid var(--rust);padding-left:16px}
-  #booking[hidden]{display:none}
-  #booking{margin-top:32px;border-top:1px solid var(--line);padding-top:32px}
+  #booking[hidden],.booking[hidden]{display:none}
+  #booking,.booking{margin-top:32px;border-top:1px solid var(--line);padding-top:32px}
   .cal-embed{min-width:280px;height:1050px;margin-top:16px}
 
   footer{max-width:760px;margin:0 auto;padding:48px 24px 64px;border-top:1px solid var(--line);font-size:15px;color:var(--t-muted)}
@@ -163,6 +163,7 @@
     <div class="nav-links">
       <a href="#prompts">The prompts</a>
       <a href="#coaching">Coaching</a>
+      <a href="#consult">Quick Consult</a>
       <a href="/coaching-kit/">Coaching kit</a>
     </div>
     <a href="#book" class="btn btn-primary">Book a call</a>
@@ -172,6 +173,7 @@
     <a href="/">Home</a>
     <a href="#prompts">The prompts</a>
     <a href="#coaching">Coaching</a>
+    <a href="#consult">Quick Consult</a>
     <a href="/coaching-kit/">Coaching kit</a>
     <a href="#book" class="btn btn-primary">Book a call</a>
   </div>
@@ -407,6 +409,35 @@ Walk me through doing it the first time, step by step, and tell me where people 
       <div class="cal-embed" id="calendly-embed" aria-label="Booking calendar"></div>
     </div>
   </section>
+
+  <section id="consult" aria-label="Quick Consult">
+    <div class="eyebrow">Quick Consult . $150</div>
+    <h2>Already know the problem? Work on it with me for an hour.</h2>
+    <p>A Quick Consult is one hour for $150. Bring one real problem: a task you want AI to take off your plate, a tool you are trying to choose, or a plan you want pushed on. We work on it together, live.</p>
+    <p>After the call I send you a short written takeaway with two or three next steps you can take on your own this week.</p>
+    <p>The hour and the takeaway are the whole engagement. There is no follow-up work or ongoing support after it, and I do not build anything for you. If we uncover something bigger, we can talk about that separately.</p>
+    <p>If you are not sure yet what you need, start with the <a href="#book">free intro call</a> above. If you already know the problem, the Quick Consult skips the intro and gets straight to work.</p>
+    <details class="howto">
+      <summary>How booking works</summary>
+      <div class="howto-body">
+        <p>Enter your email and my calendar opens here. You pay the $150 by card when you pick your time, and the time is confirmed once payment goes through.</p>
+        <p>Your email also puts you on my newsletter. You can leave it with one click from any issue.</p>
+      </div>
+    </details>
+    <form class="capture-form" id="qc-form" novalidate>
+      <div class="field">
+        <label for="qc-email">Your email</label>
+        <input id="qc-email" name="email" type="email" autocomplete="email" inputmode="email" required placeholder="you@example.com">
+      </div>
+      <div class="hp" aria-hidden="true"><label for="qc-website">Website</label><input id="qc-website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
+      <button type="submit" class="btn btn-primary" id="qc-btn">Book the hour ($150)</button>
+    </form>
+    <p class="status" id="qc-status" role="status" aria-live="polite" hidden></p>
+    <div class="booking" id="qc-booking" hidden>
+      <div class="eyebrow">Pick a time</div>
+      <div class="cal-embed" id="qc-calendly-embed" aria-label="Quick Consult booking calendar"></div>
+    </div>
+  </section>
 </main>
 
 <footer>
@@ -450,16 +481,16 @@ document.querySelectorAll('.copybtn').forEach(function(btn){
    as seats. form_location must NOT start with "workshop_" or "ic_workshop_" (that
    prefix is the recovery sender's checkout allowlist). Success = the response BODY
    saying so, never the status code alone. On failure: loud error, no calendar. */
-(function(){
+function wireBooking(cfg){
   var CAPTURE_URL='https://agentshq.boubacarbarry.com/api/orc/workshop-register';
-  var COHORT='lm_cw_ai_unstuck', MAGNET='cw_ai_unstuck', SOURCE='cw_ai_unstuck_page';
-  var CALENDLY_URL='https://calendly.com/boubacarbarry/ai-coaching-intro-call';
+  var COHORT=cfg.cohort, MAGNET=cfg.magnet, SOURCE=cfg.source;
+  var CALENDLY_URL=cfg.calendly, BTN_LABEL=cfg.btnLabel;
   var RETRY_BACKOFF_MS=[250,750];
   var qs=new URLSearchParams(window.location.search||'');
   var emailRe=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  var form=document.getElementById('capture-form'), input=document.getElementById('cap-email'),
-      btn=document.getElementById('cap-btn'), statusEl=document.getElementById('cap-status'),
-      booking=document.getElementById('booking');
+  var form=document.getElementById(cfg.form), input=document.getElementById(cfg.input),
+      btn=document.getElementById(cfg.btn), statusEl=document.getElementById(cfg.status),
+      booking=document.getElementById(cfg.booking), hp=document.getElementById(cfg.hp);
   if(!form) return;
 
   function payload(email,ref){
@@ -467,10 +498,10 @@ document.querySelectorAll('.copybtn').forEach(function(btn){
       email:email, cohort:COHORT, seat_kind:'free', reg_ref:ref,
       utm_source:qs.get('utm_source')||'cw_ai_unstuck',
       utm_medium:qs.get('utm_medium')||'organic',
-      utm_campaign:qs.get('utm_campaign')||'lm_cw_ai_unstuck',
+      utm_campaign:qs.get('utm_campaign')||COHORT,
       utm_content:qs.get('utm_content')||SOURCE,
       form_location:SOURCE, magnet:MAGNET,
-      website:(document.getElementById('cap-website')||{}).value||''
+      website:(hp||{}).value||''
     });
   }
   function post(email,ref){
@@ -496,25 +527,19 @@ document.querySelectorAll('.copybtn').forEach(function(btn){
     return once();
   }
   function show(msg,isErr){statusEl.hidden=false;statusEl.textContent=msg;statusEl.classList.toggle('err',!!isErr);}
-  function reset(){btn.disabled=false;btn.textContent='Show open times';}
+  function reset(){btn.disabled=false;btn.textContent=BTN_LABEL;}
   function calFail(){statusEl.hidden=false;statusEl.classList.add('err');statusEl.textContent='Your email is saved, but the calendar did not load here. ';var a=document.createElement('a');a.href=CALENDLY_URL;a.target='_blank';a.rel='noopener';a.textContent='Open my calendar';statusEl.appendChild(a);}
-  var calendlyLoaded=false;
   function openBooking(email){
     booking.hidden=false;
     var url=CALENDLY_URL+'?hide_gdpr_banner=1&background_color=121826&text_color=f5efe2&primary_color=e8a66b';
     function init(){
       if(!window.Calendly){calFail();return;}
-      window.Calendly.initInlineWidget({url:url,parentElement:document.getElementById('calendly-embed'),
+      window.Calendly.initInlineWidget({url:url,parentElement:document.getElementById(cfg.embed),
         prefill:{email:email},
-        utm:{utmSource:qs.get('utm_source')||'cw_ai_unstuck',utmMedium:qs.get('utm_medium')||'organic',utmCampaign:'lm_cw_ai_unstuck',utmContent:SOURCE}});
+        utm:{utmSource:qs.get('utm_source')||'cw_ai_unstuck',utmMedium:qs.get('utm_medium')||'organic',utmCampaign:COHORT,utmContent:SOURCE}});
       booking.scrollIntoView({behavior:'smooth',block:'start'});
     }
-    if(window.Calendly){init();return;}
-    if(calendlyLoaded) return;
-    calendlyLoaded=true;
-    var s=document.createElement('script');s.src='https://assets.calendly.com/assets/external/widget.js';s.async=true;s.onload=init;
-    s.onerror=function(){calFail();};
-    document.head.appendChild(s);
+    loadCalendly(init,calFail);
   }
   form.addEventListener('submit',function(ev){
     ev.preventDefault();
@@ -522,7 +547,7 @@ document.querySelectorAll('.copybtn').forEach(function(btn){
     if(!emailRe.test(email)){input.setAttribute('aria-invalid','true');show('That email does not look right. Check it and try again.',true);input.focus();return;}
     input.removeAttribute('aria-invalid');
     btn.disabled=true; btn.textContent='Saving';
-    var ref='unstuck-'+Date.now()+'-'+Math.random().toString(36).slice(2,8);
+    var ref=cfg.refPrefix+'-'+Date.now()+'-'+Math.random().toString(36).slice(2,8);
     capture(email,ref).then(function(state){
       if(state==='ok'){
         show('Saved. Pick a time below.',false);
@@ -538,7 +563,37 @@ document.querySelectorAll('.copybtn').forEach(function(btn){
       }
     });
   });
-})();
+}
+
+/* One shared loader for Calendly's widget script, so two forms on one page never
+   inject it twice. Callbacks queue until the script settles. */
+var _calState='idle', _calQueue=[];
+function loadCalendly(onReady,onFail){
+  if(window.Calendly){onReady();return;}
+  if(_calState==='failed'){onFail();return;}
+  _calQueue.push([onReady,onFail]);
+  if(_calState==='loading') return;
+  _calState='loading';
+  var s=document.createElement('script');s.src='https://assets.calendly.com/assets/external/widget.js';s.async=true;
+  s.onload=function(){_calState='loaded';var q=_calQueue;_calQueue=[];q.forEach(function(c){c[0]();});};
+  s.onerror=function(){_calState='failed';var q=_calQueue;_calQueue=[];q.forEach(function(c){c[1]();});};
+  document.head.appendChild(s);
+}
+
+/* Free 30-minute intro call. */
+wireBooking({form:'capture-form',input:'cap-email',btn:'cap-btn',status:'cap-status',booking:'booking',
+  embed:'calendly-embed',hp:'cap-website',btnLabel:'Show open times',refPrefix:'unstuck',
+  cohort:'lm_cw_ai_unstuck',magnet:'cw_ai_unstuck',source:'cw_ai_unstuck_page',
+  calendly:'https://calendly.com/boubacarbarry/ai-coaching-intro-call'});
+
+/* Paid Quick Consult, $150 / 60 min. Payment is collected by Calendly itself
+   (its Stripe payment step) before the slot confirms; this page only captures
+   the email first. Cohort is a magnet key, never a workshop key, and SOURCE must
+   not start with "workshop_" (recovery sender's checkout allowlist). */
+wireBooking({form:'qc-form',input:'qc-email',btn:'qc-btn',status:'qc-status',booking:'qc-booking',
+  embed:'qc-calendly-embed',hp:'qc-website',btnLabel:'Book the hour ($150)',refPrefix:'consult',
+  cohort:'lm_cw_quick_consult',magnet:'cw_quick_consult',source:'cw_quick_consult_page',
+  calendly:'https://calendly.com/boubacarbarry/quick-consult'});
 </script>
 </body>
 </html>
