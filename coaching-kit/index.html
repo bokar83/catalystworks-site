@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en" style="color-scheme: dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0A0E14">
+<title>Coaching Prompt Kit . Catalyst Works</title>
+<meta name="description" content="Six prompts for career context, resume review, adjacent job titles, hard decisions, premortems, and fixing a prompt that is not working. Fill in the blanks and copy the result.">
+<link rel="icon" type="image/jpeg" href="../CatalystWorks_logo.jpg">
+<link rel="canonical" href="https://boubacarbarry.com/toolbox/coaching-kit/">
+<meta property="og:title" content="Coaching Prompt Kit">
+<meta property="og:description" content="Six prompts for career context, resume review, adjacent job titles, hard decisions, premortems, and fixing a prompt that is not working.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://catalystworks.consulting/coaching-kit/">
+<meta property="og:image" content="https://catalystworks.consulting/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TBW90RVMM1"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-TBW90RVMM1');</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,600;0,700;1,600&family=Public+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0A0E14; --ink-raised:#121826; --paper:#F5EFE2; --clay:#B47C57;
+    --amber:#E8A66B; --rust:#C95F4D;
+    --line:rgba(245,239,226,0.12); --t-mid:rgba(245,239,226,0.78); --t-muted:rgba(245,239,226,0.55);
+    --ease:cubic-bezier(0.22,1,0.36,1);
+    --serif:'Spectral',Georgia,serif; --sans:'Public Sans',system-ui,sans-serif; --mono:'JetBrains Mono',ui-monospace,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%;scroll-padding-top:88px}
+  body{background:var(--ink);color:var(--paper);font-family:var(--sans);font-size:19px;line-height:1.55;min-height:100vh}
+  a{color:var(--amber)} a:visited{color:var(--clay)} a:hover{color:var(--paper)} a:active{color:var(--rust)}
+  :focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+  .nav{position:sticky;top:0;z-index:50;background:rgba(10,14,20,0.94);border-bottom:1px solid var(--line)}
+  .nav-inner{max-width:1120px;margin:0 auto;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+  .brand{display:inline-flex;align-items:center;gap:12px;font-family:var(--serif);font-weight:600;font-size:19px;color:var(--paper);text-decoration:none}
+  .brand:visited{color:var(--paper)}
+  .brand img{width:32px;height:32px;border-radius:50%}
+  .brand .accent{color:var(--amber)}
+  .nav-links{display:flex;gap:32px;align-items:center}
+  .nav-links a{font-size:15px;color:var(--t-mid);text-decoration:none}
+  .nav-links a:hover{color:var(--paper)}
+  .btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 20px;border-radius:0;font-family:var(--mono);font-size:13px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;text-decoration:none;cursor:pointer;transition:background 240ms var(--ease),color 240ms var(--ease),border-color 240ms var(--ease)}
+  .btn-primary{background:var(--amber);color:var(--ink);border:1px solid var(--amber)}
+  .btn-primary:visited{color:var(--ink)}
+  .btn-primary:hover{background:var(--paper);border-color:var(--paper);color:var(--ink)}
+  .nav-toggle{display:none;width:44px;height:44px;background:transparent;border:1px solid var(--line);border-radius:0;align-items:center;justify-content:center;cursor:pointer}
+  .nav-toggle span,.nav-toggle span::before,.nav-toggle span::after{display:block;width:18px;height:1.5px;background:var(--paper);position:relative;transition:transform 240ms var(--ease),top 240ms var(--ease)}
+  .nav-toggle span::before,.nav-toggle span::after{content:'';position:absolute;left:0}
+  .nav-toggle span::before{top:-6px}.nav-toggle span::after{top:6px}
+  .nav-toggle[aria-expanded="true"] span{background:transparent}
+  .nav-toggle[aria-expanded="true"] span::before{top:0;transform:rotate(45deg)}
+  .nav-toggle[aria-expanded="true"] span::after{top:0;transform:rotate(-45deg)}
+  .nav-drawer{display:none;border-top:1px solid var(--line);padding:8px 24px 24px}
+  .nav-drawer.is-open{display:block}
+  .nav-drawer a{display:block;padding:16px 0;border-bottom:1px solid var(--line);font-family:var(--serif);font-size:19px;color:var(--paper);text-decoration:none}
+  .nav-drawer a.btn{display:flex;margin-top:16px;border-bottom:1px solid var(--amber);font-family:var(--mono);font-size:13px;color:var(--ink)}
+  @media(max-width:760px){.nav-links,.nav-inner>.btn{display:none}.nav-toggle{display:inline-flex}}
+  .wrap{max-width:760px;margin:0 auto;padding:96px 24px 0}
+  .eyebrow{font-family:var(--mono);font-size:13px;letter-spacing:0.14em;text-transform:uppercase;color:var(--clay);margin-bottom:16px}
+  h1{font-family:var(--serif);font-weight:700;font-size:clamp(40px,6vw,72px);line-height:1.08;letter-spacing:-0.03em;max-width:16ch}
+  .intro{margin-top:24px;max-width:68ch;color:var(--t-mid)}
+  .intro p{margin-top:24px}.intro p:first-child{margin-top:0}
+  .rule{width:100%;height:1px;background:var(--line);margin:64px 0;border:none}
+  h2{font-family:var(--serif);font-weight:700;font-size:clamp(21px,2.6vw,27px);line-height:1.25;letter-spacing:-0.015em;margin:8px 0}
+  .step-num{font-family:var(--mono);font-size:13px;color:var(--clay);letter-spacing:0.14em;text-transform:uppercase}
+  .section{padding:64px 0;border-top:1px solid var(--line)}
+  .pullquote + .section,.rule + .section{border-top:none}
+  .section-intro{color:var(--t-mid);margin:8px 0 0;max-width:68ch}
+  details.howto{margin-top:16px;margin-bottom:8px}
+  details.howto summary{display:inline-flex;align-items:center;gap:8px;min-height:44px;cursor:pointer;font-family:var(--mono);font-size:13px;letter-spacing:0.14em;text-transform:uppercase;color:var(--t-muted);list-style:none}
+  details.howto summary::-webkit-details-marker{display:none}
+  details.howto summary::before{content:'+';font-size:17px;color:var(--clay);width:12px}
+  details.howto[open] summary::before{content:'\2212'}
+  details.howto summary:hover{color:var(--paper)}
+  details.howto .howto-body{padding:8px 0 8px 20px;border-left:1px solid var(--line)}
+  details.howto .howto-body p{font-size:15px;color:var(--t-mid);margin-top:12px;max-width:68ch}
+  details.howto .howto-body p:first-child{margin-top:0}
+  .promptbox{margin-top:16px}
+  .promptbox pre{background:var(--ink-raised);border:1px solid var(--line);border-radius:0;padding:24px;white-space:pre-wrap;word-wrap:break-word;font-family:var(--mono);font-size:15px;line-height:1.6;color:var(--paper);max-height:380px;overflow-y:auto}
+  .copybtn,.genbtn{margin-top:16px;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 20px;border-radius:0;font-family:var(--mono);font-size:13px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;cursor:pointer;transition:border-color 240ms var(--ease),color 240ms var(--ease)}
+  .copybtn{background:transparent;color:var(--paper);border:1px solid var(--line)}
+  .copybtn:hover{border-color:var(--clay)}
+  .copybtn svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .copybtn.copied{border-color:var(--clay);color:var(--amber)}
+  .genbtn{justify-self:start;background:transparent;color:var(--amber);border:1px solid var(--clay)}
+  .genbtn:hover{border-color:var(--amber);color:var(--paper)}
+  .fillform{margin-top:24px;display:grid;gap:16px;padding-left:20px;border-left:1px solid var(--line)}
+  .fillform .field{display:flex;flex-direction:column;gap:8px}
+  .fillform label{font-family:var(--sans);font-size:15px;font-weight:500;color:var(--t-mid)}
+  .fillform input,.fillform textarea{width:100%;background:var(--ink-raised);border:1px solid var(--line);border-radius:0;padding:12px 14px;color:var(--paper);font-family:var(--sans);font-size:16px;line-height:1.5}
+  .fillform textarea{min-height:96px;resize:vertical;font-family:var(--mono);font-size:15px}
+  .fillform input:focus,.fillform textarea:focus{outline:none;border-color:var(--amber)}
+  .fillform input::placeholder,.fillform textarea::placeholder{color:var(--t-muted)}
+  .formhint{font-size:15px;color:var(--t-muted)}
+  .result{margin-top:24px}
+  .result[hidden]{display:none}
+  .result-label{font-family:var(--mono);font-size:13px;letter-spacing:0.14em;text-transform:uppercase;color:var(--amber);margin-bottom:8px}
+  .pullquote{margin:0 0 16px;padding-left:24px;border-left:1px solid var(--clay)}
+  .pullquote p{font-family:var(--serif);font-weight:600;font-size:clamp(21px,2.6vw,27px);line-height:1.3;color:var(--paper);max-width:56ch}
+  .pullquote cite{display:block;margin-top:16px;font-family:var(--mono);font-size:13px;font-style:normal;letter-spacing:0.14em;text-transform:uppercase;color:var(--t-muted)}
+  .next{padding:64px 0;border-top:1px solid var(--line)}
+  .next p{color:var(--t-mid);max-width:68ch;margin-top:8px}
+  .next .btn{margin-top:24px}
+  footer{max-width:760px;margin:0 auto;padding:48px 24px 64px;border-top:1px solid var(--line)}
+  footer p{font-size:15px;color:var(--t-muted);margin-top:8px}
+  @media(max-width:760px){
+    .wrap{padding-top:64px}
+    .promptbox pre{padding:16px;font-size:14px}
+    .genbtn,.copybtn,.next .btn{width:100%}
+    .fillform{padding-left:12px}
+  }
+  @media (prefers-reduced-motion: reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<nav class="nav" id="nav" aria-label="Main">
+  <div class="nav-inner">
+    <a href="/" class="brand"><img src="../CatalystWorks_logo.jpg" alt="Catalyst Works" width="32" height="32" decoding="async"><span>Catalyst<span class="accent">Works</span></span></a>
+    <div class="nav-links">
+      <a href="#context-setup">Career prompts</a>
+      <a href="#council">Decision prompts</a>
+      <a href="/ai-unstuck/">AI Unstuck</a>
+    </div>
+    <a href="/ai-unstuck/#book" class="btn btn-primary">Book a call</a>
+    <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-drawer"><span></span></button>
+  </div>
+  <div class="nav-drawer" id="nav-drawer">
+    <a href="/">Home</a>
+    <a href="#context-setup">Career prompts</a>
+    <a href="#council">Decision prompts</a>
+    <a href="#prompt-fix">Fix a prompt</a>
+    <a href="/ai-unstuck/">AI Unstuck</a>
+    <a href="/ai-unstuck/#book" class="btn btn-primary">Book a call</a>
+  </div>
+</nav>
+<div class="wrap">
+  <div class="eyebrow">Coaching prompt kit</div>
+  <h1>Prompts you can use after our session</h1>
+  <div class="intro">
+    <p>These are the prompts I hand to the people I coach. Six of them, yours to keep.</p>
+    <p>Fill in the blanks under each one, hit generate, then copy the finished prompt into Claude, ChatGPT, or Gemini. Nothing to log into and nothing saved here. It all runs in your browser.</p>
+    <p>Start with the context setup prompt so the AI stops guessing at your background. Then the resume review, then the adjacent titles. Council and the premortem are the two I reach for myself whenever I am facing a real decision. The last one fixes a prompt that is not giving you what you want.</p>
+  </div>
+    <details class="howto"><summary>How to use this kit</summary><div class="howto-body"><p>Pick a prompt. Either press copy on the blank version, or fill in the fields underneath it and press generate to get a version with your details already in.</p><p>Paste the result into Claude, ChatGPT or Gemini. Nothing you type here is sent anywhere or saved. It all stays in your browser.</p></div></details>
+
+
+  <hr class="rule" />
+
+  <blockquote class="pullquote">
+    <p>&ldquo;Use AI to do the legwork, not to make the decision. That part is still yours. That&rsquo;s what makes you the leader, not the tool.&rdquo;</p>
+    <cite>Boubacar Barry</cite>
+  </blockquote>
+
+  <div class="section" id="context-setup">
+    <div class="step-num">STEP 1</div>
+    <h2>Context-setup prompt</h2>
+    <p class="section-intro">Paste this into a new chat first, before anything else. It gives the AI your real background in one shot, so it stops guessing and getting your story wrong.</p>
+    <details class="howto"><summary>How to use this</summary><div class="howto-body"><p>Fill in what you can. Real numbers beat round ones, and a blank field keeps its bracket so you can see what is still missing.</p><p>Paste the finished prompt into a brand new chat before you ask anything else. If the AI starts getting your background wrong later, paste it again.</p></div></details>
+
+    <div class="promptbox">
+      <pre id="p1">I want you to remember the following about me across our conversations so you
+stop guessing or getting facts wrong. Treat this as my standing context for
+anything related to my career, my resume, or my job search, until I tell you
+otherwise.
+
+Who I am: [your name], laid off from [company] after [X years] in [role or function].
+My education: [degree 1, e.g. MBA in Finance] and [degree 2, e.g. a masters in counseling].
+
+My real career path, in order: [role 1 at company 1, years] -> [role 2 at company 2, years] -> [role 3 at company 3, years].
+Do not shorten this into a single label like "transformation expert" unless
+I've actually held that title for a meaningful length of time -- if you're not
+sure how long I've held a title, ask me before you use it.
+
+My real, specific wins (use these exact numbers, don't round or invent new
+ones): [win 1 with a real number], [win 2 with a real number], [win 3 with a real number].
+
+What I'm looking for right now: [target role or lane, e.g. portfolio and program management],
+ideally [corporate role / fractional / open to both], in [industry, or open across industries].
+
+How I want you to work with me: don't guess at facts about my background --
+ask me if you're missing something rather than filling in a plausible-
+sounding gap. When you give me an answer, tell me what you're confident
+about versus what you're inferring. If another AI tool gave me a different
+answer to the same question, don't just agree with me -- tell me where you'd
+push back on it.
+
+Save this and refer back to it every time I ask you something about my
+resume, my career story, or my job search, without me having to repeat it.</pre>
+      <button type="button" class="copybtn" data-target="p1"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h8"/></svg><span class="copylabel">Copy blank prompt</span></button>
+    </div>
+
+    <form class="fillform" data-tpl="p1" data-out="p1out">
+      <div class="field"><label for="f1a">Your name</label><input id="f1a" type="text" data-ph="[your name]" placeholder="Jordan Reyes"></div>
+      <div class="field"><label for="f1b">Last company</label><input id="f1b" type="text" data-ph="[company]" placeholder="Meridian Health"></div>
+      <div class="field"><label for="f1c">Years there</label><input id="f1c" type="text" data-ph="[X years]" placeholder="11 years"></div>
+      <div class="field"><label for="f1d">Role or function</label><input id="f1d" type="text" data-ph="[role or function]" placeholder="program management"></div>
+      <div class="field"><label for="f1e">Degree 1</label><input id="f1e" type="text" data-ph="[degree 1, e.g. MBA in Finance]" placeholder="MBA in Finance"></div>
+      <div class="field"><label for="f1f">Degree 2</label><input id="f1f" type="text" data-ph="[degree 2, e.g. a masters in counseling]" placeholder="BS in Industrial Engineering"></div>
+      <div class="field"><label for="f1g">Role 1, company, years</label><input id="f1g" type="text" data-ph="[role 1 at company 1, years]" placeholder="Analyst at Corbin Group, 2011 to 2014"></div>
+      <div class="field"><label for="f1h">Role 2, company, years</label><input id="f1h" type="text" data-ph="[role 2 at company 2, years]" placeholder="Senior PM at Vale Systems, 2014 to 2019"></div>
+      <div class="field"><label for="f1i">Role 3, company, years</label><input id="f1i" type="text" data-ph="[role 3 at company 3, years]" placeholder="Director of Programs at Meridian Health, 2019 to 2026"></div>
+      <div class="field"><label for="f1j">Win 1, with a real number</label><input id="f1j" type="text" data-ph="[win 1 with a real number]" placeholder="cut onboarding time from 9 weeks to 4"></div>
+      <div class="field"><label for="f1k">Win 2, with a real number</label><input id="f1k" type="text" data-ph="[win 2 with a real number]" placeholder="ran a $14M portfolio across 3 sites"></div>
+      <div class="field"><label for="f1l">Win 3, with a real number</label><input id="f1l" type="text" data-ph="[win 3 with a real number]" placeholder="retired 23 legacy tools in 18 months"></div>
+      <div class="field"><label for="f1m">Target role or lane</label><input id="f1m" type="text" data-ph="[target role or lane, e.g. portfolio and program management]" placeholder="portfolio and program management"></div>
+      <div class="field"><label for="f1n">Corporate, fractional, or both</label><input id="f1n" type="text" data-ph="[corporate role / fractional / open to both]" placeholder="open to both"></div>
+      <div class="field"><label for="f1o">Industry</label><input id="f1o" type="text" data-ph="[industry, or open across industries]" placeholder="open across industries"></div>
+      <button type="submit" class="genbtn">Generate my prompt</button>
+      <p class="formhint">Leave anything blank and the bracket stays in, so you can see what is still missing.</p>
+    </form>
+
+    <div class="result promptbox" id="p1result" hidden>
+      <div class="result-label">Your filled prompt</div>
+      <pre id="p1out"></pre>
+      <button type="button" class="copybtn" data-target="p1out"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h8"/></svg><span class="copylabel">Copy filled prompt</span></button>
+    </div>
+  </div>
+
+  <div class="section" id="resume-review">
+    <div class="step-num">STEP 2</div>
+    <h2>Resume/CV deep-review prompt</h2>
+    <p class="section-intro">A full audit of the resume itself, section by section, not matched against one job posting. Attach or paste your resume and let it score you.</p>
+    <details class="howto"><summary>How to use this</summary><div class="howto-body"><p>Paste your resume as plain text, or leave that field blank and attach the file in the chat.</p><p>Fix the top three changes it names, then run it again to see the new score. Judge it against your target role, not against a perfect resume.</p></div></details>
+
+    <div class="promptbox">
+      <pre id="p2">Perform a comprehensive audit of my resume/CV based on my target role of: [target role]
+
+MY RESUME/CV:
+[paste the full text of your resume here, or attach the file]
+
+MY SENIORITY LEVEL: [entry-level / individual contributor / manager / director+ / executive]
+
+AUDIT. Score each item 1-5 and provide specific recommendations:
+
+ATS-PARSEABILITY: Does it use standard section headers ("Experience," "Education," "Skills") instead of creative ones? Is it free of tables, text boxes, columns, headers/footers, icons, and graphics that can break an applicant-tracking-system parser? Is it a simple, single-column format?
+
+6-SECOND SCAN TEST: Could a recruiter skimming only the top third of page one for 6 seconds tell what role I'm going for and why I'm a credible candidate? Does the top third (summary line + most recent role) sell me before anyone has to read further?
+
+BULLET QUALITY: Does each bullet start with a strong action verb? Does it state the scope of the work (team size, budget, systems, scale)? Is the result quantified with a real number? Is the business impact clear, not just the task performed?
+
+RELEVANCE &amp; TAILORING: Do the top bullets and skills match the language and priorities of my target role? Is anything irrelevant to this target role taking up prime space (top half of page one)?
+
+CONSISTENCY: Is verb tense consistent (past tense for past roles, present tense for the current one)? Is date formatting identical throughout? Is bullet punctuation and capitalization consistent?
+
+LENGTH &amp; DENSITY: Is the length appropriate for my seniority level (roughly 1 page under 10 years of experience, up to 2 pages for senior/director-and-above)? Is white space used well, or is it a dense wall of text?
+
+For each item scoring below 4, provide a specific rewrite or action step.
+
+End with: overall score, and the top 3 changes with the biggest impact.</pre>
+      <button type="button" class="copybtn" data-target="p2"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h8"/></svg><span class="copylabel">Copy blank prompt</span></button>
+    </div>
+
+    <form class="fillform" data-tpl="p2" data-out="p2out">
+      <div class="field"><label for="f2a">Target role</label><input id="f2a" type="text" data-ph="[target role]" placeholder="Senior Product Manager"></div>
+      <div class="field"><label for="f2b">Seniority level</label><input id="f2b" type="text" data-ph="[entry-level / individual contributor / manager / director+ / executive]" placeholder="director+"></div>
+      <div class="field"><label for="f2c">Your resume text</label><textarea id="f2c" data-ph="[paste the full text of your resume here, or attach the file]" placeholder="Paste your full resume here, or leave this blank and attach the file in the chat instead."></textarea></div>
+      <button type="submit" class="genbtn">Generate my prompt</button>
+      <p class="formhint">Leave anything blank and the bracket stays in, so you can see what is still missing.</p>
+    </form>
+
+    <div class="result promptbox" id="p2result" hidden>
+      <div class="result-label">Your filled prompt</div>
+      <pre id="p2out"></pre>
+      <button type="button" class="copybtn" data-target="p2out"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h8"/></svg><span class="copylabel">Copy filled prompt</span></button>
+    </div>
+  </div>
+
+  <div class="section" id="adjacent-titles">
+    <div class="step-num">STEP 3</div>
+    <h2>Hidden / adjacent job-titles prompt</h2>
+    <p class="section-intro">Pushes the AI past the obvious next-title list. Use it after you've saved your context in step 1. Nothing to fill in here, it runs off the context you already gave it.</p>
+    <details class="howto"><summary>How to use this</summary><div class="howto-body"><p>Run this in the same chat where you pasted your context from step 1. In a new chat, paste the context first or the titles come back generic.</p><p>If a title looks interesting, ask it which kinds of companies hire for it and what those job postings usually ask for.</p></div></details>
+
+    <div class="promptbox">
+      <pre id="p3">I want you to go further than the obvious list. Based on everything you
+know about my background (see my saved context above), give me 3-5 adjacent
+job titles that are NOT the obvious next step from my last title, and NOT
+already on any generic list you'd give someone with my resume. For each
+one:
+
+- Name the title.
+- In one sentence, explain the non-obvious connection between it and
+  something specific I've actually done (not a generic transferable-skill
+  claim).
+- Tell me one thing about the day-to-day of that role that would surprise
+  me.
+- Rate how competitive I am for it right now (strong / plausible with one
+  gap / a stretch) and name the ONE gap if there is one.
+
+Do not include any title you already gave me in a previous answer. If
+you're repeating yourself, say so and dig further instead.</pre>
+      <button type="button" class="copybtn" data-target="p3"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h8"/></svg><span class="copylabel">Copy prompt</span></button>
+    </div>
+  </div>
+
+  <hr class="rule" />
+
+  <div class="section" id="council">
+    <div class="step-num">FOR ANY HARD DECISION</div>
+    <h2>Council prompt</h2>
+    <p class="section-intro">Five different voices argue your decision from five angles: one hunts for the flaw, one asks what you are really trying to solve, one looks for the bigger opportunity you are missing, one reacts cold like a stranger with no stake in it, and one only cares what actually happens Monday morning. Then you get one verdict: where they agree, where they genuinely disagree, and one clear next step. I use this on my own hard calls, not just job-search ones, because asking a single AI usually just hands you back whatever you already believe.</p>
+    <details class="howto"><summary>How to use this</summary><div class="howto-body"><p>Be specific about the decision and what is at stake. Real numbers and a real deadline make the five voices much sharper.</p><p>Read the verdict, then make the call yourself. The prompt does the legwork, the decision stays yours.</p></div></details>
+
+    <div class="promptbox">
+      <pre id="p4">I'm facing a real decision and I want you to pressure-test it, not agree with it.
+
+THE DECISION: [describe the decision you are facing, as specifically as you can]
+
+CONTEXT: [relevant background, numbers, constraints, deadline, what is at stake if you get it wrong]
+
+WHAT I'M LEANING TOWARD (if anything): [your current instinct, or say no lean yet if you are genuinely undecided]
+
+Generate FIVE separate, independent perspectives on this decision. Do not let them agree with each other or blend together. Each one has ONE job and must not do the others' jobs:
+
+1. THE CONTRARIAN -- Your only job is to find what will fail. Assume there is a fatal flaw in the obvious choice and go hunt for it. If everything looks solid at first glance, dig deeper, the flaw is hiding somewhere. Name the untested assumption or the risk that's being glossed over. Do not soften this with anything positive.
+
+2. THE FIRST-PRINCIPLES THINKER -- Ignore the decision as I framed it. What problem am I actually trying to solve underneath it? Strip away my inherited assumptions and name the real variable I should be optimizing for. If the reframe makes my original question irrelevant, say so.
+
+3. THE EXPANSIONIST -- Find the upside I'm missing. What's the bigger, bolder version of this? Is there an adjacent opportunity I'm too narrowly focused to see? Push past "is this a good idea" into "is this idea big enough."
+
+4. THE OUTSIDER -- Respond cold, as if you're a sharp professional from a completely different field who just read this for the first time, with zero background on my situation. What's obvious to me as an insider that would look strange, risky, or unnecessary to an outsider?
+
+5. THE EXECUTOR -- Set aside whether this is a good idea. What actually happens Monday morning if I go ahead? Name the gap between "this sounds right" and "this is actually happening." If there's no concrete first step I could take in the next 7 days, say so plainly.
+
+After all five, give me a CHAIRMAN'S VERDICT:
+- Where do the five perspectives actually agree? (Only list real agreement, don't force it.)
+- Where do they genuinely disagree, and why? Don't average the disagreement away, name the real tension.
+- Your one clear recommendation: keep this decision as-is, change it, or kill it. Not a menu of options, pick one and say why.
+- The one concrete next step I could take this week.
+- The one open question that only I can answer, because you don't have enough of my context to answer it for me.
+
+One more thing: if all five of these perspectives end up agreeing with each other and with my original plan, tell me that plainly. It usually means this wasn't actually a real decision with real friction to begin with, just something I already knew I was going to do.</pre>
+      <button type="button" class="copybtn" data-target="p4"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h8"/></svg><span class="copylabel">Copy blank prompt</span></button>
+    </div>
+
+    <form class="fillform" data-tpl="p4" data-out="p4out">
+      <div class="field"><label for="f4a">The decision</label><textarea id="f4a" data-ph="[describe the decision you are facing, as specifically as you can]" placeholder="Take the director role at a smaller company, or hold out for a VP seat at a larger one."></textarea></div>
+      <div class="field"><label for="f4b">Context</label><textarea id="f4b" data-ph="[relevant background, numbers, constraints, deadline, what is at stake if you get it wrong]" placeholder="Offer expires in 9 days. 6 months of runway. Two kids in school here."></textarea></div>
+      <div class="field"><label for="f4c">What you are leaning toward</label><input id="f4c" type="text" data-ph="[your current instinct, or say no lean yet if you are genuinely undecided]" placeholder="Leaning toward taking it, but not sure why"></div>
+      <button type="submit" class="genbtn">Generate my prompt</button>
+      <p class="formhint">Leave anything blank and the bracket stays in, so you can see what is still missing.</p>
+    </form>
+
+    <div class="result promptbox" id="p4result" hidden>
+      <div class="result-label">Your filled prompt</div>
+      <pre id="p4out"></pre>
+      <button type="button" class="copybtn" data-target="p4out"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h8"/></svg><span class="copylabel">Copy filled prompt</span></button>
+    </div>
+  </div>
+
+  <div class="section" id="premortem">
+    <div class="step-num">FOR ANY HARD DECISION</div>
+    <h2>Premortem prompt</h2>
+    <p class="section-intro">Assume the decision already failed, then work backward from that failure to find out why. It uses the same five voices as the Council prompt above, but instead of arguing the decision now, they look back on it months from now as something that already went wrong. Good for anything that scares you a little before you commit to it, because it is easier to spot a blind spot in hindsight than to admit you might have one right now.</p>
+    <details class="howto"><summary>How to use this</summary><div class="howto-body"><p>Pick a realistic time horizon, like 6 or 12 months. The exercise works because it pretends the failure already happened.</p><p>Act on the last part: the one change to make now, before you go further.</p></div></details>
+
+    <div class="promptbox">
+      <pre id="p5">I've made a decision, or I'm about to, and I want you to help me find its blind spots before I commit further.
+
+THE DECISION: [describe the decision you made or are about to make]
+
+CONTEXT: [relevant background: money, time, people, what is riding on this]
+
+TIMELINE: [when you made or will make this decision, and roughly how far out failure would be visible, e.g. 6 months or 1 year]
+
+Here's the exercise: pretend it is now [how far in the future] from today. This decision has already played out, and it failed. Not "it might fail," it DID fail, badly. You are looking back at it with hindsight.
+
+Walk backward from that failure and tell me, specifically:
+
+1. THE CHAIN OF EVENTS -- Starting from the moment it became unfixable, trace the actual sequence of events that killed it. Not a vague "market conditions changed," the real chain, step by step.
+
+2. THE WRONG ASSUMPTION -- Name the ONE assumption that was wrong from the very start, the one nobody wrote down or questioned at the time because it seemed too obvious to check.
+
+3. WHAT AN OUTSIDER SAW COMING -- Describe what someone with zero stake in this, looking at it cold, would have flagged immediately, the thing insiders were too close to see.
+
+4. WHAT WAS NEVER TRIED -- Name the move that was never attempted, that would have saved it if it had been.
+
+5. THE EARLIEST WARNING SIGN -- Name the first moment a warning sign was actually visible, and be specific about the timing, the exact week or milestone where, looking back, it was already there to be seen, and nobody acted on it.
+
+Speak in the past tense throughout, as if narrating something that already happened, not something that could happen. Be concrete and specific, not general risk language like "there could be execution challenges." I want the plausible, distinct failure story, not a hedge.
+
+Finish with: given everything above, what is the ONE change I could make right now, before I go further, that would most reduce the odds of this actually happening?</pre>
+      <button type="button" class="copybtn" data-target="p5"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h8"/></svg><span class="copylabel">Copy blank prompt</span></button>
+    </div>
+
+    <form class="fillform" data-tpl="p5" data-out="p5out">
+      <div class="field"><label for="f5a">The decision</label><textarea id="f5a" data-ph="[describe the decision you made or are about to make]" placeholder="Sign a 12-month lease on office space for the new practice."></textarea></div>
+      <div class="field"><label for="f5b">Context</label><textarea id="f5b" data-ph="[relevant background: money, time, people, what is riding on this]" placeholder="$38K committed. Two contractors depending on it. No signed clients yet."></textarea></div>
+      <div class="field"><label for="f5c">Timeline</label><input id="f5c" type="text" data-ph="[when you made or will make this decision, and roughly how far out failure would be visible, e.g. 6 months or 1 year]" placeholder="Signing next Friday, failure would show by month 8"></div>
+      <div class="field"><label for="f5d">How far in the future to look back from</label><input id="f5d" type="text" data-ph="[how far in the future]" placeholder="12 months"></div>
+      <button type="submit" class="genbtn">Generate my prompt</button>
+      <p class="formhint">Leave anything blank and the bracket stays in, so you can see what is still missing.</p>
+    </form>
+
+    <div class="result promptbox" id="p5result" hidden>
+      <div class="result-label">Your filled prompt</div>
+      <pre id="p5out"></pre>
+      <button type="button" class="copybtn" data-target="p5out"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h8"/></svg><span class="copylabel">Copy filled prompt</span></button>
+    </div>
+  </div>
+
+  <hr class="rule" />
+
+  <div class="section" id="prompt-fix">
+    <div class="step-num">WHEN A PROMPT IS NOT WORKING</div>
+    <h2>Prompt Fix prompt</h2>
+    <p class="section-intro">Most bad AI output comes from a weak prompt, not a weak model. Paste in the rough version and get back a sharper one, tuned for the model you are actually using.</p>
+    <details class="howto"><summary>How to use this</summary><div class="howto-body"><p>Name the tool you actually use, then paste your prompt exactly as you wrote it, even if it is messy.</p><p>Copy the rewritten prompt into a fresh chat and use it there. The three bullets underneath tell you what to do differently next time.</p></div></details>
+
+    <div class="promptbox">
+      <pre id="p6">I want you to rewrite a prompt so it actually works. Rewrite the prompt only. Do not answer it, and do not do the task inside it.
+
+THE MODEL I AM USING: [which model you are using: Claude, ChatGPT, or Gemini]
+
+MY ROUGH PROMPT:
+[paste your rough prompt here]
+
+Work through these steps in order, then give me the rewritten prompt.
+
+1. SHAPE. Name what kind of prompt this is: research, build, content, decision, analysis, strategy, or multi-step agent work. A prompt in the wrong shape is the first thing to fix, before anything else gets touched.
+
+2. HARD FILTER. Check for the flaws that make everything downstream useless, and fix these before optimizing anything:
+- Is there one clear objective, or several fighting each other? If several, split it into phases and tell me which phase to run first.
+- Is the role or persona right for this task? If not, replace it.
+- Is there an ambiguity bad enough that the output would be unpredictable? Resolve it.
+- Is the objective missing entirely? If so, name what it should be and say you are naming it.
+
+3. DIAGNOSE. Name the true objective, meaning the outcome I actually need, not just what I literally typed. Then name the assumptions my prompt takes for granted without stating them.
+
+4. REBUILD, in this order:
+- Add the missing context: role, audience, constraints, and the exact output format.
+- If the output has a predictable shape, embed one short example of that shape, three to five lines, inside the prompt itself. Skip this for strategy and decision prompts, where the output is not a fixed artifact.
+- Run a specificity check on every requirement. Replace anything vague or unmeasurable, words like comprehensive, robust, or better, with something concrete: a metric, a named actor, a place or timeframe, and what is at stake or where the source comes from.
+- Force the trade-offs to be resolved. Do not leave the answer sitting on "it depends" with no rule for breaking the tie. One exception, and it matters: if the underlying question is genuinely unresolved or unverifiable, do not manufacture false confidence. Require the answer to state what it verified, what it could not, and exactly where the gap is.
+- Set hard output limits: length, format, structure.
+- End on a concrete deliverable, not a question thrown back at me.
+
+5. TUNE FOR MY MODEL. Apply only the section matching the model I named at the top.
+- Claude: conversational hard rules work as written, so "never do X" and "always do Y" are enough without rigid blocking syntax. Put the detail directly in the prompt body rather than pointing at a file or a link and assuming it gets fetched.
+- ChatGPT: use explicit numbered steps. Call out the system role and the user role separately and clearly. State the output-format contract up front, because format drifts over a long answer when nothing pins it down.
+- Gemini: tell it to reason through the problem step by step before it answers. Separate the context, the task, and the constraints into clearly labeled blocks. State the constraints as an explicit checklist it has to confirm against before it finishes.
+
+6. STRIP. Remove hedging words: try to, might want to, consider, feel free to. Remove passive voice from every action step. Remove vague claims with no measure attached. Do not remove an honest statement of uncertainty. "I could not verify this" is a real answer and it stays.
+
+Give me the rewritten prompt in one clean block I can copy straight out. Under that block, in three bullets, tell me what you changed and why.</pre>
+      <button type="button" class="copybtn" data-target="p6"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h8"/></svg><span class="copylabel">Copy blank prompt</span></button>
+    </div>
+
+    <form class="fillform" data-tpl="p6" data-out="p6out">
+      <div class="field"><label for="f6a">Which model you are using</label><input id="f6a" type="text" data-ph="[which model you are using: Claude, ChatGPT, or Gemini]" placeholder="Claude"></div>
+      <div class="field"><label for="f6b">Your rough prompt</label><textarea id="f6b" data-ph="[paste your rough prompt here]" placeholder="Paste the prompt that is not giving you what you want."></textarea></div>
+      <button type="submit" class="genbtn">Generate my prompt</button>
+      <p class="formhint">Leave anything blank and the bracket stays in, so you can see what is still missing.</p>
+    </form>
+
+    <div class="result promptbox" id="p6result" hidden>
+      <div class="result-label">Your filled prompt</div>
+      <pre id="p6out"></pre>
+      <button type="button" class="copybtn" data-target="p6out"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h8"/></svg><span class="copylabel">Copy filled prompt</span></button>
+    </div>
+  </div>
+
+
+  <div class="next">
+    <div class="eyebrow">Want help with this?</div>
+    <h2>Work through it with me</h2>
+    <p>If you want a second set of eyes on your search or a hard decision, book a free 30-minute intro call. You will find more free prompts there too, for getting unstuck with AI.</p>
+    <a href="/ai-unstuck/#book" class="btn btn-primary">Book a call</a>
+  </div>
+</div>
+<footer>
+  <p>Reach out anytime if one of these needs adjusting for where you land next.</p>
+  <p>Catalyst Works . Salt Lake City, Utah . <a href="mailto:boubacar@catalystworks.consulting">boubacar@catalystworks.consulting</a> . <a href="/ai-unstuck/">AI Unstuck prompts</a></p>
+</footer>
+<script>
+(function(){
+  var btn=document.querySelector('.nav-toggle'), drawer=document.getElementById('nav-drawer');
+  if(!btn||!drawer) return;
+  btn.addEventListener('click',function(){var open=drawer.classList.toggle('is-open');btn.setAttribute('aria-expanded',open?'true':'false');btn.setAttribute('aria-label',open?'Close menu':'Open menu');});
+  drawer.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){drawer.classList.remove('is-open');btn.setAttribute('aria-expanded','false');btn.setAttribute('aria-label','Open menu');});});
+})();
+</script>
+<script>
+document.querySelectorAll('.copybtn').forEach(function(btn){
+  btn.addEventListener('click', async function(){
+    var target = document.getElementById(btn.getAttribute('data-target'));
+    var txt = target.textContent;
+    try { await navigator.clipboard.writeText(txt); }
+    catch(e){
+      var t = document.createElement('textarea');
+      t.value = txt;
+      document.body.appendChild(t);
+      t.select();
+      document.execCommand('copy');
+      t.remove();
+    }
+    var label = btn.querySelector('.copylabel');
+    var prevText = label.textContent;
+    btn.classList.add('copied');
+    label.textContent = 'Copied';
+    setTimeout(function(){ btn.classList.remove('copied'); label.textContent = prevText; }, 1600);
+  });
+});
+
+document.querySelectorAll('.fillform').forEach(function(form){
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var tplEl = document.getElementById(form.getAttribute('data-tpl'));
+    var text = tplEl.textContent;
+    form.querySelectorAll('[data-ph]').forEach(function(field){
+      var token = field.getAttribute('data-ph');
+      var value = field.value.trim();
+      if (value) { text = text.split(token).join(value); }
+    });
+    var out = document.getElementById(form.getAttribute('data-out'));
+    out.textContent = text;
+    var box = out.closest('.result');
+    box.hidden = false;
+    box.scrollIntoView({behavior:'smooth', block:'nearest'});
+  });
+});
+</script>
+</body>
+</html>

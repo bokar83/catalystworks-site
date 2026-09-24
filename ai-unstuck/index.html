@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en" style="color-scheme: dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0A0E14">
+<title>AI Unstuck: free prompts to start, or start again . Catalyst Works</title>
+<meta name="description" content="Seven free prompts for people who never really started with AI, or started and stalled. Copy one, paste it into Claude, ChatGPT or Gemini, and see what comes back.">
+<link rel="icon" type="image/jpeg" href="../CatalystWorks_logo.jpg">
+<link rel="canonical" href="https://catalystworks.consulting/ai-unstuck/">
+<meta property="og:title" content="AI Unstuck: free prompts to start, or start again">
+<meta property="og:description" content="Seven free prompts for people who never really started with AI, or started and stalled. Free to use, free to share.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://catalystworks.consulting/ai-unstuck/">
+<meta property="og:image" content="https://catalystworks.consulting/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AI Unstuck: free prompts to start, or start again">
+<meta name="twitter:description" content="Seven free prompts for people who never really started with AI, or started and stalled.">
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TBW90RVMM1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-TBW90RVMM1');
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,600;0,700;1,600&family=Public+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0A0E14; --ink-raised:#121826; --paper:#F5EFE2; --clay:#B47C57;
+    --amber:#E8A66B; --rust:#C95F4D;
+    --line:rgba(245,239,226,0.12); --t-mid:rgba(245,239,226,0.78); --t-muted:rgba(245,239,226,0.55);
+    --ease:cubic-bezier(0.22,1,0.36,1);
+    --serif:'Spectral',Georgia,serif; --sans:'Public Sans',system-ui,sans-serif; --mono:'JetBrains Mono',ui-monospace,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:88px}
+  body{background:var(--ink);color:var(--paper);font-family:var(--sans);font-size:19px;line-height:1.55;min-height:100vh}
+  a{color:var(--amber)}
+  a:visited{color:var(--clay)}
+  a:hover{color:var(--paper)}
+  a:active{color:var(--rust)}
+  :focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+  strong{font-weight:600}
+
+  /* nav */
+  .nav{position:sticky;top:0;z-index:50;background:rgba(10,14,20,0.94);border-bottom:1px solid var(--line)}
+  .nav-inner{max-width:1120px;margin:0 auto;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+  .brand{display:inline-flex;align-items:center;gap:12px;font-family:var(--serif);font-weight:600;font-size:19px;color:var(--paper);text-decoration:none}
+  .brand:visited{color:var(--paper)}
+  .brand img{width:32px;height:32px;border-radius:50%}
+  .brand .accent{color:var(--amber)}
+  .nav-links{display:flex;gap:32px;align-items:center}
+  .nav-links a{font-size:15px;color:var(--t-mid);text-decoration:none}
+  .nav-links a:hover{color:var(--paper)}
+  .btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 20px;border-radius:0;font-family:var(--mono);font-size:13px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;text-decoration:none;cursor:pointer;transition:background 240ms var(--ease),color 240ms var(--ease),border-color 240ms var(--ease)}
+  .btn-primary{background:var(--amber);color:var(--ink);border:1px solid var(--amber)}
+  .btn-primary:visited{color:var(--ink)}
+  .btn-primary:hover{background:var(--paper);border-color:var(--paper);color:var(--ink)}
+  .btn-ghost{background:transparent;color:var(--paper);border:1px solid var(--line)}
+  .btn-ghost:hover{border-color:var(--clay);color:var(--paper)}
+  .nav-toggle{display:none;width:44px;height:44px;background:transparent;border:1px solid var(--line);border-radius:0;align-items:center;justify-content:center;cursor:pointer}
+  .nav-toggle span,.nav-toggle span::before,.nav-toggle span::after{display:block;width:18px;height:1.5px;background:var(--paper);position:relative;transition:transform 240ms var(--ease),top 240ms var(--ease)}
+  .nav-toggle span::before,.nav-toggle span::after{content:'';position:absolute;left:0}
+  .nav-toggle span::before{top:-6px}.nav-toggle span::after{top:6px}
+  .nav-toggle[aria-expanded="true"] span{background:transparent}
+  .nav-toggle[aria-expanded="true"] span::before{top:0;transform:rotate(45deg)}
+  .nav-toggle[aria-expanded="true"] span::after{top:0;transform:rotate(-45deg)}
+  .nav-drawer{display:none;border-top:1px solid var(--line);padding:8px 24px 24px}
+  .nav-drawer.is-open{display:block}
+  .nav-drawer a{display:block;padding:16px 0;border-bottom:1px solid var(--line);font-family:var(--serif);font-size:19px;color:var(--paper);text-decoration:none}
+  .nav-drawer a.btn{display:flex;margin-top:16px;border-bottom:1px solid var(--amber);font-family:var(--mono);font-size:13px;color:var(--ink)}
+  @media(max-width:760px){
+    .nav-links,.nav-inner>.btn{display:none}
+    .nav-toggle{display:inline-flex}
+  }
+
+  /* layout */
+  main{max-width:760px;margin:0 auto;padding:0 24px}
+  section{padding:88px 0;border-bottom:1px solid var(--line)}
+  section:last-of-type{border-bottom:none}
+  .eyebrow{font-family:var(--mono);font-size:13px;letter-spacing:0.14em;text-transform:uppercase;color:var(--clay);margin-bottom:16px}
+  h1{font-family:var(--serif);font-weight:700;font-size:clamp(40px,6vw,72px);line-height:1.08;letter-spacing:-0.03em;max-width:16ch}
+  h1 em{font-style:italic;font-weight:600}
+  h2{font-family:var(--serif);font-weight:700;font-size:clamp(21px,2.6vw,27px);line-height:1.25;letter-spacing:-0.015em;margin-bottom:16px}
+  p{color:var(--t-mid);max-width:68ch;margin-top:24px}
+  p:first-child{margin-top:0}
+  .lede p{font-size:19px}
+  .hero{padding-top:96px}
+  .hero-actions{display:flex;flex-wrap:wrap;gap:16px;margin-top:40px}
+  .quote{margin-top:48px;padding-left:24px;border-left:1px solid var(--clay)}
+  .quote p{font-family:var(--serif);font-weight:600;font-size:clamp(21px,2.6vw,27px);line-height:1.3;color:var(--paper);margin:0}
+  .quote cite{display:block;margin-top:16px;font-family:var(--mono);font-size:13px;font-style:normal;letter-spacing:0.14em;text-transform:uppercase;color:var(--t-muted)}
+
+  /* prompt rail */
+  .prompt{display:grid;grid-template-columns:64px 1fr;gap:0 24px;padding:64px 0;border-top:1px solid var(--line)}
+  .prompt:first-of-type{border-top:none;padding-top:24px}
+  .idx{font-family:var(--mono);font-size:13px;letter-spacing:0.14em;color:var(--clay);padding-top:6px}
+  .prompt-body{min-width:0}
+  .prompt .for{margin-top:8px;font-size:15px;color:var(--t-muted)}
+  details.howto{margin-top:16px}
+  details.howto summary{display:inline-flex;align-items:center;gap:8px;min-height:44px;cursor:pointer;font-family:var(--mono);font-size:13px;letter-spacing:0.14em;text-transform:uppercase;color:var(--t-muted);list-style:none}
+  details.howto summary::-webkit-details-marker{display:none}
+  details.howto summary::before{content:'+';font-size:17px;color:var(--clay);width:12px}
+  details.howto[open] summary::before{content:'\2212'}
+  details.howto summary:hover{color:var(--paper)}
+  details.howto .howto-body{padding:8px 0 8px 20px;border-left:1px solid var(--line)}
+  details.howto .howto-body p{font-size:15px;margin-top:12px}
+  details.howto .howto-body p:first-child{margin-top:0}
+  pre{margin-top:16px;background:var(--ink-raised);border:1px solid var(--line);border-radius:0;padding:24px;white-space:pre-wrap;word-wrap:break-word;font-family:var(--mono);font-size:15px;line-height:1.6;color:var(--paper);max-height:420px;overflow-y:auto}
+  .copybtn{margin-top:16px}
+  .copybtn.copied{border-color:var(--clay);color:var(--amber)}
+
+  /* coaching */
+  .steps{list-style:none;margin-top:32px}
+  .steps li{display:grid;grid-template-columns:64px 1fr;gap:0 24px;padding:24px 0;border-top:1px solid var(--line)}
+  .steps li:first-child{border-top:none}
+  .steps .idx{padding-top:4px}
+  .steps p{margin-top:0}
+
+  /* capture */
+  .capture-form{margin-top:32px;display:flex;flex-wrap:wrap;gap:16px;align-items:flex-end}
+  .field{display:flex;flex-direction:column;gap:8px;flex:1 1 280px}
+  .field label{font-family:var(--mono);font-size:13px;letter-spacing:0.14em;text-transform:uppercase;color:var(--t-muted)}
+  .field input{min-height:48px;width:100%;background:var(--ink-raised);border:1px solid var(--line);border-radius:0;padding:0 16px;color:var(--paper);font-family:var(--sans);font-size:17px}
+  .field input:focus{border-color:var(--amber);outline:none}
+  .field input[aria-invalid="true"]{border-color:var(--rust)}
+  .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+  .fineprint{font-size:15px;color:var(--t-muted);margin-top:16px}
+  .status{margin-top:24px;font-size:17px;color:var(--paper)}
+  .status[hidden]{display:none}
+  .status.err{color:var(--paper);border-left:2px solid var(--rust);padding-left:16px}
+  #booking[hidden]{display:none}
+  #booking{margin-top:32px;border-top:1px solid var(--line);padding-top:32px}
+  .calendly-inline-widget{min-width:280px;height:1050px;margin-top:16px}
+
+  footer{max-width:760px;margin:0 auto;padding:48px 24px 64px;border-top:1px solid var(--line);font-size:15px;color:var(--t-muted)}
+  footer p{font-size:15px;color:var(--t-muted);margin-top:8px}
+
+  @media(max-width:760px){
+    section{padding:64px 0}
+    .hero{padding-top:64px}
+    .prompt{grid-template-columns:1fr;padding:48px 0}
+    .prompt .idx{margin-bottom:8px}
+    .steps li{grid-template-columns:40px 1fr;gap:0 16px}
+    pre{padding:16px;font-size:14px}
+    .btn{width:100%}
+    .hero-actions .btn{width:auto;flex:1 1 200px}
+    .calendly-inline-widget{height:1150px}
+  }
+  @media (prefers-reduced-motion: reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav" aria-label="Main">
+  <div class="nav-inner">
+    <a href="/" class="brand"><img src="../CatalystWorks_logo.jpg" alt="Catalyst Works" width="32" height="32" decoding="async"><span>Catalyst<span class="accent">Works</span></span></a>
+    <div class="nav-links">
+      <a href="#prompts">The prompts</a>
+      <a href="#coaching">Coaching</a>
+      <a href="/coaching-kit/">Coaching kit</a>
+    </div>
+    <a href="#book" class="btn btn-primary">Book a call</a>
+    <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-drawer"><span></span></button>
+  </div>
+  <div class="nav-drawer" id="nav-drawer">
+    <a href="/">Home</a>
+    <a href="#prompts">The prompts</a>
+    <a href="#coaching">Coaching</a>
+    <a href="/coaching-kit/">Coaching kit</a>
+    <a href="#book" class="btn btn-primary">Book a call</a>
+  </div>
+</nav>
+
+<main>
+  <section class="hero">
+    <div class="eyebrow">Free prompts</div>
+    <h1>Stuck with AI? Take one <em>small</em> step.</h1>
+    <div class="lede">
+      <p>If you are stuck with AI, you are probably in one of two places. You never really started. Or you started, got a few bland answers, and let it slide.</p>
+      <p>These seven prompts are for exactly that moment. Copy one, paste it into Claude, ChatGPT or Gemini, fill in the brackets, and see what comes back.</p>
+      <p>They are free. If one helps you, send this page to someone who is stuck too.</p>
+    </div>
+    <div class="hero-actions">
+      <a href="#prompts" class="btn btn-ghost">See the prompts</a>
+      <a href="#book" class="btn btn-ghost">Talk it through</a>
+    </div>
+    <blockquote class="quote">
+      <p>&ldquo;Use AI to do the legwork, not to make the decision. That part is still yours. That&rsquo;s what makes you the leader, not the tool.&rdquo;</p>
+      <cite>Boubacar Barry</cite>
+    </blockquote>
+  </section>
+
+  <section id="prompts" aria-label="The prompts">
+    <div class="eyebrow">The prompts</div>
+    <h2>Seven prompts, in the order to use them</h2>
+    <p>Start at the top if you have never really used AI at work. If you already tried and stalled, start with the second one.</p>
+    <details class="howto">
+      <summary>How to use this page</summary>
+      <div class="howto-body">
+        <p>Press copy on any prompt. Open Claude, ChatGPT or Gemini in a new chat and paste it in.</p>
+        <p>Replace everything inside the square brackets with your own details. Honest and specific beats polished. Then send it and read what comes back.</p>
+        <p>You do not need an account here. Nothing you type is saved on this page.</p>
+      </div>
+    </details>
+
+    <article class="prompt" id="p-start">
+      <div class="idx">// 01</div>
+      <div class="prompt-body">
+        <h2>Find your first task</h2>
+        <p class="for">For: you have barely used AI at work and do not know where to begin.</p>
+        <details class="howto"><summary>How to use this</summary><div class="howto-body">
+          <p>Describe a normal week honestly, including the boring parts. The boring, repeated tasks are usually where the first win is hiding.</p>
+          <p>Answer its questions before it gives you the list. Then try the lowest-risk task first, today if you can.</p>
+        </div></details>
+<pre id="t1">I have barely used AI at work and I want to start small.
+
+Here is what a normal week looks like for me:
+[describe your week: the meetings, reports, emails, and the tasks you keep putting off]
+
+If you need more detail, ask me up to five questions first.
+
+Then give me three tasks from my week where AI could save me time right away. For each one:
+- what I would actually type in
+- what a good result looks like
+- one thing I should double-check before I use the result
+
+Rank them from lowest risk to highest. Keep it plain, no jargon.</pre>
+        <button type="button" class="btn btn-ghost copybtn" data-target="t1"><span class="copylabel">Copy prompt</span></button>
+      </div>
+    </article>
+
+    <article class="prompt" id="p-stall">
+      <div class="idx">// 02</div>
+      <div class="prompt-body">
+        <h2>Find out why you stalled</h2>
+        <p class="for">For: you tried AI, it felt clunky or wrong, and you drifted away.</p>
+        <details class="howto"><summary>How to use this</summary><div class="howto-body">
+          <p>Be honest about what happened. "It gave me generic stuff" and "I never had time" are both good answers.</p>
+          <p>Let it ask one question at a time. Do not rush to the end. The small thing it gives you at the end is the part to act on this week.</p>
+        </div></details>
+<pre id="t2">I tried using AI for [what you tried to use it for] and I stopped.
+Here is what happened: [what went wrong, or why you drifted away]
+
+Interview me one question at a time to find the real reason I stalled. It could be the output, trust, time, the way I asked, or a task that was a bad fit. Do not jump ahead of my answers.
+
+When you have enough, tell me the real reason in two sentences. Then give me one small thing to try this week that gets around it.</pre>
+        <button type="button" class="btn btn-ghost copybtn" data-target="t2"><span class="copylabel">Copy prompt</span></button>
+      </div>
+    </article>
+
+    <article class="prompt" id="p-voice">
+      <div class="idx">// 03</div>
+      <div class="prompt-body">
+        <h2>Make it sound like you</h2>
+        <p class="for">For: the drafts it writes sound like nobody in particular.</p>
+        <details class="howto"><summary>How to use this</summary><div class="howto-body">
+          <p>Paste three things you actually wrote, like everyday emails or messages. Skip your most polished piece. Your normal writing is what it needs to learn.</p>
+          <p>Save the style rules it gives you. Paste them at the top of any new chat where you want it to write for you.</p>
+        </div></details>
+<pre id="t3">Here are three things I wrote myself:
+
+[paste sample 1]
+
+[paste sample 2]
+
+[paste sample 3]
+
+Study how I write: sentence length, the words I use, the words I never use, how direct I am, and how I open and close.
+
+Give me a short list of style rules I can paste at the top of any future chat. Then rewrite this draft using those rules:
+[paste a draft that sounded generic]</pre>
+        <button type="button" class="btn btn-ghost copybtn" data-target="t3"><span class="copylabel">Copy prompt</span></button>
+      </div>
+    </article>
+
+    <article class="prompt" id="p-check">
+      <div class="idx">// 04</div>
+      <div class="prompt-body">
+        <h2>Check its work before you use it</h2>
+        <p class="for">For: any answer you are about to send, publish, or decide on.</p>
+        <details class="howto"><summary>How to use this</summary><div class="howto-body">
+          <p>Paste the whole answer, not a summary of it. Works best in a fresh chat, so it reviews the answer instead of defending it.</p>
+          <p>Anything it marks as possibly made up, check yourself before you use it.</p>
+        </div></details>
+<pre id="t4">Here is an answer an AI gave me:
+[paste the full answer]
+
+Go through it and list every claim that is a fact, a number, a name, or a date. For each one tell me:
+- how confident you are that it is right
+- whether it could be made up
+- how I can check it quickly
+
+Then tell me which parts I can use as they are, and which I must verify first.</pre>
+        <button type="button" class="btn btn-ghost copybtn" data-target="t4"><span class="copylabel">Copy prompt</span></button>
+      </div>
+    </article>
+
+    <article class="prompt" id="p-think">
+      <div class="idx">// 05</div>
+      <div class="prompt-body">
+        <h2>Think with it, not just ask it</h2>
+        <p class="for">For: a plan or problem you keep chewing on.</p>
+        <details class="howto"><summary>How to use this</summary><div class="howto-body">
+          <p>Describe the plan or problem in a few sentences. Then answer each question like you would answer a sharp colleague.</p>
+          <p>Pay the most attention to the part it calls your weakest thinking. That is usually the real work.</p>
+        </div></details>
+<pre id="t5">I am working on this:
+[the plan, problem, or decision]
+
+Do not give me advice yet. Ask me one question at a time to help me think it through. Push on anything vague.
+
+After about six questions, sum up what I seem to believe, where my thinking is weakest, and the one thing I should figure out next.</pre>
+        <button type="button" class="btn btn-ghost copybtn" data-target="t5"><span class="copylabel">Copy prompt</span></button>
+      </div>
+    </article>
+
+    <article class="prompt" id="p-habit">
+      <div class="idx">// 06</div>
+      <div class="prompt-body">
+        <h2>Turn one win into a habit</h2>
+        <p class="for">For: something worked once and you want it to stick.</p>
+        <details class="howto"><summary>How to use this</summary><div class="howto-body">
+          <p>Name the task where AI actually helped you. Be specific about what it saved you.</p>
+          <p>Put the day and the trigger it suggests into your calendar before you close the chat. Check back in four weeks.</p>
+        </div></details>
+<pre id="t6">AI helped me with [the task where it worked]. I want this to become a habit, not a one-off.
+
+Design a weekly routine that takes 15 minutes or less. Tell me:
+- which day, and what existing habit to attach it to
+- the exact prompt I will reuse each time
+- how I will know after four weeks whether it is saving me time
+
+Keep it realistic for someone who is busy and a little skeptical.</pre>
+        <button type="button" class="btn btn-ghost copybtn" data-target="t6"><span class="copylabel">Copy prompt</span></button>
+      </div>
+    </article>
+
+    <article class="prompt" id="p-next">
+      <div class="idx">// 07</div>
+      <div class="prompt-body">
+        <h2>Take the next step up</h2>
+        <p class="for">For: the easy wins feel routine now and you want to go further.</p>
+        <details class="howto"><summary>How to use this</summary><div class="howto-body">
+          <p>Be honest about how you use AI today, even if it is only once a week. It picks a better next step when it knows your real starting point.</p>
+          <p>Do the step it gives you once, with it walking you through, before you decide whether it is worth keeping.</p>
+        </div></details>
+<pre id="t7">Here is how I use AI today: [what you use it for now, and how often]
+My role is [your role]. The part of my work that still takes the most time is [the time-eater].
+
+Suggest my next step up: one task that is harder than what I do now but still realistic.
+
+Walk me through doing it the first time, step by step, and tell me where people usually go wrong with it.</pre>
+        <button type="button" class="btn btn-ghost copybtn" data-target="t7"><span class="copylabel">Copy prompt</span></button>
+      </div>
+    </article>
+  </section>
+
+  <section id="coaching" aria-label="Coaching">
+    <div class="eyebrow">Coaching</div>
+    <h2>What coaching with me looks like</h2>
+    <p>I coach people one on one. It fits best if AI feels like it is moving faster than you are, at work or in your career. I use AI every day to run my own business, on a system I built myself, so what I share comes from doing it.</p>
+    <details class="howto">
+      <summary>Is this for me?</summary>
+      <div class="howto-body">
+        <p>Probably yes if you keep meaning to get better with AI and it keeps slipping down the list, or if you tried and do not trust what it gives you.</p>
+        <p>Probably not if you want someone to do the work for you. Coaching is you doing the work, with me alongside.</p>
+      </div>
+    </details>
+    <ol class="steps">
+      <li><div class="idx">// 01</div><p><strong>We start with you.</strong> Where you are now, and what a good outcome looks like to you.</p></li>
+      <li><div class="idx">// 02</div><p><strong>We find what is really in the way.</strong> Sometimes it is the tool. More often it is time, trust, or not knowing where to begin.</p></li>
+      <li><div class="idx">// 03</div><p><strong>You leave with next steps.</strong> Small ones you can take that week, plus the prompts that fit your situation.</p></li>
+      <li><div class="idx">// 04</div><p><strong>You get it in writing.</strong> After each session I send a short summary and your action items, so nothing lives only in memory.</p></li>
+    </ol>
+    <p>I will not tell you AI fixes everything. I will help you use it where it helps, and leave it out where it does not.</p>
+  </section>
+
+  <section id="book" aria-label="Book a call">
+    <div class="eyebrow">Talk it through</div>
+    <h2>Book a free 30-minute intro call</h2>
+    <p>Leave your email and I will show you my open times. On the call we look at where you are stuck, and whether coaching is the right fit for you.</p>
+    <details class="howto">
+      <summary>What happens next</summary>
+      <div class="howto-body">
+        <p>Enter your email and press the button. My calendar opens right here with your email already filled in. Pick a time that works and Calendly sends you the invite.</p>
+        <p>Your email also puts you on my newsletter. You can leave it with one click from any issue.</p>
+      </div>
+    </details>
+    <form class="capture-form" id="capture-form" novalidate>
+      <div class="field">
+        <label for="cap-email">Your email</label>
+        <input id="cap-email" name="email" type="email" autocomplete="email" inputmode="email" required placeholder="you@example.com">
+      </div>
+      <div class="hp" aria-hidden="true"><label for="cap-website">Website</label><input id="cap-website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
+      <button type="submit" class="btn btn-primary" id="cap-btn">Show open times</button>
+    </form>
+    <p class="status" id="cap-status" role="status" aria-live="polite" hidden></p>
+    <div id="booking" hidden>
+      <div class="eyebrow">Pick a time</div>
+      <div class="calendly-inline-widget" id="calendly-embed" aria-label="Booking calendar"></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>Catalyst Works . Salt Lake City, Utah</p>
+  <p>Questions? <a href="mailto:boubacar@catalystworks.consulting">boubacar@catalystworks.consulting</a> . <a href="/coaching-kit/">The coaching prompt kit</a> . <a href="/privacy/">Privacy</a></p>
+</footer>
+
+<script>
+/* Hamburger nav */
+(function(){
+  var btn=document.querySelector('.nav-toggle'), drawer=document.getElementById('nav-drawer');
+  if(!btn||!drawer) return;
+  btn.addEventListener('click',function(){
+    var open=drawer.classList.toggle('is-open');
+    btn.setAttribute('aria-expanded',open?'true':'false');
+    btn.setAttribute('aria-label',open?'Close menu':'Open menu');
+  });
+  drawer.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){
+    drawer.classList.remove('is-open');btn.setAttribute('aria-expanded','false');btn.setAttribute('aria-label','Open menu');
+  });});
+})();
+
+/* Copy buttons */
+document.querySelectorAll('.copybtn').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    var txt=document.getElementById(btn.getAttribute('data-target')).textContent;
+    var done=function(){
+      var l=btn.querySelector('.copylabel'), prev=l.textContent;
+      btn.classList.add('copied'); l.textContent='Copied';
+      setTimeout(function(){btn.classList.remove('copied');l.textContent=prev;},1600);
+      try{gtag('event','prompt_copy',{prompt:btn.getAttribute('data-target'),page:'ai_unstuck'});}catch(e){}
+    };
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(done,fallback);}else{fallback();}
+    function fallback(){var t=document.createElement('textarea');t.value=txt;document.body.appendChild(t);t.select();try{document.execCommand('copy');}catch(e){}t.remove();done();}
+  });
+});
+
+/* Email capture: the email is PERSISTED before the booking calendar is shown.
+   Same endpoint and magnet-cohort pattern as humanatwork.ai/5-prompts: the cohort
+   below is a magnet key, never a workshop key, so these opt-ins are never counted
+   as seats. form_location must NOT start with "workshop_" or "ic_workshop_" (that
+   prefix is the recovery sender's checkout allowlist). Success = the response BODY
+   saying so, never the status code alone. On failure: loud error, no calendar. */
+(function(){
+  var CAPTURE_URL='https://agentshq.boubacarbarry.com/api/orc/workshop-register';
+  var COHORT='lm_cw_ai_unstuck', MAGNET='cw_ai_unstuck', SOURCE='cw_ai_unstuck_page';
+  var CALENDLY_URL='https://calendly.com/boubacarbarry/ai-coaching-intro-call';
+  var RETRY_BACKOFF_MS=[250,750];
+  var qs=new URLSearchParams(window.location.search||'');
+  var emailRe=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  var form=document.getElementById('capture-form'), input=document.getElementById('cap-email'),
+      btn=document.getElementById('cap-btn'), statusEl=document.getElementById('cap-status'),
+      booking=document.getElementById('booking');
+  if(!form) return;
+
+  function payload(email,ref){
+    return JSON.stringify({
+      email:email, cohort:COHORT, seat_kind:'free', reg_ref:ref,
+      utm_source:qs.get('utm_source')||'cw_ai_unstuck',
+      utm_medium:qs.get('utm_medium')||'organic',
+      utm_campaign:qs.get('utm_campaign')||'lm_cw_ai_unstuck',
+      utm_content:qs.get('utm_content')||SOURCE,
+      form_location:SOURCE, magnet:MAGNET,
+      website:(document.getElementById('cap-website')||{}).value||''
+    });
+  }
+  function post(email,ref){
+    return fetch(CAPTURE_URL,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:payload(email,ref)})
+      .then(function(r){return r.json().then(function(b){
+        if(b&&b.ok===true) return 'ok';
+        if(b&&b.error==='duplicate') return 'ok';
+        if(b&&b.error==='invalid_email') return 'invalid_email';
+        if(b&&b.error==='rate_limited') return 'rate_limited';
+        return 'fail';
+      }).catch(function(){return 'fail';});});
+  }
+  function capture(email,ref){
+    var attempt=0;
+    function once(){
+      return post(email,ref).catch(function(){return 'fail';}).then(function(state){
+        if(state!=='fail') return state;
+        var wait=RETRY_BACKOFF_MS[attempt]; attempt++;
+        if(wait==null) return 'fail';
+        return new Promise(function(res){setTimeout(res,wait);}).then(once);
+      });
+    }
+    return once();
+  }
+  function show(msg,isErr){statusEl.hidden=false;statusEl.textContent=msg;statusEl.classList.toggle('err',!!isErr);}
+  function reset(){btn.disabled=false;btn.textContent='Show open times';}
+  var calendlyLoaded=false;
+  function openBooking(email){
+    booking.hidden=false;
+    var url=CALENDLY_URL+'?hide_gdpr_banner=1&background_color=121826&text_color=f5efe2&primary_color=e8a66b';
+    function init(){
+      window.Calendly.initInlineWidget({url:url,parentElement:document.getElementById('calendly-embed'),
+        prefill:{email:email},
+        utm:{utmSource:qs.get('utm_source')||'cw_ai_unstuck',utmMedium:qs.get('utm_medium')||'organic',utmCampaign:'lm_cw_ai_unstuck',utmContent:SOURCE}});
+      booking.scrollIntoView({behavior:'smooth',block:'start'});
+    }
+    if(window.Calendly){init();return;}
+    if(calendlyLoaded) return;
+    calendlyLoaded=true;
+    var s=document.createElement('script');s.src='https://assets.calendly.com/assets/external/widget.js';s.async=true;s.onload=init;
+    s.onerror=function(){show('The calendar did not load. Your email is saved. Book here instead: '+CALENDLY_URL,true);};
+    document.head.appendChild(s);
+  }
+  form.addEventListener('submit',function(ev){
+    ev.preventDefault();
+    var email=(input.value||'').trim();
+    if(!emailRe.test(email)){input.setAttribute('aria-invalid','true');show('That email does not look right. Check it and try again.',true);input.focus();return;}
+    input.removeAttribute('aria-invalid');
+    btn.disabled=true; btn.textContent='Saving';
+    var ref='unstuck-'+Date.now()+'-'+Math.random().toString(36).slice(2,8);
+    capture(email,ref).then(function(state){
+      if(state==='ok'){
+        show('Saved. Pick a time below.',false);
+        form.style.display='none';
+        try{gtag('event','generate_lead',{location:SOURCE});}catch(e){}
+        openBooking(email);
+      } else {
+        reset();
+        try{gtag('event','lead_capture_failed',{location:SOURCE,state:state});}catch(e){}
+        if(state==='invalid_email') show('That email was not accepted. Check it and try again.',true);
+        else if(state==='rate_limited') show('Too many tries in a row. Wait a minute and try again.',true);
+        else show('That did not save, so I have not opened the calendar yet. Try again in a moment, or email me at boubacar@catalystworks.consulting.',true);
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>
