@@ -12,7 +12,7 @@
 > (`memory/project_antislop_design_tooling_absorb_2026_09_22.md` §4).
 > **Phase:** 1 of 6 (`cw-design-style-lock`). No CSS and no HTML is written by this phase.
 > **Date:** 2026-09-22 · **Branch:** `feat/cw-design-style-lock-2026-09-22`
-> **Amended 2026-10-03 (PROPOSED, awaiting Boubacar's approval):** new §13, documents, letterhead and print. Nothing in §1 to §12 changed.
+> **Amended 2026-10-04 (LOCKED FOR APPROVAL, awaiting Boubacar's sign-off):** new §13, documents, letterhead and print. Nothing in §1 to §12 changed.
 > **Amended 2026-09-23:** five typography and accessibility fixes (§1 rust row, §2), approved by
 > Boubacar ("proceed on all"), Karpathy + Council re-run on the delta (§12). PRD change-log line
 > of the same date.
@@ -595,31 +595,37 @@ line-height 1.5 or higher).
 
 ---
 
-## 13. Documents, letterhead and print (PROPOSED 2026-10-03, revised same day, awaiting Boubacar's approval)
+## 13. Documents, letterhead and print (LOCKED FOR APPROVAL 2026-10-04, awaiting Boubacar's sign-off)
 
-> **Status:** PROPOSAL. Rows marked LOCKED are already decided in this file or in a dated rule of his. Rows marked PROPOSAL need his yes.
-> Concepts: `https://boubacarbarry.com/review/20261003-letterhead-concepts/`. Working files: `agentsHQ/docs/brand-assets/catalyst-works/letterhead-2026-10/`.
-> **Scope:** DOCX, PDF, letterhead, proposals, one-pagers, email signature. Not the web pages in sections 1 to 12.
+> **Status:** locked for his approval. Direction chosen by him 2026-10-03/04: logo option B and the B2 white-page letterhead, with the audit fixes (design-audit 15/20 "lock with tweaks", plus a blind read). Concepts and templates: `https://boubacarbarry.com/review/20261003-letterhead-concepts/`. Files: `agentsHQ/docs/brand-assets/catalyst-works/templates/`.
+> **Scope:** DOCX, PDF, letterhead, proposals, letters, one-pagers, email signature. Not the web pages in sections 1 to 12.
 > **His direction, 2026-10-03:** "as much as possible on a white background ... I'm not going to spend extra money printing it on dark paper ... as simple as possible. Anybody can print it out ... any 8-by-11 or A4/A5-sized paper."
 
-**13.1 White page only. LOCKED by his direction.** No dark documents, no dark bands, no full-bleed colour, no tinted fills. The page is white, the text is dark. The dark `--ink` surface in sections 1 to 12 is for screens only and never appears as a document fill. (Supersedes the earlier dark-concept drafts, archived.)
+**13.1 White page only.** No dark documents, no dark bands, no full-bleed colour, no tinted fills. The page is white, the text is dark. The dark `--ink` surface in sections 1 to 12 is for screens only. The logo itself may stay a dark disc (his rule is about paper).
 
-**13.2 Print-safe layout. PROPOSAL.** Everything sits inside 12.7 mm (0.5 in) of every edge, which clears the unprintable zone of typical office printers. Header starts 15 mm from the top edge, footer ends 15 mm from the bottom. Sizes in millimetres so proportions hold on US Letter (215.9 x 279.4 mm), A4 (210 x 297) and A5 (148 x 210). Side margin 20 mm on Letter and A4, 15 mm on A5. Header distance and footer distance set to 15 mm in Word and Google Docs (their defaults, 12.7 mm, sit on the safe line). Print at 100 percent, never "fit to page".
+**13.2 Print-safe layout.** Everything inside 12.7 mm (0.5 in) of every edge. Header lockup starts 15 mm from the top, footer ends 13 mm from the bottom. Sizes in millimetres so proportions hold on US Letter (215.9 x 279.4 mm), A4 and A5. Side margins 20 mm (Letter, A4) and 15 mm (A5). Print at 100 percent, never "fit to page".
 
-**13.3 Colour for documents. PROPOSAL, with locked parts.**
+**13.3 Colour for documents.** One copper hairline `#B47C57` at 0.75 pt for every rule (it is 3.5:1 on white, so lines only, never text). One 3 pt ink tab `#0A0E14` (24 mm) on the header rule and the cover, centred on the hairline. Text `--ink-raised #121826` (17.7:1), footer and captions `#4A5160` (8.0:1), labels and links `#8A5A3A` clay deep (5.8:1, a darker `--clay` for text). `--amber` and `--paper` are not used in documents. Only one accent per page. Every document must read in greyscale and in one colour black.
 
-| Use | Value | Note | Contrast on white |
-|---|---|---|---|
-| Text | `--ink-raised #121826` | LOCKED | 17.7:1 |
-| Headings, logo ink | `--ink #0A0E14` | LOCKED | 19.3:1 |
-| Footer, captions | `--doc-muted #4A5160` | PROPOSAL | 8.0:1 |
-| The one accent (logo arc, rules, labels, links) | `--doc-clay-deep #8A5A3A` | PROPOSAL, a darker `--clay` | 5.8:1 |
-| Hairlines | `--clay #B47C57` or `#CFC8B8` | LOCKED token, lines only | 3.5:1, never text |
+**13.4 Type.** Two families only: Spectral (titles, headings, wordmark) and Public Sans (body, labels, footer). No monospace in documents. Body 12 pt (A5 11 pt), line spacing 1.5, 12 pt after paragraphs, left aligned, never justified, bold for emphasis, never italic. Labels are sentence case, Public Sans SemiBold 10.5 pt, slightly tracked. Footer 10 pt. Headings at least 20 percent larger than body, 60 to 70 characters per line. Non-breaking hyphen and space in compounds ("45-minute") and between a number and its unit. Sources: British Dyslexia Association 2023; WCAG 2.x 1.4.8 and 1.4.12; Rello and Baeza-Yates 2013. Atkinson Hyperlegible and OpenDyslexic are not used.
 
-`--amber` and `--paper` are not used in documents (amber fails on white at 2.1:1, and tints print poorly). Only one accent colour per page. Colour is never the only signal. Every document must also read correctly in greyscale and in one colour black.
+**13.5 Logo.** Option B of the refined original: ink disc, amber arc and dot, clay smile, cream plate with an ink CW. Same concept as the original, rebuilt on a golden-ratio grid in locked palette colours (no cyan, no bright orange). The square CW monogram is retired. Header lockup: 12 mm mark and a Spectral SemiBold wordmark at 20 pt, built as one in-line PNG at 600 dpi so it never depends on fonts. Minimum size: mark 6 mm, lockup 9 mm tall. Files: `agentsHQ/docs/brand-assets/catalyst-works/letterhead-2026-10/logo-v2/` (option B).
 
-**13.4 Type for documents. LOCKED faces, PROPOSAL sizes.** Spectral for titles and headings, Public Sans for body, JetBrains Mono for labels of 4 words or fewer. Body 12 pt on Letter and A4, 11 pt on A5, line spacing 1.5, 12 pt after paragraphs, left aligned (never justified), bold for emphasis (never italic), footer and captions 10 pt minimum, headings at least 20 percent larger than body, 60 to 70 characters per line. Sources: British Dyslexia Association Dyslexia Style Guide 2023; WCAG 2.x SC 1.4.8 and 1.4.12; Rello and Baeza-Yates 2013. Atkinson Hyperlegible (Braille Institute, low vision, not tested on dyslexic readers) is an optional body face. OpenDyslexic is not used (no significant benefit in the 2013 study). Word fallback: Arial for Public Sans, Georgia for Spectral (close metrics, not identical).
+**13.6 Header and footer.** Header: lockup top left, one 0.75 pt hairline under it with the 3 pt ink tab centred on its left end, in the same position on the cover, letter and inner pages. Pages 2 onward add a short running head (document title) right aligned. Footer: hairline, then "Catalyst Works, Salt Lake City, Utah" with "Page X of Y" at right (shown only when the document has more than one page), then "catalystworks.consulting, boubacar@catalystworks.consulting". The proposal cover footer carries contact only. **LOCKED by his rules:** no street or home address, "Salt Lake City, Utah" as the only location (never South Jordan), no phone number, no city in the email signature. **Contract footer:** a third line "Fouta to Moab LLC dba Catalyst Works" appears ONLY on the fee letter and engagement letter, never on letterhead or proposals. The DBA transfer is not filed yet, so those two templates carry it as a placeholder to confirm once the Utah record shows the transfer. Role line "Founder" is used because the live Gmail signature already carries it.
 
-**13.5 Logo for documents. PROPOSAL.** Today's mark (dark gradient disc, cyan arc, bright orange dot) is off palette, prints as a block of ink and fails greyscale. His direction 2026-10-03: the light outline mark was rejected ("the original one's way better"), so the mark is the ORIGINAL concept refined. The disc may stay dark, because his white-page rule is about paper, not the mark. Refined mark (options A, B, C pending his pick, A recommended): disc 240 units, arc and smile concentric on a ring at 0.74 of the radius, arc stroke R/8, smile stroke one golden-ratio step thinner, smile sweep equal to arc sweep divided by the golden ratio (150 and 92.7 degrees), plate a golden rectangle with corner radius at plate height divided by phi to the fourth, dot with an ink halo. Colours only from the locked palette: ink disc, amber arc and dot, clay smile, paper CW. No cyan, no bright orange. Treatments: full colour, one colour black, greyscale, plus a small version for 32 px and below (favicon). Minimum size: mark 6 mm or 18 px, lockup 9 mm or 26 px tall. Retire the square CW monogram so one mark is in use. Wordmark stays Spectral 700, centred on the disc by cap height. Files: `agentsHQ/docs/brand-assets/catalyst-works/letterhead-2026-10/logo-v2/`.
+### 13.7 Templates
 
-**13.6 Header and footer. PROPOSAL.** Header: lockup top left, one 0.5 pt hairline under it (B1), or the same plus a short 3 pt ink tab at its left end (B2). Footer: hairline, then two columns, left "Catalyst Works" over "Salt Lake City, Utah", right "catalystworks.consulting" over the email. **LOCKED by his rules:** no street or home address, "Salt Lake City, Utah" as the only location (never South Jordan), no city in the email signature, and the contracting entity name appears only on contracts.
+| Template | Where | What it is |
+|---|---|---|
+| Letter | `templates/dist/letter/` | Date, recipient, body, "Sincerely,", signature space, "Boubacar Barry", "Founder" |
+| Proposal | `templates/dist/proposal/` | Cover (title anchored low, date, Confidential, version), inner page, continuation page |
+| Fee letter | `templates/dist/fee-letter/` | Fee table, payment terms, acceptance block, contract footer |
+| Engagement letter / SOW | `templates/dist/engagement-letter-sow/` | Scope to term, agreed block, contract footer |
+| One-pager | `templates/dist/one-pager/` | Headline, what I do, how it works, next step |
+| Email signature | `templates/dist/email-signature/` | HTML (table layout, alt text, inline colours) and plain text |
+
+Each exists as DOCX (editable, real header and footer parts, Word styles, Page X of Y fields) and PDF (the canonical file to send) for US Letter, A4 and A5, plus a fallback DOCX set in Arial and Georgia. Copy lives in his Downloads under `Catalyst-Works-templates-2026-10-04\`. How to use: open the DOCX, replace the `[bracketed]` text, keep the styles, export to PDF with document structure tags. Details: `templates/README.md`. Rebuild with `templates/src/build_templates.py`.
+
+**Fonts.** Public Sans and Spectral (both OFL), static TrueType, properly named, in `templates/fonts/`. Installed for the current user on the MS-02 in `%LOCALAPPDATA%\Microsoft\Windows\Fonts` (Public Sans Regular, SemiBold, Bold; Spectral Regular, SemiBold, Bold). Fallback Arial and Georgia. Latin character set only.
+
+**Website swap (proposal, NOT done, needs his separate approval).** The live site still shows the old cyan logo. To swap: (1) replace `CatalystWorks_logo.jpg` at the repo root and its per-folder copies (`services/`, `bottleneck-assessment/`, `internal/studio-engagement/`), and `ai-checklist/assets/cw-logo.png`, `audit/assets/cw-logo.jpg`, `audit/assets/cw-icon.ico`, `seat/assets/cw-logo.png`, with the option B lockup and favicon exports; (2) regenerate `og-image.jpg` from `og-image.html`; (3) add the favicon and apple-touch-icon exports; (4) 48 HTML files reference these paths, so keep the file names to avoid editing them; (5) run the no-blue-on-dark check and a Playwright screenshot of the nav at desktop and 375 px on each changed page before pushing; (6) check the `boubacarbarry-site` repo for its own copy of the CW mark.
