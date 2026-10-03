@@ -595,27 +595,31 @@ line-height 1.5 or higher).
 
 ---
 
-## 13. Documents, letterhead and print (PROPOSED 2026-10-03, awaiting Boubacar's approval)
+## 13. Documents, letterhead and print (PROPOSED 2026-10-03, revised same day, awaiting Boubacar's approval)
 
-> **Status:** PROPOSAL. Every row marked LOCKED below is already decided elsewhere in this file or in a
-> dated memory rule. Every row marked PROPOSAL needs his yes. Concept boards:
-> `https://boubacarbarry.com/review/20261003-letterhead-concepts/`. Working files:
-> `agentsHQ/docs/brand-assets/catalyst-works/letterhead-2026-10/`.
-> **Scope:** DOCX, PDF, letterhead, proposals, one-pagers, email signature. Not the web pages in §1 to §12.
+> **Status:** PROPOSAL. Rows marked LOCKED are already decided in this file or in a dated rule of his. Rows marked PROPOSAL need his yes.
+> Concepts: `https://boubacarbarry.com/review/20261003-letterhead-concepts/`. Working files: `agentsHQ/docs/brand-assets/catalyst-works/letterhead-2026-10/`.
+> **Scope:** DOCX, PDF, letterhead, proposals, one-pagers, email signature. Not the web pages in sections 1 to 12.
+> **His direction, 2026-10-03:** "as much as possible on a white background ... I'm not going to spend extra money printing it on dark paper ... as simple as possible. Anybody can print it out ... any 8-by-11 or A4/A5-sized paper."
 
-**13.1 Palette governs BRANDING only. LOCKED** (`memory/feedback_brand_style_lock_scoped_to_branding_not_full_page_2026_09_23.md`, his words 2026-09-23: "we can use it for branding et al vs doing the full page ... infographics and assets on a white or lighter background so that people can print easier"). Documents sit on a white page with dark text. Ink, clay and amber appear on the logo, header or footer band, hairline rules and one accent dot.
+**13.1 White page only. LOCKED by his direction.** No dark documents, no dark bands, no full-bleed colour, no tinted fills. The page is white, the text is dark. The dark `--ink` surface in sections 1 to 12 is for screens only and never appears as a document fill. (Supersedes the earlier dark-concept drafts, archived.)
 
-**13.2 Two document-only text tokens. PROPOSAL.** `--clay` (3.5:1) and `--amber` (2.1:1) fail as text on white, so they are never used for text in documents.
+**13.2 Print-safe layout. PROPOSAL.** Everything sits inside 12.7 mm (0.5 in) of every edge, which clears the unprintable zone of typical office printers. Header starts 15 mm from the top edge, footer ends 15 mm from the bottom. Sizes in millimetres so proportions hold on US Letter (215.9 x 279.4 mm), A4 (210 x 297) and A5 (148 x 210). Side margin 20 mm on Letter and A4, 15 mm on A5. Header distance and footer distance set to 15 mm in Word and Google Docs (their defaults, 12.7 mm, sit on the safe line). Print at 100 percent, never "fit to page".
 
-| Token | Value | Job | Contrast on white |
+**13.3 Colour for documents. PROPOSAL, with locked parts.**
+
+| Use | Value | Note | Contrast on white |
 |---|---|---|---|
-| `--doc-clay-deep` | `#8A5A3A` | small labels and links on white or on `--paper` | 5.8:1 (5.1:1 on paper) |
-| `--doc-muted` | `#4A5160` | footer, captions | 8.0:1 |
+| Text | `--ink-raised #121826` | LOCKED | 17.7:1 |
+| Headings, logo ink | `--ink #0A0E14` | LOCKED | 19.3:1 |
+| Footer, captions | `--doc-muted #4A5160` | PROPOSAL | 8.0:1 |
+| The one accent (logo arc, rules, labels, links) | `--doc-clay-deep #8A5A3A` | PROPOSAL, a darker `--clay` | 5.8:1 |
+| Hairlines | `--clay #B47C57` or `#CFC8B8` | LOCKED token, lines only | 3.5:1, never text |
 
-Body text is `--ink-raised #121826` on white (17.7:1). `--paper #F5EFE2` is the only tint, used for the investment box.
+`--amber` and `--paper` are not used in documents (amber fails on white at 2.1:1, and tints print poorly). Only one accent colour per page. Colour is never the only signal. Every document must also read correctly in greyscale and in one colour black.
 
-**13.3 Type for documents. LOCKED faces, PROPOSAL sizes.** Spectral for titles and headings, Public Sans for body, JetBrains Mono for labels of 4 words or fewer. Body 12 pt, line spacing 1.5, 12 pt after each paragraph, left aligned (never justified), bold for emphasis (never italic), footer and captions 10 pt minimum, headings at least 20 percent larger than body, 60 to 70 characters per line, no underlined body text, colour never the only signal. Sources: British Dyslexia Association Dyslexia Style Guide 2023; WCAG 2.x SC 1.4.8 and 1.4.12; Rello and Baeza-Yates 2013 (ACM ASSETS). Atkinson Hyperlegible (Braille Institute, designed for low vision, not tested on dyslexic readers) is an optional document body face, PROPOSAL only. OpenDyslexic is not used: the 2013 study found no significant benefit. Word fallback when the fonts are not installed: Arial for Public Sans, Georgia for Spectral (approximate metrics, not identical).
+**13.4 Type for documents. LOCKED faces, PROPOSAL sizes.** Spectral for titles and headings, Public Sans for body, JetBrains Mono for labels of 4 words or fewer. Body 12 pt on Letter and A4, 11 pt on A5, line spacing 1.5, 12 pt after paragraphs, left aligned (never justified), bold for emphasis (never italic), footer and captions 10 pt minimum, headings at least 20 percent larger than body, 60 to 70 characters per line. Sources: British Dyslexia Association Dyslexia Style Guide 2023; WCAG 2.x SC 1.4.8 and 1.4.12; Rello and Baeza-Yates 2013. Atkinson Hyperlegible (Braille Institute, low vision, not tested on dyslexic readers) is an optional body face. OpenDyslexic is not used (no significant benefit in the 2013 study). Word fallback: Arial for Public Sans, Georgia for Spectral (close metrics, not identical).
 
-**13.4 Logo for documents. PROPOSAL.** Recolour the circular mark to the locked palette: ink disc, amber arc and dot, clay smile, enlarged CW plate, no translucent fan, no hairline ring on light grounds. Retire the cyan and bright-orange version and the square CW monogram so one mark is in circulation. Wordmark stays Spectral 700. Clear space equals the height of the CW plate. Minimum size: mark 16 px or 5 mm, lockup 24 px or 8 mm tall.
+**13.5 Logo for documents. PROPOSAL.** Today's mark (dark gradient disc, cyan arc, bright orange dot) is off palette, prints as a block of ink and fails greyscale. Documents use the light outline mark: ink ring, ink CW plate outline, one accent (`--doc-clay-deep`) for the arc, smile and dot. Three treatments: full colour, one colour black, greyscale. Minimum size: mark 6 mm or 18 px, lockup 9 mm or 26 px tall. Retire the square CW monogram so one mark is in use. Wordmark stays Spectral 700.
 
-**13.5 Footer content. LOCKED by his rules.** Catalyst Works, catalystworks.consulting, boubacar@catalystworks.consulting. No street address and no home address. "Salt Lake City, Utah" is allowed as the only location (never South Jordan). The contracting entity name appears only on contracts.
+**13.6 Header and footer. PROPOSAL.** Header: lockup top left, one 0.5 pt hairline under it (B1), or the same plus a short 3 pt ink tab at its left end (B2). Footer: hairline, then two columns, left "Catalyst Works" over "Salt Lake City, Utah", right "catalystworks.consulting" over the email. **LOCKED by his rules:** no street or home address, "Salt Lake City, Utah" as the only location (never South Jordan), no city in the email signature, and the contracting entity name appears only on contracts.
