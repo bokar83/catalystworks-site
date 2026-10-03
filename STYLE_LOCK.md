@@ -12,6 +12,7 @@
 > (`memory/project_antislop_design_tooling_absorb_2026_09_22.md` §4).
 > **Phase:** 1 of 6 (`cw-design-style-lock`). No CSS and no HTML is written by this phase.
 > **Date:** 2026-09-22 · **Branch:** `feat/cw-design-style-lock-2026-09-22`
+> **Amended 2026-10-03 (PROPOSED, awaiting Boubacar's approval):** new §13, documents, letterhead and print. Nothing in §1 to §12 changed.
 > **Amended 2026-09-23:** five typography and accessibility fixes (§1 rust row, §2), approved by
 > Boubacar ("proceed on all"), Karpathy + Council re-run on the delta (§12). PRD change-log line
 > of the same date.
@@ -591,3 +592,30 @@ AAA reading (1.5× line-height), or relax to AA (survive the SC 1.4.12 overrides
 The Expansionist proposes a follow-up contract amendment: make these rules machine-checkable
 (`font-style: italic` outside the display step, no more than one `<em>` per page, body
 line-height 1.5 or higher).
+
+---
+
+## 13. Documents, letterhead and print (PROPOSED 2026-10-03, awaiting Boubacar's approval)
+
+> **Status:** PROPOSAL. Every row marked LOCKED below is already decided elsewhere in this file or in a
+> dated memory rule. Every row marked PROPOSAL needs his yes. Concept boards:
+> `https://boubacarbarry.com/review/20261003-letterhead-concepts/`. Working files:
+> `agentsHQ/docs/brand-assets/catalyst-works/letterhead-2026-10/`.
+> **Scope:** DOCX, PDF, letterhead, proposals, one-pagers, email signature. Not the web pages in §1 to §12.
+
+**13.1 Palette governs BRANDING only. LOCKED** (`memory/feedback_brand_style_lock_scoped_to_branding_not_full_page_2026_09_23.md`, his words 2026-09-23: "we can use it for branding et al vs doing the full page ... infographics and assets on a white or lighter background so that people can print easier"). Documents sit on a white page with dark text. Ink, clay and amber appear on the logo, header or footer band, hairline rules and one accent dot.
+
+**13.2 Two document-only text tokens. PROPOSAL.** `--clay` (3.5:1) and `--amber` (2.1:1) fail as text on white, so they are never used for text in documents.
+
+| Token | Value | Job | Contrast on white |
+|---|---|---|---|
+| `--doc-clay-deep` | `#8A5A3A` | small labels and links on white or on `--paper` | 5.8:1 (5.1:1 on paper) |
+| `--doc-muted` | `#4A5160` | footer, captions | 8.0:1 |
+
+Body text is `--ink-raised #121826` on white (17.7:1). `--paper #F5EFE2` is the only tint, used for the investment box.
+
+**13.3 Type for documents. LOCKED faces, PROPOSAL sizes.** Spectral for titles and headings, Public Sans for body, JetBrains Mono for labels of 4 words or fewer. Body 12 pt, line spacing 1.5, 12 pt after each paragraph, left aligned (never justified), bold for emphasis (never italic), footer and captions 10 pt minimum, headings at least 20 percent larger than body, 60 to 70 characters per line, no underlined body text, colour never the only signal. Sources: British Dyslexia Association Dyslexia Style Guide 2023; WCAG 2.x SC 1.4.8 and 1.4.12; Rello and Baeza-Yates 2013 (ACM ASSETS). Atkinson Hyperlegible (Braille Institute, designed for low vision, not tested on dyslexic readers) is an optional document body face, PROPOSAL only. OpenDyslexic is not used: the 2013 study found no significant benefit. Word fallback when the fonts are not installed: Arial for Public Sans, Georgia for Spectral (approximate metrics, not identical).
+
+**13.4 Logo for documents. PROPOSAL.** Recolour the circular mark to the locked palette: ink disc, amber arc and dot, clay smile, enlarged CW plate, no translucent fan, no hairline ring on light grounds. Retire the cyan and bright-orange version and the square CW monogram so one mark is in circulation. Wordmark stays Spectral 700. Clear space equals the height of the CW plate. Minimum size: mark 16 px or 5 mm, lockup 24 px or 8 mm tall.
+
+**13.5 Footer content. LOCKED by his rules.** Catalyst Works, catalystworks.consulting, boubacar@catalystworks.consulting. No street address and no home address. "Salt Lake City, Utah" is allowed as the only location (never South Jordan). The contracting entity name appears only on contracts.
