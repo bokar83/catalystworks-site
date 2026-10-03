@@ -617,12 +617,12 @@ line-height 1.5 or higher).
 
 | Template | Where | What it is |
 |---|---|---|
-| Letter | `templates/dist/letter/` | Date, recipient, body, "Sincerely,", signature space, "Boubacar Barry", "Founder" |
-| Proposal | `templates/dist/proposal/` | Cover (title anchored low, date, Confidential, version), inner page, continuation page |
-| Fee letter | `templates/dist/fee-letter/` | Fee table, payment terms, acceptance block, contract footer |
-| Engagement letter / SOW | `templates/dist/engagement-letter-sow/` | Scope to term, agreed block, contract footer |
-| One-pager | `templates/dist/one-pager/` | Headline, what I do, how it works, next step |
-| Email signature | `templates/dist/email-signature/` | HTML (table layout, alt text, inline colours) and plain text |
+| Letter | `templates/built/letter/` | Date, recipient, body, "Sincerely,", signature space, "Boubacar Barry", "Founder" |
+| Proposal | `templates/built/proposal/` | Cover (title anchored low, date, Confidential, version), inner page, continuation page |
+| Fee letter | `templates/built/fee-letter/` | Fee table, payment terms, acceptance block, contract footer |
+| Engagement letter / SOW | `templates/built/engagement-letter-sow/` | Scope to term, agreed block, contract footer |
+| One-pager | `templates/built/one-pager/` | Headline, what I do, how it works, next step |
+| Email signature | `templates/built/email-signature/` | HTML (table layout, alt text, inline colours) and plain text |
 
 Each exists as DOCX (editable, real header and footer parts, Word styles, Page X of Y fields) and PDF (the canonical file to send) for US Letter, A4 and A5, plus a fallback DOCX set in Arial and Georgia. Copy lives in his Downloads under `Catalyst-Works-templates-2026-10-04\`. How to use: open the DOCX, replace the `[bracketed]` text, keep the styles, export to PDF with document structure tags. Details: `templates/README.md`. Rebuild with `templates/src/build_templates.py`.
 
