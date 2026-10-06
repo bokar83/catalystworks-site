@@ -15,6 +15,9 @@
 > **Amended 2026-09-23:** five typography and accessibility fixes (§1 rust row, §2), approved by
 > Boubacar ("proceed on all"), Karpathy + Council re-run on the delta (§12). PRD change-log line
 > of the same date.
+> **Amended 2026-10-06:** control contrast (§1 `--clay` and `--line` rows, §7), approved by
+> Boubacar ("Fix the lock amendment"), Karpathy + Council run on the delta (§12). PRD change-log
+> line of the same date.
 
 ---
 
@@ -46,10 +49,10 @@ file is the positive half. Section 9 is the negative half, and it is deliberatel
 | `--ink` | `#0A0E14` | base surface. Near-black with a cold blue undertone, never pure `#000000` | — |
 | `--ink-raised` | `#121826` | the ONLY elevated-panel color on the site | one elevation step. There is no second. |
 | `--paper` | `#F5EFE2` | primary text. Bone, never `#FFFFFF` | — |
-| `--clay` | `#B47C57` | structural accent: rules, indices, margin rail, borders | unlimited — it is structure, not emphasis |
+| `--clay` | `#B47C57` | structural accent: rules, indices, margin rail, borders, and the resting boundary of every control (5.49:1 on `--ink`, 5.03:1 on `--ink-raised`) | unlimited — it is structure, not emphasis |
 | `--amber` | `#E8A66B` | single highlight + CTA fill + base link color | **one per viewport, maximum** |
 | `--rust` | `#C95F4D` | emphasis / alert ONLY. Never decorative | **max one instance per page.** As TEXT it sits on `--ink` only (4.81:1). On `--ink-raised` it measures 4.41:1 and fails 4.5:1, so there rust is a non-text mark only (a rule, a dot, a border) |
-| `--line` | `rgba(245,239,226,0.12)` | the hairline. The separator of record | — |
+| `--line` | `rgba(245,239,226,0.12)` | the hairline. The separator of record | separator only. Measures 1.32:1 on `--ink`, so it is never the boundary of a control (WCAG 1.4.11 needs 3:1) |
 | `--t-mid` | `rgba(245,239,226,0.78)` | body text at reading weight | — |
 | `--t-muted` | `rgba(245,239,226,0.55)` | captions, small print, mono labels | — |
 
@@ -363,8 +366,9 @@ existing bare `01` at `services/index.html:214`, not a new device.
 ## 7. Controls
 
 - **Buttons are square.** `border-radius: 0` — replacing the current `9px`/`10px` mix.
-  Primary is `--amber` fill on `--ink` text. Secondary is a `--line` hairline outline on
-  transparent. *Source:* `hqforwork.com` renders both its hero CTAs at zero radius with
+  Primary is `--amber` fill on `--ink` text. Secondary is a `--clay` outline on transparent
+  with a `--paper` label. *(Corrected 2026-10-06: this previously read "a `--line` hairline
+  outline", which measures 1.32:1 and fails the 3:1 a control boundary needs.)* *Source:* `hqforwork.com` renders both its hero CTAs at zero radius with
   uppercase wide-tracked labels. **BORROW** — square corners are the single clearest signal of
   restraint available, and the current 9px/10px inconsistency is itself a defect.
 - Button labels: `JetBrains Mono`, uppercase, `letter-spacing: 0.14em`, 13px, 4 words or
@@ -372,6 +376,14 @@ existing bare `01` at `services/index.html:214`, not a new device.
 - Hover on a button is a **color** change, never a lift and never a glow. The existing
   `translateY(-1px)` + `box-shadow: 0 10px 26px rgba(232,166,107,0.30)` is deleted — a glow is
   the "real glow" of his personal-brand palette leaking onto the business site (PRD §19 D-2).
+- **Pressed state (`:active`).** Primary: `--rust` fill with an `--ink` label (4.81:1), never a
+  `--paper` label (3.51:1, fails 4.5:1 at 13px). Secondary: `--rust` border and label on `--ink`;
+  inside an `--ink-raised` panel the label and border use `--paper` instead, the same rule as
+  links (§1). The pressed flash is a state of a control, not a page element, so it is not one
+  of the page's `--rust` instances; the built CSS already pressed to `--rust` before this
+  amendment, and this line records that behavior rather than widening it.
+- **Fields.** Resting border `--clay`, focus border `--amber`, text `--paper`, placeholder
+  `--t-muted`. Square, no inner glow. A field never relies on `--line` for its boundary.
 - Touch targets ≥44px on every viewport.
 
 ### Accessibility floor — checkable, not aspirational
@@ -385,6 +397,9 @@ accessibility mechanics survive independent judgement even where the rest of tha
   `--t-muted` on `--ink` is the tightest pair in the system and is the one to measure first.
 - Every interactive control reachable and operable by **keyboard alone**, with a visible focus
   state drawn in `--amber` — never the browser default outline suppressed with `outline: none`.
+- **3:1 minimum** for every control boundary (button outline, field border) and every focus
+  ring against the surface it sits on (WCAG 1.4.11). `--clay` and `--amber` pass on both
+  surfaces; `--line` does not and is never used for one.
 - Every `<img>` carries descriptive `alt`. Every form field carries a real associated `<label>`.
 - **No dark/light theme toggle** (PRD §4.8). The trend source prescribes dual-mode theming; we
   refuse that half and keep only the contrast floor and the near-black-not-pure-black rule.
@@ -591,3 +606,25 @@ AAA reading (1.5× line-height), or relax to AA (survive the SC 1.4.12 overrides
 The Expansionist proposes a follow-up contract amendment: make these rules machine-checkable
 (`font-style: italic` outside the display step, no more than one `<em>` per page, body
 line-height 1.5 or higher).
+
+### 2026-10-06 amendment: Karpathy + Council on the delta
+
+The delta: control boundaries move from `--line` to `--clay` (§1 rows, §7), the pressed primary
+label moves from `--paper` to `--ink` on `--rust`, the raised-panel pressed rule is extended from
+links to the secondary button, and the accessibility floor gains a 3:1 control-boundary line.
+Boubacar's go: "Fix the lock amendment."
+
+**Karpathy: SHIP.** One WARN, logged: P10 scope. The build branch was reconciled in the same pass
+(six page rules plus the lock CSS) so it does not violate the amended lock on day one. The loop
+caught one miss before review: `.nav-toggle` still bordered in `--line`. A `.lock-raised`
+selector was written, found to match nothing on the site, and removed.
+
+**Council: REVISE, then KEEP.** The Contrarian found the larger defect: neither homepage field had
+a real `<label>` (both used `aria-label`), which §7 already forbids. The fix was folded into the
+build reconciliation (markup only, copy unchanged). The rust sentence was reworded from an
+"exemption" into a record of existing behavior. Parked for a weekend build: a control-boundary
+gate beside `check_no_blue_on_dark.py` (borders on controls never `--line`; every input has a
+`<label for>`).
+
+Contrast, computed: `--ink` on `--rust` 4.81:1; `--paper` on `--rust` 3.51:1; `--clay` on `--ink`
+5.49:1 and on `--ink-raised` 5.03:1; `--line` on `--ink` 1.32:1.
