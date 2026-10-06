@@ -300,11 +300,11 @@ strong { color: var(--paper); font-weight: 600; }
 .lock-btn:hover,
 .lock-btn:visited { color: var(--ink); }
 .lock-btn:hover { background: var(--paper); border-color: var(--paper); }
-.lock-btn:active { background: var(--rust); border-color: var(--rust); color: var(--paper); }
+.lock-btn:active { background: var(--rust); border-color: var(--rust); color: var(--ink); }  /* ink on rust 4.81:1; paper on rust was 3.51:1 */
 
 .lock-btn-ghost {
   background: transparent;
-  border-color: var(--line);
+  border-color: var(--clay);   /* control boundary needs 3:1; --line is 1.32:1 */
   color: var(--paper);
 }
 .lock-btn-ghost:visited { color: var(--paper); }
@@ -318,7 +318,7 @@ strong { color: var(--paper); font-weight: 600; }
   width: 100%;
   min-height: 44px;
   padding: 13px var(--s-2);
-  border: 1px solid var(--line);
+  border: 1px solid var(--clay);  /* control boundary needs 3:1; --line is 1.32:1 */
   border-radius: 0;
   background: var(--ink);
   color: var(--paper);
