@@ -292,12 +292,12 @@
     }
     .nav-cta:visited { color: var(--ink); }
     .nav-cta:hover { background: var(--paper); border-color: var(--paper); color: var(--ink); }
-    .nav-cta:active { background: var(--rust); border-color: var(--rust); color: var(--paper); }
+    .nav-cta:active { background: var(--rust); border-color: var(--rust); color: var(--ink); }
     .nav-cta::after { content: '→'; letter-spacing: 0; }
 
     /* Mobile hamburger + drawer (nav reachable below the breakpoint — HARD rule) */
     .nav-toggle {
-      display: none; background: transparent; border: 1px solid var(--line);
+      display: none; background: transparent; border: 1px solid var(--clay);
       width: 44px; height: 44px; border-radius: 0; padding: 0;
       align-items: center; justify-content: center; cursor: pointer;
       transition: border-color var(--d-micro) var(--ease);
@@ -426,11 +426,11 @@
     .demo-quota strong { color: var(--clay); font-weight: 500; }
 
     .demo-prompt-label {
-      font-size: var(--t-small); color: var(--t-mid); margin-bottom: var(--s-2);
+      display: block; font-size: var(--t-small); color: var(--t-mid); margin-bottom: var(--s-2);
     }
     .demo textarea {
       width: 100%; min-height: 104px; resize: vertical;
-      padding: var(--s-2); border: 1px solid var(--line); border-radius: 0;
+      padding: var(--s-2); border: 1px solid var(--clay); border-radius: 0;
       background: var(--ink); color: var(--paper);
       font-family: var(--sans); font-size: var(--t-small); line-height: 1.6;
       transition: border-color var(--d-micro) var(--ease);
@@ -504,11 +504,11 @@
        failed. The JS now gates success on ok === true and renders a visible
        failure. This block only restyles it. */
     .out-capture { padding: var(--s-3) 0; border-bottom: 1px solid var(--line); }
-    .out-capture-label { font-size: var(--t-small); color: var(--paper); margin-bottom: var(--s-2); line-height: 1.6; }
+    .out-capture-label { display: block; font-size: var(--t-small); color: var(--paper); margin-bottom: var(--s-2); line-height: 1.6; }
     .out-capture-form { display: flex; gap: var(--s-1); }
     .out-capture-form input[type="email"] {
       flex: 1; min-height: 44px; padding: 12px var(--s-2);
-      border: 1px solid var(--line); border-radius: 0;
+      border: 1px solid var(--clay); border-radius: 0;
       background: var(--ink); color: var(--paper);
       font-family: var(--sans); font-size: var(--t-small);
       transition: border-color var(--d-micro) var(--ease);
@@ -540,7 +540,7 @@
       justify-self: start;
       display: inline-flex; align-items: center; justify-content: center;
       min-height: 44px; padding: 12px var(--s-3);
-      border: 1px solid var(--line); border-radius: 0;
+      border: 1px solid var(--clay); border-radius: 0;
       background: transparent; color: var(--paper);
       font-family: var(--mono); font-size: var(--t-label); font-weight: 500;
       letter-spacing: 0.14em; text-transform: uppercase;
@@ -548,7 +548,8 @@
     }
     .out-cta-btn:visited { color: var(--paper); }
     .out-cta-btn:hover { border-color: var(--amber); color: var(--amber); }
-    .out-cta-btn:active { border-color: var(--rust); color: var(--rust); }
+    /* inside the --ink-raised demo panel: rust text is 4.41:1 there, so pressed is paper (STYLE_LOCK §1, §7) */
+    .out-cta-btn:active { border-color: var(--paper); color: var(--paper); }
 
     /* ------------------------------------------------------ THE PILLAR STRIP
        Was a 40s infinite marquee with faded edge masks. Continuous
@@ -808,7 +809,7 @@
       transition: background var(--d-micro) var(--ease), border-color var(--d-micro) var(--ease);
     }
     .offer-cta:hover { background: var(--paper); border-color: var(--paper); }
-    .offer-cta:active { background: var(--rust); border-color: var(--rust); color: var(--paper); }
+    .offer-cta:active { background: var(--rust); border-color: var(--rust); color: var(--ink); }
     .offer-fineprint { font-size: var(--t-eyebrow); color: var(--t-muted); line-height: 1.7; margin-top: var(--s-2); }
     .offer-scarcity {
       font-family: var(--mono); font-size: var(--t-eyebrow); margin-top: var(--s-1);
@@ -1149,8 +1150,8 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"
       <div class="demo-quota"><strong id="quota">live</strong> . diagnostic</div>
     </div>
 
-    <p class="demo-prompt-label">Describe what is stuck in your business in one sentence.</p>
-    <textarea id="demo-input" placeholder="e.g. Revenue is up 30% but margin is flat. Two of my best people left in six months. We keep solving the same operational problems." aria-label="Describe what is stuck in your business"></textarea>
+    <label for="demo-input" class="demo-prompt-label">Describe what is stuck in your business in one sentence.</label>
+    <textarea id="demo-input" placeholder="e.g. Revenue is up 30% but margin is flat. Two of my best people left in six months. We keep solving the same operational problems."></textarea>
     <div class="demo-actions">
       <button class="demo-submit" id="demo-go">
         Run the diagnostic <span class="arr">→</span>
@@ -1172,9 +1173,9 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"
         <div class="out-action" id="out-action"></div>
       </div>
       <div class="out-capture" id="out-capture">
-        <div class="out-capture-label">Want me to write three sharper reframes for this and email them to you in 24 hours?</div>
+        <label for="capture-email" class="out-capture-label">Want me to write three sharper reframes for this and email them to you in 24 hours?</label>
         <form class="out-capture-form" id="capture-form" novalidate>
-          <input type="email" name="email" id="capture-email" placeholder="your@email.com" autocomplete="email" required aria-label="Email address">
+          <input type="email" name="email" id="capture-email" placeholder="your@email.com" autocomplete="email" required>
           <button type="submit" class="out-capture-btn" id="capture-btn">Send the reframes →</button>
         </form>
         <div class="out-capture-note">Boubacar reads each one and writes back personally. No drip sequence. No newsletter signup.</div>
