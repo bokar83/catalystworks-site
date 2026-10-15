@@ -9,6 +9,37 @@ RewriteEngine On
 # both with-slash and without-slash entry points.
 RewriteRule ^signal/?$ signal.html [NC,L]
 
+# =====================================================================
+# 2026-10-15 NO ACTIVE WORKSHOP: every workshop/registration page and short link
+# redirects to the homepage (Boubacar, direct: no live event, no dead date, no
+# payment CTA, and no raw 404 on a workshop URL).
+#
+# 302, deliberately temporary: a workshop WILL return. A 301 would be cached by
+# browsers and crawlers and keep sending people to the homepage after the page is
+# restored. Single hop to / for every form (slashed, unslashed, /index.html).
+# QSA is intentionally absent: the incoming query is dropped and replaced by the
+# legacy utm set, so nothing from the old URL is carried along.
+#
+# KEPT LIVE, on purpose: /online/thank-you/ and /seat/thank-you/ (post-payment
+# "You're in" confirmations, Stripe return URLs for people who already paid),
+# /online-kit/ and /kit/ (attendee take-home kits), /workshop/*.ics and assets.
+# Their own serve rules below are untouched. The serve rules for the redirected
+# pages are commented with the marker #RETIRED-1015 further down.
+#
+# ROLLBACK: delete this block, then `sed -i 's/^#RETIRED-1015 //' .htaccess`.
+# That restores every previous rule verbatim (the 08-17 free-seat 404s included).
+# Page files are untouched in the repo.
+# Loop safety: target is "/" which matches none of these patterns.
+RewriteRule ^(workshop|workshop-b|online|seat|ai-checklist|rsvp-0730|free-thank-you|free-workshop-july16|finish)(/index\.html)?/?$ /?utm_source=legacy&utm_medium=redirect&utm_campaign=no_active_workshop&utm_content=$1 [NC,R=302,L]
+RewriteRule ^seat/aug19-credit(/index\.html)?/?$ /?utm_source=legacy&utm_medium=redirect&utm_campaign=no_active_workshop&utm_content=seat_aug19_credit [NC,R=302,L]
+# Every /w/<slug> short link (svc sjc li x nl online online-li online-x online-nl
+# ads free fb fb-organic paid sbdc beccy ss start july16 vip, and any future or
+# mistyped slug). Slug is carried into utm_content so old links stay attributable.
+RewriteRule ^w/([A-Za-z0-9_-]+)/?$ /?utm_source=legacy&utm_medium=redirect&utm_campaign=no_active_workshop&utm_content=w_$1 [NC,R=302,L]
+RewriteRule ^w/?$ /?utm_source=legacy&utm_medium=redirect&utm_campaign=no_active_workshop&utm_content=w [NC,R=302,L]
+# =====================================================================
+
+
 # Gated lead magnet "Prompts That Push Back" (2026-09-24). Same no-slash 301 as /workshop
 # below, for the same DirectorySlash Off reason. The prompt text is not in this repo: see
 # prompts-that-push-back/unlock.php.
@@ -22,8 +53,8 @@ RewriteRule ^prompts-that-push-back$ /prompts-that-push-back/ [R=301,L,QSA]
 # relative_links_2026_07_30.md) -- DirectorySlash Off served the no-slash
 # form in place with no redirect, leaving document.baseURI at /workshop and
 # breaking every relative href on the page. 301 to the slashed form first.
-RewriteRule ^workshop$ /workshop/ [R=301,L,QSA]
-RewriteRule ^workshop/?$ workshop/index.html [NC,L]
+#RETIRED-1015 RewriteRule ^workshop$ /workshop/ [R=301,L,QSA]
+#RETIRED-1015 RewriteRule ^workshop/?$ workshop/index.html [NC,L]
 
 # The ONLINE session page (Wednesday 2026-08-19, 11:00 am Mountain, $25) lives at
 # /online/. Deliberately a second page and not a second state on /workshop/: the
@@ -36,8 +67,8 @@ RewriteRule ^workshop/?$ workshop/index.html [NC,L]
 # every relative href on the page. The 301 to the slashed form MUST stay ahead
 # of the serve rule. It cannot loop: /online/ already has a trailing slash and
 # never matches ^online$. QSA keeps the UTMs on a typed link carrying them.
-RewriteRule ^online$ /online/ [R=301,L,QSA]
-RewriteRule ^online/?$ online/index.html [NC,L]
+#RETIRED-1015 RewriteRule ^online$ /online/ [R=301,L,QSA]
+#RETIRED-1015 RewriteRule ^online/?$ online/index.html [NC,L]
 
 # Post-payment landing, the success_url on Stripe payment link
 # plink_1U1CWwQWqcWWuBB0jgP2KmJT. Same slash treatment, same reason.
@@ -58,7 +89,7 @@ RewriteRule ^online/thank-you/?$ online/thank-you/index.html [NC,L]
 # 2026-08-07: widened to the explicit index.html form. /workshop-b/index.html was
 # returning 200 and rendering the July 30 $47 variant, verified live before this
 # change. Same closed hole as /ai-checklist/ and /seat/. No Stripe object touched.
-RewriteRule ^workshop-b(/index\.html)?/?$ /workshop/?utm_source=legacy&utm_medium=redirect&utm_campaign=ic_workshop_permanent&utm_content=legacy_workshop_b [NC,R=301,L]
+#RETIRED-1015 RewriteRule ^workshop-b(/index\.html)?/?$ /workshop/?utm_source=legacy&utm_medium=redirect&utm_campaign=ic_workshop_permanent&utm_content=legacy_workshop_b [NC,R=301,L]
 
 # IC lead-magnet opt-in (free AI checklist) lives at /ai-checklist/.
 # Same directory-index pattern as /workshop. Captures cold Meta-ad traffic.
@@ -117,7 +148,7 @@ RewriteRule ^workshop-b(/index\.html)?/?$ /workshop/?utm_source=legacy&utm_mediu
 # Off (line 2) serves the no-slash form IN PLACE, leaving document.baseURI at
 # /ai-checklist and breaking the page's relative assets/cw-logo.png reference.
 # The page's July 30 copy has to be rewritten before it can serve again anyway.
-RewriteRule ^ai-checklist(/index\.html)?/?$ - [NC,R=404,L]
+#RETIRED-1015 RewriteRule ^ai-checklist(/index\.html)?/?$ - [NC,R=404,L]
 # IC simple one-screen QR conversion page (StartFEST + /w/ss) lived at /seat/.
 #
 # 2026-08-04: RETIRED to a redirect, same reason again. It renders a $47
@@ -139,7 +170,7 @@ RewriteRule ^ai-checklist(/index\.html)?/?$ - [NC,R=404,L]
 # The pattern still matches ^seat, ^seat/ and ^seat/index.html ONLY:
 # /seat/thank-you/ (an ACTIVE Stripe return URL for the $50 and $25 links),
 # /seat/aug19-credit/ and /seat/assets/* are all untouched.
-RewriteRule ^seat(/index\.html)?/?$ /workshop/?utm_source=legacy&utm_medium=redirect&utm_campaign=ic_workshop_permanent&utm_content=legacy_seat [NC,R=301,L]
+#RETIRED-1015 RewriteRule ^seat(/index\.html)?/?$ /workshop/?utm_source=legacy&utm_medium=redirect&utm_campaign=ic_workshop_permanent&utm_content=legacy_seat [NC,R=301,L]
 
 # /seat/aug19-credit/ was the unlisted closed-list checkout for the August 19
 # online attendees: the same August 27 seat at $25 instead of $50, because their
@@ -178,7 +209,7 @@ RewriteRule ^seat(/index\.html)?/?$ /workshop/?utm_source=legacy&utm_medium=redi
 # Safe to sit after the ^seat/?$ redirect above: that pattern matches ^seat/?$
 # and nothing else, so it never sees this path. It cannot loop either, because
 # the target is /online/ and matches nothing here.
-RewriteRule ^seat/aug19-credit(/index\.html)?/?$ /online/?utm_source=legacy&utm_medium=redirect&utm_campaign=ic_workshop_online_0819&utm_content=retired_credit_seat [NC,R=301,L]
+#RETIRED-1015 RewriteRule ^seat/aug19-credit(/index\.html)?/?$ /online/?utm_source=legacy&utm_medium=redirect&utm_campaign=ic_workshop_online_0819&utm_content=retired_credit_seat [NC,R=301,L]
 
 # The July 30 attendee take-home kit lives at /kit/. This is the QR target
 # printed on the cards and shown on the closing slide, so both the with-slash
@@ -264,7 +295,7 @@ RewriteRule ^geolisted/?$ https://geolisted.co/ [R=301,L]
 # delete the 404 rule below and put these two back:
 #   RewriteRule ^free-thank-you$ /free-thank-you/ [R=301,L,QSA]
 #   RewriteRule ^free-thank-you/?$ free-thank-you/index.html [NC,L]
-RewriteRule ^free-thank-you(/index\.html)?/?$ - [NC,R=404,L]
+#RETIRED-1015 RewriteRule ^free-thank-you(/index\.html)?/?$ - [NC,R=404,L]
 # /free-workshop-july16/ was the CANCELLED July 16 free session's live capture
 # page: a working form, still POSTing real leads to workshop-register, still
 # confirming a $0 seat for a date and event ("free session, July 16, 7:00 to
@@ -304,7 +335,7 @@ RewriteRule ^free-thank-you(/index\.html)?/?$ - [NC,R=404,L]
 # RESTORING (do not, without checking free-seat copy is allowed again): restore
 # the file per the git checkout above, then delete the 404 rule and put back:
 #   RewriteRule ^free-workshop-july16/?$ free-workshop-july16/index.html [NC,L]
-RewriteRule ^free-workshop-july16(/index\.html)?/?$ - [NC,R=404,L]
+#RETIRED-1015 RewriteRule ^free-workshop-july16(/index\.html)?/?$ - [NC,R=404,L]
 # The July 30 comp-seat RSVP page booked NOTHING (Beehiiv-only) yet told
 # visitors "your seat is held" -- a false claim. Repoint to the live free-seat
 # capture that actually reserves the $0 seat. Organic medium keeps attribution
@@ -331,7 +362,7 @@ RewriteRule ^free-workshop-july16(/index\.html)?/?$ - [NC,R=404,L]
 # the 404 rule below and put these back:
 #   RewriteRule ^rsvp-0730$ /rsvp-0730/ [R=301,L,QSA]
 #   RewriteRule ^rsvp-0730/?$ rsvp-0730/index.html [NC,L]
-RewriteRule ^rsvp-0730(/index\.html)?/?$ - [NC,R=404,L]
+#RETIRED-1015 RewriteRule ^rsvp-0730(/index\.html)?/?$ - [NC,R=404,L]
 # Services offer-ladder page lives at /services/ (unlinked preview, awaiting nav sign-off).
 # 2026-07-31: same trailing-slash defect as /kit -- 301 to the slashed form first.
 RewriteRule ^services$ /services/ [R=301,L,QSA]
@@ -380,7 +411,7 @@ RewriteRule ^portfolio/?$ portfolio/index.html [NC,L]
 # /workshop/. Do NOT restore it verbatim while it still targets /workshop/, or
 # this exact defect comes straight back:
 #   RewriteRule ^w/start/?$ /workshop/?utm_source=meta&utm_medium=paid&utm_campaign=ic_workshop_permanent&utm_content=meta_leadmagnet [R=301,L,QSA]
-RewriteRule ^w/start(/index\.html)?/?$ - [NC,R=404,L]
+#RETIRED-1015 RewriteRule ^w/start(/index\.html)?/?$ - [NC,R=404,L]
 
 # Workshop short links: one per channel, UTM baked behind the 301.
 # Never reuse a slug across campaigns.
@@ -393,8 +424,8 @@ RewriteRule ^w/start(/index\.html)?/?$ - [NC,R=404,L]
 # collapsing into an unattributable blob. Same "track_free" prohibition applies:
 # /workshop/ and /workshop-b/ attribute the paid split test with
 # /track_free/.test(utm_content), so no value here may contain that substring.
-RewriteRule ^w/svc/?$ /workshop/?utm_source=chamber&utm_medium=email&utm_campaign=ic_workshop_permanent&utm_content=south_valley [R=301,L,QSA]
-RewriteRule ^w/sjc/?$ /workshop/?utm_source=chamber&utm_medium=email&utm_campaign=ic_workshop_permanent&utm_content=south_jordan [R=301,L,QSA]
+#RETIRED-1015 RewriteRule ^w/svc/?$ /workshop/?utm_source=chamber&utm_medium=email&utm_campaign=ic_workshop_permanent&utm_content=south_valley [R=301,L,QSA]
+#RETIRED-1015 RewriteRule ^w/sjc/?$ /workshop/?utm_source=chamber&utm_medium=email&utm_campaign=ic_workshop_permanent&utm_content=south_jordan [R=301,L,QSA]
 # 2026-07-21 (Boubacar, explicit): the organic LinkedIn + X push for July 30 goes
 # to the FREE seat capture, not the $47 page. Both were pointed at /workshop/,
 # which is the paid flow. Repointed to /ai-checklist/, the live free-seat page.
@@ -402,9 +433,9 @@ RewriteRule ^w/sjc/?$ /workshop/?utm_source=chamber&utm_medium=email&utm_campaig
 # w/fb-organic exists). utm_content MUST NOT contain "track_free" -- /workshop/
 # and /workshop-b/ attribute the paid split test with /track_free/.test(utm_content),
 # so "organic_li" / "organic_x" keep organic clicks out of the paid free-first arm.
-RewriteRule ^w/li/?$ /workshop/?utm_source=linkedin&utm_medium=organic&utm_campaign=ic_workshop_permanent&utm_content=organic_li [R=301,L,QSA]
-RewriteRule ^w/x/?$ /workshop/?utm_source=x&utm_medium=organic&utm_campaign=ic_workshop_permanent&utm_content=organic_x [R=301,L,QSA]
-RewriteRule ^w/nl/?$ /workshop/?utm_source=newsletter&utm_medium=email&utm_campaign=ic_workshop_permanent&utm_content=newsletter [R=301,L,QSA]
+#RETIRED-1015 RewriteRule ^w/li/?$ /workshop/?utm_source=linkedin&utm_medium=organic&utm_campaign=ic_workshop_permanent&utm_content=organic_li [R=301,L,QSA]
+#RETIRED-1015 RewriteRule ^w/x/?$ /workshop/?utm_source=x&utm_medium=organic&utm_campaign=ic_workshop_permanent&utm_content=organic_x [R=301,L,QSA]
+#RETIRED-1015 RewriteRule ^w/nl/?$ /workshop/?utm_source=newsletter&utm_medium=email&utm_campaign=ic_workshop_permanent&utm_content=newsletter [R=301,L,QSA]
 
 # ---- ONLINE SESSION (2026-08-19) short links, minted 2026-08-05 ----
 # FRESH slugs on a FRESH campaign key. Every w/* slug above carries
@@ -412,10 +443,10 @@ RewriteRule ^w/nl/?$ /workshop/?utm_source=newsletter&utm_medium=email&utm_campa
 # sixteen of them onto it, so reusing any of them would fold this session's
 # numbers into the in-person page's. These four are the only ones tagged
 # ic_workshop_online_0819 and they are the only ones that point at /online/.
-RewriteRule ^w/online/?$ /online/?utm_source=direct&utm_medium=link&utm_campaign=ic_workshop_online_0819&utm_content=direct_online [R=301,L,QSA]
-RewriteRule ^w/online-li/?$ /online/?utm_source=linkedin&utm_medium=organic&utm_campaign=ic_workshop_online_0819&utm_content=organic_li [R=301,L,QSA]
-RewriteRule ^w/online-x/?$ /online/?utm_source=x&utm_medium=organic&utm_campaign=ic_workshop_online_0819&utm_content=organic_x [R=301,L,QSA]
-RewriteRule ^w/online-nl/?$ /online/?utm_source=newsletter&utm_medium=email&utm_campaign=ic_workshop_online_0819&utm_content=newsletter [R=301,L,QSA]
+#RETIRED-1015 RewriteRule ^w/online/?$ /online/?utm_source=direct&utm_medium=link&utm_campaign=ic_workshop_online_0819&utm_content=direct_online [R=301,L,QSA]
+#RETIRED-1015 RewriteRule ^w/online-li/?$ /online/?utm_source=linkedin&utm_medium=organic&utm_campaign=ic_workshop_online_0819&utm_content=organic_li [R=301,L,QSA]
+#RETIRED-1015 RewriteRule ^w/online-x/?$ /online/?utm_source=x&utm_medium=organic&utm_campaign=ic_workshop_online_0819&utm_content=organic_x [R=301,L,QSA]
+#RETIRED-1015 RewriteRule ^w/online-nl/?$ /online/?utm_source=newsletter&utm_medium=email&utm_campaign=ic_workshop_online_0819&utm_content=newsletter [R=301,L,QSA]
 
 # ---- FRACTIONAL RETAINER short links, minted 2026-08-12 ----
 # The retainer is a different offer from the workshops, so these carry their own
@@ -440,7 +471,7 @@ RewriteRule ^fx/hr-li/?$ /fractional/hr/?utm_source=linkedin&utm_medium=organic&
 # The ad set is paused at $0/day, so the split test is not actively running and
 # nothing is being corrupted mid-flight. utm_content=track_direct is preserved so
 # the track stays distinguishable when the paid destination is restored.
-RewriteRule ^w/ads/?$ /workshop/?utm_source=meta&utm_medium=paid&utm_campaign=ic_workshop_permanent&utm_content=track_direct [R=301,L,QSA]
+#RETIRED-1015 RewriteRule ^w/ads/?$ /workshop/?utm_source=meta&utm_medium=paid&utm_campaign=ic_workshop_permanent&utm_content=track_direct [R=301,L,QSA]
 # Track 2 FREE-FIRST: cold ad -> free AI checklist (email capture + Meta Lead)
 # then its built-in CTA to the $47 July 30 seat. utm_content=track_free.
 #
@@ -456,8 +487,8 @@ RewriteRule ^w/ads/?$ /workshop/?utm_source=meta&utm_medium=paid&utm_campaign=ic
 # RESTORING (do not, without a free offer Boubacar has named): delete the 404
 # rule and put this back:
 #   RewriteRule ^w/free/?$ /workshop/?utm_source=meta&utm_medium=paid&utm_campaign=ic_workshop_permanent&utm_content=track_free [R=301,L,QSA]
-RewriteRule ^w/free/?$ - [NC,R=404,L]
-RewriteRule ^w/fb/?$ /workshop/?utm_source=facebook&utm_medium=paid&utm_campaign=ic_workshop_permanent&utm_content=fb_ad [R=301,L,QSA]
+#RETIRED-1015 RewriteRule ^w/free/?$ - [NC,R=404,L]
+#RETIRED-1015 RewriteRule ^w/fb/?$ /workshop/?utm_source=facebook&utm_medium=paid&utm_campaign=ic_workshop_permanent&utm_content=fb_ad [R=301,L,QSA]
 
 # ORGANIC free-seat link -- for a hand-posted FB/social post, NOT an ad buy.
 # Exists because every /w/ free-seat slug above bakes utm_medium=paid: sharing
@@ -468,21 +499,21 @@ RewriteRule ^w/fb/?$ /workshop/?utm_source=facebook&utm_medium=paid&utm_campaign
 # /workshop-b/ attribute the split test with /track_free/.test(utm_content),
 # so a value like "track_free_organic" would silently register organic clicks
 # as the paid free-first arm. "organic_fb" cannot match, which is the point.
-RewriteRule ^w/fb-organic/?$ /workshop/?utm_source=facebook&utm_medium=organic&utm_campaign=ic_workshop_permanent&utm_content=organic_fb [R=301,L,QSA]
+#RETIRED-1015 RewriteRule ^w/fb-organic/?$ /workshop/?utm_source=facebook&utm_medium=organic&utm_campaign=ic_workshop_permanent&utm_content=organic_fb [R=301,L,QSA]
 
 # Paid-seat counterpart to /w/free. Direct/hand-shared attribution, no channel
 # baked in. 2026-07-27: repointed to the free capture with the rest. This slug is
 # hand-shareable, so while the July 30 workshop is free it was the likeliest way
 # for someone to hit a $47 checkout for a free event. utm_content=direct_paid is
 # preserved unchanged so restoring is a destination swap, nothing else.
-RewriteRule ^w/paid/?$ /workshop/?utm_source=direct&utm_medium=link&utm_campaign=ic_workshop_permanent&utm_content=direct_paid [R=301,L,QSA]
+#RETIRED-1015 RewriteRule ^w/paid/?$ /workshop/?utm_source=direct&utm_medium=link&utm_campaign=ic_workshop_permanent&utm_content=direct_paid [R=301,L,QSA]
 
 # Same 2026-07-27 free-event repoint as the chamber slugs above. w/ss pointed at
 # /seat/, which renders a $47 "Reserve my seat" CTA wired to the paid Stripe
 # link, so it was a paid destination too despite not being /workshop/.
-RewriteRule ^w/sbdc/?$ /workshop/?utm_source=sbdc&utm_medium=partner&utm_campaign=ic_workshop_permanent&utm_content=sbdc_partner [R=301,L,QSA]
-RewriteRule ^w/beccy/?$ /workshop/?utm_source=beccy&utm_medium=email&utm_campaign=ic_workshop_permanent&utm_content=beccy [R=301,L,QSA]
-RewriteRule ^w/ss/?$ /workshop/?utm_source=silicon_slopes&utm_medium=event&utm_campaign=ic_workshop_permanent&utm_content=silicon_slopes [R=301,L,QSA]
+#RETIRED-1015 RewriteRule ^w/sbdc/?$ /workshop/?utm_source=sbdc&utm_medium=partner&utm_campaign=ic_workshop_permanent&utm_content=sbdc_partner [R=301,L,QSA]
+#RETIRED-1015 RewriteRule ^w/beccy/?$ /workshop/?utm_source=beccy&utm_medium=email&utm_campaign=ic_workshop_permanent&utm_content=beccy [R=301,L,QSA]
+#RETIRED-1015 RewriteRule ^w/ss/?$ /workshop/?utm_source=silicon_slopes&utm_medium=event&utm_campaign=ic_workshop_permanent&utm_content=silicon_slopes [R=301,L,QSA]
 
 # Old SBDC-newsletter short link for the CANCELLED July 16 free session. Its old
 # target (/free-workshop-july16/) now 301s to the live July 30 free-seat capture;
@@ -498,7 +529,7 @@ RewriteRule ^w/ss/?$ /workshop/?utm_source=silicon_slopes&utm_medium=event&utm_c
 # RESTORING (do not, without a free offer Boubacar has named): delete the 404
 # rule and put this back:
 #   RewriteRule ^w/july16/?$ /workshop/?utm_source=sbdc&utm_medium=organic&utm_campaign=ic_workshop_permanent&utm_content=stale_july16_shortlink [R=301,L]
-RewriteRule ^w/july16/?$ - [NC,R=404,L]
+#RETIRED-1015 RewriteRule ^w/july16/?$ - [NC,R=404,L]
 
 # DISCRETE comp-seat link for July 30 -- Boubacar shares this 1:1 only (never
 # posted publicly, never linked from the paid page). Confirms a free seat with
@@ -523,7 +554,7 @@ RewriteRule ^w/july16/?$ - [NC,R=404,L]
 # RESTORING (do not, without a comp offer Boubacar has named): delete the 404
 # rule and put this back:
 #   RewriteRule ^w/vip/?$ /workshop/?utm_source=direct_invite&utm_medium=comp&utm_campaign=ic_workshop_permanent&utm_content=track_comp [R=301,L,QSA]
-RewriteRule ^w/vip/?$ - [NC,R=404,L]
+#RETIRED-1015 RewriteRule ^w/vip/?$ - [NC,R=404,L]
 
 # Clean URLs: append .html for any path without an extension. Handles top-level
 # (/governance → /governance.html), nested (/lens/throughput → /lens/throughput.html,
