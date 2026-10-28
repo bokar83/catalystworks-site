@@ -101,7 +101,7 @@
       "systems thinking",
       "Theory of Constraints"
     ],
-    "description": "Boubacar Barry built Catalyst Works after 20 years across four continents. He runs the five-lens diagnostic protocol used in Signal Sessions.",
+    "description": "Boubacar Barry built Catalyst Works after working across the US, the Middle East and North Africa, and West Africa. He runs the five-lens diagnostic protocol used in Signal Sessions.",
     "sameAs": [
       "https://www.linkedin.com/in/boubacarbarry/"
     ]
@@ -274,8 +274,8 @@
 
     .nav-links { display: flex; gap: var(--s-3); align-items: center; }
     .nav-links a {
-      font-family: var(--mono); font-size: var(--t-eyebrow);
-      letter-spacing: 0.1em; text-transform: uppercase;
+      font-family: var(--sans); font-size: var(--t-small); font-weight: 500;
+      letter-spacing: 0;
       color: var(--t-muted); transition: color var(--d-micro) var(--ease);
     }
     .nav-links a:visited { color: var(--t-muted); }
@@ -565,11 +565,16 @@
     }
     .marquee-track {
       max-width: 1320px; margin: 0 auto;
-      display: flex; flex-wrap: wrap; gap: var(--s-2) var(--s-5);
-      font-family: var(--mono); font-size: var(--t-eyebrow);
-      letter-spacing: 0.14em; text-transform: uppercase; color: var(--t-muted);
+      display: flex; flex-wrap: wrap; gap: var(--s-2) var(--s-4);
+      justify-content: space-between;
+      font-family: var(--sans); font-size: var(--t-small); font-weight: 500;
+      letter-spacing: 0; color: var(--t-mid);
     }
     .marquee-track span:nth-child(n+8) { display: none; }
+    @media (max-width: 1180px) {
+      .marquee-track { justify-content: center; gap: var(--s-1) var(--s-4); }
+      .marquee-track span:nth-child(n+6) { display: none; }
+    }
     @media (max-width: 760px) { .marquee { padding: var(--s-3); } }
 
     /* ------------------------------------------------------------- METHOD
@@ -715,28 +720,16 @@
     .about-portrait img { width: 100%; height: auto; border-radius: 0; }
     .about p { font-size: var(--t-small); color: var(--t-mid); line-height: 1.7; margin-top: var(--s-2); max-width: var(--measure); }
 
-    .about-meta-row {
-      display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: var(--s-3); margin-top: var(--s-5);
-      padding-top: var(--s-3); border-top: 1px solid var(--line);
-    }
-    @media (max-width: 540px) { .about-meta-row { grid-template-columns: 1fr 1fr; gap: var(--s-2); } }
-    .stat-num { font-family: var(--serif); font-size: var(--t-subhead); font-weight: 700; color: var(--paper); line-height: 1; }
-    .stat-lbl {
-      font-family: var(--mono); font-size: var(--t-eyebrow); margin-top: 6px;
-      letter-spacing: 0.1em; text-transform: uppercase; color: var(--t-muted); line-height: 1.5;
-    }
-
     /* ------------------------------------------------------------- THESIS */
     .thesis-block { padding: var(--sec-2) var(--s-4); border-top: 1px solid var(--line); }
-    .thesis-inner { max-width: 760px; margin: 0 auto; text-align: center; }
+    .thesis-inner { max-width: 760px; margin: 0 auto; text-align: left; }
     .thesis-anchor {
       font-family: var(--serif); font-size: var(--t-subhead); font-style: italic;
       font-weight: 600; color: var(--paper); line-height: 1.4; margin: 0 auto var(--s-4);
     }
     .thesis-claim {
-      font-family: var(--serif); font-size: var(--t-display); font-weight: 700;
-      color: var(--paper); line-height: 1.1; letter-spacing: -0.03em;
+      font-family: var(--serif); font-size: clamp(28px, 3.4vw, 40px); font-weight: 700;
+      color: var(--paper); line-height: 1.2; letter-spacing: -0.01em;
       margin: 0 auto var(--s-4);
     }
     .thesis-bridge { font-size: var(--t-small); color: var(--t-mid); line-height: 1.7; margin: 0 auto; }
@@ -1143,7 +1136,7 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"
     <p class="hero-sub">Most consultants want a six-week discovery before they tell you anything. Catalyst Works starts differently. Type a sentence. Get a diagnosis.</p>
     <div class="hero-meta">
       <span>Founder: Boubacar</span>
-      <span>20 years . 4 continents</span>
+      <span>Salt Lake City, Utah</span>
       <span>$497 . 90 minutes</span>
     </div>
   </div>
@@ -1327,35 +1320,16 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"
     <div class="reveal">
       <div class="eyebrow">The operator behind it</div>
       <h2>A diagnostic <em>partner</em>.<br>Not a vendor.</h2>
-      <p>Boubacar built Catalyst Works after twenty years across four continents: leadership roles spanning the US, MENA, and West Africa, a $500K executive development program in Mauritius, and a communications consulting firm in Guinea.</p>
-      <p>The pattern showed up across every operation he ran. <strong>The growth ceiling is rarely where the operator thinks it is.</strong> It is one constraint, compounding quietly, hidden behind activity.</p>
+      <p>I help companies put AI to work without the confusion. They are not buying the AI. They are buying the outcome: the answer already sitting in their own data, made usable, inside their own systems. I come in, assess what's really stuck, build a roadmap around it, then put the fix in alongside the team, using AI only where it helps.</p>
+      <p>I built Catalyst Works after working with teams across the US, the Middle East and North Africa, and West Africa. The pattern kept showing up. <strong>The growth ceiling is rarely where the operator thinks it is.</strong> It is one constraint, compounding quietly, hidden behind activity.</p>
       <p>Catalyst Works exists because most consulting starts with prescriptions. Diagnosis comes first.</p>
-
-      <div class="about-meta-row">
-        <div>
-          <div class="stat-num">20+</div>
-          <div class="stat-lbl">Years operating</div>
-        </div>
-        <div>
-          <div class="stat-num">4</div>
-          <div class="stat-lbl">Continents</div>
-        </div>
-        <div>
-          <div class="stat-num">10</div>
-          <div class="stat-lbl">Years GE leadership</div>
-        </div>
-        <div>
-          <div class="stat-num">5</div>
-          <div class="stat-lbl">Diagnostic lenses</div>
-        </div>
-      </div>
     </div>
   </div>
 </section>
 
 <section id="thesis" class="thesis-block" aria-label="What I see">
   <div class="thesis-inner">
-    <div class="eyebrow" style="justify-content: center;">What I see</div>
+    <div class="eyebrow">What I see</div>
     <p class="thesis-anchor reveal">I trusted people when they were too afraid to tell me the truth. Believed the performance instead of pressing for honesty.</p>
     <p class="thesis-claim reveal">The biggest constraint in most SMBs is not strategy. It is that the founder cannot get straight answers from the people closest to them.</p>
     <p class="thesis-bridge reveal">Performance replaces truth. Loyalty replaces honesty. Strategy work that does not fix that loop is wasted. The Signal Session below names the loop in your business.</p>
@@ -1412,7 +1386,7 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"
           </div>
           <div class="outcome-row outcome-result">
             <span class="outcome-row-label">30-day outcome</span>
-            Shifted focus to retention and delivery parameters; <span class="outcome-metric">recaptured $14k/mo in leakage</span>.
+            Shifted focus to retention and delivery parameters; <span class="outcome-metric">recaptured revenue that had been quietly leaking out</span>.
           </div>
           <span class="outcome-cta">See the protocol for this industry →</span>
         </a>
@@ -1426,7 +1400,7 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"
           </div>
           <div class="outcome-row outcome-result">
             <span class="outcome-row-label">30-day outcome</span>
-            Rebuilt routing protocols; <span class="outcome-metric">cut speed-to-lead from 4 hrs to 90 sec</span>.
+            Rebuilt routing protocols; <span class="outcome-metric">cut speed-to-lead from hours to seconds</span>.
           </div>
           <span class="outcome-cta">See the protocol for this industry →</span>
         </a>
@@ -1440,13 +1414,13 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"
           </div>
           <div class="outcome-row outcome-result">
             <span class="outcome-row-label">30-day outcome</span>
-            Automated patient onboarding; <span class="outcome-metric">clawed back 15 operator hrs/week</span>.
+            Automated patient onboarding; <span class="outcome-metric">gave the founder a big part of the week back</span>.
           </div>
           <span class="outcome-cta">See the protocol for this industry →</span>
         </a>
       </div>
 
-      <p class="offer-outcomes-fineprint">Composite outcomes from Signal Session engagements. Industry and figures anonymized; constraint mechanics preserved.</p>
+      <p class="offer-outcomes-fineprint">Composite outcomes from Signal Session engagements. Industry and details anonymized; constraint mechanics preserved.</p>
     </div>
   </div>
 </section>
@@ -1456,7 +1430,7 @@ src="https://www.facebook.com/tr?id=1826865671807664&ev=PageView&noscript=1"
     <a href="governance" class="sec-card">
       <span class="tag">AI Governance</span>
       <h3>Find out which AI tools touch your customer data.</h3>
-      <p>Most SMBs between 5 and 200 employees have 12 to 20 AI tools touching their business. Most owners can name three.</p>
+      <p>Most small and mid-size businesses have more AI tools touching their data than the owner can name.</p>
       <span class="arr">Read about AI governance for SMBs <span>→</span></span>
     </a>
     <a href="ai-data-audit" class="sec-card">
